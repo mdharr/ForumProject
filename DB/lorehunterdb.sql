@@ -41,24 +41,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `thread`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `thread` ;
-
-CREATE TABLE IF NOT EXISTS `thread` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `subject` VARCHAR(1000) NULL,
-  `created_at` TIMESTAMP NULL,
-  `user_id` INT NULL,
-  `status` VARCHAR(100) NULL,
-  `last_edited` TIMESTAMP NULL,
-  `post_count` INT NULL,
-  `last_post` INT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `forum`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `forum` ;
@@ -78,6 +60,37 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `thread`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `thread` ;
+
+CREATE TABLE IF NOT EXISTS `thread` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `subject` VARCHAR(1000) NULL,
+  `created_at` TIMESTAMP NULL,
+  `status` VARCHAR(100) NULL,
+  `last_edited` TIMESTAMP NULL,
+  `post_count` INT NULL,
+  `last_post` INT NULL,
+  `user_id` INT NOT NULL,
+  `forum_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_thread_user_idx` (`user_id` ASC),
+  INDEX `fk_thread_forum1_idx` (`forum_id` ASC),
+  CONSTRAINT `fk_thread_user`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_thread_forum1`
+    FOREIGN KEY (`forum_id`)
+    REFERENCES `forum` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `post`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `post` ;
@@ -87,11 +100,29 @@ CREATE TABLE IF NOT EXISTS `post` (
   `title` VARCHAR(1000) NOT NULL,
   `content` TEXT NOT NULL,
   `created_at` TIMESTAMP NOT NULL,
-  `thread_id` INT NULL,
-  `user_id` INT NULL,
   `status` VARCHAR(100) NULL,
-  `parent_id` INT NULL,
-  PRIMARY KEY (`id`))
+  `user_id` INT NOT NULL,
+  `thread_id` INT NOT NULL,
+  `post_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_post_user1_idx` (`user_id` ASC),
+  INDEX `fk_post_thread1_idx` (`thread_id` ASC),
+  INDEX `fk_post_post1_idx` (`post_id` ASC),
+  CONSTRAINT `fk_post_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_post_thread1`
+    FOREIGN KEY (`thread_id`)
+    REFERENCES `thread` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_post_post1`
+    FOREIGN KEY (`post_id`)
+    REFERENCES `post` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -105,7 +136,6 @@ CREATE TABLE IF NOT EXISTS `votes` (
   `up_count` INT NULL,
   `down_count` INT NULL,
   `thread_id` INT NULL,
-  `post_id` INT NULL,
   `vote_count` INT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
