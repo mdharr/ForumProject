@@ -77,7 +77,6 @@ CREATE TABLE IF NOT EXISTS `thread` (
   `status` VARCHAR(100) NULL,
   `last_edited` TIMESTAMP NULL,
   `post_count` INT NULL,
-  `last_post` INT NULL,
   `user_id` INT NOT NULL,
   `forum_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -103,56 +102,21 @@ DROP TABLE IF EXISTS `post` ;
 
 CREATE TABLE IF NOT EXISTS `post` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(1000) NOT NULL,
   `content` TEXT NOT NULL,
   `created_at` TIMESTAMP NOT NULL,
   `status` VARCHAR(100) NULL,
   `user_id` INT NOT NULL,
   `thread_id` INT NOT NULL,
-  `post_id` INT NOT NULL,
+  `last_edited` TIMESTAMP NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_post_user1_idx` (`user_id` ASC),
   INDEX `fk_post_thread1_idx` (`thread_id` ASC),
-  INDEX `fk_post_post1_idx` (`post_id` ASC),
   CONSTRAINT `fk_post_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_post_thread1`
-    FOREIGN KEY (`thread_id`)
-    REFERENCES `thread` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_post_post1`
-    FOREIGN KEY (`post_id`)
-    REFERENCES `post` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `vote`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `vote` ;
-
-CREATE TABLE IF NOT EXISTS `vote` (
-  `id` INT NOT NULL,
-  `up_count` INT NULL,
-  `down_count` INT NULL,
-  `vote_count` INT NULL,
-  `user_id` INT NOT NULL,
-  `thread_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_vote_user1_idx` (`user_id` ASC),
-  INDEX `fk_vote_thread1_idx` (`thread_id` ASC),
-  CONSTRAINT `fk_vote_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_vote_thread1`
     FOREIGN KEY (`thread_id`)
     REFERENCES `thread` (`id`)
     ON DELETE NO ACTION

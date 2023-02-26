@@ -1,11 +1,17 @@
 package com.skilldistillery.lorehunter.entities;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class User {
@@ -21,9 +27,68 @@ public class User {
 	private Boolean enabled;
 
 	private String role;
+	
+	@Column(name = "first_name")
+	private String firstName;
+	
+	@Column(name = "last_name")
+	private String lastName;
+	
+	private String email;
+	
+	@CreationTimestamp
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
+	
+	@Column(name = "image_url")
+	private String imageUrl;
+	
+	@Column(name = "last_activity")
+	private LocalDateTime lastActivity;
+	
+	private String status;
+	
+	@Column(name = "post_count")
+	private int postCount;
+	
+	@Column(name = "banner_message")
+	private String bannerMessage;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Forum> forums;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Thread> threads;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Post> posts;
 
 	public User() {
 		super();
+	}
+
+	public User(int id, String username, String password, Boolean enabled, String role, String firstName,
+			String lastName, String email, LocalDateTime createdAt, String imageUrl, LocalDateTime lastActivity,
+			String status, int postCount, String bannerMessage, List<Forum> forums, List<Thread> threads,
+			List<Post> posts) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.role = role;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.createdAt = createdAt;
+		this.imageUrl = imageUrl;
+		this.lastActivity = lastActivity;
+		this.status = status;
+		this.postCount = postCount;
+		this.bannerMessage = bannerMessage;
+		this.forums = forums;
+		this.threads = threads;
+		this.posts = posts;
 	}
 
 	public int getId() {
@@ -66,6 +131,102 @@ public class User {
 		this.role = role;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public LocalDateTime getLastActivity() {
+		return lastActivity;
+	}
+
+	public void setLastActivity(LocalDateTime lastActivity) {
+		this.lastActivity = lastActivity;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public int getPostCount() {
+		return postCount;
+	}
+
+	public void setPostCount(int postCount) {
+		this.postCount = postCount;
+	}
+
+	public String getBannerMessage() {
+		return bannerMessage;
+	}
+
+	public void setBannerMessage(String bannerMessage) {
+		this.bannerMessage = bannerMessage;
+	}
+
+	public List<Forum> getForums() {
+		return forums;
+	}
+
+	public void setForums(List<Forum> forums) {
+		this.forums = forums;
+	}
+
+	public List<Thread> getThreads() {
+		return threads;
+	}
+
+	public void setThreads(List<Thread> threads) {
+		this.threads = threads;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -86,7 +247,11 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
-				+ ", role=" + role + "]";
+				+ ", role=" + role + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", createdAt=" + createdAt + ", imageUrl=" + imageUrl + ", lastActivity=" + lastActivity + ", status="
+				+ status + ", postCount=" + postCount + ", bannerMessage=" + bannerMessage + ", forums=" + forums
+				+ ", threads=" + threads + ", posts=" + posts + "]";
 	}
 
+	
 }
