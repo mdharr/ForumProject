@@ -33,28 +33,28 @@ public class Forum {
 	private String status;
 	
 	@Column(name = "view_count")
-	private int viewCount;
+	private Integer viewCount;
 	
-	@Column(name = "thread_count")
-	private int threadCount;
+	@Column(name = "topic_count")
+	private Integer topicCount;
 	
 	@Column(name = "post_count")
-	private int postCount;
+	private Integer postCount;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
 	@OneToMany(mappedBy = "forum")
-	private List<Thread> threads;
+	private List<Topic> topics;
 
 	public Forum() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Forum(int id, String name, String description, LocalDateTime createdAt, String status, int viewCount,
-			int threadCount, int postCount, User user, List<Thread> threads) {
+	public Forum(int id, String name, String description, LocalDateTime createdAt, String status, Integer viewCount,
+			Integer topicCount, Integer postCount, User user, List<Topic> topics) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -62,10 +62,10 @@ public class Forum {
 		this.createdAt = createdAt;
 		this.status = status;
 		this.viewCount = viewCount;
-		this.threadCount = threadCount;
+		this.topicCount = topicCount;
 		this.postCount = postCount;
 		this.user = user;
-		this.threads = threads;
+		this.topics = topics;
 	}
 
 	public int getId() {
@@ -108,27 +108,27 @@ public class Forum {
 		this.status = status;
 	}
 
-	public int getViewCount() {
+	public Integer getViewCount() {
 		return viewCount;
 	}
 
-	public void setViewCount(int viewCount) {
+	public void setViewCount(Integer viewCount) {
 		this.viewCount = viewCount;
 	}
 
-	public int getThreadCount() {
-		return threadCount;
+	public Integer getTopicCount() {
+		return topicCount;
 	}
 
-	public void setThreadCount(int threadCount) {
-		this.threadCount = threadCount;
+	public void setTopicCount(Integer topicCount) {
+		this.topicCount = topicCount;
 	}
 
-	public int getPostCount() {
+	public Integer getPostCount() {
 		return postCount;
 	}
 
-	public void setPostCount(int postCount) {
+	public void setPostCount(Integer postCount) {
 		this.postCount = postCount;
 	}
 
@@ -140,12 +140,12 @@ public class Forum {
 		this.user = user;
 	}
 
-	public List<Thread> getThreads() {
-		return threads;
+	public List<Topic> getTopics() {
+		return topics;
 	}
 
-	public void setThreads(List<Thread> threads) {
-		this.threads = threads;
+	public void setTopics(List<Topic> topics) {
+		this.topics = topics;
 	}
 
 	@Override
@@ -168,8 +168,9 @@ public class Forum {
 	@Override
 	public String toString() {
 		return "Forum [id=" + id + ", name=" + name + ", description=" + description + ", createdAt=" + createdAt
-				+ ", status=" + status + ", viewCount=" + viewCount + ", threadCount=" + threadCount + ", postCount="
-				+ postCount + ", user=" + user + ", threads=" + threads + "]";
+				+ ", status=" + status + ", viewCount=" + viewCount + ", topicCount=" + topicCount + ", postCount="
+				+ postCount + ", user=" + user + ", topics=" + topics + "]";
 	}
 
+	
 }

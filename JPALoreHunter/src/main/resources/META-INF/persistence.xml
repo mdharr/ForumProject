@@ -9,6 +9,9 @@
 
 		<!-- begin entities -->
 		<class>com.skilldistillery.lorehunter.entities.User</class>
+		<class>com.skilldistillery.lorehunter.entities.Forum</class>
+		<class>com.skilldistillery.lorehunter.entities.Topic</class>
+		<class>com.skilldistillery.lorehunter.entities.Post</class>
 
 		<!-- end entities -->
 

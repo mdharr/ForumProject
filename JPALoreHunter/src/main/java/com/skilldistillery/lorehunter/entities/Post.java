@@ -39,16 +39,17 @@ public class Post {
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "thread_id")
-	private Thread thread;
+	@JoinColumn(name = "topic_id")
+	private Topic topic;
+	
+	// parent/child mapping
 
 	public Post() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Post(int id, String content, LocalDateTime createdAt, String status, LocalDateTime lastEdited, int postCount,
-			User user, Thread thread) {
+			User user, Topic topic) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -57,7 +58,7 @@ public class Post {
 		this.lastEdited = lastEdited;
 		this.postCount = postCount;
 		this.user = user;
-		this.thread = thread;
+		this.topic = topic;
 	}
 
 	public int getId() {
@@ -116,12 +117,12 @@ public class Post {
 		this.user = user;
 	}
 
-	public Thread getThread() {
-		return thread;
+	public Topic getTopic() {
+		return topic;
 	}
 
-	public void setThread(Thread thread) {
-		this.thread = thread;
+	public void setTopic(Topic topic) {
+		this.topic = topic;
 	}
 
 	@Override
@@ -144,9 +145,9 @@ public class Post {
 	@Override
 	public String toString() {
 		return "Post [id=" + id + ", content=" + content + ", createdAt=" + createdAt + ", status=" + status
-				+ ", lastEdited=" + lastEdited + ", postCount=" + postCount + ", user=" + user + ", thread=" + thread
+				+ ", lastEdited=" + lastEdited + ", postCount=" + postCount + ", user=" + user + ", topic=" + topic
 				+ "]";
 	}
-	
+
 	
 }

@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-public class Thread {
+public class Topic {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class Thread {
 	@Column(name = "last_edited")
 	private LocalDateTime lastEdited;
 	
-	@Column(name = "postCount")
+	@Column(name = "post_count")
 	private int postCount;
 	
 	@ManyToOne
@@ -44,15 +44,15 @@ public class Thread {
 	@JoinColumn(name = "forum_id")
 	private Forum forum;
 	
-	@OneToMany(mappedBy = "thread")
+	@OneToMany(mappedBy = "topic")
 	private List<Post> posts;
 
-	public Thread() {
+	public Topic() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Thread(int id, String subject, LocalDateTime createdAt, String status, LocalDateTime lastEdited,
+	public Topic(int id, String subject, LocalDateTime createdAt, String status, LocalDateTime lastEdited,
 			int postCount, User user, Forum forum, List<Post> posts) {
 		super();
 		this.id = id;
@@ -151,15 +151,17 @@ public class Thread {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Thread other = (Thread) obj;
+		Topic other = (Topic) obj;
 		return id == other.id;
 	}
 
 	@Override
 	public String toString() {
-		return "Thread [id=" + id + ", subject=" + subject + ", createdAt=" + createdAt + ", status=" + status
+		return "Topic [id=" + id + ", subject=" + subject + ", createdAt=" + createdAt + ", status=" + status
 				+ ", lastEdited=" + lastEdited + ", postCount=" + postCount + ", user=" + user + ", forum=" + forum
 				+ ", posts=" + posts + "]";
 	}
+	
+	
 
 }

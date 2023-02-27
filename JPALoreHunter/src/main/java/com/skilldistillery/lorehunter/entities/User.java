@@ -58,10 +58,13 @@ public class User {
 	private List<Forum> forums;
 	
 	@OneToMany(mappedBy = "user")
-	private List<Thread> threads;
+	private List<Topic> topics;
 	
 	@OneToMany(mappedBy = "user")
 	private List<Post> posts;
+	
+	@Column(name = "topic_count")
+	private Integer topicCount;
 
 	public User() {
 		super();
@@ -69,8 +72,8 @@ public class User {
 
 	public User(int id, String username, String password, Boolean enabled, String role, String firstName,
 			String lastName, String email, LocalDateTime createdAt, String imageUrl, LocalDateTime lastActivity,
-			String status, int postCount, String bannerMessage, List<Forum> forums, List<Thread> threads,
-			List<Post> posts) {
+			String status, int postCount, String bannerMessage, List<Forum> forums, List<Topic> topics,
+			List<Post> posts, Integer topicCount) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -87,8 +90,9 @@ public class User {
 		this.postCount = postCount;
 		this.bannerMessage = bannerMessage;
 		this.forums = forums;
-		this.threads = threads;
+		this.topics = topics;
 		this.posts = posts;
+		this.topicCount = topicCount;
 	}
 
 	public int getId() {
@@ -211,12 +215,12 @@ public class User {
 		this.forums = forums;
 	}
 
-	public List<Thread> getThreads() {
-		return threads;
+	public List<Topic> getTopics() {
+		return topics;
 	}
 
-	public void setThreads(List<Thread> threads) {
-		this.threads = threads;
+	public void setTopics(List<Topic> topics) {
+		this.topics = topics;
 	}
 
 	public List<Post> getPosts() {
@@ -225,6 +229,14 @@ public class User {
 
 	public void setPosts(List<Post> posts) {
 		this.posts = posts;
+	}
+
+	public Integer getTopicCount() {
+		return topicCount;
+	}
+
+	public void setTopicCount(Integer topicCount) {
+		this.topicCount = topicCount;
 	}
 
 	@Override
@@ -250,8 +262,9 @@ public class User {
 				+ ", role=" + role + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", createdAt=" + createdAt + ", imageUrl=" + imageUrl + ", lastActivity=" + lastActivity + ", status="
 				+ status + ", postCount=" + postCount + ", bannerMessage=" + bannerMessage + ", forums=" + forums
-				+ ", threads=" + threads + ", posts=" + posts + "]";
+				+ ", topics=" + topics + ", posts=" + posts + ", topicCount=" + topicCount + "]";
 	}
 
+	
 	
 }
