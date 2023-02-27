@@ -108,9 +108,11 @@ CREATE TABLE IF NOT EXISTS `post` (
   `user_id` INT NOT NULL,
   `thread_id` INT NOT NULL,
   `last_edited` TIMESTAMP NULL,
+  `post_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_post_user1_idx` (`user_id` ASC),
   INDEX `fk_post_thread1_idx` (`thread_id` ASC),
+  INDEX `fk_post_post1_idx` (`post_id` ASC),
   CONSTRAINT `fk_post_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `user` (`id`)
@@ -119,6 +121,11 @@ CREATE TABLE IF NOT EXISTS `post` (
   CONSTRAINT `fk_post_thread1`
     FOREIGN KEY (`thread_id`)
     REFERENCES `thread` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_post_post1`
+    FOREIGN KEY (`post_id`)
+    REFERENCES `post` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
