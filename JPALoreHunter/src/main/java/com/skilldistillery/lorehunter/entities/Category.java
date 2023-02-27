@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-public class Forum {
+public class Category {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,26 +35,25 @@ public class Forum {
 	@Column(name = "view_count")
 	private Integer viewCount;
 	
-	@Column(name = "topic_count")
-	private Integer topicCount;
-	
 	@Column(name = "post_count")
 	private Integer postCount;
+	
+	@Column(name = "comment_count")
+	private Integer commentCount;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@OneToMany(mappedBy = "forum")
-	private List<Topic> topics;
+	@OneToMany(mappedBy = "category")
+	private List<Post> posts;
 
-	public Forum() {
+	public Category() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Forum(int id, String name, String description, LocalDateTime createdAt, String status, Integer viewCount,
-			Integer topicCount, Integer postCount, User user, List<Topic> topics) {
+	public Category(int id, String name, String description, LocalDateTime createdAt, String status, Integer viewCount,
+			Integer postCount, Integer commentCount, User user, List<Post> posts) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -62,10 +61,10 @@ public class Forum {
 		this.createdAt = createdAt;
 		this.status = status;
 		this.viewCount = viewCount;
-		this.topicCount = topicCount;
 		this.postCount = postCount;
+		this.commentCount = commentCount;
 		this.user = user;
-		this.topics = topics;
+		this.posts = posts;
 	}
 
 	public int getId() {
@@ -116,20 +115,20 @@ public class Forum {
 		this.viewCount = viewCount;
 	}
 
-	public Integer getTopicCount() {
-		return topicCount;
-	}
-
-	public void setTopicCount(Integer topicCount) {
-		this.topicCount = topicCount;
-	}
-
 	public Integer getPostCount() {
 		return postCount;
 	}
 
 	public void setPostCount(Integer postCount) {
 		this.postCount = postCount;
+	}
+
+	public Integer getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(Integer commentCount) {
+		this.commentCount = commentCount;
 	}
 
 	public User getUser() {
@@ -140,12 +139,12 @@ public class Forum {
 		this.user = user;
 	}
 
-	public List<Topic> getTopics() {
-		return topics;
+	public List<Post> getPosts() {
+		return posts;
 	}
 
-	public void setTopics(List<Topic> topics) {
-		this.topics = topics;
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	@Override
@@ -161,16 +160,18 @@ public class Forum {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Forum other = (Forum) obj;
+		Category other = (Category) obj;
 		return id == other.id;
 	}
 
 	@Override
 	public String toString() {
-		return "Forum [id=" + id + ", name=" + name + ", description=" + description + ", createdAt=" + createdAt
-				+ ", status=" + status + ", viewCount=" + viewCount + ", topicCount=" + topicCount + ", postCount="
-				+ postCount + ", user=" + user + ", topics=" + topics + "]";
+		return "Category [id=" + id + ", name=" + name + ", description=" + description + ", createdAt=" + createdAt
+				+ ", status=" + status + ", viewCount=" + viewCount + ", postCount=" + postCount + ", commentCount="
+				+ commentCount + ", user=" + user + ", posts=" + posts + "]";
 	}
-
 	
+	
+
+
 }

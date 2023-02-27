@@ -1,6 +1,7 @@
 package com.skilldistillery.lorehunter.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -20,7 +22,7 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String content;
+	private String subject;
 	
 	@CreationTimestamp
 	@Column(name = "created_at")
@@ -31,34 +33,36 @@ public class Post {
 	@Column(name = "last_edited")
 	private LocalDateTime lastEdited;
 	
-	@Column(name = "post_count")
-	private int postCount;
+	@Column(name = "comment_count")
+	private Integer commentCount;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "topic_id")
-	private Topic topic;
+	@JoinColumn(name = "category_id")
+	private Category category;
 	
-	// parent/child mapping
+	@OneToMany(mappedBy = "post")
+	private List<Comment> comments;
 
 	public Post() {
 		super();
 	}
 
-	public Post(int id, String content, LocalDateTime createdAt, String status, LocalDateTime lastEdited, int postCount,
-			User user, Topic topic) {
+	public Post(int id, String subject, LocalDateTime createdAt, String status, LocalDateTime lastEdited,
+			Integer commentCount, User user, Category category, List<Comment> comments) {
 		super();
 		this.id = id;
-		this.content = content;
+		this.subject = subject;
 		this.createdAt = createdAt;
 		this.status = status;
 		this.lastEdited = lastEdited;
-		this.postCount = postCount;
+		this.commentCount = commentCount;
 		this.user = user;
-		this.topic = topic;
+		this.category = category;
+		this.comments = comments;
 	}
 
 	public int getId() {
@@ -69,12 +73,12 @@ public class Post {
 		this.id = id;
 	}
 
-	public String getContent() {
-		return content;
+	public String getSubject() {
+		return subject;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -101,12 +105,12 @@ public class Post {
 		this.lastEdited = lastEdited;
 	}
 
-	public int getPostCount() {
-		return postCount;
+	public Integer getCommentCount() {
+		return commentCount;
 	}
 
-	public void setPostCount(int postCount) {
-		this.postCount = postCount;
+	public void setCommentCount(Integer commentCount) {
+		this.commentCount = commentCount;
 	}
 
 	public User getUser() {
@@ -117,12 +121,20 @@ public class Post {
 		this.user = user;
 	}
 
-	public Topic getTopic() {
-		return topic;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setTopic(Topic topic) {
-		this.topic = topic;
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	@Override
@@ -144,10 +156,9 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", content=" + content + ", createdAt=" + createdAt + ", status=" + status
-				+ ", lastEdited=" + lastEdited + ", postCount=" + postCount + ", user=" + user + ", topic=" + topic
-				+ "]";
+		return "Post [id=" + id + ", subject=" + subject + ", createdAt=" + createdAt + ", status=" + status
+				+ ", lastEdited=" + lastEdited + ", commentCount=" + commentCount + ", user=" + user + ", category="
+				+ category + ", comments=" + comments + "]";
 	}
 
-	
 }

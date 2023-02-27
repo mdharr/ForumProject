@@ -48,23 +48,23 @@ public class User {
 	
 	private String status;
 	
-	@Column(name = "post_count")
-	private int postCount;
+	@Column(name = "comment_count")
+	private int commentCount;
 	
 	@Column(name = "banner_message")
 	private String bannerMessage;
 	
 	@OneToMany(mappedBy = "user")
-	private List<Forum> forums;
-	
-	@OneToMany(mappedBy = "user")
-	private List<Topic> topics;
+	private List<Category> categories;
 	
 	@OneToMany(mappedBy = "user")
 	private List<Post> posts;
 	
-	@Column(name = "topic_count")
-	private Integer topicCount;
+	@OneToMany(mappedBy = "user")
+	private List<Comment> comments;
+	
+	@Column(name = "post_count")
+	private Integer postCount;
 
 	public User() {
 		super();
@@ -72,8 +72,8 @@ public class User {
 
 	public User(int id, String username, String password, Boolean enabled, String role, String firstName,
 			String lastName, String email, LocalDateTime createdAt, String imageUrl, LocalDateTime lastActivity,
-			String status, int postCount, String bannerMessage, List<Forum> forums, List<Topic> topics,
-			List<Post> posts, Integer topicCount) {
+			String status, int commentCount, String bannerMessage, List<Category> categories, List<Post> posts,
+			List<Comment> comments, Integer postCount) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -87,12 +87,12 @@ public class User {
 		this.imageUrl = imageUrl;
 		this.lastActivity = lastActivity;
 		this.status = status;
-		this.postCount = postCount;
+		this.commentCount = commentCount;
 		this.bannerMessage = bannerMessage;
-		this.forums = forums;
-		this.topics = topics;
+		this.categories = categories;
 		this.posts = posts;
-		this.topicCount = topicCount;
+		this.comments = comments;
+		this.postCount = postCount;
 	}
 
 	public int getId() {
@@ -191,12 +191,12 @@ public class User {
 		this.status = status;
 	}
 
-	public int getPostCount() {
-		return postCount;
+	public int getCommentCount() {
+		return commentCount;
 	}
 
-	public void setPostCount(int postCount) {
-		this.postCount = postCount;
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
 	}
 
 	public String getBannerMessage() {
@@ -207,20 +207,12 @@ public class User {
 		this.bannerMessage = bannerMessage;
 	}
 
-	public List<Forum> getForums() {
-		return forums;
+	public List<Category> getCategories() {
+		return categories;
 	}
 
-	public void setForums(List<Forum> forums) {
-		this.forums = forums;
-	}
-
-	public List<Topic> getTopics() {
-		return topics;
-	}
-
-	public void setTopics(List<Topic> topics) {
-		this.topics = topics;
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 	public List<Post> getPosts() {
@@ -231,12 +223,20 @@ public class User {
 		this.posts = posts;
 	}
 
-	public Integer getTopicCount() {
-		return topicCount;
+	public List<Comment> getComments() {
+		return comments;
 	}
 
-	public void setTopicCount(Integer topicCount) {
-		this.topicCount = topicCount;
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public Integer getPostCount() {
+		return postCount;
+	}
+
+	public void setPostCount(Integer postCount) {
+		this.postCount = postCount;
 	}
 
 	@Override
@@ -261,10 +261,10 @@ public class User {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
 				+ ", role=" + role + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", createdAt=" + createdAt + ", imageUrl=" + imageUrl + ", lastActivity=" + lastActivity + ", status="
-				+ status + ", postCount=" + postCount + ", bannerMessage=" + bannerMessage + ", forums=" + forums
-				+ ", topics=" + topics + ", posts=" + posts + ", topicCount=" + topicCount + "]";
+				+ status + ", commentCount=" + commentCount + ", bannerMessage=" + bannerMessage + ", categories="
+				+ categories + ", posts=" + posts + ", comments=" + comments + ", postCount=" + postCount + "]";
 	}
-
+	
 	
 	
 }

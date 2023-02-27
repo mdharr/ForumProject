@@ -1,7 +1,6 @@
 package com.skilldistillery.lorehunter.entities;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -11,18 +10,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-public class Topic {
+public class Comment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String subject;
+	private String content;
 	
 	@CreationTimestamp
 	@Column(name = "created_at")
@@ -33,37 +31,31 @@ public class Topic {
 	@Column(name = "last_edited")
 	private LocalDateTime lastEdited;
 	
-	@Column(name = "post_count")
-	private int postCount;
-	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "forum_id")
-	private Forum forum;
+	@JoinColumn(name = "post_id")
+	private Post post;
 	
-	@OneToMany(mappedBy = "topic")
-	private List<Post> posts;
+	// parent/child mapping
 
-	public Topic() {
+	public Comment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Topic(int id, String subject, LocalDateTime createdAt, String status, LocalDateTime lastEdited,
-			int postCount, User user, Forum forum, List<Post> posts) {
+	public Comment(int id, String content, LocalDateTime createdAt, String status, LocalDateTime lastEdited, User user,
+			Post post) {
 		super();
 		this.id = id;
-		this.subject = subject;
+		this.content = content;
 		this.createdAt = createdAt;
 		this.status = status;
 		this.lastEdited = lastEdited;
-		this.postCount = postCount;
 		this.user = user;
-		this.forum = forum;
-		this.posts = posts;
+		this.post = post;
 	}
 
 	public int getId() {
@@ -74,12 +66,12 @@ public class Topic {
 		this.id = id;
 	}
 
-	public String getSubject() {
-		return subject;
+	public String getContent() {
+		return content;
 	}
 
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -106,14 +98,6 @@ public class Topic {
 		this.lastEdited = lastEdited;
 	}
 
-	public int getPostCount() {
-		return postCount;
-	}
-
-	public void setPostCount(int postCount) {
-		this.postCount = postCount;
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -122,20 +106,12 @@ public class Topic {
 		this.user = user;
 	}
 
-	public Forum getForum() {
-		return forum;
+	public Post getPost() {
+		return post;
 	}
 
-	public void setForum(Forum forum) {
-		this.forum = forum;
-	}
-
-	public List<Post> getPosts() {
-		return posts;
-	}
-
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
 	@Override
@@ -151,16 +127,16 @@ public class Topic {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Topic other = (Topic) obj;
+		Comment other = (Comment) obj;
 		return id == other.id;
 	}
 
 	@Override
 	public String toString() {
-		return "Topic [id=" + id + ", subject=" + subject + ", createdAt=" + createdAt + ", status=" + status
-				+ ", lastEdited=" + lastEdited + ", postCount=" + postCount + ", user=" + user + ", forum=" + forum
-				+ ", posts=" + posts + "]";
+		return "Comment [id=" + id + ", content=" + content + ", createdAt=" + createdAt + ", status=" + status
+				+ ", lastEdited=" + lastEdited + ", user=" + user + ", post=" + post + "]";
 	}
+	
 	
 	
 
