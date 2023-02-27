@@ -1,15 +1,21 @@
 package com.skilldistillery.lorehunter.entities;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -39,11 +45,19 @@ public class Comment {
 	@JoinColumn(name = "post_id")
 	private Post post;
 	
-	// parent/child mapping
+	// parent/child single table
+	@Transient
+    private Integer commentId;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional=true)
+    @JoinColumn(name="comment_id")
+    private Comment parentComment;
+    
+    @OneToMany(mappedBy="comment", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
+    private Set<Comment> childComment = new HashSet<Comment>();
 
 	public Comment() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Comment(int id, String content, LocalDateTime createdAt, String status, LocalDateTime lastEdited, User user,
