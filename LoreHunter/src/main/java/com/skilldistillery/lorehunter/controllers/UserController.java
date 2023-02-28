@@ -72,5 +72,19 @@ public class UserController {
 		}
 		return user;
 	}
+	
+	@PutMapping("users/{id}")
+	public void archiveUser(Principal principal, @PathVariable int id, HttpServletResponse res) {
+		try {
+			if (userService.archiveUser(id)) {
+				res.setStatus(204);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+	}
 
 }
