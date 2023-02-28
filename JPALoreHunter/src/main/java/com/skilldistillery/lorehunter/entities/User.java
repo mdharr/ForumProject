@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 
@@ -54,12 +56,15 @@ public class User {
 	@Column(name = "banner_message")
 	private String bannerMessage;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Category> categories;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Post> posts;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Comment> comments;
 	
