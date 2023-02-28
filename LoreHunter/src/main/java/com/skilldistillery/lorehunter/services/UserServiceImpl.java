@@ -1,5 +1,6 @@
 package com.skilldistillery.lorehunter.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,8 +93,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateLogInTime(User user) {
-		// TODO Auto-generated method stub
-		
+			Optional<User> userOpt = userRepo.findById(user.getId());
+			if(userOpt.isPresent()) {
+				User userUpdate = userOpt.get();
+				userUpdate.setLastActivity(LocalDateTime.now());
+				userRepo.saveAndFlush(userUpdate);
+			}
 	}
 
 }
