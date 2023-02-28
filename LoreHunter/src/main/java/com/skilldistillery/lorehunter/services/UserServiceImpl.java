@@ -36,13 +36,31 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User updateAdmin(int id, User user) {
-		return null;
+		User userUpdate = show(id);
+		userUpdate.setUsername(user.getUsername());
+		userUpdate.setPassword(user.getPassword());
+		userUpdate.setEnabled(user.getEnabled());
+		userUpdate.setRole(user.getRole());
+		userUpdate.setFirstName(user.getFirstName());
+		userUpdate.setLastName(user.getLastName());
+		userUpdate.setEmail(user.getEmail());
+		userUpdate.setImageUrl(user.getImageUrl());
+		userUpdate.setStatus(user.getStatus());
+		userUpdate.setBannerMessage(user.getBannerMessage());
+		return userRepo.save(userUpdate);
 	}
 
 	@Override
 	public User updateOwn(String username, User user) {
-		// TODO Auto-generated method stub
-		return null;
+		User userUpdate = userRepo.findByUsername(username);
+		userUpdate.setUsername(user.getUsername());
+		userUpdate.setPassword(user.getPassword());
+		userUpdate.setFirstName(user.getFirstName());
+		userUpdate.setLastName(user.getLastName());
+		userUpdate.setEmail(user.getEmail());
+		userUpdate.setImageUrl(user.getImageUrl());
+		userUpdate.setBannerMessage(user.getBannerMessage());
+		return userRepo.save(userUpdate);
 	}
 
 	@Override
