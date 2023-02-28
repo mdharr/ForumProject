@@ -19,6 +19,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Comment {
 	
@@ -50,11 +52,12 @@ public class Comment {
     private Integer commentId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional=true)
-    @JoinColumn(name="comment_id")
+    @JoinColumn(name="parent_id")
     private Comment parentComment;
     
-    @OneToMany(mappedBy="comment", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
-    private Set<Comment> childComment = new HashSet<Comment>();
+//    @JsonIgnore
+//    @OneToMany(mappedBy="comment", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
+//    private Set<Comment> childComment = new HashSet<Comment>();
 
 	public Comment() {
 		super();

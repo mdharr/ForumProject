@@ -14,11 +14,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
-	
+class CategoryTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Category category;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,37 +33,37 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		category = em.find(Category.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		category = null;
 	}
 
 	@Test
-	void test_User_entity_mapping() {
-		assertNotNull(user);
-		assertEquals("admin", user.getUsername());
+	void test_Category_entity_mapping() {
+		assertNotNull(category);
+		assertEquals("Gaming Forum", category.getName());
 	}
 	
 	@Test
-	void test_User_Category_one_to_many_mapping() {
-		assertNotNull(user);
-		assertTrue(user.getCategories().size() > 0);
+	void test_Category_Post_one_to_many_mapping() {
+		assertNotNull(category);
+		assertTrue(category.getPosts().size() > 0);
 	}
 	
 	@Test
-	void test_User_Post_one_to_many_mapping() {
-		assertNotNull(user);
-		assertTrue(user.getPosts().size() > 0);
+	void test_Category_User_one_to_one_mapping() {
+		assertNotNull(category);
+		assertEquals("admin", category.getUser().getUsername());
 	}
 	
 	@Test
-	void test_User_Comment_one_to_many_mapping() {
-		assertNotNull(user);
-		assertTrue(user.getComments().size() > 0);
+	void test_Category_Comment_one_to_many_mapping() {
+		assertNotNull(category);
+		assertEquals("Glad we are finally getting some solid gameplay footage.", category.getPosts().get(0).getComments().get(0).getContent());
 	}
 
 }

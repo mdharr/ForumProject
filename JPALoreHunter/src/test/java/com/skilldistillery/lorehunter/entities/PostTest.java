@@ -1,8 +1,6 @@
 package com.skilldistillery.lorehunter.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,11 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
-	
+class PostTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Post post;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,37 +31,37 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		post = em.find(Post.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		post = null;
 	}
 
 	@Test
-	void test_User_entity_mapping() {
-		assertNotNull(user);
-		assertEquals("admin", user.getUsername());
+	void test_Post_entity_mapping() {
+		assertNotNull(post);
+		assertEquals("[Reddit Rumor] Embargo preview FFXVI lifted next week", post.getSubject());
 	}
 	
 	@Test
-	void test_User_Category_one_to_many_mapping() {
-		assertNotNull(user);
-		assertTrue(user.getCategories().size() > 0);
+	void test_Post_Category_one_to_one_mapping() {
+		assertNotNull(post);
+		assertEquals("Gaming Forum", post.getCategory().getName());
 	}
 	
 	@Test
-	void test_User_Post_one_to_many_mapping() {
-		assertNotNull(user);
-		assertTrue(user.getPosts().size() > 0);
+	void test_Post_User_one_to_one_mapping() {
+		assertNotNull(post);
+		assertEquals("admin", post.getUser().getUsername());
 	}
 	
 	@Test
-	void test_User_Comment_one_to_many_mapping() {
-		assertNotNull(user);
-		assertTrue(user.getComments().size() > 0);
+	void test_Post_Comment_one_to_many_mapping() {
+		assertNotNull(post);
+		assertTrue(post.getComments().size() > 0);
 	}
-
+	
 }

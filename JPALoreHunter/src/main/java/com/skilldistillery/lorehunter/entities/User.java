@@ -49,7 +49,7 @@ public class User {
 	private String status;
 	
 	@Column(name = "comment_count")
-	private int commentCount;
+	private Integer commentCount;
 	
 	@Column(name = "banner_message")
 	private String bannerMessage;
@@ -72,7 +72,7 @@ public class User {
 
 	public User(int id, String username, String password, Boolean enabled, String role, String firstName,
 			String lastName, String email, LocalDateTime createdAt, String imageUrl, LocalDateTime lastActivity,
-			String status, int commentCount, String bannerMessage, List<Category> categories, List<Post> posts,
+			String status, Integer commentCount, String bannerMessage, List<Category> categories, List<Post> posts,
 			List<Comment> comments, Integer postCount) {
 		super();
 		this.id = id;
@@ -191,11 +191,11 @@ public class User {
 		this.status = status;
 	}
 
-	public int getCommentCount() {
+	public Integer getCommentCount() {
 		return commentCount;
 	}
 
-	public void setCommentCount(int commentCount) {
+	public void setCommentCount(Integer commentCount) {
 		this.commentCount = commentCount;
 	}
 
