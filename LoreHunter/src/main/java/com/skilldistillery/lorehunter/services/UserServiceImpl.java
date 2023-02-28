@@ -65,14 +65,19 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean archiveUser(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		Optional<User> userOpt = userRepo.findById(id);
+		if(userOpt.isPresent()) {
+			User user = userOpt.get();
+			user.setEnabled(false);
+			userRepo.saveAndFlush(user);		
+		}
+		return true;
 	}
 
 	@Override
 	public boolean deleteAdmin(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		userRepo.deleteById(id);
+		return !userRepo.existsById(id);
 	}
 
 	@Override
