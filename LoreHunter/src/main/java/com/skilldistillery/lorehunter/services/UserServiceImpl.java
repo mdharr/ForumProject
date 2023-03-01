@@ -103,4 +103,14 @@ public class UserServiceImpl implements UserService {
 			}
 	}
 
+	@Override
+	public User getUser(int userId) {
+		User user = null;
+		Optional<User> userOpt = userRepo.findById(userId);
+		if (userOpt.isPresent()) {
+			user = userOpt.get();
+		}
+		return user;
+	}
+
 }

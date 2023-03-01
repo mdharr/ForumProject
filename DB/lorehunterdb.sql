@@ -149,7 +149,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `created_at`, `image_url`, `last_activity`, `status`, `comment_count`, `banner_message`, `post_count`) VALUES (1, 'admin', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'ADMIN', NULL, NULL, 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `created_at`, `image_url`, `last_activity`, `status`, `comment_count`, `banner_message`, `post_count`) VALUES (1, 'admin', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'ADMIN', 'admin', 'admin', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `created_at`, `image_url`, `last_activity`, `status`, `comment_count`, `banner_message`, `post_count`) VALUES (2, 'Wander', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'ADMIN', 'Michael', 'Harrington', 'acatt.mh@gmail.com', NULL, 'https://cdn.discordapp.com/attachments/1080302897599877181/1080303009180946562/ico-profile-picture.jpeg', NULL, NULL, NULL, 'Raise thy sword by the light, and head to the place where the sword\'s light gathers.', NULL);
 
 COMMIT;
 
@@ -160,6 +161,7 @@ COMMIT;
 START TRANSACTION;
 USE `lorehunterdb`;
 INSERT INTO `category` (`id`, `name`, `description`, `created_at`, `status`, `view_count`, `post_count`, `comment_count`, `user_id`) VALUES (1, 'Gaming Forum', 'The latest video game news, discussions, announcements, industry gossip, sales figures, bargains and reviews. The pulse of the gaming industry.', NULL, NULL, NULL, 1, 1, 1);
+INSERT INTO `category` (`id`, `name`, `description`, `created_at`, `status`, `view_count`, `post_count`, `comment_count`, `user_id`) VALUES (2, 'Lore Hunting', 'Paradise floats upon the lake... ', NULL, NULL, NULL, 1, 1, 2);
 
 COMMIT;
 
@@ -170,6 +172,7 @@ COMMIT;
 START TRANSACTION;
 USE `lorehunterdb`;
 INSERT INTO `post` (`id`, `subject`, `created_at`, `status`, `last_edited`, `comment_count`, `category_id`, `user_id`, `content`) VALUES (1, '[Reddit Rumor] Embargo preview FFXVI lifted next week', NULL, NULL, NULL, 1, 1, 1, 'Two Italian reviewers have stated that an important game\'s embargo will expire at the end of the month, and have hinted that it is FFXVI (preview). Obviously do not take this information as 100% certain, we will find out in the coming days. To avoid NDA problems I will avoid specifying who they are.');
+INSERT INTO `post` (`id`, `subject`, `created_at`, `status`, `last_edited`, `comment_count`, `category_id`, `user_id`, `content`) VALUES (2, '12th Colossus', NULL, NULL, NULL, 1, 2, 2, 'Paradise floats upon the lake....');
 
 COMMIT;
 
@@ -180,6 +183,7 @@ COMMIT;
 START TRANSACTION;
 USE `lorehunterdb`;
 INSERT INTO `comment` (`id`, `content`, `created_at`, `status`, `last_edited`, `parent_id`, `user_id`, `post_id`) VALUES (1, 'Glad we are finally getting some solid gameplay footage.', NULL, NULL, NULL, NULL, 1, 1);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `status`, `last_edited`, `parent_id`, `user_id`, `post_id`) VALUES (2, 'A silent being wields thunder...', NULL, NULL, NULL, NULL, 2, 2);
 
 COMMIT;
 

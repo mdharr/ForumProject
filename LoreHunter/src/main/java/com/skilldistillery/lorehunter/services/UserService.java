@@ -23,5 +23,7 @@ public interface UserService {
 	public User showByUsername(String username);
 	
 	public void updateLogInTime(User user);
+	
+	public User getUser(int userId);
 
 }

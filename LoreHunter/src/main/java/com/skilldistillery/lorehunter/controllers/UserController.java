@@ -2,6 +2,7 @@ package com.skilldistillery.lorehunter.controllers;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.lorehunter.entities.User;
+import com.skilldistillery.lorehunter.repositories.UserRepository;
 import com.skilldistillery.lorehunter.services.UserService;
 
 @CrossOrigin({ "*", "http://localhost/"})
@@ -32,8 +35,17 @@ public class UserController {
 		return userService.index();
 	}
 	
-	@GetMapping("users/{username}")
-	public User show(Principal principal, @PathVariable String username, HttpServletResponse res) {
+	@GetMapping("users/{id}")
+	public User getUser(@PathVariable("id") int id, HttpServletResponse res) {
+		
+		if(userService.getUser(id) == null) {
+			res.setStatus(404);
+		}
+		return userService.getUser(id);
+	}
+	
+	@GetMapping("users/username/{username}")
+	public User show(Principal principal, @PathVariable String username, HttpServletRequest req, HttpServletResponse res) {
 		User user = userService.showByUsername(username);
 		if(user == null) {
 			res.setStatus(404);
