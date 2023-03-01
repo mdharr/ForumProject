@@ -56,9 +56,14 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public void archive(String username, int categoryId) {
-		// TODO Auto-generated method stub
-		
+	public boolean archive(String username, int categoryId) {
+		Optional<Category> categoryOpt = categoryRepo.findById(categoryId);
+		if(categoryOpt.isPresent()) {
+			Category category = categoryOpt.get();
+			category.setEnabled(false);
+			categoryRepo.saveAndFlush(category);		
+		}
+		return true;
 	}
 
 }
