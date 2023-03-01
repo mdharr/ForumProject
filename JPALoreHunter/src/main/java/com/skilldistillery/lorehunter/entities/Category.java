@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Category {
 	
@@ -41,10 +43,12 @@ public class Category {
 	@Column(name = "comment_count")
 	private Integer commentCount;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "category")
 	private List<Post> posts;
 
