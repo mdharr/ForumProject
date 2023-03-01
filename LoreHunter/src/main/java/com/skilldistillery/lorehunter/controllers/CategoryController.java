@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,6 +55,22 @@ public class CategoryController {
 			res.setStatus(404);
 		}
 		return newCategory;
+	}
+	
+	@PutMapping("categories/{cid}")
+	public Category update(Principal principal, @RequestBody Category category, @PathVariable("cid") int categoryId, HttpServletRequest req, HttpServletResponse res) {
+		Category updateCategory = null;
+		try {
+			updateCategory = categoryService.update(principal.getName(), category, categoryId);
+			if(updateCategory == null) {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			category = null;
+		}
+		return updateCategory;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.skilldistillery.lorehunter.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,13 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Category update(String username, Category category, int categoryId) {
-		return null;
+
+		Category existing = show(username, categoryId);
+			existing.setName(category.getName());
+			existing.setDescription(category.getDescription());
+			existing.setStatus(category.getStatus());
+			existing.setEnabled(category.getEnabled());
+		return categoryRepo.save(existing);
 	}
 
 	@Override
