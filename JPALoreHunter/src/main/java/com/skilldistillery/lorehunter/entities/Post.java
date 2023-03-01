@@ -46,13 +46,15 @@ public class Post {
 	
 	@OneToMany(mappedBy = "post")
 	private List<Comment> comments;
+	
+	private Boolean enabled;
 
 	public Post() {
 		super();
 	}
 
 	public Post(int id, String subject, LocalDateTime createdAt, String status, LocalDateTime lastEdited,
-			Integer commentCount, User user, Category category, List<Comment> comments) {
+			Integer commentCount, User user, Category category, List<Comment> comments, Boolean enabled) {
 		super();
 		this.id = id;
 		this.subject = subject;
@@ -63,6 +65,7 @@ public class Post {
 		this.user = user;
 		this.category = category;
 		this.comments = comments;
+		this.enabled = enabled;
 	}
 
 	public int getId() {
@@ -137,6 +140,14 @@ public class Post {
 		this.comments = comments;
 	}
 
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -156,9 +167,29 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", subject=" + subject + ", createdAt=" + createdAt + ", status=" + status
-				+ ", lastEdited=" + lastEdited + ", commentCount=" + commentCount + ", user=" + user + ", category="
-				+ category + ", comments=" + comments + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Post [id=");
+		builder.append(id);
+		builder.append(", subject=");
+		builder.append(subject);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", status=");
+		builder.append(status);
+		builder.append(", lastEdited=");
+		builder.append(lastEdited);
+		builder.append(", commentCount=");
+		builder.append(commentCount);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", category=");
+		builder.append(category);
+		builder.append(", comments=");
+		builder.append(comments);
+		builder.append(", enabled=");
+		builder.append(enabled);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

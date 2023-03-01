@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.lorehunter.entities.Category;
+import com.skilldistillery.lorehunter.entities.User;
 import com.skilldistillery.lorehunter.repositories.CategoryRepository;
+import com.skilldistillery.lorehunter.repositories.UserRepository;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 	
 	@Autowired CategoryRepository categoryRepo;
+	
+	@Autowired UserRepository userRepo;
 
 	@Override
 	public List<Category> index() {
@@ -19,33 +23,35 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Category show() {
-		// TODO Auto-generated method stub
+	public Category show(String username, int categoryId) {
+		Category category = null;
+		category = categoryRepo.findByIdAndUserId(categoryId, userRepo.findByUsername(username).getId());
+		return category;
+	}
+
+	@Override
+	public Category create(String username, Category category) {
+		Category newCategory = null;
+		User user = null;
+		User userOpt = userRepo.findByUsername(username);
+		if(userOpt != null) {
+			user = userOpt;
+			category.setUser(user);
+			category.setEnabled(true);
+			newCategory = categoryRepo.saveAndFlush(category);
+		}
+		return newCategory;
+	}
+
+	@Override
+	public Category update(String username, Category category, int categoryId) {
 		return null;
 	}
 
 	@Override
-	public Category create() {
+	public void archive(String username, int categoryId) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Category updateAdmin() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Category updateOwn() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void archive() {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 }

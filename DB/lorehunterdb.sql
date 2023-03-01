@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `post_count` INT NULL,
   `comment_count` INT NULL,
   `user_id` INT NOT NULL,
+  `enabled` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_category_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_category_user1`
@@ -82,6 +83,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   `category_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   `content` TEXT NOT NULL,
+  `enabled` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_post_category1_idx` (`category_id` ASC),
   INDEX `fk_post_user1_idx` (`user_id` ASC),
@@ -112,6 +114,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `parent_id` INT NULL,
   `user_id` INT NOT NULL,
   `post_id` INT NOT NULL,
+  `enabled` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_comment_comment1_idx` (`parent_id` ASC),
   INDEX `fk_comment_user1_idx` (`user_id` ASC),
@@ -160,8 +163,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `category` (`id`, `name`, `description`, `created_at`, `status`, `view_count`, `post_count`, `comment_count`, `user_id`) VALUES (1, 'Gaming Forum', 'The latest video game news, discussions, announcements, industry gossip, sales figures, bargains and reviews. The pulse of the gaming industry.', NULL, NULL, NULL, 1, 1, 1);
-INSERT INTO `category` (`id`, `name`, `description`, `created_at`, `status`, `view_count`, `post_count`, `comment_count`, `user_id`) VALUES (2, 'Lore Hunting', 'Paradise floats upon the lake... ', NULL, NULL, NULL, 1, 1, 2);
+INSERT INTO `category` (`id`, `name`, `description`, `created_at`, `status`, `view_count`, `post_count`, `comment_count`, `user_id`, `enabled`) VALUES (1, 'Gaming Forum', 'The latest video game news, discussions, announcements, industry gossip, sales figures, bargains and reviews. The pulse of the gaming industry.', NULL, NULL, NULL, 1, 1, 1, NULL);
+INSERT INTO `category` (`id`, `name`, `description`, `created_at`, `status`, `view_count`, `post_count`, `comment_count`, `user_id`, `enabled`) VALUES (2, 'Lore Hunting', 'Paradise floats upon the lake... ', NULL, NULL, NULL, 1, 1, 2, NULL);
 
 COMMIT;
 
@@ -171,8 +174,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `post` (`id`, `subject`, `created_at`, `status`, `last_edited`, `comment_count`, `category_id`, `user_id`, `content`) VALUES (1, '[Reddit Rumor] Embargo preview FFXVI lifted next week', NULL, NULL, NULL, 1, 1, 1, 'Two Italian reviewers have stated that an important game\'s embargo will expire at the end of the month, and have hinted that it is FFXVI (preview). Obviously do not take this information as 100% certain, we will find out in the coming days. To avoid NDA problems I will avoid specifying who they are.');
-INSERT INTO `post` (`id`, `subject`, `created_at`, `status`, `last_edited`, `comment_count`, `category_id`, `user_id`, `content`) VALUES (2, '12th Colossus', NULL, NULL, NULL, 1, 2, 2, 'Paradise floats upon the lake....');
+INSERT INTO `post` (`id`, `subject`, `created_at`, `status`, `last_edited`, `comment_count`, `category_id`, `user_id`, `content`, `enabled`) VALUES (1, '[Reddit Rumor] Embargo preview FFXVI lifted next week', NULL, NULL, NULL, 1, 1, 1, 'Two Italian reviewers have stated that an important game\'s embargo will expire at the end of the month, and have hinted that it is FFXVI (preview). Obviously do not take this information as 100% certain, we will find out in the coming days. To avoid NDA problems I will avoid specifying who they are.', NULL);
+INSERT INTO `post` (`id`, `subject`, `created_at`, `status`, `last_edited`, `comment_count`, `category_id`, `user_id`, `content`, `enabled`) VALUES (2, '12th Colossus', NULL, NULL, NULL, 1, 2, 2, 'Paradise floats upon the lake....', NULL);
 
 COMMIT;
 
@@ -182,8 +185,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `comment` (`id`, `content`, `created_at`, `status`, `last_edited`, `parent_id`, `user_id`, `post_id`) VALUES (1, 'Glad we are finally getting some solid gameplay footage.', NULL, NULL, NULL, NULL, 1, 1);
-INSERT INTO `comment` (`id`, `content`, `created_at`, `status`, `last_edited`, `parent_id`, `user_id`, `post_id`) VALUES (2, 'A silent being wields thunder...', NULL, NULL, NULL, NULL, 2, 2);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `status`, `last_edited`, `parent_id`, `user_id`, `post_id`, `enabled`) VALUES (1, 'Glad we are finally getting some solid gameplay footage.', NULL, NULL, NULL, NULL, 1, 1, NULL);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `status`, `last_edited`, `parent_id`, `user_id`, `post_id`, `enabled`) VALUES (2, 'A silent being wields thunder...', NULL, NULL, NULL, NULL, 2, 2, NULL);
 
 COMMIT;
 

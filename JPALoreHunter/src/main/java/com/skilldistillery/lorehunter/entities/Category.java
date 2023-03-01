@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Category {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -51,13 +51,15 @@ public class Category {
 	@JsonIgnore
 	@OneToMany(mappedBy = "category")
 	private List<Post> posts;
+	
+	private Boolean enabled;
 
 	public Category() {
 		super();
 	}
 
 	public Category(int id, String name, String description, LocalDateTime createdAt, String status, Integer viewCount,
-			Integer postCount, Integer commentCount, User user, List<Post> posts) {
+			Integer postCount, Integer commentCount, User user, List<Post> posts, Boolean enabled) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -69,6 +71,7 @@ public class Category {
 		this.commentCount = commentCount;
 		this.user = user;
 		this.posts = posts;
+		this.enabled = enabled;
 	}
 
 	public int getId() {
@@ -151,6 +154,14 @@ public class Category {
 		this.posts = posts;
 	}
 
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -170,9 +181,31 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + ", description=" + description + ", createdAt=" + createdAt
-				+ ", status=" + status + ", viewCount=" + viewCount + ", postCount=" + postCount + ", commentCount="
-				+ commentCount + ", user=" + user + ", posts=" + posts + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Category [id=");
+		builder.append(id);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", status=");
+		builder.append(status);
+		builder.append(", viewCount=");
+		builder.append(viewCount);
+		builder.append(", postCount=");
+		builder.append(postCount);
+		builder.append(", commentCount=");
+		builder.append(commentCount);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", posts=");
+		builder.append(posts);
+		builder.append(", enabled=");
+		builder.append(enabled);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 	

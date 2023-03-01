@@ -8,14 +8,12 @@ public interface CategoryService {
 	
 	public List<Category> index();
 	
-	public Category show();
+	public Category show(String username, int categoryId);
 	
-	public Category create();
+	public Category create(String username, Category category);
 	
-	public Category updateAdmin();
+	public Category update(String username, Category category, int categoryId);
 	
-	public Category updateOwn();
-	
-	public void archive();
+	public void archive(String username, int categoryId);
 
 }

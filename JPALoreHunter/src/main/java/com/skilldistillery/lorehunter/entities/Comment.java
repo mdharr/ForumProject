@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Comment {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -47,6 +47,8 @@ public class Comment {
 	@JoinColumn(name = "post_id")
 	private Post post;
 	
+	private Boolean enabled;
+	
 	// parent/child single table
 	@Transient
     private Integer commentId;
@@ -64,7 +66,7 @@ public class Comment {
 	}
 
 	public Comment(int id, String content, LocalDateTime createdAt, String status, LocalDateTime lastEdited, User user,
-			Post post) {
+			Post post, Boolean enabled, Integer commentId, Comment parentComment) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -73,6 +75,9 @@ public class Comment {
 		this.lastEdited = lastEdited;
 		this.user = user;
 		this.post = post;
+		this.enabled = enabled;
+		this.commentId = commentId;
+		this.parentComment = parentComment;
 	}
 
 	public int getId() {
@@ -131,6 +136,30 @@ public class Comment {
 		this.post = post;
 	}
 
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Integer getCommentId() {
+		return commentId;
+	}
+
+	public void setCommentId(Integer commentId) {
+		this.commentId = commentId;
+	}
+
+	public Comment getParentComment() {
+		return parentComment;
+	}
+
+	public void setParentComment(Comment parentComment) {
+		this.parentComment = parentComment;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -150,8 +179,29 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", content=" + content + ", createdAt=" + createdAt + ", status=" + status
-				+ ", lastEdited=" + lastEdited + ", user=" + user + ", post=" + post + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Comment [id=");
+		builder.append(id);
+		builder.append(", content=");
+		builder.append(content);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", status=");
+		builder.append(status);
+		builder.append(", lastEdited=");
+		builder.append(lastEdited);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", post=");
+		builder.append(post);
+		builder.append(", enabled=");
+		builder.append(enabled);
+		builder.append(", commentId=");
+		builder.append(commentId);
+		builder.append(", parentComment=");
+		builder.append(parentComment);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 	
