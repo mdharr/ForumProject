@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -34,6 +35,7 @@ public class Post {
 	
 	private String status;
 	
+	@UpdateTimestamp
 	@Column(name = "last_edited")
 	private LocalDateTime lastEdited;
 	
