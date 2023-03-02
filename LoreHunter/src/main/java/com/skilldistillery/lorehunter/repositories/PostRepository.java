@@ -15,6 +15,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 	
 	List<Post> findByPost_Id(int id);
 	
-	List<Post> findByCategoryId(int categoryId);
+	List<Post> findByCategory_Id(int categoryId);
 
 }

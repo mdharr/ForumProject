@@ -28,7 +28,7 @@ public class PostServiceImpl implements PostService {
 	
 	@Override
 	public List<Post> index(int categoryId) {
-		return postRepo.findByCategoryId(categoryId);
+		return postRepo.findByCategory_Id(categoryId);
 	}
 
 	@Override
