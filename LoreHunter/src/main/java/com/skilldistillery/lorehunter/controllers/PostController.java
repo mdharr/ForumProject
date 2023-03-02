@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -73,6 +74,20 @@ public class PostController {
 		}
 		
 		return post;
+	}
+	
+	@PatchMapping("categories/{cid}/posts/{pid}")
+	public void archive(Principal principal, @PathVariable("cid") int categoryId, @PathVariable("pid") int postId, HttpServletResponse res) {
+		try {
+			if (postService.archive(principal.getName(), postId, categoryId)) {
+				res.setStatus(204);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
 	}
 
 }
