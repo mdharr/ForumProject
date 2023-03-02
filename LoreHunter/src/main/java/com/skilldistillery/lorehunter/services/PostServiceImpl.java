@@ -63,6 +63,7 @@ public class PostServiceImpl implements PostService {
 	public Post update(String username, int postId, Post post, int categoryId) {
 		Post existing = show(username, postId);
 		existing.setSubject(post.getSubject());
+		existing.setContent(post.getContent());
 		existing.setStatus(post.getStatus());
 		return postRepo.save(existing);
 	}

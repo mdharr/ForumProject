@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Post {
 	
@@ -23,6 +25,8 @@ public class Post {
 	private int id;
 	
 	private String subject;
+	
+	private String content;
 	
 	@CreationTimestamp
 	@Column(name = "created_at")
@@ -36,14 +40,17 @@ public class Post {
 	@Column(name = "comment_count")
 	private Integer commentCount;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "post")
 	private List<Comment> comments;
 	
@@ -53,11 +60,12 @@ public class Post {
 		super();
 	}
 
-	public Post(int id, String subject, LocalDateTime createdAt, String status, LocalDateTime lastEdited,
+	public Post(int id, String subject, String content, LocalDateTime createdAt, String status, LocalDateTime lastEdited,
 			Integer commentCount, User user, Category category, List<Comment> comments, Boolean enabled) {
 		super();
 		this.id = id;
 		this.subject = subject;
+		this.content = content;
 		this.createdAt = createdAt;
 		this.status = status;
 		this.lastEdited = lastEdited;
@@ -82,6 +90,14 @@ public class Post {
 
 	public void setSubject(String subject) {
 		this.subject = subject;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -172,6 +188,8 @@ public class Post {
 		builder.append(id);
 		builder.append(", subject=");
 		builder.append(subject);
+		builder.append(", content=");
+		builder.append(content);
 		builder.append(", createdAt=");
 		builder.append(createdAt);
 		builder.append(", status=");

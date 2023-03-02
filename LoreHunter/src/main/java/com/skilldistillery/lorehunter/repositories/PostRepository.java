@@ -13,7 +13,8 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 	
 	Post findByIdAndUserId(int postId, int userId);
 	
-	List<Post> findByPost_Id(int id);
+	// This gives illegal argument exception because "Post" field does not exist in Post
+//	List<Post> findByPost_Id(int postId);
 	
 	List<Post> findByCategory_Id(int categoryId);
 
