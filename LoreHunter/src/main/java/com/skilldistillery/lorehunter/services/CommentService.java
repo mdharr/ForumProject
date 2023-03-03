@@ -8,7 +8,7 @@ import com.skilldistillery.lorehunter.entities.Post;
 
 public interface CommentService {
 	
-	public List<Comment> index();
+	public List<Comment> index(int projectId);
 	
 	public Set<Comment> indexByUsername(String username);
 	
