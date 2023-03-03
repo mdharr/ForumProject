@@ -32,8 +32,20 @@ public class CommentServiceImpl implements CommentService {
 	private CommentRepository commentRepo;
 
 	@Override
-	public List<Comment> index(int postId) {
-		return commentRepo.findByPost_Id(postId);
+	public List<Comment> index(int categoryId, int postId) {
+		Category category = null;
+		Post post = null;
+		Optional<Post> postOpt = postRepo.findById(postId);
+		if(postOpt.isPresent()) {
+			post = postOpt.get();
+		}
+		Optional<Category> categoryOpt = categoryRepo.findById(categoryId);
+		if(categoryOpt.isPresent()) {
+			category = categoryOpt.get();
+			post.setCategory(category);
+		}
+		 
+		return post.getComments();
 	}
 
 	@Override

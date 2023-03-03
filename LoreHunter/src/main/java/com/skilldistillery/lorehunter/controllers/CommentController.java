@@ -38,7 +38,7 @@ public class CommentController {
 	
 	@GetMapping("categories/{cid}/posts/{pid}/comments")
 	public List<Comment> index(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable("cid") int categoryId, @PathVariable("pid") int postId) {
-		return commentService.index(categoryId);
+		return commentService.index(postId, categoryId);
 	}
 
 }

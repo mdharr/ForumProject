@@ -8,7 +8,7 @@ import com.skilldistillery.lorehunter.entities.Post;
 
 public interface CommentService {
 	
-	public List<Comment> index(int projectId);
+	public List<Comment> index(int categoryId, int postId);
 	
 	public Set<Comment> indexByUsername(String username);
 	
@@ -19,5 +19,5 @@ public interface CommentService {
 	public Comment update(String username, int commentId, Post post, int postId);
 	
 	public boolean archive(String username, int commentId);
-
+	
 }
