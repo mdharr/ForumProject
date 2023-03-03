@@ -32,8 +32,8 @@ public class CommentServiceImpl implements CommentService {
 	private CommentRepository commentRepo;
 
 	@Override
-	public List<Comment> index(int projectId) {
-		return commentRepo.findByProject_Id(projectId);
+	public List<Comment> index(int postId) {
+		return commentRepo.findByPost_Id(postId);
 	}
 
 	@Override
