@@ -9,10 +9,10 @@ import com.skilldistillery.lorehunter.entities.Comment;
 
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 	
-//	Set<Comment> findByUser_Username(String username);
-//	
-//	Comment findByIdAndUserId(int commentId, int userId);
-//	
-//	List<Comment> findByComment_Id(int id);
+	Set<Comment> findByUser_Username(String username);
+	
+	Comment findByIdAndUserId(int commentId, int userId);
+	
+	List<Comment> findByComment_Id(int id);
 
 }

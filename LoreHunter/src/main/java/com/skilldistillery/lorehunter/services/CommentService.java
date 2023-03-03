@@ -1,0 +1,23 @@
+package com.skilldistillery.lorehunter.services;
+
+import java.util.List;
+import java.util.Set;
+
+import com.skilldistillery.lorehunter.entities.Comment;
+import com.skilldistillery.lorehunter.entities.Post;
+
+public interface CommentService {
+	
+	public List<Comment> index();
+	
+	public Set<Comment> indexByUsername(String username);
+	
+	public Comment show(String username, int commentId);
+	
+	public Comment create(String username, Comment comment, int postId, int categoryId);
+	
+	public Comment update(String username, int commentId, Post post, int postId, int categoryId);
+	
+	public boolean archive(String username, int commentId, int postId, int categoryId);
+
+}
