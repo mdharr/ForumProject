@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.lorehunter.entities.Category;
 import com.skilldistillery.lorehunter.entities.Comment;
 import com.skilldistillery.lorehunter.entities.Post;
 import com.skilldistillery.lorehunter.entities.User;
@@ -48,7 +49,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public Comment create(String username, Comment comment, int postId, int categoryId) {
+	public Comment create(String username, Comment comment, int postId) {
 		User user = userRepo.findByUsername(username);
 		Post post = null;
 		Optional<Post> postOpt = postRepo.findById(postId);
@@ -64,15 +65,20 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public Comment update(String username, int commentId, Post post, int postId, int categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Comment update(String username, int commentId, Post post, int postId) {
+		Comment existing = show(username, commentId);
+		return commentRepo.save(existing);
 	}
 
 	@Override
-	public boolean archive(String username, int commentId, int postId, int categoryId) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean archive(String username, int commentId) {
+		Optional<Comment> commentOpt = commentRepo.findById(commentId);
+		if(commentOpt.isPresent()) {
+			Comment comment = commentOpt.get();
+			comment.setEnabled(false);
+			commentRepo.saveAndFlush(comment);		
+		}
+		return true;
 	}
 
 }

@@ -14,10 +14,10 @@ public interface CommentService {
 	
 	public Comment show(String username, int commentId);
 	
-	public Comment create(String username, Comment comment, int postId, int categoryId);
+	public Comment create(String username, Comment comment, int postId);
 	
-	public Comment update(String username, int commentId, Post post, int postId, int categoryId);
+	public Comment update(String username, int commentId, Post post, int postId);
 	
-	public boolean archive(String username, int commentId, int postId, int categoryId);
+	public boolean archive(String username, int commentId);
 
 }
