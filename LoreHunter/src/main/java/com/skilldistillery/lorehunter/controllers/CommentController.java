@@ -32,7 +32,7 @@ public class CommentController {
 		return commentService.index(postId, categoryId);
 	}
 	
-	@PostMapping("categories/{cid}/posts{pid}/comments")
+	@PostMapping("categories/{cid}/posts/{pid}/comments")
 	public Comment create(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable("cid") int categoryId, @PathVariable("pid") int postId, @RequestBody Comment comment) {
 		
 		try {
