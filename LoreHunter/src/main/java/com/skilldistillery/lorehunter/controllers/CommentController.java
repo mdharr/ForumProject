@@ -14,24 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.lorehunter.entities.Comment;
-import com.skilldistillery.lorehunter.repositories.CategoryRepository;
-import com.skilldistillery.lorehunter.services.CategoryService;
 import com.skilldistillery.lorehunter.services.CommentService;
-import com.skilldistillery.lorehunter.services.PostService;
 
 @CrossOrigin({ "*", "http://localhost/"})
 @RestController
 @RequestMapping("api")
 public class CommentController {
-	
-	@Autowired
-	private PostService postService;
-	
-	@Autowired 
-	private CategoryService categoryService;
-	
-	@Autowired
-	private CategoryRepository categoryRepo;
 	
 	@Autowired
 	private CommentService commentService;
