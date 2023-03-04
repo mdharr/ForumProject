@@ -17,6 +17,7 @@ import { PostComponent } from './components/post/post.component';
 import { PostsAllComponent } from './components/posts-all/posts-all.component';
 import { UserComponent } from './components/user/user.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     PostComponent,
     PostsAllComponent,
     UserComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
