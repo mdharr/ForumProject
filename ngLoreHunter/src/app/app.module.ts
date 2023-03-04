@@ -19,6 +19,7 @@ import { UserComponent } from './components/user/user.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { CategoryComponent } from './components/category/category.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     UserComponent,
     NotFoundComponent,
     FooterComponent,
-    SidenavComponent
+    SidenavComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
