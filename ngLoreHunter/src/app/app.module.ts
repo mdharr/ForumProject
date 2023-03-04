@@ -16,6 +16,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { PostComponent } from './components/post/post.component';
 import { PostsAllComponent } from './components/posts-all/posts-all.component';
 import { UserComponent } from './components/user/user.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UserComponent } from './components/user/user.component';
     ProfileComponent,
     PostComponent,
     PostsAllComponent,
-    UserComponent
+    UserComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
