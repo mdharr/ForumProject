@@ -1,0 +1,29 @@
+<!-- <mat-sidenav-container class='app-drawer-container' fullscreen>
+  <mat-sidenav #sidenav mode="side">
+    sidenav bar
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <button mat-button (click)="sidenav.toggle()">Main content</button>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+<mat-sidenav-container class='app-drawer-container' fullscreen>
+  <mat-sidenav #sidenav mode="side">
+    <mat-nav-list>
+      <a mat-list-item>Forums</a>
+      <a mat-list-item>Gaming Forum</a>
+      <a mat-list-item>Gaming Hangouts</a>
+      <a mat-list-item>Lore Forum</a>
+      <a mat-list-item>Lore Hangouts</a>
+      <a mat-list-item>Trending Threads</a>
+      <a mat-list-item>Latest Threads</a>
+      <a mat-list-item>Tickets</a>
+      <a mat-list-item>Hide Images</a>
+      <a mat-list-item>Light/Dark</a>
+      <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <button mat-button (click)="sidenav.toggle()">Main content</button>
+  </mat-sidenav-content>
+</mat-sidenav-container>
