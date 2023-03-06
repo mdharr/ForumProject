@@ -7,3 +7,11 @@
   flex: 1;
   flex-direction: column;
 }
+
+a {
+  font-family: "Palanquin Dark",serif !important;
+}
+
+p {
+  font-family: "Josefin Sans",serif;
+}
