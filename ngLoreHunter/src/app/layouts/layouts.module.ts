@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LayoutsComponent } from './layouts.component';
 import { MatListModule } from '@angular/material/list';
+import { RouterModule, Routes } from '@angular/router';
 
 
 
@@ -23,7 +24,8 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     MatIconModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
+    RouterModule
   ],
   exports: [
     HeaderComponent,

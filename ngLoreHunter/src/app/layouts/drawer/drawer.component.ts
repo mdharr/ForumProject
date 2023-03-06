@@ -8,7 +8,7 @@ import { SideNavService } from 'src/app/services/side-nav.service';
   styleUrls: ['./drawer.component.css']
 })
 export class DrawerComponent implements OnInit {
-  @ViewChild('sidenav') public sidenav: MatSidenav;
+  @ViewChild('sidenav') public sidenav: MatSidenav | undefined;
 
   constructor(private sideNavService: SideNavService) {
 
@@ -16,7 +16,7 @@ export class DrawerComponent implements OnInit {
 
   ngOnInit() {
     this.sideNavService.sideNavToggleSubject.subscribe(()=> {
-      this.sidenav.toggle();
+      this.sidenav?.toggle();
     });
   }
 
