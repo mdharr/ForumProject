@@ -12,3 +12,10 @@
   align-items: center;
   padding: 8px 16px;
 }
+
+h1 {
+  font-family: "Palanquin Dark",serif;
+}
+p {
+  font-family: "Josefin Sans",serif;
+}
