@@ -9,6 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { LayoutsComponent } from './layouts.component';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule, Routes } from '@angular/router';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
@@ -25,7 +26,8 @@ import { RouterModule, Routes } from '@angular/router';
     MatIconModule,
     MatButtonModule,
     MatListModule,
-    RouterModule
+    RouterModule,
+    MatExpansionModule
   ],
   exports: [
     HeaderComponent,

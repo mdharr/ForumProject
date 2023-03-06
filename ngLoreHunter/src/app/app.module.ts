@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LayoutsModule } from './layouts/layouts.module';
 import { FooterComponent } from './components/footer/footer.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { FooterComponent } from './components/footer/footer.component';
     MatIconModule,
     MatListModule,
     MatButtonModule,
-    LayoutsModule
+    LayoutsModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
