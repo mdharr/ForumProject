@@ -17,13 +17,15 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LayoutsModule } from './layouts/layouts.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NotFoundComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
