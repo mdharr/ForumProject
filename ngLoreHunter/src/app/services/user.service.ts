@@ -57,4 +57,25 @@ export class UserService {
     );
   }
 
+  disableAdmin(user: User): Observable<User> {
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    return this.http
+      .put<User>(`${this.url}/${user.id}`, user, this.getHttpOptions())
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () =>
+              new Error(
+                'userService.disableAdmin(): error disabling user: ' + err
+              )
+          );
+        })
+      );
+  }
+
 }
