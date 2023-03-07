@@ -17,7 +17,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
   declarations: [
     DrawerComponent,
     HeaderComponent,
-    LayoutsComponent
+    LayoutsComponent,
   ],
   imports: [
     CommonModule,

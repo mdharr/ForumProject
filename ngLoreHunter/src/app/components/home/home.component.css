@@ -1,6 +1,10 @@
 h1 {
   font-family: "Palanquin Dark",serif;
 }
+h2 {
+  font-family: "Palanquin Dark",serif;
+}
+
 h3 {
   font-family: "Palanquin Dark",serif;
 }
@@ -20,11 +24,11 @@ p {
 .discussion-container {
   display: flex;
   flex-wrap: wrap;
-  margin: 2vh;
 }
 
 .official-container {
-  margin: 2vh;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
 }
 
 .sidebar-container {
@@ -34,8 +38,21 @@ p {
 }
 
 .discussion-container > div {
-  flex: 50%;
+  flex: 35%;
+  margin: 5px;
 }
+
+.card {
+  box-shadow: 0 20px 20px 0 rgb(0 0 0 / 8%);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card:hover {
+  box-shadow: 0 6px 10px 0px rgb(0 0 0 / 14%), 0 1px 18px 0px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%) !important;
+  transform: translateY(-5px);
+}
+
+
 
 
 

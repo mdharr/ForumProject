@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { SideNavService } from 'src/app/services/side-nav.service';
+import { RouterModule, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-drawer',

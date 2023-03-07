@@ -1,4 +1,39 @@
-
+/*
 h4 {
   text-transform: uppercase;
-}
+} */
+
+ .footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  background-color: rgb(64 80 181);
+  color: rgb(9, 2, 24);
+  text-align: center;
+  margin: 0px;
+  }
+
+  ul {
+    display: flex;
+    justify-content: right;
+    color: white;
+  }
+  li {
+    list-style: none;
+    margin: 5px;
+    margin-right: 10vh !important;
+    color: white;
+  }
+
+  li > a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  li > a:hover {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+  }
