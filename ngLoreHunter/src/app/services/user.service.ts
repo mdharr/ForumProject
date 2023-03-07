@@ -34,4 +34,16 @@ export class UserService {
     );
   }
 
+  show(id: number): Observable<User> {
+    return this.http.get<User>(`${this.url}/${id}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error('UserService.show(): error retrieving user: ' + err)
+        );
+      })
+    );
+  }
+
 }
