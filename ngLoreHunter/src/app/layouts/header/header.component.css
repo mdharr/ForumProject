@@ -19,3 +19,7 @@ h1 {
 p {
   font-family: "Josefin Sans",serif;
 }
+
+.example-spacer {
+  flex: 1 1 auto;
+}
