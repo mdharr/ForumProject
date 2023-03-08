@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

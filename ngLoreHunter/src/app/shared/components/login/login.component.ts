@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -13,7 +14,8 @@ export class LoginComponent {
 
   constructor(
               private authService: AuthService,
-              private router: Router
+              private router: Router,
+              private modalService: NgbModal
               ) {}
 
   login(loginUser: User) {
@@ -22,6 +24,7 @@ export class LoginComponent {
       next: (loggedInUser) => {
         console.log('Login success');
         console.log(loggedInUser);
+        this.modalService.dismissAll();
         this.router.navigateByUrl('home');
       },
       error: (fail) => {
