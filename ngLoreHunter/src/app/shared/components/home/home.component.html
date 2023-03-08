@@ -4,8 +4,8 @@
 <div class="container-fluid main-container">
   <div class="container-fluid forums-container">
     <div class="container-fluid discussion-container">
-      <mat-accordion>
-      <mat-expansion-panel hideToggle [expanded]="true">
+      <mat-accordion elevation={0}>
+      <mat-expansion-panel hideToggle [expanded]="true" class="mat-elevation-z0" style="background-color: #fafafa;">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <h1>Discussion</h1>
@@ -16,8 +16,8 @@
         </mat-expansion-panel-header>
         <hr>
         <div class="container-fluid discussion-container">
-          <div class="container card gaming"  *ngFor="let category of categories">
-            <h2>{{ category.name }}</h2>
+          <div class="container card">
+            <h2>Gaming Forum</h2>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia aliquid et, dicta itaque voluptatem impedit laudantium illo ad in dolorum distinctio accusamus repudiandae quia dignissimos ut! Expedita ratione molestiae labore?</p>
           </div>
           <div class="container-fluid card">
@@ -38,7 +38,7 @@
     </div>
     <div class="container-fluid official-container">
       <mat-accordion>
-      <mat-expansion-panel hideToggle [expanded]="true">
+      <mat-expansion-panel hideToggle [expanded]="true" class="mat-elevation-z0" style="background-color: #fafafa;">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <h1>Official</h1>

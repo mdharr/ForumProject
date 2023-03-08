@@ -1,5 +1,5 @@
 <mat-sidenav-container class='app-drawer-container' fullscreen>
-  <mat-sidenav #sidenav mode="side">
+  <mat-sidenav #sidenav mode="side" class="mat-elevation-z0" style="background-color: #fafafa; border: none;">
     <mat-nav-list>
       <a mat-list-item>Forums</a>
       <a mat-list-item>Gaming Forum</a>
@@ -8,8 +8,30 @@
       <a mat-list-item>Lore Hangouts</a>
       <a mat-list-item>Trending Threads</a>
       <a mat-list-item>Latest Threads</a>
-      <a mat-list-item>Tickets</a>
+      <mat-accordion elevation={0}>
+        <mat-expansion-panel hideToggle class="mat-elevation-z0" style="background-color: #fafafa; padding: 0;">
+          <mat-expansion-panel-header style="padding: 16px;">
+            <mat-panel-title>
+              <span style="font: 16px 'Roboto', sans-serif">Tickets</span>
+            </mat-panel-title>
+            <mat-panel-description>
+              <!-- This is a summary of the content -->
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="container-fluid" style="padding: 0;">
+            <div class="container" style="padding: 0;">
+              <a mat-list-item style="padding: 0;"><span style="font: 16px 'Roboto', sans-serif">Open New Ticket</span></a>
+            </div>
+            <br>
+            <div class="container-fluid" style="padding: 0;">
+              <a mat-list-item style="padding: 0;"><span style="font: 16px 'Roboto', sans-serif">Watched</span></a>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <hr>
       <a mat-list-item>Hide Images</a>
+      <hr>
       <a mat-list-item>Light/Dark</a>
     </mat-nav-list>
   </mat-sidenav>
