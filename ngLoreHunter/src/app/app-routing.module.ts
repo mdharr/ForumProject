@@ -5,6 +5,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LayoutsComponent } from './layouts/layouts.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { UserComponent } from './components/user/user.component';
 
 
 const routes: Routes = [
@@ -12,8 +14,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'footer', component: FooterComponent },
   { path: 'layouts', component: LayoutsComponent },
-  // { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'user', component: UserComponent },
   { path: '**', component: NotFoundComponent } //page not found route
 ];
 
