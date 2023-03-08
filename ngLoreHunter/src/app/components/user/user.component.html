@@ -1,1 +1,26 @@
-<p>user works!</p>
+<div class="container" *ngIf="!selected">
+  <h2 class="projectList" id="projectList">User List</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name:</th>
+      </tr>
+    </thead>
+    <tbody class="scrolling-box">
+      <tr *ngFor="let user of userList">
+        <td (click)="displayUser(user)">
+          {{ user.firstName }} {{ user.lastName }}
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-info"
+            (click)="updateUserAdmin(user, user.id)"
+          >
+            X
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
