@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './shared/components/home/home.component';
-import { NotFoundComponent } from './shared/components/not-found/not-found.component';
-import { FooterComponent } from './shared/components/footer/footer.component';
+import { DrawerComponent } from './layouts/drawer/drawer.component';
+import { HeaderComponent } from './layouts/header/header.component';
 import { LayoutsComponent } from './layouts/layouts.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { HomeComponent } from './shared/components/home/home.component';
 import { LoginComponent } from './shared/components/login/login.component';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { RegisterComponent } from './shared/components/register/register.component';
 import { UserComponent } from './shared/components/user/user.component';
-import { HeaderComponent } from './layouts/header/header.component';
-import { DrawerComponent } from './layouts/drawer/drawer.component';
-
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },

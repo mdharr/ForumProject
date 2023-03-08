@@ -1,11 +1,3 @@
-
-<!-- <mat-toolbar color="primary" role="heading">
-  <button mat-icon-button (click)="clickMenu()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <button mat-button>Lore Hunter</button>
-</mat-toolbar> -->
-
 <mat-toolbar color="primary" role="heading">
   <button mat-icon-button (click)="clickMenu()">
    <mat-icon>menu</mat-icon>
@@ -15,22 +7,17 @@
  </button>
  <span class="example-spacer"></span>
  <button mat-button *ngIf="!loggedIn()" (click)="open(loginmodal)">
-   <!-- <mat-icon>favorite</mat-icon> -->
    <span>Login</span>
  </button>
  <button mat-button *ngIf="!loggedIn()" (click)="open(registermodal)">
-  <!-- <mat-icon>share</mat-icon> -->
   <span>Register</span>
 </button>
- <!-- <button mat-button *ngIf="loggedIn()"> -->
-  <!-- <mat-icon>share</mat-icon> -->
   <app-logout *ngIf="loggedIn()"></app-logout>
-<!-- </button> -->
 </mat-toolbar>
 
 <ng-template #loginmodal let-modal>
   <div *ngIf="!loggedIn()">
-  <div class="modal-body" style="background-color: #08243B;">
+  <div class="modal-body" style="background-color: #3f51b5;">
     <app-login></app-login>
   </div>
 </div>
@@ -38,7 +25,7 @@
 
 <ng-template #registermodal let-modal>
   <div *ngIf="!loggedIn()">
-  <div class="modal-body" style="background-color: #08243B;">
+  <div class="modal-body" style="background-color: #3f51b5;">
     <app-register></app-register>
   </div>
 </div>

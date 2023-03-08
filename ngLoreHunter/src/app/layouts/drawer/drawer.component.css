@@ -15,3 +15,11 @@ a {
 p {
   font-family: "Josefin Sans",serif;
 }
+
+html {
+  color-scheme: light;
+}
+
+html:has(body > #theme-toggle:checked) {
+  color-scheme: dark;
+}
