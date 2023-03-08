@@ -19,6 +19,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { LoginComponent } from './components/login/login.component';
 import { LayoutsModule } from './layouts/layouts.module';
 import { RegisterComponent } from './components/register/register.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RegisterComponent } from './components/register/register.component';
     NotFoundComponent,
     FooterComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
