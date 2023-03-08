@@ -19,6 +19,7 @@ export class User {
   status: string;
   commentCount: number;
   postCount: number;
+  bannerMessage: string;
   categories: Category[];
   posts: Post[];
   comments: Comment[];
@@ -39,6 +40,7 @@ export class User {
     status: string = '',
     commentCount: number = 0,
     postCount: number = 0,
+    bannerMessage: string = '',
     categories: Category[] = [],
     posts: Post[] = [],
     comments: Comment[] = []
@@ -57,6 +59,7 @@ export class User {
     this.status = status;
     this.commentCount = commentCount;
     this.postCount = postCount;
+    this.bannerMessage = bannerMessage;
     this.categories = categories;
     this.posts = posts;
     this.comments = comments;
