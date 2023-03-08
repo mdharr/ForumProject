@@ -10,7 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  loginUser: User = new User;
+  //added parentheses after new User
+  loginUser: User = new User();
 
   constructor(
               private authService: AuthService,

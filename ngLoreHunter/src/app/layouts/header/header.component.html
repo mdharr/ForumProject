@@ -22,14 +22,14 @@
   <!-- <mat-icon>share</mat-icon> -->
   <span>Register</span>
 </button>
- <button mat-button *ngIf="loggedIn()">
+ <!-- <button mat-button *ngIf="loggedIn()"> -->
   <!-- <mat-icon>share</mat-icon> -->
-  <span>Logout</span>
-</button>
+  <app-logout *ngIf="loggedIn()"></app-logout>
+<!-- </button> -->
 </mat-toolbar>
 
 <ng-template #loginmodal let-modal>
-  <div *ngIf="loggedIn()">
+  <div *ngIf="!loggedIn()">
   <div class="modal-body" style="background-color: #08243B;">
     <app-login></app-login>
   </div>

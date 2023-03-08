@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LayoutsModule } from '../layouts/layouts.module';
 import { AppRoutingModule } from '../app-routing.module';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 
@@ -29,7 +30,8 @@ import { AppRoutingModule } from '../app-routing.module';
     FooterComponent,
     LoginComponent,
     RegisterComponent,
-    UserComponent
+    UserComponent,
+    LogoutComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +55,8 @@ import { AppRoutingModule } from '../app-routing.module';
     FooterComponent,
     LoginComponent,
     RegisterComponent,
-    UserComponent
+    UserComponent,
+    LogoutComponent
   ]
 })
 export class SharedModule { }
