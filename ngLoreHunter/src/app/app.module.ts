@@ -18,6 +18,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { LoginComponent } from './components/login/login.component';
 import { LayoutsModule } from './layouts/layouts.module';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LayoutsModule } from './layouts/layouts.module';
     HomeComponent,
     NotFoundComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
