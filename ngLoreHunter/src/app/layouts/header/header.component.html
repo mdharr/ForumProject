@@ -12,6 +12,8 @@
  <button mat-button *ngIf="!loggedIn()" (click)="open(registermodal)">
   <span>Register</span>
 </button>
+  <img id="userThumbnail" src="{{ loggedInUser.imageUrl }}" alt="" *ngIf="loggedIn()"/>
+  <span id="username" *ngIf="loggedIn()">{{ loggedInUser.username }}</span>
   <app-logout *ngIf="loggedIn()"></app-logout>
 </mat-toolbar>
 

@@ -163,8 +163,12 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `category` (`id`, `name`, `description`, `created_at`, `status`, `view_count`, `post_count`, `comment_count`, `user_id`, `enabled`) VALUES (1, 'Gaming Forum', 'The latest video game news, discussions, announcements, industry gossip, sales figures, bargains and reviews. The pulse of the gaming industry.', NULL, NULL, NULL, 1, 1, 1, NULL);
-INSERT INTO `category` (`id`, `name`, `description`, `created_at`, `status`, `view_count`, `post_count`, `comment_count`, `user_id`, `enabled`) VALUES (2, 'Lore Hunting', 'Paradise floats upon the lake... ', NULL, NULL, NULL, 1, 1, 2, NULL);
+INSERT INTO `category` (`id`, `name`, `description`, `created_at`, `status`, `view_count`, `post_count`, `comment_count`, `user_id`, `enabled`) VALUES (1, 'Gaming Forum', 'The latest video game news, discussions, announcements, industry gossip, sales figures, bargains and reviews. The pulse of the gaming industry.', '2023-03-03T12:35:22', 'active', 0, 1, 1, 1, 1);
+INSERT INTO `category` (`id`, `name`, `description`, `created_at`, `status`, `view_count`, `post_count`, `comment_count`, `user_id`, `enabled`) VALUES (2, 'Gaming Hangouts', 'If it\'s a community related to gaming, it has a home here! Official threads >1 month old, buy/sell/trade marketplace, gaming media fandoms, matchmaking, guilds and clans.', '2023-03-03T12:35:22', 'active', 0, 1, 1, 2, 1);
+INSERT INTO `category` (`id`, `name`, `description`, `created_at`, `status`, `view_count`, `post_count`, `comment_count`, `user_id`, `enabled`) VALUES (3, 'Lore Forum', 'Everything else. Current events, entertainment, technology, life, food, politics, pets, randomness, and anything in between. Civil discourse triumphs.', '2023-03-03T12:35:22', 'active', 0, 1, 1, 1, 1);
+INSERT INTO `category` (`id`, `name`, `description`, `created_at`, `status`, `view_count`, `post_count`, `comment_count`, `user_id`, `enabled`) VALUES (4, 'Lore Hangouts', 'Hobbyist enclaves. Sports followings. Official threads >1 month old. Local, international, and non-English language threads. Whatever your passion, find a community to share it with!', '2023-03-03T12:35:22', 'active', 0, 1, 1, 1, 1);
+INSERT INTO `category` (`id`, `name`, `description`, `created_at`, `status`, `view_count`, `post_count`, `comment_count`, `user_id`, `enabled`) VALUES (5, 'Announcements', 'Resources and staff communication.', '2023-03-03T12:35:22', 'active', 0, 1, 1, 1, 1);
+INSERT INTO `category` (`id`, `name`, `description`, `created_at`, `status`, `view_count`, `post_count`, `comment_count`, `user_id`, `enabled`) VALUES (6, 'The Vault', 'Treasured memories of threads past.', '2023-03-03T12:35:22', 'active', 0, 1, 1, 1, 1);
 
 COMMIT;
 

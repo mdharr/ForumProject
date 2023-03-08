@@ -16,8 +16,8 @@
         </mat-expansion-panel-header>
         <hr>
         <div class="container-fluid discussion-container">
-          <div class="container card gaming">
-            <h2>Gaming Forum</h2>
+          <div class="container card gaming"  *ngFor="let category of categories">
+            <h2>{{ category.name }}</h2>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia aliquid et, dicta itaque voluptatem impedit laudantium illo ad in dolorum distinctio accusamus repudiandae quia dignissimos ut! Expedita ratione molestiae labore?</p>
           </div>
           <div class="container-fluid card">

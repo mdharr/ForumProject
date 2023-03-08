@@ -4,6 +4,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -11,15 +13,54 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   title: string = "Dashboard";
 
+  loggedInUser: User = new User();
+
   constructor(private sideNavService: SideNavService,
+    private userService: UserService,
     private authService: AuthService,
     private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router) {
 
+  }
+
+  getHttpOptions() {
+    let options = {
+      headers: {
+        Authorization: 'Basic ' + this.authService.getCredentials(),
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    };
+    return options;
+  }
+
+  ngOnInit(): void {
+    this.authService.getLoggedInUser().subscribe({
+      next: (user) => {
+        this.loggedInUser = user;
+        console.log(user);
+
+      },
+      error: (error) => {
+        console.log('Error getting loggedInUser Profile Component');
+        console.log(error);
+      },
+    });
+  //   this.display = false;
+  //   this.projectService.indexAll().subscribe({
+  //     next: (projects) => {
+  //       this.projects = projects;
+  //       this.display = true;},
+  //   error: (error) => {
+  //     console.log(error);
+  //     console.log("Error loading all projects")
+  //   }
+  //   })
+  // this.checkUserAvailability();
+  // this.getCompletedProjects();
   }
 
   clickMenu() {

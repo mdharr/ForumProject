@@ -23,3 +23,15 @@ p {
 .example-spacer {
   flex: 1 1 auto;
 }
+
+#userThumbnail {
+  width: 35px;
+  border: 1px solid white;
+  margin-right: 15px;
+}
+
+#username {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
