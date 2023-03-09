@@ -1,15 +1,22 @@
 h1 {
   font-family: "Palanquin Dark",serif;
+  font-size: 2em;
+  font-weight: 400;
 }
 h2 {
   font-family: "Palanquin Dark",serif;
+  font-size: 1.5em;
+  font-weight: 400;
 }
 
 h3 {
   font-family: "Palanquin Dark",serif;
+  font-size: 17px;
+  font-weight: 400;
 }
 p {
   font-family: "Josefin Sans",serif;
+  font-size: 16px;
 }
 
 .main-container {
@@ -37,6 +44,10 @@ p {
   min-width: 300px;
 }
 
+.sidebar-item {
+  margin: 1vh 0 5vh 0;
+}
+
 .discussion-container > div {
   flex: 35%;
   margin: 5px;
@@ -45,6 +56,7 @@ p {
 .card {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  padding: 16px;
 }
 
 .card:hover {

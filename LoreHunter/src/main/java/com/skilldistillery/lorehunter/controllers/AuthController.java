@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.lorehunter.entities.User;
 import com.skilldistillery.lorehunter.services.AuthService;
+import com.skilldistillery.lorehunter.services.UserService;
 
 @RestController
 @CrossOrigin({"*", "http://localhost"})
 public class AuthController {
   @Autowired
   private AuthService authService;
+  @Autowired
+  private UserService userService;
   
   @PostMapping("register")
 	public User register(@RequestBody User user, HttpServletResponse res) {
@@ -37,6 +40,8 @@ public class AuthController {
 	     res.setHeader("WWW-Authenticate", "Basic");
 	     return null;
 	  }
-	  return authService.getUserByUsername(principal.getName());
+	  User loggedInUser = authService.getUserByUsername(principal.getName());
+	  userService.updateLogInTime(loggedInUser);
+	  return loggedInUser;
 	}
 }
