@@ -24,8 +24,8 @@
                   <a class="light-link" style="text-decoration:none;" style="text-decoration:none;" href="#"><mat-icon class="material-icons">sports_esports</mat-icon></a>
                 </div>
                 <div class="card-title">
-                  <div class="title">
-                    <a class="light-link" href="#"><h3 class="subject">Gaming Forum</h3></a>
+                  <div class="title" *ngFor="let category of categories; let i = index">
+                    <a class="light-link" href="#"><h3 *ngIf="i === 0" class="subject">{{ category.name }}</h3></a>
                   </div>
                   <div class="description">
                     <p>The latest video game news, discussions, announcements, industry gossip, sales figures, bargains and reviews. The pulse of the gaming industry.</p>
