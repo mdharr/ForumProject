@@ -233,6 +233,79 @@ dl {
   margin: 0;
 }
 
+.block-body {
+
+}
+
+.block-row {
+  margin: 0;
+}
+
+.content-row {
+  display: flex;
+}
+
+.content-row-main {
+  padding-left: 12px;
+}
+
+.content-row-figure {
+  vertical-align: top;
+  white-space: nowrap;
+  word-wrap: normal;
+  text-align: center;
+}
+
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 5px;
+}
+
+.avatar.avatar--xxs {
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+}
+
+.avatar {
+  border-radius: 4px;
+  vertical-align: top;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  border-radius: 0;
+}
+
+.avatar img:not(.cropImage) {
+  text-indent: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: normal;
+  display: block;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+.list-inline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listInline>li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
 
 
 
