@@ -29,8 +29,13 @@ h4 {
     cursor: pointer;
   }
 
-  li > a:hover {
-    color: white;
+  .light-link {
     text-decoration: none;
-    cursor: pointer;
+    color: #ffffff;
   }
+
+  .light-link:hover {
+    text-decoration:underline;
+    color: #ffffff;
+  }
+

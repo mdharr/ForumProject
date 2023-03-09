@@ -6,7 +6,6 @@ h1 {
 h2 {
   font-family: "Palanquin Dark",serif;
   font-size: 1.5em;
-  font-weight: 400;
 }
 
 h3 {
@@ -16,7 +15,7 @@ h3 {
 }
 p {
   font-family: "Josefin Sans",serif;
-  font-size: 16px;
+  font-size: 13px;
 }
 
 .main-container {
@@ -45,6 +44,22 @@ p {
   min-width: 300px;
 }
 
+.stats-container {
+  display: flex;
+  align-items: flex-end;
+}
+
+.stats-icon {
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.stats-title {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
 .sidebar-item {
   margin: 1vh 0 5vh 0;
 }
@@ -55,6 +70,7 @@ p {
 }
 
 .card {
+  max-width: 100%;
   padding: 0;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -126,10 +142,12 @@ p {
   justify-content: center;
   border-radius: 5px;
   margin-right: 10px;
+  background-color: rgba(255,255,255,.5);
 }
 
 .card-icon {
-  width: 50px;
+  width: 45px;
+  margin-right: 20px;
 }
 
 .card-title {
@@ -154,6 +172,8 @@ p {
 
 .latest-post {
   display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .user-avatar-container {
@@ -161,6 +181,7 @@ p {
   justify-content: center;
   align-items: center;
   width: 50px;
+  margin-right: 10px;
 }
 
 .user-avatar {
@@ -183,6 +204,33 @@ p {
   width: 100%;
   flex-basis: 100%;
   max-width: 100%;
+}
+
+.dark-link {
+  text-decoration: none;
+  color: black;
+}
+
+.dark-link:hover {
+  text-decoration:underline;
+  color: black;
+}
+
+.light-link {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.light-link:hover {
+  text-decoration:underline;
+  color: #ffffff;
+}
+
+dl {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
 }
 
 
