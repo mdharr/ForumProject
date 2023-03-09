@@ -31,6 +31,7 @@ p {
 .discussion-container {
   display: flex;
   flex-wrap: wrap;
+  color: white;
 }
 
 .official-container {
@@ -49,60 +50,46 @@ p {
 }
 
 .discussion-container > div {
-  flex: 35%;
+  flex: 45%;
   margin: 5px;
-  color: white;
 }
 
-.card-gaming {
+.card {
+  padding: 0;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-  padding: 16px;
-  background: rgb(6,142,167);
-  background: linear-gradient(90deg, rgba(6,142,167,1) 0%, rgba(36,161,159,1) 40%);
 }
 
-.card-gaming:hover {
+.card:hover {
   box-shadow: 0 6px 10px 0px rgb(0 0 0 / 14%), 0 1px 18px 0px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%) !important;
   transform: translateY(-5px);
 }
+
+.card-gaming {
+  padding: 16px;
+  background: rgb(6,142,167);
+  background: linear-gradient(90deg, rgba(6,142,167,1) 0%, rgba(36,161,159,1) 40%);
+  min-height: 200px;
+}
+
 .card-lore {
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   padding: 16px;
   background: rgb(151,57,124);
   background: linear-gradient(90deg, rgba(151,57,124,1) 75%, rgba(138,57,127,1) 100%);
 }
 
-.card-lore:hover {
-  box-shadow: 0 6px 10px 0px rgb(0 0 0 / 14%), 0 1px 18px 0px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%) !important;
-  transform: translateY(-5px);
-}
 
 .card-announcements {
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   padding: 16px;
   background: rgb(232,156,41);
   background: linear-gradient(90deg, rgba(232,156,41,1) 75%, rgba(232,131,58,1) 100%);
 }
 
-.card-announcements:hover {
-  box-shadow: 0 6px 10px 0px rgb(0 0 0 / 14%), 0 1px 18px 0px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%) !important;
-  transform: translateY(-5px);
-}
 
 .card-vault {
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   padding: 16px;
   background: rgb(62,178,91);
   background: linear-gradient(90deg, rgba(62,178,91,1) 0%, rgba(83,183,75,1) 40%);
-}
-
-.card-vault:hover {
-  box-shadow: 0 6px 10px 0px rgb(0 0 0 / 14%), 0 1px 18px 0px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%) !important;
-  transform: translateY(-5px);
 }
 
 .ghost-container {
@@ -112,6 +99,17 @@ p {
 .node-container {
   display: flex;
   flex-direction: column;
+}
+
+.more-container {
+  background-color: #ffffff;
+  width: 100%;
+  color: black;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding: 5px 5px 0 0;
+
 }
 
 .node-title-container {
@@ -142,6 +140,10 @@ p {
 
 }
 
+.subject {
+  margin-bottom: 0;
+}
+
 .description {
 
 }
@@ -151,7 +153,7 @@ p {
 }
 
 .latest-post {
-
+  display: flex;
 }
 
 .user-avatar-container {
@@ -175,6 +177,12 @@ p {
 
 .post-time {
 
+}
+
+.forums-container {
+  width: 100%;
+  flex-basis: 100%;
+  max-width: 100%;
 }
 
 
