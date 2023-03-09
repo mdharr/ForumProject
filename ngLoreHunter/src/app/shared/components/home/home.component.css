@@ -264,6 +264,7 @@ dl {
   white-space: nowrap;
   word-wrap: normal;
   text-align: center;
+  padding-top: 5px;
 }
 
 ul {
