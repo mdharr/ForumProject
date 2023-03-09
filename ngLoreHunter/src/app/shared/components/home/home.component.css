@@ -18,6 +18,11 @@ p {
   font-size: 13px;
 }
 
+.side-list {
+  font-family: "Josefin Sans",serif;
+  font-size: 13px;
+}
+
 .main-container {
   display: flex;
 }
@@ -239,6 +244,7 @@ dl {
 
 .block-row {
   margin: 0;
+  margin-bottom: 20px !important;
 }
 
 .content-row {
