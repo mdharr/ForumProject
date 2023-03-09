@@ -13,6 +13,10 @@ h3 {
   font-size: 17px;
   font-weight: 400;
 }
+h4 {
+  margin: 0 0 1px;
+}
+
 p {
   font-family: "Josefin Sans",serif;
   font-size: 13px;
@@ -311,6 +315,18 @@ ul {
   margin: 0;
   padding: 0;
 }
+
+#userThumbnail {
+  width: 35px;
+  border: 1px solid white;
+  margin-right: 15px;
+}
+
+#username {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
 
 
 
