@@ -64,6 +64,10 @@ p {
   transform: translateY(-5px);
 }
 
+.ghost-container {
+  height: 100px;
+}
+
 
 
 
