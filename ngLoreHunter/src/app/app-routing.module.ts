@@ -7,6 +7,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { HomeComponent } from './shared/components/home/home.component';
 import { LoginComponent } from './shared/components/login/login.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { PostsComponent } from './shared/components/posts/posts.component';
 import { RegisterComponent } from './shared/components/register/register.component';
 import { UserComponent } from './shared/components/user/user.component';
 
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'footer', component: FooterComponent },
   { path: 'layouts', component: LayoutsComponent },
+  { path: 'posts', component: PostsComponent},
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'user', component: UserComponent },

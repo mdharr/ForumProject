@@ -8,7 +8,7 @@
 }
 
 .breadcrumbnav li::after {
-  content: " >  ";
+  content: " \a0> \a0";
 }
 
 .breadcrumbnav li:last-child::after {
