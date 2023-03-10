@@ -7,14 +7,14 @@
       <mat-accordion elevation={0}>
       <mat-expansion-panel hideToggle [expanded]="true" class="mat-elevation-z0" style="background-color: #fafafa;">
         <mat-expansion-panel-header style="height: 40px; align-items: baseline;">
-          <mat-panel-title>
+          <mat-panel-title style="padding: 0px 30px;">
             <a class="dark-link" href="#"><h2>Discussion</h2></a>
           </mat-panel-title>
           <mat-panel-description>
             <!-- This is a summary of the content -->
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <hr>
+        <hr class="main-hr">
         <div class="container-fluid discussion-container">
           <div class="container-fluid card">
             <div class="card-gaming">
@@ -196,14 +196,14 @@
       <mat-accordion>
       <mat-expansion-panel hideToggle [expanded]="true" class="mat-elevation-z0" style="background-color: #fafafa;">
         <mat-expansion-panel-header style="height: 40px; align-items: baseline;">
-          <mat-panel-title>
+          <mat-panel-title style="padding: 0px 30px;">
             <a class="dark-link" href="#"><h2>Official</h2></a>
           </mat-panel-title>
           <mat-panel-description>
             <!-- This is a summary of the content -->
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <hr>
+        <hr class="main-hr">
         <div class="container-fluid discussion-container">
           <div class="container-fluid card">
             <div class="card-announcements">
@@ -298,7 +298,7 @@
   </div>
 
   <div class="container-fluid sidebar-container">
-    <div class="container-fluid sidebar-item">
+    <div class="container-fluid sidebar-item" style="margin-top: 5px !important;">
       <div class="stats-container">
         <div class="stats-icon">
           <mat-icon style="color: gray;">bar_chart</mat-icon>
@@ -307,7 +307,7 @@
           <h3>Online Statistics</h3>
         </div>
       </div>
-      <hr>
+      <hr class="sidebar-hr">
       <div>
         <dl>
           <dt>Members online</dt>
@@ -332,7 +332,7 @@
         </div>
         <a class="dark-link" href="#"><h3>Latest Threads</h3></a>
       </div>
-      <hr>
+      <hr class="sidebar-hr">
       <ul class="block-body">
         <li class="block-row" style="list-style: none;">
           <div class="content-row">
@@ -453,7 +453,7 @@
           <h3>Forum Statistics</h3>
         </div>
     </div>
-    <hr>
+    <hr class="sidebar-hr">
     <div>
       <dl>
         <dt>Threads</dt>

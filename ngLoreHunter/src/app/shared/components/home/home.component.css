@@ -39,6 +39,7 @@ p {
   display: flex;
   flex-wrap: wrap;
   color: white;
+  padding: 0;
 }
 
 .official-container {
@@ -325,6 +326,16 @@ ul {
 #username {
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
+}
+
+.sidebar-hr {
+padding: 0;
+margin: 0;
+margin-bottom: 15px;
+}
+
+.main-hr {
+  margin-top: 5px;
 }
 
 

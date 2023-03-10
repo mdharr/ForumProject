@@ -20,6 +20,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LayoutsModule } from '../layouts/layouts.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { LogoutComponent } from './components/logout/logout.component';
+import { PostsComponent } from './components/posts/posts.component';
 
 
 
@@ -31,7 +32,8 @@ import { LogoutComponent } from './components/logout/logout.component';
     LoginComponent,
     RegisterComponent,
     UserComponent,
-    LogoutComponent
+    LogoutComponent,
+    PostsComponent
   ],
   imports: [
     CommonModule,
