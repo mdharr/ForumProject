@@ -27,8 +27,8 @@
                   <div class="title" *ngFor="let category of categories; let i = index">
                     <a class="light-link" href="#"><h3 *ngIf="i === 0" class="subject">{{ category.name }}</h3></a>
                   </div>
-                  <div class="description">
-                    <p>The latest video game news, discussions, announcements, industry gossip, sales figures, bargains and reviews. The pulse of the gaming industry.</p>
+                  <div class="description" *ngFor="let category of categories; let i = index">
+                    <p *ngIf="i === 0">{{ category.description }}</p>
                   </div>
                   <div class="meta-details">
 
@@ -67,11 +67,11 @@
                   <a class="light-link" style="text-decoration:none;" href="#"><mat-icon class="material-icons">headset_mic</mat-icon></a>
                 </div>
                 <div class="card-title">
-                  <div class="title">
-                    <a class="light-link" href="#"><h3 class="subject">Gaming Hangouts</h3></a>
+                  <div class="title" *ngFor="let category of categories; let i = index">
+                    <a class="light-link" href="#"><h3 *ngIf="i === 1" class="subject">{{ category.name }}</h3></a>
                   </div>
-                  <div class="description">
-                    <p>If it's a community related to gaming, it has a home here! Official threads >1 month old, buy/sell/trade marketplace, gaming media fandoms, matchmaking, guilds and clans.</p>
+                  <div class="description" *ngFor="let category of categories; let i = index">
+                    <p *ngIf="i === 1">{{ category.description }}</p>
                   </div>
                   <div class="meta-details">
 
@@ -110,11 +110,11 @@
                   <a class="light-link" style="text-decoration:none;" href="#"><mat-icon class="material-icons">forum</mat-icon></a>
                 </div>
                 <div class="card-title">
-                  <div class="title">
-                    <a class="light-link" href="#"><h3 class="subject">Lore Forum</h3></a>
+                  <div class="title" *ngFor="let category of categories; let i = index">
+                    <a class="light-link" href="#"><h3 *ngIf="i === 2" class="subject">{{ category.name }}</h3></a>
                   </div>
-                  <div class="description">
-                    <p>Everything else. Current events, entertainment, technology, life, food, politics, pets, randomness, and anything in between. Civil discourse triumphs.</p>
+                  <div class="description" *ngFor="let category of categories; let i = index">
+                    <p *ngIf="i === 2">{{ category.description }}</p>
                   </div>
                   <div class="meta-details">
 
@@ -153,11 +153,11 @@
                     <a class="light-link" style="text-decoration:none;" href="#"><mat-icon class="material-icons">groups</mat-icon></a>
                   </div>
                   <div class="card-title">
-                    <div class="title">
-                      <a class="light-link" href="#"><h3 class="subject">Lore Hangouts</h3></a>
+                    <div class="title" *ngFor="let category of categories; let i = index">
+                      <a class="light-link" href="#"><h3 *ngIf="i === 3" class="subject">{{ category.name }}</h3></a>
                     </div>
-                    <div class="description">
-                      <p>Hobbyist enclaves. Sports followings. Official threads >1 month old. Local, international, and non-English language threads. Whatever your passion, find a community to share it with!</p>
+                    <div class="description" *ngFor="let category of categories; let i = index">
+                      <p *ngIf="i === 3">{{ category.description }}</p>
                     </div>
                     <div class="meta-details">
 
@@ -213,11 +213,11 @@
                   <a class="light-link" href="#"><mat-icon class="material-icons">campaign</mat-icon></a>
                 </div>
                 <div class="card-title">
-                  <div class="title">
-                    <a class="light-link" href="#"><h3 class="subject">Announcements</h3></a>
+                  <div class="title" *ngFor="let category of categories; let i = index">
+                    <a class="light-link" href="#"><h3 *ngIf="i === 4" class="subject">{{ category.name }}</h3></a>
                   </div>
-                  <div class="description">
-                    <p>Resources and staff communication.</p>
+                  <div class="description" *ngFor="let category of categories; let i = index">
+                    <p *ngIf="i === 4">{{ category.description }}</p>
                   </div>
                   <div class="meta-details">
 
@@ -256,11 +256,11 @@
                   <a class="light-link" href="#"><mat-icon class="material-icons">auto_stories</mat-icon></a>
                 </div>
                 <div class="card-title">
-                  <div class="title">
-                    <a class="light-link" href="#"><h3 class="subject">The Vault</h3></a>
+                  <div class="title" *ngFor="let category of categories; let i = index">
+                    <a class="light-link" href="#"><h3 *ngIf="i === 5" class="subject">{{ category.name }}</h3></a>
                   </div>
-                  <div class="description">
-                    <p>Treasured memories of threads past.</p>
+                  <div class="description" *ngFor="let category of categories; let i = index">
+                    <p *ngIf="i === 5">{{ category.description }}</p>
                   </div>
                   <div class="meta-details">
 
