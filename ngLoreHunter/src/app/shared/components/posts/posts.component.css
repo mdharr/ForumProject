@@ -1,0 +1,26 @@
+.breadcrumbnav {
+  list-style: none;
+}
+
+.breadcrumbnav > li {
+  display: inline-block;
+  font-weight: bold;
+}
+
+.breadcrumbnav li::after {
+  content: " >  ";
+}
+
+.breadcrumbnav li:last-child::after {
+  content: "";
+}
+
+.breadcrumbnav > a {
+  font-weight: normal;
+  text-decoration: none;
+  color: #222;
+}
+
+.breadcrumbnav > a:hover {
+  text-decoration: underline;
+}
