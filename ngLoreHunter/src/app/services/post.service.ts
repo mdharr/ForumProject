@@ -75,5 +75,24 @@ export class PostService {
     );
   }
 
+  update(post: Post): Observable<Post> {
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    return this.http.put<Post>(`${this.url}/`, post, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(
+              'PostService.update(): error updating post: ' + err
+            )
+        );
+      })
+    );
+  }
+
 
 }
