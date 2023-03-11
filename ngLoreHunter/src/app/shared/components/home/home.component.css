@@ -99,22 +99,22 @@ p {
 
 .card-lore {
   padding: 16px;
-  background: rgb(151,57,124);
-  background: linear-gradient(90deg, rgba(151,57,124,1) 75%, rgba(138,57,127,1) 100%);
+  background: rgb(152,57,124);
+  background: linear-gradient(90deg, rgba(152,57,124,1) 40%, rgba(131,56,122,1) 100%);
 }
 
 
 .card-announcements {
   padding: 16px;
-  background: rgb(232,156,41);
-  background: linear-gradient(90deg, rgba(232,156,41,1) 75%, rgba(232,131,58,1) 100%);
+  background: rgb(234,157,44);
+  background: linear-gradient(90deg, rgba(234,157,44,1) 40%, rgba(227,127,58,1) 100%);
 }
 
 
 .card-vault {
   padding: 16px;
   background: rgb(62,178,91);
-  background: linear-gradient(90deg, rgba(62,178,91,1) 0%, rgba(83,183,75,1) 40%);
+  background: linear-gradient(90deg, rgba(62,178,91,1) 0%, rgba(89,185,73,1) 45%);
 }
 
 .ghost-container {
