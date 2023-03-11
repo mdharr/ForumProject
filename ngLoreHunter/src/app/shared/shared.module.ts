@@ -21,6 +21,7 @@ import { LayoutsModule } from '../layouts/layouts.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { LogoutComponent } from './components/logout/logout.component';
 import { PostsComponent } from './components/posts/posts.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 
 
@@ -33,7 +34,8 @@ import { PostsComponent } from './components/posts/posts.component';
     RegisterComponent,
     UserComponent,
     LogoutComponent,
-    PostsComponent
+    PostsComponent,
+    CommentsComponent
   ],
   imports: [
     CommonModule,
