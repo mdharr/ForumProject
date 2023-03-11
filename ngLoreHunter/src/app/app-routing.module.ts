@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'footer', component: FooterComponent },
   { path: 'layouts', component: LayoutsComponent },
-  { path: 'posts', component: PostsComponent},
+  { path: 'categories/:categoryId/posts', component: PostsComponent},
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'user', component: UserComponent },

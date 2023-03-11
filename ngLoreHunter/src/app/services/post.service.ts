@@ -30,6 +30,20 @@ export class PostService {
     return options;
   }
 
+  show(id: number): Observable<Post> {
+    return this.http.get<Post>(`${this.url}/${id}`, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(
+              'PostService.index() error retrieving post list: ' + err
+            )
+        );
+      })
+    );
+  }
+
   createPost(post: Post): Observable<Post> {
     const httpOptions = {
       headers: {

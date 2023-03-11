@@ -11,7 +11,8 @@ export class Comment {
   user: User;
   post: Post;
   commentId: number;
-  parentComment: Comment;
+  // parentComment causing stack overflow
+  // parentComment: Comment;
 
   constructor(
     id: number = 0,
@@ -23,7 +24,7 @@ export class Comment {
     user: User = new User(),
     post: Post = new Post(),
     commentId: number = 0,
-    parentComment: Comment = new Comment()
+    // parentComment: Comment = new Comment()
   ) {
     this.id = id;
     this.content = content;
@@ -34,6 +35,6 @@ export class Comment {
     this.user = user;
     this.post = post;
     this.commentId = commentId;
-    this.parentComment = parentComment;
+    // this.parentComment = parentComment;
   }
 }

@@ -66,4 +66,16 @@ public class CategoryServiceImpl implements CategoryService {
 		return true;
 	}
 
+
+
+	@Override
+	public Category getById(int categoryId) {
+		Category category = null;
+		Optional<Category> categoryOpt = categoryRepo.findById(categoryId);
+		if(categoryOpt.isPresent()) {
+			category = categoryOpt.get();
+		}
+		return category;
+	}
+
 }

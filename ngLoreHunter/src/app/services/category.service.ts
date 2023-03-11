@@ -52,4 +52,16 @@ export class CategoryService {
       })
     );
   }
+
+  find(id: number): Observable<Category> {
+    return this.http.get<Category>(`${this.url}/${id}`).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error('CategoryService.find(): error retrieving category: ' + err)
+        );
+      })
+    );
+  }
 }

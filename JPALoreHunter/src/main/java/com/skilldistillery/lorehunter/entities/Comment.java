@@ -50,6 +50,7 @@ public class Comment {
 	private Boolean enabled;
 	
 	// parent/child single table
+	@JsonIgnore
 	@Transient
     private Integer commentId;
 

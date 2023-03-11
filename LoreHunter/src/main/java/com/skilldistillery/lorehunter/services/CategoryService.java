@@ -15,5 +15,7 @@ public interface CategoryService {
 	public Category update(String username, Category category, int categoryId);
 	
 	public boolean archive(String username, int categoryId);
+	
+	public Category getById(int categoryId);
 
 }

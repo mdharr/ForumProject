@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.lorehunter.entities.Category;
+import com.skilldistillery.lorehunter.entities.User;
 import com.skilldistillery.lorehunter.repositories.CategoryRepository;
 import com.skilldistillery.lorehunter.repositories.UserRepository;
 import com.skilldistillery.lorehunter.services.CategoryService;
@@ -43,6 +44,24 @@ public class CategoryController {
 	@GetMapping("categories")
 	public List<Category> index() {
 		return categoryService.index();
+	}
+	
+//	@GetMapping("users/{id}")
+//	public User getUser(@PathVariable("id") int id, HttpServletResponse res) {
+//		
+//		if(userService.getUser(id) == null) {
+//			res.setStatus(404);
+//		}
+//		return userService.getUser(id);
+//	}
+	
+	@GetMapping("categories/{cid}")
+	public Category find(@PathVariable("cid") int categoryId, HttpServletResponse res) {
+		
+		if(categoryService.getById(categoryId) == null) {
+			res.setStatus(404);
+		}
+		return categoryService.getById(categoryId);
 	}
 	
 	@PostMapping("categories")
