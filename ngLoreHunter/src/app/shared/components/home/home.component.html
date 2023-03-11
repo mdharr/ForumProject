@@ -154,7 +154,7 @@
                   </div>
                   <div class="card-title">
                     <div class="title" *ngFor="let category of categories; let i = index">
-                      <a *ngIf="i === 1" class="light-link" [routerLink]="['/posts']"><h3 class="subject">{{ category.name }}</h3></a>
+                      <a *ngIf="i === 3" class="light-link" [routerLink]="['/posts']"><h3 class="subject">{{ category.name }}</h3></a>
                     </div>
                     <div class="description" *ngFor="let category of categories; let i = index">
                       <p *ngIf="i === 3">{{ category.description }}</p>
