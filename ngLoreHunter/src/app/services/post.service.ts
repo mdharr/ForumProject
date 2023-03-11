@@ -61,13 +61,8 @@ export class PostService {
     );
   }
 
-  postsByCategory(category: Category): Observable<Post[]> {
-    const httpOptions = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-    return this.http.get<Post[]>(this.url + '/categories/' + category.id + '/posts', this.getHttpOptions()).pipe(
+  postsByCategory(categoryId: number): Observable<Post[]> {
+    return this.http.get<Post[]>(this.url + '/categories/' + categoryId + '/posts', this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
