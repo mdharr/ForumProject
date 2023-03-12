@@ -54,15 +54,17 @@ export class PostsComponent implements OnInit, OnDestroy {
     console.log(this.activatedRoute);
 
     this.paramsSub = this.activatedRoute.paramMap.subscribe((param) => {
-      let idString = param.get('id');
+      let idString = param.get('categoryId');
       if (idString) {
-        let categoryId = +idString;
+        this.categoryId = +idString;
 
-        if (!isNaN(categoryId)) {
-          this.categoryService.find(categoryId).subscribe({
+        console.log(this.categoryId);
+
+        if (!isNaN(this.categoryId)) {
+          this.categoryService.find(this.categoryId).subscribe({
             next: (category) => {
-              this.displayTable();
-              console.log(categoryId);
+              // nest subscription??
+              console.log(this.categoryId);
             },
             error: (fail) => {
               console.log(fail);

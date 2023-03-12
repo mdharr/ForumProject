@@ -33,7 +33,6 @@ export class HomeComponent implements OnInit {
     this.auth.getLoggedInUser().subscribe({
       next: (user) => {
         console.log(user);
-
       },
       error:(fail) => {
         console.error('Error getting user:');
@@ -42,20 +41,5 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-
-
-
-  // tempTestDeleteMeLater() {
-  //   this.auth.login('admin','wombat1').subscribe({
-  //     next: (data) => {
-  //       console.log('Logged in:');
-  //       console.log(data);
-  //     },
-  //     error: (fail) => {
-  //       console.error('Error authenticating:');
-  //       console.error(fail);
-  //     }
-  //   });
-  // }
 
 }
