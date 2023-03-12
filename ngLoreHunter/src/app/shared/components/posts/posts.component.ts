@@ -21,6 +21,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   paramsSub: Subscription | undefined;
 
   posts: Post[] = [];
+  categories: Category[] = [];
   post: Post | null = null;
   users: User[] = [];
   selected: null | Post = null;

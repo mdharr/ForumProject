@@ -20,7 +20,49 @@
         </ol>
       </div>
     </div>
-    <div></div>
+    <div class="main-container">
+      <div class="body-main">
+        <div class="main-content">
+          <div class="page-content">
+            <div class="block">
+              <div class="block-outer"></div>
+              <div class="block-container">
+                <div class="block-body">
+                  <div class="item-container">
+                    <div class="item-container-group" *ngFor="let category of categories">
+                      <div class="thread-item" *ngFor="let post of posts">
+                        <div class="icon-cell">
+                          <div class="icon-container">
+                            <a href="#">
+                              <img src="" alt="">
+                            </a>
+                          </div>
+                        </div>
+                        <div class="main-cell">
+                          <div class="thread-title">
+                            <a href="#"></a>
+                          </div>
+                          <div class="thread-minor">
+                            <ul class="item-details">
+                              <li>{{this.post.user.username}}</li>
+                              <li>{{this.post.createdAt}}</li>
+                            </ul>
+                            <ul class="item-statuses">
+                              <li>viewCount</li>
+                              <li>{{this.post.commentCount}}</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div></div>
     <div></div>
   </div>

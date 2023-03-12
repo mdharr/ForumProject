@@ -1,11 +1,10 @@
-import { Component, OnChanges, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { SideNavService } from 'src/app/services/side-nav.service';
-import { ActivatedRoute, Router, RouterModule, Routes } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { HomeService } from 'src/app/services/home.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-drawer',
