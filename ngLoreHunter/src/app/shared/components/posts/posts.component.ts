@@ -51,15 +51,18 @@ export class PostsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    console.log(this.activatedRoute.params);
+    console.log(this.activatedRoute);
+
     this.paramsSub = this.activatedRoute.paramMap.subscribe((param) => {
       let idString = param.get('id');
       if (idString) {
-        this.categoryId = +idString;
-        if (!isNaN(this.categoryId)) {
-          this.categoryService.find(this.categoryId).subscribe({
+        let categoryId = +idString;
+
+        if (!isNaN(categoryId)) {
+          this.categoryService.find(categoryId).subscribe({
             next: (category) => {
               this.displayTable();
+              console.log(categoryId);
             },
             error: (fail) => {
               console.log(fail);

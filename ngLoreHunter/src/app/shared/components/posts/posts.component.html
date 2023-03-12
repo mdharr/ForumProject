@@ -1,6 +1,21 @@
-<div>
-  <div>
-
+<div class="container">
+  <div class="table-wrapper">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2><b>Posts</b></h2>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-hover" *ngFor="let category of categories">
+      <tbody *ngFor="let post of posts">
+        <tr *ngIf="categoryId">
+          <td style="text-align: center; vertical-align: middle;">{{post.user.username}}</td>
+          <td style="text-align: center; vertical-align: middle;" class="ellipsis">{{post.subject}}</td>
+          <td style="text-align: center; vertical-align: middle;" class="ellipsis">{{post.content}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
