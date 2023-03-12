@@ -1,11 +1,19 @@
 <mat-sidenav-container class='app-drawer-container' fullscreen>
   <mat-sidenav #sidenav mode="side" class="mat-elevation-z0" style="background-color: #fafafa; border: none;">
     <mat-nav-list>
-      <a mat-list-item>Forums</a>
-      <a mat-list-item>Gaming Forum</a>
-      <a mat-list-item>Gaming Hangouts</a>
-      <a mat-list-item>Lore Forum</a>
-      <a mat-list-item>Lore Hangouts</a>
+      <a mat-list-item [routerLink]="['/home']">Forums</a>
+      <div class="title" *ngFor="let category of categories; let i = index">
+        <a mat-list-item *ngIf="i === 0" class="light-link" [routerLink]="['/categories', category.id, 'posts']">{{ category.name }}</a>
+      </div>
+      <div class="title" *ngFor="let category of categories; let i = index">
+        <a mat-list-item *ngIf="i === 1" class="light-link" [routerLink]="['/categories', category.id, 'posts']">{{ category.name }}</a>
+      </div>
+      <div class="title" *ngFor="let category of categories; let i = index">
+        <a mat-list-item *ngIf="i === 2" class="light-link" [routerLink]="['/categories', category.id, 'posts']">{{ category.name }}</a>
+      </div>
+      <div class="title" *ngFor="let category of categories; let i = index">
+        <a mat-list-item *ngIf="i === 3" class="light-link" [routerLink]="['/categories', category.id, 'posts']">{{ category.name }}</a>
+      </div>
       <a mat-list-item>Trending Threads</a>
       <a mat-list-item>Latest Threads</a>
       <mat-accordion elevation={0}>

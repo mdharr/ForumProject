@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
@@ -8,14 +8,17 @@ import { CategoryService } from 'src/app/services/category.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { Category } from 'src/app/models/category';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, OnDestroy {
   title = 'ngLoreHunter';
+
+  paramsSub: Subscription | undefined;
 
   posts: Post[] = [];
   post: Post | null = null;
@@ -41,7 +44,6 @@ export class PostsComponent implements OnInit {
     private postService: PostService,
     private commentService: CommentService,
     private authService: AuthService,
-    private route: ActivatedRoute,
     private router: Router,
     private categoryService: CategoryService,
     private activatedRoute: ActivatedRoute
@@ -49,7 +51,7 @@ export class PostsComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.activatedRoute);
-    this.activatedRoute.paramMap.subscribe((param) => {
+    this.paramsSub = this.activatedRoute.paramMap.subscribe((param) => {
       let idString = param.get('id');
       if (idString) {
         this.categoryId = +idString;
@@ -81,6 +83,12 @@ export class PostsComponent implements OnInit {
         console.log(error);
       },
     });
+
+  }
+
+  ngOnDestroy() {
+    console.log('Destroyed and unsubscribed');
+    this.paramsSub?.unsubscribe();
 
   }
 
