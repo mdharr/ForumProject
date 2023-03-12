@@ -22,7 +22,7 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   posts: Post[] = [];
   categories: Category[] = [];
-  post: Post | null = null;
+  post: null | Post = null;
   users: User[] = [];
   selected: null | Post = null;
   categoryId: number = 0;
@@ -51,7 +51,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    console.log(this.activatedRoute);
+    console.log(this.activatedRoute.params);
     this.paramsSub = this.activatedRoute.paramMap.subscribe((param) => {
       let idString = param.get('id');
       if (idString) {

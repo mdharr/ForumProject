@@ -42,7 +42,6 @@ export class HeaderComponent implements OnInit {
       next: (user) => {
         this.loggedInUser = user;
         console.log(user);
-
       },
       error: (error) => {
         console.log('Error getting loggedInUser Profile Component');
