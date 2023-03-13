@@ -37,6 +37,16 @@
   margin: 25px;
 }
 
+.subject {
+  font-family: "Palanquin Dark",serif;
+  font-size: 1.25em;
+}
+
+.cat-description {
+  color: rgba(255,255,255,.7);
+
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
