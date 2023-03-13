@@ -21,6 +21,13 @@ p {
   font-size: 13px;
 }
 
+.disable-hover-color {
+  background-color: #fafafa;
+}
+.disable-hover-color:hover {
+  background-color: #fafafa !important;
+}
+
 .side-list {
   font-family: "Josefin Sans",serif;
   font-size: 13px;
@@ -131,6 +138,7 @@ p {
   width: 100%;
   color: black;
   display: flex;
+  flex-direction: row;
   justify-content: right;
   align-items: center;
   padding: 5px 5px 0 0;
@@ -152,6 +160,13 @@ p {
   border-radius: 5px;
   margin-right: 10px;
   background-color: rgba(255,255,255,.5);
+}
+
+.arrow-forward {
+  font-size: 15px !important;
+  background-color: #ffffff !important;
+  display: flex;
+  justify-content: right;
 }
 
 .card-icon {

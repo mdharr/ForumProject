@@ -1,9 +1,9 @@
-<mat-toolbar color="primary" role="heading" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;">
+<mat-toolbar color="primary" role="heading" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
   <button mat-icon-button (click)="clickMenu()">
    <mat-icon>menu</mat-icon>
  </button>
  <button mat-button [routerLink]="['/home']">
-   <span class="logo">Lore Hunter</span>
+   <span class="logo">Lore Hunters</span>
  </button>
  <span class="example-spacer"></span>
  <button mat-button *ngIf="!loggedIn()" (click)="open(loginmodal)">

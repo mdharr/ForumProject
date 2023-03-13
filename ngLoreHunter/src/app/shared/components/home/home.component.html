@@ -6,13 +6,11 @@
     <div class="container-fluid discussion-container">
       <mat-accordion elevation={0}>
       <mat-expansion-panel hideToggle [expanded]="true" class="mat-elevation-z0" style="background-color: #fafafa;">
-        <mat-expansion-panel-header style="height: 40px; align-items: baseline;">
+        <mat-expansion-panel-header style="height: 40px; align-items: baseline;" class="disable-hover-color">
           <mat-panel-title style="padding: 0px 30px;">
             <a class="dark-link" href="#"><h2>Discussion</h2></a>
           </mat-panel-title>
-          <mat-panel-description>
-            <!-- This is a summary of the content -->
-          </mat-panel-description>
+            <mat-icon class="material-icons" style="background-color: rgb(250 250 250) !important;">expand_less</mat-icon>
         </mat-expansion-panel-header>
         <hr class="main-hr">
         <div class="container-fluid discussion-container">
@@ -55,8 +53,9 @@
               </div>
             </div>
           </div>
-            <div class="more-container">
-              <a class="dark-link" href="#"><p>More</p></a>
+            <div class="more-container" style="color: #098ea6 !important;">
+              <mat-icon class="material-icons arrow-forward">arrow_forward</mat-icon>
+              <a class="dark-link" href="#"><p style="color: #098ea6 !important;">More</p></a>
             </div>
           </div>
           <div class="container-fluid card">
@@ -98,8 +97,9 @@
               </div>
             </div>
           </div>
-          <div class="more-container">
-            <a class="dark-link" href="#"><p>More</p></a>
+          <div class="more-container" style="color: #098ea6 !important;">
+            <mat-icon class="material-icons arrow-forward">arrow_forward</mat-icon>
+            <a class="dark-link" href="#"><p style="color: #098ea6 !important;">More</p></a>
           </div>
           </div>
           <div class="container-fluid card">
@@ -141,8 +141,9 @@
               </div>
             </div>
           </div>
-            <div class="more-container">
-              <a class="dark-link" href="#"><p>More</p></a>
+            <div class="more-container" style="color: #9a387b;">
+              <mat-icon class="material-icons arrow-forward">arrow_forward</mat-icon>
+              <a class="dark-link" href="#"><p style="color: #9a387b;">More</p></a>
             </div>
           </div>
             <div class="container-fluid card">
@@ -184,8 +185,9 @@
                 </div>
               </div>
             </div>
-              <div class="more-container">
-                <a class="dark-link" href="#"><p>More</p></a>
+              <div class="more-container" style="color: #9a387b;">
+                <mat-icon class="material-icons arrow-forward">arrow_forward</mat-icon>
+                <a class="dark-link" href="#"><p style="color: #9a387b;">More</p></a>
               </div>
           </div>
         </div>
@@ -195,13 +197,11 @@
     <div class="container-fluid official-container">
       <mat-accordion>
       <mat-expansion-panel hideToggle [expanded]="true" class="mat-elevation-z0" style="background-color: #fafafa;">
-        <mat-expansion-panel-header style="height: 40px; align-items: baseline;">
-          <mat-panel-title style="padding: 0px 30px;">
+        <mat-expansion-panel-header style="height: 40px; display: flex; align-items: baseline;" class="disable-hover-color">
+          <mat-panel-title style="padding: 0px 30px;" class="disable-hover-color">
             <a class="dark-link" href="#"><h2>Official</h2></a>
           </mat-panel-title>
-          <mat-panel-description>
-            <!-- This is a summary of the content -->
-          </mat-panel-description>
+            <mat-icon class="material-icons" style="background-color: rgb(250 250 250) !important;">expand_less</mat-icon>
         </mat-expansion-panel-header>
         <hr class="main-hr">
         <div class="container-fluid discussion-container">
@@ -244,8 +244,9 @@
               </div>
             </div>
           </div>
-          <div class="more-container">
-            <a class="dark-link" href="#"><p>More</p></a>
+          <div class="more-container" style="color: #ea7e3e;">
+            <mat-icon class="material-icons arrow-forward">arrow_forward</mat-icon>
+            <a class="dark-link" href="#"><p style="color: #ea7e3e;">More</p></a>
           </div>
           </div>
           <div class="container-fluid card">
@@ -287,8 +288,9 @@
               </div>
             </div>
           </div>
-          <div class="more-container">
-            <a class="dark-link" href="#"><p>More</p></a>
+          <div class="more-container" style="color: #3ab25d;">
+            <mat-icon class="material-icons arrow-forward">arrow_forward</mat-icon>
+            <a class="dark-link" href="#"><p style="color: #3ab25d;">More</p></a>
           </div>
         </div>
         </div>
