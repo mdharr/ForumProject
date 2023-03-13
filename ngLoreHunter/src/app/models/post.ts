@@ -11,6 +11,7 @@ export class Post {
   lastEdited: string;
   commentCount: number;
   enabled: boolean;
+  viewCount: number;
   user: User;
   category: Category;
   comments: Comment[];
@@ -24,6 +25,7 @@ export class Post {
     lastEdited: string = '',
     commentCount: number = 0,
     enabled: boolean = false,
+    viewCount: number = 0,
     user: User = new User(),
     category: Category = new Category(),
     comments: Comment[] = []
@@ -36,6 +38,7 @@ export class Post {
     this.lastEdited = lastEdited;
     this.commentCount = commentCount;
     this.enabled = enabled;
+    this.viewCount = viewCount;
     this.user = user;
     this.category = category;
     this.comments = comments;

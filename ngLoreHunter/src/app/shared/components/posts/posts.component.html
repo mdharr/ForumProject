@@ -119,7 +119,7 @@
 
 <div class="wrapper">
 
-	<table class="main-table" *ngFor="let post of posts">
+	<table class="main-table">
       <th *ngIf="categoryId === 1" class="forum-topicsview-header" style="text-align: center;" colspan="5"> Gaming Forum </th>
       <th *ngIf="categoryId === 2" class="forum-topicsview-header" style="text-align: center;" colspan="5"> Gaming Hangouts </th>
       <th *ngIf="categoryId === 3" class="forum-topicsview-header" style="text-align: center;" colspan="5"> Lore Forum </th>
@@ -133,14 +133,13 @@
 			<th class="header-row forum-topics-col-views"> Views </th>
 			<th class="header-row forum-topics-col-lastpost"> Last Post </th>
 		</tr>
-
-		<tr class="forum-topicview-row" *ngIf="categoryId">
-			<td class="forum-topics-col-icon"> <img style="margin-right: 20px; margin-left: 20px;" src="{{post.user.imageUrl}}" class="avatar"> </td>
-			<td class="" style="text-align: left;"> <a href="#"><p> {{post.subject}} </p></a> </td>
-			<td class="forum-topics-col-views"> <dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons">forum</mat-icon></dt><dd>1</dd> </dl></td>
-			<td class="forum-topics-col-views"> <dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons">visibility_outline</mat-icon></dt><dd>5</dd> </dl></td>
-			<td class="forum-topics-col-lastpost"> <p>Last Post by: {{post.user.username}}<br><b> {{post.createdAt | date : "shortDate"}} </b></p> </td>
-		</tr>
+      <tr class="forum-topicview-row"  *ngFor="let post of posts">
+        <td *ngIf="categoryId" class="forum-topics-col-icon"> <img style="margin-right: 20px; margin-left: 20px;" src="{{post.user.imageUrl}}" class="avatar"> </td>
+        <td *ngIf="categoryId" class="" style="text-align: left;"> <a href="#"><p> {{post.subject}} </p></a> </td>
+        <td *ngIf="categoryId" class="forum-topics-col-views"> <dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons">forum</mat-icon></dt><dd>{{post.viewCount}}</dd> </dl></td>
+        <td *ngIf="categoryId" class="forum-topics-col-views"> <dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons">visibility_outline</mat-icon></dt><dd>5</dd> </dl></td>
+        <td *ngIf="categoryId" class="forum-topics-col-lastpost"> <p>Last Post by: {{post.user.username}}<br><b> {{post.createdAt | date : "shortDate"}} </b></p> </td>
+      </tr>
 
 		<!-- <tr>
 			<th class="" colspan="5"> Footer</th>

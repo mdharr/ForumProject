@@ -54,6 +54,8 @@ public class Post {
 	@OneToMany(mappedBy = "post")
 	private List<Comment> comments;
 	
+	private int viewCount;
+	
 	private Boolean enabled;
 
 	public Post() {
@@ -61,7 +63,7 @@ public class Post {
 	}
 
 	public Post(int id, String subject, String content, LocalDateTime createdAt, String status, LocalDateTime lastEdited,
-			Integer commentCount, User user, Category category, List<Comment> comments, Boolean enabled) {
+			Integer commentCount, User user, Category category, List<Comment> comments, int viewCount, Boolean enabled) {
 		super();
 		this.id = id;
 		this.subject = subject;
@@ -73,6 +75,7 @@ public class Post {
 		this.user = user;
 		this.category = category;
 		this.comments = comments;
+		this.viewCount = viewCount;
 		this.enabled = enabled;
 	}
 
@@ -155,6 +158,14 @@ public class Post {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
+	
+	public int getViewCount() {
+		return viewCount;
+	}
+
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
 
 	public Boolean getEnabled() {
 		return enabled;
@@ -204,6 +215,8 @@ public class Post {
 		builder.append(category);
 		builder.append(", comments=");
 		builder.append(comments);
+		builder.append(", viewCount=");
+		builder.append(viewCount);
 		builder.append(", enabled=");
 		builder.append(enabled);
 		builder.append("]");
