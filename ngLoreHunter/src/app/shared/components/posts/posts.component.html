@@ -175,22 +175,22 @@
 
     <ng-container matColumnDef="topics">
       <th mat-header-cell *matHeaderCellDef class="header-row" style="text-align: left;"> Topics </th>
-      <td mat-cell *ngIf="categoryId" class="" style="text-align: left;"> <a href="#"><p style="color: #58595b;"> {{post.subject}} </p></a> </td>
+      <td mat-cell *ngIf="categoryId" class="topic" style="text-align: left;"> <a href="#"><p style="color: #58595b;"> {{post.subject}} </p></a> </td>
     </ng-container>
 
     <ng-container matColumnDef="comments">
       <th mat-header-cell *matHeaderCellDef class="header-row forum-topics-col-views"> Comments </th>
-      <td mat-cell *ngIf="categoryId" class="forum-topics-col-views"> <dl class="pairs" style="color: #9e9fa2;"><dt class="dt-icon"><mat-icon class="material-icons">forum</mat-icon></dt><dd>{{post.viewCount}}</dd> </dl></td>
+      <td mat-cell *ngIf="categoryId" class="forum-topics-col-views comment"> <dl class="pairs" style="color: #9e9fa2;"><dt class="dt-icon"><mat-icon class="material-icons">forum</mat-icon></dt><dd>{{post.viewCount}}</dd> </dl></td>
     </ng-container>
 
     <ng-container matColumnDef="views">
       <th mat-header-cell *matHeaderCellDef class="header-row forum-topics-col-views"> Views </th>
-      <td mat-cell *ngIf="categoryId" class="forum-topics-col-views"> <dl class="pairs" style="color: #9e9fa2;"><dt class="dt-icon"><mat-icon class="material-icons">visibility_outline</mat-icon></dt><dd>5</dd> </dl></td>
+      <td mat-cell *ngIf="categoryId" class="forum-topics-col-views view"> <dl class="pairs" style="color: #9e9fa2;"><dt class="dt-icon"><mat-icon class="material-icons">visibility_outline</mat-icon></dt><dd>5</dd> </dl></td>
     </ng-container>
 
     <ng-container matColumnDef="last post">
       <th mat-header-cell *matHeaderCellDef class="header-row forum-topics-col-lastpost"> Last Post </th>
-      <td mat-cell *ngIf="categoryId" class="forum-topics-col-lastpost"> <p style="color: #9e9fa2;">Last Post by: {{post.user.username}}<br> <span>{{post.createdAt | date : "short"}}</span> </p> </td>
+      <td mat-cell *ngIf="categoryId" class="forum-topics-col-lastpost last-post"> <p style="color: #9e9fa2;">Last Post by: {{post.user.username}}<br> <span>{{post.createdAt | date : "short"}}</span> </p> </td>
     </ng-container>
 
 	</table>

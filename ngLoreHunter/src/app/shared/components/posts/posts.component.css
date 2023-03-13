@@ -42,8 +42,14 @@
   font-size: 1.25em;
 }
 
+ .topic {
+  font-size: 1.15em;
+
+}
+
 .cat-description {
   color: rgba(255,255,255,.7);
+  font-size: 15px;
 
 }
 
