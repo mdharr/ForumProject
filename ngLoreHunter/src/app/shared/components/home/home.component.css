@@ -17,7 +17,6 @@ h4 {
 }
 
 p {
-  font-family: "Josefin Sans",serif;
   font-size: 13px;
 }
 
@@ -52,6 +51,7 @@ p {
 .official-container {
   margin-top: 2vh;
   margin-bottom: 2vh;
+  padding: 0;
 }
 
 .sidebar-container {
@@ -167,6 +167,14 @@ p {
   background-color: #ffffff !important;
   display: flex;
   justify-content: right;
+}
+
+.more-container > a {
+  text-decoration: none;
+}
+
+.more-container > a:hover {
+  text-decoration: none;
 }
 
 .card-icon {
@@ -351,6 +359,28 @@ margin-bottom: 15px;
 
 .main-hr {
   margin-top: 5px;
+}
+
+.pairs {
+  display: flex;
+  float: left;
+  max-width: 100%;
+  margin-right: 12px;
+  flex-shrink: 0;
+  align-items: center;
+
+}
+
+.dt-icon {
+  margin-right: 0;
+}
+
+dd {
+  margin: 0;
+}
+
+.icons {
+  font-size: 18px;
 }
 
 
