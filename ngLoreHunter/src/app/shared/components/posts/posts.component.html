@@ -1,3 +1,15 @@
+<div class="card-title">
+  <div class="title" *ngFor="let category of categories; let i = index">
+    <a *ngIf="i === categoryId" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
+  </div>
+  <div class="description" *ngFor="let category of categories; let i = index">
+    <p *ngIf="i === categoryId">{{ category.description }}</p>
+  </div>
+  <div class="meta-details">
+
+  </div>
+</div>
+
 <div class="breadcrumb-outer">
   <div class="breadcrumb-inner">
     <ol class="breadcrumbnav">
@@ -9,28 +21,32 @@
 
 <div class="wrapper">
 
-	<table *ngFor="let post of posts">
-
-		<th class="forum-topicsview-header" colspan="5"> Forums </th>
-		<tr>
-			<th class=""> User </th>
-			<th class="" style="text-align: left;"> Topics </th>
-			<th class="forum-topics-col-views"> Posts </th>
-			<th class="forum-topics-col-views"> Views </th>
-			<th class="forum-topics-col-lastpost"> Last Post </th>
+	<table class="main-table" *ngFor="let post of posts">
+      <th *ngIf="categoryId === 1" class="forum-topicsview-header" style="text-align: center;" colspan="5"> Gaming Forum </th>
+      <th *ngIf="categoryId === 2" class="forum-topicsview-header" style="text-align: center;" colspan="5"> Gaming Hangouts </th>
+      <th *ngIf="categoryId === 3" class="forum-topicsview-header" style="text-align: center;" colspan="5"> Lore Forum </th>
+      <th *ngIf="categoryId === 4" class="forum-topicsview-header" style="text-align: center;" colspan="5"> Lore Hangouts </th>
+      <th *ngIf="categoryId === 5" class="forum-topicsview-header" style="text-align: center;" colspan="5"> Announcements </th>
+      <th *ngIf="categoryId === 6" class="forum-topicsview-header" style="text-align: center;" colspan="5"> The Vault </th>
+		<tr class="header-row">
+			<th class="header-row"> </th>
+			<th class="header-row" style="text-align: left;"> Topics </th>
+			<th class="header-row forum-topics-col-views"> Comments </th>
+			<th class="header-row forum-topics-col-views"> Views </th>
+			<th class="header-row forum-topics-col-lastpost"> Last Post </th>
 		</tr>
 
 		<tr class="forum-topicview-row" *ngIf="categoryId">
-			<td class="forum-topics-col-icon"> <img src="{{post.user.imageUrl}}" class="avatar"> </td>
+			<td class="forum-topics-col-icon"> <img style="margin-right: 20px; margin-left: 20px;" src="{{post.user.imageUrl}}" class="avatar"> </td>
 			<td class="" style="text-align: left;"> <a href="#"><p> {{post.subject}} </p></a> </td>
-			<td class="forum-topics-col-views"> 1 </td>
-			<td class="forum-topics-col-views"> 5 </td>
+			<td class="forum-topics-col-views"> <dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons">forum</mat-icon></dt><dd>1</dd> </dl></td>
+			<td class="forum-topics-col-views"> <dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons">visibility_outline</mat-icon></dt><dd>5</dd> </dl></td>
 			<td class="forum-topics-col-lastpost"> <p>Last Post by: {{post.user.username}}<br><b> {{post.createdAt | date : "shortDate"}} </b></p> </td>
 		</tr>
 
-		<tr>
-			<th class="" colspan="5"> Footer Stuff</th>
-		</tr>
+		<!-- <tr>
+			<th class="" colspan="5"> Footer</th>
+		</tr> -->
 
 	</table>
 

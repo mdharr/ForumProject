@@ -9,6 +9,7 @@ import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { Category } from 'src/app/models/category';
 import { Subscription } from 'rxjs';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-posts',
@@ -48,7 +49,8 @@ export class PostsComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     private categoryService: CategoryService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private homeService: HomeService
   ) {
   }
 
@@ -105,6 +107,16 @@ export class PostsComponent implements OnInit, OnDestroy {
         console.error('Error loading posts');
         console.error(err);
       },
+    });
+
+    this.homeService.index().subscribe({
+      next: (categories) => {
+        this.categories = categories;
+      },
+      error:(fail) => {
+        console.error('Error getting categories:');
+        console.error(fail);
+      }
     });
   }
 
