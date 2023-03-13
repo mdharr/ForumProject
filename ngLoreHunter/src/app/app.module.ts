@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -38,7 +40,9 @@ import { DatePipe } from '@angular/common';
     RouterModule,
     LayoutsModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    MatPaginatorModule,
+    MatTableModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

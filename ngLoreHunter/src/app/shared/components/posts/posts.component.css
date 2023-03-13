@@ -31,6 +31,12 @@
   cursor: pointer;
 }
 
+.breadcrumb-outer-bottom {
+  margin-bottom: 100px !important;
+  margin-top: 100px !important;
+  margin: 25px;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,

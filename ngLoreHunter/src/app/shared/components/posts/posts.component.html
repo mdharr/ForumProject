@@ -1,3 +1,12 @@
+<!-- <div class="forum_footer_wrap">
+	<div class="forum_ledgend_wrap">
+	<h1>Legend</h1>
+	<p><i class="material-icons">chat_bubble</i> Topic with unread posts</p>
+	<p><i class="material-icons">chat_bubble_outline</i> Topic with no new posts</p>
+	</div>
+</div> -->
+
+
 <div class="container-fluid card">
   <div class="card-gaming" *ngIf="categoryId === 1">
     <div class="node-container">
@@ -117,7 +126,7 @@
   </div>
 </div>
 
-<div class="wrapper">
+<!-- <div class="wrapper">
 
 	<table class="main-table">
       <th *ngIf="categoryId === 1" class="forum-topicsview-header" style="text-align: center;" colspan="5"> Gaming Forum </th>
@@ -140,19 +149,65 @@
         <td *ngIf="categoryId" class="forum-topics-col-views"> <dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons">visibility_outline</mat-icon></dt><dd>5</dd> </dl></td>
         <td *ngIf="categoryId" class="forum-topics-col-lastpost"> <p>Last Post by: {{post.user.username}}<br><b> {{post.createdAt | date : "shortDate"}} </b></p> </td>
       </tr>
+	</table>
 
-		<!-- <tr>
-			<th class="" colspan="5"> Footer</th>
-		</tr> -->
+</div> -->
+
+<div class="wrapper">
+
+	<table mat-table class="main-table" *ngFor="let post of posts">
+      <ng-container matColumnDef="user">
+        <th mat-header-cell *matHeaderCellDef class="header-row"> User </th>
+        <td mat-cell *ngIf="categoryId" class="forum-topics-col-icon">
+          <div style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="margin-bottom: 5px;">
+              <img style="margin-right: 20px; margin-left: 20px;" src="{{post.user.imageUrl}}" class="avatar">
+            </div>
+            <div style="display: flex; justify-content: center;">
+              <div>
+                <p style="vertical-align: middle;">{{post.user.username}}</p>
+              </div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+
+    <ng-container matColumnDef="topics">
+      <th mat-header-cell *matHeaderCellDef class="header-row" style="text-align: left;"> Topics </th>
+      <td mat-cell *ngIf="categoryId" class="" style="text-align: left;"> <a href="#"><p style="color: #58595b;"> {{post.subject}} </p></a> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="comments">
+      <th mat-header-cell *matHeaderCellDef class="header-row forum-topics-col-views"> Comments </th>
+      <td mat-cell *ngIf="categoryId" class="forum-topics-col-views"> <dl class="pairs" style="color: #9e9fa2;"><dt class="dt-icon"><mat-icon class="material-icons">forum</mat-icon></dt><dd>{{post.viewCount}}</dd> </dl></td>
+    </ng-container>
+
+    <ng-container matColumnDef="views">
+      <th mat-header-cell *matHeaderCellDef class="header-row forum-topics-col-views"> Views </th>
+      <td mat-cell *ngIf="categoryId" class="forum-topics-col-views"> <dl class="pairs" style="color: #9e9fa2;"><dt class="dt-icon"><mat-icon class="material-icons">visibility_outline</mat-icon></dt><dd>5</dd> </dl></td>
+    </ng-container>
+
+    <ng-container matColumnDef="last post">
+      <th mat-header-cell *matHeaderCellDef class="header-row forum-topics-col-lastpost"> Last Post </th>
+      <td mat-cell *ngIf="categoryId" class="forum-topics-col-lastpost"> <p style="color: #9e9fa2;">Last Post by: {{post.user.username}}<br><b> {{post.createdAt | date : "shortDate"}} </b></p> </td>
+    </ng-container>
 
 	</table>
 
-<!-- <div class="forum_footer_wrap">
-	<div class="forum_ledgend_wrap">
-	<h1>Legend</h1>
-	<p><i class="material-icons">chat_bubble</i> Topic with unread posts</p>
-	<p><i class="material-icons">chat_bubble_outline</i> Topic with no new posts</p>
-	</div>
-</div> -->
+</div>
 
+
+<div class="breadcrumb-outer-bottom">
+  <div class="breadcrumb-inner">
+    <ol class="breadcrumbnav" style="padding:0;">
+      <li class="breadcrumb-value" [routerLink]="['/home']">Discussion</li>
+      <li class="breadcrumb-value" *ngIf="categoryId === 1" [routerLink]="['/home']">Gaming Forum</li>
+      <li class="breadcrumb-value" *ngIf="categoryId === 2" [routerLink]="['/home']">Gaming Hangouts</li>
+      <li class="breadcrumb-value" *ngIf="categoryId === 3" [routerLink]="['/home']">Lore Forum</li>
+      <li class="breadcrumb-value" *ngIf="categoryId === 4" [routerLink]="['/home']">Lore Hangouts</li>
+      <li class="breadcrumb-value" *ngIf="categoryId === 5" [routerLink]="['/home']">Announcements</li>
+      <li class="breadcrumb-value" *ngIf="categoryId === 6" [routerLink]="['/home']">The Vault</li>
+    </ol>
+  </div>
 </div>
