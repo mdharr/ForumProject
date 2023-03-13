@@ -37,7 +37,6 @@ public class Comment {
 	@Column(name = "last_edited")
 	private LocalDateTime lastEdited;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;

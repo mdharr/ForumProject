@@ -42,7 +42,6 @@ public class Post {
 	@Column(name = "comment_count")
 	private Integer commentCount;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -52,7 +51,6 @@ public class Post {
 	@JoinColumn(name = "category_id")
 	private Category category;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "post")
 	private List<Comment> comments;
 	

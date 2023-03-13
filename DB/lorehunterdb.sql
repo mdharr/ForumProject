@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `last_activity` TIMESTAMP NULL,
   `status` VARCHAR(100) NULL,
   `comment_count` INT NULL,
-  `banner_message` VARCHAR(100) NULL,
+  `banner_message` VARCHAR(1000) NULL,
   `post_count` INT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC),
@@ -152,8 +152,9 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `created_at`, `image_url`, `last_activity`, `status`, `comment_count`, `banner_message`, `post_count`) VALUES (1, 'admin', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'ADMIN', 'admin', 'admin', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `created_at`, `image_url`, `last_activity`, `status`, `comment_count`, `banner_message`, `post_count`) VALUES (2, 'Wander', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'ADMIN', 'Michael', 'Harrington', 'acatt.mh@gmail.com', NULL, 'https://cdn.discordapp.com/attachments/1080302897599877181/1080303009180946562/ico-profile-picture.jpeg', NULL, NULL, NULL, 'Raise thy sword by the light, and head to the place where the sword\'s light gathers.', NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `created_at`, `image_url`, `last_activity`, `status`, `comment_count`, `banner_message`, `post_count`) VALUES (1, 'Wesker', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'ADMIN', 'Albert', 'Wesker', 'admin@admin.com', '2023-03-03T12:35:22', 'https://i.pinimg.com/originals/d3/5a/ed/d35aed7844c296a44b0276ef37803e0f.png', '2023-03-03T12:35:22', 'active', 0, 'I am the master of this domain.', 0);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `created_at`, `image_url`, `last_activity`, `status`, `comment_count`, `banner_message`, `post_count`) VALUES (2, 'Wander', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'ADMIN', 'Michael', 'Harrington', 'acatt.mh@gmail.com', '2023-03-03T12:35:22', 'https://cdn.discordapp.com/attachments/1080302897599877181/1080303009180946562/ico-profile-picture.jpeg', '2023-03-03T12:35:22', 'active', 0, 'Raise thy sword by the light, and head to the place where the sword\'s light gathers.', 0);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `created_at`, `image_url`, `last_activity`, `status`, `comment_count`, `banner_message`, `post_count`) VALUES (3, 'Snake', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'ADMIN', 'Solid', 'Snake', 'snake@MGS.com', '2023-03-03T12:35:22', 'https://1.bp.blogspot.com/-VtNMBLJexIg/UEUABciRBMI/AAAAAAAAIBs/IJLeyg4ELYk/s1600/Old_Snake_by_metalgearsolid.jpg', '2023-03-03T12:35:22', 'active', 0, 'A legend is nothing but fiction. Someone tells it, someone else remembers it, everybody passes it on.', 0);
 
 COMMIT;
 

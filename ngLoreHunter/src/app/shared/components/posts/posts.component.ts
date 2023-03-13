@@ -26,6 +26,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   users: User[] = [];
   selected: null | Post = null;
   categoryId: number = 0;
+  value: any;
 
   newPost: Post = new Post();
 
@@ -48,7 +49,8 @@ export class PostsComponent implements OnInit, OnDestroy {
     private router: Router,
     private categoryService: CategoryService,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     console.log(this.activatedRoute);
@@ -57,13 +59,9 @@ export class PostsComponent implements OnInit, OnDestroy {
       let idString = param.get('categoryId');
       if (idString) {
         this.categoryId = +idString;
-
-        console.log(this.categoryId);
-
         if (!isNaN(this.categoryId)) {
           this.categoryService.find(this.categoryId).subscribe({
             next: (category) => {
-              // nest subscription??
               console.log(this.categoryId);
             },
             error: (fail) => {
