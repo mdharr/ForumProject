@@ -15,3 +15,16 @@ a {
 p {
   font-family: "Josefin Sans",serif;
 }
+
+.pairs {
+  display: flex;
+  float: left;
+  max-width: 100%;
+  margin-right: 12px;
+  flex-shrink: 0;
+
+}
+
+.dt-icon {
+  margin-right: 10px;
+}
