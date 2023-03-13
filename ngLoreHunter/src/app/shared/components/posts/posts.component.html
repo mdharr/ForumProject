@@ -1,90 +1,45 @@
-<!-- <div class="container">
-  <div class="table-wrapper">
-    <div class="table-title">
-      <div class="row">
-        <div class="col-sm-6">
-          <h2><b>Posts</b></h2>
-        </div>
-      </div>
-    </div>
-    <table class="table table-striped table-hover">
-      <tbody *ngFor="let post of posts">
-            <tr *ngIf="categoryId">
-              <td style="text-align: center; vertical-align: middle;">{{post.subject}}</td>
-              <td style="text-align: center; vertical-align: middle;" class="ellipsis">{{post.content}}</td>
-              <td style="text-align: center; vertical-align: middle;" class="ellipsis">{{post.createdAt}}</td>
-            </tr>
-      </tbody>
-    </table>
+<div class="breadcrumb-outer">
+  <div class="breadcrumb-inner">
+    <ol class="breadcrumbnav">
+      <li class="breadcrumb-value">Discussion</li>
+      <li class="breadcrumb-value">Gaming Forum</li>
+    </ol>
   </div>
+</div>
+
+<div class="wrapper">
+
+	<table *ngFor="let post of posts">
+
+		<th class="forum-topicsview-header" colspan="5"> Forums </th>
+		<tr>
+			<th class=""> User </th>
+			<th class="" style="text-align: left;"> Topics </th>
+			<th class="forum-topics-col-views"> Posts </th>
+			<th class="forum-topics-col-views"> Views </th>
+			<th class="forum-topics-col-lastpost"> Last Post </th>
+		</tr>
+
+		<tr class="forum-topicview-row" *ngIf="categoryId">
+			<td class="forum-topics-col-icon"> <img src="{{post.user.imageUrl}}" class="avatar"> </td>
+			<td class="" style="text-align: left;"> <a href="#"><p> {{post.subject}} </p></a> </td>
+			<td class="forum-topics-col-views"> 1 </td>
+			<td class="forum-topics-col-views"> 5 </td>
+			<td class="forum-topics-col-lastpost"> <p>Last Post by: {{post.user.username}}<br><b> {{post.createdAt | date : "shortDate"}} </b></p> </td>
+		</tr>
+
+		<tr>
+			<th class="" colspan="5"> Footer Stuff</th>
+		</tr>
+
+	</table>
+
+<!-- <div class="forum_footer_wrap">
+	<div class="forum_ledgend_wrap">
+	<h1>Legend</h1>
+	<p><i class="material-icons">chat_bubble</i> Topic with unread posts</p>
+	<p><i class="material-icons">chat_bubble_outline</i> Topic with no new posts</p>
+	</div>
 </div> -->
 
-<div class="body-outer">
-  <div class="body-inner">
-    <div class="body-header">
-      <div class="header-outer">
-        <div class="header-inner">
-          <div class="header-title">
-            <h1 class="header-value"></h1>
-          </div>
-          <div class="header-description">
-            <p class="description-value"></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="breadcrumb-outer">
-      <div class="breadcrumb-inner">
-        <ol class="breadcrumbnav">
-          <li class="breadcrumb-value">Discussion</li>
-          <li class="breadcrumb-value">Gaming Forum</li>
-        </ol>
-      </div>
-    </div>
-    <div class="main-container">
-      <div class="body-main">
-        <div class="main-content">
-          <div class="page-content">
-            <div class="block">
-              <div class="block-outer"></div>
-              <div class="block-container">
-                <div class="block-body">
-                  <div class="item-container">
-                    <div class="item-container-group" *ngFor="let post of posts">
-                      <div class="thread-item" *ngIf="categoryId">
-                        <div class="icon-cell">
-                          <div class="icon-container">
-                            <a href="#">
-                              <img src="" alt="">
-                            </a>
-                          </div>
-                        </div>
-                        <div class="main-cell">
-                          <div class="thread-title">
-                            <a href="#"></a>
-                          </div>
-                          <div class="thread-minor">
-                            <ul class="item-details">
-                              <li>{{this.post.user.username}}</li>
-                              <li>{{this.post.createdAt}}</li>
-                            </ul>
-                            <ul class="item-statuses">
-                              <li>viewCount</li>
-                              <li>{{this.post.commentCount}}</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div></div>
-    <div></div>
-  </div>
 </div>
