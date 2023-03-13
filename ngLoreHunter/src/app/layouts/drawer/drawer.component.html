@@ -1,6 +1,6 @@
 <mat-sidenav-container class='app-drawer-container' fullscreen>
   <mat-sidenav #sidenav mode="side" class="mat-elevation-z0" style="background-color: #fafafa; border: none;">
-    <mat-nav-list>
+    <mat-nav-list style="margin-top: 50px;">
       <a mat-list-item [routerLink]="['/home']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#3f51b5;">forum</mat-icon></dt><dd><span style="color:#3f51b5;">Forums</span></dd></dl></a>
       <div class="title" *ngFor="let category of categories; let i = index">
         <a mat-list-item *ngIf="i === 0" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#58595b;">sports_esports</mat-icon></dt><dd>{{ category.name }}</dd></dl></a>
