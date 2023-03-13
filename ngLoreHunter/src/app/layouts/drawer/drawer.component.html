@@ -3,7 +3,7 @@
     <mat-nav-list>
       <a mat-list-item [routerLink]="['/home']">Forums</a>
       <div class="title" *ngFor="let category of categories; let i = index">
-        <a mat-list-item *ngIf="i === 0" class="light-link" [routerLink]="['/categories', category.id, 'posts']">{{ category.name }}</a>
+        <a mat-list-item *ngIf="i === 0" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><mat-icon class="material-icons">sports_esports</mat-icon>{{ category.name }}</a>
       </div>
       <div class="title" *ngFor="let category of categories; let i = index">
         <a mat-list-item *ngIf="i === 1" class="light-link" [routerLink]="['/categories', category.id, 'posts']">{{ category.name }}</a>

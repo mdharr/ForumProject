@@ -115,7 +115,7 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	width: 90%;
-	margin: 100px auto;
+	margin: 50px auto;
 }
 
 table {
@@ -222,10 +222,14 @@ td {
 }
 
 .card {
-  max-width: 100%;
-  padding: 0;
+  margin: 10px;
+  max-width: 95%;
+  padding: 2px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  color: #ffffff;
+  margin-left: 25px;
+  margin-top: 20px;
 }
 
 .card:hover {
@@ -237,13 +241,32 @@ td {
   padding: 16px;
   background: rgb(6,142,167);
   background: linear-gradient(90deg, rgba(6,142,167,1) 0%, rgba(36,161,159,1) 40%);
-  min-height: 200px;
+  min-height: 100px;
+  border-radius:5px;
+
+}
+
+.card-gaming-hangouts {
+  padding: 16px;
+  background: rgb(6,142,167);
+  background: linear-gradient(90deg, rgba(6,142,167,1) 0%, rgba(36,161,159,1) 40%);
+  min-height: 100px;
+  border-radius:5px;
+
 }
 
 .card-lore {
   padding: 16px;
   background: rgb(152,57,124);
   background: linear-gradient(90deg, rgba(152,57,124,1) 40%, rgba(131,56,122,1) 100%);
+  border-radius:5px;
+}
+
+.card-lore-hangouts {
+  padding: 16px;
+  background: rgb(152,57,124);
+  background: linear-gradient(90deg, rgba(152,57,124,1) 40%, rgba(131,56,122,1) 100%);
+  border-radius:5px;
 }
 
 
@@ -251,6 +274,7 @@ td {
   padding: 16px;
   background: rgb(234,157,44);
   background: linear-gradient(90deg, rgba(234,157,44,1) 40%, rgba(227,127,58,1) 100%);
+  border-radius:5px;
 }
 
 
@@ -258,6 +282,7 @@ td {
   padding: 16px;
   background: rgb(62,178,91);
   background: linear-gradient(90deg, rgba(62,178,91,1) 0%, rgba(89,185,73,1) 45%);
+  border-radius:5px;
 }
 
 
