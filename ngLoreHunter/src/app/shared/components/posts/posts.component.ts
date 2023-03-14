@@ -10,6 +10,7 @@ import { PostService } from 'src/app/services/post.service';
 import { Category } from 'src/app/models/category';
 import { Subscription } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-posts',
@@ -50,8 +51,9 @@ export class PostsComponent implements OnInit, OnDestroy {
     private router: Router,
     private categoryService: CategoryService,
     private activatedRoute: ActivatedRoute,
-    private homeService: HomeService
-  ) {
+    private homeService: HomeService,
+    private http: HttpClient
+    ) {
   }
 
   ngOnInit() {
@@ -65,6 +67,7 @@ export class PostsComponent implements OnInit, OnDestroy {
           this.categoryService.find(this.categoryId).subscribe({
             next: (category) => {
               console.log(this.categoryId);
+
             },
             error: (fail) => {
               console.log(fail);

@@ -174,12 +174,12 @@
 
 
     <ng-container matColumnDef="topics">
-      <th mat-header-cell *matHeaderCellDef class="header-row" style="text-align: left;"> Topics </th>
+      <th mat-header-cell *matHeaderCellDef class="header-row forum-topics-col-topics" style="text-align: left;"> Topics </th>
       <td mat-cell *ngIf="categoryId" class="topic" style="text-align: left;"> <a href="#"><p style="color: #58595b;"> {{post.subject}} </p></a> </td>
     </ng-container>
 
     <ng-container matColumnDef="comments">
-      <th mat-header-cell *matHeaderCellDef class="header-row forum-topics-col-views"> Comments </th>
+      <th mat-header-cell *matHeaderCellDef class="header-row forum-topics-col-comments"> Comments </th>
       <td mat-cell *ngIf="categoryId" class="forum-topics-col-views comment"> <dl class="pairs" style="color: #9e9fa2;"><dt class="dt-icon"><mat-icon class="material-icons">forum</mat-icon></dt><dd>{{post.viewCount}}</dd> </dl></td>
     </ng-container>
 
@@ -211,3 +211,54 @@
     </ol>
   </div>
 </div>
+
+
+<!-- <div class="mat-elevation-z1">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Action</th>
+      <td mat-cell *matCellDef="let element" class="left-text">
+          <button mat-stroked-button color="primary" (click)="openRecord(element.id, element.username)">View</button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="avatar">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Avatar </th>
+      <td mat-cell *matCellDef="let element" class="left-text">
+        <img src={{element.avatar}}  width="50" height="auto"  />
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Username </th>
+      <td mat-cell *matCellDef="let element" class="left-text"> {{element.username}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Email </th>
+      <td mat-cell *matCellDef="let element" class="left-text"> {{element.email | number:'2.1-2'}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="date_of_birth">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Date of Birth </th>
+      <td mat-cell *matCellDef="let element" class="left-text">{{element.date_of_birth | date: 'EEEE MMM dd, yyy'}}  </td>
+    </ng-container>
+
+    <ng-container matColumnDef="latidtude">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Latitude </th>
+      <td mat-cell *matCellDef="let element" class="left-text"> {{element.address.coordinates.lat | number:'2.1-2'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="longitude">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header>Longitude </th>
+      <td mat-cell *matCellDef="let element" class="left-text"> {{element.address.coordinates.lng | number:'2.1-2'}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
+</div> -->

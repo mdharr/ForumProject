@@ -108,4 +108,11 @@ export class PostService {
     );
   }
 
+
+  // material table test
+  getPosts(categoryId: number): Observable<Post[]> {
+    const URL = `${this.url + '/categories/' + categoryId + '/posts'}`;
+    return this.http.get<Post[]>(URL);
+  }
+
 }
