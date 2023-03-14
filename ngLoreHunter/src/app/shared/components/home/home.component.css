@@ -102,6 +102,7 @@ p {
   background: rgb(6,142,167);
   background: linear-gradient(90deg, rgba(6,142,167,1) 0%, rgba(36,161,159,1) 40%);
   min-height: auto;
+  border-radius: 5px 5px 0 0;
 }
 
 .card-lore {
@@ -109,6 +110,7 @@ p {
   background: rgb(152,57,124);
   background: linear-gradient(90deg, rgba(152,57,124,1) 40%, rgba(131,56,122,1) 100%);
   min-height: auto;
+  border-radius: 5px 5px 0 0;
 }
 
 
@@ -117,6 +119,7 @@ p {
   background: rgb(234,157,44);
   background: linear-gradient(90deg, rgba(234,157,44,1) 40%, rgba(227,127,58,1) 100%);
   min-height: auto;
+  border-radius: 5px 5px 0 0;
 }
 
 
@@ -125,6 +128,7 @@ p {
   background: rgb(62,178,91);
   background: linear-gradient(90deg, rgba(62,178,91,1) 0%, rgba(89,185,73,1) 45%);
   min-height: auto;
+  border-radius: 5px 5px 0 0;
 }
 
 .ghost-container {
@@ -145,7 +149,7 @@ p {
   justify-content: right;
   align-items: center;
   padding: 5px 5px 0 0;
-
+  border-radius: 5px;
 }
 
 .node-title-container {
