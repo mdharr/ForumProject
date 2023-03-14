@@ -65,7 +65,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     RegisterComponent,
     UserComponent,
     LogoutComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    CommentsComponent
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,550 @@
+/*Begin CSS*/
+
+body {
+  overflow-x: hidden;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Dosis:400,600);
+
+.whenAndWho, .whenAndWho a {
+
+    color: #7b8b8e;
+    height: 18px;
+    text-align: left;
+    width: auto;
+   text-decoration: none !important;
+
+    font: normal normal normal normal 13px / 18.2px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    list-style: none outside none;
+    margin: 0px 0px 15px;
+}
+
+
+
+.avatarCoin {
+    background-position: 50% 50%;
+    box-sizing: border-box;
+    color: #576366;
+    height: 55px;
+    position: absolute;
+    text-align: left;
+    width: 55px;
+    perspective-origin: 20px 20px;
+    transform-origin: 20px 20px;
+    background: #edeff0 url("http://images.proboards.com/v5/defaultavatar.png") no-repeat scroll 50% 50% / contain padding-box border-box;
+    border: 0px solid rgb(237, 239, 240);
+    border-radius: 25% 25% 25% 25%;
+    list-style: none outside none;
+    margin: 5px 0px 0px -70px;
+    outline: #576366 none 0px;
+    background-size: cover;
+}
+
+#wrapper {
+  margin: 50px;
+  width:auto !important;
+}
+
+.paginationBar {
+  border-radius: 25px;
+  width: 100% !important;
+  box-sizing: border-box;
+    color: rgb(87, 99, 102);
+
+    text-align: center;
+
+background: #F9F9F9;
+    line-height: 5px;
+    margin-bottom: 10px;
+    height: 44px;
+}
+
+.threadItem {
+
+  box-sizing: border-box;
+    color: rgb(87, 99, 102);
+
+    position: relative;
+    width: 100%;
+    perspective-origin: 655px 67px;
+    transform-origin: 655px 67px;
+    border-top: 1px solid rgb(237, 239, 240);
+    border-right: 0px none rgb(87, 99, 102);
+    border-bottom: 0px none rgb(87, 99, 102);
+    border-left: 0px none rgb(87, 99, 102);
+    font: normal normal normal normal 14px / 14px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    list-style: none outside none;
+    outline: rgb(87, 99, 102) none 0px;
+    padding: 15px 0px 0px;
+}
+
+.activeButton {
+  box-sizing: border-box;
+  text-decoration: none;
+    color: #3DAFF5;
+    cursor: pointer;
+    display: block;
+    float: right;
+    height: 40px;
+    width: 67px;
+    border: 2px solid #3DAFF5;
+    border-radius: 4px 4px 4px 4px;
+    font: normal normal 500 normal 14px / 36px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    padding: 0px 15px;
+    transition: color 0.3s ease 0s, background-color 0.3s ease 0s, border-color 0.3s ease 0s, width 0.3s ease 0s, opacity 0.3s ease 0s;
+}
+
+.disabledButton {
+box-sizing: border-box;
+    color: rgb(123, 139, 142);
+    cursor: default;
+    display: block;
+    float: left;
+    height: 40px;
+    opacity: 0.5;
+
+    text-align: center;
+
+    width: 65px;
+
+
+    border: 2px solid rgb(232, 235, 237);
+    border-radius: 4px 4px 4px 4px;
+    font: normal normal 500 normal 14px / 36px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 10px 0px 0px;
+    padding: 0px 15px;
+    transition: color 0.3s ease 0s, background-color 0.3s ease 0s, border-color 0.3s ease 0s, width 0.3s ease 0s, opacity 0.3s ease 0s;
+  }
+
+.pageNumber {
+  box-sizing: border-box;
+    color: rgb(123, 139, 142);
+    display: inline-block;
+    height: 38px;
+    text-align: center;
+    width: 102.875px;
+
+    outline: rgb(123, 139, 142) none 0px;
+    padding: 12px 0px;
+
+
+
+}
+
+.labelItem {
+        box-sizing: border-box;
+    color: #36ACF3;
+    cursor: pointer;
+    display: inline-block;
+    height: 36px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    perspective-origin: 30.9063px 18px;
+    transform-origin: 30.9063px 18px;
+    border: 2px solid rgba(48, 73, 97, 0.0980392);
+    border-radius: 100px 100px 100px 100px;
+    font: normal normal 500 normal 13px / 32px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    list-style: none outside none;
+    outline: #e15258 none 0px;
+    padding: 0px 12px;
+    transition: border-color 0.15s ease 0s, background-color 0.15s ease 0s, color 0.15s ease 0s;
+}
+
+.postContainer {
+  box-sizing: border-box;
+    color: rgb(87, 99, 102);
+
+    text-align: left;
+    perspective-origin: 476.25px 56px;
+    transform-origin: 476.25px 56px;
+    border: 0px none rgb(87, 99, 102);
+    font: normal normal normal normal 14px / 14px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    list-style: none outside none;
+    outline: rgb(87, 99, 102) none 0px;
+    padding: 0px 0px 0px 55px;
+}
+
+.threadItemLabel {
+
+
+    color: #7b8b8e;
+
+    text-align: center;
+    font: normal normal normal normal 12px / 18px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+}
+
+.answerCountContainer {
+   box-sizing: border-box;
+    color: rgb(87, 99, 102);
+    float: right;
+    height: 72px;
+    text-align: center;
+    perspective-origin: 25.5px 36px;
+    transform-origin: 25.5px 36px;
+    border: 0px none rgb(87, 99, 102);
+    font: normal normal normal normal 14px / 14px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    list-style: none outside none;
+    margin-right: 40px;
+    outline: rgb(87, 99, 102) none 0px;
+    padding: 5px 0px 0px;
+}
+
+.replyCount {
+  box-sizing: border-box;
+    color: rgb(87, 99, 102);
+    display: inline-block;
+    height: 29px;
+    text-align: center;
+    vertical-align: middle;
+    width: 17.3906px;
+    perspective-origin: 8.6875px 14.5px;
+    transform-origin: 8.6875px 14.5px;
+    border: 0px none rgb(87, 99, 102);
+    font: normal normal 500 normal 24px / 24px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    list-style: none outside none;
+    outline: rgb(87, 99, 102) none 0px;
+    padding-right: 10%;
+}
+
+.labelList {
+  box-sizing: border-box;
+    color: rgb(87, 99, 102);
+    height: 45px;
+    position: relative;
+    text-align: left;
+    white-space: nowrap;
+    width: 897.5px;
+    perspective-origin: 448.75px 22.5px;
+    transform-origin: 448.75px 22.5px;
+    border: 0px none rgb(87, 99, 102);
+    font: normal normal normal normal 14px / 14px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    list-style: none outside none;
+    margin: 10px;
+    outline: rgb(87, 99, 102) none 0px;
+    overflow: hidden;
+    padding: 0px;
+}
+
+.labelListItem {
+  box-sizing: border-box;
+    color: rgb(87, 99, 102);
+    display: inline-block;
+    height: 36px;
+    white-space: nowrap;
+    width: 61.8281px;
+    perspective-origin: 30.9063px 18px;
+    transform-origin: 30.9063px 18px;
+    border: 0px none rgb(87, 99, 102);
+    font: normal normal normal normal 14px / 14px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    list-style: none outside none;
+    margin: 0px 7px 9px 0px;
+    outline: rgb(87, 99, 102) none 0px;
+}
+
+.threadTitleHeader {
+  box-sizing: border-box;
+    color: #384047;
+
+    text-align: left;
+    width: 100%;
+    perspective-origin: 448.75px 13.5px;
+    transform-origin: 448.75px 13.5px;
+    border: 0px none #384047;
+    font: normal normal 500 normal 16px / 22.4px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    list-style: none outside none;
+    margin: 0px 0px 7px;
+    outline: #384047 none 0px;
+    padding: 5px 0px 0px;
+}
+
+.userAvatarLink {
+      box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    height: 100%;
+    text-align: left;
+    text-decoration: none;
+    width: 36px;
+    perspective-origin: 18px 18px;
+    transform-origin: 18px 18px;
+    font: normal normal normal normal 14px / 14px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    list-style: none outside none;
+}
+
+.threadTitleHeader > a {
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.whenAndWho {
+  color: #C5C5C5;
+}
+
+.userLinkPostCount {
+  border-radius: 15%;
+  font-size: 8px !important;
+  padding: 5px;
+  color: #FFF !important;
+  background: #6B6B6B;
+  position: relative;
+  bottom: 2px;
+}
+
+.expandDesc {
+  border-radius: 10%;
+  font-size: 12px !important;
+  padding: 5px;
+  color: #FFF !important;
+  background: #E2E2E2;
+  position: relative;
+  bottom: 2px;
+  cursor: pointer;
+}
+
+div, ul, p, h1, h2, a, ul {
+  font-family: "Dosis";
+  font-size: 16px;
+
+  letter-spacing: 1px;
+  line-height: 20px;
+}
+
+.hiddenToggle {
+  display: none;
+}
+
+
+
+
+.descriptionText {margin-top: 20px;
+margin-bottom: 20px;
+    padding-right: 30px;}
+
+body {background-color:#1D1F20;}
+#wrapper {
+  background-color: #FFF;
+  border-radius: 5px;
+  margin-left: 90px;
+}
+
+.firstPost{border:0;}
+
+.forwardButton {
+    position: relative;
+    right: 5px;
+}
+
+.backButton {
+    position: relative;
+    left: 5px;
+}
+.btn-on {
+  background-color: #D0CECE;
+}
+@media (max-width: 777px) {
+  .avatarCoin {
+        border: 5px solid #FFF;
+  }
+  .threadItem {
+    margin: 0px;
+  }
+  .answerCountContainer {
+        padding-left: 10px;
+    padding-right:30px;
+    width: 100%;
+    margin: 0px;
+
+  }
+  .replyCount {
+    padding: 0px;
+  }
+  .postContainer {
+        padding: 0px;
+  }
+}
+
+@media (max-width: 669px) {
+  .threadTitleHeader, .whenAndWho {
+        text-align: center;
+  }
+  .pageNumber {
+    font-size: 11px;
+    width: auto;
+  }
+  .lastUpdated,  .expandDesc {
+    display: none;
+  }
+  .threadTitleHeader, .whenAndWho {
+    padding-right: 30px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .descriptionText {
+    display:block !important;
+  }
+}
+
+@media (max-width: 370px) {
+  .pageNumber {
+    display: none;
+  }
+}
+
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+/* entypo */
+[class*="entypo-"]:before {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  text-align: center;
+  font-family: 'entypo', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+.side-panel {
+  position: fixed;
+  top: 25vh;
+  left: 0;
+  z-index: 9999;
+}
+.side-panel:nth-child(2n) {
+  background: #483430;
+}
+.side-panel ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.side-panel > ul > li:first-child {
+  border-top-right-radius: 3px;
+}
+.side-panel > ul > li:first-child a {
+  padding-top: 13px;
+}
+.side-panel > ul > li:last-child {
+  border-bottom-right-radius: 3px;
+}
+.side-panel > ul > li:last-child a {
+  padding-bottom: 13px;
+}
+.side-panel > ul ul {
+  width: 150px;
+  padding-left: 10px;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+}
+.side-panel > ul ul li:first-child {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-right-color: #efefef;
+}
+.side-panel > ul ul li:first-child:before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid #efefef;
+  border-right-color: inherit;
+}
+.side-panel > ul ul li:first-child:hover {
+  border-right-color: #fff;
+}
+.side-panel > ul ul li:last-child {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.side-panel li {
+  position: relative;
+  background: #efefef;
+}
+.side-panel li:hover {
+  background: #fff;
+}
+.side-panel li:hover > ul {
+  display: block;
+}
+.side-panel a {
+  display: inline-block;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.a > ul {
+  width: 150px;
+  transform: translateX(-110px);
+}
+.a span[class*="entypo-"] {
+  display: inline-block;
+  position: relative;
+  left: 105px;
+}
+.a .menu-item {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  display: block;
+  padding: 8px 13px;
+  color: #efefef;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  transform: translate(10px, 0%) translateZ(0);
+  opacity: 0;
+  background: #483430;
+  border-radius: 3px;
+  border-right-color: #483430;
+  transition: all .3s ease-in-out;
+  z-index: -2;
+}
+.a .menu-item:before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid #efefef;
+  border-right-color: inherit;
+}
+.a li:hover .menu-item {
+  opacity: 1;
+  transform: translate(10px, -50%);
+}
+.a > ul ul {
+  display: block;
+  opacity: 0;
+  transform: translate(-100%);
+  transition: all .3s ease-in-out;
+  z-index: -1;
+}
+.a > ul > li:first-child:hover .menu-item {
+  transform: translate(-100%, -50%);
+}
+.a li:hover ul {
+  opacity: 1;
+  transform: translate(0);
+}
+
+html, body {margin:0;padding:0;height:100%;}
