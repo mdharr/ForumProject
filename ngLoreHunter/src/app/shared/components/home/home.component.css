@@ -383,11 +383,16 @@ dd {
   font-size: 18px;
 }
 
-.rotate{
-  display:inline-block;
+.rotate {
+  -moz-transition: all .1s linear;
+  -webkit-transition: all .1s linear;
+  transition: all .1s linear;
+}
+
+.down {
+  -moz-transform:rotate(180deg);
+  -webkit-transform:rotate(180deg);
   transform:rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
 }
 
 

@@ -11,9 +11,8 @@ import { HomeService } from 'src/app/services/home.service';
 export class HomeComponent implements OnInit {
   categories: Category[] = [];
 
-  chevron: HTMLElement | any = document.getElementById('up-arrow');
-
-  public isRotated: boolean = false;
+  isRotated1: boolean = false;
+  isRotated2: boolean = false;
 
   constructor(private auth: AuthService, private homeServ: HomeService) {}
 
@@ -46,11 +45,20 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  rotateChevron() {
-    if(this.isRotated) {
-      this.isRotated = true;
+  rotateChevronTop() {
+    if(this.isRotated1) {
+      this.isRotated1 = false;
     } else {
-      this.isRotated = false;
+      this.isRotated1 = true;
+    }
+
+  }
+
+  rotateChevronBottom() {
+    if(this.isRotated2) {
+      this.isRotated2 = false;
+    } else {
+      this.isRotated2 = true;
     }
 
   }
