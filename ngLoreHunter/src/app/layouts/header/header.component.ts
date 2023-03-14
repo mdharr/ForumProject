@@ -18,6 +18,8 @@ export class HeaderComponent implements OnInit {
 
   loggedInUser: User = new User();
 
+  displayProgressBar: boolean = false;
+
   constructor(private sideNavService: SideNavService,
     private userService: UserService,
     private authService: AuthService,
@@ -64,6 +66,7 @@ export class HeaderComponent implements OnInit {
 
   clickMenu() {
     this.sideNavService.toggle();
+    this.displayProgressBar = true;
   }
 
   public isCollapsed = false;

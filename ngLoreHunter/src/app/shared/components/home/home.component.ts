@@ -11,6 +11,10 @@ import { HomeService } from 'src/app/services/home.service';
 export class HomeComponent implements OnInit {
   categories: Category[] = [];
 
+  chevron: HTMLElement | any = document.getElementById('up-arrow');
+
+  public isRotated: boolean = false;
+
   constructor(private auth: AuthService, private homeServ: HomeService) {}
 
   ngOnInit() {
@@ -40,6 +44,15 @@ export class HomeComponent implements OnInit {
 
       }
     });
+  }
+
+  rotateChevron() {
+    if(this.isRotated) {
+      this.isRotated = true;
+    } else {
+      this.isRotated = false;
+    }
+
   }
 
 }

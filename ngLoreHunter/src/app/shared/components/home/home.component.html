@@ -10,7 +10,7 @@
           <mat-panel-title style="padding: 0px 30px;">
             <a class="dark-link" href="#"><h2>Discussion</h2></a>
           </mat-panel-title>
-            <mat-icon class="material-icons" style="background-color: rgb(250 250 250) !important;">expand_less</mat-icon>
+            <mat-icon class="material-icons up-arrow" style="background-color: rgb(250 250 250) !important;">expand_less</mat-icon>
         </mat-expansion-panel-header>
         <hr class="main-hr">
         <div class="container-fluid discussion-container">
@@ -196,7 +196,7 @@
           <mat-panel-title style="padding: 0px 30px;">
             <a class="dark-link" href="#"><h2>Official</h2></a>
           </mat-panel-title>
-            <mat-icon class="material-icons" style="background-color: rgb(250 250 250) !important;">expand_less</mat-icon>
+            <mat-icon class="material-icons up-arrow" style="background-color: rgb(250 250 250) !important;" (click)="rotateChevron()" [ngStyle]="{ transform: isRotated ? 'rotate(180deg)' : 'rotate(0deg)' }">expand_less</mat-icon>
         </mat-expansion-panel-header>
         <hr class="main-hr">
         <div class="container-fluid discussion-container">

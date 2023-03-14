@@ -22,6 +22,8 @@ import { AppRoutingModule } from '../app-routing.module';
 import { LogoutComponent } from './components/logout/logout.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 
@@ -35,7 +37,8 @@ import { CommentsComponent } from './components/comments/comments.component';
     UserComponent,
     LogoutComponent,
     PostsComponent,
-    CommentsComponent
+    CommentsComponent,
+    ProgressBarComponent
   ],
   imports: [
     CommonModule,
@@ -52,6 +55,7 @@ import { CommentsComponent } from './components/comments/comments.component';
     MatButtonModule,
     MatExpansionModule,
     AppRoutingModule,
+    MatProgressBarModule
   ],
   exports: [
     HomeComponent,
@@ -60,7 +64,8 @@ import { CommentsComponent } from './components/comments/comments.component';
     LoginComponent,
     RegisterComponent,
     UserComponent,
-    LogoutComponent
+    LogoutComponent,
+    ProgressBarComponent
   ]
 })
 export class SharedModule { }

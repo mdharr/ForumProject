@@ -19,6 +19,8 @@ import { LayoutsModule } from './layouts/layouts.module';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { DatePipe } from '@angular/common';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { DatePipe } from '@angular/common';
     AppRoutingModule,
     SharedModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatProgressBarModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

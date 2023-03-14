@@ -1,20 +1,20 @@
 <mat-toolbar color="primary" role="heading" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
-  <button mat-icon-button (click)="clickMenu()">
-   <mat-icon>menu</mat-icon>
- </button>
- <button mat-button [routerLink]="['/home']">
-   <span class="logo">Lore Hunters</span>
- </button>
- <span class="example-spacer"></span>
- <button mat-button *ngIf="!loggedIn()" (click)="open(loginmodal)">
-   <span>Login</span>
- </button>
- <button mat-button *ngIf="!loggedIn()" (click)="open(registermodal)">
-  <span>Register</span>
-</button>
-  <a style="cursor: pointer;"><img id="userThumbnail" src="{{ loggedInUser.imageUrl }}" alt="" *ngIf="loggedIn()"/></a>
-  <button mat-button *ngIf="loggedIn()">{{ loggedInUser.username }}</button>
-  <app-logout *ngIf="loggedIn()"></app-logout>
+      <button mat-icon-button (click)="clickMenu()">
+       <mat-icon>menu</mat-icon>
+     </button>
+     <button mat-button [routerLink]="['/home']">
+       <span class="logo">Lore Hunters</span>
+     </button>
+     <span class="example-spacer"></span>
+     <button mat-button *ngIf="!loggedIn()" (click)="open(loginmodal)">
+       <span>Login</span>
+     </button>
+     <button mat-button *ngIf="!loggedIn()" (click)="open(registermodal)">
+      <span>Register</span>
+    </button>
+      <a style="cursor: pointer;"><img id="userThumbnail" src="{{ loggedInUser.imageUrl }}" alt="" *ngIf="loggedIn()"/></a>
+      <button mat-button *ngIf="loggedIn()">{{ loggedInUser.username }}</button>
+      <app-logout *ngIf="loggedIn()"></app-logout>
 </mat-toolbar>
 
 <ng-template #loginmodal let-modal>
