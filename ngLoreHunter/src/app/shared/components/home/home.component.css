@@ -113,7 +113,6 @@ p {
   border-radius: 5px 5px 0 0;
 }
 
-
 .card-announcements {
   padding: 16px;
   background: rgb(234,157,44);
@@ -121,7 +120,6 @@ p {
   min-height: auto;
   border-radius: 5px 5px 0 0;
 }
-
 
 .card-vault {
   padding: 16px;
@@ -138,6 +136,22 @@ p {
 .node-container {
   display: flex;
   flex-direction: column;
+}
+
+.inline-pairs {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  line-height: 1.7;
+}
+
+.forum-stats {
+  display: inline;
+}
+
+.meta-details {
+  display: flex;
 }
 
 .more-container {
