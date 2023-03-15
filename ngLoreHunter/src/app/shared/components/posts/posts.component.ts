@@ -1,3 +1,4 @@
+import { PostDataSource } from './../../../services/post.dataSource';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
@@ -21,7 +22,11 @@ export class PostsComponent implements OnInit, OnDestroy {
   title = 'ngLoreHunter';
 
   // mat table properties start
-  displayedColumns: string[] = ['id', 'name', 'age'];
+  displayedColumns: string[] = ['id', 'subject', 'content'];
+
+  dataSource = new PostDataSource(this.postService);
+
+  // mat table end
 
   paramsSub: Subscription | undefined;
 
@@ -95,6 +100,8 @@ export class PostsComponent implements OnInit, OnDestroy {
         console.log(error);
       },
     });
+
+    this.dataSource.loadPosts();
 
   }
 

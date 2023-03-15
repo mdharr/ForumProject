@@ -1,3 +1,5 @@
+import { PostDataSource } from './../services/post.dataSource';
+import { PostService } from 'src/app/services/post.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './components/footer/footer.component';
@@ -24,6 +26,8 @@ import { PostsComponent } from './components/posts/posts.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 
 
@@ -55,7 +59,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatButtonModule,
     MatExpansionModule,
     AppRoutingModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTableModule,
+    MatSortModule
   ],
   exports: [
     HomeComponent,
@@ -67,6 +73,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     LogoutComponent,
     ProgressBarComponent,
     CommentsComponent
+  ],
+  providers: [
+    PostService,
+    PostDataSource,
   ]
 })
 export class SharedModule { }

@@ -83,7 +83,7 @@ export class PostService {
         return throwError(
           () =>
             new Error(
-              'PostService.index(): error retrieving post list:' + err
+              'PostService.index(): error retrieving post list: ' + err
             )
         );
       })
@@ -109,15 +109,18 @@ export class PostService {
     );
   }
 
+  fetchPosts(categoryId: number): Observable<Post[]>{
+    return this.http.get<Post[]>(this.url + '/categories/' + categoryId + '/posts', this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(
+              'PostService.fetchPosts(): error fetching posts: ' + err
+            )
+        );
+      })
+    );
 
-  // material table test
-  getLaps(categoryId: number): Observable<any> {
-    return this.http.get(`${this.url + '/categories/' + categoryId + '/posts'}`).pipe(
-      map(this.extractData));
   }
-
-  private extractData(res: Response) {
-    return res || {}; // If 'res' is null, it returns empty object
-  }
-
 }
