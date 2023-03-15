@@ -12,6 +12,7 @@ import { Category } from 'src/app/models/category';
 import { Subscription } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
+import { Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-posts',
@@ -75,6 +76,7 @@ export class PostsComponent implements OnInit, OnDestroy {
           this.categoryService.find(this.categoryId).subscribe({
             next: (category) => {
               console.log(this.categoryId);
+              this.dataSource.loadPosts(this.categoryId, { active: 'id', direction: 'asc' });
 
             },
             error: (fail) => {
@@ -100,8 +102,6 @@ export class PostsComponent implements OnInit, OnDestroy {
         console.log(error);
       },
     });
-
-    this.dataSource.loadPosts();
 
   }
 
@@ -234,5 +234,9 @@ export class PostsComponent implements OnInit, OnDestroy {
           console.error(toobad);
       },
     });
+  }
+
+  sortPosts(sort: Sort): void {
+    this.dataSource.loadPosts(this.categoryId, sort);
   }
 }

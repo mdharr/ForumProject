@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
@@ -7,6 +7,7 @@ import { Category } from '../models/category';
 import { Post } from '../models/post';
 import { AuthService } from './auth.service';
 import { map } from 'rxjs/operators';
+import { Sort } from '@angular/material/sort';
 
 @Injectable({
   providedIn: 'root'
@@ -109,8 +110,11 @@ export class PostService {
     );
   }
 
-  fetchPosts(categoryId: number): Observable<Post[]>{
-    return this.http.get<Post[]>(this.url + '/categories/' + categoryId + '/posts', this.getHttpOptions()).pipe(
+  fetchPosts(categoryId: number, sort: Sort): Observable<Post[]>{
+    const params = new HttpParams()
+    .set('_sort', sort.active)
+    .set('_order', sort.direction);
+    return this.http.get<Post[]>(this.url + '/categories/' + categoryId + '/posts',  { params, }).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

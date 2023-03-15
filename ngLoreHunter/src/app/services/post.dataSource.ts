@@ -1,5 +1,6 @@
 import { DataSource } from "@angular/cdk/collections";
 import { Injectable } from "@angular/core";
+import { Sort } from "@angular/material/sort";
 import { BehaviorSubject, Observable } from "rxjs";
 import { Post } from "../models/post";
 import { PostService } from "./post.service";
@@ -9,8 +10,6 @@ import { PostService } from "./post.service";
 export class PostDataSource extends DataSource<Post> {
   posts$ = new BehaviorSubject<Post[]>([]);
   isLoading$ = new BehaviorSubject<boolean>(false);
-
-  categoryId: number = 1;
 
   constructor(private postService: PostService) {
     super();
@@ -24,9 +23,9 @@ export class PostDataSource extends DataSource<Post> {
     this.posts$.complete();
   }
 
-  loadPosts(): void {
+  loadPosts(categoryId: number, sort: Sort): void {
     this.isLoading$.next(true);
-    this.postService.fetchPosts(this.categoryId).subscribe((posts) => {
+    this.postService.fetchPosts(categoryId, sort).subscribe((posts) => {
       this.posts$.next(posts);
       this.isLoading$.next(false);
     });
