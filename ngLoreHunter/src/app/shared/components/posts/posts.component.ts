@@ -1,5 +1,5 @@
 import { PostDataSource } from './../../../services/post.dataSource';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
 import { Sort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-posts',
@@ -23,7 +24,9 @@ export class PostsComponent implements OnInit, OnDestroy {
   title = 'ngLoreHunter';
 
   // mat table properties start
-  displayedColumns: string[] = ['id', 'subject', 'content'];
+
+  // mat table properties start
+  displayedColumns: string[] = ['id', 'subject', 'content', 'imageUrl'];
 
   dataSource = new PostDataSource(this.postService);
 

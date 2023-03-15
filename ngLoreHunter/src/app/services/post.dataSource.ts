@@ -1,5 +1,6 @@
 import { DataSource } from "@angular/cdk/collections";
-import { Injectable } from "@angular/core";
+import { Injectable, ViewChild } from "@angular/core";
+import { MatPaginator } from "@angular/material/paginator";
 import { Sort } from "@angular/material/sort";
 import { BehaviorSubject, Observable } from "rxjs";
 import { Post } from "../models/post";

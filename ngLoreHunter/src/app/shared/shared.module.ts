@@ -28,6 +28,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -61,7 +62,8 @@ import { MatSortModule } from '@angular/material/sort';
     AppRoutingModule,
     MatProgressBarModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatPaginatorModule
   ],
   exports: [
     HomeComponent,
