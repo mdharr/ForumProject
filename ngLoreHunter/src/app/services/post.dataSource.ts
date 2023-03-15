@@ -23,10 +23,13 @@ export class PostDataSource extends DataSource<Post> {
 
   disconnect(): void {
     this.posts$.complete();
+    this.isLoading$.complete();
   }
 
   loadPosts(categoryId: number, sort: Sort): void {
     this.isLoading$.next(true);
+    console.log(categoryId);
+    console.log(sort);
     this.postService.fetchPosts(categoryId, sort).subscribe((posts) => {
       this.posts$.next(posts);
       this.isLoading$.next(false);
