@@ -11,6 +11,7 @@ import { PostService } from "./post.service";
 export class PostDataSource extends DataSource<Post> {
   posts$ = new BehaviorSubject<Post[]>([]);
   isLoading$ = new BehaviorSubject<boolean>(false);
+  sort: any;
 
   constructor(private postService: PostService) {
     super();

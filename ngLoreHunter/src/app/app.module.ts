@@ -1,3 +1,4 @@
+import { MatSortModule } from '@angular/material/sort';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -46,6 +47,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatPaginatorModule,
     MatTableModule,
     MatProgressBarModule,
+    MatSortModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

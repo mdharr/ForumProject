@@ -114,7 +114,9 @@ export class PostService {
     const params = new HttpParams()
     .set('_sort', sort.active)
     .set('_order', sort.direction);
-    return this.http.get<Post[]>(this.url + '/categories/' + categoryId + '/posts',  { params, }).pipe(
+    return this.http.get<Post[]>(this.url + '/categories/' + categoryId + '/posts',  {
+      params,
+     }).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -127,4 +129,5 @@ export class PostService {
     );
 
   }
+
 }

@@ -127,13 +127,13 @@
 </div>
 
 <div class="wrapper">
-  <div *ngIf="dataSource.isLoading$ | async">Loading...</div>
+  <!-- <div *ngIf="dataSource.isLoading$ | async">Loading...</div> -->
 
 <table
   mat-table
   matSort
   matSortActive="id"
-  matSortDirection="asc"
+  matSortDirection="desc"
   matSortDisableClear
   (matSortChange)="sortPosts($event)"
   [dataSource]="dataSource"

@@ -1,5 +1,5 @@
 import { PostDataSource } from './../../../services/post.dataSource';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
@@ -12,7 +12,7 @@ import { Category } from 'src/app/models/category';
 import { Subscription } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
-import { Sort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
@@ -23,12 +23,13 @@ import { MatPaginator } from '@angular/material/paginator';
 export class PostsComponent implements OnInit, OnDestroy {
   title = 'ngLoreHunter';
 
-  // mat table properties start
-
-  // mat table properties start
   displayedColumns: string[] = ['id', 'subject', 'content', 'imageUrl'];
 
   dataSource = new PostDataSource(this.postService);
+
+  // mat table properties start
+
+  // mat table properties start
 
   // mat table end
 
@@ -79,7 +80,7 @@ export class PostsComponent implements OnInit, OnDestroy {
           this.categoryService.find(this.categoryId).subscribe({
             next: (category) => {
               console.log(this.categoryId);
-              this.dataSource.loadPosts(this.categoryId, { active: 'id', direction: 'asc' });
+              this.dataSource.loadPosts(this.categoryId, { active: 'id', direction: 'desc' });
 
             },
             error: (fail) => {
@@ -105,6 +106,7 @@ export class PostsComponent implements OnInit, OnDestroy {
         console.log(error);
       },
     });
+
 
   }
 
