@@ -20,6 +20,9 @@ import { HttpClient } from '@angular/common/http';
 export class PostsComponent implements OnInit, OnDestroy {
   title = 'ngLoreHunter';
 
+  // mat table properties start
+  displayedColumns: string[] = ['id', 'name', 'age'];
+
   paramsSub: Subscription | undefined;
 
   posts: Post[] = [];

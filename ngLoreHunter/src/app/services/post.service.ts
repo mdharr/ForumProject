@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Category } from '../models/category';
 import { Post } from '../models/post';
 import { AuthService } from './auth.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -110,9 +111,13 @@ export class PostService {
 
 
   // material table test
-  getPosts(categoryId: number): Observable<Post[]> {
-    const URL = `${this.url + '/categories/' + categoryId + '/posts'}`;
-    return this.http.get<Post[]>(URL);
+  getLaps(categoryId: number): Observable<any> {
+    return this.http.get(`${this.url + '/categories/' + categoryId + '/posts'}`).pipe(
+      map(this.extractData));
+  }
+
+  private extractData(res: Response) {
+    return res || {}; // If 'res' is null, it returns empty object
   }
 
 }
