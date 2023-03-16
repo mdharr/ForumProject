@@ -20,7 +20,7 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent implements OnInit, OnDestroy {
+export class PostsComponent implements OnInit {
   title = 'ngLoreHunter';
 
   displayedColumns: string[] = ['id', 'subject', 'content', 'imageUrl'];
@@ -79,8 +79,9 @@ export class PostsComponent implements OnInit, OnDestroy {
         if (!isNaN(this.categoryId)) {
           this.categoryService.find(this.categoryId).subscribe({
             next: (category) => {
+              console.log(category);
               console.log(this.categoryId);
-              this.dataSource.loadPosts(this.categoryId, { active: 'id', direction: 'desc' });
+              this.dataSource.loadPosts(this.categoryId, { active: 'id', direction: 'asc' });
 
             },
             error: (fail) => {
@@ -110,11 +111,11 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy() {
-    console.log('Destroyed and unsubscribed');
-    this.paramsSub?.unsubscribe();
+  // ngOnDestroy() {
+  //   console.log('Destroyed and unsubscribed');
+  //   this.paramsSub?.unsubscribe();
 
-  }
+  // }
 
   reload() {
     this.postService.postsByCategory(this.categoryId).subscribe({
