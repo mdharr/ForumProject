@@ -21,7 +21,6 @@ export class CommentDataSource extends DataSource<Comment> {
 
   disconnect(collectionViewer: CollectionViewer): void {
     this.comments$.complete();
-    this.isLoading$.complete();
   }
 
   loadComments(categoryId: number, postId: number, sort: Sort): void {

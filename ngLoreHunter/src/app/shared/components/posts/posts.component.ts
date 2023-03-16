@@ -47,7 +47,7 @@ export class PostsComponent implements OnInit {
   users: User[] = [];
   selected: null | Post = null;
   categoryId: number = 0;
-  postId: number = 1;
+  postId: number = 0;
   value: any;
 
   newPost: Post = new Post();
@@ -88,7 +88,6 @@ export class PostsComponent implements OnInit {
             next: (category) => {
               console.log(category);
               console.log(this.categoryId);
-              this.dataSource.loadPosts(this.categoryId, { active: 'id', direction: 'asc' });
 
             },
             error: (fail) => {
@@ -99,6 +98,7 @@ export class PostsComponent implements OnInit {
         } else {
           this.router.navigateByUrl('invalidCategoryId');
         }
+        this.dataSource.loadPosts(this.categoryId, { active: 'id', direction: 'asc' });
       }
     });
 
@@ -144,15 +144,6 @@ export class PostsComponent implements OnInit {
       },
     });
 
-    this.homeService.index().subscribe({
-      next: (categories) => {
-        this.categories = categories;
-      },
-      error:(fail) => {
-        console.error('Error getting categories:');
-        console.error(fail);
-      }
-    });
   }
 
   resetForm() {
@@ -170,39 +161,6 @@ export class PostsComponent implements OnInit {
     if (this.selected && this.selected.id) {
       // invoke getComments method with this.selected.id as argument
     }
-  }
-
-  getComments(id: number) {
-    this.postService.postsByCategory(id).subscribe({
-      next: (posts) => {
-        this.posts = posts;
-        console.log(this.posts);
-      },
-      error: (err) => {
-        console.error('Error loading post comments');
-        console.error(err);
-      },
-    });
-  }
-
-  createComment(comment: Comment, selected: Post) {
-    let id = this.selected?.id;
-    if (id) {
-      comment.post.id = id;
-    }
-    console.log(comment);
-    this.commentService.createComment(comment).subscribe({
-      next: (data) => {
-        this.newComment.post.id = selected.id;
-        this.newComment.user.id = this.loggedInUser.id;
-        this.newComment = new Comment();
-        this.displayPost(selected);
-      },
-      error: (nojoy) => {
-        console.error('PostComponent.createComment: Error creating comment.');
-        console.error(nojoy);
-      },
-    });
   }
 
   displayTable() {

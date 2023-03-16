@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { User } from 'src/app/models/user';
 import { PostDataSource } from 'src/app/services/post.dataSource';
+import { CommentDataSource } from 'src/app/services/comment.dataSource';
 
 @Component({
   selector: 'app-comments',
@@ -29,9 +30,9 @@ export class CommentsComponent implements OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  displayedColumns: string[] = ['id', 'subject', 'content', 'imageUrl'];
+  displayedColumns: string[] = ['id', 'content', 'imageUrl'];
 
-  dataSource = new PostDataSource(this.postService);
+  dataSource = new CommentDataSource(this.commentService);
 
   // mat table properties start
 
@@ -84,27 +85,37 @@ export class CommentsComponent implements OnInit {
       let idString2 = param.get('postId');
       if (idString && idString2) {
         this.categoryId = +idString;
-        this.postId = + idString2;
+        this.postId = +idString2;
         if (!isNaN(this.categoryId && this.postId)) {
           this.categoryService.find(this.categoryId).subscribe({
             next: (category) => {
               console.log(category);
               console.log(this.categoryId);
-              this.dataSource.loadPosts(this.categoryId, { active: 'id', direction: 'asc' });
+              this.categoryId = category.id;
 
             },
             error: (fail) => {
               console.log(fail);
-              this.router.navigateByUrl('postNotFound');
+              this.router.navigateByUrl('categoryNotFound');
             },
           });
+          this.postService.show(this.postId).subscribe({
+            next: (post) => {
+              console.log(post);
+              this.postId = post.id;
+            },
+            error: (fail) => {
+              console.log(fail);
+              this.router.navigateByUrl('postNotFound');
+            }
+          })
         } else {
           this.router.navigateByUrl('invalidPostId');
         }
       }
     });
 
-    this.reload();
+    // this.reload();
 
     this.authService.getLoggedInUser().subscribe({
       next: (user) => {
@@ -117,6 +128,7 @@ export class CommentsComponent implements OnInit {
       },
     });
 
+    this.dataSource.loadComments(this.categoryId, this.postId, { active: 'id', direction: 'asc' });
   }
 
   reload() {
@@ -192,8 +204,8 @@ export class CommentsComponent implements OnInit {
     }
   }
 
-  sortPosts(sort: Sort): void {
-    this.dataSource.loadPosts(this.categoryId, sort);
+  sortComments(sort: Sort): void {
+    this.dataSource.loadComments(this.categoryId, this.postId, sort);
   }
 
 }

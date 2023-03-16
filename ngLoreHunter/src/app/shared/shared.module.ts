@@ -29,6 +29,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { CommentService } from '../services/comment.service';
+import { CommentDataSource } from '../services/comment.dataSource';
 
 
 
@@ -80,6 +82,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
   providers: [
     PostService,
     PostDataSource,
+    CommentService,
+    CommentDataSource
   ]
 })
 export class SharedModule { }

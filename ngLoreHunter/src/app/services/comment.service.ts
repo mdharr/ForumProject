@@ -52,22 +52,14 @@ export class CommentService {
     const params = new HttpParams()
     .set('_sort', sort.active)
     .set('_order', sort.direction);
-    return this.http.get<Comment[]>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/comments', this.getHttpOptions()).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(
-          () =>
-            new Error(
-              'CommentService.index(): error retrieving comment list: ' + err
-            )
-        );
-      })
-    );
+    return this.http.get<Comment[]>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/comments', {
+      params,
+    });
 
   }
 
   commentsByPost(categoryId: number, postId: number): Observable<Post[]> {
-    return this.http.get<Post[]>(this.url + '/categories/' + categoryId + '/posts/' + postId, this.getHttpOptions()).pipe(
+    return this.http.get<Post[]>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/comments').pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
