@@ -8,6 +8,7 @@ import { Post } from '../models/post';
 import { AuthService } from './auth.service';
 import { map } from 'rxjs/operators';
 import { Sort } from '@angular/material/sort';
+import { PostInterface } from './post.interface';
 
 @Injectable({
   providedIn: 'root'

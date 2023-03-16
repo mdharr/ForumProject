@@ -74,7 +74,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     UserComponent,
     LogoutComponent,
     ProgressBarComponent,
-    CommentsComponent
+    CommentsComponent,
+    PostsComponent
   ],
   providers: [
     PostService,

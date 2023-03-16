@@ -4,6 +4,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { Sort } from "@angular/material/sort";
 import { BehaviorSubject, Observable } from "rxjs";
 import { Post } from "../models/post";
+import { PostInterface } from "./post.interface";
 import { PostService } from "./post.service";
 
 
