@@ -20,7 +20,7 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent implements OnInit, AfterViewInit {
+export class PostsComponent implements OnInit {
   title = 'ngLoreHunter';
 
   @ViewChild(MatPaginator)
@@ -116,15 +116,15 @@ export class PostsComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngAfterViewInit() {
+  // ngAfterViewInit() {
 
-    merge(this.sort.sortChange, this.paginator.page)
-        .pipe(
-          tap(() => this.dataSource.loadPosts(this.categoryId, this.sort))
-        )
-        .subscribe();
+  //   merge(this.sort.sortChange, this.paginator.page)
+  //       .pipe(
+  //         tap(() => this.dataSource.loadPosts(this.categoryId, this.sort))
+  //       )
+  //       .subscribe();
 
-  }
+  // }
 
   // ngOnDestroy() {
   //   console.log('Destroyed and unsubscribed');
