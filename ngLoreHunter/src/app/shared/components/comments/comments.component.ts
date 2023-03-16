@@ -81,6 +81,9 @@ export class CommentsComponent implements OnInit {
     console.log(this.activatedRoute);
 
     this.paramsSub = this.activatedRoute.paramMap.subscribe((param) => {
+      console.log(param);
+      console.log(this.postId);
+
       let idString = param.get('categoryId');
       let idString2 = param.get('postId');
       if (idString && idString2) {
@@ -91,31 +94,32 @@ export class CommentsComponent implements OnInit {
             next: (category) => {
               console.log(category);
               console.log(this.categoryId);
-              this.categoryId = category.id;
+              console.log(this.postId);
 
             },
             error: (fail) => {
               console.log(fail);
-              this.router.navigateByUrl('categoryNotFound');
+              // this.router.navigateByUrl('categoryNotFound');
             },
           });
-          this.postService.show(this.postId).subscribe({
+          this.postService.show(this.categoryId, this.postId).subscribe({
             next: (post) => {
               console.log(post);
-              this.postId = post.id;
+              console.log(this.postId);
+
             },
             error: (fail) => {
               console.log(fail);
-              this.router.navigateByUrl('postNotFound');
+              // this.router.navigateByUrl('postNotFound');
             }
           })
         } else {
-          this.router.navigateByUrl('invalidPostId');
+          // this.router.navigateByUrl('invalidPostId');
         }
       }
     });
 
-    // this.reload();
+    this.reload();
 
     this.authService.getLoggedInUser().subscribe({
       next: (user) => {
@@ -128,7 +132,7 @@ export class CommentsComponent implements OnInit {
       },
     });
 
-    this.dataSource.loadComments(this.categoryId, this.postId, { active: 'id', direction: 'asc' });
+    this.dataSource.loadComments(this.categoryId, this.postId);
   }
 
   reload() {
@@ -204,8 +208,8 @@ export class CommentsComponent implements OnInit {
     }
   }
 
-  sortComments(sort: Sort): void {
-    this.dataSource.loadComments(this.categoryId, this.postId, sort);
-  }
+  // sortComments(sort: Sort): void {
+  //   this.dataSource.loadComments(this.categoryId, this.postId, sort);
+  // }
 
 }

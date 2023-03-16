@@ -48,13 +48,8 @@ export class CommentService {
     );
   }
 
-  fetchComments(categoryId: number, postId: number, sort: Sort): Observable<Comment[]>{
-    const params = new HttpParams()
-    .set('_sort', sort.active)
-    .set('_order', sort.direction);
-    return this.http.get<Comment[]>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/comments', {
-      params,
-    });
+  fetchComments(categoryId: number, postId: number): Observable<Comment[]>{
+    return this.http.get<Comment[]>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/comments');
 
   }
 

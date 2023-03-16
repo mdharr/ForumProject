@@ -33,8 +33,8 @@ export class PostService {
     return options;
   }
 
-  show(id: number): Observable<Post> {
-    return this.http.get<Post>(`${this.url}/${id}`, this.getHttpOptions()).pipe(
+  show(categoryId: number, postId: number): Observable<Post> {
+    return this.http.get<Post>(this.url + '/categories/' + categoryId + '/posts', this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

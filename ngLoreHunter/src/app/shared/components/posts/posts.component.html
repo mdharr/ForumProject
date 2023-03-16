@@ -160,7 +160,7 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
-  <tr mat-row *matRowDef="let row; columns: displayedColumns" [routerLink]="['/categories', categoryId, 'posts', postId, 'comments']"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/categories', categoryId, 'posts', row.id, 'comments']"></tr>
 
 </table>
 <mat-paginator #paginator
