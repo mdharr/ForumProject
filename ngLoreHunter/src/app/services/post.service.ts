@@ -116,17 +116,7 @@ export class PostService {
     .set('_order', sort.direction);
     return this.http.get<Post[]>(this.url + '/categories/' + categoryId + '/posts',  {
       params,
-     }).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(
-          () =>
-            new Error(
-              'PostService.fetchPosts(): error fetching posts: ' + err
-            )
-        );
-      })
-    );
+     });
 
   }
 

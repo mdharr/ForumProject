@@ -48,6 +48,14 @@ p {
   padding: 0;
 }
 
+@media only screen and (max-width:1170px) {
+  .discussion-container {
+      display    : block;     /* override flexbox */
+      min-height : inherit;
+  }
+
+}
+
 .official-container {
   margin-top: 2vh;
   margin-bottom: 2vh;

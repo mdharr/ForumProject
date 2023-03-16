@@ -9,7 +9,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { Category } from 'src/app/models/category';
-import { Subscription } from 'rxjs';
+import { merge, Subscription, tap } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -20,8 +20,14 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, AfterViewInit {
   title = 'ngLoreHunter';
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+
+  @ViewChild(MatSort)
+  sort!: MatSort;
 
   displayedColumns: string[] = ['id', 'subject', 'content', 'imageUrl'];
 
@@ -108,6 +114,15 @@ export class PostsComponent implements OnInit {
       },
     });
 
+  }
+
+  ngAfterViewInit() {
+
+    merge(this.sort.sortChange, this.paginator.page)
+        .pipe(
+          tap(() => this.dataSource.loadPosts(this.categoryId, this.sort))
+        )
+        .subscribe();
 
   }
 
