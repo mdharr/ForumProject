@@ -47,6 +47,7 @@ export class PostsComponent implements OnInit {
   users: User[] = [];
   selected: null | Post = null;
   categoryId: number = 0;
+  postId: number = 1;
   value: any;
 
   newPost: Post = new Post();

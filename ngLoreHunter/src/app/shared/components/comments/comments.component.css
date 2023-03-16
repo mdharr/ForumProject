@@ -1,550 +1,318 @@
-/*Begin CSS*/
-
-body {
-  overflow-x: hidden;
-}
-
-@import url(https://fonts.googleapis.com/css?family=Dosis:400,600);
-
-.whenAndWho, .whenAndWho a {
-
-    color: #7b8b8e;
-    height: 18px;
-    text-align: left;
-    width: auto;
-   text-decoration: none !important;
-
-    font: normal normal normal normal 13px / 18.2px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    list-style: none outside none;
-    margin: 0px 0px 15px;
-}
-
-
-
-.avatarCoin {
-    background-position: 50% 50%;
-    box-sizing: border-box;
-    color: #576366;
-    height: 55px;
-    position: absolute;
-    text-align: left;
-    width: 55px;
-    perspective-origin: 20px 20px;
-    transform-origin: 20px 20px;
-    background: #edeff0 url("http://images.proboards.com/v5/defaultavatar.png") no-repeat scroll 50% 50% / contain padding-box border-box;
-    border: 0px solid rgb(237, 239, 240);
-    border-radius: 25% 25% 25% 25%;
-    list-style: none outside none;
-    margin: 5px 0px 0px -70px;
-    outline: #576366 none 0px;
-    background-size: cover;
-}
-
-#wrapper {
-  margin: 50px;
-  width:auto !important;
-}
-
-.paginationBar {
-  border-radius: 25px;
-  width: 100% !important;
-  box-sizing: border-box;
-    color: rgb(87, 99, 102);
-
-    text-align: center;
-
-background: #F9F9F9;
-    line-height: 5px;
-    margin-bottom: 10px;
-    height: 44px;
-}
-
-.threadItem {
-
-  box-sizing: border-box;
-    color: rgb(87, 99, 102);
-
-    position: relative;
-    width: 100%;
-    perspective-origin: 655px 67px;
-    transform-origin: 655px 67px;
-    border-top: 1px solid rgb(237, 239, 240);
-    border-right: 0px none rgb(87, 99, 102);
-    border-bottom: 0px none rgb(87, 99, 102);
-    border-left: 0px none rgb(87, 99, 102);
-    font: normal normal normal normal 14px / 14px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    list-style: none outside none;
-    outline: rgb(87, 99, 102) none 0px;
-    padding: 15px 0px 0px;
-}
-
-.activeButton {
-  box-sizing: border-box;
-  text-decoration: none;
-    color: #3DAFF5;
-    cursor: pointer;
-    display: block;
-    float: right;
-    height: 40px;
-    width: 67px;
-    border: 2px solid #3DAFF5;
-    border-radius: 4px 4px 4px 4px;
-    font: normal normal 500 normal 14px / 36px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    padding: 0px 15px;
-    transition: color 0.3s ease 0s, background-color 0.3s ease 0s, border-color 0.3s ease 0s, width 0.3s ease 0s, opacity 0.3s ease 0s;
-}
-
-.disabledButton {
-box-sizing: border-box;
-    color: rgb(123, 139, 142);
-    cursor: default;
-    display: block;
-    float: left;
-    height: 40px;
-    opacity: 0.5;
-
-    text-align: center;
-
-    width: 65px;
-
-
-    border: 2px solid rgb(232, 235, 237);
-    border-radius: 4px 4px 4px 4px;
-    font: normal normal 500 normal 14px / 36px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    margin: 0px 10px 0px 0px;
-    padding: 0px 15px;
-    transition: color 0.3s ease 0s, background-color 0.3s ease 0s, border-color 0.3s ease 0s, width 0.3s ease 0s, opacity 0.3s ease 0s;
-  }
-
-.pageNumber {
-  box-sizing: border-box;
-    color: rgb(123, 139, 142);
-    display: inline-block;
-    height: 38px;
-    text-align: center;
-    width: 102.875px;
-
-    outline: rgb(123, 139, 142) none 0px;
-    padding: 12px 0px;
-
-
-
-}
-
-.labelItem {
-        box-sizing: border-box;
-    color: #36ACF3;
-    cursor: pointer;
-    display: inline-block;
-    height: 36px;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    white-space: nowrap;
-    perspective-origin: 30.9063px 18px;
-    transform-origin: 30.9063px 18px;
-    border: 2px solid rgba(48, 73, 97, 0.0980392);
-    border-radius: 100px 100px 100px 100px;
-    font: normal normal 500 normal 13px / 32px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    list-style: none outside none;
-    outline: #e15258 none 0px;
-    padding: 0px 12px;
-    transition: border-color 0.15s ease 0s, background-color 0.15s ease 0s, color 0.15s ease 0s;
-}
-
-.postContainer {
-  box-sizing: border-box;
-    color: rgb(87, 99, 102);
-
-    text-align: left;
-    perspective-origin: 476.25px 56px;
-    transform-origin: 476.25px 56px;
-    border: 0px none rgb(87, 99, 102);
-    font: normal normal normal normal 14px / 14px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    list-style: none outside none;
-    outline: rgb(87, 99, 102) none 0px;
-    padding: 0px 0px 0px 55px;
-}
-
-.threadItemLabel {
-
-
-    color: #7b8b8e;
-
-    text-align: center;
-    font: normal normal normal normal 12px / 18px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-
-}
-
-.answerCountContainer {
-   box-sizing: border-box;
-    color: rgb(87, 99, 102);
-    float: right;
-    height: 72px;
-    text-align: center;
-    perspective-origin: 25.5px 36px;
-    transform-origin: 25.5px 36px;
-    border: 0px none rgb(87, 99, 102);
-    font: normal normal normal normal 14px / 14px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    list-style: none outside none;
-    margin-right: 40px;
-    outline: rgb(87, 99, 102) none 0px;
-    padding: 5px 0px 0px;
-}
-
-.replyCount {
-  box-sizing: border-box;
-    color: rgb(87, 99, 102);
-    display: inline-block;
-    height: 29px;
-    text-align: center;
-    vertical-align: middle;
-    width: 17.3906px;
-    perspective-origin: 8.6875px 14.5px;
-    transform-origin: 8.6875px 14.5px;
-    border: 0px none rgb(87, 99, 102);
-    font: normal normal 500 normal 24px / 24px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    list-style: none outside none;
-    outline: rgb(87, 99, 102) none 0px;
-    padding-right: 10%;
-}
-
-.labelList {
-  box-sizing: border-box;
-    color: rgb(87, 99, 102);
-    height: 45px;
-    position: relative;
-    text-align: left;
-    white-space: nowrap;
-    width: 897.5px;
-    perspective-origin: 448.75px 22.5px;
-    transform-origin: 448.75px 22.5px;
-    border: 0px none rgb(87, 99, 102);
-    font: normal normal normal normal 14px / 14px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    list-style: none outside none;
-    margin: 10px;
-    outline: rgb(87, 99, 102) none 0px;
-    overflow: hidden;
-    padding: 0px;
-}
-
-.labelListItem {
-  box-sizing: border-box;
-    color: rgb(87, 99, 102);
-    display: inline-block;
-    height: 36px;
-    white-space: nowrap;
-    width: 61.8281px;
-    perspective-origin: 30.9063px 18px;
-    transform-origin: 30.9063px 18px;
-    border: 0px none rgb(87, 99, 102);
-    font: normal normal normal normal 14px / 14px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    list-style: none outside none;
-    margin: 0px 7px 9px 0px;
-    outline: rgb(87, 99, 102) none 0px;
-}
-
-.threadTitleHeader {
-  box-sizing: border-box;
-    color: #384047;
-
-    text-align: left;
-    width: 100%;
-    perspective-origin: 448.75px 13.5px;
-    transform-origin: 448.75px 13.5px;
-    border: 0px none #384047;
-    font: normal normal 500 normal 16px / 22.4px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    list-style: none outside none;
-    margin: 0px 0px 7px;
-    outline: #384047 none 0px;
-    padding: 5px 0px 0px;
-}
-
-.userAvatarLink {
-      box-sizing: border-box;
-    cursor: pointer;
-    display: block;
-    height: 100%;
-    text-align: left;
-    text-decoration: none;
-    width: 36px;
-    perspective-origin: 18px 18px;
-    transform-origin: 18px 18px;
-    font: normal normal normal normal 14px / 14px 'Gotham Rounded A', 'Gotham Rounded B', 'Gotham Rounded', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    list-style: none outside none;
-}
-
-.threadTitleHeader > a {
-  color: #000;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.whenAndWho {
-  color: #C5C5C5;
-}
-
-.userLinkPostCount {
-  border-radius: 15%;
-  font-size: 8px !important;
-  padding: 5px;
-  color: #FFF !important;
-  background: #6B6B6B;
-  position: relative;
-  bottom: 2px;
-}
-
-.expandDesc {
-  border-radius: 10%;
-  font-size: 12px !important;
-  padding: 5px;
-  color: #FFF !important;
-  background: #E2E2E2;
-  position: relative;
-  bottom: 2px;
-  cursor: pointer;
-}
-
-div, ul, p, h1, h2, a, ul {
-  font-family: "Dosis";
-  font-size: 16px;
-
-  letter-spacing: 1px;
-  line-height: 20px;
-}
-
-.hiddenToggle {
-  display: none;
-}
-
-
-
-
-.descriptionText {margin-top: 20px;
-margin-bottom: 20px;
-    padding-right: 30px;}
-
-body {background-color:#1D1F20;}
-#wrapper {
-  background-color: #FFF;
-  border-radius: 5px;
-  margin-left: 90px;
-}
-
-.firstPost{border:0;}
-
-.forwardButton {
-    position: relative;
-    right: 5px;
-}
-
-.backButton {
-    position: relative;
-    left: 5px;
-}
-.btn-on {
-  background-color: #D0CECE;
-}
-@media (max-width: 777px) {
-  .avatarCoin {
-        border: 5px solid #FFF;
-  }
-  .threadItem {
-    margin: 0px;
-  }
-  .answerCountContainer {
-        padding-left: 10px;
-    padding-right:30px;
-    width: 100%;
-    margin: 0px;
-
-  }
-  .replyCount {
-    padding: 0px;
-  }
-  .postContainer {
-        padding: 0px;
-  }
-}
-
-@media (max-width: 669px) {
-  .threadTitleHeader, .whenAndWho {
-        text-align: center;
-  }
-  .pageNumber {
-    font-size: 11px;
-    width: auto;
-  }
-  .lastUpdated,  .expandDesc {
-    display: none;
-  }
-  .threadTitleHeader, .whenAndWho {
-    padding-right: 30px;
-  }
-}
-
-@media (min-width: 1100px) {
-  .descriptionText {
-    display:block !important;
-  }
-}
-
-@media (max-width: 370px) {
-  .pageNumber {
-    display: none;
-  }
-}
-
-@import url(http://weloveiconfonts.com/api/?family=entypo);
-/* entypo */
-[class*="entypo-"]:before {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-  text-align: center;
-  font-family: 'entypo', sans-serif;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-
-.side-panel {
-  position: fixed;
-  top: 25vh;
-  left: 0;
-  z-index: 9999;
-}
-.side-panel:nth-child(2n) {
-  background: #483430;
-}
-.side-panel ul {
-  margin: 0;
-  padding: 0;
+.breadcrumbnav {
   list-style: none;
 }
-.side-panel > ul > li:first-child {
-  border-top-right-radius: 3px;
-}
-.side-panel > ul > li:first-child a {
-  padding-top: 13px;
-}
-.side-panel > ul > li:last-child {
-  border-bottom-right-radius: 3px;
-}
-.side-panel > ul > li:last-child a {
-  padding-bottom: 13px;
-}
-.side-panel > ul ul {
-  width: 150px;
-  padding-left: 10px;
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 100%;
-}
-.side-panel > ul ul li:first-child {
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  border-right-color: #efefef;
-}
-.side-panel > ul ul li:first-child:before {
-  position: absolute;
-  content: "";
-  width: 0;
-  height: 0;
-  top: 50%;
-  right: 100%;
-  margin-top: -5px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-right: 5px solid #efefef;
-  border-right-color: inherit;
-}
-.side-panel > ul ul li:first-child:hover {
-  border-right-color: #fff;
-}
-.side-panel > ul ul li:last-child {
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-}
-.side-panel li {
-  position: relative;
-  background: #efefef;
-}
-.side-panel li:hover {
-  background: #fff;
-}
-.side-panel li:hover > ul {
-  display: block;
-}
-.side-panel a {
+
+.breadcrumbnav > li {
   display: inline-block;
-  padding: 8px 15px;
+  font-weight: bold;
+  font-family: "Palanquin Dark",serif;
+  font-size: 1em;
+}
+
+.breadcrumbnav li::after {
+  content: " \a0> \a0";
+}
+
+.breadcrumbnav li:last-child::after {
+  content: "";
+}
+
+.breadcrumbnav > a {
+  font-weight: normal;
+  text-decoration: none;
+  color: #222;
+}
+
+.breadcrumbnav > a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-value {
   cursor: pointer;
 }
 
-.a > ul {
-  width: 150px;
-  transform: translateX(-110px);
-}
-.a span[class*="entypo-"] {
-  display: inline-block;
-  position: relative;
-  left: 105px;
-}
-.a .menu-item {
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  display: block;
-  padding: 8px 13px;
-  color: #efefef;
-  text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 1px;
-  white-space: nowrap;
-  transform: translate(10px, 0%) translateZ(0);
-  opacity: 0;
-  background: #483430;
-  border-radius: 3px;
-  border-right-color: #483430;
-  transition: all .3s ease-in-out;
-  z-index: -2;
-}
-.a .menu-item:before {
-  position: absolute;
-  content: "";
-  width: 0;
-  height: 0;
-  top: 50%;
-  right: 100%;
-  margin-top: -5px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-right: 5px solid #efefef;
-  border-right-color: inherit;
-}
-.a li:hover .menu-item {
-  opacity: 1;
-  transform: translate(10px, -50%);
-}
-.a > ul ul {
-  display: block;
-  opacity: 0;
-  transform: translate(-100%);
-  transition: all .3s ease-in-out;
-  z-index: -1;
-}
-.a > ul > li:first-child:hover .menu-item {
-  transform: translate(-100%, -50%);
-}
-.a li:hover ul {
-  opacity: 1;
-  transform: translate(0);
+.breadcrumb-outer-bottom {
+  margin-bottom: 100px !important;
+  margin-top: 100px !important;
+  margin: 25px;
 }
 
-html, body {margin:0;padding:0;height:100%;}
+.subject {
+  font-family: "Palanquin Dark",serif;
+  font-size: 1.25em;
+}
+
+ .topic {
+  font-size: 1.15em;
+
+}
+
+.cat-description {
+  color: rgba(255,255,255,.7);
+  font-size: 15px;
+
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: middle;
+}
+
+input:focus {
+	outline:none;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+p {
+  line-height: inherit;
+}
+
+body {
+  background: #222;
+  min-height: 100%;
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+  }
+
+/* -------------------------------------------- */
+/*            material design icons             */
+/* -------------------------------------------- */
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;  /* Preferred icon size */
+  display: inline-block;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: inherit;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  cursor: default;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 90%;
+	margin: 50px auto;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+th {
+	background: #ffffff;
+  font-size: 20px;
+  font-weight: lighter;
+	padding: 10px;
+	color: black;
+  font-weight: bold;
+  font-family: "Palanquin Dark",serif;
+  font-size: 1.25em;
+}
+
+.forum-topicview-row {
+  background-color: #f1f0f1;
+	border-bottom: 1px solid #3f51b5;
+  font-weight: bold;
+  font-family: "Josefin Sans",serif;
+  font-size: 13px;
+}
+
+td {
+	background: #ffffff;
+	padding: 12px;
+  font-size: 18px;
+	color: black;
+}
+
+mat-paginator {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.forum-topicsview-header {
+	background-color:#3f51b5;
+	color: #ffffff;
+}
+
+.header-row {
+  background-color: #f1f0f1;
+  border-bottom: #3f51b5;
+}
+
+.forum-topics-col-views {
+	width: 70px;
+	text-align: center;
+}
+
+
+.forum-topics-col-icon {
+	width: 70px;
+	color: black;
+	text-align: center;
+}
+
+.forum-topics-col-lastpost {
+	width: 200px;
+	text-align: center;
+}
+
+.forum-topics-col-lastpost p {
+		font-size: 16px;
+		color: black;
+}
+
+.forum_footer_wrap {
+	display: flex;
+	flex-direction: row;
+  background-color: #ffffff;
+	margin-top: 12px;
+	width: 100%;
+}
+
+.forum_ledgend_wrap {
+	padding: 16px;
+	color: black;
+}
+
+.forum_ledgend_wrap  p {
+	margin: 6px;
+}
+
+.avatar {
+  width: 50px;
+}
+
+.breadcrumb-outer {
+  margin: 25px;
+}
+
+.pairs {
+  display: flex;
+  float: left;
+  max-width: 100%;
+  margin-right: 12px;
+  flex-shrink: 0;
+
+}
+
+.dt-icon {
+  margin-right: 10px;
+}
+
+.card {
+  margin: 10px;
+  max-width: 95%;
+  padding: 0;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  color: #ffffff;
+  margin-left: 25px;
+  margin-top: 20px;
+}
+
+.card:hover {
+  box-shadow: 0 6px 10px 0px rgb(0 0 0 / 14%), 0 1px 18px 0px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%) !important;
+  transform: translateY(-5px);
+}
+
+.card-gaming {
+  padding: 16px;
+  background: rgb(6,142,167);
+  background: linear-gradient(90deg, rgba(6,142,167,1) 0%, rgba(36,161,159,1) 40%);
+  min-height: 100px;
+  border-radius:5px;
+
+}
+
+.card-gaming-hangouts {
+  padding: 16px;
+  background: rgb(6,142,167);
+  background: linear-gradient(90deg, rgba(6,142,167,1) 0%, rgba(36,161,159,1) 40%);
+  min-height: 100px;
+  border-radius:5px;
+
+}
+
+.card-lore {
+  padding: 16px;
+  background: rgb(152,57,124);
+  background: linear-gradient(90deg, rgba(152,57,124,1) 40%, rgba(131,56,122,1) 100%);
+  border-radius:5px;
+}
+
+.card-lore-hangouts {
+  padding: 16px;
+  background: rgb(152,57,124);
+  background: linear-gradient(90deg, rgba(152,57,124,1) 40%, rgba(131,56,122,1) 100%);
+  border-radius:5px;
+}
+
+
+.card-announcements {
+  padding: 16px;
+  background: rgb(234,157,44);
+  background: linear-gradient(90deg, rgba(234,157,44,1) 40%, rgba(227,127,58,1) 100%);
+  border-radius:5px;
+}
+
+
+.card-vault {
+  padding: 16px;
+  background: rgb(62,178,91);
+  background: linear-gradient(90deg, rgba(62,178,91,1) 0%, rgba(89,185,73,1) 45%);
+  border-radius:5px;
+}
+
+
