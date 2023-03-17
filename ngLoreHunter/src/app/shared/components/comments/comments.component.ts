@@ -95,7 +95,7 @@ export class CommentsComponent implements OnInit {
               console.log(category);
               console.log(this.categoryId);
               console.log(this.postId);
-
+              console.log(this.comments);
             },
             error: (fail) => {
               console.log(fail);
@@ -132,7 +132,7 @@ export class CommentsComponent implements OnInit {
       },
     });
 
-    this.dataSource.loadComments(this.categoryId, this.postId);
+    this.dataSource.loadComments(this.categoryId, this.postId, { active: 'id', direction: 'asc' });
   }
 
   reload() {
@@ -208,8 +208,8 @@ export class CommentsComponent implements OnInit {
     }
   }
 
-  // sortComments(sort: Sort): void {
-  //   this.dataSource.loadComments(this.categoryId, this.postId, sort);
-  // }
+  sortComments(sort: Sort): void {
+    this.dataSource.loadComments(this.categoryId, this.postId, sort);
+  }
 
 }
