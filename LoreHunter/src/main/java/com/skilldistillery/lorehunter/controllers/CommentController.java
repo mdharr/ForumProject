@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +42,23 @@ public class CommentController {
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(comment.getId());
 			res.setHeader("Location", url.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			comment = null;
+		}
+		
+		return comment;
+	}
+	
+	@PutMapping("categories/{cid}/posts/{pid}/comments/{id}")
+	public Comment update(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable("pid") int postId, @PathVariable("cid") int categoryId, @PathVariable("id") int commentId, @RequestBody Comment comment) {
+		
+		try {
+			comment = commentService.update(principal.getName(), commentId, comment, postId);
+			if(comment == null) {
+				res.setStatus(404);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);

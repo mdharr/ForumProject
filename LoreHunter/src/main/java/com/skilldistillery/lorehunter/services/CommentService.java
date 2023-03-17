@@ -16,7 +16,7 @@ public interface CommentService {
 	
 	public Comment create(String username, Comment comment, int postId);
 	
-	public Comment update(String username, int commentId, Post post, int postId);
+	public Comment update(String username, int commentId, Comment comment, int postId);
 	
 	public boolean archive(String username, int commentId);
 	

@@ -65,6 +65,11 @@ public class PostServiceImpl implements PostService {
 		existing.setSubject(post.getSubject());
 		existing.setContent(post.getContent());
 		existing.setStatus(post.getStatus());
+		existing.setViewCount(post.getViewCount());
+		existing.setCommentCount(post.getCommentCount());
+		existing.setEnabled(post.getEnabled());
+		existing.setCreatedAt(post.getCreatedAt());
+		existing.setLastEdited(post.getLastEdited());
 		return postRepo.save(existing);
 	}
 

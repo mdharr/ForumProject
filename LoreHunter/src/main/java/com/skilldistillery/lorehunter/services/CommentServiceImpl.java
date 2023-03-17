@@ -77,8 +77,13 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public Comment update(String username, int commentId, Post post, int postId) {
+	public Comment update(String username, int commentId, Comment comment, int postId) {
 		Comment existing = show(username, commentId);
+		existing.setContent(comment.getContent());
+		existing.setStatus(comment.getStatus());
+		existing.setEnabled(comment.getEnabled());
+		existing.setCreatedAt(comment.getCreatedAt());
+		existing.setLastEdited(comment.getLastEdited());
 		return commentRepo.save(existing);
 	}
 
