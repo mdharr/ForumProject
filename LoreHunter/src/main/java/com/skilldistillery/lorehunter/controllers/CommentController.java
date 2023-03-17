@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -66,6 +67,20 @@ public class CommentController {
 		}
 		
 		return comment;
+	}
+	
+	@PatchMapping("categories/{cid}/posts/{pid}/comments/{id}")
+	public void archive(Principal principal, @PathVariable("cid") int categoryId, @PathVariable("pid") int postId, @PathVariable("id") int commentId, HttpServletResponse res) {
+		try {
+			if (commentService.archive(principal.getName(), commentId)) {
+				res.setStatus(204);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
 	}
 
 }

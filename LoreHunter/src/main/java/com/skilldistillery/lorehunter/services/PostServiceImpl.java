@@ -54,6 +54,8 @@ public class PostServiceImpl implements PostService {
 		if (user != null) {
 			post.setUser(user);
 			post.setCategory(category);
+			post.setStatus("active");
+			post.setEnabled(true);
 			return postRepo.saveAndFlush(post);
 		}
 		return null;

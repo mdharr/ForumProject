@@ -29,6 +29,9 @@ public class CommentServiceImpl implements CommentService {
 	private PostRepository postRepo;
 	
 	@Autowired
+	private PostService postService;
+	
+	@Autowired
 	private CommentRepository commentRepo;
 
 	@Override
@@ -71,6 +74,8 @@ public class CommentServiceImpl implements CommentService {
 		if(user != null) {
 			comment.setUser(user);
 			comment.setPost(post);
+			comment.setStatus("active");
+			comment.setEnabled(true);
 			return commentRepo.saveAndFlush(comment);
 		}
 		return null;
