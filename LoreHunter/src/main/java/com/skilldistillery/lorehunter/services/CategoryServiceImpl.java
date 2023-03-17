@@ -39,6 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
 			user = userOpt;
 			category.setUser(user);
 			category.setEnabled(true);
+			category.setStatus("active");
 			newCategory = categoryRepo.saveAndFlush(category);
 		}
 		return newCategory;
