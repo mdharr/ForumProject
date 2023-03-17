@@ -52,6 +52,10 @@ public class CategoryServiceImpl implements CategoryService {
 			existing.setDescription(category.getDescription());
 			existing.setStatus(category.getStatus());
 			existing.setEnabled(category.getEnabled());
+			existing.setCreatedAt(category.getCreatedAt());
+			existing.setViewCount(category.getViewCount());
+			existing.setPostCount(category.getPostCount());
+			existing.setCommentCount(category.getCommentCount());
 		return categoryRepo.save(existing);
 	}
 
