@@ -71,7 +71,7 @@ export class PostsComponent implements OnInit {
     private router: Router,
     private categoryService: CategoryService,
     private activatedRoute: ActivatedRoute,
-    private homeService: HomeService,
+    private homeServ: HomeService,
     private http: HttpClient
     ) {
   }
@@ -142,6 +142,15 @@ export class PostsComponent implements OnInit {
         console.error('Error loading posts');
         console.error(err);
       },
+    });
+    this.homeServ.index().subscribe({
+      next: (categories) => {
+        this.categories = categories;
+      },
+      error:(fail) => {
+        console.error('Error getting categories:');
+        console.error(fail);
+      }
     });
 
   }
