@@ -21,6 +21,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { DatePipe } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatPaginatorModule,
     MatTableModule,
     MatProgressBarModule,
-    MatSortModule
+    MatSortModule,
+    CKEditorModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
