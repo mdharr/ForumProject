@@ -29,7 +29,7 @@ export class PostsComponent implements OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  displayedColumns: string[] = ['id', 'subject', 'content', 'imageUrl'];
+  displayedColumns: string[] = ['user', 'subject', 'content'];
 
   dataSource = new PostDataSource(this.postService);
 

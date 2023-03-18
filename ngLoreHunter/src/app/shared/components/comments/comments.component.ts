@@ -30,7 +30,7 @@ export class CommentsComponent implements OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  displayedColumns: string[] = ['id', 'content', 'imageUrl'];
+  displayedColumns: string[] = ['user', 'content'];
 
   dataSource = new CommentDataSource(this.commentService);
 
