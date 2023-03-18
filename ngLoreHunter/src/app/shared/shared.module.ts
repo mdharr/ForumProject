@@ -31,6 +31,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CommentService } from '../services/comment.service';
 import { CommentDataSource } from '../services/comment.dataSource';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 
@@ -65,7 +66,8 @@ import { CommentDataSource } from '../services/comment.dataSource';
     MatProgressBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    CKEditorModule
   ],
   exports: [
     HomeComponent,

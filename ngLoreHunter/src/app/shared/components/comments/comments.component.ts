@@ -15,6 +15,7 @@ import { Category } from 'src/app/models/category';
 import { User } from 'src/app/models/user';
 import { PostDataSource } from 'src/app/services/post.dataSource';
 import { CommentDataSource } from 'src/app/services/comment.dataSource';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-comments',
@@ -23,6 +24,8 @@ import { CommentDataSource } from 'src/app/services/comment.dataSource';
 })
 export class CommentsComponent implements OnInit {
   title = 'ngLoreHunter';
+
+  public Editor = ClassicEditor;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;

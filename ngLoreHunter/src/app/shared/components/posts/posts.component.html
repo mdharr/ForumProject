@@ -1,12 +1,3 @@
-<!-- <div class="forum_footer_wrap">
-	<div class="forum_ledgend_wrap">
-	<h1>Legend</h1>
-	<p><i class="material-icons">chat_bubble</i> Topic with unread posts</p>
-	<p><i class="material-icons">chat_bubble_outline</i> Topic with no new posts</p>
-	</div>
-</div> -->
-
-
 <div class="container-fluid card">
   <div class="card-gaming" *ngIf="categoryId === 1">
     <div class="node-container">
@@ -170,78 +161,9 @@
 
 </div>
 
-<!-- <div class="wrapper">
-
-	<table class="main-table">
-      <th *ngIf="categoryId === 1" class="forum-topicsview-header" style="text-align: center;" colspan="5"> Gaming Forum </th>
-      <th *ngIf="categoryId === 2" class="forum-topicsview-header" style="text-align: center;" colspan="5"> Gaming Hangouts </th>
-      <th *ngIf="categoryId === 3" class="forum-topicsview-header" style="text-align: center;" colspan="5"> Lore Forum </th>
-      <th *ngIf="categoryId === 4" class="forum-topicsview-header" style="text-align: center;" colspan="5"> Lore Hangouts </th>
-      <th *ngIf="categoryId === 5" class="forum-topicsview-header" style="text-align: center;" colspan="5"> Announcements </th>
-      <th *ngIf="categoryId === 6" class="forum-topicsview-header" style="text-align: center;" colspan="5"> The Vault </th>
-		<tr class="header-row">
-			<th class="header-row"> </th>
-			<th class="header-row" style="text-align: left;"> Topics </th>
-			<th class="header-row forum-topics-col-views"> Comments </th>
-			<th class="header-row forum-topics-col-views"> Views </th>
-			<th class="header-row forum-topics-col-lastpost"> Last Post </th>
-		</tr>
-      <tr class="forum-topicview-row"  *ngFor="let post of posts">
-        <td *ngIf="categoryId" class="forum-topics-col-icon"> <img style="margin-right: 20px; margin-left: 20px;" src="{{post.user.imageUrl}}" class="avatar"> </td>
-        <td *ngIf="categoryId" class="" style="text-align: left;"> <a href="#"><p> {{post.subject}} </p></a> </td>
-        <td *ngIf="categoryId" class="forum-topics-col-views"> <dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons">forum</mat-icon></dt><dd>{{post.viewCount}}</dd> </dl></td>
-        <td *ngIf="categoryId" class="forum-topics-col-views"> <dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons">visibility_outline</mat-icon></dt><dd>5</dd> </dl></td>
-        <td *ngIf="categoryId" class="forum-topics-col-lastpost"> <p>Last Post by: {{post.user.username}}<br><b> {{post.createdAt | date : "shortDate"}} </b></p> </td>
-      </tr>
-	</table>
-
-</div> -->
-
-
-<!-- previous material table start -->
-<!-- <div class="wrapper">
-
-	<table mat-table class="main-table" *ngFor="let post of posts">
-      <ng-container matColumnDef="user">
-        <th mat-header-cell *matHeaderCellDef class="header-row"> User </th>
-        <td mat-cell *ngIf="categoryId" class="forum-topics-col-icon">
-          <div style="display: flex; flex-direction: column; justify-content: space-between;">
-            <div style="margin-bottom: 5px;">
-              <img style="margin-right: 20px; margin-left: 20px;" src="{{post.user.imageUrl}}" class="avatar">
-            </div>
-            <div style="display: flex; justify-content: center;">
-              <div>
-                <p style="vertical-align: middle;">{{post.user.username}}</p>
-              </div>
-            </div>
-          </div>
-        </td>
-      </ng-container>
-
-
-    <ng-container matColumnDef="topics">
-      <th mat-header-cell *matHeaderCellDef class="header-row forum-topics-col-topics" style="text-align: left;"> Topics </th>
-      <td mat-cell *ngIf="categoryId" class="topic" style="text-align: left;"> <a href="#"><p style="color: #58595b;"> {{post.subject}} </p></a> </td>
-    </ng-container>
-
-    <ng-container matColumnDef="comments">
-      <th mat-header-cell *matHeaderCellDef class="header-row forum-topics-col-comments"> Comments </th>
-      <td mat-cell *ngIf="categoryId" class="forum-topics-col-views comment"> <dl class="pairs" style="color: #9e9fa2;"><dt class="dt-icon"><mat-icon class="material-icons">forum</mat-icon></dt><dd>{{post.viewCount}}</dd> </dl></td>
-    </ng-container>
-
-    <ng-container matColumnDef="views">
-      <th mat-header-cell *matHeaderCellDef class="header-row forum-topics-col-views"> Views </th>
-      <td mat-cell *ngIf="categoryId" class="forum-topics-col-views view"> <dl class="pairs" style="color: #9e9fa2;"><dt class="dt-icon"><mat-icon class="material-icons">visibility_outline</mat-icon></dt><dd>5</dd> </dl></td>
-    </ng-container>
-
-    <ng-container matColumnDef="last post">
-      <th mat-header-cell *matHeaderCellDef class="header-row forum-topics-col-lastpost"> Last Post </th>
-      <td mat-cell *ngIf="categoryId" class="forum-topics-col-lastpost last-post"> <p style="color: #9e9fa2;">Last Post by: {{post.user.username}}<br> <span>{{post.createdAt | date : "short"}}</span> </p> </td>
-    </ng-container>
-
-	</table>
-
-</div> -->
+<div *ngIf="loggedInUser" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+  <ckeditor [editor]="Editor" data="<p>Hello, world!</p>"></ckeditor>
+</div>
 
 
 <div class="breadcrumb-outer-bottom">
@@ -258,55 +180,5 @@
   </div>
 </div>
 
-
-<!-- <div class="mat-elevation-z1">
-  <table mat-table [dataSource]="dataSource" matSort>
-
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Action</th>
-      <td mat-cell *matCellDef="let element" class="left-text">
-          <button mat-stroked-button color="primary" (click)="openRecord(element.id, element.username)">View</button>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="avatar">
-      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Avatar </th>
-      <td mat-cell *matCellDef="let element" class="left-text">
-        <img src={{element.avatar}}  width="50" height="auto"  />
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="username">
-      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Username </th>
-      <td mat-cell *matCellDef="let element" class="left-text"> {{element.username}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Email </th>
-      <td mat-cell *matCellDef="let element" class="left-text"> {{element.email | number:'2.1-2'}} </td>
-    </ng-container>
-
-
-    <ng-container matColumnDef="date_of_birth">
-      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Date of Birth </th>
-      <td mat-cell *matCellDef="let element" class="left-text">{{element.date_of_birth | date: 'EEEE MMM dd, yyy'}}  </td>
-    </ng-container>
-
-    <ng-container matColumnDef="latidtude">
-      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Latitude </th>
-      <td mat-cell *matCellDef="let element" class="left-text"> {{element.address.coordinates.lat | number:'2.1-2'}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="longitude">
-      <th mat-header-cell *matHeaderCellDef  mat-sort-header>Longitude </th>
-      <td mat-cell *matCellDef="let element" class="left-text"> {{element.address.coordinates.lng | number:'2.1-2'}} </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-  <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
-</div> -->
 
 

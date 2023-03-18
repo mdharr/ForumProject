@@ -14,6 +14,7 @@ import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-posts',
@@ -22,6 +23,8 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class PostsComponent implements OnInit {
   title = 'ngLoreHunter';
+
+  public Editor = ClassicEditor;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;

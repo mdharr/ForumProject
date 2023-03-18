@@ -23,7 +23,6 @@ import { DatePipe } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +49,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MatProgressBarModule,
     MatSortModule,
     CKEditorModule
+
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
