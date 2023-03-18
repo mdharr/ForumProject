@@ -138,6 +138,10 @@ export class CommentsComponent implements OnInit {
     this.dataSource.loadComments(this.categoryId, this.postId, { active: 'id', direction: 'asc' });
   }
 
+  loggedIn(): boolean {
+    return this.authService.checkLogin();
+  }
+
   reload() {
     this.postService.postsByCategory(this.categoryId).subscribe({
       next: (posts) => {

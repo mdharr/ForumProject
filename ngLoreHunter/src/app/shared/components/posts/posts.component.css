@@ -316,4 +316,78 @@ mat-paginator {
   border-radius:5px;
 }
 
+.comment-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.comment-block-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;;
+  align-items: center;
+  width: 90%;
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+#userThumbnail {
+  width: 96px;
+  height: 96px;
+  border: 1px solid white;
+  margin-right: 15px;
+}
+
+#username {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+.user-block-outer {
+  width: 15%;
+  height: 200px;
+}
+
+.user-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.user-block-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.user-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-alias {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:host ::ng-deep .ck.ck-editor__editable {
+	min-height: 20vh;
+  min-width: 800px;
+}
+
+.editor-outer {
+  width: 85%;
+}
+
+.editor-inner {
+  width: 100%;
+}
+
 

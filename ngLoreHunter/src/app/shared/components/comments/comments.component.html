@@ -156,8 +156,26 @@ matSortDisableClear
 
 </div>
 
-<div *ngIf="loggedInUser" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-  <ckeditor [editor]="Editor" data="<p>Hello, world!</p>"></ckeditor>
+<div *ngIf="loggedInUser" class="comment-block">
+  <div class="comment-block-inner">
+    <div class="user-block-outer">
+      <div class="user-block">
+        <div class="user-block-inner">
+          <div class="user-avatar">
+            <a style="cursor: pointer;"><img id="userThumbnail" src="{{ loggedInUser.imageUrl }}" alt="" *ngIf="loggedIn()"/></a>
+          </div>
+          <div class="user-alias">
+            <a *ngIf="loggedIn()">{{ loggedInUser.username }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="editor-outer">
+      <div class="editor-inner">
+        <ckeditor [editor]="Editor" data="<p>Hello, world!</p>"></ckeditor>
+      </div>
+    </div>
+  </div>
 </div>
 
 

@@ -136,6 +136,10 @@ export class PostsComponent implements OnInit {
 
   // }
 
+  loggedIn(): boolean {
+    return this.authService.checkLogin();
+  }
+
   reload() {
     this.postService.postsByCategory(this.categoryId).subscribe({
       next: (posts) => {
