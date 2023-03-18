@@ -149,6 +149,7 @@ table {
 	border-collapse: collapse;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  cursor: pointer;
 }
 
 th {
