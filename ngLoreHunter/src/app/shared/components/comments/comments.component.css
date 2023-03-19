@@ -395,6 +395,10 @@ mat-paginator {
   background-color: #3f51b5;
 }
 
+.login-prompt {
+  font-weight: bolder;
+}
+
 /* blockquote {
   margin: 0.5em 0 !important;
   background: #f9fafa !important;

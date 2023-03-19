@@ -161,7 +161,7 @@
 
 </div>
 
-<div *ngIf="loggedInUser" class="post-block">
+<div *ngIf="loggedIn()" class="post-block">
   <div class="post-block-inner">
     <div class="user-block-outer">
       <div class="user-block">
@@ -181,6 +181,9 @@
       </div>
     </div>
   </div>
+</div>
+<div *ngIf="!loggedIn()" style="display: flex; justify-content: center;">
+  <p class="login-prompt">Log in to post!</p>
 </div>
 
 

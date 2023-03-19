@@ -390,3 +390,7 @@ mat-paginator {
   width: 100%;
 }
 
+.login-prompt {
+  font-weight: bolder;
+}
+
