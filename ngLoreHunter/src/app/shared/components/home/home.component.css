@@ -160,6 +160,16 @@ p {
 
 .meta-details {
   display: flex;
+  margin:0;
+  float:right;
+}
+.meta-details > p {
+  display: flex;
+  margin:0;
+}
+
+#description-text {
+  margin: 0 0 1px !important;
 }
 
 .more-container {
