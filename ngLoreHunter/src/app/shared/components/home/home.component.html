@@ -26,7 +26,7 @@
                       <a  *ngIf="i === 0" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><h3 class="subject">{{ category.name }}</h3></a>
                     </div>
                     <div class="description" *ngFor="let category of categories; let i = index">
-                      <p id="description-text" *ngIf="i === 0">{{ category.description }}</p>
+                      <p class="description-text" *ngIf="i === 0">{{ category.description }}</p>
                     </div>
                     <div class="meta-details" *ngFor="let category of categories; let i = index">
                         <p *ngIf="i === 0">{{category.createdAt | date:'short'}}</p>
@@ -68,7 +68,7 @@
                       <a *ngIf="i === 1" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><h3 class="subject">{{ category.name }}</h3></a>
                     </div>
                     <div class="description" *ngFor="let category of categories; let i = index">
-                      <p *ngIf="i === 1">{{ category.description }}</p>
+                      <p class="description-text" *ngIf="i === 1">{{ category.description }}</p>
                     </div>
                     <div class="meta-details" *ngFor="let category of categories; let i = index">
                       <p *ngIf="i === 1">{{category.createdAt | date:'short'}}</p>
@@ -111,7 +111,7 @@
                       <a *ngIf="i === 2" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><h3 class="subject">{{ category.name }}</h3></a>
                     </div>
                     <div class="description" *ngFor="let category of categories; let i = index">
-                      <p *ngIf="i === 2">{{ category.description }}</p>
+                      <p class="description-text" *ngIf="i === 2">{{ category.description }}</p>
                     </div>
                     <div class="meta-details" *ngFor="let category of categories; let i = index">
                       <p *ngIf="i === 2">{{category.createdAt | date:'short'}}</p>
@@ -154,7 +154,7 @@
                         <a *ngIf="i === 3" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><h3 class="subject">{{ category.name }}</h3></a>
                       </div>
                       <div class="description" *ngFor="let category of categories; let i = index">
-                        <p *ngIf="i === 3">{{ category.description }}</p>
+                        <p class="description-text" *ngIf="i === 3">{{ category.description }}</p>
                       </div>
                       <div class="meta-details" *ngFor="let category of categories; let i = index">
                         <p *ngIf="i === 3">{{category.createdAt | date:'short'}}</p>
@@ -212,11 +212,11 @@
                     <a *ngIf="i === 4" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><h3 class="subject">{{ category.name }}</h3></a>
                   </div>
                   <div class="description" *ngFor="let category of categories; let i = index">
-                    <p *ngIf="i === 4">{{ category.description }}</p>
+                    <p class="description-text" *ngIf="i === 4">{{ category.description }}</p>
                   </div>
-                  <div class="meta-details">
-
-                  </div>
+                  <div class="meta-details" *ngFor="let category of categories; let i = index">
+                    <p *ngIf="i === 4">{{category.createdAt | date:'short'}}</p>
+                </div>
                 </div>
 
               </div>
@@ -255,11 +255,11 @@
                     <a *ngIf="i === 5" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><h3 class="subject">{{ category.name }}</h3></a>
                   </div>
                   <div class="description" *ngFor="let category of categories; let i = index">
-                    <p *ngIf="i === 5">{{ category.description }}</p>
+                    <p class="description-text" *ngIf="i === 5">{{ category.description }}</p>
                   </div>
-                  <div class="meta-details">
-
-                  </div>
+                  <div class="meta-details" *ngFor="let category of categories; let i = index">
+                    <p *ngIf="i === 5">{{category.createdAt | date:'short'}}</p>
+                </div>
                 </div>
 
               </div>
