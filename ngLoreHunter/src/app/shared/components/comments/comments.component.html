@@ -172,8 +172,9 @@ matSortDisableClear
     </div>
     <div class="editor-outer">
       <div class="editor-inner">
-        <ckeditor [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.'}"></ckeditor>
+        <ckeditor [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.'}" [formControl]="content" required></ckeditor>
       </div>
+      <button mat-stroked-button>Submit</button>
     </div>
   </div>
 </div>
