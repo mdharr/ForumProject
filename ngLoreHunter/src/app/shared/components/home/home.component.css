@@ -161,7 +161,7 @@ p {
 .meta-details {
   display: flex;
   margin:0;
-  float:right;
+
 }
 .meta-details > p {
   display: flex;

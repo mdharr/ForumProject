@@ -70,9 +70,9 @@
                     <div class="description" *ngFor="let category of categories; let i = index">
                       <p *ngIf="i === 1">{{ category.description }}</p>
                     </div>
-                    <div class="meta-details">
-
-                    </div>
+                    <div class="meta-details" *ngFor="let category of categories; let i = index">
+                      <p *ngIf="i === 1">{{category.createdAt | date:'short'}}</p>
+                  </div>
                   </div>
 
                 </div>
@@ -113,9 +113,9 @@
                     <div class="description" *ngFor="let category of categories; let i = index">
                       <p *ngIf="i === 2">{{ category.description }}</p>
                     </div>
-                    <div class="meta-details">
-
-                    </div>
+                    <div class="meta-details" *ngFor="let category of categories; let i = index">
+                      <p *ngIf="i === 2">{{category.createdAt | date:'short'}}</p>
+                  </div>
                   </div>
 
                 </div>
@@ -156,9 +156,9 @@
                       <div class="description" *ngFor="let category of categories; let i = index">
                         <p *ngIf="i === 3">{{ category.description }}</p>
                       </div>
-                      <div class="meta-details">
-
-                      </div>
+                      <div class="meta-details" *ngFor="let category of categories; let i = index">
+                        <p *ngIf="i === 3">{{category.createdAt | date:'short'}}</p>
+                    </div>
                     </div>
 
                   </div>
