@@ -31,13 +31,13 @@ export class CommentService {
     return options;
   }
 
-  createComment(comment: Comment): Observable<Comment> {
+  createComment(comment: Comment, categoryId: number, postId: number): Observable<Comment> {
     const httpOptions = {
       headers: {
         'Content-Type': 'application/json',
       },
     };
-    return this.http.post<Comment>(this.url + '/posts/' + comment.post.id + '/comments', comment, this.getHttpOptions()).pipe(
+    return this.http.post<Comment>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/comments', comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

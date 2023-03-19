@@ -44,7 +44,7 @@ export class CommentsComponent implements OnInit {
   categories: Category[] = [];
   post: null | Post = null;
   users: User[] = [];
-  selected: null | Post = null;
+  selected: Post = new Post();
   categoryId: number = 0;
   postId: number = 0;
   value: any;
@@ -54,6 +54,7 @@ export class CommentsComponent implements OnInit {
   postsByCategory: Post[] = [];
 
   comments: Comment[] = [];
+  comment: Comment = new Comment();
   newComment: Comment = new Comment();
   loggedInUser: User = new User();
 
@@ -176,20 +177,20 @@ export class CommentsComponent implements OnInit {
   }
 
   createComment(comment: Comment, selected: Post) {
-    let id = this.selected?.id;
+    let id = this.selected.id;
     if (id) {
       comment.post.id = id;
     }
     console.log(comment);
-    this.commentService.createComment(comment).subscribe({
+    this.commentService.createComment(comment, this.categoryId, this.postId).subscribe({
       next: (data) => {
         this.newComment.post.id = selected.id;
         this.newComment.user.id = this.loggedInUser.id;
         this.newComment = new Comment();
-        this.displayPost(selected);
+        // this.displayPost(selected);
       },
       error: (nojoy) => {
-        console.error('PostComponent.createComment: Error creating comment.');
+        console.error('CommentComponent.createComment: Error creating comment.');
         console.error(nojoy);
       },
     });
@@ -201,7 +202,7 @@ export class CommentsComponent implements OnInit {
 
   }
 
-  displayPost(post: Post | null) {
+  displayPost(post: Post) {
     this.selected = post;
     if (this.selected) {
       console.log('user name');
@@ -230,6 +231,8 @@ export class CommentsComponent implements OnInit {
       this.content.markAllAsTouched();
       console.log('Submit button clicked');
       return
+    } else {
+      this.createComment(this.newComment, this.selected);
     }
   }
 

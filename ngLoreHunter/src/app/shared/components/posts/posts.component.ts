@@ -44,9 +44,10 @@ export class PostsComponent implements OnInit {
 
   paramsSub: Subscription | undefined;
 
+  post: Post = new Post();
   posts: Post[] = [];
   categories: Category[] = [];
-  post: null | Post = null;
+  // post: null | Post = null;
   users: User[] = [];
   selected: null | Post = null;
   categoryId: number = 0;
@@ -58,6 +59,7 @@ export class PostsComponent implements OnInit {
   postsByCategory: Post[] = [];
 
   comments: Comment[] = [];
+  comment: Comment = new Comment();
   newComment: Comment = new Comment();
   loggedInUser: User = new User();
 

@@ -162,21 +162,21 @@ matSortDisableClear
       <div class="user-block">
         <div class="user-block-inner">
           <div class="user-avatar">
-            <a style="cursor: pointer;"><img id="userThumbnail" src="{{ loggedInUser.imageUrl }}" alt="" *ngIf="loggedIn()"/></a>
+            <a style="cursor: pointer; padding-left: 10px;"><img id="userThumbnail" src="{{ loggedInUser.imageUrl }}" alt="" *ngIf="loggedIn()"/></a>
           </div>
           <div class="user-alias">
-            <a *ngIf="loggedIn()">{{ loggedInUser.username }}</a>
+            <a style="font-size: 18px;" *ngIf="loggedIn()">{{ loggedInUser.username }}</a>
           </div>
         </div>
       </div>
     </div>
     <div class="editor-outer" style="padding: 10px;">
       <div class="editor-inner" style="padding: 10px;">
-          <ckeditor [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.'}" [formControl]="content" required></ckeditor>
+          <ckeditor name="newComment.content" [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.'}" [formControl]="content" [(ngModel)]="newComment.content" required></ckeditor>
           <mat-error *ngIf="content.invalid && checkCkEditor">{{getErrorMessageContent()}}</mat-error>
       </div>
       <div class="submitButtonContainer" style="float: right; padding-right: 10px;">
-        <button class="submitBtn" mat-stroked-button (click)="submitButtonClicked()">Submit</button>
+        <button class="submitBtn" mat-stroked-button (click)="submitButtonClicked();">Submit</button>
       </div>
     </div>
   </div>
