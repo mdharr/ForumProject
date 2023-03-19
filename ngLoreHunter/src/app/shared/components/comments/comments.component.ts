@@ -187,6 +187,8 @@ export class CommentsComponent implements OnInit {
         this.newComment.post.id = selected.id;
         this.newComment.user.id = this.loggedInUser.id;
         this.newComment = new Comment();
+        // location.reload();
+        this.dataSource.loadComments(this.categoryId, this.postId, { active: 'id', direction: 'asc' });
         // this.displayPost(selected);
       },
       error: (nojoy) => {
