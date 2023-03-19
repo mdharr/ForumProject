@@ -316,7 +316,7 @@ mat-paginator {
   border-radius:5px;
 }
 
-.comment-block {
+.post-block {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -324,7 +324,7 @@ mat-paginator {
   width: 100%;
 }
 
-.comment-block-inner {
+.post-block-inner {
   display: flex;
   flex-direction: row;
   justify-content: space-between;;
