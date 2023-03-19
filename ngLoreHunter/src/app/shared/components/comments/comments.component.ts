@@ -16,6 +16,7 @@ import { User } from 'src/app/models/user';
 import { PostDataSource } from 'src/app/services/post.dataSource';
 import { CommentDataSource } from 'src/app/services/comment.dataSource';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-comments',
@@ -36,12 +37,6 @@ export class CommentsComponent implements OnInit {
   displayedColumns: string[] = ['user', 'content'];
 
   dataSource = new CommentDataSource(this.commentService);
-
-  // mat table properties start
-
-  // mat table properties start
-
-  // mat table end
 
   paramsSub: Subscription | undefined;
 
@@ -67,6 +62,8 @@ export class CommentsComponent implements OnInit {
   addPostMod: Post | null = null;
 
   selectedSearch: string = 'all';
+
+  content = new FormControl('', [Validators.required]);
 
   constructor(
     private postService: PostService,
@@ -217,6 +214,13 @@ export class CommentsComponent implements OnInit {
 
   sortComments(sort: Sort): void {
     this.dataSource.loadComments(this.categoryId, this.postId, sort);
+  }
+
+  getErrorMessageContent() {
+    if(this.content.hasError('required')) {
+      return 'Must enter valid content to submit';
+    }
+    return
   }
 
 }
