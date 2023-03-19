@@ -384,10 +384,16 @@ mat-paginator {
 
 .editor-outer {
   width: 85%;
+  border-left: 1px solid #3f51b5;
 }
 
 .editor-inner {
   width: 100%;
+}
+
+.submitBtn:hover {
+  color: #ffffff;
+  background-color: #3f51b5;
 }
 
 .login-prompt {

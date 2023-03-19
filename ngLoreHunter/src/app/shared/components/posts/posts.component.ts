@@ -15,6 +15,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-posts',
@@ -68,6 +69,10 @@ export class PostsComponent implements OnInit {
   addPostMod: Post | null = null;
 
   selectedSearch: string = 'all';
+
+  subject = new FormControl('', [Validators.required]);
+  content = new FormControl('', [Validators.required]);
+  checkCkEditor: boolean = false;
 
   constructor(
     private postService: PostService,
@@ -195,10 +200,11 @@ export class PostsComponent implements OnInit {
   addPost(post: Post) {
     console.log(post);
 
-    this.postService.createPost(post).subscribe({
+    this.postService.createPost(this.categoryId, post).subscribe({
       next: (data) => {
         this.postCreated = true;
         this.post = data;
+        this.dataSource.loadPosts(this.categoryId, this.sort);
       },
       error: (nojoy) => {
         console.error(
@@ -236,5 +242,29 @@ export class PostsComponent implements OnInit {
 
   sortPosts(sort: Sort): void {
     this.dataSource.loadPosts(this.categoryId, sort);
+  }
+
+  getErrorMessageSubject() {
+    if(this.subject.hasError('required')) {
+      return 'Must enter valid subject to submit';
+    }
+    return this.subject.hasError('subject') ? 'Not valid subject' : '';
+  }
+  getErrorMessageContent() {
+    if(this.content.hasError('required')) {
+      return 'Must enter valid content to submit';
+    }
+    return this.content.hasError('content') ? 'Not valid content' : '';
+  }
+
+  submitButtonClicked() {
+    if (!this.content.valid) {
+      this.checkCkEditor = true;
+      this.content.markAllAsTouched();
+      console.log('Submit button clicked');
+      return
+    } else {
+      this.addPost(this.newPost);
+    }
   }
 }
