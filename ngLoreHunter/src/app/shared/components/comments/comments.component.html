@@ -170,11 +170,14 @@ matSortDisableClear
         </div>
       </div>
     </div>
-    <div class="editor-outer">
-      <div class="editor-inner">
-        <ckeditor [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.'}" [formControl]="content" required></ckeditor>
+    <div class="editor-outer" style="padding: 10px;">
+      <div class="editor-inner" style="padding: 10px;">
+          <ckeditor [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.'}" [formControl]="content" required></ckeditor>
+          <mat-error *ngIf="content.invalid && checkCkEditor">{{getErrorMessageContent()}}</mat-error>
       </div>
-      <button mat-stroked-button>Submit</button>
+      <div class="submitButtonContainer" style="float: right; padding-right: 10px;">
+        <button mat-stroked-button (click)="submitButtonClicked()">Submit</button>
+      </div>
     </div>
   </div>
 </div>

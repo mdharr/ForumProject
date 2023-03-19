@@ -64,6 +64,7 @@ export class CommentsComponent implements OnInit {
   selectedSearch: string = 'all';
 
   content = new FormControl('', [Validators.required]);
+  checkCkEditor: boolean = false;
 
   constructor(
     private postService: PostService,
@@ -220,7 +221,16 @@ export class CommentsComponent implements OnInit {
     if(this.content.hasError('required')) {
       return 'Must enter valid content to submit';
     }
-    return
+    return this.content.hasError('content') ? 'Not valid content' : '';
+  }
+
+  submitButtonClicked() {
+    if (!this.content.valid) {
+      this.checkCkEditor = true;
+      this.content.markAllAsTouched();
+      console.log('Submit button clicked');
+      return
+    }
   }
 
 }

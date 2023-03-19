@@ -22,6 +22,7 @@ import { SharedModule } from './shared/shared.module';
 import { DatePipe } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MatTableModule,
     MatProgressBarModule,
     MatSortModule,
-    CKEditorModule
+    CKEditorModule,
+    MatFormFieldModule
 
   ],
   providers: [DatePipe],

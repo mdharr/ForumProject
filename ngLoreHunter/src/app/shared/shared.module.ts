@@ -32,6 +32,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { CommentService } from '../services/comment.service';
 import { CommentDataSource } from '../services/comment.dataSource';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -67,7 +68,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    CKEditorModule
+    CKEditorModule,
+    MatFormFieldModule
   ],
   exports: [
     HomeComponent,
