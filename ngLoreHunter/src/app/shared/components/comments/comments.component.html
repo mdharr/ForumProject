@@ -162,7 +162,7 @@ matSortDisableClear
   </div>
 </div> -->
 
-<div *ngIf="loggedInUser" class="comment-block">
+<div *ngIf="loggedIn()" class="comment-block">
   <div class="comment-block-inner">
     <div class="user-block-outer">
       <div class="user-block">
@@ -186,6 +186,9 @@ matSortDisableClear
       </div>
     </div>
   </div>
+</div>
+<div *ngIf="!loggedIn()" style="display: flex; justify-content: center;">
+  <p>Log in to comment!</p>
 </div>
 
 
