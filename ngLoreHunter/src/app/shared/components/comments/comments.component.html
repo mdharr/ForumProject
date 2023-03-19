@@ -156,6 +156,12 @@ matSortDisableClear
 
 </div>
 
+<!-- <div *ngFor="let post of posts">
+  <div *ngFor="let comment of post.comments">
+    <p [innerHtml]="comment.content">{{comment.content}}</p>
+  </div>
+</div> -->
+
 <div *ngIf="loggedInUser" class="comment-block">
   <div class="comment-block-inner">
     <div class="user-block-outer">
