@@ -13,6 +13,7 @@ export class User {
   firstName: string;
   lastName: string;
   email: string;
+  state: string;
   createdAt: string;
   imageUrl: string;
   lastActivity: string;
@@ -34,6 +35,7 @@ export class User {
     firstName: string = '',
     lastName: string = '',
     email: string = '',
+    state: string = '',
     createdAt: string = '',
     imageUrl: string = '',
     lastActivity: string = '',
@@ -53,6 +55,7 @@ export class User {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
+    this.state = state;
     this.createdAt = createdAt;
     this.imageUrl = imageUrl;
     this.lastActivity = lastActivity;
