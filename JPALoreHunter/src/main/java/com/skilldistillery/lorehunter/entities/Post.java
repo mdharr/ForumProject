@@ -54,6 +54,7 @@ public class Post {
 	@OneToMany(mappedBy = "post")
 	private List<Comment> comments;
 	
+	@Column(name = "view_count")
 	private int viewCount;
 	
 	private Boolean enabled;

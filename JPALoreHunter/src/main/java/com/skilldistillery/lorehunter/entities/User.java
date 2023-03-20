@@ -38,6 +38,8 @@ public class User {
 	
 	private String email;
 	
+	private String state;
+	
 	@CreationTimestamp
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
@@ -76,7 +78,7 @@ public class User {
 	}
 
 	public User(int id, String username, String password, Boolean enabled, String role, String firstName,
-			String lastName, String email, LocalDateTime createdAt, String imageUrl, LocalDateTime lastActivity,
+			String lastName, String email, String state, LocalDateTime createdAt, String imageUrl, LocalDateTime lastActivity,
 			String status, Integer commentCount, String bannerMessage, List<Category> categories, List<Post> posts,
 			List<Comment> comments, Integer postCount) {
 		super();
@@ -88,6 +90,7 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.state = state;
 		this.createdAt = createdAt;
 		this.imageUrl = imageUrl;
 		this.lastActivity = lastActivity;
@@ -162,6 +165,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getState() {
+		return state;
+	}
+	
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -265,9 +276,10 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
 				+ ", role=" + role + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", createdAt=" + createdAt + ", imageUrl=" + imageUrl + ", lastActivity=" + lastActivity + ", status="
-				+ status + ", commentCount=" + commentCount + ", bannerMessage=" + bannerMessage + ", categories="
-				+ categories + ", posts=" + posts + ", comments=" + comments + ", postCount=" + postCount + "]";
+				+ ", state=" + state + ", createdAt=" + createdAt + ", imageUrl=" + imageUrl + ", lastActivity="
+				+ lastActivity + ", status=" + status + ", commentCount=" + commentCount + ", bannerMessage="
+				+ bannerMessage + ", categories=" + categories + ", posts=" + posts + ", comments=" + comments
+				+ ", postCount=" + postCount + "]";
 	}
 	
 	

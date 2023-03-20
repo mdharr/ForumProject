@@ -55,7 +55,7 @@ class PostTest {
 	@Test
 	void test_Post_User_one_to_one_mapping() {
 		assertNotNull(post);
-		assertEquals("admin", post.getUser().getUsername());
+		assertEquals("Wesker", post.getUser().getUsername());
 	}
 	
 	@Test

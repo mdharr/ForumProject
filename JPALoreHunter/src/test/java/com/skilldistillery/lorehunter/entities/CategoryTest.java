@@ -57,7 +57,7 @@ class CategoryTest {
 	@Test
 	void test_Category_User_one_to_one_mapping() {
 		assertNotNull(category);
-		assertEquals("admin", category.getUser().getUsername());
+		assertEquals("Wesker", category.getUser().getUsername());
 	}
 	
 	@Test

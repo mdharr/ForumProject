@@ -61,7 +61,7 @@ class CommentTest {
 	@Test
 	void test_Comment_User_one_to_one_mapping() {
 		assertNotNull(comment);
-		assertEquals("admin", comment.getUser().getUsername());
+		assertEquals("Wesker", comment.getUser().getUsername());
 	}
 
 }

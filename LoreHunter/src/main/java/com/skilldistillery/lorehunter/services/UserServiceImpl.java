@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
 		userUpdate.setImageUrl(user.getImageUrl());
 		userUpdate.setStatus(user.getStatus());
 		userUpdate.setBannerMessage(user.getBannerMessage());
+		userUpdate.setState(user.getState());
 		return userRepo.save(userUpdate);
 	}
 
@@ -63,6 +64,7 @@ public class UserServiceImpl implements UserService {
 		userUpdate.setEmail(user.getEmail());
 		userUpdate.setImageUrl(user.getImageUrl());
 		userUpdate.setBannerMessage(user.getBannerMessage());
+		userUpdate.setState(user.getState());
 		return userRepo.save(userUpdate);
 	}
 

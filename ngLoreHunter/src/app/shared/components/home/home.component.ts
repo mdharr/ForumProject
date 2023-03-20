@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category';
 import { AuthService } from 'src/app/services/auth.service';
 import { HomeService } from 'src/app/services/home.service';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -61,6 +62,15 @@ export class HomeComponent implements OnInit {
       this.isRotated2 = true;
     }
 
+  }
+
+  hasNetwork(online: boolean) {
+    console.log(online);
+  }
+
+  @HostListener('window:online', ['$event'])
+    onLine(e:any){
+    // do something
   }
 
 }
