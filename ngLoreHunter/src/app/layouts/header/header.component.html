@@ -5,7 +5,7 @@
      <button mat-button [routerLink]="['/home']">
        <span class="logo">Lore Hunters</span>
      </button>
-     <button mat-button [matMenuTriggerFor]="afterMenu">Quick Jump</button>
+     <button mat-button [matMenuTriggerFor]="afterMenu" id="quick-jump-btn"><span>Quick Jump</span><mat-icon>arrow_drop_down</mat-icon></button>
      <mat-menu #afterMenu="matMenu" xPosition="after">
       <div *ngFor="let category of categories; let i = index">
         <button *ngIf="i === 0" mat-menu-item [routerLink]="['/categories', category.id, 'posts']">{{category.name}}</button>
