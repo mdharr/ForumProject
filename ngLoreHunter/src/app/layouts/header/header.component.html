@@ -7,8 +7,13 @@
      </button>
      <button mat-button [matMenuTriggerFor]="afterMenu">Quick Jump</button>
      <mat-menu #afterMenu="matMenu" xPosition="after">
-      <div *ngFor="let category of categories">
-        <button mat-menu-item>{{category.name}}</button>
+      <div *ngFor="let category of categories; let i = index">
+        <button *ngIf="i === 0" mat-menu-item [routerLink]="['/categories', category.id, 'posts']">{{category.name}}</button>
+        <button *ngIf="i === 1" mat-menu-item [routerLink]="['/categories', category.id, 'posts']">{{category.name}}</button>
+        <button *ngIf="i === 2" mat-menu-item [routerLink]="['/categories', category.id, 'posts']">{{category.name}}</button>
+        <button *ngIf="i === 3" mat-menu-item [routerLink]="['/categories', category.id, 'posts']">{{category.name}}</button>
+        <button *ngIf="i === 4" mat-menu-item>{{category.name}}</button>
+        <button *ngIf="i === 5" mat-menu-item>{{category.name}}</button>
       </div>
       </mat-menu>
      <span class="example-spacer"></span>
