@@ -13,6 +13,10 @@ export class LoginComponent {
   //added parentheses after new User
   loginUser: User = new User();
 
+  public onlineUserCount: number = 0;
+
+  public loggedInUserCount: number = 0;
+
   constructor(
               private authService: AuthService,
               private router: Router,
@@ -26,13 +30,14 @@ export class LoginComponent {
         console.log('Login success');
         console.log(loggedInUser);
         this.modalService.dismissAll();
+        this.authService.checkLogin();
         this.router.navigateByUrl('home');
       },
       error: (fail) => {
         console.error('Login failed');
         console.error(fail);
       }
-    })
+    });
   }
 
 }

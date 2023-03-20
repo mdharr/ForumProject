@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AppComponent implements OnInit {
   title = 'ngLoreHunter';
 
-  constructor(private _snackBar: MatSnackBar) {}
+  constructor(
+    private _snackBar: MatSnackBar,
+    private authService: AuthService
+    ) {}
 
   ngOnInit() {
-    // if(!navigator.onLine) {
-    //   alert('please check your internet connection');
-    // }
+
     addEventListener('offline', (e) => {
       this._snackBar.open('Please check your internet connection','Dismiss', {
         duration: 5000
@@ -26,5 +28,17 @@ export class AppComponent implements OnInit {
         duration: 2000
       });
     });
+  }
+
+  loggedIn(): boolean {
+    return this.authService.checkLogin();
+  }
+
+  checkOnlineUserCount() {
+
+  }
+
+  checkLoggedInUserCount() {
+
   }
 }

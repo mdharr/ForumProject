@@ -50,18 +50,7 @@ export class HeaderComponent implements OnInit {
         console.log(error);
       },
     });
-  //   this.display = false;
-  //   this.projectService.indexAll().subscribe({
-  //     next: (projects) => {
-  //       this.projects = projects;
-  //       this.display = true;},
-  //   error: (error) => {
-  //     console.log(error);
-  //     console.log("Error loading all projects")
-  //   }
-  //   })
-  // this.checkUserAvailability();
-  // this.getCompletedProjects();
+
   }
 
   clickMenu() {
