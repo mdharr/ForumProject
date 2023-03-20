@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category';
 import { AuthService } from 'src/app/services/auth.service';
 import { HomeService } from 'src/app/services/home.service';
+import { PostService } from 'src/app/services/post.service';
 import { HostListener } from '@angular/core';
+import { PostDataSource } from './../../../services/post.dataSource';
+import { Post } from 'src/app/models/post';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +14,22 @@ import { HostListener } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   categories: Category[] = [];
+  categoryId: number = 0;
+  posts: Post[] = [];
+  data: any;
+  sort: any;
+  latest: Post = new Post();
 
   isRotated1: boolean = false;
   isRotated2: boolean = false;
 
-  constructor(private auth: AuthService, private homeServ: HomeService) {}
+  dataSource = new PostDataSource(this.postService);
+
+  constructor(
+              private auth: AuthService,
+              private homeServ: HomeService,
+              private postService: PostService,
+              ) {}
 
   ngOnInit() {
     this.reload();
@@ -71,6 +85,12 @@ export class HomeComponent implements OnInit {
   @HostListener('window:online', ['$event'])
     onLine(e:any){
     // do something
+  }
+
+  getLatestPost(categoryId: number) {
+    this.data = this.dataSource.loadLatestPost(categoryId);
+    this.posts = this.data;
+    this.latest = this.posts.sort((a, b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0];
   }
 
 }

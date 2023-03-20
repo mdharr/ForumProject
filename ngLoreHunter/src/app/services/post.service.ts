@@ -121,4 +121,9 @@ export class PostService {
 
   }
 
+  getPosts(categoryId: number): Observable<Post[]>{
+    return this.http.get<Post[]>(this.url + '/categories/' + categoryId + '/posts');
+
+  }
+
 }

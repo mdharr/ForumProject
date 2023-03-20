@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent {
   constructor(
               private authService: AuthService,
               private router: Router,
-              private modalService: NgbModal
+              private modalService: NgbModal,
+              private userService: UserService
               ) {}
 
   login(loginUser: User) {
@@ -31,13 +33,16 @@ export class LoginComponent {
         console.log(loggedInUser);
         this.modalService.dismissAll();
         this.authService.checkLogin();
-        this.router.navigateByUrl('home');
+        location.reload();
+        // this.router.navigateByUrl('home');
       },
       error: (fail) => {
         console.error('Login failed');
         console.error(fail);
       }
     });
+
+    // this.userService
   }
 
 }

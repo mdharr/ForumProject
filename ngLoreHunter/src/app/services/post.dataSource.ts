@@ -12,6 +12,7 @@ import { PostService } from "./post.service";
 export class PostDataSource extends DataSource<Post> {
   posts$ = new BehaviorSubject<Post[]>([]);
   isLoading$ = new BehaviorSubject<boolean>(false);
+  latest$ = new BehaviorSubject<Post[]>([]);
   sort: any;
 
   constructor(private postService: PostService) {
@@ -35,6 +36,16 @@ export class PostDataSource extends DataSource<Post> {
       this.posts$.next(posts);
       this.isLoading$.next(false);
     });
+  }
+
+  loadLatestPost(categoryId: number): void {
+    this.isLoading$.next(true);
+    console.log(categoryId);
+    this.postService.getPosts(categoryId).subscribe((posts) => {
+      this.latest$.next(posts);
+      this.isLoading$.next(false);
+    });
+
   }
 
 }
