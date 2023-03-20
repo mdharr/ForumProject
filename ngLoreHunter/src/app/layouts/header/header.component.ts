@@ -6,7 +6,9 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
-import { MatMenuModule } from '@angular/material/menu';
+import { CategoryService } from 'src/app/services/category.service';
+import { HomeService } from 'src/app/services/home.service';
+import { Category } from 'src/app/models/category';
 
 
 @Component({
@@ -19,10 +21,14 @@ export class HeaderComponent implements OnInit {
 
   loggedInUser: User = new User();
 
+  categories: Category[] = [];
+
   displayProgressBar: boolean = false;
 
   constructor(private sideNavService: SideNavService,
     private userService: UserService,
+    private categoryService: CategoryService,
+    private homeService: HomeService,
     private authService: AuthService,
     private modalService: NgbModal,
     private route: ActivatedRoute,
@@ -52,6 +58,20 @@ export class HeaderComponent implements OnInit {
       },
     });
 
+    this.reload();
+
+  }
+
+  reload(): void {
+    this.homeService.index().subscribe({
+      next: (categories) => {
+        this.categories = categories;
+      },
+      error:(fail) => {
+        console.error('Error getting categories:');
+        console.error(fail);
+      }
+    });
   }
 
   clickMenu() {

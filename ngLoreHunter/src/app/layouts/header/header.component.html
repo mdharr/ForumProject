@@ -5,10 +5,11 @@
      <button mat-button [routerLink]="['/home']">
        <span class="logo">Lore Hunters</span>
      </button>
-     <button mat-button [matMenuTriggerFor]="afterMenu">After</button>
+     <button mat-button [matMenuTriggerFor]="afterMenu">Quick Jump</button>
      <mat-menu #afterMenu="matMenu" xPosition="after">
-       <button mat-menu-item>Item 1</button>
-       <button mat-menu-item>Item 2</button>
+      <div *ngFor="let category of categories">
+        <button mat-menu-item>{{category.name}}</button>
+      </div>
       </mat-menu>
      <span class="example-spacer"></span>
      <button mat-button *ngIf="!loggedIn()" (click)="open(loginmodal)">
