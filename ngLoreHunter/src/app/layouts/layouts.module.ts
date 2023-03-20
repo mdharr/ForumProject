@@ -18,6 +18,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SharedModule } from '../shared/shared.module';
     RouterModule,
     MatExpansionModule,
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatMenuModule
   ],
   exports: [
     HeaderComponent,
