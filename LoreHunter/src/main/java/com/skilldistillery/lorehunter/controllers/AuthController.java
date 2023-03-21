@@ -40,6 +40,7 @@ public class AuthController {
 	     res.setHeader("WWW-Authenticate", "Basic");
 	     return null;
 	  }
+	  // update most recent login time
 	  User loggedInUser = authService.getUserByUsername(principal.getName());
 	  userService.updateLogInTime(loggedInUser);
 	  return loggedInUser;

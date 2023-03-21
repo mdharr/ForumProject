@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
+import { User } from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,10 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'ngLoreHunter';
+
+  onlineUsers: User[] = [];
+
+  loggedInUsers: User[] = [];
 
   constructor(
     private _snackBar: MatSnackBar,
@@ -41,4 +46,6 @@ export class AppComponent implements OnInit {
   checkLoggedInUserCount() {
 
   }
+
+
 }
