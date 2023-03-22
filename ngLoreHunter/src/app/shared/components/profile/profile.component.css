@@ -2,6 +2,12 @@
   list-style: none;
 }
 
+.breadcrumb-outer {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-left: 25px;
+}
+
 .breadcrumbnav > li {
   display: inline-block;
   font-weight: bold;
@@ -99,6 +105,12 @@
 
 .member-banner {
   min-height: 250px;
+  display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: #f3f4f5;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 3px 3px 0 0;
 }
 
 .member-main-content {
@@ -156,7 +168,7 @@
 
 .member-header-name {
   margin: 0;
-  margin-top: -0.15em;
+  margin-top: 0.40em;
   padding: 0;
   font-weight: 400;
   font-size: 24px;
@@ -164,7 +176,9 @@
 }
 
 .username {
+  color: #ffffff;
   text-align: left;
+  text-shadow: 0 0 1px #000;
 }
 
 .member-header-blurbContainer {
@@ -182,7 +196,25 @@
 }
 
 .pairs {
-  display: inline;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  text-align: center;
+}
+
+.stats-pairs {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  text-align: center;
+}
+
+.activity-pairs {
+  display: flex;
   padding: 0;
   margin: 0;
   overflow: hidden;
@@ -194,4 +226,45 @@ dl {
   margin-block-end: 1em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
+}
+
+dd {
+  display: block;
+}
+
+dt {
+  margin-right: 5px;
+}
+
+.pairs-justified {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-right: -5px;
+  margin-bottom: -5px;
+}
+
+.pairs > dt {
+  padding: 0;
+  margin: 0;
+}
+
+.pairs > dd {
+  padding: 0;
+  margin: 0;
+}
+
+.member-header-content {
+  font-size: 17px;
+  border: none;
+  padding: 10px;
+  padding-left: 212px;
+}
+
+.button-group {
+  margin-top: 0;
+}
+
+.member-header-blurb {
+  margin-top: 0;
 }

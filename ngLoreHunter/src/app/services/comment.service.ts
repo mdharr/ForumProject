@@ -71,4 +71,8 @@ export class CommentService {
       })
     );
   }
+
+  // commentsByUser(userId: number): Observable<Comment[]> {
+
+  // }
 }

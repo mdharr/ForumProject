@@ -21,6 +21,7 @@ export class User {
   commentCount: number;
   postCount: number;
   bannerMessage: string;
+  bannerImage: string;
   categories: Category[];
   posts: Post[];
   comments: Comment[];
@@ -43,6 +44,7 @@ export class User {
     commentCount: number = 0,
     postCount: number = 0,
     bannerMessage: string = '',
+    bannerImage: string = '',
     categories: Category[] = [],
     posts: Post[] = [],
     comments: Comment[] = []
@@ -63,6 +65,7 @@ export class User {
     this.commentCount = commentCount;
     this.postCount = postCount;
     this.bannerMessage = bannerMessage;
+    this.bannerImage = bannerImage;
     this.categories = categories;
     this.posts = posts;
     this.comments = comments;

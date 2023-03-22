@@ -24,7 +24,7 @@
       <span>Register</span>
     </button>
       <a style="cursor: pointer;" [routerLink]="['/users', loggedInUser.id]"><img id="userThumbnail" src="{{ loggedInUser.imageUrl }}" alt="" *ngIf="loggedIn()"/></a>
-      <button mat-button *ngIf="loggedIn()">{{ loggedInUser.username }}</button>
+      <button mat-button *ngIf="loggedIn()" [routerLink]="['/users', loggedInUser.id]">{{ loggedInUser.username }}</button>
       <app-logout *ngIf="loggedIn()"></app-logout>
 </mat-toolbar>
 
