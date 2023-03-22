@@ -117,6 +117,28 @@
   </div>
 </div>
 
+<div class="op-block" *ngFor="let post of posts">
+  <div class="op-block-inner">
+    <div *ngIf="this.post.id === postId">
+      <div class="op-user">
+        <div class="avatar-container">
+          <img class="avatar" src="{{post.user.imageUrl}}" alt="">
+        </div>
+      </div>
+    </div>
+    <div *ngIf="this.post.id === postId" class="op-post-content">
+      <div class="op-post">
+        <div class="op-subject">
+          <h3>{{post.subject}}</h3>
+        </div>
+        <div class="op-content">
+          <p [innerHtml]="post.content">{{post.content}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="wrapper">
   <!-- <div *ngIf="dataSource.isLoading$ | async">Loading...</div> -->
 
