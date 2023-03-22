@@ -11,6 +11,7 @@ import { PostsComponent } from './shared/components/posts/posts.component';
 import { RegisterComponent } from './shared/components/register/register.component';
 import { UserComponent } from './shared/components/user/user.component';
 import { CommentsComponent } from './shared/components/comments/comments.component';
+import { ProfileComponent } from './shared/components/profile/profile.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'categories/:categoryId/posts', component: PostsComponent},
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'users/:userId', component: UserComponent },
+  { path: 'user', component: UserComponent },
+  { path: 'users/:userId', component: ProfileComponent },
   { path: 'comments', component: CommentsComponent },
   { path: 'categories/:categoryId/posts/:postId/comments', component: CommentsComponent },
   { path: 'header', component: HeaderComponent },
