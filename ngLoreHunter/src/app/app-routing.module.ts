@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'categories/:categoryId/posts', component: PostsComponent},
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'user', component: UserComponent },
+  { path: 'users/:userId', component: UserComponent },
   { path: 'comments', component: CommentsComponent },
   { path: 'categories/:categoryId/posts/:postId/comments', component: CommentsComponent },
   { path: 'header', component: HeaderComponent },
