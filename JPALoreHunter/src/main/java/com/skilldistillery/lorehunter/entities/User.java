@@ -58,6 +58,9 @@ public class User {
 	@Column(name = "banner_message")
 	private String bannerMessage;
 	
+	@Column(name = "banner_image")
+	private String bannerImage;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Category> categories;
@@ -79,7 +82,7 @@ public class User {
 
 	public User(int id, String username, String password, Boolean enabled, String role, String firstName,
 			String lastName, String email, String state, LocalDateTime createdAt, String imageUrl, LocalDateTime lastActivity,
-			String status, Integer commentCount, String bannerMessage, List<Category> categories, List<Post> posts,
+			String status, Integer commentCount, String bannerMessage, String bannerImage, List<Category> categories, List<Post> posts,
 			List<Comment> comments, Integer postCount) {
 		super();
 		this.id = id;
@@ -97,6 +100,7 @@ public class User {
 		this.status = status;
 		this.commentCount = commentCount;
 		this.bannerMessage = bannerMessage;
+		this.bannerImage = bannerImage;
 		this.categories = categories;
 		this.posts = posts;
 		this.comments = comments;
@@ -222,6 +226,14 @@ public class User {
 	public void setBannerMessage(String bannerMessage) {
 		this.bannerMessage = bannerMessage;
 	}
+	
+	public String getBannerImage() {
+		return bannerImage;
+	}
+	
+	public void setBannerImage(String bannerImage) {
+		this.bannerImage = bannerImage;
+	}
 
 	public List<Category> getCategories() {
 		return categories;
@@ -278,8 +290,8 @@ public class User {
 				+ ", role=" + role + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", state=" + state + ", createdAt=" + createdAt + ", imageUrl=" + imageUrl + ", lastActivity="
 				+ lastActivity + ", status=" + status + ", commentCount=" + commentCount + ", bannerMessage="
-				+ bannerMessage + ", categories=" + categories + ", posts=" + posts + ", comments=" + comments
-				+ ", postCount=" + postCount + "]";
+				+ bannerMessage + ", bannerImage=" + bannerImage + ", categories=" + categories + ", posts=" + posts
+				+ ", comments=" + comments + ", postCount=" + postCount + "]";
 	}
 	
 	
