@@ -467,7 +467,9 @@
       </dl>
       <dl>
         <dt>Latest Member</dt>
-        <dd>Wander</dd>
+        <div *ngFor="let user of users; index as i; last as isLast;">
+          <dd *ngIf="isLast">{{ user.username }} at {{ user.createdAt | date:'shortTime' }}</dd>
+        </div>
       </dl>
     </div>
     </div>
