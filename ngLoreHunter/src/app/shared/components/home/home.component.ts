@@ -6,6 +6,10 @@ import { PostService } from 'src/app/services/post.service';
 import { HostListener } from '@angular/core';
 import { PostDataSource } from './../../../services/post.dataSource';
 import { Post } from 'src/app/models/post';
+import { Comment } from 'src/app/models/comment';
+import { CommentService } from 'src/app/services/comment.service';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +20,8 @@ export class HomeComponent implements OnInit {
   categories: Category[] = [];
   categoryId: number = 0;
   posts: Post[] = [];
+  comments: Comment[] = [];
+  users: User[] = [];
   data: any;
   sort: any;
   latest: Post = new Post();
@@ -28,7 +34,9 @@ export class HomeComponent implements OnInit {
   constructor(
               private auth: AuthService,
               private homeServ: HomeService,
-              private postService: PostService
+              private postService: PostService,
+              private commentService: CommentService,
+              private userService: UserService
               ) {}
 
   ngOnInit() {
@@ -51,6 +59,24 @@ export class HomeComponent implements OnInit {
       },
       error:(fail) => {
         console.error('Error getting posts:');
+        console.error(fail);
+      }
+    });
+    this.commentService.indexAll().subscribe({
+      next: (comments) => {
+        this.comments = comments;
+      },
+      error:(fail) => {
+        console.error('Error getting comments:');
+        console.error(fail);
+      }
+    });
+    this.userService.index().subscribe({
+      next: (users) => {
+        this.users = users;
+      },
+      error:(fail) => {
+        console.error('Error getting comments:');
         console.error(fail);
       }
     });

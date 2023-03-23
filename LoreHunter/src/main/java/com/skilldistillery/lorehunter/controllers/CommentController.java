@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.lorehunter.entities.Comment;
 import com.skilldistillery.lorehunter.entities.Post;
+import com.skilldistillery.lorehunter.repositories.CommentRepository;
 import com.skilldistillery.lorehunter.services.CommentService;
 
 @CrossOrigin({ "*", "http://localhost/"})
@@ -28,6 +29,14 @@ public class CommentController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private CommentRepository commentRepo;
+	
+	@GetMapping("comments")
+	public List<Comment> index(HttpServletRequest req, HttpServletResponse res) {
+		return commentRepo.findAll();
+	}
 	
 	@GetMapping("categories/{cid}/posts/{pid}/comments")
 	public List<Comment> index(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable("cid") int categoryId, @PathVariable("pid") int postId) {

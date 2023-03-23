@@ -28,7 +28,7 @@ export class UserService {
       catchError((err: any) => {
         console.log(err);
         return throwError(
-          () => new Error('UserService.index(): error retrieving user: ' + err)
+          () => new Error('UserService.index(): error retrieving users: ' + err)
         );
       })
     );

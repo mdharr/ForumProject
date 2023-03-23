@@ -72,7 +72,18 @@ export class CommentService {
     );
   }
 
-  // commentsByUser(userId: number): Observable<Comment[]> {
+  indexAll(): Observable<Comment[]> {
+    return this.http.get<Comment[]>(this.url + '/comments').pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(
+              'CommentService.index(): error retrieving comment list: ' + err
+            )
+        );
+      })
+    );
+  }
 
-  // }
 }
