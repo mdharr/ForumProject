@@ -329,7 +329,7 @@
             <mat-icon style="color: gray;">comment</mat-icon>
           </div>
         </div>
-        <a class="dark-link" href="#"><h3>Latest Threads</h3></a>
+        <a class="dark-link" [routerLink]="['/posts']"><h3>Latest Threads</h3></a>
       </div>
       <hr class="sidebar-hr">
       <div *ngFor="let category of categories; index as i;">

@@ -38,6 +38,14 @@ export class PostDataSource extends DataSource<Post> {
     });
   }
 
+  loadAllPosts(): void {
+    this.isLoading$.next(true);
+    this.postService.indexAll().subscribe((posts) => {
+      this.posts$.next(posts);
+      this.isLoading$.next(false);
+    });
+  }
+
   loadLatestPost(categoryId: number): void {
     this.isLoading$.next(true);
     console.log(categoryId);

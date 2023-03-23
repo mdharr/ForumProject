@@ -34,6 +34,7 @@ import { CommentDataSource } from '../services/comment.dataSource';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ProfileComponent } from './components/profile/profile.component';
+import { PostsListComponent } from './components/posts-list/posts-list.component';
 
 
 
@@ -49,7 +50,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     PostsComponent,
     CommentsComponent,
     ProgressBarComponent,
-    ProfileComponent
+    ProfileComponent,
+    PostsListComponent
   ],
   imports: [
     CommonModule,
@@ -83,7 +85,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     LogoutComponent,
     ProgressBarComponent,
     CommentsComponent,
-    PostsComponent
+    PostsComponent,
+    PostsListComponent
   ],
   providers: [
     PostService,

@@ -12,6 +12,7 @@ import { RegisterComponent } from './shared/components/register/register.compone
 import { UserComponent } from './shared/components/user/user.component';
 import { CommentsComponent } from './shared/components/comments/comments.component';
 import { ProfileComponent } from './shared/components/profile/profile.component';
+import { PostsListComponent } from './shared/components/posts-list/posts-list.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'footer', component: FooterComponent },
   { path: 'layouts', component: LayoutsComponent },
   { path: 'categories/:categoryId/posts', component: PostsComponent},
+  { path: 'posts', component: PostsListComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'user', component: UserComponent },
