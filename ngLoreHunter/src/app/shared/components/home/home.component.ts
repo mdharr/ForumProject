@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   constructor(
               private auth: AuthService,
               private homeServ: HomeService,
-              private postService: PostService,
+              private postService: PostService
               ) {}
 
   ngOnInit() {
@@ -42,6 +42,15 @@ export class HomeComponent implements OnInit {
       },
       error:(fail) => {
         console.error('Error getting categories:');
+        console.error(fail);
+      }
+    });
+    this.postService.indexAll().subscribe({
+      next: (posts) => {
+        this.posts = posts;
+      },
+      error:(fail) => {
+        console.error('Error getting posts:');
         console.error(fail);
       }
     });
@@ -87,10 +96,10 @@ export class HomeComponent implements OnInit {
     // do something
   }
 
-  getLatestPost(categoryId: number) {
-    this.data = this.dataSource.loadLatestPost(categoryId);
-    this.posts = this.data;
-    this.latest = this.posts.sort((a, b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0];
-  }
+  // getLatestPost(categoryId: number) {
+  //   this.data = this.dataSource.loadLatestPost(categoryId);
+  //   this.posts = this.data;
+  //   this.latest = this.posts.sort((a, b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0];
+  // }
 
 }

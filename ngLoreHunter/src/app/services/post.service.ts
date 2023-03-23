@@ -65,7 +65,7 @@ export class PostService {
   }
 
   indexAll(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.url).pipe(
+    return this.http.get<Post[]>(this.url + '/posts').pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

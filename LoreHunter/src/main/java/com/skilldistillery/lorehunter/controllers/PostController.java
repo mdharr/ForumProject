@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.lorehunter.entities.Post;
 import com.skilldistillery.lorehunter.repositories.CategoryRepository;
+import com.skilldistillery.lorehunter.repositories.PostRepository;
 import com.skilldistillery.lorehunter.services.CategoryService;
 import com.skilldistillery.lorehunter.services.PostService;
 
@@ -35,6 +36,14 @@ public class PostController {
 	
 	@Autowired
 	private CategoryRepository categoryRepo;
+	
+	@Autowired
+	private PostRepository postRepo;
+	
+	@GetMapping("posts")
+	public List<Post> index(HttpServletRequest req, HttpServletResponse res) {
+		return postRepo.findAll();
+	}
 	
 	@GetMapping("categories/{cid}/posts")
 	public List<Post> index(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable("cid") int categoryId) {
