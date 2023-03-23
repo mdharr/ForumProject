@@ -332,116 +332,37 @@
         <a class="dark-link" href="#"><h3>Latest Threads</h3></a>
       </div>
       <hr class="sidebar-hr">
-      <ul class="block-body">
-        <li class="block-row" style="list-style: none;">
-          <div class="content-row">
-            <div class="content-row-figure">
-              <a href="#">
-                <img class="user-avatar" src="https://cdn.discordapp.com/attachments/1080302897599877181/1080303009180946562/ico-profile-picture.jpeg">
-              </a>
-            </div>
-            <div class="content-row-main">
-              <a class="dark-link" href="#"><h4>AXIOS: Biden to propose 25% billionaire tax</h4></a>
-              <div>
-                <span>News</span>
-                <span>&nbsp;</span>
+      <div *ngFor="let category of categories; index as i;">
+        <ul class="block-body" *ngFor="let post of category.posts; last as isLast;">
+          <li *ngIf="i < 4 && isLast" class="block-row" style="list-style: none;">
+            <div class="content-row">
+              <div class="content-row-figure">
+                <a href="#">
+                  <img class="user-avatar" src="{{ post.user.imageUrl }}">
+                </a>
               </div>
-              <div>
-                <ul class="list-inline side-list">
-                  <li>Started by Chromie</li>
-                  <li>Today at 3:17 AM </li>
-                  <li>Replies: 4</li>
-                </ul>
-              </div>
-              <div class="content-row">
-                <a class="dark-link" href="#">EtcetEra Hangouts</a>
-              </div>
+              <div class="content-row-main">
+                <a class="dark-link" href="#"><h4>{{ post.subject }}</h4></a>
+                <div>
+                  <span>News</span>
+                  <span>&nbsp;</span>
+                </div>
+                <div>
+                  <ul class="list-inline side-list">
+                    <li>Started by {{ post.user.username }}</li>
+                    <li>{{ post.createdAt | date:'short' }}</li>
+                    <li>Replies: {{ post.comments.length }}</li>
+                  </ul>
+                </div>
+                <div class="content-row">
+                  <a class="dark-link" href="#">{{ category.name }}</a>
+                </div>
 
+              </div>
             </div>
-          </div>
-        </li>
-        <li class="block-row" style="list-style: none;">
-          <div class="content-row">
-            <div class="content-row-figure">
-              <a href="#">
-                <img class="user-avatar" src="https://cdn.discordapp.com/attachments/1080302897599877181/1080303009180946562/ico-profile-picture.jpeg">
-              </a>
-            </div>
-            <div class="content-row-main">
-              <a class="dark-link" href="#"><h4>AXIOS: Biden to propose 25% billionaire tax</h4></a>
-              <div>
-                <span>News</span>
-                <span>&nbsp;</span>
-              </div>
-              <div>
-                <ul class="list-inline side-list">
-                  <li>Started by Chromie</li>
-                  <li>Today at 3:17 AM </li>
-                  <li>Replies: 4</li>
-                </ul>
-              </div>
-              <div class="content-row">
-                <a class="dark-link" href="#">EtcetEra Hangouts</a>
-              </div>
-
-            </div>
-          </div>
-        </li>
-        <li class="block-row" style="list-style: none;">
-          <div class="content-row">
-            <div class="content-row-figure">
-              <a href="#">
-                <img class="user-avatar" src="https://cdn.discordapp.com/attachments/1080302897599877181/1080303009180946562/ico-profile-picture.jpeg">
-              </a>
-            </div>
-            <div class="content-row-main">
-              <a class="dark-link" href="#"><h4>AXIOS: Biden to propose 25% billionaire tax</h4></a>
-              <div>
-                <span>News</span>
-                <span>&nbsp;</span>
-              </div>
-              <div>
-                <ul class="list-inline side-list">
-                  <li>Started by Chromie</li>
-                  <li>Today at 3:17 AM </li>
-                  <li>Replies: 4</li>
-                </ul>
-              </div>
-              <div class="content-row">
-                <a class="dark-link" href="#">EtcetEra Hangouts</a>
-              </div>
-
-            </div>
-          </div>
-        </li>
-        <li class="block-row" style="list-style: none;">
-          <div class="content-row">
-            <div class="content-row-figure">
-              <a href="#">
-                <img class="user-avatar" src="https://cdn.discordapp.com/attachments/1080302897599877181/1080303009180946562/ico-profile-picture.jpeg">
-              </a>
-            </div>
-            <div class="content-row-main">
-              <a class="dark-link" href="#"><h4>AXIOS: Biden to propose 25% billionaire tax</h4></a>
-              <div>
-                <span>News</span>
-                <span>&nbsp;</span>
-              </div>
-              <div>
-                <ul class="list-inline side-list">
-                  <li>Started by Chromie</li>
-                  <li>Today at 3:17 AM </li>
-                  <li>Replies: 4</li>
-                </ul>
-              </div>
-              <div class="content-row">
-                <a class="dark-link" href="#">EtcetEra Hangouts</a>
-              </div>
-
-            </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="container-fluid sidebar-item">
       <div class="stats-container">
