@@ -334,7 +334,7 @@
       <hr class="sidebar-hr">
       <div *ngFor="let category of categories; index as i;">
         <ul class="block-body" *ngFor="let post of category.posts; last as isLast;">
-          <li *ngIf="isLast" class="block-row" style="list-style: none;">
+          <li *ngIf="i < 4 && isLast" class="block-row" style="list-style: none;">
             <div class="content-row">
               <div class="content-row-figure">
                 <a href="#">
