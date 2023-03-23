@@ -48,7 +48,6 @@ public class Category {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "category")
 	private List<Post> posts;
 	

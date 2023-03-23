@@ -34,20 +34,21 @@
                   </div>
 
                 </div>
-                <div class="node-title-container">
-                  <div class="latest-post">
-                    <div class="user-avatar-container">
-                      <a class="light-link" style="text-decoration:none;" href="#"><img class="user-avatar" src="https://cdn.discordapp.com/attachments/1080302897599877181/1080303009180946562/ico-profile-picture.jpeg"></a>
-                    </div>
-                    <div class="user-post">
-                      <div class="post-title">
-                        <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>Resident Evil 4 - new gameplay footage impressions</strong></p></a>
-                        <p style="margin-bottom: 0;">Today at 1:06 AM <a class="light-link" href="#"><span>gcubed</span></a></p>
+                <div class="node-title-container" *ngFor="let category of categories; index as i;">
+                  <div class="latest-post" *ngFor="let post of category.posts; last as isLast;">
+                      <div class="user-avatar-container"*ngIf="i === 0 && isLast">
+                        <a  class="light-link" style="text-decoration:none;" href="#"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
                       </div>
-                      <div class="post-time">
 
+                      <div class="user-post" *ngIf="i === 0 && isLast">
+                        <div class="post-title" >
+                          <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                          <p style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
+                        </div>
+                        <div class="post-time">
+
+                        </div>
                       </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -76,22 +77,22 @@
                   </div>
 
                 </div>
-                <div class="node-title-container">
-                  <div class="latest-post">
-                    <div class="user-avatar-container">
-                      <a class="light-link" style="text-decoration:none;" href="#"><img class="user-avatar" src="https://cdn.discordapp.com/attachments/1080302897599877181/1080303009180946562/ico-profile-picture.jpeg"></a>
-                    </div>
-                    <div class="user-post">
-                      <div class="post-title">
-                        <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>Resident Evil 4 - new gameplay footage impressions</strong></p></a>
-                        <p style="margin-bottom: 0;">Today at 1:06 AM <a class="light-link" href="#"><span>gcubed</span></a></p>
+                <div class="node-title-container" *ngFor="let category of categories; index as i;">
+                  <div class="latest-post" *ngFor="let post of category.posts; last as isLast;">
+                      <div class="user-avatar-container"*ngIf="i === 1 && isLast">
+                        <a  class="light-link" style="text-decoration:none;" href="#"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
                       </div>
-                      <div class="post-time">
 
+                      <div class="user-post" *ngIf="i === 1 && isLast">
+                        <div class="post-title" >
+                          <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                          <p style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
+                        </div>
+                        <div class="post-time">
+
+                        </div>
                       </div>
-                    </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -119,22 +120,22 @@
                   </div>
 
                 </div>
-                <div class="node-title-container">
-                  <div class="latest-post">
-                    <div class="user-avatar-container">
-                      <a class="light-link" style="text-decoration:none;" href="#"><img class="user-avatar" src="https://cdn.discordapp.com/attachments/1080302897599877181/1080303009180946562/ico-profile-picture.jpeg"></a>
-                    </div>
-                    <div class="user-post">
-                      <div class="post-title">
-                        <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>Resident Evil 4 - new gameplay footage impressions</strong></p></a>
-                        <p style="margin-bottom: 0;">Today at 1:06 AM <a class="light-link" href="#"><span>gcubed</span></a></p>
+                <div class="node-title-container" *ngFor="let category of categories; index as i;">
+                  <div class="latest-post" *ngFor="let post of category.posts; last as isLast;">
+                      <div class="user-avatar-container"*ngIf="i === 2 && isLast">
+                        <a  class="light-link" style="text-decoration:none;" href="#"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
                       </div>
-                      <div class="post-time">
 
+                      <div class="user-post" *ngIf="i === 2 && isLast">
+                        <div class="post-title" >
+                          <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                          <p style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
+                        </div>
+                        <div class="post-time">
+
+                        </div>
                       </div>
-                    </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -162,22 +163,22 @@
                     </div>
 
                   </div>
-                  <div class="node-title-container">
-                    <div class="latest-post">
-                      <div class="user-avatar-container">
-                        <a class="light-link" style="text-decoration:none;" href="#"><img class="user-avatar" src="https://cdn.discordapp.com/attachments/1080302897599877181/1080303009180946562/ico-profile-picture.jpeg"></a>
-                      </div>
-                      <div class="user-post">
-                        <div class="post-title">
-                          <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>Resident Evil 4 - new gameplay footage impressions</strong></p></a>
-                          <p style="margin-bottom: 0;">Today at 1:06 AM <a class="light-link" href="#"><span>gcubed</span></a></p>
+                  <div class="node-title-container" *ngFor="let category of categories; index as i;">
+                    <div class="latest-post" *ngFor="let post of category.posts; last as isLast;">
+                        <div class="user-avatar-container"*ngIf="i === 3 && isLast">
+                          <a  class="light-link" style="text-decoration:none;" href="#"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
                         </div>
-                        <div class="post-time">
 
+                        <div class="user-post" *ngIf="i === 3 && isLast">
+                          <div class="post-title" >
+                            <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                            <p style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
+                          </div>
+                          <div class="post-time">
+
+                          </div>
                         </div>
-                      </div>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -220,22 +221,22 @@
                 </div>
 
               </div>
-              <div class="node-title-container">
-                <div class="latest-post">
-                  <div class="user-avatar-container">
-                    <a class="light-link" href="#"><img class="user-avatar" src="https://cdn.discordapp.com/attachments/1080302897599877181/1080303009180946562/ico-profile-picture.jpeg"></a>
-                  </div>
-                  <div class="user-post">
-                    <div class="post-title">
-                      <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>Resident Evil 4 - new gameplay footage impressions</strong></p></a>
-                      <p style="margin-bottom: 0;">Today at 1:06 AM <a class="light-link" href="#"><span>gcubed</span></a></p>
+              <div class="node-title-container" *ngFor="let category of categories; index as i;">
+                <div class="latest-post" *ngFor="let post of category.posts; last as isLast;">
+                    <div class="user-avatar-container"*ngIf="i === 4 && isLast">
+                      <a  class="light-link" style="text-decoration:none;" href="#"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
                     </div>
-                    <div class="post-time">
 
+                    <div class="user-post" *ngIf="i === 4 && isLast">
+                      <div class="post-title" >
+                        <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                        <p style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
+                      </div>
+                      <div class="post-time">
+
+                      </div>
                     </div>
-                  </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -263,22 +264,22 @@
                 </div>
 
               </div>
-              <div class="node-title-container">
-                <div class="latest-post">
-                  <div class="user-avatar-container">
-                    <a class="light-link" href="#"><img class="user-avatar" src="https://cdn.discordapp.com/attachments/1080302897599877181/1080303009180946562/ico-profile-picture.jpeg"></a>
-                  </div>
-                  <div class="user-post">
-                    <div class="post-title">
-                      <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>Resident Evil 4 - new gameplay footage impressions</strong></p></a>
-                      <p style="margin-bottom: 0;">Today at 1:06 AM <a class="light-link" href="#"><span>gcubed</span></a></p>
+              <div class="node-title-container" *ngFor="let category of categories; index as i;">
+                <div class="latest-post" *ngFor="let post of category.posts; last as isLast;">
+                    <div class="user-avatar-container"*ngIf="i === 5 && isLast">
+                      <a  class="light-link" style="text-decoration:none;" href="#"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
                     </div>
-                    <div class="post-time">
 
+                    <div class="user-post" *ngIf="i === 5 && isLast">
+                      <div class="post-title" >
+                        <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                        <p style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
+                      </div>
+                      <div class="post-time">
+
+                      </div>
                     </div>
-                  </div>
                 </div>
-
               </div>
             </div>
           </div>

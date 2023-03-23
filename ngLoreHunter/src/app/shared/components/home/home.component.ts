@@ -10,6 +10,7 @@ import { Comment } from 'src/app/models/comment';
 import { CommentService } from 'src/app/services/comment.service';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,9 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  public posts$: Observable<Post[]> | undefined;
+
   categories: Category[] = [];
   categoryId: number = 0;
   posts: Post[] = [];
@@ -36,10 +40,12 @@ export class HomeComponent implements OnInit {
               private homeServ: HomeService,
               private postService: PostService,
               private commentService: CommentService,
-              private userService: UserService
+              private userService: UserService,
+              private postDataSource: PostDataSource,
               ) {}
 
   ngOnInit() {
+    this.posts$ = this.postService.indexAll();
     this.reload();
   }
 
