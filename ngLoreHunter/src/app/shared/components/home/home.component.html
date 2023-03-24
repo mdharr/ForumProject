@@ -54,7 +54,9 @@
               </div>
             </div>
             <div class="more-container" style="color: #098ea6 !important;">
-              <a class="dark-link" [routerLink]="['/comments']"><dl class="pairs" style="color: #098ea6 !important;"><dt class="dt-icon"><mat-icon class="material-icons icons" style="justify-content: right;">arrow_forward</mat-icon></dt><dd>More</dd> </dl></a>
+              <ng-container *ngFor="let category of categories; index as i;">
+                <a class="dark-link" *ngIf="i === 0" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs" style="color: #098ea6 !important;"><dt class="dt-icon"><mat-icon class="material-icons icons" style="justify-content: right;">arrow_forward</mat-icon></dt><dd>More</dd> </dl></a>
+              </ng-container>
             </div>
           </div>
           <div class="container-fluid card">
@@ -97,7 +99,9 @@
               </div>
             </div>
             <div class="more-container" style="color: #098ea6 !important;">
-              <a class="dark-link" href="#"><dl class="pairs" style="color: #098ea6 !important;"><dt class="dt-icon"><mat-icon class="material-icons icons" style="justify-content: right;">arrow_forward</mat-icon></dt><dd>More</dd> </dl></a>
+              <ng-container *ngFor="let category of categories; index as i;">
+                <a class="dark-link" *ngIf="i === 1" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs" style="color: #098ea6 !important;"><dt class="dt-icon"><mat-icon class="material-icons icons" style="justify-content: right;">arrow_forward</mat-icon></dt><dd>More</dd> </dl></a>
+              </ng-container>
             </div>
           </div>
           <div class="container-fluid card">
@@ -140,7 +144,9 @@
               </div>
             </div>
             <div class="more-container" style="color: #9a387b;">
-              <a class="dark-link" href="#"><dl class="pairs" style="color: #9a387b !important;"><dt class="dt-icon"><mat-icon class="material-icons icons" style="justify-content: right;">arrow_forward</mat-icon></dt><dd>More</dd> </dl></a>
+              <ng-container *ngFor="let category of categories; index as i;">
+                <a class="dark-link" *ngIf="i === 2" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs" style="color: #9a387b !important;"><dt class="dt-icon"><mat-icon class="material-icons icons" style="justify-content: right;">arrow_forward</mat-icon></dt><dd>More</dd> </dl></a>
+              </ng-container>
             </div>
           </div>
             <div class="container-fluid card">
@@ -183,7 +189,9 @@
                 </div>
               </div>
               <div class="more-container" style="color: #9a387b;">
-                <a class="dark-link" href="#"><dl class="pairs" style="color: #9a387b !important;"><dt class="dt-icon"><mat-icon class="material-icons icons" style="justify-content: right;">arrow_forward</mat-icon></dt><dd>More</dd> </dl></a>
+                <ng-container *ngFor="let category of categories; index as i;">
+                  <a class="dark-link" *ngIf="i === 3" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs" style="color: #9a387b !important;"><dt class="dt-icon"><mat-icon class="material-icons icons" style="justify-content: right;">arrow_forward</mat-icon></dt><dd>More</dd> </dl></a>
+                </ng-container>
               </div>
             </div>
         </div>
@@ -241,7 +249,9 @@
             </div>
           </div>
           <div class="more-container" style="color: #ea7e3e;">
-            <a class="dark-link" href="#"><dl class="pairs" style="color: #ea7e3e !important;"><dt class="dt-icon"><mat-icon class="material-icons icons" style="justify-content: right;">arrow_forward</mat-icon></dt><dd>More</dd> </dl></a>
+            <ng-container *ngFor="let category of categories; index as i;">
+              <a class="dark-link" *ngIf="i === 4" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs" style="color: #ea7e3e !important;"><dt class="dt-icon"><mat-icon class="material-icons icons" style="justify-content: right;">arrow_forward</mat-icon></dt><dd>More</dd> </dl></a>
+            </ng-container>
           </div>
           </div>
           <div class="container-fluid card">
@@ -284,7 +294,9 @@
             </div>
           </div>
           <div class="more-container" style="color: #3ab25d;">
-            <a class="dark-link" href="#"><dl class="pairs" style="color: #3ab25d !important;"><dt class="dt-icon"><mat-icon class="material-icons icons" style="justify-content: right;">arrow_forward</mat-icon></dt><dd>More</dd> </dl></a>
+            <ng-container *ngFor="let category of categories; index as i;">
+              <a class="dark-link" *ngIf="i === 5" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs" style="color: #3ab25d !important;"><dt class="dt-icon"><mat-icon class="material-icons icons" style="justify-content: right;">arrow_forward</mat-icon></dt><dd>More</dd> </dl></a>
+            </ng-container>
           </div>
         </div>
         </div>
