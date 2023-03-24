@@ -96,7 +96,7 @@ export class PostsListComponent implements OnInit {
       if (idString) {
         this.categoryId = +idString;
         if (!isNaN(this.categoryId)) {
-          this.categoryService.find(this.categoryId).subscribe({
+          this.categoryService.find(this.post.category.id).subscribe({
             next: (category) => {
               console.log(category);
               console.log(this.categoryId);
