@@ -37,6 +37,8 @@ export class PostsComponent implements OnInit {
 
   dataSource = new PostDataSource(this.postService);
 
+  viewCount: number = 0;
+
   // mat table properties start
 
   // mat table properties start
@@ -266,5 +268,19 @@ export class PostsComponent implements OnInit {
     } else {
       this.addPost(this.newPost);
     }
+  }
+
+  // TODO: THIS METHOD IS INCOMPLETE
+  viewCounter() {
+    this.postService.update(this.post).subscribe({
+      next: (data) => {
+        this.post = data;
+      },
+      error: (nojoy) => {
+        console.error('PostComponent.viewCounter: Error incrementing post view count.');
+
+      }
+    });
+    this.viewCount = this.viewCount++;
   }
 }
