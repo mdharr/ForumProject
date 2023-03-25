@@ -275,6 +275,7 @@ export class PostsComponent implements OnInit {
     this.postService.update(this.post).subscribe({
       next: (data) => {
         this.post = data;
+        this.post.viewCount++;
       },
       error: (nojoy) => {
         console.error('PostComponent.viewCounter: Error incrementing post view count.');
