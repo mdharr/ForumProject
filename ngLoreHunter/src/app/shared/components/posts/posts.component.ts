@@ -223,7 +223,7 @@ export class PostsComponent implements OnInit {
   }
 
   updatePost(post: Post, goToDetail = true): void {
-    this.postService.update(post).subscribe({
+    this.postService.update(this.postId, this.categoryId).subscribe({
       next: (updatedPost) => {
         if (goToDetail) {
           this.displayPost(updatedPost);
@@ -271,17 +271,15 @@ export class PostsComponent implements OnInit {
   }
 
   // TODO: THIS METHOD IS INCOMPLETE
-  viewCounter() {
-    this.postService.update(this.post).subscribe({
+  updateViewCount() {
+    this.postService.update(this.postId, this.categoryId).subscribe({
       next: (data) => {
         this.post = data;
         this.post.viewCount++;
       },
       error: (nojoy) => {
-        console.error('PostComponent.viewCounter: Error incrementing post view count.');
-
+        console.error('PostComponent.updateViewCount: Error incrementing post view count.');
       }
     });
-    this.viewCount = this.viewCount++;
   }
 }

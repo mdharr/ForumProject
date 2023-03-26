@@ -18,4 +18,5 @@ public interface PostService {
 	public Post update(String username, int postId, Post post, int categoryId);
 	
 	public boolean archive(String username, int postId, int categoryId);
+
 }

@@ -34,6 +34,11 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.GET, "/api/categories/**").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/categories/**/posts").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/categories/**/posts/**").permitAll() // will hit the OPTIONS on the route
+        .antMatchers(HttpMethod.PUT, "/api/categories").permitAll() // will hit the OPTIONS on the route
+        .antMatchers(HttpMethod.PUT, "/api/categories/**").permitAll() // will hit the OPTIONS on the route
+        .antMatchers(HttpMethod.PUT, "/api/categories/**/posts").permitAll() // will hit the OPTIONS on the route
+        .antMatchers(HttpMethod.PUT, "/api/categories/**/posts/**").permitAll() // will hit the OPTIONS on the route
+        .antMatchers(HttpMethod.PUT, "/api/categories/**/posts/**/comments").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/categories/**/posts/**/comments").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/users/**").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/posts").permitAll() // will hit the OPTIONS on the route
