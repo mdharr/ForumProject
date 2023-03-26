@@ -271,8 +271,8 @@ export class PostsComponent implements OnInit {
   }
 
   // TODO: THIS METHOD IS INCOMPLETE
-  updateViewCount() {
-    this.postService.update(this.postId, this.categoryId).subscribe({
+  updateViewCount(postId: number, categoryId: number) {
+    this.postService.update(postId, categoryId).subscribe({
       next: (data) => {
         this.post = data;
         this.post.viewCount++;
