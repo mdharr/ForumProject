@@ -74,6 +74,8 @@ public class PostServiceImpl implements PostService {
 		existing.setLastEdited(post.getLastEdited());
 		return postRepo.save(existing);
 	}
+	
+	
 
 	@Override
 	public boolean archive(String username, int postId, int categoryId) {
@@ -85,5 +87,16 @@ public class PostServiceImpl implements PostService {
 		}
 		return true;
 	}
+
+//	@Override
+//	public Post updateViewCount(int postId, Post post, int categoryId) {
+//		Optional<Post> postOpt = postRepo.findById(postId);
+//		if(postOpt.isPresent()) {
+//			Post updated = postOpt.get();
+//			updated.setViewCount(updated.getViewCount());
+//			postRepo.saveAndFlush(updated);
+//		}
+//		return null;
+//	}
 
 }

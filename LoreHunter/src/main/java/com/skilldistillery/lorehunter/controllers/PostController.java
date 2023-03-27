@@ -98,5 +98,19 @@ public class PostController {
 			res.setStatus(400);
 		}
 	}
+	
+//	@PutMapping("categories/{cid}/posts/{pid}/")
+//	public Post updateViewCount(@PathVariable("cid") int categoryId, @PathVariable("pid") int postId, @RequestBody Post post, HttpServletResponse res) {
+//		try {
+//			postService.updateViewCount(postId, post, categoryId);
+//			if (post == null) {
+//				res.setStatus(404);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			res.setStatus(400);
+//		}
+//		return post;
+//	}
 
 }
