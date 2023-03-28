@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { HomeService } from 'src/app/services/home.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ThemePalette } from '@angular/material/core';
+
 
 @Component({
   selector: 'app-drawer',
@@ -13,6 +15,10 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class DrawerComponent implements OnInit {
   @ViewChild('sidenav') public sidenav: MatSidenav | undefined;
+
+  color: ThemePalette = 'primary';
+  checked = false;
+  disabled = false;
 
   categories: Category[] = [];
 

@@ -13,9 +13,10 @@ a {
   font-family: "Palanquin Dark",serif !important;
 }
 
-p {
-  font-family: "Josefin Sans",serif;
-}
+/* p {
+  font-family: "Palanquin Dark",serif !important;
+} */
+
 
 .pairs {
   display: flex;
