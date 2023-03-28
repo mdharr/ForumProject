@@ -109,6 +109,7 @@ p {
 .card:hover {
   box-shadow: 0 6px 10px 0px rgb(0 0 0 / 14%), 0 1px 18px 0px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%) !important;
   transform: translateY(-5px);
+  border: 1px #ffffff solid;
 }
 
 .card-gaming {
@@ -195,7 +196,7 @@ p {
   justify-content: right;
   align-items: center;
   padding: 5px 5px 0 0;
-  border-radius: 5px;
+  border-radius: 0px 0px 5px 5px;
 }
 
 .node-title-container {
