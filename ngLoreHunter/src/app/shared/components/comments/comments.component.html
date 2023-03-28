@@ -178,7 +178,7 @@ matSortDisableClear
 
 <div *ngFor="let post of posts">
   <div *ngFor="let comment of post.comments">
-    <article *ngIf="this.post.id === postId" class="message-outer" style="background-color: #ffffff; margin-bottom: 10px; border: 1px solid black;">
+    <article *ngIf="this.post.id === postId" class="message-outer">
       <span class="anchorTarget"></span>
       <div class="message-inner" style="display: flex;">
         <div class="message-cell message-cell-user">
