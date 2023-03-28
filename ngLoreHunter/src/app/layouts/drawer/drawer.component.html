@@ -14,9 +14,9 @@
       <div class="title" *ngFor="let category of categories; let i = index">
         <a mat-list-item *ngIf="i === 3" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#58595b;">groups</mat-icon></dt><dd>{{ category.name }}</dd></dl></a>
       </div>
-      <a mat-list-item><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#58595b;">trending_up</mat-icon></dt><dd>Trending Threads</dd></dl></a>
+      <a mat-list-item><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#58595b;">trending_up</mat-icon></dt><dd>Trending Posts</dd></dl></a>
       <!-- TODO: PASS CATEGORY ID THROUGH ROUTERLINK EITHER HERE OR IN POST LIST COMPONENT (LIKELY THE LATTER) -->
-      <a mat-list-item><dl class="pairs" [routerLink]="['/posts',]"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#58595b;">chat</mat-icon></dt><dd>Latest Threads</dd></dl></a>
+      <a mat-list-item><dl class="pairs" [routerLink]="['/posts',]"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#58595b;">chat</mat-icon></dt><dd>Latest Posts</dd></dl></a>
       <mat-accordion elevation={0}>
         <mat-expansion-panel hideToggle class="mat-elevation-z0" style="background-color: #fafafa; padding: 0;">
           <mat-expansion-panel-header style="padding: 16px;">
