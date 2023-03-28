@@ -1,27 +1,27 @@
 <mat-sidenav-container class='app-drawer-container' fullscreen>
-  <mat-sidenav #sidenav mode="side" class="mat-elevation-z0" style="background-color: #fafafa; border: none;">
+  <mat-sidenav #sidenav mode="side" class="mat-elevation-z0">
     <mat-nav-list style="margin-top: 50px;">
-      <a mat-list-item [routerLink]="['/home']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#3f51b5;">forum</mat-icon></dt><dd><span style="color:#3f51b5;">Forums</span></dd></dl></a>
+      <a mat-list-item [routerLink]="['/home']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons forum-icon">forum</mat-icon></dt><dd><span class="sidenav-forum">Forums</span></dd></dl></a>
       <div class="title" *ngFor="let category of categories; let i = index">
-        <a mat-list-item *ngIf="i === 0" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#58595b;">sports_esports</mat-icon></dt><dd>{{ category.name }}</dd></dl></a>
+        <a mat-list-item *ngIf="i === 0" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">sports_esports</mat-icon></dt><dd class="sidenav-items">{{ category.name }}</dd></dl></a>
       </div>
       <div class="title" *ngFor="let category of categories; let i = index">
-        <a mat-list-item *ngIf="i === 1" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#58595b;">headset_mic</mat-icon></dt><dd>{{ category.name }}</dd></dl></a>
+        <a mat-list-item *ngIf="i === 1" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">headset_mic</mat-icon></dt><dd class="sidenav-items">{{ category.name }}</dd></dl></a>
       </div>
       <div class="title" *ngFor="let category of categories; let i = index">
-        <a mat-list-item *ngIf="i === 2" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#58595b;">forum</mat-icon></dt><dd>{{ category.name }}</dd></dl></a>
+        <a mat-list-item *ngIf="i === 2" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">forum</mat-icon></dt><dd class="sidenav-items">{{ category.name }}</dd></dl></a>
       </div>
       <div class="title" *ngFor="let category of categories; let i = index">
-        <a mat-list-item *ngIf="i === 3" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#58595b;">groups</mat-icon></dt><dd>{{ category.name }}</dd></dl></a>
+        <a mat-list-item *ngIf="i === 3" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">groups</mat-icon></dt><dd class="sidenav-items">{{ category.name }}</dd></dl></a>
       </div>
-      <a mat-list-item><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#58595b;">trending_up</mat-icon></dt><dd>Trending Posts</dd></dl></a>
+      <a mat-list-item><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">trending_up</mat-icon></dt><dd class="sidenav-items">Trending Posts</dd></dl></a>
       <!-- TODO: PASS CATEGORY ID THROUGH ROUTERLINK EITHER HERE OR IN POST LIST COMPONENT (LIKELY THE LATTER) -->
-      <a mat-list-item><dl class="pairs" [routerLink]="['/posts',]"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#58595b;">chat</mat-icon></dt><dd>Latest Posts</dd></dl></a>
+      <a mat-list-item><dl class="pairs" [routerLink]="['/posts',]"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">chat</mat-icon></dt><dd class="sidenav-items">Latest Posts</dd></dl></a>
       <mat-accordion elevation={0}>
-        <mat-expansion-panel hideToggle class="mat-elevation-z0" style="background-color: #fafafa; padding: 0;">
-          <mat-expansion-panel-header style="padding: 16px;">
+        <mat-expansion-panel hideToggle class="mat-elevation-z0" style="background: var(--bkg-color); padding: 0;">
+          <mat-expansion-panel-header style="padding: 16px; background: var(--bkg-color);">
             <mat-panel-title>
-              <dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#58595b;">confirmation_number</mat-icon></dt><dd><span style="font: 16px 'Roboto', sans-serif">Tickets</span></dd></dl>
+              <dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">confirmation_number</mat-icon></dt><dd><span class="sidenav-items">Tickets</span></dd></dl>
             </mat-panel-title>
             <mat-panel-description>
               <!-- This is a summary of the content -->
@@ -29,19 +29,19 @@
           </mat-expansion-panel-header>
           <div class="container-fluid" style="padding: 0;">
             <div class="container" style="padding: 0;">
-              <a mat-list-item style="padding: 0;"><span style="font: 16px 'Roboto', sans-serif">Open New Ticket</span></a>
+              <a mat-list-item style="padding: 0;"><span class="sidenav-items" class="dark-mode-text">Open New Ticket</span></a>
             </div>
             <br>
             <div class="container-fluid" style="padding: 0;">
-              <a mat-list-item style="padding: 0;"><span style="font: 16px 'Roboto', sans-serif">Watched</span></a>
+              <a mat-list-item style="padding: 0;"><span class="sidenav-items">Watched</span></a>
             </div>
           </div>
         </mat-expansion-panel>
       </mat-accordion>
       <hr>
-      <a mat-list-item><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#58595b;">hide_image</mat-icon></dt><dd><span style="font: 16px 'Roboto', sans-serif">Hide Images</span></dd></dl></a>
+      <a mat-list-item><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">hide_image</mat-icon></dt><dd><span class="sidenav-items">Hide Images</span></dd></dl></a>
       <hr>
-      <a mat-list-item (click)="toggleDarkTheme()"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons" style="color:#58595b;">light_mode</mat-icon></dt><dd><span style="font: 16px 'Roboto', sans-serif">Light/Dark</span></dd></dl></a>
+      <a mat-list-item (click)="toggleDarkTheme()"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">light_mode</mat-icon></dt><dd><span  class="sidenav-items">Light/Dark</span></dd></dl></a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

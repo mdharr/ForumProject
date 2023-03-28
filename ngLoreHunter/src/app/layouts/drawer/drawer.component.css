@@ -1,5 +1,6 @@
 .app-drawer-container {
   flex: 1;
+  background: var(--bkg-color);
 }
 
 .app-content {
@@ -27,4 +28,30 @@ p {
 
 .dt-icon {
   margin-right: 10px;
+}
+
+mat-sidenav {
+  background: var(--bkg-color);
+  border: none;
+}
+
+.forum-icon {
+  color:#3f51b5;
+}
+
+.sidenav-icons {
+  color:#58595b;
+}
+
+.sidenav-items {
+  font: 16px 'Roboto', sans-serif;
+  color: var(--text-color);
+}
+
+.sidenav-forum {
+  color:#3f51b5;
+}
+
+.dark-mode-text {
+  color: var(--text-color);
 }

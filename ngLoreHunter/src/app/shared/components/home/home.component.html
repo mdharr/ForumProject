@@ -1,35 +1,35 @@
-<div class="container-fluid title-container">
+<div class="container-fluid title-container" style="background: var(--bkg-color) !important;">
   <h1>Forum list</h1>
 </div>
-<div class="container-fluid main-container">
+<div class="container-fluid main-container card-text">
   <div class="container-fluid forums-container">
     <div class="container-fluid discussion-container">
       <mat-accordion elevation={0}>
-      <mat-expansion-panel hideToggle [expanded]="true" class="mat-elevation-z0" style="background-color: #fafafa;">
-        <mat-expansion-panel-header style="height: 40px; align-items: baseline;" class="disable-hover-color">
+      <mat-expansion-panel hideToggle [expanded]="true" class="mat-elevation-z0" style="background: var(--bkg-color);">
+        <mat-expansion-panel-header style="height: 40px; align-items: baseline;background: var(--bkg-color);" class="disable-hover-color mat-elevation-z0" (click)="rotateChevronTop()">
           <mat-panel-title style="padding: 0px 30px;">
-            <a class="dark-link" href="#"><h2>Discussion</h2></a>
+            <a class="dark-link" href="#"><h2 class="dark-mode-text">Discussion</h2></a>
           </mat-panel-title>
-            <mat-icon class="material-icons up-arrow rotate" style="background-color: rgb(250 250 250) !important;"  (click)="rotateChevronTop()" [ngClass]="{down: !isRotated1}">keyboard_arrow_down</mat-icon>
+            <mat-icon class="material-icons up-arrow rotate dark-mode-text" [ngClass]="{down: !isRotated1}">keyboard_arrow_down</mat-icon>
         </mat-expansion-panel-header>
-        <hr class="main-hr">
+        <hr class="main-hr dark-mode-text">
         <div class="container-fluid discussion-container">
           <div class="container-fluid card">
             <div class="card-gaming">
               <div class="node-container">
                 <div class="node-title-container">
                   <div class="card-icon">
-                    <a class="light-link" style="text-decoration:none;" href="#"><mat-icon class="material-icons">sports_esports</mat-icon></a>
+                    <a class="light-link" style="text-decoration:none;" href="#"><mat-icon class="material-icons card-icons">sports_esports</mat-icon></a>
                   </div>
                   <div class="card-title">
                     <div class="title" *ngFor="let category of categories; let i = index">
                       <a  *ngIf="i === 0" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><h3 class="subject">{{ category.name }}</h3></a>
                     </div>
                     <div class="description" *ngFor="let category of categories; let i = index">
-                      <p class="description-text" *ngIf="i === 0">{{ category.description }}</p>
+                      <p class="description-text card-text" *ngIf="i === 0">{{ category.description }}</p>
                     </div>
-                    <div class="meta-details" *ngFor="let category of categories; let i = index">
-                        <p *ngIf="i === 0">{{category.createdAt | date:'short'}}</p>
+                    <div class="meta-details card-text" *ngFor="let category of categories; let i = index">
+                        <p class="card-text" *ngIf="i === 0">{{category.createdAt | date:'short'}}</p>
                     </div>
                   </div>
 
@@ -42,8 +42,8 @@
 
                       <div class="user-post" *ngIf="i === 0 && isLast">
                         <div class="post-title" >
-                          <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
-                          <p style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
+                          <a class="light-link" href="#"><p class="card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                          <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
                         </div>
                         <div class="post-time">
 
@@ -64,17 +64,17 @@
               <div class="node-container">
                 <div class="node-title-container">
                   <div class="card-icon">
-                    <a class="light-link" style="text-decoration:none;" href="#"><mat-icon class="material-icons">headset_mic</mat-icon></a>
+                    <a class="light-link" style="text-decoration:none;" href="#"><mat-icon class="material-icons card-icons">headset_mic</mat-icon></a>
                   </div>
                   <div class="card-title">
                     <div class="title" *ngFor="let category of categories; let i = index">
                       <a *ngIf="i === 1" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><h3 class="subject">{{ category.name }}</h3></a>
                     </div>
                     <div class="description" *ngFor="let category of categories; let i = index">
-                      <p class="description-text" *ngIf="i === 1">{{ category.description }}</p>
+                      <p class="description-text card-text" *ngIf="i === 1">{{ category.description }}</p>
                     </div>
                     <div class="meta-details" *ngFor="let category of categories; let i = index">
-                      <p *ngIf="i === 1">{{category.createdAt | date:'short'}}</p>
+                      <p class="card-text" *ngIf="i === 1">{{category.createdAt | date:'short'}}</p>
                   </div>
                   </div>
 
@@ -82,13 +82,13 @@
                 <div class="node-title-container" *ngFor="let category of categories; index as i;">
                   <div class="latest-post" *ngFor="let post of category.posts; last as isLast;">
                       <div class="user-avatar-container"*ngIf="i === 1 && isLast">
-                        <a  class="light-link" style="text-decoration:none;" href="#"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
+                        <a class="light-link" style="text-decoration:none;" href="#"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
                       </div>
 
                       <div class="user-post" *ngIf="i === 1 && isLast">
                         <div class="post-title" >
-                          <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
-                          <p style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
+                          <a class="light-link" href="#"><p class="card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                          <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
                         </div>
                         <div class="post-time">
 
@@ -109,17 +109,17 @@
               <div class="node-container">
                 <div class="node-title-container">
                   <div class="card-icon">
-                    <a class="light-link" style="text-decoration:none;" href="#"><mat-icon class="material-icons">forum</mat-icon></a>
+                    <a class="light-link" style="text-decoration:none;" href="#"><mat-icon class="material-icons card-icons">forum</mat-icon></a>
                   </div>
                   <div class="card-title">
                     <div class="title" *ngFor="let category of categories; let i = index">
                       <a *ngIf="i === 2" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><h3 class="subject">{{ category.name }}</h3></a>
                     </div>
                     <div class="description" *ngFor="let category of categories; let i = index">
-                      <p class="description-text" *ngIf="i === 2">{{ category.description }}</p>
+                      <p class="description-text card-text" *ngIf="i === 2">{{ category.description }}</p>
                     </div>
                     <div class="meta-details" *ngFor="let category of categories; let i = index">
-                      <p *ngIf="i === 2">{{category.createdAt | date:'short'}}</p>
+                      <p class="card-text" *ngIf="i === 2">{{category.createdAt | date:'short'}}</p>
                   </div>
                   </div>
 
@@ -132,8 +132,8 @@
 
                       <div class="user-post" *ngIf="i === 2 && isLast">
                         <div class="post-title" >
-                          <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
-                          <p style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
+                          <a class="light-link" href="#"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                          <p class=" card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
                         </div>
                         <div class="post-time">
 
@@ -154,17 +154,17 @@
                 <div class="node-container">
                   <div class="node-title-container">
                     <div class="card-icon">
-                      <a class="light-link" style="text-decoration:none;" href="#"><mat-icon class="material-icons">groups</mat-icon></a>
+                      <a class="light-link" style="text-decoration:none;" href="#"><mat-icon class="material-icons card-icons">groups</mat-icon></a>
                     </div>
                     <div class="card-title">
                       <div class="title" *ngFor="let category of categories; let i = index">
                         <a *ngIf="i === 3" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><h3 class="subject">{{ category.name }}</h3></a>
                       </div>
                       <div class="description" *ngFor="let category of categories; let i = index">
-                        <p class="description-text" *ngIf="i === 3">{{ category.description }}</p>
+                        <p class="description-text card-text" *ngIf="i === 3">{{ category.description }}</p>
                       </div>
                       <div class="meta-details" *ngFor="let category of categories; let i = index">
-                        <p *ngIf="i === 3">{{category.createdAt | date:'short'}}</p>
+                        <p class=" card-text" *ngIf="i === 3">{{category.createdAt | date:'short'}}</p>
                     </div>
                     </div>
 
@@ -177,8 +177,8 @@
 
                         <div class="user-post" *ngIf="i === 3 && isLast">
                           <div class="post-title" >
-                            <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
-                            <p style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
+                            <a class="light-link" href="#"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                            <p class=" card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
                           </div>
                           <div class="post-time">
 
@@ -200,31 +200,31 @@
     </div>
     <div class="container-fluid official-container">
       <mat-accordion>
-      <mat-expansion-panel hideToggle [expanded]="true" class="mat-elevation-z0" style="background-color: #fafafa;">
-        <mat-expansion-panel-header style="height: 40px; align-items: baseline;" class="disable-hover-color">
+      <mat-expansion-panel hideToggle [expanded]="true" class="mat-elevation-z0" style="background: var(--bkg-color);">
+        <mat-expansion-panel-header (click)="rotateChevronBottom()" style="height: 40px; align-items: baseline; background: var(--bkg-color);" class="disable-hover-color">
           <mat-panel-title style="padding: 0px 30px;">
-            <a class="dark-link" href="#"><h2>Official</h2></a>
+            <a class="dark-link" href="#"><h2 class="dark-mode-text">Official</h2></a>
           </mat-panel-title>
-            <mat-icon class="material-icons up-arrow rotate" style="background-color: rgb(250 250 250) !important;" (click)="rotateChevronBottom()" [ngClass]="{down: !isRotated2}">keyboard_arrow_down</mat-icon>
+            <mat-icon class="material-icons up-arrow rotate dark-mode-text" style="background: var(--bkg-color);" [ngClass]="{down: !isRotated2}">keyboard_arrow_down</mat-icon>
         </mat-expansion-panel-header>
-        <hr class="main-hr">
+        <hr class="main-hr dark-mode-text">
         <div class="container-fluid discussion-container">
           <div class="container-fluid card">
             <div class="card-announcements">
             <div class="node-container">
               <div class="node-title-container">
                 <div class="card-icon">
-                  <a class="light-link" href="#"><mat-icon class="material-icons">campaign</mat-icon></a>
+                  <a class="light-link" href="#"><mat-icon class="material-icons card-icons">campaign</mat-icon></a>
                 </div>
                 <div class="card-title">
                   <div class="title" *ngFor="let category of categories; let i = index">
                     <a *ngIf="i === 4" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><h3 class="subject">{{ category.name }}</h3></a>
                   </div>
                   <div class="description" *ngFor="let category of categories; let i = index">
-                    <p class="description-text" *ngIf="i === 4">{{ category.description }}</p>
+                    <p class="description-text card-text" *ngIf="i === 4">{{ category.description }}</p>
                   </div>
                   <div class="meta-details" *ngFor="let category of categories; let i = index">
-                    <p *ngIf="i === 4">{{category.createdAt | date:'short'}}</p>
+                    <p class=" card-text" *ngIf="i === 4">{{category.createdAt | date:'short'}}</p>
                 </div>
                 </div>
 
@@ -237,8 +237,8 @@
 
                     <div class="user-post" *ngIf="i === 4 && isLast">
                       <div class="post-title" >
-                        <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
-                        <p style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
+                        <a class="light-link" href="#"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                        <p class=" card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
                       </div>
                       <div class="post-time">
 
@@ -259,17 +259,17 @@
             <div class="node-container">
               <div class="node-title-container">
                 <div class="card-icon">
-                  <a class="light-link" href="#"><mat-icon class="material-icons">auto_stories</mat-icon></a>
+                  <a class="light-link" href="#"><mat-icon class="material-icons card-icons">auto_stories</mat-icon></a>
                 </div>
                 <div class="card-title">
                   <div class="title" *ngFor="let category of categories; let i = index">
                     <a *ngIf="i === 5" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><h3 class="subject">{{ category.name }}</h3></a>
                   </div>
                   <div class="description" *ngFor="let category of categories; let i = index">
-                    <p class="description-text" *ngIf="i === 5">{{ category.description }}</p>
+                    <p class="description-text card-text" *ngIf="i === 5">{{ category.description }}</p>
                   </div>
                   <div class="meta-details" *ngFor="let category of categories; let i = index">
-                    <p *ngIf="i === 5">{{category.createdAt | date:'short'}}</p>
+                    <p class=" card-text" *ngIf="i === 5">{{category.createdAt | date:'short'}}</p>
                 </div>
                 </div>
 
@@ -282,8 +282,8 @@
 
                     <div class="user-post" *ngIf="i === 5 && isLast">
                       <div class="post-title" >
-                        <a class="light-link" href="#"><p style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
-                        <p style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
+                        <a class="light-link" href="#"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                        <p class=" card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" href="#"><span>{{ post.user.username }}</span></a></p>
                       </div>
                       <div class="post-time">
 
@@ -312,28 +312,26 @@
           <mat-icon style="color: gray;">bar_chart</mat-icon>
         </div>
         <div class="stats-title">
-          <h3>Online Statistics</h3>
+          <h3 class="dark-mode-text">Online Statistics</h3>
         </div>
       </div>
-      <hr class="sidebar-hr">
+      <hr class="sidebar-hr dark-mode-text">
       <div>
         <dl>
-          <dt>Members online</dt>
-          <dd>1,579</dd>
+          <dt class="dark-mode-text">Members online</dt>
+          <dd class="dark-mode-text">1,579</dd>
         </dl>
         <dl>
-          <dt>Guests online</dt>
-          <dd>3,265</dd>
+          <dt class="dark-mode-text">Guests online</dt>
+          <dd class="dark-mode-text">3,265</dd>
         </dl>
         <dl>
-          <dt>Total members</dt>
-          <ng-container *ngFor="let user of users; index as i;">
-            <dd *ngIf="user.status === 'active'">{{users.length}}</dd>
-          </ng-container>
+          <dt class="dark-mode-text">Total members</dt>
+          <dd class="dark-mode-text">{{users.length}}</dd>
         </dl>
       </div>
       <div class="hidden-visitor-notice">
-        <p>Totals may include hidden visitors.</p>
+        <p class="dark-mode-text">Totals may include hidden visitors.</p>
       </div>
     </div>
     <div class="container-fluid sidebar-item">
@@ -343,9 +341,9 @@
             <mat-icon style="color: gray;">comment</mat-icon>
           </div>
         </div>
-        <a class="dark-link" [routerLink]="['/posts']"><h3>Latest Threads</h3></a>
+        <a class="dark-link" [routerLink]="['/posts']"><h3 class="dark-mode-text">Latest Threads</h3></a>
       </div>
-      <hr class="sidebar-hr">
+      <hr class="sidebar-hr dark-mode-text">
       <div *ngFor="let category of categories; index as i;">
         <ul class="block-body" *ngFor="let post of category.posts; last as isLast;">
           <li *ngIf="i < 4 && isLast" class="block-row" style="list-style: none;">
@@ -356,16 +354,16 @@
                 </a>
               </div>
               <div class="content-row-main">
-                <a class="dark-link" href="#" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><h4>{{ post.subject }}</h4></a>
+                <a class="dark-link" href="#" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><h4 class="dark-mode-text">{{ post.subject }}</h4></a>
                 <div>
-                  <ul class="list-inline side-list">
+                  <ul class="list-inline side-list dark-mode-text">
                     <li>Started by {{ post.user.username }}</li>
                     <li>{{ post.createdAt | date:'short' }}</li>
                     <li>Comments: {{ post.comments.length }}</li>
                   </ul>
                 </div>
                 <div class="content-row">
-                  <a class="dark-link" href="#">{{ category.name }}</a>
+                  <a class="dark-link dark-mode-text" href="#">{{ category.name }}</a>
                 </div>
               </div>
             </div>
@@ -382,27 +380,27 @@
           <mat-icon style="color: gray;">query_stats</mat-icon>
         </div>
         <div class="stats-title">
-          <h3>Forum Statistics</h3>
+          <h3 class="dark-mode-text">Forum Statistics</h3>
         </div>
     </div>
-    <hr class="sidebar-hr">
+    <hr class="sidebar-hr dark-mode-text">
     <div>
       <dl>
-        <dt>Posts</dt>
-        <dd>{{ posts.length }}</dd>
+        <dt class="dark-mode-text">Posts</dt>
+        <dd class="dark-mode-text">{{ posts.length }}</dd>
       </dl>
       <dl>
-        <dt>Comments</dt>
-        <dd>{{ comments.length }}</dd>
+        <dt class="dark-mode-text">Comments</dt>
+        <dd class="dark-mode-text">{{ comments.length }}</dd>
       </dl>
       <dl>
-        <dt>Members</dt>
-        <dd>{{ users.length }}</dd>
+        <dt class="dark-mode-text">Members</dt>
+        <dd class="dark-mode-text">{{ users.length }}</dd>
       </dl>
       <dl>
-        <dt>Latest Member</dt>
+        <dt class="dark-mode-text">Latest Member</dt>
         <div *ngFor="let user of users; index as i; last as isLast;">
-          <dd *ngIf="isLast">{{ user.username }} at {{ user.createdAt | date:'shortTime' }}</dd>
+          <dd class="dark-mode-text" *ngIf="isLast">{{ user.username }} at {{ user.createdAt | date:'shortTime' }}</dd>
         </div>
       </dl>
     </div>
