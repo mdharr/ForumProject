@@ -270,16 +270,4 @@ export class PostsComponent implements OnInit {
     }
   }
 
-  // TODO: THIS METHOD IS INCOMPLETE
-  updateViewCount(postId: number, categoryId: number) {
-    this.postService.update(postId, categoryId).subscribe({
-      next: (data) => {
-        this.post = data;
-        this.post.viewCount++;
-      },
-      error: (nojoy) => {
-        console.error('PostComponent.updateViewCount: Error incrementing post view count.');
-      }
-    });
-  }
 }

@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   posts: Post[] = [];
   comments: Comment[] = [];
   users: User[] = [];
+  activeUsers: User[] = [];
   data: any;
   sort: any;
   latest: Post = new Post();
@@ -86,6 +87,7 @@ export class HomeComponent implements OnInit {
         console.error(fail);
       }
     });
+
   }
 
   checkLogin(): void {
@@ -118,6 +120,7 @@ export class HomeComponent implements OnInit {
     }
 
   }
+
 
   hasNetwork(online: boolean) {
     console.log(online);

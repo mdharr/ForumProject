@@ -326,8 +326,10 @@
           <dd>3,265</dd>
         </dl>
         <dl>
-          <dt>Total visitors</dt>
-          <dd>4,844</dd>
+          <dt>Total members</dt>
+          <ng-container *ngFor="let user of users; index as i;">
+            <dd *ngIf="user.status === 'active'">{{users.length}}</dd>
+          </ng-container>
         </dl>
       </div>
       <div class="hidden-visitor-notice">
