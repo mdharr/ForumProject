@@ -39,4 +39,8 @@ export class DrawerComponent implements OnInit {
     });
   }
 
+  toggleDarkTheme(): void {
+    document.body.classList.toggle('dark-theme');
+  }
+
 }
