@@ -142,7 +142,7 @@
 <div class="wrapper">
   <!-- <div *ngIf="dataSource.isLoading$ | async">Loading...</div> -->
 
-<!-- <table
+<table
 mat-table
 matSort
 matSortActive="id"
@@ -174,47 +174,41 @@ matSortDisableClear
 <mat-paginator #paginator
 [pageSize]="5"
 [pageSizeOptions]="[5, 10, 20]">
-</mat-paginator> -->
+</mat-paginator>
 
-<div *ngFor="let post of posts">
-  <div *ngFor="let comment of post.comments">
-    <article *ngIf="this.post.id === postId" class="message-outer">
-      <span class="anchorTarget"></span>
-      <div class="message-inner" style="display: flex;">
-        <div class="message-cell message-cell-user">
-          <section class="message-user">
-            <div class="message-avatar">
-              <div class="message-avatar-wrapper">
-                <a href="">
-                  <img class="avatar" src="{{comment.user.imageUrl}}" alt="">
-                </a>
+  <!-- <div *ngFor="let post of posts">
+    <div *ngFor="let comment of post.comments">
+      <article *ngIf="this.post.id === postId" class="message-outer">
+        <span class="anchorTarget"></span>
+        <div class="message-inner" style="display: flex;">
+          <div class="message-cell message-cell-user">
+            <section class="message-user">
+              <div class="message-avatar">
+                <div class="message-avatar-wrapper">
+                  <a href="">
+                    <img class="avatar" src="{{comment.user.imageUrl}}" alt="">
+                  </a>
+                </div>
               </div>
+              <div class="user-details-wrapper">
+                <div class="userDetails"></div>
+                <div class="userExtras"></div>
+              </div>
+            </section>
+          </div>
+          <div class="message-cell message-cell-main">
+            <div class="message-main">
+              <header class="message-attribution"></header>
+              <div class="message-content" [innerHtml]='comment.content'>{{comment.content}}</div>
             </div>
-            <div class="user-details-wrapper">
-              <div class="userDetails"></div>
-              <div class="userExtras"></div>
-            </div>
-          </section>
-        </div>
-        <div class="message-cell message-cell-main">
-          <div class="message-main">
-            <header class="message-attribution"></header>
-            <div class="message-content" [innerHtml]='comment.content'>{{comment.content}}</div>
           </div>
         </div>
-      </div>
-    </article>
-  </div>
+      </article>
+    </div>
+
+  </div> -->
 
 </div>
-
-</div>
-
-<!-- <div *ngFor="let post of posts">
-  <div *ngFor="let comment of post.comments">
-    <p [innerHtml]="comment.content">{{comment.content}}</p>
-  </div>
-</div> -->
 
 <div *ngIf="loggedIn()" class="comment-block">
   <div class="comment-block-inner">

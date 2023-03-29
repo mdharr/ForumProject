@@ -10,7 +10,7 @@ import { HomeService } from 'src/app/services/home.service';
 import { PostService } from 'src/app/services/post.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
-import { Subscription } from 'rxjs';
+import { map, Observable, of, Subscription } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { User } from 'src/app/models/user';
 import { PostDataSource } from 'src/app/services/post.dataSource';
@@ -41,6 +41,10 @@ export class CommentsComponent implements OnInit {
   paramsSub: Subscription | undefined;
 
   posts: Post[] = [];
+
+  // posts$ = of(this.posts);
+  // comments$ = this.posts$.pipe(map((posts) => posts.map((post) => post.comments)));
+
   categories: Category[] = [];
   post: null | Post = null;
   users: User[] = [];
@@ -54,6 +58,7 @@ export class CommentsComponent implements OnInit {
   postsByCategory: Post[] = [];
 
   comments: Comment[] = [];
+
   comment: Comment = new Comment();
   newComment: Comment = new Comment();
   loggedInUser: User = new User();
@@ -134,7 +139,9 @@ export class CommentsComponent implements OnInit {
       },
     });
 
-    this.dataSource.loadComments(this.categoryId, this.postId, { active: 'id', direction: 'asc' });
+    this.dataSource.loadComments(this.categoryId, this.postId);
+
+    this.commentService.fetchComments(this.categoryId, this.postId).pipe();
   }
 
   loggedIn(): boolean {
@@ -187,9 +194,8 @@ export class CommentsComponent implements OnInit {
         this.newComment.post.id = selected.id;
         this.newComment.user.id = this.loggedInUser.id;
         this.newComment = new Comment();
+        this.dataSource.loadComments(this.categoryId, this.postId);
         // location.reload();
-        this.dataSource.loadComments(this.categoryId, this.postId, { active: 'id', direction: 'asc' });
-        // this.displayPost(selected);
       },
       error: (nojoy) => {
         console.error('CommentComponent.createComment: Error creating comment.');
@@ -217,7 +223,7 @@ export class CommentsComponent implements OnInit {
   }
 
   sortComments(sort: Sort): void {
-    this.dataSource.loadComments(this.categoryId, this.postId, sort);
+    this.dataSource.loadComments(this.categoryId, this.postId);
   }
 
   getErrorMessageContent() {

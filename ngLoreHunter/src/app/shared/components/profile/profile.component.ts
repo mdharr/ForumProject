@@ -132,7 +132,7 @@ export class ProfileComponent implements OnInit {
         },
       });
 
-      this.dataSource.loadComments(this.categoryId, this.postId, { active: 'id', direction: 'asc' });
+      this.dataSource.loadComments(this.categoryId, this.postId);
 
     }
 
@@ -164,7 +164,7 @@ export class ProfileComponent implements OnInit {
 
 
     sortComments(sort: Sort): void {
-      this.dataSource.loadComments(this.categoryId, this.postId, sort);
+      this.dataSource.loadComments(this.categoryId, this.postId);
     }
 
 }

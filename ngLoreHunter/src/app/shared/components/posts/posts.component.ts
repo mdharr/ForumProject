@@ -39,12 +39,6 @@ export class PostsComponent implements OnInit {
 
   viewCount: number = 0;
 
-  // mat table properties start
-
-  // mat table properties start
-
-  // mat table end
-
   paramsSub: Subscription | undefined;
 
   post: Post = new Post();

@@ -23,11 +23,11 @@ export class CommentDataSource extends DataSource<Comment> {
     this.comments$.complete();
   }
 
-  loadComments(categoryId: number, postId: number, sort: Sort): void {
+  loadComments(categoryId: number, postId: number): void {
     this.isLoading$.next(true);
     console.log(categoryId);
     console.log(postId);
-    this.commentService.fetchComments(categoryId, postId, sort).subscribe((comments) => {
+    this.commentService.fetchComments(categoryId, postId).subscribe((comments) => {
       this.comments$.next(comments);
       this.isLoading$.next(false);
     });

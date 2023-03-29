@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { Comment } from '../models/comment';
@@ -48,18 +48,15 @@ export class CommentService {
     );
   }
 
-  fetchComments(categoryId: number, postId: number, sort: Sort): Observable<Comment[]>{
-    const params = new HttpParams()
-    .set('_sort', sort.active)
-    .set('_order', sort.direction);
-    return this.http.get<Comment[]>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/comments',  {
-      params,
-     });
+  fetchComments(categoryId: number, postId: number): Observable<Comment[]>{
+    return this.http.get<Comment[]>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/comments').pipe(map((comments: Comment[]) => {
+      return comments
+    }));
 
   }
 
-  commentsByPost(categoryId: number, postId: number): Observable<Post[]> {
-    return this.http.get<Post[]>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/comments').pipe(
+  commentsByPost(categoryId: number, postId: number): Observable<Comment[]> {
+    return this.http.get<Comment[]>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/comments').pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
