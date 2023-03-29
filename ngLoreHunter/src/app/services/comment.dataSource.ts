@@ -1,7 +1,7 @@
 import { CollectionViewer, DataSource } from "@angular/cdk/collections";
 import { Injectable } from "@angular/core";
 import { Sort } from "@angular/material/sort";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { CommentService } from "./comment.service";
 import { Comment } from "../models/comment";
 
@@ -23,14 +23,16 @@ export class CommentDataSource extends DataSource<Comment> {
     this.comments$.complete();
   }
 
-  loadComments(categoryId: number, postId: number): void {
+  loadComments(categoryId: number, postId: number): Observable<Comment[]> {
     this.isLoading$.next(true);
-    console.log(categoryId);
-    console.log(postId);
+    // console.log(categoryId);
+    // console.log(postId);
     this.commentService.fetchComments(categoryId, postId).subscribe((comments) => {
       this.comments$.next(comments);
       this.isLoading$.next(false);
+
     });
+    return this.comments$;
   }
 
 }

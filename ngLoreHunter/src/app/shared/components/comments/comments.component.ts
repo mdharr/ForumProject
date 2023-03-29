@@ -42,9 +42,6 @@ export class CommentsComponent implements OnInit {
 
   posts: Post[] = [];
 
-  // posts$ = of(this.posts);
-  // comments$ = this.posts$.pipe(map((posts) => posts.map((post) => post.comments)));
-
   categories: Category[] = [];
   post: null | Post = null;
   users: User[] = [];
@@ -58,6 +55,7 @@ export class CommentsComponent implements OnInit {
   postsByCategory: Post[] = [];
 
   comments: Comment[] = [];
+  comments$!: Observable<Comment[]>;
 
   comment: Comment = new Comment();
   newComment: Comment = new Comment();
@@ -139,9 +137,10 @@ export class CommentsComponent implements OnInit {
       },
     });
 
-    this.dataSource.loadComments(this.categoryId, this.postId);
+    // this.comments$ = this.dataSource.loadComments(this.categoryId, this.postId);
 
-    this.commentService.fetchComments(this.categoryId, this.postId).pipe();
+    this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe();
+
   }
 
   loggedIn(): boolean {
@@ -170,17 +169,20 @@ export class CommentsComponent implements OnInit {
     });
   }
 
-  getComments(id: number) {
-    this.postService.postsByCategory(id).subscribe({
-      next: (posts) => {
-        this.posts = posts;
-        console.log(this.posts);
-      },
-      error: (err) => {
-        console.error('Error loading post comments');
-        console.error(err);
-      },
-    });
+  getComments(categoryId: number, postId: number) {
+    // this.postService.postsByCategory(id).subscribe({
+    //   next: (posts) => {
+    //     this.posts = posts;
+    //     console.log(this.posts);
+    //   },
+    //   error: (err) => {
+    //     console.error('Error loading post comments');
+    //     console.error(err);
+    //   },
+    // });
+    this.commentService.fetchComments(categoryId, postId).subscribe({
+
+    })
   }
 
   createComment(comment: Comment, selected: Post) {
@@ -191,17 +193,18 @@ export class CommentsComponent implements OnInit {
     console.log(comment);
     this.commentService.createComment(comment, this.categoryId, this.postId).subscribe({
       next: (data) => {
-        this.newComment.post.id = selected.id;
-        this.newComment.user.id = this.loggedInUser.id;
-        this.newComment = new Comment();
-        this.dataSource.loadComments(this.categoryId, this.postId);
-        // location.reload();
+        // this.newComment.post.id = selected.id;
+        // this.newComment.user.id = this.loggedInUser.id;
+        // this.newComment = new Comment();
+        // this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId);
+        this.comments$ = this.dataSource.loadComments(this.categoryId, this.postId);
       },
       error: (nojoy) => {
         console.error('CommentComponent.createComment: Error creating comment.');
         console.error(nojoy);
       },
     });
+
   }
 
   displayTable() {

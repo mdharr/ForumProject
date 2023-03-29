@@ -142,7 +142,7 @@
 <div class="wrapper">
   <!-- <div *ngIf="dataSource.isLoading$ | async">Loading...</div> -->
 
-<table
+<!-- <table
 mat-table
 matSort
 matSortActive="id"
@@ -174,11 +174,11 @@ matSortDisableClear
 <mat-paginator #paginator
 [pageSize]="5"
 [pageSizeOptions]="[5, 10, 20]">
-</mat-paginator>
+</mat-paginator> -->
 
-  <!-- <div *ngFor="let post of posts">
-    <div *ngFor="let comment of post.comments">
-      <article *ngIf="this.post.id === postId" class="message-outer">
+
+    <div *ngFor="let comment of comments$ | async">
+      <article class="message-outer">
         <span class="anchorTarget"></span>
         <div class="message-inner" style="display: flex;">
           <div class="message-cell message-cell-user">
@@ -206,7 +206,7 @@ matSortDisableClear
       </article>
     </div>
 
-  </div> -->
+
 
 </div>
 

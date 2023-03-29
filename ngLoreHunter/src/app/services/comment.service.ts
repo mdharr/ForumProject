@@ -14,6 +14,8 @@ import { Post } from '../models/post';
 export class CommentService {
   private url = environment.baseUrl + 'api';
 
+  comments: Comment[] = [];
+
   constructor(
     private authService: AuthService,
     private http: HttpClient,
@@ -49,9 +51,16 @@ export class CommentService {
   }
 
   fetchComments(categoryId: number, postId: number): Observable<Comment[]>{
-    return this.http.get<Comment[]>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/comments').pipe(map((comments: Comment[]) => {
-      return comments
-    }));
+    return this.http.get<Comment[]>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/comments').pipe(      catchError((err: any) => {
+      console.log(err);
+      return throwError(
+        () =>
+          new Error(
+            'CommentService.index(): error retrieving comment list: ' + err
+          )
+      );
+    })
+    );
 
   }
 
