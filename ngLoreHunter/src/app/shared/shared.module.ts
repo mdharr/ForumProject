@@ -35,7 +35,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PostsListComponent } from './components/posts-list/posts-list.component';
-
+import { NoSanitizePipe } from '../utilities/nosanitizerpipe';
 
 
 @NgModule({
@@ -51,7 +51,8 @@ import { PostsListComponent } from './components/posts-list/posts-list.component
     CommentsComponent,
     ProgressBarComponent,
     ProfileComponent,
-    PostsListComponent
+    PostsListComponent,
+    NoSanitizePipe
   ],
   imports: [
     CommonModule,
@@ -73,7 +74,7 @@ import { PostsListComponent } from './components/posts-list/posts-list.component
     MatSortModule,
     MatPaginatorModule,
     CKEditorModule,
-    MatFormFieldModule
+    MatFormFieldModule,
   ],
   exports: [
     HomeComponent,

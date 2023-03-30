@@ -28,6 +28,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
+    // NoSanitizePipe
   ],
   imports: [
     BrowserModule,
@@ -52,7 +53,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSortModule,
     CKEditorModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+
+  ],
+  exports: [
 
   ],
   providers: [DatePipe],

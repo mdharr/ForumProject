@@ -199,7 +199,7 @@ matSortDisableClear
           <div class="message-cell message-cell-main">
             <div class="message-main">
               <header class="message-attribution"></header>
-              <div class="message-content" [innerHtml]='comment.content'>{{comment.content}}</div>
+              <div class="message-content" [innerHtml]='comment.content | noSanitize'>{{comment.content}}</div>
             </div>
           </div>
         </div>
