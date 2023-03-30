@@ -9,7 +9,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { Category } from 'src/app/models/category';
-import { merge, Subscription, tap } from 'rxjs';
+import { merge, Observable, Subscription, tap } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -48,6 +48,8 @@ export class PostsListComponent implements OnInit {
 
   post: Post = new Post();
   posts: Post[] = [];
+  posts$!: Observable<Post[]>;
+
   categories: Category[] = [];
   // post: null | Post = null;
   users: User[] = [];
@@ -126,6 +128,18 @@ export class PostsListComponent implements OnInit {
     });
 
     this.dataSource.loadAllPosts();
+    this.posts$ = this.postService.getPosts(this.categoryId).pipe();
+
+    this.postService.getAllPosts().subscribe({
+      next: (data) => {
+        this.posts = data;
+      },
+      error: (error) => {
+        console.log('Error getting posts');
+        console.log(error);
+
+      }
+    })
   }
 
   // sortPosts(sort: Sort): void {

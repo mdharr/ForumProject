@@ -19,7 +19,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LayoutsModule } from '../layouts/layouts.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { LogoutComponent } from './components/logout/logout.component';
 import { PostsComponent } from './components/posts/posts.component';

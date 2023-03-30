@@ -16,6 +16,8 @@ import { PostInterface } from './post.interface';
 export class PostService {
   private url = environment.baseUrl + 'api';
 
+  posts: Comment[] = [];
+
   constructor(
     private authService: AuthService,
     private http: HttpClient,
@@ -122,8 +124,31 @@ export class PostService {
   }
 
   getPosts(categoryId: number): Observable<Post[]>{
-    return this.http.get<Post[]>(this.url + '/categories/' + categoryId + '/posts');
+    return this.http.get<Post[]>(this.url + '/categories/' + categoryId + '/posts').pipe(
+      catchError((err: any) => {
+      console.log(err);
+      return throwError(
+        () =>
+        new Error(
+          'PostService.getPosts(): error retrieving post list: ' + err
+        )
+        );
+      })
+      );
+    }
 
-  }
+    getAllPosts(): Observable<Post[]>{
+      return this.http.get<Post[]>(this.url + '/posts').pipe(
+        catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+          new Error(
+            'PostService.getPosts(): error retrieving list of all posts: ' + err
+          )
+          );
+        })
+        );
+      }
 
 }
