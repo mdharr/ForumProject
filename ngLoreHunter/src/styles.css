@@ -42,7 +42,7 @@ mat-side-nav {
 
 h1,
 p {
-  color: var(--text-color);
+  /* color: var(--text-color); */
 }
 button {
   padding: 10px;

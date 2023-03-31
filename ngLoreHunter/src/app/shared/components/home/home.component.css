@@ -188,7 +188,7 @@ p {
 }
 
 .more-container {
-  background: var(--bkg-color);
+  background: var(--container-bkg-color);
   width: 100%;
   color: black;
   display: flex;
@@ -263,6 +263,10 @@ p {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+}
+
+.forum-list-title {
+  color: var(--text-color);
 }
 
 .user-avatar-container {
