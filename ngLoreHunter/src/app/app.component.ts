@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
         duration: 2000
       });
     });
+
   }
 
   loggedIn(): boolean {

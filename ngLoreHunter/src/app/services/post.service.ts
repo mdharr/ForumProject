@@ -36,7 +36,7 @@ export class PostService {
   }
 
   show(categoryId: number, postId: number): Observable<Post> {
-    return this.http.get<Post>(this.url + '/categories/' + categoryId + '/posts', this.getHttpOptions()).pipe(
+    return this.http.get<Post>(this.url + '/categories/' + categoryId + '/posts').pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -81,7 +81,7 @@ export class PostService {
   }
 
   postsByCategory(categoryId: number): Observable<Post[]> {
-    return this.http.get<Post[]>(this.url + '/categories/' + categoryId + '/posts', this.getHttpOptions()).pipe(
+    return this.http.get<Post[]>(this.url + '/categories/' + categoryId + '/posts').pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

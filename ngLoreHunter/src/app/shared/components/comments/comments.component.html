@@ -3,8 +3,8 @@
     <div class="node-container">
       <div class="node-title-container">
         <div class="card-title">
-          <div class="title" *ngFor="let category of categories; let i = index">
-            <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
+          <div class="title" *ngFor="let post of posts; let i = index">
+            <a *ngIf="this.post.id === postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
           </div>
           <div class="description" *ngFor="let category of categories; let i = index">
             <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
@@ -20,8 +20,8 @@
     <div class="node-container">
       <div class="node-title-container">
         <div class="card-title">
-          <div class="title" *ngFor="let category of categories; let i = index">
-            <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
+          <div class="title" *ngFor="let post of posts; let i = index">
+            <a *ngIf="this.post.id === postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
           </div>
           <div class="description" *ngFor="let category of categories; let i = index">
             <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
@@ -37,8 +37,8 @@
     <div class="node-container">
       <div class="node-title-container">
         <div class="card-title">
-          <div class="title" *ngFor="let category of categories; let i = index">
-            <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
+          <div class="title" *ngFor="let post of posts; let i = index">
+            <a *ngIf="this.post.id === postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
           </div>
           <div class="description" *ngFor="let category of categories; let i = index">
             <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
@@ -54,8 +54,8 @@
     <div class="node-container">
       <div class="node-title-container">
         <div class="card-title">
-          <div class="title" *ngFor="let category of categories; let i = index">
-            <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
+          <div class="title" *ngFor="let post of posts; let i = index">
+            <a *ngIf="this.post.id === postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
           </div>
           <div class="description" *ngFor="let category of categories; let i = index">
             <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
@@ -71,8 +71,8 @@
     <div class="node-container">
       <div class="node-title-container">
         <div class="card-title">
-          <div class="title" *ngFor="let category of categories; let i = index">
-            <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
+          <div class="title" *ngFor="let post of posts; let i = index">
+            <a *ngIf="this.post.id === postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
           </div>
           <div class="description" *ngFor="let category of categories; let i = index">
             <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
@@ -88,8 +88,8 @@
     <div class="node-container">
       <div class="node-title-container">
         <div class="card-title">
-          <div class="title" *ngFor="let category of categories; let i = index">
-            <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
+          <div class="title" *ngFor="let post of posts; let i = index">
+            <a *ngIf="this.post.id === postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
           </div>
           <div class="description" *ngFor="let category of categories; let i = index">
             <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
@@ -117,7 +117,7 @@
   </div>
 </div>
 
-<div class="op-block" *ngFor="let post of posts">
+<!-- <div class="op-block" *ngFor="let post of posts">
   <div class="op-block-inner">
     <div *ngIf="this.post.id === postId">
       <div class="op-user">
@@ -129,7 +129,7 @@
     <div *ngIf="this.post.id === postId" class="op-post-content">
       <div class="op-post">
         <div class="op-subject">
-          <h3>{{post.subject}}</h3>
+          <h3 class="post-title">{{post.subject}}</h3>
         </div>
         <div class="op-content">
           <p [innerHtml]="post.content">{{post.content}}</p>
@@ -137,9 +137,204 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
 
 <div class="wrapper">
+    <div *ngFor="let post of posts; let i = index">
+      <article *ngIf="this.post.id === postId" class="message-outer">
+        <span class="anchorTarget"></span>
+        <div class="message-inner">
+          <div class="message-cell message-cell-user">
+            <section class="message-user">
+              <div class="message-avatar">
+                <div class="message-avatar-wrapper">
+                  <a href="" class="avatar avatar--l">
+                    <img class="avatar" src="{{ post.user.imageUrl }}" alt="">
+                  </a>
+                </div>
+              </div>
+              <div class="user-details-wrapper">
+                <div class="userDetails">
+                  <h4 class="message-name">
+                    <a href="username">{{ post.user.username }}</a>
+                  </h4>
+                  <h5 class="userTitle message-userTitle">{{ post.user.bannerMessage }}</h5>
+                </div>
+                <div class="userExtras">
+                  <dl class="pairs pairs--justified">
+                    <dt></dt>
+                    <dd>
+                      <ol class="listInline listInline--customField">
+                        <li></li>
+                      </ol>
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="message-cell message-cell-main">
+            <div class="message-main">
+              <header class="message-attribution">
+                <ul class="message-attribution-main">
+                  <li class="u-concealed">
+                    <a href="">
+                      <time class="u-dt"></time>
+                    </a>
+                  </li>
+                </ul>
+                <ul class="message-attribution-opposite">
+                  <li>
+                    <a href="" class="message-attribution-gadget">
+                      <i></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" class="message-attribution-gadget">
+                      <i></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" class="message-attribution-gadget">
+                      <i>#{{i + 1}}</i>
+                    </a>
+                  </li>
+                </ul>
+              </header>
+              <div class="message-content">
+                <div class="message-userContent">
+                  <article class="message-body" [innerHtml]='post.content | noSanitize'></article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div *ngFor="let comment of comments$ | async; let i = index;">
+      <article class="message-outer">
+        <span class="anchorTarget"></span>
+        <div class="message-inner">
+          <div class="message-cell message-cell-user">
+            <section class="message-user">
+              <div class="message-avatar">
+                <div class="message-avatar-wrapper">
+                  <a href="" class="avatar avatar--l">
+                    <img class="avatar" src="{{ comment.user.imageUrl }}" alt="">
+                  </a>
+                </div>
+              </div>
+              <div class="user-details-wrapper">
+                <div class="userDetails">
+                  <h4 class="message-name">
+                    <a href="username">{{ comment.user.username }}</a>
+                  </h4>
+                  <h5 class="userTitle message-userTitle">{{ comment.user.bannerMessage }}</h5>
+                </div>
+                <div class="userExtras">
+                  <dl class="pairs pairs--justified">
+                    <dt></dt>
+                    <dd>
+                      <ol class="listInline listInline--customField">
+                        <li></li>
+                      </ol>
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="message-cell message-cell-main">
+            <div class="message-main">
+              <header class="message-attribution">
+                <ul class="message-attribution-main">
+                  <li class="u-concealed">
+                    <a href="">
+                      <time class="u-dt"></time>
+                    </a>
+                  </li>
+                </ul>
+                <ul class="message-attribution-opposite">
+                  <li>
+                    <a href="" class="message-attribution-gadget">
+                      <i></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" class="message-attribution-gadget">
+                      <i>#{{i + 2}}</i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" class="message-attribution-gadget">
+                      <i></i>
+                    </a>
+                  </li>
+                </ul>
+              </header>
+              <div class="message-content">
+                <div class="message-userContent">
+                  <article class="message-body" [innerHtml]='comment.content | noSanitize'></article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+
+
+</div>
+
+<div *ngIf="loggedIn()" class="comment-block">
+  <div class="comment-block-inner">
+    <div class="user-block-outer">
+      <div class="user-block">
+        <div class="user-block-inner">
+          <div class="user-avatar">
+            <a style="cursor: pointer; padding-left: 10px;"><img id="userThumbnail" src="{{ loggedInUser.imageUrl }}" alt="" *ngIf="loggedIn()"/></a>
+          </div>
+          <div class="user-alias">
+            <a class="user-name-text" *ngIf="loggedIn()">{{ loggedInUser.username }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="editor-outer" style="padding: 10px;">
+      <div class="editor-inner" style="padding: 10px;">
+          <ckeditor name="newComment.content" [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.'}" [formControl]="content" [(ngModel)]="newComment.content" required></ckeditor>
+          <mat-error *ngIf="content.invalid && checkCkEditor">{{getErrorMessageContent()}}</mat-error>
+      </div>
+      <div class="submitButtonContainer" style="float: right; padding-right: 10px;">
+        <button class="submitBtn" mat-stroked-button (click)="submitButtonClicked();">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!loggedIn()" style="display: flex; justify-content: center;">
+  <p class="login-prompt">Log in to comment!</p>
+</div>
+
+
+
+<div class="breadcrumb-outer-bottom">
+  <div class="breadcrumb-inner">
+    <ol class="breadcrumbnav" style="padding:0;">
+      <li class="breadcrumb-value" [routerLink]="['/home']">Discussion</li>
+      <li class="breadcrumb-value" *ngIf="categoryId === 1" [routerLink]="['/categories', categoryId, 'posts']">Gaming Forum</li>
+      <li class="breadcrumb-value" *ngIf="categoryId === 2" [routerLink]="['/categories', categoryId, 'posts']">Gaming Hangouts</li>
+      <li class="breadcrumb-value" *ngIf="categoryId === 3" [routerLink]="['/categories', categoryId, 'posts']">Lore Forum</li>
+      <li class="breadcrumb-value" *ngIf="categoryId === 4" [routerLink]="['/categories', categoryId, 'posts']">Lore Hangouts</li>
+      <li class="breadcrumb-value" *ngIf="categoryId === 5" [routerLink]="['/categories', categoryId, 'posts']">Announcements</li>
+      <li class="breadcrumb-value" *ngIf="categoryId === 6" [routerLink]="['/categories', categoryId, 'posts']">The Vault</li>
+    </ol>
+  </div>
+</div>
+
   <!-- <div *ngIf="dataSource.isLoading$ | async">Loading...</div> -->
 
 <!-- <table
@@ -175,83 +370,4 @@ matSortDisableClear
 [pageSize]="5"
 [pageSizeOptions]="[5, 10, 20]">
 </mat-paginator> -->
-
-
-    <div *ngFor="let comment of comments$ | async">
-      <article class="message-outer">
-        <span class="anchorTarget"></span>
-        <div class="message-inner" style="display: flex;">
-          <div class="message-cell message-cell-user">
-            <section class="message-user">
-              <div class="message-avatar">
-                <div class="message-avatar-wrapper">
-                  <a href="">
-                    <img class="avatar" src="{{comment.user.imageUrl}}" alt="">
-                  </a>
-                </div>
-              </div>
-              <div class="user-details-wrapper">
-                <div class="userDetails"></div>
-                <div class="userExtras"></div>
-              </div>
-            </section>
-          </div>
-          <div class="message-cell message-cell-main">
-            <div class="message-main">
-              <header class="message-attribution"></header>
-              <div class="message-content" [innerHtml]='comment.content | noSanitize'>{{comment.content}}</div>
-            </div>
-          </div>
-        </div>
-      </article>
-    </div>
-
-
-
-</div>
-
-<div *ngIf="loggedIn()" class="comment-block">
-  <div class="comment-block-inner">
-    <div class="user-block-outer">
-      <div class="user-block">
-        <div class="user-block-inner">
-          <div class="user-avatar">
-            <a style="cursor: pointer; padding-left: 10px;"><img id="userThumbnail" src="{{ loggedInUser.imageUrl }}" alt="" *ngIf="loggedIn()"/></a>
-          </div>
-          <div class="user-alias">
-            <a style="font-size: 18px;" *ngIf="loggedIn()">{{ loggedInUser.username }}</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="editor-outer" style="padding: 10px;">
-      <div class="editor-inner" style="padding: 10px;">
-          <ckeditor name="newComment.content" [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.'}" [formControl]="content" [(ngModel)]="newComment.content" required></ckeditor>
-          <mat-error *ngIf="content.invalid && checkCkEditor">{{getErrorMessageContent()}}</mat-error>
-      </div>
-      <div class="submitButtonContainer" style="float: right; padding-right: 10px;">
-        <button class="submitBtn" mat-stroked-button (click)="submitButtonClicked();">Submit</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div *ngIf="!loggedIn()" style="display: flex; justify-content: center;">
-  <p class="login-prompt">Log in to comment!</p>
-</div>
-
-
-<div class="breadcrumb-outer-bottom">
-  <div class="breadcrumb-inner">
-    <ol class="breadcrumbnav" style="padding:0;">
-      <li class="breadcrumb-value" [routerLink]="['/home']">Discussion</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 1" [routerLink]="['/categories', categoryId, 'posts']">Gaming Forum</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 2" [routerLink]="['/categories', categoryId, 'posts']">Gaming Hangouts</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 3" [routerLink]="['/categories', categoryId, 'posts']">Lore Forum</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 4" [routerLink]="['/categories', categoryId, 'posts']">Lore Hangouts</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 5" [routerLink]="['/categories', categoryId, 'posts']">Announcements</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 6" [routerLink]="['/categories', categoryId, 'posts']">The Vault</li>
-    </ol>
-  </div>
-</div>
 
