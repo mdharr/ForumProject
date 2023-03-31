@@ -199,6 +199,16 @@ p {
   border-radius: 0px 0px 5px 5px;
 }
 
+.neutral-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.neutral-link:hover {
+  color: var(--text-color);
+  text-decoration: underline;
+}
+
 .node-title-container {
   display: flex;
 }
