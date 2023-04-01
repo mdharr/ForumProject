@@ -6,8 +6,18 @@
           <div class="title" *ngFor="let post of posts; let i = index">
             <a *ngIf="this.post.id === postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
           </div>
-          <div class="description" *ngFor="let category of categories; let i = index">
-            <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
+          <div class="description" *ngFor="let post of posts; let i = index">
+            <ul *ngIf="this.post.id === postId" class="cat-description listInline">
+              <li>
+                <mat-icon class="top-icon">person</mat-icon>
+                <a href="">{{ post.user.username }}</a>
+              </li>
+              <li>
+                <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
+                <mat-icon class="top-icon">access_time_filled</mat-icon>
+                <a href="">{{ post.createdAt | date:'shortDate' }}</a>
+              </li>
+            </ul>
           </div>
           <div class="meta-details">
 
@@ -23,8 +33,18 @@
           <div class="title" *ngFor="let post of posts; let i = index">
             <a *ngIf="this.post.id === postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
           </div>
-          <div class="description" *ngFor="let category of categories; let i = index">
-            <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
+          <div class="description" *ngFor="let post of posts; let i = index">
+            <ul *ngIf="this.post.id === postId" class="cat-description listInline">
+              <li>
+                <mat-icon class="top-icon">person</mat-icon>
+                <a href="">{{ post.user.username }}</a>
+              </li>
+              <li>
+                <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
+                <mat-icon class="top-icon">access_time_filled</mat-icon>
+                <a href="">{{ post.createdAt | date:'shortDate' }}</a>
+              </li>
+            </ul>
           </div>
           <div class="meta-details">
 
@@ -40,8 +60,18 @@
           <div class="title" *ngFor="let post of posts; let i = index">
             <a *ngIf="this.post.id === postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
           </div>
-          <div class="description" *ngFor="let category of categories; let i = index">
-            <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
+          <div class="description" *ngFor="let post of posts; let i = index">
+            <ul *ngIf="this.post.id === postId" class="cat-description listInline">
+              <li>
+                <mat-icon class="top-icon">person</mat-icon>
+                <a href="">{{ post.user.username }}</a>
+              </li>
+              <li>
+                <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
+                <mat-icon class="top-icon">access_time_filled</mat-icon>
+                <a href="">{{ post.createdAt | date:'shortDate' }}</a>
+              </li>
+            </ul>
           </div>
           <div class="meta-details">
 
@@ -57,8 +87,18 @@
           <div class="title" *ngFor="let post of posts; let i = index">
             <a *ngIf="this.post.id === postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
           </div>
-          <div class="description" *ngFor="let category of categories; let i = index">
-            <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
+          <div class="description" *ngFor="let post of posts; let i = index">
+            <ul *ngIf="this.post.id === postId" class="cat-description listInline">
+              <li>
+                <mat-icon class="top-icon">person</mat-icon>
+                <a href="">{{ post.user.username }}</a>
+              </li>
+              <li>
+                <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
+                <mat-icon class="top-icon">access_time_filled</mat-icon>
+                <a href="">{{ post.createdAt | date:'shortDate' }}</a>
+              </li>
+            </ul>
           </div>
           <div class="meta-details">
 
@@ -74,8 +114,18 @@
           <div class="title" *ngFor="let post of posts; let i = index">
             <a *ngIf="this.post.id === postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
           </div>
-          <div class="description" *ngFor="let category of categories; let i = index">
-            <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
+          <div class="description" *ngFor="let post of posts; let i = index">
+            <ul *ngIf="this.post.id === postId" class="cat-description listInline">
+              <li>
+                <mat-icon class="top-icon">person</mat-icon>
+                <a href="">{{ post.user.username }}</a>
+              </li>
+              <li>
+                <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
+                <mat-icon class="top-icon">access_time_filled</mat-icon>
+                <a href="">{{ post.createdAt | date:'shortDate' }}</a>
+              </li>
+            </ul>
           </div>
           <div class="meta-details">
 
