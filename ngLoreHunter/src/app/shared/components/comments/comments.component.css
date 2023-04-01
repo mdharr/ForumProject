@@ -50,8 +50,11 @@
 
 .cat-description {
   color: rgba(255,255,255,.7);
-  font-size: 15px;
 
+}
+
+.description {
+  display: flex;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -400,7 +403,7 @@ mat-paginator {
 }
 
 .submitBtn:hover {
-  color: var(--text-color);
+  color: #ffffff;
   background-color: #3f51b5;
 }
 
@@ -464,36 +467,53 @@ section {
   display: block;
 }
 
-.message-cell-main {
+.message-cell {
   display: block;
   vertical-align: top;
   padding: 12px;
+}
+
+.message-cell-main {
+  flex: 1 1 auto;
   width: 100%;
-  border-radius: 5px;
+  min-width: 0;
+  /* background: #2a2a2c; */
+  border-radius: 6px!important;
   box-shadow: var(--box-shadow-style);
   background: var(--container-bkg-color);
 }
 
 .message-cell-user {
   padding: 12px;
+  /* min-width: 200px;
+  max-width: 200px; */
+  width: 200px;
 }
 
 .message-avatar {
   text-align: center;
-  padding: 5px;
+  padding: 0;
 }
 
 .message-avatar-wrapper {
   position: relative;
   display: inline-block;
   vertical-align: bottom;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.2em;
+}
+
+.member-status {
+  font-weight: 500 !important;
+  margin: 0;
+  padding: 0;
+  margin-top: 10px;
+
 }
 
 .avatar img:not(.cropImage) {
   vertical-align: bottom;
-  max-width: 120px;
-  max-height: 120px;
+  max-width: 100px;
+  max-height: 100px;
   text-indent: 100%;
   overflow: hidden;
   white-space: nowrap;
@@ -524,6 +544,16 @@ section {
   margin: 0;
 }
 
+.message-name > a {
+  color: #465ccc;
+}
+
+.message-userTitle {
+  font-weight: 400;
+  text-align: center;
+  margin: 0;
+}
+
 .userExtras {
   font-size: 1.3rem;
 }
@@ -536,15 +566,37 @@ section {
   min-width: 0;
 }
 
-.message-attribution {
+.message-attribution,
+.message-attribution--split {
   display: flex;
-  align-items: flex-end;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
+  grid-gap: 12px;
+  margin-bottom: 10px;
 }
 
 .message-attribution-main {
   float: left;
   margin-right: 12px;
+}
+
+.listInline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.top-icon {
+  display: inline;
+  font-size: inherit;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0,0);
+  width: auto;
+  margin-right: 5px;
 }
 
 .listInline > li {
@@ -565,12 +617,13 @@ section {
 }
 
 .message-attribution-opposite {
-  margin-left: auto;
   display: flex;
   line-height: 1;
   list-style: none;
   margin: 0;
   padding: 0;
+  float: right;
+  margin-left: 14px;
 }
 
 .message-attribution-opposite > li:first-child {
