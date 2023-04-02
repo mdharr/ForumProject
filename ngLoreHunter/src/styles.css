@@ -40,10 +40,6 @@ mat-side-nav {
   background: var(--bkg-color);
 }
 
-h1,
-p {
-  /* color: var(--text-color); */
-}
 button {
   padding: 10px;
   border: none;
