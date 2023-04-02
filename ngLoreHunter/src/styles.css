@@ -20,6 +20,9 @@ body {
   --icon-color: #58595b;
   --border-style: 0.25px solid #fff;
   --box-shadow-style: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+  --table-row-color-odd: #ffffff;
+  --table-row-color-even: #f9f9fb;
+  --table-filter-row: #f1f0f1;
 }
 body.dark-theme {
   --text-color: #eee;
@@ -30,6 +33,9 @@ body.dark-theme {
   --icon-color: #58595b;
   --border-style: 0.25px solid #fff;
   --box-shadow-style: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+  --table-row-color-odd: #2a2a2c;
+  --table-row-color-even: #2f2f31;
+  --table-filter-row: #343436;
 }
 
 body {

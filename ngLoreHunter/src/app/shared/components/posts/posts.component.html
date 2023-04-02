@@ -158,8 +158,12 @@
 [pageSize]="5"
 [pageSizeOptions]="[5, 10, 20]">
 </mat-paginator> -->
-
-<div *ngFor="let post of posts$ | async; let i = index">
+<div class="block-filter-bar">
+  <div class="filter-bar">
+    <a class="filter-bar-menu-trigger" role="mat-button" href="">Filters<span class="filter-bar-icon"><mat-icon>arrow_drop_down</mat-icon></span></a>
+  </div>
+</div>
+<div class="article-container" *ngFor="let post of posts$ | async; let i = index">
   <article class="message-outer">
     <span class="anchorTarget"></span>
     <div class="message-inner">
@@ -168,7 +172,7 @@
           <div class="message-avatar">
             <div class="message-avatar-wrapper">
               <a href="">
-                <img class="avatar" src="{{post.user.imageUrl}}" alt="">
+                <img class="avatar" src="{{ post.user.imageUrl }}" alt="">
               </a>
             </div>
           </div>

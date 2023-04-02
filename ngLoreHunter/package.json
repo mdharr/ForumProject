@@ -25,6 +25,7 @@
     "@ckeditor/ckeditor5-html-embed": "^36.0.1",
     "@ckeditor/ckeditor5-media-embed": "^36.0.1",
     "@ckeditor/ckeditor5-watchdog": "^36.0.1",
+    "@mdi/font": "^7.2.96",
     "@ng-bootstrap/ng-bootstrap": "^14.0.1",
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
