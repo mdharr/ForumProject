@@ -9,7 +9,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { Category } from 'src/app/models/category';
-import { merge, Subscription, tap } from 'rxjs';
+import { merge, Observable, Subscription, tap } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -43,6 +43,7 @@ export class PostsComponent implements OnInit {
 
   post: Post = new Post();
   posts: Post[] = [];
+  posts$!: Observable<Post[]>;
   categories: Category[] = [];
   // post: null | Post = null;
   users: User[] = [];
@@ -104,10 +105,11 @@ export class PostsComponent implements OnInit {
         } else {
           this.router.navigateByUrl('invalidCategoryId');
         }
-        this.dataSource.loadPosts(this.categoryId, { active: 'id', direction: 'asc' });
+        // this.posts$ = this.dataSource.loadPosts(this.categoryId);
+        // this.posts$ = this.postService.postsByCategory(this.categoryId);
+        this.posts$ = this.postService.postsByCategory(this.categoryId).pipe();
       }
     });
-
     this.reload();
 
     this.authService.getLoggedInUser().subscribe({
@@ -191,6 +193,7 @@ export class PostsComponent implements OnInit {
   createPost: boolean = false;
   setAddPost(): void {
     this.editPost = Object.assign({}, this.selected);
+    this.reload();
   }
 
   addPost(post: Post) {
@@ -200,7 +203,7 @@ export class PostsComponent implements OnInit {
       next: (data) => {
         this.postCreated = true;
         this.post = data;
-        this.dataSource.loadPosts(this.categoryId, this.sort);
+        this.posts$ = this.postService.postsByCategory(this.categoryId);
       },
       error: (nojoy) => {
         console.error(
@@ -237,7 +240,7 @@ export class PostsComponent implements OnInit {
   }
 
   sortPosts(sort: Sort): void {
-    this.dataSource.loadPosts(this.categoryId, sort);
+    this.dataSource.loadPosts(this.categoryId);
   }
 
   getErrorMessageSubject() {

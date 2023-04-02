@@ -51,7 +51,8 @@ export class CommentService {
   }
 
   fetchComments(categoryId: number, postId: number): Observable<Comment[]>{
-    return this.http.get<Comment[]>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/comments').pipe(      catchError((err: any) => {
+    return this.http.get<Comment[]>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/comments').pipe(
+      catchError((err: any) => {
       console.log(err);
       return throwError(
         () =>

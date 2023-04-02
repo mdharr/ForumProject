@@ -42,7 +42,7 @@ export class PostService {
         return throwError(
           () =>
             new Error(
-              'PostService.index() error retrieving post list: ' + err
+              'PostService.index() error retrieving post: ' + err
             )
         );
       })

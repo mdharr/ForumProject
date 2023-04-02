@@ -331,7 +331,8 @@ mat-paginator {
   justify-content: space-between;;
   align-items: center;
   width: 90%;
-  background-color: #ffffff;
+  background-color: var(--container-bkg-color);
+  box-shadow: var(--box-shadow-style);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
@@ -339,7 +340,6 @@ mat-paginator {
   width: 96px;
   height: 96px;
   border: 1px solid white;
-  margin-right: 15px;
 }
 
 #username {
@@ -376,12 +376,18 @@ mat-paginator {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--text-color);
 }
 
 :host ::ng-deep .ck.ck-editor__editable {
 	min-height: 20vh;
   min-width: 100%;
 }
+
+/* .ck.ck-editor__main>.ck-editor__editable {
+  background: var(--bkg-color);
+  border-radius: 0;
+} */
 
 .editor-outer {
   width: 85%;
@@ -390,6 +396,10 @@ mat-paginator {
 
 .editor-inner {
   width: 100%;
+}
+
+.submitBtn {
+  color: var(--text-color);
 }
 
 .submitBtn:hover {

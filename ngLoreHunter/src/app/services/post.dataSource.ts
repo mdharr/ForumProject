@@ -28,14 +28,14 @@ export class PostDataSource extends DataSource<Post> {
     this.isLoading$.complete();
   }
 
-  loadPosts(categoryId: number, sort: Sort): void {
+  loadPosts(categoryId: number): Observable<Post[]> {
     this.isLoading$.next(true);
     console.log(categoryId);
-    console.log(sort);
-    this.postService.fetchPosts(categoryId, sort).subscribe((posts) => {
+    this.postService.postsByCategory(categoryId).subscribe((posts) => {
       this.posts$.next(posts);
       this.isLoading$.next(false);
     });
+    return this.posts$;
   }
 
   loadAllPosts(): void {

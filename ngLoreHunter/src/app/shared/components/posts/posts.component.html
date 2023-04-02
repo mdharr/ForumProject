@@ -159,7 +159,7 @@
 [pageSizeOptions]="[5, 10, 20]">
 </mat-paginator> -->
 
-<div *ngFor="let post of posts; let i = index">
+<div *ngFor="let post of posts$ | async; let i = index">
   <article class="message-outer">
     <span class="anchorTarget"></span>
     <div class="message-inner">
@@ -181,7 +181,7 @@
       <div class="message-cell message-cell-main">
         <div class="message-main">
           <div class="message-content">
-            <a class="post-link" [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']" [innerHtml]='post.subject | noSanitize'>{{ post.subject }}</a>
+            <a class="post-link" [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']" [innerHtml]='post.subject'>{{ post.subject }}</a>
           </div>
           <div class="message-content-details">
             <div class="message-user-details">
@@ -239,7 +239,7 @@
     <div class="editor-outer" style="padding: 10px;">
       <div class="editor-inner" style="padding: 10px;">
           <!-- <ckeditor name="newPost.subject" [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.'}" [formControl]="subject" [(ngModel)]="newPost.subject" required></ckeditor> -->
-          <mat-label style="font-weight: bolder; margin-right: 10px;">Title:</mat-label>
+          <mat-label style="font-weight: bolder; margin-right: 10px; color: var(--text-color);">Title:</mat-label>
           <input mat-input [formControl]="subject" [(ngModel)]="newPost.subject" required>
           <mat-error *ngIf="subject.invalid && checkCkEditor">{{ getErrorMessageSubject() }}</mat-error>
       </div>

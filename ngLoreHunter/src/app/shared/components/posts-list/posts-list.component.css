@@ -29,6 +29,7 @@
 
 .breadcrumb-value {
   cursor: pointer;
+  color: var(--text-color);
 }
 
 .breadcrumb-outer-bottom {
@@ -401,8 +402,9 @@ mat-paginator {
 }
 
 .message-outer {
-  background-color: #ffffff;
+  background-color: var(--container-bkg-color);
   margin-bottom: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  color: var(--text-color);
 }
 
