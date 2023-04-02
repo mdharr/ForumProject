@@ -29,6 +29,7 @@
 
 .breadcrumb-value {
   cursor: pointer;
+  color: var(--text-color);
 }
 
 .breadcrumb-outer-bottom {

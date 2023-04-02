@@ -77,6 +77,10 @@ export class HeaderComponent implements OnInit {
   clickMenu() {
     this.sideNavService.toggle();
     this.displayProgressBar = true;
+    setTimeout(() => {
+      this.displayProgressBar = false;
+    }, 1130);
+
   }
 
   public isCollapsed = false;

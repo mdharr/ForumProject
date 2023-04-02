@@ -27,6 +27,7 @@
       <button mat-button *ngIf="loggedIn()" [routerLink]="['/users', loggedInUser.id]">{{ loggedInUser.username }}</button>
       <app-logout *ngIf="loggedIn()"></app-logout>
 </mat-toolbar>
+<mat-progress-bar *ngIf="displayProgressBar" style="z-index: 3000;" mode="indeterminate" color="deep-purple"></mat-progress-bar>
 
 <ng-template #loginmodal let-modal>
   <div *ngIf="!loggedIn()">
