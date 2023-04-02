@@ -401,3 +401,69 @@ mat-paginator {
   font-weight: bolder;
 }
 
+.message-outer {
+  color: var(--text-color);
+  font-size: 15px;
+  background-color: var(--container-bkg-color);
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.message-inner {
+  display: flex;
+}
+
+.message-cell-user {
+  margin-right: 10px;
+}
+
+.post-link:hover {
+  text-decoration: underline;
+  color: #3f51b5;
+}
+
+.message-user-details {
+  display: inline-flex;
+}
+
+.p-content {
+  margin: 0;
+  font-size: 13px;
+  color:#58595b;
+}
+
+.message-metadetails {
+  display: flex;
+}
+
+.message-content-details {
+  display: flex;
+  justify-content:space-between;
+}
+
+.message-cell-main {
+  width: 100%;
+}
+
+.mat-icons {
+  font-size: 13px;
+  color:#58595b;
+  display:flex;
+  justify-content:center;
+}
+
+.comment-count,
+.view-count {
+  display: flex;
+  width: 75px !important;
+  justify-content: flex-start;
+}
+
+.latest-comment-date,
+.latest-comment-user {
+  width: 190px !important;
+  display: flex;
+  justify-content: flex-end;
+}
+
+

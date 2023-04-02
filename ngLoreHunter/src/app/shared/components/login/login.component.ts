@@ -33,8 +33,8 @@ export class LoginComponent {
         console.log(loggedInUser);
         this.modalService.dismissAll();
         this.authService.checkLogin();
+        this.router.navigateByUrl('home');
         location.reload();
-        // this.router.navigateByUrl('home');
       },
       error: (fail) => {
         console.error('Login failed');

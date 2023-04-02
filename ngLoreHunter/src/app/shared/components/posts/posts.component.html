@@ -120,7 +120,7 @@
 <div class="wrapper">
   <!-- <div *ngIf="dataSource.isLoading$ | async">Loading...</div> -->
 
-<table
+<!-- <table
   mat-table
   matSort
   matSortActive="id"
@@ -157,7 +157,63 @@
 <mat-paginator #paginator
 [pageSize]="5"
 [pageSizeOptions]="[5, 10, 20]">
-</mat-paginator>
+</mat-paginator> -->
+
+<div *ngFor="let post of posts; let i = index">
+  <article class="message-outer">
+    <span class="anchorTarget"></span>
+    <div class="message-inner">
+      <div class="message-cell message-cell-user">
+        <section class="message-user">
+          <div class="message-avatar">
+            <div class="message-avatar-wrapper">
+              <a href="">
+                <img class="avatar" src="{{post.user.imageUrl}}" alt="">
+              </a>
+            </div>
+          </div>
+          <div class="user-details-wrapper">
+            <div class="userDetails"></div>
+            <div class="userExtras"></div>
+          </div>
+        </section>
+      </div>
+      <div class="message-cell message-cell-main">
+        <div class="message-main">
+          <div class="message-content">
+            <a class="post-link" [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']" [innerHtml]='post.subject | noSanitize'>{{ post.subject }}</a>
+          </div>
+          <div class="message-content-details">
+            <div class="message-user-details">
+              <div>
+                <p class="p-content">{{ post.user.username }}</p>
+              </div>
+              <div>
+                <p class="p-content"><span style="margin-left: 5px; margin-right: 5px;">&#183;</span> {{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</p>
+              </div>
+            </div>
+            <div class="message-metadetails">
+              <div class="view-count">
+                <mat-icon class="mat-icons">visibility</mat-icon>
+                <p class="p-content">{{ post.viewCount }}</p>
+              </div>
+              <div class="comment-count">
+                <mat-icon class="mat-icons" style="margin-left: 8px;">chat_bubble</mat-icon>
+                <p class="p-content">{{ post.comments.length }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="latest-comment-details" *ngFor="let comment of post.comments; let i = index;">
+        <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-date">{{ comment.createdAt | date:'shortDate' }} at {{ comment.createdAt | date:'shortTime' }}</div>
+        <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-user">{{ comment.user.username }}</div>
+        <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
+        <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.user.username }}</div>
+      </div>
+    </div>
+  </article>
+</div>
 
 </div>
 
@@ -181,11 +237,11 @@
           <!-- <ckeditor name="newPost.subject" [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.'}" [formControl]="subject" [(ngModel)]="newPost.subject" required></ckeditor> -->
           <mat-label style="font-weight: bolder; margin-right: 10px;">Title:</mat-label>
           <input mat-input [formControl]="subject" [(ngModel)]="newPost.subject" required>
-          <mat-error *ngIf="content.invalid && checkCkEditor">{{getErrorMessageSubject()}}</mat-error>
+          <mat-error *ngIf="subject.invalid && checkCkEditor">{{ getErrorMessageSubject() }}</mat-error>
       </div>
       <div class="editor-inner" style="padding: 10px;">
           <ckeditor name="newPost.content" [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.'}" [formControl]="content" [(ngModel)]="newPost.content" required></ckeditor>
-          <mat-error *ngIf="content.invalid && checkCkEditor">{{getErrorMessageContent()}}</mat-error>
+          <mat-error *ngIf="content.invalid && checkCkEditor">{{ getErrorMessageContent() }}</mat-error>
       </div>
       <div class="submitButtonContainer" style="float: right; padding-right: 10px;">
         <button class="submitBtn" mat-stroked-button (click)="submitButtonClicked();">Submit</button>

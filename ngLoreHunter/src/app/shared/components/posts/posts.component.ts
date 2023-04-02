@@ -254,7 +254,12 @@ export class PostsComponent implements OnInit {
   }
 
   submitButtonClicked() {
-    if (!this.content.valid) {
+    if (!this.subject.valid) {
+      this.checkCkEditor = true;
+      this.subject.markAllAsTouched();
+      console.log('Submit button clicked');
+      return
+    } else if(!this.content.valid) {
       this.checkCkEditor = true;
       this.content.markAllAsTouched();
       console.log('Submit button clicked');
