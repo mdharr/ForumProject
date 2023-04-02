@@ -211,6 +211,10 @@
         <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
         <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.user.username }}</div>
       </div>
+      <div class="latest-comment-details" *ngIf="post.comments.length < 1">
+        <div class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
+        <div class="latest-comment-date">{{ post.user.username }}</div>
+      </div>
     </div>
   </article>
 </div>
