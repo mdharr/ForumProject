@@ -43,7 +43,9 @@ export class CommentsComponent implements OnInit {
   posts: Post[] = [];
 
   categories: Category[] = [];
-  post: null | Post = null;
+  // post: null | Post = null;
+  post: Post | null = null;
+
   users: User[] = [];
   selected: Post = new Post();
   categoryId: number = 0;
@@ -111,6 +113,7 @@ export class CommentsComponent implements OnInit {
             next: (post) => {
               console.log(post);
               console.log(this.postId);
+              // this.updateViewCount(this.postId, this.categoryId);
 
             },
             error: (fail) => {
@@ -141,6 +144,19 @@ export class CommentsComponent implements OnInit {
 
     this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe();
 
+  }
+
+  // needs work
+  updateViewCount(postId: number, categoryId: number): void {
+    console.log('in editInformation');
+    this.postService.update(this.postId, this.categoryId).subscribe({
+      next: (post) => {
+        post.viewCount += post.viewCount;
+        console.log("Before view count update" + post.viewCount);
+        post.viewCount += post.viewCount;
+        console.log("After first view count update" + post.viewCount);
+      }
+    });
   }
 
   loggedIn(): boolean {

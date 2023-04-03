@@ -113,6 +113,20 @@ export class PostService {
     );
   }
 
+  // updateViewCount(categoryId: number, postId: number): Observable<Post> {
+  //   return this.http.put<Post>(this.url + '/categories/' + categoryId + '/posts/' + postId).pipe(
+  //     catchError((err: any) => {
+  //       console.log(err);
+  //       return throwError(
+  //         () =>
+  //           new Error(
+  //             'PostService.updateViewCount(): error updating view count: ' + err
+  //           )
+  //       )
+  //     })
+  //   )
+  // }
+
   fetchPosts(categoryId: number, sort: Sort): Observable<Post[]>{
     const params = new HttpParams()
     .set('_sort', sort.active)
