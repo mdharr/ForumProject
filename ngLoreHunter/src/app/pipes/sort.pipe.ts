@@ -16,16 +16,31 @@ export class SortPipe implements PipeTransform {
     }
 
     value.sort((a: any, b: any) => {
-      if (a[sortField] < b[sortField]) {
+
+      let aField;
+      if (isNaN(a[sortField])) {
+        aField = a[sortField].toLowerCase();
+      } else {
+        aField = +[sortField];
+      }
+
+      let bField;
+      if (isNaN(b[sortField])) {
+        bField = b[sortField].toLowerCase();
+      } else {
+        bField = +b[sortField];
+      }
+
+      if (aField < bField) {
         return - 1 * multiplier;
-      } else if (a[sortField] > b[sortField]) {
+      } else if (aField > bField) {
         return 1 * multiplier;
       } else {
         return 0;
       }
     }
     );
-    return null;
+    return value;
   }
 
 }

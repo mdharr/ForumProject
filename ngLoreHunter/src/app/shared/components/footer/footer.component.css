@@ -10,6 +10,7 @@ h4 {
   color: rgb(9, 2, 24);
   text-align: center;
   position: relative;
+  display: none;
   }
 
   ul {

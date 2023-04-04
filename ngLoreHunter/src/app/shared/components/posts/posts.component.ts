@@ -41,11 +41,13 @@ export class PostsComponent implements OnInit {
 
   paramsSub: Subscription | undefined;
 
+  topic: string =  '';
+
   post: Post = new Post();
   posts: Post[] = [];
   posts$!: Observable<Post[]>;
   categories: Category[] = [];
-  // post: null | Post = null;
+
   users: User[] = [];
   selected: null | Post = null;
   categoryId: number = 0;
@@ -105,8 +107,7 @@ export class PostsComponent implements OnInit {
         } else {
           this.router.navigateByUrl('invalidCategoryId');
         }
-        // this.posts$ = this.dataSource.loadPosts(this.categoryId);
-        // this.posts$ = this.postService.postsByCategory(this.categoryId);
+
         this.posts$ = this.postService.postsByCategory(this.categoryId).pipe();
       }
     });
