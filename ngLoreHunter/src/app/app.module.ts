@@ -24,14 +24,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { FilterPipe } from './pipes/filter.pipe';
-import { SortPipe } from './pipes/sort.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FilterPipe,
-    SortPipe,
     // NoSanitizePipe
   ],
   imports: [

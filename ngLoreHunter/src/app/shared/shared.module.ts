@@ -1,3 +1,5 @@
+import { FilterPipe } from './../pipes/filter.pipe';
+import { SortPipe } from './../pipes/sort.pipe';
 import { PostDataSource } from './../services/post.dataSource';
 import { PostService } from 'src/app/services/post.service';
 import { NgModule } from '@angular/core';
@@ -51,7 +53,9 @@ import { NoSanitizePipe } from '../utilities/nosanitizerpipe';
     ProgressBarComponent,
     ProfileComponent,
     PostsListComponent,
-    NoSanitizePipe
+    NoSanitizePipe,
+    SortPipe,
+    FilterPipe
   ],
   imports: [
     CommonModule,
