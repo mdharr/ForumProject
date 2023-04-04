@@ -27,11 +27,11 @@ export class PostsComponent implements OnInit {
 
   public Editor = ClassicEditor;
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
+  // @ViewChild(MatPaginator)
+  // paginator!: MatPaginator;
 
-  @ViewChild(MatSort)
-  sort!: MatSort;
+  // @ViewChild(MatSort)
+  // sort!: MatSort;
 
   displayedColumns: string[] = ['user', 'subject', 'content'];
 
@@ -40,8 +40,6 @@ export class PostsComponent implements OnInit {
   viewCount: number = 0;
 
   paramsSub: Subscription | undefined;
-
-  topic: string =  '';
 
   post: Post = new Post();
   posts: Post[] = [];
@@ -240,9 +238,9 @@ export class PostsComponent implements OnInit {
     });
   }
 
-  sortPosts(sort: Sort): void {
-    this.dataSource.loadPosts(this.categoryId);
-  }
+  // sortPosts(sort: Sort): void {
+  //   this.dataSource.loadPosts(this.categoryId);
+  // }
 
   getErrorMessageSubject() {
     if(this.subject.hasError('required')) {

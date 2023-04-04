@@ -10,9 +10,7 @@ export class Comment {
   enabled: boolean;
   user: User;
   post: Post;
-  commentId: number;
-  // parentComment causing stack overflow
-  // parentComment: Comment;
+  parentId: number;
 
   constructor(
     id: number = 0,
@@ -23,8 +21,7 @@ export class Comment {
     enabled: boolean = false,
     user: User = new User(),
     post: Post = new Post(),
-    commentId: number = 0,
-    // parentComment: Comment = new Comment()
+    parentId: number = 0,
   ) {
     this.id = id;
     this.content = content;
@@ -34,7 +31,6 @@ export class Comment {
     this.enabled = enabled;
     this.user = user;
     this.post = post;
-    this.commentId = commentId;
-    // this.parentComment = parentComment;
+    this.parentId = parentId;
   }
 }

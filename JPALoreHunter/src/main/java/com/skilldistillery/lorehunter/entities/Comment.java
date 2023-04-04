@@ -48,25 +48,16 @@ public class Comment {
 	
 	private Boolean enabled;
 	
-	// parent/child single table
-	@JsonIgnore
-	@Transient
-    private Integer commentId;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional=true)
-    @JoinColumn(name="parent_id")
-    private Comment parentComment;
-    
-//    @JsonIgnore
-//    @OneToMany(mappedBy="comment", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
-//    private Set<Comment> childComment = new HashSet<Comment>();
+//	@JsonIgnore
+//    @Column(name = "parent_id")
+//    private int parentId;
 
 	public Comment() {
 		super();
 	}
 
 	public Comment(int id, String content, LocalDateTime createdAt, String status, LocalDateTime lastEdited, User user,
-			Post post, Boolean enabled, Integer commentId, Comment parentComment) {
+			Post post, Boolean enabled) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -76,8 +67,7 @@ public class Comment {
 		this.user = user;
 		this.post = post;
 		this.enabled = enabled;
-		this.commentId = commentId;
-		this.parentComment = parentComment;
+//		this.parentId = parentId;
 	}
 
 	public int getId() {
@@ -144,21 +134,19 @@ public class Comment {
 		this.enabled = enabled;
 	}
 
-	public Integer getCommentId() {
-		return commentId;
-	}
+	
 
-	public void setCommentId(Integer commentId) {
-		this.commentId = commentId;
-	}
+//	public int getParentId() {
+//		return parentId;
+//	}
+//
+//
+//
+//	public void setParentId(int parentId) {
+//		this.parentId = parentId;
+//	}
 
-	public Comment getParentComment() {
-		return parentComment;
-	}
 
-	public void setParentComment(Comment parentComment) {
-		this.parentComment = parentComment;
-	}
 
 	@Override
 	public int hashCode() {
@@ -179,29 +167,9 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Comment [id=");
-		builder.append(id);
-		builder.append(", content=");
-		builder.append(content);
-		builder.append(", createdAt=");
-		builder.append(createdAt);
-		builder.append(", status=");
-		builder.append(status);
-		builder.append(", lastEdited=");
-		builder.append(lastEdited);
-		builder.append(", user=");
-		builder.append(user);
-		builder.append(", post=");
-		builder.append(post);
-		builder.append(", enabled=");
-		builder.append(enabled);
-		builder.append(", commentId=");
-		builder.append(commentId);
-		builder.append(", parentComment=");
-		builder.append(parentComment);
-		builder.append("]");
-		return builder.toString();
+		return "Comment [id=" + id + ", content=" + content + ", createdAt=" + createdAt + ", status=" + status
+				+ ", lastEdited=" + lastEdited + ", user=" + user + ", post=" + post + ", enabled=" + enabled
+				+ "]";
 	}
 	
 	
