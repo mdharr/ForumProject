@@ -50,14 +50,16 @@ public class Comment {
 	
 //	@JsonIgnore
     @Column(name = "parent_id")
-    private int parentId;
+    private Integer parentId;
 
 	public Comment() {
 		super();
 	}
 
+
+
 	public Comment(int id, String content, LocalDateTime createdAt, String status, LocalDateTime lastEdited, User user,
-			Post post, Boolean enabled) {
+			Post post, Boolean enabled, Integer parentId) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -67,8 +69,10 @@ public class Comment {
 		this.user = user;
 		this.post = post;
 		this.enabled = enabled;
-//		this.parentId = parentId;
+		this.parentId = parentId;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -134,19 +138,13 @@ public class Comment {
 		this.enabled = enabled;
 	}
 
-	
+	public Integer getParentId() {
+		return parentId;
+	}
 
-//	public int getParentId() {
-//		return parentId;
-//	}
-//
-//
-//
-//	public void setParentId(int parentId) {
-//		this.parentId = parentId;
-//	}
-
-
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
 
 	@Override
 	public int hashCode() {
@@ -165,14 +163,15 @@ public class Comment {
 		return id == other.id;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", content=" + content + ", createdAt=" + createdAt + ", status=" + status
 				+ ", lastEdited=" + lastEdited + ", user=" + user + ", post=" + post + ", enabled=" + enabled
-				+ "]";
+				+ ", parentId=" + parentId + "]";
 	}
-	
-	
-	
+
+
 
 }
