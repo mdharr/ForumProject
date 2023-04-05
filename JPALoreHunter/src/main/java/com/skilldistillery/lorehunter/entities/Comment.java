@@ -48,7 +48,7 @@ public class Comment {
 	
 	private Boolean enabled;
 	
-	@JsonIgnore
+//	@JsonIgnore
     @Column(name = "parent_id")
     private int parentId;
 
