@@ -96,4 +96,15 @@ export class AuthService {
   getCredentials(): string | null {
     return localStorage.getItem('credentials');
   }
+
+  getLoggedInUsers(): Observable<number> {
+    return this.http.get<number>(this.url + 'logged-in-users').pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('AuthService.getLoggedInUsers(): error retrieving logged in users.')
+        );
+      })
+    );
+  }
 }

@@ -52,9 +52,8 @@ public class AuthController {
 	  return loggedInUser;
 	}
 	
-	  @GetMapping("online-users")
+	  @GetMapping("logged-in-users")
 	  public int getOnlineUsers() {
-	    List<Object> principals = sessionRegistry.getAllPrincipals();
-	    return principals.size();
+		  return authService.getLoggedInUsers();
 	  }
 }

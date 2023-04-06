@@ -3,6 +3,7 @@ package com.skilldistillery.lorehunter.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,14 @@ public class AuthServiceImpl implements AuthService {
 	    List<Object> principals = sessionRegistry.getAllPrincipals();
 	    return principals.size();
 	}
+
+	@Override
+	public int getLoggedInUsers() {
+	    List<Object> principals = sessionRegistry.getAllPrincipals();
+	    return principals.size();
+	}
+	
+	
 	
 
 

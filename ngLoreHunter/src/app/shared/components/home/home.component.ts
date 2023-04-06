@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category';
 import { AuthService } from 'src/app/services/auth.service';
@@ -30,6 +31,7 @@ export class HomeComponent implements OnInit {
   data: any;
   sort: any;
   latest: Post = new Post();
+  loggedInUsers: number = 0;
 
   isRotated1: boolean = false;
   isRotated2: boolean = false;
@@ -43,11 +45,17 @@ export class HomeComponent implements OnInit {
               private commentService: CommentService,
               private userService: UserService,
               private postDataSource: PostDataSource,
+              private http: HttpClient
               ) {}
 
   ngOnInit() {
     this.posts$ = this.postService.indexAll();
+    console.log(this.loggedInUsers);
+
     this.reload();
+    this.getLoggedInUsers();
+    console.log(this.loggedInUsers);
+
   }
 
   reload(): void {
@@ -131,10 +139,16 @@ export class HomeComponent implements OnInit {
     // do something
   }
 
-  // getLatestPost(categoryId: number) {
-  //   this.data = this.dataSource.loadLatestPost(categoryId);
-  //   this.posts = this.data;
-  //   this.latest = this.posts.sort((a, b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0];
-  // }
+  getLoggedInUsers() {
+    this.auth.getLoggedInUsers().subscribe({
+      next: (loggedInUsers) => {
+        this.loggedInUsers = loggedInUsers;
+      },
+      error: (fail) => {
+        console.error('Error getting online users:');
+        console.error(fail);
+      }
+    });
+  }
 
 }

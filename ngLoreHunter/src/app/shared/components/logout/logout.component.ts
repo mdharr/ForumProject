@@ -14,8 +14,9 @@ export class LogoutComponent {
   logout() {
     console.log("Logging out");
     this.authService.logout();
-    // location.reload();
     this.router.navigateByUrl('home');
+    location.reload();
   }
 
 }
+

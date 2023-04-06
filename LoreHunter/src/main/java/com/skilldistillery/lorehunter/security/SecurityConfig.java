@@ -56,12 +56,26 @@ public class SecurityConfig {
         .sessionManagement()
         .maximumSessions(1)
         .maxSessionsPreventsLogin(false)
-        .expiredUrl("/login")
+        .expiredUrl("/api/login")
         .sessionRegistry(sessionRegistry())
         .and()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
-        .httpBasic(); // Move httpBasic() here
+        .httpBasic() // Move httpBasic() here
+        .and()
+        .logout() // Configure logout handling
+        .logoutUrl("/api/logout") // URL for logging out
+        .deleteCookies("JSESSIONID") // Delete cookies on logout
+        .invalidateHttpSession(true) // Invalidate session on logout
+        .logoutSuccessHandler((request, response, authentication) -> {
+            // Get the user's session ID
+            String sessionId = request.getSession().getId();
+            // Remove the session from the SessionRegistry
+            sessionRegistry().removeSessionInformation(sessionId);
+            // Redirect to logout success page or do other actions
+            response.sendRedirect("/home");
+        })
+        .permitAll(); // Allow all users to access logout URL
 
         http
         .sessionManagement()
@@ -82,6 +96,7 @@ public class SecurityConfig {
         .usersByUsernameQuery(userQuery)
         .authoritiesByUsernameQuery(authQuery)
         .passwordEncoder(encoder);
+        
     }
     
 }
