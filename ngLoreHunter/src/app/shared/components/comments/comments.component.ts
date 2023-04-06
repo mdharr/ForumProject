@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Post } from 'src/app/models/post';
 import { Comment } from 'src/app/models/comment';
 import { HttpClient } from '@angular/common/http';
@@ -17,13 +17,14 @@ import { PostDataSource } from 'src/app/services/post.dataSource';
 import { CommentDataSource } from 'src/app/services/comment.dataSource';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormControl, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-comments',
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.css']
 })
-export class CommentsComponent implements OnInit {
+export class CommentsComponent implements OnInit, AfterViewInit {
   title = 'ngLoreHunter';
 
   public Editor = ClassicEditor;
@@ -80,7 +81,9 @@ export class CommentsComponent implements OnInit {
     private categoryService: CategoryService,
     private activatedRoute: ActivatedRoute,
     private homeService: HomeService,
-    private http: HttpClient
+    private http: HttpClient,
+    private sanitizer:DomSanitizer,
+    private _renderer: Renderer2
     ) {}
 
   ngOnInit() {
@@ -141,8 +144,11 @@ export class CommentsComponent implements OnInit {
     });
 
     // this.comments$ = this.dataSource.loadComments(this.categoryId, this.postId);
-
     this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe();
+
+  }
+
+  ngAfterViewInit(){
 
   }
 

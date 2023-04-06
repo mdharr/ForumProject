@@ -48,9 +48,8 @@ public class Comment {
 	
 	private Boolean enabled;
 	
-//	@JsonIgnore
-    @Column(name = "parent_id")
-    private Integer parentId;
+//    @Column(name = "parent_id")
+//    private Integer parentId;
 
 	public Comment() {
 		super();
@@ -69,7 +68,7 @@ public class Comment {
 		this.user = user;
 		this.post = post;
 		this.enabled = enabled;
-		this.parentId = parentId;
+//		this.parentId = parentId;
 	}
 
 
@@ -138,13 +137,13 @@ public class Comment {
 		this.enabled = enabled;
 	}
 
-	public Integer getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Integer parentId) {
-		this.parentId = parentId;
-	}
+//	public Integer getParentId() {
+//		return parentId;
+//	}
+//
+//	public void setParentId(Integer parentId) {
+//		this.parentId = parentId;
+//	}
 
 	@Override
 	public int hashCode() {
@@ -169,7 +168,7 @@ public class Comment {
 	public String toString() {
 		return "Comment [id=" + id + ", content=" + content + ", createdAt=" + createdAt + ", status=" + status
 				+ ", lastEdited=" + lastEdited + ", user=" + user + ", post=" + post + ", enabled=" + enabled
-				+ ", parentId=" + parentId + "]";
+				+ "]";
 	}
 
 
