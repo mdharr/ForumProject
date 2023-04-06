@@ -1,10 +1,12 @@
 package com.skilldistillery.lorehunter.controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,10 +20,14 @@ import com.skilldistillery.lorehunter.services.UserService;
 @RestController
 @CrossOrigin({"*", "http://localhost"})
 public class AuthController {
-  @Autowired
-  private AuthService authService;
-  @Autowired
-  private UserService userService;
+	@Autowired
+  	private AuthService authService;
+	
+  	@Autowired
+  	private UserService userService;
+  	
+	@Autowired
+	private SessionRegistry sessionRegistry;
   
   @PostMapping("register")
 	public User register(@RequestBody User user, HttpServletResponse res) {
@@ -45,4 +51,10 @@ public class AuthController {
 	  userService.updateLogInTime(loggedInUser);
 	  return loggedInUser;
 	}
+	
+	  @GetMapping("online-users")
+	  public int getOnlineUsers() {
+	    List<Object> principals = sessionRegistry.getAllPrincipals();
+	    return principals.size();
+	  }
 }
