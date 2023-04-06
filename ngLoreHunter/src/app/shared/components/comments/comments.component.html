@@ -338,7 +338,8 @@
               </header>
               <div class="message-content">
                 <div class="message-userContent">
-                  <article class="message-body" [innerHTML]="comment.content | noSanitize"></article>
+                  <article class="message-body" [innerHtml]="comment.content | noSanitize">
+                  </article>
                 </div>
               </div>
             </div>

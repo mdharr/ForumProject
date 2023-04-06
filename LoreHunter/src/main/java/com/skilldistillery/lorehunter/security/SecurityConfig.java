@@ -9,6 +9,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -22,6 +24,11 @@ public class SecurityConfig {
     // this bean is created in the application starter class if you're looking for it
     @Autowired
     private PasswordEncoder encoder;
+    
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl(); // You can use the default implementation or any custom implementation of SessionRegistry interface
+    }
 	
     @Bean
     public SecurityFilterChain createFilterChain(HttpSecurity http) throws Exception {
@@ -46,7 +53,15 @@ public class SecurityConfig {
         .antMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
         .anyRequest().permitAll()               // All other requests are allowed without authentication.
         .and()
-        .httpBasic();                           // Use HTTP Basic Authentication
+        .sessionManagement()
+        .maximumSessions(1)
+        .maxSessionsPreventsLogin(false)
+        .expiredUrl("/login")
+        .sessionRegistry(sessionRegistry())
+        .and()
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+        .httpBasic(); // Move httpBasic() here
 
         http
         .sessionManagement()
