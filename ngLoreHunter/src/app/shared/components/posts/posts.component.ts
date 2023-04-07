@@ -9,7 +9,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { Category } from 'src/app/models/category';
-import { merge, Observable, Subscription, tap } from 'rxjs';
+import { map, merge, Observable, Subscription, tap } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -102,7 +102,9 @@ export class PostsComponent implements OnInit {
           this.router.navigateByUrl('invalidCategoryId');
         }
 
-        this.posts$ = this.postService.postsByCategory(this.categoryId).pipe();
+        this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
+          map(posts => posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
+        );
       }
     });
     this.reload();
@@ -183,7 +185,10 @@ export class PostsComponent implements OnInit {
       next: (data) => {
         this.postCreated = true;
         this.post = data;
-        this.posts$ = this.postService.postsByCategory(this.categoryId);
+        // this.posts$ = this.postService.postsByCategory(this.categoryId);
+        this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
+          map(posts => posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
+        );
       },
       error: (nojoy) => {
         console.error(
