@@ -386,6 +386,11 @@ mat-paginator {
   background-color: var(--container-bkg-color);
 }
 
+.custom-ckeditor-toolbar {
+  color: var(--text-color);
+  background-color: var(--bkg-color); /* Change this to the desired background color */
+}
+
 /* .ck.ck-editor__main>.ck-editor__editable {
   background: var(--bkg-color);
   border-radius: 0;
@@ -542,4 +547,8 @@ mat-paginator {
   background-color: var(--container-bkg-color); /* Change this to the desired background color */
 }
 
+.mat-paginator-container {
+  display: flex !important;
+  align-items: center !important;
+}
 

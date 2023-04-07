@@ -9,7 +9,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { Category } from 'src/app/models/category';
-import { map, merge, Observable, Subscription, tap } from 'rxjs';
+import { map, merge, Observable, Subscription, take, tap } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -19,15 +19,29 @@ import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-posts',
+  template: `
+  <ckeditor
+    #ckeditorInstance
+    name="newPost.content"
+    [editor]="Editor"
+    [config]="{placeholder: 'Hello, Colonel! This is Snake.', contentsCSS: ['src/app/shared/components/posts/posts.component.css']}"
+    [formControl]="content"
+    required
+    ></ckeditor>
+  `,
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, AfterViewInit {
   title = 'ngLoreHunter';
 
   public Editor = ClassicEditor;
 
   @ViewChild('ckeditorInstance') ckeditorInstance: any; // Add this line to access the CKEditor instance
+
+  currentPage: number = 1;
+
+  pageSize: number = 5;
 
   displayedColumns: string[] = ['user', 'subject', 'content'];
 
@@ -120,6 +134,14 @@ export class PostsComponent implements OnInit {
       },
     });
 
+  }
+
+  ngAfterViewInit() {
+    const toolbarElement = document.querySelector('.ck-toolbar');
+
+    if (toolbarElement) {
+      (toolbarElement as HTMLElement).style.backgroundColor = 'red !important'; // Replace with your desired background color
+    }
   }
 
   loggedIn(): boolean {
@@ -251,6 +273,31 @@ export class PostsComponent implements OnInit {
       }
     }
   );
+  }
+
+  getTotalPages(): number {
+    const totalPosts = this.posts.length; // or use this.posts$.value.length if you're using BehaviorSubject
+    return Math.ceil(totalPosts / this.pageSize);
+  }
+
+  goToPreviousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  goToNextPage(): void {
+    if (this.posts$ !== undefined) {
+      this.posts$.pipe(
+        take(1)
+      ).subscribe(posts => {
+        if (Array.isArray(posts) && (this.currentPage * 5) < (posts.length)) {
+          this.currentPage++;
+        }
+      }, error => {
+        console.error(error);
+      });
+    }
   }
 
 }

@@ -381,6 +381,8 @@ mat-paginator {
 :host ::ng-deep .ck.ck-editor__editable {
 	min-height: 20vh;
   min-width: 100%;
+  color: var(--text-color);
+  background-color: var(--container-bkg-color);
 }
 
 .ck-content > p {

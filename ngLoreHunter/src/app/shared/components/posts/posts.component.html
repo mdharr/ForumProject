@@ -159,6 +159,17 @@
 [pageSizeOptions]="[5, 10, 20]">
 </mat-paginator> -->
 
+<div class="mat-paginator-container" fxLayout="row" fxLayoutAlign="center center">
+  <button mat-icon-button [disabled]="currentPage === 1" (click)="goToPreviousPage()">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+  <div class="mat-paginator-range-label">
+    Page {{ currentPage }} of {{ getTotalPages() }}
+  </div>
+  <button mat-icon-button [disabled]="currentPage === getTotalPages()" (click)="goToNextPage()">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
+</div>
 
 <div class="block-filter-bar">
   <div class="filter-bar">
@@ -168,7 +179,9 @@
 </div>
 
 <!-- <ng-container *ngIf="(posts$ | async) as posts"> -->
-  <div class="article-container" *ngFor="let post of posts$ | async; let i = index">
+  <!-- <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">Previous</button>
+  <button (click)="goToNextPage()" *ngIf="posts$ | async as posts" [disabled]="(currentPage * 5) >= posts.length">Next</button> -->
+  <div class="article-container" *ngFor="let post of (posts$ | async)?.slice((currentPage - 1) * 5, currentPage * 5); let i = index">
     <article class="message-outer">
       <span class="anchorTarget"></span>
       <div class="message-inner">
@@ -253,7 +266,7 @@
           <mat-error *ngIf="subject.invalid && checkCkEditor">{{ getErrorMessageSubject() }}</mat-error>
       </div>
       <div class="editor-inner" style="padding: 10px;">
-          <ckeditor #ckeditorInstance name="newPost.content" [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.', contentsCSS: ['src/app/shared/components/posts/posts.component.css']}" [formControl]="content" [(ngModel)]="newPost.content" required></ckeditor>
+          <ckeditor #ckeditorInstance name="newPost.content" [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.', contentsCSS: ['src/app/shared/components/posts/posts.component.css']}" [formControl]="content" required></ckeditor>
           <mat-error *ngIf="content.invalid && checkCkEditor">{{ getErrorMessageContent() }}</mat-error>
       </div>
       <div class="submitButtonContainer" style="float: right; padding-right: 10px;">
