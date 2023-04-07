@@ -173,8 +173,8 @@
 
 <div class="block-filter-bar">
   <div class="filter-bar">
-    <!-- <a class="filter-bar-menu-trigger" role="mat-button" href="">Filters<span class="filter-bar-icon"><mat-icon>arrow_drop_down</mat-icon></span></a> -->
-    <input [(ngModel)]="filterSubject" (input)="filterPosts()" placeholder="Filter by subject">
+    <a *ngIf="currentPage !== 1" class="filter-bar-menu-trigger" role="mat-button" href="">Filters<span class="filter-bar-icon"><mat-icon>arrow_drop_down</mat-icon></span></a>
+    <input *ngIf="currentPage === 1" [(ngModel)]="filterSubject" (input)="filterPosts()" placeholder="Filter by subject">
   </div>
 </div>
 
