@@ -55,7 +55,7 @@ public class Post {
 	private List<Comment> comments;
 	
 	@Column(name = "view_count")
-	private int viewCount;
+	private Integer viewCount;
 	
 	private Boolean enabled;
 
@@ -64,7 +64,7 @@ public class Post {
 	}
 
 	public Post(int id, String subject, String content, LocalDateTime createdAt, String status, LocalDateTime lastEdited,
-			Integer commentCount, User user, Category category, List<Comment> comments, int viewCount, Boolean enabled) {
+			Integer commentCount, User user, Category category, List<Comment> comments, Integer viewCount, Boolean enabled) {
 		super();
 		this.id = id;
 		this.subject = subject;
@@ -160,11 +160,11 @@ public class Post {
 		this.comments = comments;
 	}
 	
-	public int getViewCount() {
+	public Integer getViewCount() {
 		return viewCount;
 	}
 
-	public void setViewCount(int viewCount) {
+	public void setViewCount(Integer viewCount) {
 		this.viewCount = viewCount;
 	}
 
