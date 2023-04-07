@@ -552,6 +552,7 @@ mat-paginator {
 .mat-paginator-container {
   display: flex !important;
   align-items: center !important;
+  color: var(--text-color) !important;
 }
 
 
