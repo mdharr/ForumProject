@@ -266,7 +266,7 @@
           <mat-error *ngIf="subject.invalid && checkCkEditor">{{ getErrorMessageSubject() }}</mat-error>
       </div>
       <div class="editor-inner" style="padding: 10px;">
-          <ckeditor #ckeditorInstance name="newPost.content" [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.', contentsCSS: ['src/app/shared/components/posts/posts.component.css']}" [formControl]="content" required></ckeditor>
+          <ckeditor #ckeditorInstance name="newPost.content" [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.', contentsCSS: ['src/app/shared/components/posts/posts.component.css']}" [formControl]="content" [(ngModel)]="newPost.content" required></ckeditor>
           <mat-error *ngIf="content.invalid && checkCkEditor">{{ getErrorMessageContent() }}</mat-error>
       </div>
       <div class="submitButtonContainer" style="float: right; padding-right: 10px;">
