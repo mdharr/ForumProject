@@ -48,6 +48,7 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public int getLoggedInUsers() {
 	    List<Object> principals = sessionRegistry.getAllPrincipals();
+	    System.out.println(principals);
 	    return principals.size();
 	}
 	

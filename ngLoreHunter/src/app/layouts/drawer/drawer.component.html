@@ -39,7 +39,7 @@
         </mat-expansion-panel>
       </mat-accordion>
       <hr class="dark-mode-text">
-      <a mat-list-item><dl class="pairs hide-images"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">hide_image</mat-icon></dt><dd><span class="sidenav-items">Hide Images</span></dd></dl></a>
+      <a mat-list-item (click)="onHideImagesButtonClick()"><dl class="pairs hide-images"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">hide_image</mat-icon></dt><dd><span class="sidenav-items">Hide Images</span></dd></dl></a>
       <hr class="dark-mode-text">
       <!-- <a mat-list-item (click)="toggleDarkTheme()"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">light_mode</mat-icon></dt><dd><span  class="sidenav-items">Light/Dark</span></dd></dl></a> -->
       <a mat-list-item><mat-slide-toggle

@@ -27,11 +27,7 @@ export class PostsComponent implements OnInit {
 
   public Editor = ClassicEditor;
 
-  // @ViewChild(MatPaginator)
-  // paginator!: MatPaginator;
-
-  // @ViewChild(MatSort)
-  // sort!: MatSort;
+  @ViewChild('ckeditorInstance') ckeditorInstance: any; // Add this line to access the CKEditor instance
 
   displayedColumns: string[] = ['user', 'subject', 'content'];
 
@@ -124,22 +120,6 @@ export class PostsComponent implements OnInit {
 
   }
 
-  // ngAfterViewInit() {
-
-  //   merge(this.sort.sortChange, this.paginator.page)
-  //       .pipe(
-  //         tap(() => this.dataSource.loadPosts(this.categoryId, this.sort))
-  //       )
-  //       .subscribe();
-
-  // }
-
-  // ngOnDestroy() {
-  //   console.log('Destroyed and unsubscribed');
-  //   this.paramsSub?.unsubscribe();
-
-  // }
-
   loggedIn(): boolean {
     return this.authService.checkLogin();
   }
@@ -174,6 +154,7 @@ export class PostsComponent implements OnInit {
   displayPost(post: Post | null) {
     this.selected = post;
     if (this.selected) {
+      this.postId = this.selected.id;
       console.log('user name');
 
     }
@@ -218,30 +199,6 @@ export class PostsComponent implements OnInit {
     this.editPost = Object.assign({}, this.selected);
   }
 
-  updatePost(post: Post, goToDetail = true): void {
-    this.postService.update(this.postId, this.categoryId).subscribe({
-      next: (updatedPost) => {
-        if (goToDetail) {
-          this.displayPost(updatedPost);
-        } else {
-          this.displayPost(null);
-        }
-        this.editPost = null;
-        this.reload();
-      },
-      error: (toobad) => {
-        console.error(
-          'PostsComponent.updatePost: error updating post'
-        );
-          console.error(toobad);
-      },
-    });
-  }
-
-  // sortPosts(sort: Sort): void {
-  //   this.dataSource.loadPosts(this.categoryId);
-  // }
-
   getErrorMessageSubject() {
     if(this.subject.hasError('required')) {
       return 'Must enter valid subject to submit';
@@ -268,7 +225,27 @@ export class PostsComponent implements OnInit {
       return
     } else {
       this.addPost(this.newPost);
+      this.subject.reset();
+      this.ckeditorInstance.editorInstance.setData('');
     }
+  }
+
+  incrementViewCount(categoryId: number, postId: number): void {
+    // Call the API to increment the view count
+    this.postService.updateViewCount(categoryId, postId).subscribe({
+      next: (data) => {
+        this.postCreated = true;
+        this.post = data;
+        this.posts$ = this.postService.postsByCategory(this.categoryId);
+      },
+      error: (nojoy) => {
+        console.error(
+          'PostsComponent.addPost: error creating post'
+        );
+          console.error(nojoy);
+      }
+    }
+  );
   }
 
 }

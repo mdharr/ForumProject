@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Category } from '../models/category';
 import { Post } from '../models/post';
 import { AuthService } from './auth.service';
-import { map } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { Sort } from '@angular/material/sort';
 import { PostInterface } from './post.interface';
 
@@ -100,7 +100,26 @@ export class PostService {
         'Content-Type': 'application/json',
       },
     };
-    return this.http.put<Post>(this.url + '/categories/' + categoryId + '/posts/' + postId, this.getHttpOptions()).pipe(
+    // Call the API to update the post
+    return this.http.put<Post>(this.url + '/categories/' + categoryId + '/posts/' + postId, {}, this.getHttpOptions()).pipe(
+      switchMap(() => {
+        // After successful update, fetch the updated post
+        return this.http.get<Post>(this.url + '/categories/' + categoryId + '/posts/' + postId).pipe(
+          tap((post: Post) => {
+            // Update the view count of the fetched post
+            post.viewCount++;
+          }),
+          catchError((err: any) => {
+            console.log(err);
+            return throwError(
+              () =>
+                new Error(
+                  'PostService.update(): error fetching updated post: ' + err
+                )
+            );
+          })
+        );
+      }),
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -113,19 +132,9 @@ export class PostService {
     );
   }
 
-  // updateViewCount(categoryId: number, postId: number): Observable<Post> {
-  //   return this.http.put<Post>(this.url + '/categories/' + categoryId + '/posts/' + postId).pipe(
-  //     catchError((err: any) => {
-  //       console.log(err);
-  //       return throwError(
-  //         () =>
-  //           new Error(
-  //             'PostService.updateViewCount(): error updating view count: ' + err
-  //           )
-  //       )
-  //     })
-  //   )
-  // }
+  updateViewCount(categoryId: number, postId: number): Observable<Post> {
+    return this.http.put<Post>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/viewCount', {});
+  }
 
   fetchPosts(categoryId: number, sort: Sort): Observable<Post[]>{
     const params = new HttpParams()

@@ -350,7 +350,8 @@
             <div class="content-row">
               <div class="content-row-figure">
                 <a href="#">
-                  <img class="user-avatar" src="{{ post.user.imageUrl }}">
+                  <img class="user-avatar" [src]="post.user.imageUrl" alt="User Image">
+                  <!-- <img *ngIf="hideImages" class="user-avatar" [src]="defaultImageUrl" alt="User Image"> -->
                 </a>
               </div>
               <div class="content-row-main">

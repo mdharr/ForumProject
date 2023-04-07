@@ -63,7 +63,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public Post update(String username, int postId, Post post, int categoryId) {
-		Post existing = show(username, postId);
+		Post existing = postRepo.findByUser_UsernameAndId(username, postId);
 		existing.setSubject(post.getSubject());
 		existing.setContent(post.getContent());
 		existing.setStatus(post.getStatus());
@@ -88,15 +88,15 @@ public class PostServiceImpl implements PostService {
 		return true;
 	}
 
-//	@Override
-//	public Post updateViewCount(int postId, Post post, int categoryId) {
-//		Optional<Post> postOpt = postRepo.findById(postId);
-//		if(postOpt.isPresent()) {
-//			Post updated = postOpt.get();
-//			updated.setViewCount(updated.getViewCount());
-//			postRepo.saveAndFlush(updated);
-//		}
-//		return null;
-//	}
+	@Override
+	public Post updateViewCount(int postId, int categoryId) {
+	    Optional<Post> postOpt = postRepo.findById(postId);
+	    if(postOpt.isPresent()) {
+	        Post updated = postOpt.get();
+	        updated.setViewCount(updated.getViewCount() + 1); // Increment viewCount by 1
+	        return postRepo.saveAndFlush(updated); // Return the updated post object
+	    }
+	    return null;
+	}
 
 }

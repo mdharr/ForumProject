@@ -25,6 +25,9 @@ public class SecurityConfig {
     @Autowired
     private PasswordEncoder encoder;
     
+    @Autowired
+    private CustomLogoutHandler customLogoutHandler; // Autowire your custom logout handler here
+    
     @Bean
     public SessionRegistry sessionRegistry() {
         return new SessionRegistryImpl(); // You can use the default implementation or any custom implementation of SessionRegistry interface
@@ -47,6 +50,7 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.PUT, "/api/categories/**/posts/**").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.PUT, "/api/categories/**/posts/**/comments").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/categories/**/posts/**/comments").permitAll() // will hit the OPTIONS on the route
+        .antMatchers(HttpMethod.PUT, "/api/categories/**/posts/**/viewCount").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/users/**").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/posts").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/comments").permitAll() // will hit the OPTIONS on the route
@@ -56,7 +60,7 @@ public class SecurityConfig {
         .sessionManagement()
         .maximumSessions(1)
         .maxSessionsPreventsLogin(false)
-        .expiredUrl("/api/login")
+        .expiredUrl("/login")
         .sessionRegistry(sessionRegistry())
         .and()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -64,16 +68,17 @@ public class SecurityConfig {
         .httpBasic() // Move httpBasic() here
         .and()
         .logout() // Configure logout handling
-        .logoutUrl("/api/logout") // URL for logging out
+        .logoutUrl("/logout") // URL for logging out
         .deleteCookies("JSESSIONID") // Delete cookies on logout
         .invalidateHttpSession(true) // Invalidate session on logout
+        .addLogoutHandler(customLogoutHandler) // Register custom logout handler
         .logoutSuccessHandler((request, response, authentication) -> {
             // Get the user's session ID
             String sessionId = request.getSession().getId();
             // Remove the session from the SessionRegistry
             sessionRegistry().removeSessionInformation(sessionId);
             // Redirect to logout success page or do other actions
-            response.sendRedirect("/home");
+            response.sendRedirect("/api/home");
         })
         .permitAll(); // Allow all users to access logout URL
 

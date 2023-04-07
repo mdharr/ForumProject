@@ -12,6 +12,7 @@ import { CommentService } from 'src/app/services/comment.service';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { Observable } from 'rxjs';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-home',
@@ -45,7 +46,8 @@ export class HomeComponent implements OnInit {
               private commentService: CommentService,
               private userService: UserService,
               private postDataSource: PostDataSource,
-              private http: HttpClient
+              private http: HttpClient,
+              public imageService: ImageService
               ) {}
 
   ngOnInit() {

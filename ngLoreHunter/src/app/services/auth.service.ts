@@ -4,6 +4,7 @@ import { Observable, catchError, throwError, tap } from 'rxjs';
 import { User } from '../models/user';
 import { Buffer } from "buffer";
 import { environment } from 'src/environments/environment';
+import { NavigationEnd, RouterLink } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -54,8 +55,16 @@ export class AuthService {
     );
   }
 
-  logout(): void {
+  logout(): Observable<any> {
     localStorage.removeItem('credentials');
+    return this.http.post(this.url + 'logout', null).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('AuthService.logout(): error logging out user.')
+        );
+      })
+    );
   }
 
   getLoggedInUser(): Observable<User> {
@@ -107,4 +116,15 @@ export class AuthService {
       })
     );
   }
+
+  // invalidateLoginCredentials() {
+  //   return this.http.post(this.url + 'logout').pipe(
+  //     catchError((err: any) => {
+  //       console.log(err);
+  //       return throwError(
+  //         () => new Error('AuthService.invalidateLoginCredentials(): error invalidating login.')
+  //       );
+  //     })
+  //   );
+  // }
 }

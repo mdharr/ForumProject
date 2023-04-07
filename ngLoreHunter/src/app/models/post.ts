@@ -15,6 +15,7 @@ export class Post {
   user: User;
   category: Category;
   comments: Comment[];
+  sort: any;
 
   constructor(
     id: number = 0,

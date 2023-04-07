@@ -28,6 +28,7 @@ export class CommentsComponent implements OnInit, AfterViewInit {
   title = 'ngLoreHunter';
 
   public Editor = ClassicEditor;
+  @ViewChild('ckeditorInstance') ckeditorInstance: any; // Add this line to access the CKEditor instance
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -266,6 +267,7 @@ export class CommentsComponent implements OnInit, AfterViewInit {
       return
     } else {
       this.createComment(this.newComment, this.selected);
+      this.ckeditorInstance.editorInstance.setData('');
     }
   }
 
