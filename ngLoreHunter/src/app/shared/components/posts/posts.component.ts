@@ -9,7 +9,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { Category } from 'src/app/models/category';
-import { map, merge, Observable, Subscription, take, tap } from 'rxjs';
+import { debounceTime, map, merge, Observable, Subscription, take, tap } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -310,6 +310,7 @@ export class PostsComponent implements OnInit, AfterViewInit {
 
           if (this.filterSubject && this.filterSubject !== '') {
             subjectMatch = post.subject.toLowerCase().includes(this.filterSubject.toLowerCase());
+
           }
           return subjectMatch;
         });

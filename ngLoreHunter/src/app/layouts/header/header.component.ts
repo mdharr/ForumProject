@@ -9,6 +9,8 @@ import { UserService } from 'src/app/services/user.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { HomeService } from 'src/app/services/home.service';
 import { Category } from 'src/app/models/category';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ChangeDetectorRef } from '@angular/core';
 
 
 @Component({
@@ -32,7 +34,10 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService,
     private modalService: NgbModal,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private cdr: ChangeDetectorRef
+    ) {
 
   }
 
@@ -47,19 +52,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.getLoggedInUser().subscribe({
-      next: (user) => {
-        this.loggedInUser = user;
-        console.log(user);
-      },
-      error: (error) => {
-        console.log('Error getting loggedInUser Profile Component');
-        console.log(error);
-      },
-    });
-
     this.reload();
-
   }
 
   reload(): void {
@@ -71,6 +64,17 @@ export class HeaderComponent implements OnInit {
         console.error('Error getting categories:');
         console.error(fail);
       }
+    });
+
+    this.authService.getLoggedInUser().subscribe({
+      next: (user) => {
+        this.loggedInUser = user;
+        console.log(user);
+      },
+      error: (error) => {
+        console.log('Error getting loggedInUser Profile Component');
+        console.log(error);
+      },
     });
   }
 
@@ -121,6 +125,12 @@ export class HeaderComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
+
+  }
+
+  checkForLogin() {
+    this.cdr.markForCheck();
+    this.cdr.detectChanges();
   }
 
 }

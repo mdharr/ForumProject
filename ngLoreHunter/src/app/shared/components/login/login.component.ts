@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -22,8 +23,9 @@ export class LoginComponent {
               private authService: AuthService,
               private router: Router,
               private modalService: NgbModal,
-              private userService: UserService
-              ) {}
+              private userService: UserService,
+              private snackBar: MatSnackBar
+  ) {}
 
   login(loginUser: User) {
     console.log("Logging in");
@@ -33,16 +35,20 @@ export class LoginComponent {
         console.log(loggedInUser);
         this.modalService.dismissAll();
         this.authService.checkLogin();
-        this.router.navigateByUrl('home');
-        location.reload();
+        this.snackBar.open('Login Successful!', 'Dismiss', {
+          duration: 4000,
+          panelClass: ['mat-toolbar', 'mat-primary'],
+          verticalPosition: 'bottom'
+        });
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
       },
       error: (fail) => {
         console.error('Login failed');
         console.error(fail);
       }
     });
-
-    // this.userService
   }
 
 }
