@@ -45,9 +45,11 @@ export class PostsComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['user', 'subject', 'content'];
 
-  dataSource = new PostDataSource(this.postService);
-
   viewCount: number = 0;
+
+  filteredPosts: Post[] = [];
+
+  public filterSubject: string = '';
 
   paramsSub: Subscription | undefined;
 
@@ -298,6 +300,21 @@ export class PostsComponent implements OnInit, AfterViewInit {
         console.error(error);
       });
     }
+  }
+
+  public filterPosts(): void {
+    this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
+      map(posts => {
+        return posts.filter(post => {
+          let subjectMatch = true;
+
+          if (this.filterSubject && this.filterSubject !== '') {
+            subjectMatch = post.subject.toLowerCase().includes(this.filterSubject.toLowerCase());
+          }
+          return subjectMatch;
+        });
+      })
+    );
   }
 
 }
