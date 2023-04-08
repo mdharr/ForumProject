@@ -163,15 +163,15 @@ export class PostService {
     getAllPosts(): Observable<Post[]>{
       return this.http.get<Post[]>(this.url + '/posts').pipe(
         catchError((err: any) => {
-        console.log(err);
-        return throwError(
-          () =>
-          new Error(
-            'PostService.getPosts(): error retrieving list of all posts: ' + err
-          )
+          console.log(err);
+          return throwError(
+            () =>
+              new Error(
+                'PostService.index(): error retrieving list of all posts: ' + err
+              )
           );
         })
-        );
-      }
+      );
+    }
 
 }

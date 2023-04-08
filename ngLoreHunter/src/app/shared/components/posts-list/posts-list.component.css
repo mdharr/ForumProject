@@ -331,7 +331,8 @@ mat-paginator {
   justify-content: space-between;;
   align-items: center;
   width: 90%;
-  background-color: #ffffff;
+  background-color: var(--container-bkg-color);
+  box-shadow: var(--box-shadow-style);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
@@ -339,7 +340,6 @@ mat-paginator {
   width: 96px;
   height: 96px;
   border: 1px solid white;
-  margin-right: 15px;
 }
 
 #username {
@@ -376,12 +376,25 @@ mat-paginator {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--text-color);
 }
 
 :host ::ng-deep .ck.ck-editor__editable {
 	min-height: 20vh;
   min-width: 100%;
+  color: var(--text-color);
+  background-color: var(--container-bkg-color);
 }
+
+.custom-ckeditor-toolbar {
+  color: var(--text-color);
+  background-color: var(--bkg-color); /* Change this to the desired background color */
+}
+
+/* .ck.ck-editor__main>.ck-editor__editable {
+  background: var(--bkg-color);
+  border-radius: 0;
+} */
 
 .editor-outer {
   width: 85%;
@@ -390,6 +403,10 @@ mat-paginator {
 
 .editor-inner {
   width: 100%;
+}
+
+.submitBtn {
+  color: var(--text-color);
 }
 
 .submitBtn:hover {
@@ -402,9 +419,138 @@ mat-paginator {
 }
 
 .message-outer {
-  background-color: var(--container-bkg-color);
-  margin-bottom: 10px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   color: var(--text-color);
+  font-size: 15px;
+  background-color: var(--container-bkg-color);
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
+.message-inner {
+  display: flex;
+}
+
+.message-cell-user {
+  margin-right: 10px;
+}
+
+.post-link:hover {
+  text-decoration: underline;
+  color: #3f51b5;
+}
+
+.message-user-details {
+  display: inline-flex;
+}
+
+.p-content {
+  margin: 0;
+  font-size: 13px;
+  color:#58595b;
+}
+
+.message-metadetails {
+  display: flex;
+}
+
+.message-content-details {
+  display: flex;
+  justify-content:space-between;
+}
+
+.message-cell-main {
+  width: 100%;
+}
+
+.mat-icons {
+  font-size: 13px;
+  color:#58595b;
+  display:flex;
+  justify-content:center;
+}
+
+.comment-count,
+.view-count {
+  display: flex;
+  width: 75px !important;
+  justify-content: flex-start;
+}
+
+.latest-comment-date,
+.latest-comment-user {
+  width: 190px !important;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.article-container:nth-child(odd) article {
+  background-color: var(--table-row-color-odd) !important;
+}
+
+.article-container:nth-child(even) article {
+  background-color: var(--table-row-color-even) !important;
+}
+
+.article-container article:hover {
+  background-color: var(--table-filter-row) !important;
+}
+
+.article-container:last-child article {
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.block-filter-bar {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 6px;
+    font-size: 1.3rem;
+    color: var(--text-color);
+    background: var(--table-filter-row);
+    border-bottom:  2px solid #3f51b5;
+    box-shadow: var(--box-shadow-style);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.filter-bar {
+  display: flex;
+}
+
+.filter-bar-menu-trigger {
+  flex: 0 0 auto;
+    margin-left: auto;
+    white-space: nowrap;
+    border-radius: 6px;
+    text-decoration: none;
+    padding: 1px 5px;
+    font-size: 1rem;
+    padding: 0;
+    padding-right: 8px;
+    padding-left: 8px;
+    height: 28px;
+    line-height: 28px;
+    color: #3f51b5;
+}
+
+.filter-bar-icon {
+  font: normal normal normal 18px/1 "Material Design Icons";
+  font-size: 110%;
+  font-weight: 400;
+  line-height: inherit;
+  width: auto;
+  display: inline-block;
+  text-align: center;
+  font-weight: 900;
+  font-size: inherit;
+}
+
+.custom-ckeditor {
+  background-color: var(--container-bkg-color); /* Change this to the desired background color */
+}
+
+.mat-paginator-container {
+  display: flex !important;
+  align-items: center !important;
+  color: var(--text-color) !important;
+}

@@ -1,21 +1,16 @@
-import { PostDataSource } from './../../../services/post.dataSource';
-import { Component, OnDestroy, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
-import { Comment } from 'src/app/models/comment';
 import { AuthService } from 'src/app/services/auth.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { Category } from 'src/app/models/category';
-import { map, merge, Observable, Subscription, tap } from 'rxjs';
+import { map, Observable, Subscription, tap } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-posts-list',
@@ -25,96 +20,49 @@ import { FormControl, Validators } from '@angular/forms';
 export class PostsListComponent implements OnInit {
 
   title = 'ngLoreHunter';
-
   public Editor = ClassicEditor;
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
+  @ViewChild('ckeditorInstance') ckeditorInstance: any; // Add this line to access the CKEditor instance
 
-  @ViewChild(MatSort)
-  sort!: MatSort;
+  currentPage: number = 1;
+
+  pageSize: number = 10;
 
   displayedColumns: string[] = ['user', 'subject', 'content'];
 
-  dataSource = new PostDataSource(this.postService);
+  viewCount: number = 0;
 
-  // mat table properties start
+  filteredPosts: Post[] = [];
 
-  // mat table properties start
-
-  // mat table end
+  public filterSubject: string = '';
 
   paramsSub: Subscription | undefined;
 
   post: Post = new Post();
   posts: Post[] = [];
   posts$!: Observable<Post[]>;
-
   categories: Category[] = [];
-  // post: null | Post = null;
+
   users: User[] = [];
   selected: null | Post = null;
   categoryId: number = 0;
   postId: number = 0;
   value: any;
 
-  newPost: Post = new Post();
-
-  postsByCategory: Post[] = [];
-
-  comments: Comment[] = [];
-  comment: Comment = new Comment();
-  newComment: Comment = new Comment();
   loggedInUser: User = new User();
 
   postCreated = false;
-  showForm: boolean = false;
-  addPostMod: Post | null = null;
 
   selectedSearch: string = 'all';
 
-  subject = new FormControl('', [Validators.required]);
-  content = new FormControl('', [Validators.required]);
-  checkCkEditor: boolean = false;
-
-
   constructor(
     private postService: PostService,
-    private commentService: CommentService,
     private authService: AuthService,
-    private router: Router,
-    private categoryService: CategoryService,
-    private activatedRoute: ActivatedRoute,
     private homeServ: HomeService,
-    private http: HttpClient
     ) {
   }
 
-
   ngOnInit() {
-
-    this.paramsSub = this.activatedRoute.paramMap.subscribe((param) => {
-      let idString = param.get('categoryId');
-      if (idString) {
-        this.categoryId = +idString;
-        if (!isNaN(this.categoryId)) {
-          this.categoryService.find(this.post.category.id).subscribe({
-            next: (category) => {
-              console.log(category);
-              console.log(this.categoryId);
-
-            },
-            error: (fail) => {
-              console.log(fail);
-              this.router.navigateByUrl('categoryNotFound');
-            },
-          });
-        } else {
-          this.router.navigateByUrl('invalidCategoryId');
-        }
-
-      }
-    });
 
     this.authService.getLoggedInUser().subscribe({
       next: (user) => {
@@ -127,7 +75,7 @@ export class PostsListComponent implements OnInit {
       },
     });
 
-    this.postService.getAllPosts().pipe(
+    this.postService.indexAll().pipe(
       tap(posts => {
         // Set the posts data to the component's property
         this.posts = posts;
@@ -144,6 +92,54 @@ export class PostsListComponent implements OnInit {
       }
     });
 
+    this.homeServ.index().subscribe({
+      next: (categories) => {
+        this.categories = categories;
+      },
+      error:(fail) => {
+        console.error('Error getting categories:');
+        console.error(fail);
+      }
+    });
+
+  }
+
+  incrementViewCount(categoryId: number, postId: number): void {
+    // Call the API to increment the view count
+    this.postService.updateViewCount(categoryId, postId).subscribe({
+      next: (data) => {
+        this.postCreated = true;
+        this.post = data;
+        this.posts$ = this.postService.postsByCategory(this.categoryId);
+      },
+      error: (nojoy) => {
+        console.error(
+          'PostsComponent.addPost: error creating post'
+        );
+          console.error(nojoy);
+      }
+    }
+  );
+  }
+
+  public filterPosts(): void {
+    this.posts$ = this.postService.getAllPosts().pipe(
+      map(posts => {
+        return posts.filter(post => {
+          let subjectMatch = true;
+
+          if (this.filterSubject && this.filterSubject !== '') {
+            subjectMatch = post.subject.toLowerCase().includes(this.filterSubject.toLowerCase());
+
+            return subjectMatch;
+          } else {
+            return this.posts$ = this.postService.getAllPosts().pipe(
+              map(posts => posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
+            );
+          }
+        });
+      })
+    );
   }
 
 }
