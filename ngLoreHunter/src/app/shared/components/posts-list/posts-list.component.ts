@@ -9,7 +9,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { Category } from 'src/app/models/category';
-import { merge, Observable, Subscription, tap } from 'rxjs';
+import { map, merge, Observable, Subscription, tap } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -127,23 +127,23 @@ export class PostsListComponent implements OnInit {
       },
     });
 
-    this.dataSource.loadAllPosts();
-    this.posts$ = this.postService.getPosts(this.categoryId).pipe();
-
-    this.postService.getAllPosts().subscribe({
-      next: (data) => {
-        this.posts = data;
+    this.postService.getAllPosts().pipe(
+      tap(posts => {
+        // Set the posts data to the component's property
+        this.posts = posts;
+      }),
+      map(posts => posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
+    ).subscribe({
+      next: (sortedPosts) => {
+        // The sorted posts will be emitted here
+        console.log(sortedPosts);
       },
       error: (error) => {
         console.log('Error getting posts');
         console.log(error);
-
       }
-    })
-  }
+    });
 
-  // sortPosts(sort: Sort): void {
-  //   this.dataSource.loadPosts(this.categoryId, sort);
-  // }
+  }
 
 }
