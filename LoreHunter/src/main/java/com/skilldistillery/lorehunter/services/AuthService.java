@@ -8,5 +8,6 @@ public interface AuthService {
 	public User getUserByUsername(String username);
 	public int getOnlineUsers();
 	public int getLoggedInUsers();
+	User authenticate(String username, String password);
 
 }

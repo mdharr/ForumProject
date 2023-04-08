@@ -114,5 +114,38 @@ public class UserServiceImpl implements UserService {
 		}
 		return user;
 	}
+	
+	@Override
+	public int getLoggedInUsersCount() {
+	    int loggedInUsersCount = 0;
+	    // Retrieve the list of all users from the repository
+	    List<User> allUsers = userRepo.findAll();
+	    // Iterate through the list and count the users who have the online status set to true
+	    for (User user : allUsers) {
+	        if (user.getIsOnline()) {
+	            loggedInUsersCount++;
+	        }
+	    }
+	    return loggedInUsersCount;
+	}
+
+	@Override
+	public int getNotLoggedInUsersCount() {
+	    int notLoggedInUsersCount = 0;
+	    // Retrieve the list of all users from the repository
+	    List<User> allUsers = userRepo.findAll();
+	    // Iterate through the list and count the users who have the online status set to false
+	    for (User user : allUsers) {
+	        if (!user.getIsOnline()) {
+	            notLoggedInUsersCount++;
+	        }
+	    }
+	    return notLoggedInUsersCount;
+	}
+
+
+
+
+
 
 }

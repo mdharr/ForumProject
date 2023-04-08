@@ -13,6 +13,7 @@ import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { Observable } from 'rxjs';
 import { ImageService } from 'src/app/services/image.service';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-home',
@@ -33,6 +34,7 @@ export class HomeComponent implements OnInit {
   sort: any;
   latest: Post = new Post();
   loggedInUsers: number = 0;
+  activeSessionCount: number = 0;
 
   isRotated1: boolean = false;
   isRotated2: boolean = false;
@@ -47,7 +49,8 @@ export class HomeComponent implements OnInit {
               private userService: UserService,
               private postDataSource: PostDataSource,
               private http: HttpClient,
-              public imageService: ImageService
+              public imageService: ImageService,
+              private sessionService: SessionService
               ) {}
 
   ngOnInit() {
@@ -57,6 +60,15 @@ export class HomeComponent implements OnInit {
     this.reload();
     this.getLoggedInUsers();
     console.log(this.loggedInUsers);
+
+    this.sessionService.getActiveSessionCount().subscribe(
+      count => {
+        this.activeSessionCount = count;
+      },
+      error => {
+        console.error('Failed to fetch active session count: ', error);
+      }
+    );
 
   }
 

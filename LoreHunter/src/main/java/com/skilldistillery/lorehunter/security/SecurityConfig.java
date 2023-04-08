@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     // this you get for free when you configure the db connection in application.properties file
@@ -54,6 +56,8 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.GET, "/api/users/**").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/posts").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/comments").permitAll() // will hit the OPTIONS on the route
+        .antMatchers(HttpMethod.GET, "/api/sessions/active").permitAll() // will hit the OPTIONS on the route
+        .antMatchers(HttpMethod.GET, "/sessions/active").permitAll() // will hit the OPTIONS on the route
         .antMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
         .anyRequest().permitAll()               // All other requests are allowed without authentication.
         .and()
@@ -68,7 +72,7 @@ public class SecurityConfig {
         .httpBasic() // Move httpBasic() here
         .and()
         .logout() // Configure logout handling
-        .logoutUrl("/logout") // URL for logging out
+        .logoutUrl("logout") // URL for logging out
         .deleteCookies("JSESSIONID") // Delete cookies on logout
         .invalidateHttpSession(true) // Invalidate session on logout
         .addLogoutHandler(customLogoutHandler) // Register custom logout handler
@@ -78,7 +82,7 @@ public class SecurityConfig {
             // Remove the session from the SessionRegistry
             sessionRegistry().removeSessionInformation(sessionId);
             // Redirect to logout success page or do other actions
-            response.sendRedirect("/api/home");
+            response.sendRedirect("home");
         })
         .permitAll(); // Allow all users to access logout URL
 

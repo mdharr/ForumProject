@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,9 +16,14 @@ export class AppComponent implements OnInit {
 
   loggedInUsers: User[] = [];
 
+  isLoggedIn = false;
+  loggedInUsersCount: number = 0;
+  notLoggedInUsersCount: number = 0;
+
   constructor(
     private _snackBar: MatSnackBar,
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
     ) {}
 
   ngOnInit() {
@@ -34,18 +40,41 @@ export class AppComponent implements OnInit {
       });
     });
 
+    // Fetch count of logged-in and not logged-in users from backend API
+    this.fetchUserCounts();
+
+    // Update isLoggedIn flag based on localStorage value
+    this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
   }
 
   loggedIn(): boolean {
     return this.authService.checkLogin();
   }
 
-  checkOnlineUserCount() {
-
+  fetchUserCounts() {
+    // Send HTTP request to backend API to fetch counts of logged-in and not logged-in users
+    // Update loggedInUsersCount and notLoggedInUsersCount variables based on the response
+    this.authService.getUserCounts().subscribe((response: any) => {
+      this.loggedInUsersCount = response.loggedInUsersCount;
+      this.notLoggedInUsersCount = response.notLoggedInUsersCount;
+    });
   }
 
-  checkLoggedInUserCount() {
+  onLoginClick() {
+    // Call login() method from AuthService and update isLoggedIn flag and user counts
+    this.authService.login('username', 'password').subscribe(() => {
+      this.isLoggedIn = true;
+      this.fetchUserCounts();
+    });
+  }
 
+  onLogoutClick() {
+    // Call logout() method from AuthService and update isLoggedIn flag and user counts
+    this.authService.logout().subscribe(() => {
+      this.isLoggedIn = false;
+      this.fetchUserCounts();
+    });
   }
 
 

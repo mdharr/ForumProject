@@ -7,11 +7,11 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class SessionService {
-  private url = environment.baseUrl + 'api';
+  private url = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
   getActiveSessionCount(): Observable<number> {
-    return this.http.get<number>(this.url + '/sessions/active');
+    return this.http.get<number>(this.url + 'sessions/active');
   }
 }

@@ -26,4 +26,9 @@ public interface UserService {
 	
 	public User getUser(int userId);
 
+	public int getLoggedInUsersCount();
+	
+	public int getNotLoggedInUsersCount();
+
+
 }

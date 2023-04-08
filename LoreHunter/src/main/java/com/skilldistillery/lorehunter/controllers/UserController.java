@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.lorehunter.entities.User;
+import com.skilldistillery.lorehunter.repositories.UserRepository;
 import com.skilldistillery.lorehunter.services.UserService;
 
 @CrossOrigin({ "*", "http://localhost/"})
@@ -27,6 +30,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserRepository userRepo;
 	
 	@GetMapping("users")
 	public List<User> index() {
@@ -95,6 +101,79 @@ public class UserController {
 			e.printStackTrace();
 			res.setStatus(400);
 		}
+	}
+	
+    @PutMapping("users/{id}/setOnline")
+    public ResponseEntity<?> setUserOnline(@PathVariable("id") int userId) {
+        try {
+            User user = userService.getUser(userId);
+            if (user == null) {
+                return ResponseEntity.notFound().build();
+            }
+            user.setIsOnline(true);
+            userRepo.save(user);
+            return ResponseEntity.ok().body("User is now online");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
+    // Endpoint to set user's isOnline status to false
+    @PutMapping("users/{id}/setOffline")
+    public ResponseEntity<?> setUserOffline(@PathVariable("id") int userId) {
+        try {
+            User user = userService.getUser(userId);
+            if (user == null) {
+                return ResponseEntity.notFound().build();
+            }
+            user.setIsOnline(false);
+            userRepo.save(user);
+            return ResponseEntity.ok().body("User is now offline");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+	
+	@GetMapping("userCounts")
+	public ResponseEntity<UserCountResponse> getUserCounts() {
+	    int loggedInUsersCount = userService.getLoggedInUsersCount();
+	    int notLoggedInUsersCount = userService.getNotLoggedInUsersCount();
+
+	    UserCountResponse response = new UserCountResponse(loggedInUsersCount, notLoggedInUsersCount);
+	    return ResponseEntity.ok(response);
+	}
+
+	// Define a response class to encapsulate the user count data
+	static class UserCountResponse {
+	    private int loggedInUsersCount;
+	    private int notLoggedInUsersCount;
+
+	    public UserCountResponse() {
+	        // Constructor
+	    }
+
+	    public UserCountResponse(int loggedInUsersCount, int notLoggedInUsersCount) {
+	        this.loggedInUsersCount = loggedInUsersCount;
+	        this.notLoggedInUsersCount = notLoggedInUsersCount;
+	    }
+
+	    public int getLoggedInUsersCount() {
+	        return loggedInUsersCount;
+	    }
+
+	    public void setLoggedInUsersCount(int loggedInUsersCount) {
+	        this.loggedInUsersCount = loggedInUsersCount;
+	    }
+
+	    public int getNotLoggedInUsersCount() {
+	        return notLoggedInUsersCount;
+	    }
+
+	    public void setNotLoggedInUsersCount(int notLoggedInUsersCount) {
+	        this.notLoggedInUsersCount = notLoggedInUsersCount;
+	    }
 	}
 
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -59,6 +60,33 @@ public class AuthController {
 	public int getOnlineUsers() {
 		return authService.getLoggedInUsers();
 	}
+	
+	@PostMapping("login")
+	public ResponseEntity<?> login(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
+	    // Extract the username and password from the login form
+	    String username = user.getUsername();
+	    String password = user.getPassword();
+
+	    // Authenticate the user
+	    User authenticatedUser = authService.authenticate(username, password);
+	    if (authenticatedUser == null) {
+	        // Return an error response if authentication fails
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+	    }
+
+	    // Update most recent login time
+	    userService.updateLogInTime(authenticatedUser);
+
+	    // Create a new session for the authenticated user
+	    HttpSession session = request.getSession(true);
+
+	    // Set session attributes as needed
+	    // For example, you can store the authenticated user object in the session
+	    session.setAttribute("user", authenticatedUser);
+
+	    // Return a success response to the frontend
+	    return ResponseEntity.ok().body(authenticatedUser);
+	}
 
 	@PostMapping("logout")
 	public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
@@ -68,6 +96,7 @@ public class AuthController {
 		if (session != null) {
 			// Invalidate the session
 			session.invalidate();
+			
 		}
 
 		// Clear any session-related information from the response

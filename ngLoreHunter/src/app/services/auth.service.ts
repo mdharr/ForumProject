@@ -13,6 +13,8 @@ export class AuthService {
 
   private url = environment.baseUrl;
 
+  private isLoggedIn = false; // flag to track authentication state
+
   constructor(private http: HttpClient) {}
 
   register(user: User): Observable<User> {
@@ -36,6 +38,7 @@ export class AuthService {
         Authorization: `Basic ${credentials}`,
         'X-Requested-With': 'XMLHttpRequest',
       }),
+
     };
 
     // Create GET request to authenticate credentials
@@ -44,6 +47,8 @@ export class AuthService {
         // While credentials are stored in browser localStorage, we consider
         // ourselves logged in.
         localStorage.setItem('credentials', credentials);
+        this.isLoggedIn = true;
+        localStorage.setItem('isLoggedIn', 'true');
         return newUser;
       }),
       catchError((err: any) => {
@@ -58,6 +63,10 @@ export class AuthService {
   logout(): Observable<any> {
     localStorage.removeItem('credentials');
     return this.http.post(this.url + 'logout', null).pipe(
+      tap(() => {
+        // set isLoggedIn to false in localStorage
+        localStorage.setItem('isLoggedIn', 'false');
+      }),
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -65,6 +74,11 @@ export class AuthService {
         );
       })
     );
+  }
+
+  isAuthenticated() {
+    // Check isLoggedIn flag and local storage or cookie
+    return this.isLoggedIn || localStorage.getItem('isLoggedIn') === 'true';
   }
 
   getLoggedInUser(): Observable<User> {
@@ -117,14 +131,16 @@ export class AuthService {
     );
   }
 
-  // invalidateLoginCredentials() {
-  //   return this.http.post(this.url + 'logout').pipe(
-  //     catchError((err: any) => {
-  //       console.log(err);
-  //       return throwError(
-  //         () => new Error('AuthService.invalidateLoginCredentials(): error invalidating login.')
-  //       );
-  //     })
-  //   );
-  // }
+  getUserCounts(): Observable<any> {
+    // Send HTTP request to backend API to fetch counts of logged-in and not logged-in users
+    return this.http.get<any>(this.url + 'userCounts').pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('AuthService.getUserCounts(): error fetching user counts.')
+        );
+      })
+    );
+  }
+
 }

@@ -75,6 +75,9 @@ public class User {
 	
 	@Column(name = "post_count")
 	private Integer postCount;
+	
+	@Column(name = "is_online")
+	private Boolean isOnline;
 
 	public User() {
 		super();
@@ -83,7 +86,7 @@ public class User {
 	public User(int id, String username, String password, Boolean enabled, String role, String firstName,
 			String lastName, String email, String state, LocalDateTime createdAt, String imageUrl, LocalDateTime lastActivity,
 			String status, Integer commentCount, String bannerMessage, String bannerImage, List<Category> categories, List<Post> posts,
-			List<Comment> comments, Integer postCount) {
+			List<Comment> comments, Integer postCount, Boolean isOnline) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -105,6 +108,7 @@ public class User {
 		this.posts = posts;
 		this.comments = comments;
 		this.postCount = postCount;
+		this.isOnline = isOnline;
 	}
 
 	public int getId() {
@@ -267,6 +271,14 @@ public class User {
 		this.postCount = postCount;
 	}
 
+	public Boolean getIsOnline() {
+		return isOnline;
+	}
+
+	public void setIsOnline(Boolean isOnline) {
+		this.isOnline = isOnline;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -291,7 +303,7 @@ public class User {
 				+ ", state=" + state + ", createdAt=" + createdAt + ", imageUrl=" + imageUrl + ", lastActivity="
 				+ lastActivity + ", status=" + status + ", commentCount=" + commentCount + ", bannerMessage="
 				+ bannerMessage + ", bannerImage=" + bannerImage + ", categories=" + categories + ", posts=" + posts
-				+ ", comments=" + comments + ", postCount=" + postCount + "]";
+				+ ", comments=" + comments + ", postCount=" + postCount + ", isOnline=" + isOnline + "]";
 	}
 	
 	
