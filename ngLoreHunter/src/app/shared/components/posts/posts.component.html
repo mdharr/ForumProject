@@ -172,9 +172,9 @@
 </div>
 
 <div class="block-filter-bar">
-  <div class="filter-bar">
+  <div class="filter-bar"  style="height: 25px;">
     <a *ngIf="currentPage !== 1" class="filter-bar-menu-trigger" role="mat-button" href="">Filters<span class="filter-bar-icon"><mat-icon>arrow_drop_down</mat-icon></span></a>
-    <input *ngIf="currentPage === 1" [(ngModel)]="filterSubject" (input)="filterPosts()" placeholder="Filter by subject">
+    <input *ngIf="currentPage === 1" [(ngModel)]="filterSubject" (input)="filterPosts()" size="15" placeholder="Filter by subject" style="line-height: 2px;">
   </div>
 </div>
 

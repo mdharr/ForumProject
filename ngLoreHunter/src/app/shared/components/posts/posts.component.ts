@@ -96,6 +96,23 @@ export class PostsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.reload();
+
+  }
+
+  ngAfterViewInit() {
+    const toolbarElement = document.querySelector('.ck-toolbar');
+
+    if (toolbarElement) {
+      (toolbarElement as HTMLElement).style.backgroundColor = 'red !important'; // Replace with your desired background color
+    }
+  }
+
+  loggedIn(): boolean {
+    return this.authService.checkLogin();
+  }
+
+  reload() {
     console.log(this.activatedRoute);
 
     this.paramsSub = this.activatedRoute.paramMap.subscribe((param) => {
@@ -123,7 +140,6 @@ export class PostsComponent implements OnInit, AfterViewInit {
         );
       }
     });
-    this.reload();
 
     this.authService.getLoggedInUser().subscribe({
       next: (user) => {
@@ -135,22 +151,6 @@ export class PostsComponent implements OnInit, AfterViewInit {
         console.log(error);
       },
     });
-
-  }
-
-  ngAfterViewInit() {
-    const toolbarElement = document.querySelector('.ck-toolbar');
-
-    if (toolbarElement) {
-      (toolbarElement as HTMLElement).style.backgroundColor = 'red !important'; // Replace with your desired background color
-    }
-  }
-
-  loggedIn(): boolean {
-    return this.authService.checkLogin();
-  }
-
-  reload() {
     this.postService.postsByCategory(this.categoryId).subscribe({
       next: (posts) => {
         this.posts = posts;
@@ -311,8 +311,12 @@ export class PostsComponent implements OnInit, AfterViewInit {
           if (this.filterSubject && this.filterSubject !== '') {
             subjectMatch = post.subject.toLowerCase().includes(this.filterSubject.toLowerCase());
 
+            return subjectMatch;
+          } else {
+            return this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
+              map(posts => posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
+            );
           }
-          return subjectMatch;
         });
       })
     );
