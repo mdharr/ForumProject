@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Post {
@@ -46,9 +46,9 @@ public class Post {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "category_id")
+	@JsonManagedReference
 	private Category category;
 	
 	@OneToMany(mappedBy = "post")

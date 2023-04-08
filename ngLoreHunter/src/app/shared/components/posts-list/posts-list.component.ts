@@ -59,10 +59,39 @@ export class PostsListComponent implements OnInit {
     private postService: PostService,
     private authService: AuthService,
     private homeServ: HomeService,
+    private router: Router,
+    private categoryService: CategoryService,
+    private activatedRoute: ActivatedRoute
     ) {
   }
 
   ngOnInit() {
+
+    this.paramsSub = this.activatedRoute.paramMap.subscribe((param) => {
+      let idString = param.get('categoryId');
+      if (idString) {
+        this.categoryId = +idString;
+        if (!isNaN(this.categoryId)) {
+          this.categoryService.find(this.categoryId).subscribe({
+            next: (category) => {
+              console.log(category);
+              console.log(this.categoryId);
+
+            },
+            error: (fail) => {
+              console.log(fail);
+              this.router.navigateByUrl('categoryNotFound');
+            },
+          });
+        } else {
+          this.router.navigateByUrl('invalidCategoryId');
+        }
+
+        this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
+          map(posts => posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
+        );
+      }
+    });
 
     this.authService.getLoggedInUser().subscribe({
       next: (user) => {
@@ -106,11 +135,11 @@ export class PostsListComponent implements OnInit {
 
   incrementViewCount(categoryId: number, postId: number): void {
     // Call the API to increment the view count
-    this.postService.updateViewCount(categoryId, postId).subscribe({
+    this.postService.updateViewCount(this.post.category.id, postId).subscribe({
       next: (data) => {
         this.postCreated = true;
         this.post = data;
-        this.posts$ = this.postService.postsByCategory(this.categoryId);
+        this.posts$ = this.postService.postsByCategory(this.post.category.id);
       },
       error: (nojoy) => {
         console.error(
@@ -140,6 +169,14 @@ export class PostsListComponent implements OnInit {
         });
       })
     );
+  }
+
+  isNotANumber(value: any): boolean {
+    return isNaN(value);
+  }
+
+  parseToInt(value: string): number {
+    return parseInt(value);
   }
 
 }

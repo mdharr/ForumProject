@@ -50,7 +50,7 @@
         <div class="message-cell message-cell-main">
           <div class="message-main">
             <div class="message-content">
-              <a class="post-link" [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']" [innerHtml]='post.subject'  (click)="incrementViewCount(this.categoryId, post.id)">{{ post.subject }}</a>
+              <a class="post-link" [routerLink]="['/categories', post.category.id, 'posts', post.id, 'comments']" [innerHtml]='post.subject'  (click)="incrementViewCount(post.category.id, post.id)">{{ post.subject }}</a>
             </div>
             <div class="message-content-details">
               <div class="message-user-details">
