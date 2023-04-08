@@ -149,7 +149,9 @@
               </ng-container>
             </div>
           </div>
-            <div class="container-fluid card">
+            <div class="container-fluid card" style="  display: flex;
+            flex-direction: column;
+            justify-content: space-between;">
               <div class="card-lore">
                 <div class="node-container">
                   <div class="node-title-container">
@@ -188,7 +190,7 @@
                   </div>
                 </div>
               </div>
-              <div class="more-container" style="color: #9a387b;">
+              <div class="more-container" style="color: #9a387b; align-self: flex-end;">
                 <ng-container *ngFor="let category of categories; index as i;">
                   <a class="dark-link" *ngIf="i === 3" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs" style="color: #9a387b !important;"><dt class="dt-icon"><mat-icon class="material-icons icons" style="justify-content: right;">arrow_forward</mat-icon></dt><dd>More</dd> </dl></a>
                 </ng-container>

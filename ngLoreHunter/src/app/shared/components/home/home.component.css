@@ -109,37 +109,36 @@ p {
 .card:hover {
   box-shadow: 0 6px 10px 0px rgb(0 0 0 / 14%), 0 1px 18px 0px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%) !important;
   transform: translateY(-5px);
-  border: 1px #ffffff solid;
 }
 
 .card-gaming {
+  flex-grow: 1;
   padding: 16px;
-  background: rgb(6,142,167);
-  background: linear-gradient(90deg, rgba(6,142,167,1) 0%, rgba(36,161,159,1) 40%);
+  background: linear-gradient(310.77deg,#29aa9f 0%,#098ea6 100%);
   min-height: auto;
   border-radius: 5px 5px 0 0;
 }
 
 .card-lore {
+  flex-grow: 1;
   padding: 16px;
-  background: rgb(152,57,124);
-  background: linear-gradient(90deg, rgba(152,57,124,1) 40%, rgba(131,56,122,1) 100%);
+  background: linear-gradient(310.3deg,#863a81 0%,#9a387b 100%);
   min-height: auto;
   border-radius: 5px 5px 0 0;
 }
 
 .card-announcements {
+  flex-grow: 1;
   padding: 16px;
-  background: rgb(234,157,44);
-  background: linear-gradient(90deg, rgba(234,157,44,1) 40%, rgba(227,127,58,1) 100%);
+  background-image: linear-gradient(312.03deg,#ea7e3e 0%,#e9a127 100%)!important;
   min-height: auto;
   border-radius: 5px 5px 0 0;
 }
 
 .card-vault {
+  flex-grow: 1;
   padding: 16px;
-  background: rgb(62,178,91);
-  background: linear-gradient(90deg, rgba(62,178,91,1) 0%, rgba(89,185,73,1) 45%);
+  background-image: linear-gradient(308.41deg,#5fba43 0%,#3ab25d 100%)!important;
   min-height: auto;
   border-radius: 5px 5px 0 0;
 }
@@ -197,6 +196,7 @@ p {
   align-items: center;
   padding: 5px 5px 0 0;
   border-radius: 0px 0px 5px 5px;
+  margin-top: auto; /* add this line */
 }
 
 .neutral-link {
