@@ -7,7 +7,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { Category } from 'src/app/models/category';
-import { map, Observable, Subscription, tap } from 'rxjs';
+import { catchError, map, Observable, Subscription, tap, throwError } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -67,32 +67,6 @@ export class PostsListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.paramsSub = this.activatedRoute.paramMap.subscribe((param) => {
-      let idString = param.get('categoryId');
-      if (idString) {
-        this.categoryId = +idString;
-        if (!isNaN(this.categoryId)) {
-          this.categoryService.find(this.categoryId).subscribe({
-            next: (category) => {
-              console.log(category);
-              console.log(this.categoryId);
-
-            },
-            error: (fail) => {
-              console.log(fail);
-              this.router.navigateByUrl('categoryNotFound');
-            },
-          });
-        } else {
-          this.router.navigateByUrl('invalidCategoryId');
-        }
-
-        this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
-          map(posts => posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
-        );
-      }
-    });
-
     this.authService.getLoggedInUser().subscribe({
       next: (user) => {
         this.loggedInUser = user;
@@ -139,6 +113,7 @@ export class PostsListComponent implements OnInit {
       next: (data) => {
         this.postCreated = true;
         this.post = data;
+
         this.posts$ = this.postService.postsByCategory(categoryId);
       },
       error: (nojoy) => {
@@ -147,8 +122,7 @@ export class PostsListComponent implements OnInit {
         );
           console.error(nojoy);
       }
-    }
-  );
+    });
   }
 
   public filterPosts(): void {
@@ -179,21 +153,34 @@ export class PostsListComponent implements OnInit {
     return parseInt(value);
   }
 
-  handlePostClick(post: Post) {
-    // Access the categoryId from the associated Category object
-    const categoryId = post.category.id;
+  // getCategoryByPostId(postId: number): Observable<number> {
+  //   return this.categoryService.getCategoryIdByPostId(postId).pipe(
+  //     map(categoryId => {
+  //       this.categoryId = categoryId;
+  //       // Handle the category id, for example, update the UI or perform any other operation
+  //       console.log('Category ID:', categoryId);
+  //       return this.categoryId; // Return the category ID value
+  //     }),
+  //     catchError(error => {
+  //       // Handle the error, for example, show an error message
+  //       console.error(error);
+  //       // You can choose to return a default value or throw an error here if needed
+  //       // For example, you can return -1 or throw a custom error
+  //       return throwError(() => new Error('Error retrieving category ID: ' + error));
+  //     })
+  //   );
+  // }
 
-    if (post && post.id) {
-      this.incrementViewCount(categoryId, post.id);
-    }
-    // Access the postId from the Post object
-    const postId = post.id;
-
-    // Construct the endpoint using the category ID and post ID
-    const endpoint = `/api/categories/${categoryId}/posts/${postId}/comments`;
-
-    // Navigate to the desired endpoint
-    this.router.navigate([endpoint]);
+  getCategoryByPostId(postId: number): void {
+    this.categoryService.getCategoryIdByPostId(postId).pipe(
+      catchError(error => {
+        console.error(error);
+        return throwError(() => new Error('Error retrieving category ID: ' + error));
+      })
+    ).subscribe(categoryId => {
+      this.categoryId = categoryId;
+      console.log('Category ID:', categoryId);
+    });
   }
 
 }

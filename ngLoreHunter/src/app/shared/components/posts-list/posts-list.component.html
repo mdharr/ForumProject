@@ -50,7 +50,8 @@
         <div class="message-cell message-cell-main">
           <div class="message-main">
             <div class="message-content">
-              <a class="post-link" (click)="handlePostClick(post)" [innerHtml]='post.subject' (click)="incrementViewCount(categoryId, post.id)"></a>
+              <a class="post-link" [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']" [innerHtml]='post.subject'></a>
+              <!-- (click)="incrementViewCount(this.categoryId, post.id);" -->
             </div>
             <div class="message-content-details">
               <div class="message-user-details">
