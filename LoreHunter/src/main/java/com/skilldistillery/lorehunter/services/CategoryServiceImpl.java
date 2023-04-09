@@ -7,16 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.lorehunter.entities.Category;
+import com.skilldistillery.lorehunter.entities.Post;
 import com.skilldistillery.lorehunter.entities.User;
 import com.skilldistillery.lorehunter.repositories.CategoryRepository;
+import com.skilldistillery.lorehunter.repositories.PostRepository;
 import com.skilldistillery.lorehunter.repositories.UserRepository;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 	
-	@Autowired CategoryRepository categoryRepo;
+	@Autowired 
+	CategoryRepository categoryRepo;
 	
-	@Autowired UserRepository userRepo;
+	@Autowired 
+	UserRepository userRepo;
+	
+	@Autowired
+	PostRepository postRepo;
 
 	@Override
 	public List<Category> index() {
@@ -81,6 +88,12 @@ public class CategoryServiceImpl implements CategoryService {
 			category = categoryOpt.get();
 		}
 		return category;
+	}
+
+	@Override
+	public Integer getCategoryIdByPostId(Integer postId) {
+		Post post = postRepo.findById(postId).orElse(null);
+		return post != null ? post.getCategory().getId() : null;
 	}
 
 }

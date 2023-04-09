@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -50,5 +51,30 @@ export class LoginComponent {
       }
     });
   }
+
+  // login(loginUser: User) {
+  //   console.log("logging in");
+  //   this.authService.login(loginUser.username, loginUser.password).pipe(
+  //     switchMap((user) => {
+  //       // Handle succesfful login
+  //       console.log("login successful: ", user);
+
+  //       // Store user ID in AuthService
+  //       this.authService.setUserId(user.id);
+
+  //       this.modalService.dismissAll();
+  //       this.authService.checkLogin();
+  //       return this.userService.setOnline(user.id);
+  //     })
+  //   ).subscribe({
+  //     next: (response) => {
+  //       console.log('Set user online successfully: ', response);
+  //       // Redirect to home page or do other actions
+  //     },
+  //     error: (error) => {
+  //       console.error('Login error: ', error);
+  //     }
+  //   });
+  // }
 
 }

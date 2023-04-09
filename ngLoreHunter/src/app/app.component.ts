@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
   fetchUserCounts() {
     // Send HTTP request to backend API to fetch counts of logged-in and not logged-in users
     // Update loggedInUsersCount and notLoggedInUsersCount variables based on the response
-    this.authService.getUserCounts().subscribe((response: any) => {
+    this.authService.getLoggedInUsers().subscribe((response: any) => {
       this.loggedInUsersCount = response.loggedInUsersCount;
       this.notLoggedInUsersCount = response.notLoggedInUsersCount;
     });

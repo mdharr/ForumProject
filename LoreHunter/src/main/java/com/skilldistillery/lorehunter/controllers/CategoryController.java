@@ -106,5 +106,10 @@ public class CategoryController {
 			res.setStatus(400);
 		}
 	}
+	
+	@GetMapping("posts/{id}/category")
+	public Integer getCategoryByPostId(@PathVariable("id") Integer postId) {
+		return categoryService.getCategoryIdByPostId(postId);
+	}
 
 }

@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 import { ImageService } from 'src/app/services/image.service';
 import { SessionService } from 'src/app/services/session.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit {
   latest: Post = new Post();
   loggedInUsers: number = 0;
   activeSessionCount: number = 0;
+  loggedInUserCount: number = 0;
 
   isRotated1: boolean = false;
   isRotated2: boolean = false;
@@ -70,6 +72,9 @@ export class HomeComponent implements OnInit {
       }
     );
 
+    this.auth.getLoggedInUsers().subscribe((count) => {
+      this.loggedInUserCount = count;
+    })
   }
 
   reload(): void {

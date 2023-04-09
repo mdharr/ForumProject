@@ -15,6 +15,8 @@ export class AuthService {
 
   private isLoggedIn = false; // flag to track authentication state
 
+  private userId: number = 0; // User ID property
+
   constructor(private http: HttpClient) {}
 
   register(user: User): Observable<User> {
@@ -131,16 +133,25 @@ export class AuthService {
     );
   }
 
-  getUserCounts(): Observable<any> {
-    // Send HTTP request to backend API to fetch counts of logged-in and not logged-in users
-    return this.http.get<any>(this.url + 'userCounts').pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(
-          () => new Error('AuthService.getUserCounts(): error fetching user counts.')
-        );
-      })
-    );
-  }
+  // getUserCounts(): Observable<any> {
+  //   return this.http.get<any>(this.url + 'userCounts').pipe(
+  //     catchError((err: any) => {
+  //       console.log(err);
+  //       return throwError(
+  //         () => new Error('AuthService.getUserCounts(): error fetching user counts.')
+  //       );
+  //     })
+  //   );
+  // }
+
+    // Setter for user ID
+    setUserId(userId: number): void {
+      this.userId = userId;
+    }
+
+    // Getter for user ID
+    getUserId(): number {
+      return this.userId;
+    }
 
 }

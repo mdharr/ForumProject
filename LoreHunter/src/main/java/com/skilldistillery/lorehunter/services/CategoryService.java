@@ -17,5 +17,7 @@ public interface CategoryService {
 	public boolean archive(String username, int categoryId);
 	
 	public Category getById(int categoryId);
+	
+	public Integer getCategoryIdByPostId(Integer postId);
 
 }

@@ -16,7 +16,7 @@ export class UserService {
   getHttpOptions() {
     let options = {
       headers: {
-        Authorizations: 'Basic ' + this.authService.getCredentials(),
+        Authorization: 'Basic ' + this.authService.getCredentials(),
         'X-Requested-With': 'XMLHttpRequest',
       },
     };
@@ -24,7 +24,7 @@ export class UserService {
   }
 
   index(): Observable<User[]> {
-    return this.http.get<User[]>(this.url, this.getHttpOptions()).pipe(
+    return this.http.get<User[]>(this.url).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -58,13 +58,9 @@ export class UserService {
   }
 
   disableAdmin(user: User): Observable<User> {
-    const httpOptions = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
+    const httpOptions = this.getHttpOptions();
     return this.http
-      .put<User>(`${this.url}/${user.id}`, user, this.getHttpOptions())
+      .put<User>(`${this.url}/${user.id}`, user, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -76,6 +72,30 @@ export class UserService {
           );
         })
       );
+  }
+
+  setOffline(userId: number): Observable<User> {
+    const httpOptions = this.getHttpOptions();
+    return this.http.put<User>(`${this.url}/${userId}/setOffline`, {}, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('UserService.setOffline(): error setting user offline: ' + err)
+        );
+      })
+    );
+  }
+
+  setOnline(userId: number): Observable<User> {
+    const httpOptions = this.getHttpOptions();
+    return this.http.put<User>(`${this.url}/${userId}/setOnline`, {}, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('UserService.setOnline(): error setting user online: ' + err)
+        );
+      })
+    );
   }
 
 }

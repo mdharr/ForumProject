@@ -135,11 +135,11 @@ export class PostsListComponent implements OnInit {
 
   incrementViewCount(categoryId: number, postId: number): void {
     // Call the API to increment the view count
-    this.postService.updateViewCount(this.post.category.id, postId).subscribe({
+    this.postService.updateViewCount(categoryId, postId).subscribe({
       next: (data) => {
         this.postCreated = true;
         this.post = data;
-        this.posts$ = this.postService.postsByCategory(this.post.category.id);
+        this.posts$ = this.postService.postsByCategory(categoryId);
       },
       error: (nojoy) => {
         console.error(
@@ -177,6 +177,23 @@ export class PostsListComponent implements OnInit {
 
   parseToInt(value: string): number {
     return parseInt(value);
+  }
+
+  handlePostClick(post: Post) {
+    // Access the categoryId from the associated Category object
+    const categoryId = post.category.id;
+
+    if (post && post.id) {
+      this.incrementViewCount(categoryId, post.id);
+    }
+    // Access the postId from the Post object
+    const postId = post.id;
+
+    // Construct the endpoint using the category ID and post ID
+    const endpoint = `/api/categories/${categoryId}/posts/${postId}/comments`;
+
+    // Navigate to the desired endpoint
+    this.router.navigate([endpoint]);
   }
 
 }
