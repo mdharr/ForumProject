@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Post } from 'src/app/models/post';
 import { Comment } from 'src/app/models/comment';
 import { HttpClient } from '@angular/common/http';
@@ -10,7 +10,7 @@ import { HomeService } from 'src/app/services/home.service';
 import { PostService } from 'src/app/services/post.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
-import { Subscription } from 'rxjs';
+import { catchError, EMPTY, of, Subscription, switchMap } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
@@ -24,7 +24,7 @@ import { FormControl, Validators } from '@angular/forms';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
   title = 'ngLoreHunter';
 
@@ -40,7 +40,6 @@ export class ProfileComponent implements OnInit {
 
   dataSource = new CommentDataSource(this.commentService);
 
-  paramsSub: Subscription | undefined;
 
   posts: Post[] = [];
   categories: Category[] = [];
@@ -70,6 +69,11 @@ export class ProfileComponent implements OnInit {
   content = new FormControl('', [Validators.required]);
   checkCkEditor: boolean = false;
 
+  private paramsSubscription: Subscription | undefined;
+  private loggedInUserSubscription: Subscription | undefined;
+  private homeServIndexSubscription: Subscription | undefined;
+  private postsByCategorySubscription: Subscription | undefined;
+
   constructor(
     private postService: PostService,
     private commentService: CommentService,
@@ -86,42 +90,61 @@ export class ProfileComponent implements OnInit {
 
       console.log(this.activatedRoute);
 
-      this.paramsSub = this.activatedRoute.paramMap.subscribe((param) => {
-        console.log(this.userId);
+      // ...
 
-        let idString = param.get('userId');
-        if (idString) {
-          this.userId = +idString;
-          if (!isNaN(this.userId)) {
-            this.userService.show(this.userId).subscribe({
-              next: (user) => {
-                console.log(user);
-                console.log(this.loggedInUser);
-              },
-              error: (fail) => {
-                console.log(fail);
-              },
-            });
-            this.postService.show(this.categoryId, this.postId).subscribe({
-              next: (post) => {
-                console.log(post);
-                console.log(this.postId);
+      this.paramsSubscription = this.activatedRoute.paramMap.pipe(
+        switchMap((param) => {
+          console.log(this.userId);
 
-              },
-              error: (fail) => {
-                console.log(fail);
-                // this.router.navigateByUrl('postNotFound');
-              }
-            })
+          let idString = param.get('userId');
+          if (idString) {
+            this.userId = +idString;
+            if (!isNaN(this.userId)) {
+              return this.userService.show(this.userId).pipe(
+                switchMap((user) => {
+                  console.log(user);
+                  console.log(this.loggedInUser);
+
+                  return this.postService.show(this.categoryId, this.postId).pipe(
+                    switchMap((post) => {
+                      console.log(post);
+                      console.log(this.postId);
+
+                      // Do any other processing with user and post here
+
+                      // You can return an observable if you need to further chain operators or subscribe later
+                      return of({ user, post });
+                    }),
+                    catchError((fail) => {
+                      console.log(fail);
+                      // this.router.navigateByUrl('postNotFound');
+                      // Return an empty observable or throw an error if needed
+                      return EMPTY;
+                    })
+                  );
+                }),
+                catchError((fail) => {
+                  console.log(fail);
+                  // Return an empty observable or throw an error if needed
+                  return EMPTY;
+                })
+              );
+            } else {
+              // this.router.navigateByUrl('invalidPostId');
+              // Return an empty observable or throw an error if needed
+              return EMPTY;
+            }
           } else {
-            // this.router.navigateByUrl('invalidPostId');
+            // Return an empty observable or throw an error if needed
+            return EMPTY;
           }
-        }
-      });
+        })
+      ).subscribe();
+
 
       this.reload();
 
-      this.authService.getLoggedInUser().subscribe({
+      this.loggedInUserSubscription = this.authService.getLoggedInUser().subscribe({
         next: (user) => {
           this.loggedInUser = user;
           console.log(user);
@@ -132,8 +155,26 @@ export class ProfileComponent implements OnInit {
         },
       });
 
-      this.dataSource.loadComments(this.categoryId, this.postId);
+      // this.dataSource.loadComments(this.categoryId, this.postId);
 
+    }
+
+    ngOnDestroy() {
+      if (this.paramsSubscription) {
+        this.paramsSubscription.unsubscribe();
+      }
+
+      if (this.loggedInUserSubscription) {
+        this.loggedInUserSubscription.unsubscribe();
+      }
+
+      if (this.postsByCategorySubscription) {
+        this.postsByCategorySubscription.unsubscribe();
+      }
+
+      if (this.homeServIndexSubscription) {
+        this.homeServIndexSubscription.unsubscribe();
+      }
     }
 
     loggedIn(): boolean {
@@ -141,7 +182,7 @@ export class ProfileComponent implements OnInit {
     }
 
     reload() {
-      this.postService.postsByCategory(this.categoryId).subscribe({
+      this.postsByCategorySubscription = this.postService.postsByCategory(this.categoryId).subscribe({
         next: (posts) => {
           this.posts = posts;
         },
@@ -151,7 +192,7 @@ export class ProfileComponent implements OnInit {
         },
       });
 
-      this.homeService.index().subscribe({
+      this.homeServIndexSubscription = this.homeService.index().subscribe({
         next: (categories) => {
           this.categories = categories;
         },
