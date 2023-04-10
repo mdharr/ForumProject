@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnInit, Renderer2, ViewChild } from '@
 import { Post } from 'src/app/models/post';
 import { Comment } from 'src/app/models/comment';
 import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { CommentService } from 'src/app/services/comment.service';
@@ -10,7 +10,7 @@ import { HomeService } from 'src/app/services/home.service';
 import { PostService } from 'src/app/services/post.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
-import { map, Observable, of, Subscription } from 'rxjs';
+import { catchError, EMPTY, map, Observable, of, Subscription, switchMap } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { User } from 'src/app/models/user';
 import { PostDataSource } from 'src/app/services/post.dataSource';
@@ -91,45 +91,90 @@ export class CommentsComponent implements OnInit, AfterViewInit {
 
     console.log(this.activatedRoute);
 
-    this.paramsSub = this.activatedRoute.paramMap.subscribe((param) => {
-      console.log(param);
-      console.log(this.postId);
+    this.paramsSub = this.activatedRoute.paramMap.pipe(
+      switchMap((param) => {
+        console.log(param);
+        console.log(this.postId);
 
-      let idString = param.get('categoryId');
-      let idString2 = param.get('postId');
-      if (idString && idString2) {
-        this.categoryId = +idString;
-        this.postId = +idString2;
-        if (!isNaN(this.categoryId && this.postId)) {
-          this.categoryService.find(this.categoryId).subscribe({
-            next: (category) => {
-              console.log(category);
-              console.log(this.categoryId);
-              console.log(this.postId);
-              console.log(this.comments);
-            },
-            error: (fail) => {
-              console.log(fail);
-              // this.router.navigateByUrl('categoryNotFound');
-            },
-          });
-          this.postService.show(this.categoryId, this.postId).subscribe({
-            next: (post) => {
-              console.log(post);
-              console.log(this.postId);
-              // this.updateViewCount(this.postId, this.categoryId);
+        let idString = param.get('categoryId');
+        let idString2 = param.get('postId');
+        if (idString && idString2) {
+          this.categoryId = +idString;
+          this.postId = +idString2;
+          if (!isNaN(this.categoryId && this.postId)) {
+            if (this.categoryId === 0) {
+              return this.categoryService.getCategoryIdByPostId(this.postId).pipe(
+                switchMap((categoryId) => {
+                  this.categoryId = categoryId;
+                  return this.categoryService.find(this.categoryId).pipe(
+                    switchMap((category) => {
+                      console.log(category);
+                      console.log(this.categoryId);
+                      console.log(this.postId);
+                      console.log(this.comments);
+                      // Perform actions with category data
+                      // this.navigateToComments(this.categoryId, this.postId);
+                      this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe();
+                      return this.postService.show(this.categoryId, this.postId);
+                    }),
+                    switchMap((post) => {
+                      console.log(post);
+                      console.log(this.postId);
+                      // Perform actions with post data
+                      // this.updateViewCount(this.postId, this.categoryId);
+                      return EMPTY; // Replace with appropriate observable if needed
+                    }),
+                    catchError((fail) => {
+                      console.log(fail);
+                      // Handle error for postService.show
+                      // this.router.navigateByUrl('postNotFound');
+                      return EMPTY; // Replace with appropriate observable if needed
+                    })
+                  );
+                }),
+                catchError((err) => {
+                  console.log(err);
+                  // Handle error for getCategoryIdByPostId
+                  // this.router.navigateByUrl('categoryIdNotFound');
+                  return EMPTY; // Replace with appropriate observable if needed
+                })
+              );
+            } else {
+              return this.categoryService.find(this.categoryId).pipe(
+                switchMap((category) => {
+                  console.log(category);
+                  console.log(this.categoryId);
+                  console.log(this.postId);
+                  console.log(this.comments);
+                  // Perform actions with category data
+                  this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe();
 
-            },
-            error: (fail) => {
-              console.log(fail);
-              // this.router.navigateByUrl('postNotFound');
+                  return this.postService.show(this.categoryId, this.postId);
+                }),
+                switchMap((post) => {
+                  console.log(post);
+                  console.log(this.postId);
+                  // Perform actions with post data
+                  // this.updateViewCount(this.postId, this.categoryId);
+                  return EMPTY; // Replace with appropriate observable if needed
+                }),
+                catchError((fail) => {
+                  console.log(fail);
+                  // Handle error for postService.show
+                  // this.router.navigateByUrl('postNotFound');
+                  return EMPTY; // Replace with appropriate observable if needed
+                })
+              );
             }
-          })
+          } else {
+            // this.router.navigateByUrl('invalidPostId');
+            return EMPTY; // Replace with appropriate observable if needed
+          }
         } else {
-          // this.router.navigateByUrl('invalidPostId');
+          return EMPTY; // Replace with appropriate observable if needed
         }
-      }
-    });
+      })
+    ).subscribe();
 
     this.reload();
 
@@ -269,6 +314,17 @@ export class CommentsComponent implements OnInit, AfterViewInit {
       this.createComment(this.newComment, this.selected);
       this.ckeditorInstance.editorInstance.setData('');
     }
+  }
+
+  navigateToComments(categoryId: number, postId: number): void {
+    const url = `/categories/${categoryId}/posts/${postId}/comments`;
+    const queryParams: NavigationExtras = {
+      queryParams: {
+        categoryId: categoryId,
+        postId: postId
+      }
+    };
+    this.router.navigate([url], queryParams);
   }
 
 }

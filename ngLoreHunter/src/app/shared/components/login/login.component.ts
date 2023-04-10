@@ -34,6 +34,9 @@ export class LoginComponent {
       next: (loggedInUser) => {
         console.log('Login success');
         console.log(loggedInUser);
+        this.authService.setUserId(loggedInUser.id); // Setting userId in AuthService
+        console.log('USER ID: ' + this.authService.getUserId());
+
         this.modalService.dismissAll();
         this.authService.checkLogin();
         this.snackBar.open('Login Successful!', 'Dismiss', {
@@ -41,9 +44,6 @@ export class LoginComponent {
           panelClass: ['mat-toolbar', 'mat-primary'],
           verticalPosition: 'bottom'
         });
-        setTimeout(() => {
-          location.reload();
-        }, 1000);
       },
       error: (fail) => {
         console.error('Login failed');
@@ -60,7 +60,6 @@ export class LoginComponent {
   //       console.log("login successful: ", user);
 
   //       // Store user ID in AuthService
-  //       this.authService.setUserId(user.id);
 
   //       this.modalService.dismissAll();
   //       this.authService.checkLogin();

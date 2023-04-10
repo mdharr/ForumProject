@@ -15,7 +15,7 @@ export class AuthService {
 
   private isLoggedIn = false; // flag to track authentication state
 
-  private userId: number = 0; // User ID property
+  userId: number = 0; // User ID property
 
   constructor(private http: HttpClient) {}
 

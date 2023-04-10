@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -189,16 +189,39 @@ export class PostsListComponent implements OnInit, OnDestroy {
   //   );
   // }
 
-  getCategoryByPostId(postId: number): void {
+  getCategoryIdByPostId(postId: number): void {
     this.categoryService.getCategoryIdByPostId(postId).pipe(
       catchError(error => {
         console.error(error);
         return throwError(() => new Error('Error retrieving category ID: ' + error));
       })
     ).subscribe(categoryId => {
-      this.categoryId = categoryId;
-      console.log('Category ID:', categoryId);
+      this.navigateToComments(categoryId, postId); // Call navigateToComments with categoryId and postId as arguments
     });
+  }
+
+  navigateToComments(categoryId: number, postId: number): void {
+    const url = `/categories/${categoryId}/posts/${postId}/comments`;
+    const queryParams: NavigationExtras = {
+      queryParams: {
+        categoryId: categoryId,
+        postId: postId
+      }
+    };
+    this.router.navigate([url], queryParams);
+  }
+
+  // posts-list.component.ts
+  getCategoryIdAndNavigateToComments(postId: number): void {
+    this.categoryService.getCategoryIdByPostId(postId).subscribe(
+      categoryId => {
+        this.navigateToComments(categoryId, postId);
+      },
+      error => {
+        console.error(error);
+        // Handle error case here, if needed
+      }
+    );
   }
 
 }

@@ -11,6 +11,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./logout.component.css']
 })
 export class LogoutComponent {
+  userId: number = 0; // Retrieve userId from AuthService
+
 
   constructor(
               private authService: AuthService,
@@ -35,13 +37,13 @@ export class LogoutComponent {
 
   logout() {
     console.log("logging out");
-    const userId = this.authService.getUserId();
+    this.userId = this.authService.getUserId(); // Retrieve userId from AuthService
     this.authService.logout().pipe(
       switchMap(() => {
         // Handle successful logout
-        console.log("logout successfuly");
-        // Pass the user ID to setOffline() function in AuthService
-        return this.userService.setOffline(userId);
+        console.log("logout successfully");
+        // Pass the user ID to setOffline() function in UserService
+        return this.userService.setOffline(this.userId);
       })
     ).subscribe({
       next: (response) => {
