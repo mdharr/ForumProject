@@ -7,7 +7,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { Category } from 'src/app/models/category';
-import { catchError, map, Observable, Subscription, tap, throwError } from 'rxjs';
+import { catchError, EMPTY, map, Observable, Subscription, tap, throwError } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -211,17 +211,16 @@ export class PostsListComponent implements OnInit, OnDestroy {
     this.router.navigate([url], queryParams);
   }
 
-  // posts-list.component.ts
   getCategoryIdAndNavigateToComments(postId: number): void {
-    this.categoryService.getCategoryIdByPostId(postId).subscribe(
-      categoryId => {
-        this.navigateToComments(categoryId, postId);
-      },
-      error => {
+    this.categoryService.getCategoryIdByPostId(postId).pipe(
+      catchError(error => {
         console.error(error);
         // Handle error case here, if needed
-      }
-    );
+        return EMPTY; // Return an empty observable to prevent error propagation
+      })
+    ).subscribe(categoryId => {
+      this.navigateToComments(categoryId, postId);
+    });
   }
 
 }
