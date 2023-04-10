@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Post } from 'src/app/models/post';
 import { Comment } from 'src/app/models/comment';
 import { HttpClient } from '@angular/common/http';
@@ -24,7 +24,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.css']
 })
-export class CommentsComponent implements OnInit, AfterViewInit {
+export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   title = 'ngLoreHunter';
 
   public Editor = ClassicEditor;
@@ -192,6 +192,12 @@ export class CommentsComponent implements OnInit, AfterViewInit {
     // this.comments$ = this.dataSource.loadComments(this.categoryId, this.postId);
     this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe();
 
+  }
+
+  ngOnDestroy() {
+    if (this.paramsSub) {
+      this.paramsSub.unsubscribe();
+    }
   }
 
   ngAfterViewInit(){
