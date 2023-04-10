@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Post } from 'src/app/models/post';
 import { Comment } from 'src/app/models/comment';
 import { HttpClient } from '@angular/common/http';
@@ -74,6 +74,8 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   content = new FormControl('', [Validators.required]);
   checkCkEditor: boolean = false;
 
+  private loggedInSubscription: Subscription;
+
   constructor(
     private postService: PostService,
     private commentService: CommentService,
@@ -84,8 +86,18 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
     private homeService: HomeService,
     private http: HttpClient,
     private sanitizer:DomSanitizer,
-    private _renderer: Renderer2
-    ) {}
+    private _renderer: Renderer2,
+    private cdr: ChangeDetectorRef
+    ) {
+      this.loggedInSubscription = this.authService.loggedIn$.subscribe(loggedIn => {
+        if (loggedIn) {
+          // User is logged in, do something
+          this.cdr.detectChanges();
+        } else {
+          // User is not logged in, do something else
+        }
+      });
+    }
 
   ngOnInit() {
 
@@ -182,6 +194,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
       next: (user) => {
         this.loggedInUser = user;
         console.log(user);
+        this.cdr.detectChanges();
       },
       error: (error) => {
         console.log('Error getting loggedInUser');
@@ -198,6 +211,11 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.paramsSub) {
       this.paramsSub.unsubscribe();
     }
+
+    if (this.loggedInSubscription) {
+      this.loggedInSubscription.unsubscribe();
+    }
+
   }
 
   ngAfterViewInit(){

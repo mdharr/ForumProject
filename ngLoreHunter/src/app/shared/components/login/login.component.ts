@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user';
@@ -25,7 +25,8 @@ export class LoginComponent {
               private router: Router,
               private modalService: NgbModal,
               private userService: UserService,
-              private snackBar: MatSnackBar
+              private snackBar: MatSnackBar,
+              private cdr: ChangeDetectorRef
   ) {}
 
   login(loginUser: User) {
@@ -39,6 +40,9 @@ export class LoginComponent {
 
         this.modalService.dismissAll();
         this.authService.checkLogin();
+        this.userService.setUser(loginUser);
+        this.authService.setLoggedIn(true);
+        this.cdr.detectChanges(); // Trigger change detection
         this.snackBar.open('Login Successful!', 'Dismiss', {
           duration: 4000,
           panelClass: ['mat-toolbar', 'mat-primary'],

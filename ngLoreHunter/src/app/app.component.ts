@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from './models/user';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent implements OnInit {
 
   onlineUsers: User[] = [];
 
+  loggedInUser: User = new User();
   loggedInUsers: User[] = [];
 
   isLoggedIn = false;
@@ -23,7 +25,9 @@ export class AppComponent implements OnInit {
   constructor(
     private _snackBar: MatSnackBar,
     private authService: AuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    private userService: UserService,
+    private cdr: ChangeDetectorRef
     ) {}
 
   ngOnInit() {
@@ -45,6 +49,12 @@ export class AppComponent implements OnInit {
 
     // Update isLoggedIn flag based on localStorage value
     this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+    this.userService.userChanged.subscribe(user => {
+      this.loggedInUser = user;
+      this.cdr.detectChanges(); // Trigger change detection
+
+    });
 
   }
 

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError, tap } from 'rxjs';
+import { Observable, catchError, throwError, tap, Subject } from 'rxjs';
 import { User } from '../models/user';
 import { Buffer } from "buffer";
 import { environment } from 'src/environments/environment';
@@ -16,6 +16,9 @@ export class AuthService {
   private isLoggedIn = false; // flag to track authentication state
 
   userId: number = 0; // User ID property
+
+  private loggedInSubject: Subject<boolean> = new Subject<boolean>();
+  loggedIn$ = this.loggedInSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -152,6 +155,10 @@ export class AuthService {
     // Getter for user ID
     getUserId(): number {
       return this.userId;
+    }
+
+    setLoggedIn(loggedIn: boolean): void {
+      this.loggedInSubject.next(loggedIn);
     }
 
 }

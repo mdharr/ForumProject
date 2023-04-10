@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
@@ -10,6 +10,9 @@ import { AuthService } from './auth.service';
 })
 export class UserService {
   private url = environment.baseUrl + 'api/users';
+
+  user: User = new User();
+  userChanged: EventEmitter<User> = new EventEmitter<User>();
 
   constructor(private authService: AuthService, private http: HttpClient) { }
 
@@ -96,6 +99,11 @@ export class UserService {
         );
       })
     );
+  }
+
+  setUser(user: User) {
+    this.user = user;
+    this.userChanged.emit(user);
   }
 
 }

@@ -210,7 +210,7 @@
               <div class="message-avatar">
                 <div class="message-avatar-wrapper">
                   <a href="" class="avatar avatar--l">
-                    <img class="avatar" src="{{ this.post.user.imageUrl }}" alt="">
+                    <img class="avatar" src="{{ post.user.imageUrl }}" alt="">
                   </a>
                 </div>
               </div>
@@ -359,7 +359,7 @@
       <div class="user-block">
         <div class="user-block-inner">
           <div class="user-avatar">
-            <a style="cursor: pointer; padding-left: 10px;"><img id="userThumbnail" src="{{ loggedInUser.imageUrl }}" alt="" *ngIf="loggedIn()"/></a>
+            <a style="cursor: pointer; padding-left: 10px;"><img id="userThumbnail" [src]="loggedInUser.imageUrl" alt="" *ngIf="loggedIn()"/></a>
           </div>
           <div class="user-alias">
             <a class="user-name-text" *ngIf="loggedIn()">{{ loggedInUser.username }}</a>
