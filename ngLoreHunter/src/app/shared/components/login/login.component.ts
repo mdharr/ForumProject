@@ -45,7 +45,8 @@ export class LoginComponent {
           panelClass: ['mat-toolbar', 'mat-primary'],
           verticalPosition: 'bottom'
         });
-        this.reloadCurrentPage();
+
+        this.reloadPage();
       },
       error: (fail) => {
         console.error('Login failed');
@@ -78,11 +79,20 @@ export class LoginComponent {
   //   });
   // }
 
+  reloadPage() {
+    let currentUrl = this.router.url;
+    !currentUrl.includes('&postId') ? this.reloadCurrentPage() : this.reloadCurrentPage2();
+  }
+
   reloadCurrentPage(){
     let currentUrl = this.router.url;
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
     this.router.navigate([currentUrl]);
     });
+  }
+
+  reloadCurrentPage2() {
+    location.reload();
   }
 
 }
