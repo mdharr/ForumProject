@@ -24,15 +24,12 @@ export class LogoutComponent {
   logout() {
     console.log("Logging out");
     this.authService.logout();
-    this.router.navigateByUrl('/home');
+    this.reloadCurrentPage();
     this.snackBar.open('Logout Successful!', 'Dismiss', {
       duration: 3000, // Duration in milliseconds for which the snackbar will be shown
       panelClass: ['mat-toolbar', 'mat-primary'], // CSS class for custom styling
       verticalPosition: 'bottom' // Position of the snackbar on the screen
     });
-    setTimeout(() => {
-      location.reload();
-    }, 1000);
   }
 
   // logout() {
@@ -58,6 +55,13 @@ export class LogoutComponent {
   //     }
   //   });
   // }
+
+  reloadCurrentPage(){
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+    this.router.navigate([currentUrl]);
+    });
+  }
 
 }
 

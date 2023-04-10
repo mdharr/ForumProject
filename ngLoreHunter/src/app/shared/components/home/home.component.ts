@@ -66,11 +66,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.posts$ = this.postService.indexAll();
-    console.log(this.loggedInUsers);
 
     this.reload();
-    this.getLoggedInUsers();
-    console.log(this.loggedInUsers);
 
     if (this.activeSessionCountSubscription) {
       this.activeSessionCountSubscription.unsubscribe();

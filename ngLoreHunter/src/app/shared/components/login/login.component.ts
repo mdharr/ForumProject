@@ -33,12 +33,9 @@ export class LoginComponent {
     console.log("Logging in");
     this.authService.login(loginUser.username, loginUser.password).subscribe({
       next: (loginUser) => {
-        this.cdr.detectChanges(); // Trigger change detection
         console.log('Login success');
-        console.log(loginUser);
         this.authService.setUserId(loginUser.id); // Setting userId in AuthService
         console.log('USER ID: ' + this.authService.getUserId());
-
         this.modalService.dismissAll();
         this.authService.checkLogin();
         this.userService.setUser(loginUser);
@@ -48,6 +45,7 @@ export class LoginComponent {
           panelClass: ['mat-toolbar', 'mat-primary'],
           verticalPosition: 'bottom'
         });
+        this.reloadCurrentPage();
       },
       error: (fail) => {
         console.error('Login failed');
@@ -79,5 +77,12 @@ export class LoginComponent {
   //     }
   //   });
   // }
+
+  reloadCurrentPage(){
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+    this.router.navigate([currentUrl]);
+    });
+  }
 
 }
