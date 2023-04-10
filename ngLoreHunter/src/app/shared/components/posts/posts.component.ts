@@ -51,11 +51,9 @@ export class PostsComponent implements OnInit, AfterViewInit {
 
   public filterSubject: string = '';
 
-  paramsSub: Subscription | undefined;
-
   post: Post = new Post();
   posts: Post[] = [];
-  posts$!: Observable<Post[]>;
+  posts$!: Observable<Post[]> | undefined;
   categories: Category[] = [];
 
   users: User[] = [];
@@ -83,6 +81,8 @@ export class PostsComponent implements OnInit, AfterViewInit {
   content = new FormControl('', [Validators.required]);
   checkCkEditor: boolean = false;
 
+  private paramsSub: Subscription | undefined;
+
   constructor(
     private postService: PostService,
     private commentService: CommentService,
@@ -98,6 +98,12 @@ export class PostsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.reload();
 
+  }
+
+  ngOnDestroy() {
+    if (this.paramsSub) {
+      this.paramsSub.unsubscribe();
+    }
   }
 
   ngAfterViewInit() {
