@@ -32,7 +32,7 @@ import { FormControl, Validators } from '@angular/forms';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent implements OnInit, AfterViewInit {
+export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   title = 'ngLoreHunter';
 
   public Editor = ClassicEditor;

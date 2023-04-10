@@ -17,7 +17,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   templateUrl: './posts-list.component.html',
   styleUrls: ['./posts-list.component.css']
 })
-export class PostsListComponent implements OnInit {
+export class PostsListComponent implements OnInit, OnDestroy {
 
   title = 'ngLoreHunter';
   public Editor = ClassicEditor;
@@ -55,6 +55,10 @@ export class PostsListComponent implements OnInit {
 
   selectedSearch: string = 'all';
 
+  private loggedInUserSubscription: Subscription | undefined;
+  private indexAllSubscription: Subscription | undefined;
+  private homeServIndexSubscription: Subscription | undefined;
+
   constructor(
     private postService: PostService,
     private authService: AuthService,
@@ -67,7 +71,7 @@ export class PostsListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.authService.getLoggedInUser().subscribe({
+    this.loggedInUserSubscription = this.authService.getLoggedInUser().subscribe({
       next: (user) => {
         this.loggedInUser = user;
         console.log(user);
@@ -78,7 +82,7 @@ export class PostsListComponent implements OnInit {
       },
     });
 
-    this.postService.indexAll().pipe(
+    this.indexAllSubscription = this.postService.indexAll().pipe(
       tap(posts => {
         // Set the posts data to the component's property
         this.posts = posts;
@@ -95,7 +99,7 @@ export class PostsListComponent implements OnInit {
       }
     });
 
-    this.homeServ.index().subscribe({
+    this.homeServIndexSubscription = this.homeServ.index().subscribe({
       next: (categories) => {
         this.categories = categories;
       },
@@ -105,6 +109,20 @@ export class PostsListComponent implements OnInit {
       }
     });
 
+  }
+
+  ngOnDestroy() {
+    if (this.loggedInUserSubscription) {
+      this.loggedInUserSubscription.unsubscribe();
+    }
+
+    if (this.indexAllSubscription) {
+      this.indexAllSubscription.unsubscribe();
+    }
+
+    if (this.homeServIndexSubscription) {
+      this.homeServIndexSubscription.unsubscribe();
+    }
   }
 
   incrementViewCount(categoryId: number, postId: number): void {
