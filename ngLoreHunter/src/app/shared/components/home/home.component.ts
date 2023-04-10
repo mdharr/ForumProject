@@ -225,7 +225,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   @HostListener('window:online', ['$event'])
     onLine(e:any){
-    // do something
+    // do something here with the listener
   }
 
   getLoggedInUsers() {
