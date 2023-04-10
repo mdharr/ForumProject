@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category';
 import { AuthService } from 'src/app/services/auth.service';
 import { HomeService } from 'src/app/services/home.service';
@@ -11,7 +11,7 @@ import { Comment } from 'src/app/models/comment';
 import { CommentService } from 'src/app/services/comment.service';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ImageService } from 'src/app/services/image.service';
 import { SessionService } from 'src/app/services/session.service';
 
@@ -21,7 +21,7 @@ import { SessionService } from 'src/app/services/session.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   public posts$: Observable<Post[]> | undefined;
 
@@ -43,6 +43,15 @@ export class HomeComponent implements OnInit {
 
   dataSource = new PostDataSource(this.postService);
 
+  private categoriesSubscription: Subscription | undefined;
+  private postsSubscription: Subscription | undefined;
+  private commentsSubscription: Subscription | undefined;
+  private usersSubscription: Subscription | undefined;
+  private activeSessionCountSubscription: Subscription | undefined;
+  private loggedInUserCountSubscription: Subscription | undefined;
+  private loggedInUsersSubscription: Subscription | undefined;
+  private getLoggedInUserSubscription: Subscription | undefined;
+
   constructor(
               private auth: AuthService,
               private homeServ: HomeService,
@@ -63,7 +72,11 @@ export class HomeComponent implements OnInit {
     this.getLoggedInUsers();
     console.log(this.loggedInUsers);
 
-    this.sessionService.getActiveSessionCount().subscribe(
+    if (this.activeSessionCountSubscription) {
+      this.activeSessionCountSubscription.unsubscribe();
+    }
+
+    this.activeSessionCountSubscription = this.sessionService.getActiveSessionCount().subscribe(
       count => {
         this.activeSessionCount = count;
       },
@@ -72,13 +85,34 @@ export class HomeComponent implements OnInit {
       }
     );
 
-    this.auth.getLoggedInUsers().subscribe((count) => {
+    if (this.loggedInUsersSubscription) {
+      this.loggedInUsersSubscription.unsubscribe();
+    }
+
+    this.loggedInUsersSubscription = this.auth.getLoggedInUsers().subscribe((count) => {
       this.loggedInUserCount = count;
-    })
+    });
   }
 
   reload(): void {
-    this.homeServ.index().subscribe({
+
+    if (this.categoriesSubscription) {
+      this.categoriesSubscription.unsubscribe();
+    }
+
+    if (this.postsSubscription) {
+      this.postsSubscription.unsubscribe();
+    }
+
+    if (this.commentsSubscription) {
+      this.commentsSubscription.unsubscribe();
+    }
+
+    if (this.usersSubscription) {
+      this.usersSubscription.unsubscribe();
+    }
+
+    this.categoriesSubscription = this.homeServ.index().subscribe({
       next: (categories) => {
         this.categories = categories;
       },
@@ -87,7 +121,8 @@ export class HomeComponent implements OnInit {
         console.error(fail);
       }
     });
-    this.postService.indexAll().subscribe({
+
+    this.postsSubscription = this.postService.indexAll().subscribe({
       next: (posts) => {
         this.posts = posts;
       },
@@ -96,7 +131,8 @@ export class HomeComponent implements OnInit {
         console.error(fail);
       }
     });
-    this.commentService.indexAll().subscribe({
+
+    this.commentsSubscription = this.commentService.indexAll().subscribe({
       next: (comments) => {
         this.comments = comments;
       },
@@ -105,7 +141,8 @@ export class HomeComponent implements OnInit {
         console.error(fail);
       }
     });
-    this.userService.index().subscribe({
+
+    this.usersSubscription = this.userService.index().subscribe({
       next: (users) => {
         this.users = users;
       },
@@ -117,8 +154,44 @@ export class HomeComponent implements OnInit {
 
   }
 
+  ngOnDestroy() {
+
+    if (this.activeSessionCountSubscription) {
+      this.activeSessionCountSubscription.unsubscribe();
+    }
+
+    if (this.categoriesSubscription) {
+      this.categoriesSubscription.unsubscribe();
+    }
+
+    if (this.postsSubscription) {
+      this.postsSubscription.unsubscribe();
+    }
+
+    if (this.commentsSubscription) {
+      this.commentsSubscription.unsubscribe();
+    }
+
+    if (this.usersSubscription) {
+      this.usersSubscription.unsubscribe();
+    }
+
+    if (this.loggedInUsersSubscription) {
+      this.loggedInUsersSubscription.unsubscribe();
+    }
+
+    if (this.getLoggedInUserSubscription) {
+      this.getLoggedInUserSubscription.unsubscribe();
+    }
+
+  }
+
   checkLogin(): void {
-    this.auth.getLoggedInUser().subscribe({
+    if (this.getLoggedInUserSubscription) {
+      this.getLoggedInUserSubscription.unsubscribe();
+    }
+
+    this.getLoggedInUserSubscription = this.auth.getLoggedInUser().subscribe({
       next: (user) => {
         console.log(user);
       },
@@ -159,7 +232,11 @@ export class HomeComponent implements OnInit {
   }
 
   getLoggedInUsers() {
-    this.auth.getLoggedInUsers().subscribe({
+    if (this.loggedInUsersSubscription) {
+      this.loggedInUsersSubscription.unsubscribe();
+    }
+
+    this.loggedInUsersSubscription = this.auth.getLoggedInUsers().subscribe({
       next: (loggedInUsers) => {
         this.loggedInUsers = loggedInUsers;
       },
