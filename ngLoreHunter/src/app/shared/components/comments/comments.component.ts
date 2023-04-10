@@ -30,12 +30,6 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   public Editor = ClassicEditor;
   @ViewChild('ckeditorInstance') ckeditorInstance: any; // Add this line to access the CKEditor instance
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-
-  @ViewChild(MatSort)
-  sort!: MatSort;
-
   displayedColumns: string[] = ['user', 'content'];
 
   dataSource = new CommentDataSource(this.commentService);
@@ -61,6 +55,8 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   comments: Comment[] = [];
   comments$!: Observable<Comment[]>;
 
+  user: any;
+
   comment: Comment = new Comment();
   newComment: Comment = new Comment();
   loggedInUser: User = new User();
@@ -73,8 +69,6 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   content = new FormControl('', [Validators.required]);
   checkCkEditor: boolean = false;
-
-  private loggedInSubscription: Subscription;
 
   constructor(
     private postService: PostService,
@@ -89,14 +83,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
     private _renderer: Renderer2,
     private cdr: ChangeDetectorRef
     ) {
-      this.loggedInSubscription = this.authService.loggedIn$.subscribe(loggedIn => {
-        if (loggedIn) {
-          // User is logged in, do something
-          this.cdr.detectChanges();
-        } else {
-          // User is not logged in, do something else
-        }
-      });
+
     }
 
   ngOnInit() {
@@ -194,7 +181,6 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
       next: (user) => {
         this.loggedInUser = user;
         console.log(user);
-        this.cdr.detectChanges();
       },
       error: (error) => {
         console.log('Error getting loggedInUser');
@@ -210,10 +196,6 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     if (this.paramsSub) {
       this.paramsSub.unsubscribe();
-    }
-
-    if (this.loggedInSubscription) {
-      this.loggedInSubscription.unsubscribe();
     }
 
   }
@@ -274,7 +256,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
     // });
     this.commentService.fetchComments(categoryId, postId).subscribe({
 
-    })
+    });
   }
 
   createComment(comment: Comment, selected: Post) {
@@ -349,6 +331,13 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     };
     this.router.navigate([url], queryParams);
+  }
+
+  refreshComponent() {
+    // Method to be triggered from LoginComponent
+    console.log('Refresh Component method called from LoginComponent');
+    this.cdr.detectChanges();
+    // ... implement your logic to refresh the component
   }
 
 }

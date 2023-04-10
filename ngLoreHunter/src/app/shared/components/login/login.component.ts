@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user';
@@ -32,17 +32,17 @@ export class LoginComponent {
   login(loginUser: User) {
     console.log("Logging in");
     this.authService.login(loginUser.username, loginUser.password).subscribe({
-      next: (loggedInUser) => {
+      next: (loginUser) => {
+        this.cdr.detectChanges(); // Trigger change detection
         console.log('Login success');
-        console.log(loggedInUser);
-        this.authService.setUserId(loggedInUser.id); // Setting userId in AuthService
+        console.log(loginUser);
+        this.authService.setUserId(loginUser.id); // Setting userId in AuthService
         console.log('USER ID: ' + this.authService.getUserId());
 
         this.modalService.dismissAll();
         this.authService.checkLogin();
         this.userService.setUser(loginUser);
         this.authService.setLoggedIn(true);
-        this.cdr.detectChanges(); // Trigger change detection
         this.snackBar.open('Login Successful!', 'Dismiss', {
           duration: 4000,
           panelClass: ['mat-toolbar', 'mat-primary'],

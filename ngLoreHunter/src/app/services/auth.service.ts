@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError, tap, Subject } from 'rxjs';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Observable, catchError, throwError, tap, Subject, BehaviorSubject } from 'rxjs';
 import { User } from '../models/user';
 import { Buffer } from "buffer";
 import { environment } from 'src/environments/environment';
@@ -17,7 +17,8 @@ export class AuthService {
 
   userId: number = 0; // User ID property
 
-  private loggedInSubject: Subject<boolean> = new Subject<boolean>();
+  private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private loggedIn = new BehaviorSubject<boolean>(false);
   loggedIn$ = this.loggedInSubject.asObservable();
 
   constructor(private http: HttpClient) {}
@@ -53,6 +54,7 @@ export class AuthService {
         // ourselves logged in.
         localStorage.setItem('credentials', credentials);
         this.isLoggedIn = true;
+        this.loggedIn.next(true);
         localStorage.setItem('isLoggedIn', 'true');
         return newUser;
       }),
@@ -71,6 +73,7 @@ export class AuthService {
       tap(() => {
         // set isLoggedIn to false in localStorage
         localStorage.setItem('isLoggedIn', 'false');
+        this.loggedIn.next(false);
       }),
       catchError((err: any) => {
         console.log(err);

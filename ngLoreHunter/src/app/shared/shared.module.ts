@@ -37,6 +37,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PostsListComponent } from './components/posts-list/posts-list.component';
 import { NoSanitizePipe } from '../utilities/nosanitizerpipe';
+import { AuthService } from '../services/auth.service';
 
 
 @NgModule({
@@ -96,7 +97,8 @@ import { NoSanitizePipe } from '../utilities/nosanitizerpipe';
     PostService,
     PostDataSource,
     CommentService,
-    CommentDataSource
+    CommentDataSource,
+    AuthService
   ]
 })
 export class SharedModule { }
