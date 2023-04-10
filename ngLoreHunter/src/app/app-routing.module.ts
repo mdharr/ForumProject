@@ -13,6 +13,7 @@ import { UserComponent } from './shared/components/user/user.component';
 import { CommentsComponent } from './shared/components/comments/comments.component';
 import { ProfileComponent } from './shared/components/profile/profile.component';
 import { PostsListComponent } from './shared/components/posts-list/posts-list.component';
+import { LogoutComponent } from './shared/components/logout/logout.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
