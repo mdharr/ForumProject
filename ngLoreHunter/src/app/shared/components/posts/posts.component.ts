@@ -96,6 +96,11 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.authService.getCurrentLoggedInUser().subscribe((user: User) => {
+      this.loggedInUser = user;
+      // Do something with the logged-in user object, e.g. update UI
+    });
+
     this.reload();
 
   }

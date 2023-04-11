@@ -82,6 +82,11 @@ export class PostsListComponent implements OnInit, OnDestroy {
       },
     });
 
+    this.authService.getCurrentLoggedInUser().subscribe((user: User) => {
+      this.loggedInUser = user;
+      // Do something with the logged-in user object, e.g. update UI
+    });
+
     this.indexAllSubscription = this.postService.indexAll().pipe(
       tap(posts => {
         // Set the posts data to the component's property
