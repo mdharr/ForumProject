@@ -50,10 +50,10 @@ export class AppComponent implements OnInit {
     // Update isLoggedIn flag based on localStorage value
     this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
-    this.userService.userChanged.subscribe(user => {
+    this.authService.getCurrentLoggedInUser().subscribe((user: User) => {
       this.loggedInUser = user;
-      this.cdr.detectChanges(); // Trigger change detection
-
+      this.cdr.detectChanges;
+      // Do something with the logged-in user object, e.g. update UI
     });
 
   }

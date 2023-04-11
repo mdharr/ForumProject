@@ -175,6 +175,11 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     ).subscribe();
 
+    this.authService.getCurrentLoggedInUser().subscribe((user: User) => {
+      this.loggedInUser = user;
+      // Do something with the logged-in user object, e.g. update UI
+    });
+
     this.reload();
 
     this.authService.getLoggedInUser().subscribe({
