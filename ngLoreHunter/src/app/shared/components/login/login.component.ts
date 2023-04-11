@@ -30,69 +30,26 @@ export class LoginComponent {
   ) {}
 
   login(loginUser: User) {
-    console.log("Logging in");
+    console.log("logging in");
     this.authService.login(loginUser.username, loginUser.password).subscribe({
-      next: (loginUser) => {
-        console.log('Login success');
-        this.authService.setUserId(loginUser.id); // Setting userId in AuthService
-        console.log('USER ID: ' + this.authService.getUserId());
+      next: (loggedInUser) => {
+        console.log("login success")
+        console.log(loggedInUser);
+        this.cdr.detectChanges();
         this.modalService.dismissAll();
-        this.authService.checkLogin();
-        this.userService.setUser(loginUser);
-        this.authService.setLoggedIn(true);
-        this.snackBar.open('Login Successful!', 'Dismiss', {
+        // this.router.navigateByUrl('home');
+        this.snackBar.open('Login Success!', 'Dismiss', {
           duration: 4000,
           panelClass: ['mat-toolbar', 'mat-primary'],
           verticalPosition: 'bottom'
         });
-
-        this.reloadPage();
       },
       error: (fail) => {
-        console.error('Login failed');
+        console.error('login fail');
         console.error(fail);
       }
-    });
-  }
+    })
 
-  // login(loginUser: User) {
-  //   console.log("logging in");
-  //   this.authService.login(loginUser.username, loginUser.password).pipe(
-  //     switchMap((user) => {
-  //       // Handle succesfful login
-  //       console.log("login successful: ", user);
-
-  //       // Store user ID in AuthService
-
-  //       this.modalService.dismissAll();
-  //       this.authService.checkLogin();
-  //       return this.userService.setOnline(user.id);
-  //     })
-  //   ).subscribe({
-  //     next: (response) => {
-  //       console.log('Set user online successfully: ', response);
-  //       // Redirect to home page or do other actions
-  //     },
-  //     error: (error) => {
-  //       console.error('Login error: ', error);
-  //     }
-  //   });
-  // }
-
-  reloadPage() {
-    let currentUrl = this.router.url;
-    !currentUrl.includes('&postId') ? this.reloadCurrentPage() : this.reloadCurrentPage2();
-  }
-
-  reloadCurrentPage(){
-    let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-    this.router.navigate([currentUrl]);
-    });
-  }
-
-  reloadCurrentPage2() {
-    location.reload();
   }
 
 }

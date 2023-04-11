@@ -77,7 +77,7 @@ public class SecurityConfig {
         .httpBasic() // Move httpBasic() here
         .and()
         .logout() // Configure logout handling
-        .logoutUrl("logout") // URL for logging out
+        .logoutUrl("/logout") // URL for logging out
         .deleteCookies("JSESSIONID") // Delete cookies on logout
         .invalidateHttpSession(true) // Invalidate session on logout
         .addLogoutHandler(customLogoutHandler) // Register custom logout handler
@@ -87,7 +87,7 @@ public class SecurityConfig {
             // Remove the session from the SessionRegistry
             sessionRegistry().removeSessionInformation(sessionId);
             // Redirect to logout success page or do other actions
-            response.sendRedirect("home");
+            response.sendRedirect("/login");
         })
         .permitAll(); // Allow all users to access logout URL
 

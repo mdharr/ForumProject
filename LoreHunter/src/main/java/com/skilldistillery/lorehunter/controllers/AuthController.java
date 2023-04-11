@@ -3,6 +3,7 @@ package com.skilldistillery.lorehunter.controllers;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -90,21 +91,35 @@ public class AuthController {
 
 	@PostMapping("logout")
 	public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
-		// Get the current session
-		HttpSession session = request.getSession(false);
+	    // Get the current session
+	    HttpSession session = request.getSession(false);
 
-		if (session != null) {
-			// Invalidate the session
-			session.invalidate();
-			
-		}
+	    if (session != null) {
+	        // Invalidate the session
+	        session.invalidate();
 
-		// Clear any session-related information from the response
-		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-		response.setHeader("Expires", "0"); // Proxies.
+	        // Clear authentication-related cookies from the client-side
+	        Cookie[] cookies = request.getCookies();
+	        if (cookies != null) {
+	            for (Cookie cookie : cookies) {
+	                // Assuming your authentication cookies have a specific name, such as "jsessionid"
+	                if ("jsessionid".toUpperCase().equals(cookie.getName().toUpperCase())) {
+	                    cookie.setValue("");
+	                    cookie.setPath("/");
+	                    cookie.setMaxAge(0);
+	                    response.addCookie(cookie);
+	                }
+	                // Add any other authentication-related cookies here, if applicable
+	            }
+	        }
+	    }
 
-		// Return a success response to the frontend
-		return ResponseEntity.ok().build();
+	    // Clear any session-related information from the response
+	    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+	    response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+	    response.setHeader("Expires", "0"); // Proxies.
+
+	    // Return a success response to the frontend
+	    return ResponseEntity.ok().build();
 	}
 }

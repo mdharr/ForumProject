@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SideNavService } from 'src/app/services/side-nav.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,6 +11,7 @@ import { HomeService } from 'src/app/services/home.service';
 import { Category } from 'src/app/models/category';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ChangeDetectorRef } from '@angular/core';
+import { Subscription, tap } from 'rxjs';
 
 
 @Component({
@@ -26,6 +27,9 @@ export class HeaderComponent implements OnInit {
   categories: Category[] = [];
 
   displayProgressBar: boolean = false;
+
+  private categoriesSubscription: Subscription | undefined;
+  private loggedInUserSubscription: Subscription | undefined;
 
   constructor(private sideNavService: SideNavService,
     private userService: UserService,
@@ -52,11 +56,46 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.categoriesSubscription) {
+      this.categoriesSubscription.unsubscribe();
+    }
+    if (this.loggedInUserSubscription) {
+      this.loggedInUserSubscription.unsubscribe();
+    }
+
+    this.authService.getCurrentLoggedInUser().subscribe((user: User) => {
+      this.loggedInUser = user;
+      // Do something with the logged-in user object, e.g. update UI
+    });
+
+    this.authService.getLoggedInUser().subscribe({
+      next: (user) => {
+        this.loggedInUser = user;
+        console.log(user);
+      },
+      error: (error) => {
+        console.log('Error getting loggedInUser');
+        console.log(error);
+      },
+    });
+
+    this.loggedInUserSubscription = this.authService.getLoggedInUser().pipe(
+      tap(user => {
+        this.loggedInUser = user;
+        console.log(user);
+      })
+    ).subscribe({
+      error: (error) => {
+        console.log('Error getting loggedInUser Profile Component');
+        console.log(error);
+      },
+    });
     this.reload();
   }
 
+
   reload(): void {
-    this.homeService.index().subscribe({
+    this.categoriesSubscription = this.homeService.index().subscribe({
       next: (categories) => {
         this.categories = categories;
       },
@@ -66,17 +105,7 @@ export class HeaderComponent implements OnInit {
       }
     });
 
-    this.authService.getLoggedInUser().subscribe({
-      next: (user) => {
-        this.loggedInUser = user;
-        console.log(user);
-      },
-      error: (error) => {
-        console.log('Error getting loggedInUser Profile Component');
-        console.log(error);
-      },
-    });
-  }
+    }
 
   clickMenu() {
     this.sideNavService.toggle();
@@ -128,9 +157,14 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  checkForLogin() {
-    this.cdr.markForCheck();
-    this.cdr.detectChanges();
+  // checkForLogin() {
+  //   this.cdr.markForCheck();
+  //   this.cdr.detectChanges();
+  // }
+
+  getCurrentTimestamp(): number {
+    // Logic to get current timestamp
+    return Math.floor(Date.now() / 1000);
   }
 
 }

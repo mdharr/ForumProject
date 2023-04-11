@@ -29,7 +29,6 @@ import { AuthService } from './services/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
-    // NoSanitizePipe
   ],
   imports: [
     BrowserModule,

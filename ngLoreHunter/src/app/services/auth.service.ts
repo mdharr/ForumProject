@@ -13,6 +13,9 @@ export class AuthService {
 
   private url = environment.baseUrl;
 
+  private loggedInUserSubject: BehaviorSubject<User> = new BehaviorSubject<User>(new User());
+  private loggedInUser: User = new User();
+
   private isLoggedIn = false; // flag to track authentication state
 
   userId: number = 0; // User ID property
@@ -44,7 +47,6 @@ export class AuthService {
         Authorization: `Basic ${credentials}`,
         'X-Requested-With': 'XMLHttpRequest',
       }),
-
     };
 
     // Create GET request to authenticate credentials
@@ -56,6 +58,8 @@ export class AuthService {
         this.isLoggedIn = true;
         this.loggedIn.next(true);
         localStorage.setItem('isLoggedIn', 'true');
+        this.loggedInUser = newUser; // store the logged-in user object
+        this.loggedInUserSubject.next(this.loggedInUser); // emit the logged-in user object using the BehaviorSubject
         return newUser;
       }),
       catchError((err: any) => {
@@ -69,11 +73,14 @@ export class AuthService {
 
   logout(): Observable<any> {
     localStorage.removeItem('credentials');
+    localStorage.removeItem('isLoggedIn');
+    localStorage.clear();
     return this.http.post(this.url + 'logout', null).pipe(
       tap(() => {
         // set isLoggedIn to false in localStorage
-        localStorage.setItem('isLoggedIn', 'false');
         this.loggedIn.next(false);
+        this.loggedInUser = new User(); // clear the logged-in user object
+        this.loggedInUserSubject.next(this.loggedInUser); // emit null to indicate no logged-in user using the BehaviorSubject
       }),
       catchError((err: any) => {
         console.log(err);
@@ -162,6 +169,10 @@ export class AuthService {
 
     setLoggedIn(loggedIn: boolean): void {
       this.loggedInSubject.next(loggedIn);
+    }
+
+    getCurrentLoggedInUser(): BehaviorSubject<User> {
+      return this.loggedInUserSubject;
     }
 
 }

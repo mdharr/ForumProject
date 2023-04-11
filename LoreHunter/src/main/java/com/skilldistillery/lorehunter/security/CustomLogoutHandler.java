@@ -1,5 +1,6 @@
 package com.skilldistillery.lorehunter.security;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,6 +33,8 @@ public class CustomLogoutHandler implements LogoutHandler {
         // For example, you can clear authentication-related cookies here
         
         // You can also perform other cleanup tasks, if needed
+        // Call clearAuthenticationCookies to clear authentication-related cookies
+        clearAuthenticationCookies(request, response);
         
         // Redirect to a specific page after logout, if desired
         // For example, you can redirect to a logout success page
@@ -39,4 +42,18 @@ public class CustomLogoutHandler implements LogoutHandler {
         // Note: If you are using Spring Security's built-in logout functionality,
         // you can configure these tasks in the logoutSuccessHandler
     }
+    
+    private void clearAuthenticationCookies(HttpServletRequest request, HttpServletResponse response) {
+    	  Cookie[] cookies = request.getCookies();
+    	  if (cookies != null) {
+    	    for (Cookie cookie : cookies) {
+    	      if (cookie.getName().startsWith("auth")) {
+    	        cookie.setMaxAge(0);
+    	        cookie.setValue("");
+    	        cookie.setPath("/");
+    	        response.addCookie(cookie);
+    	      }
+    	    }
+    	  }
+    	}
 }

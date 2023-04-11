@@ -107,9 +107,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
                   return this.postService.show(this.categoryId, this.postId).pipe(
                     switchMap((post) => {
-                      console.log(post);
-                      console.log(this.postId);
-
                       // Do any other processing with user and post here
 
                       // You can return an observable if you need to further chain operators or subscribe later
