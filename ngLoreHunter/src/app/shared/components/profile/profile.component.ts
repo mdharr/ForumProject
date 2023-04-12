@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Post } from 'src/app/models/post';
 import { Comment } from 'src/app/models/comment';
 import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { CommentService } from 'src/app/services/comment.service';
@@ -10,7 +10,7 @@ import { HomeService } from 'src/app/services/home.service';
 import { PostService } from 'src/app/services/post.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
-import { catchError, EMPTY, of, Subscription, switchMap } from 'rxjs';
+import { catchError, EMPTY, of, Subscription, switchMap, throwError } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
@@ -220,6 +220,40 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     sortComments(sort: Sort): void {
       this.dataSource.loadComments(this.categoryId, this.postId);
+    }
+
+    getCategoryIdByPostId(postId: number): void {
+      this.categoryService.getCategoryIdByPostId(postId).pipe(
+        catchError(error => {
+          console.error(error);
+          return throwError(() => new Error('Error retrieving category ID: ' + error));
+        })
+      ).subscribe(categoryId => {
+        this.navigateToComments(categoryId, postId); // Call navigateToComments with categoryId and postId as arguments
+      });
+    }
+
+    navigateToComments(categoryId: number, postId: number): void {
+      const url = `/categories/${categoryId}/posts/${postId}/comments`;
+      const queryParams: NavigationExtras = {
+        queryParams: {
+          categoryId: categoryId,
+          postId: postId
+        }
+      };
+      this.router.navigate([url], queryParams);
+    }
+
+    getCategoryIdAndNavigateToComments(postId: number): void {
+      this.categoryService.getCategoryIdByPostId(postId).pipe(
+        catchError(error => {
+          console.error(error);
+          // Handle error case here, if needed
+          return EMPTY; // Return an empty observable to prevent error propagation
+        })
+      ).subscribe(categoryId => {
+        this.navigateToComments(categoryId, postId);
+      });
     }
 
 }
