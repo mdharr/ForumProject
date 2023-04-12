@@ -176,7 +176,7 @@
   padding: 0;
   font-weight: 400;
   font-size: 24px;
-  color: #3cbead;
+  color: #3f51b5;
 }
 
 .username {
@@ -198,6 +198,16 @@
 .member-header-blurb {
   margin-top: 0;
   text-align: left;
+}
+
+.member-header-blurbMessage {
+  margin-top: 0;
+  text-align: left;
+}
+
+.member-header-blurbMessage::before,
+.member-header-blurbMessage::after {
+  content: '"';
 }
 
 .pairs {

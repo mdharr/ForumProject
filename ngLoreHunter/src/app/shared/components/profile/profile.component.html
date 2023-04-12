@@ -36,7 +36,10 @@
                         </h1>
                         <div class="member-header-blurbContainer">
                           <div class="member-header-blurb">
-                            <span>Lore Hunter Member</span>
+                            <span *ngIf="profileUser.status === 'active'">Member</span>
+                          </div>
+                          <div class="member-header-blurbMessage">
+                            <span>{{ profileUser.bannerMessage }}</span>
                           </div>
                           <div class="member-header-blurb">
                             <dl class="activity-pairs">
