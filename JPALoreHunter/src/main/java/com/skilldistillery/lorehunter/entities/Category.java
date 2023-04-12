@@ -15,8 +15,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Category {
@@ -50,7 +50,7 @@ public class Category {
 	private User user;
 	
 	@OneToMany(mappedBy = "category")
-	@JsonManagedReference
+	@JsonBackReference
 	private List<Post> posts;
 	
 	private Boolean enabled;
