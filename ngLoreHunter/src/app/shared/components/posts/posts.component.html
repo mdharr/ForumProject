@@ -208,7 +208,7 @@
             <div class="message-content-details">
               <div class="message-user-details">
                 <div>
-                  <p class="p-content">{{ post.user.username }}</p>
+                  <a class="post-link" [routerLink]="['/users', post.user.id]"><p class="p-content">{{ post.user.username }}</p></a>
                 </div>
                 <div>
                   <p class="p-content"><span style="margin-left: 5px; margin-right: 5px;">&#183;</span> {{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</p>

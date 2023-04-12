@@ -59,6 +59,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   comment: Comment = new Comment();
   newComment: Comment = new Comment();
   loggedInUser: User = new User();
+  profileUser: User = new User();
 
   postCreated = false;
   showForm: boolean = false;
@@ -73,6 +74,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private loggedInUserSubscription: Subscription | undefined;
   private homeServIndexSubscription: Subscription | undefined;
   private postsByCategorySubscription: Subscription | undefined;
+  private profileUserSubscription: Subscription | undefined;
 
   constructor(
     private postService: PostService,
@@ -144,12 +146,23 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.loggedInUserSubscription = this.authService.getLoggedInUser().subscribe({
         next: (user) => {
           this.loggedInUser = user;
-          console.log(user);
+          console.log(this.loggedInUser);
         },
         error: (error) => {
           console.log('Error getting loggedInUser');
           console.log(error);
         },
+      });
+
+      this.profileUserSubscription = this.userService.show(this.userId).subscribe({
+        next:(user) => {
+          this.profileUser = user;
+          console.log(this.profileUser);
+        },
+        error: (error) => {
+          console.log('Error getting profileUser');
+          console.log(error);
+        }
       });
 
       // this.dataSource.loadComments(this.categoryId, this.postId);
@@ -171,6 +184,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
       if (this.homeServIndexSubscription) {
         this.homeServIndexSubscription.unsubscribe();
+      }
+
+      if (this.profileUserSubscription) {
+        this.profileUserSubscription.unsubscribe();
       }
     }
 

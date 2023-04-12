@@ -2,7 +2,7 @@
   <div class="breadcrumb-inner">
     <ol class="breadcrumbnav" style="padding:0;">
       <li class="breadcrumb-value" [routerLink]="['/home']">Discussion</li>
-      <li class="breadcrumb-value" [routerLink]="['/users/' + loggedInUser.id]">{{loggedInUser.username}}'s Profile</li>
+      <li class="breadcrumb-value" [routerLink]="['/users/' + profileUser.id]">{{profileUser.username}}'s Profile</li>
     </ol>
   </div>
 </div>
@@ -16,11 +16,11 @@
             <div class="block-container">
               <div class="block-body">
                 <div class="member-header">
-                  <div class="member-banner" style="background-image: url({{loggedInUser.bannerImage}}); background-position-y: 32%; background-size: 100% auto;">
+                  <div class="member-banner" style="background-image: url({{profileUser.bannerImage}}); background-position-y: 32%; background-size: 100% auto;">
                     <div class="member-main-content">
                       <span class="member-avatar">
                         <span class="avatar-wrapper">
-                          <a class="avatar-url"><img class="avatar" src="{{loggedInUser.imageUrl}}" alt=""></a>
+                          <a class="avatar-url"><img class="avatar" src="{{profileUser.imageUrl}}" alt=""></a>
                         </span>
                       </span>
                       <div class="memberHeader-content">
@@ -31,7 +31,7 @@
                         </div>
                         <h1 class="member-header-name">
                           <span class="name-wrapper">
-                            <span class="username">{{loggedInUser.username}}</span>
+                            <span class="username">{{profileUser.username}}</span>
                           </span>
                         </h1>
                         <div class="member-header-blurbContainer">
@@ -41,13 +41,13 @@
                           <div class="member-header-blurb">
                             <dl class="activity-pairs">
                               <dt>Joined: </dt>
-                              <dd>{{loggedInUser.createdAt | date:'short'}}</dd>
+                              <dd>{{profileUser.createdAt | date:'short'}}</dd>
                             </dl>
                           </div>
                           <div class="member-header-blurb">
                             <dl class="activity-pairs">
                               <dt>Last activity: </dt>
-                              <dd>{{loggedInUser.lastActivity | date:'short'}}</dd>
+                              <dd>{{profileUser.lastActivity | date:'short'}}</dd>
                             </dl>
                           </div>
                         </div>
@@ -60,13 +60,13 @@
                         <dl class="stats-pairs">
                           <dt>Posts</dt>
                           <dd>
-                            <a href="">{{loggedInUser.postCount}}</a>
+                            <a href="">{{profileUser.postCount}}</a>
                           </dd>
                         </dl>
                         <dl class="stats-pairs">
                           <dt>Comments</dt>
                           <dd>
-                            <a href="">{{loggedInUser.commentCount}}</a>
+                            <a href="">{{profileUser.commentCount}}</a>
                           </dd>
                         </dl>
                         <dl class="stats-pairs"></dl>
@@ -79,39 +79,6 @@
           </div>
           <!-- material table with user comments and posts here -->
           <div class="wrapper">
-          <!-- <table
-          mat-table
-          matSort
-          matSortActive="id"
-          matSortDirection="asc"
-          matSortDisableClear
-          (matSortChange)="sortComments($event)"
-          [dataSource]="dataSource"
-          >
-            <ng-container matColumnDef="id">
-              <th mat-header-cell mat-sort-header *matHeaderCellDef>ID</th>
-              <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="content">
-              <th mat-header-cell mat-sort-header *matHeaderCellDef>Content</th>
-              <td mat-cell *matCellDef="let element" [innerHtml]='element.content'>{{ element.content }}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="user">
-              <th mat-header-cell mat-sort-header *matHeaderCellDef>User</th>
-              <td mat-cell *matCellDef="let element"><div style="display:flex; flex-direction:column; align-items: center; justify-content: center; float: left;"><div style="margin-bottom: 10px; padding: 7px;"><img class="avatar" src="{{ element.user.imageUrl }}" alt=""></div><div><p>{{ element.user.username }}</p></div></div></td>
-            </ng-container>
-
-            <tr style="border-bottom: 2px solid #3f51b5;" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-
-            <tr style="border-bottom: 1px solid #3f51b5;" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-
-          </table>
-          <mat-paginator #paginator
-          [pageSize]="5"
-          [pageSizeOptions]="[5, 10, 20]">
-          </mat-paginator> -->
 
           </div>
         </div>
@@ -124,7 +91,7 @@
   <div class="breadcrumb-inner">
     <ol class="breadcrumbnav" style="padding:0;">
       <li class="breadcrumb-value" [routerLink]="['/home']">Discussion</li>
-      <li class="breadcrumb-value" [routerLink]="['/users/' + loggedInUser.id]">{{loggedInUser.username}}'s Profile</li>
+      <li class="breadcrumb-value" [routerLink]="['/users/' + profileUser.id]">{{profileUser.username}}'s Profile</li>
     </ol>
   </div>
 </div>
