@@ -54,6 +54,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   newPost: Post = new Post();
 
   postsByCategory: Post[] = [];
+  userPosts: Post[] = [];
 
   comments: Comment[] = [];
   comment: Comment = new Comment();
@@ -106,6 +107,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 switchMap((user) => {
                   console.log(user);
                   console.log(this.loggedInUser);
+                  this.profileUser = user;
 
                   return this.postService.show(this.categoryId, this.postId).pipe(
                     switchMap((post) => {

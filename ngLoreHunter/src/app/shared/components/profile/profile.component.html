@@ -36,21 +36,21 @@
                         </h1>
                         <div class="member-header-blurbContainer">
                           <div class="member-header-blurb">
-                            <span *ngIf="profileUser.status === 'active'">Member</span>
+                            <span class="user-account-status" *ngIf="profileUser.status === 'active'">Member</span>
                           </div>
                           <div class="member-header-blurbMessage">
-                            <span>{{ profileUser.bannerMessage }}</span>
+                            <span class="user-bannerMessage">{{ profileUser.bannerMessage }}</span>
                           </div>
                           <div class="member-header-blurb">
                             <dl class="activity-pairs">
-                              <dt>Joined: </dt>
-                              <dd>{{ profileUser.createdAt | date:'short' }}</dd>
+                              <dt class="blurb-data">Joined: </dt>
+                              <dd class="blurb-data">{{ profileUser.createdAt | date:'short' }}</dd>
                             </dl>
                           </div>
                           <div class="member-header-blurb">
                             <dl class="activity-pairs">
-                              <dt>Last activity: </dt>
-                              <dd>{{profileUser.lastActivity | date:'short'}}</dd>
+                              <dt class="blurb-data">Last activity: </dt>
+                              <dd class="blurb-data">{{profileUser.lastActivity | date:'short'}}</dd>
                             </dl>
                           </div>
                         </div>
@@ -92,7 +92,7 @@
 
 <div class="wrapper">
 
-    <div class="article-container" *ngFor="let post of profileUser.posts; let i = index">
+    <div class="article-container" *ngFor="let post of posts; let i = index">
       <article class="message-outer">
         <span class="anchorTarget"></span>
         <div class="message-inner">
