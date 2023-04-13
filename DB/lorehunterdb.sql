@@ -140,6 +140,44 @@ CREATE TABLE IF NOT EXISTS `comment` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `game`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `game` ;
+
+CREATE TABLE IF NOT EXISTS `game` (
+  `id` INT NOT NULL,
+  `api_key` VARCHAR(100) NULL DEFAULT 'a569b5c91c944880a78145c9280ce92c',
+  `url` TEXT NULL,
+  `created_at` TIMESTAMP NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `user_has_game`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_has_game` ;
+
+CREATE TABLE IF NOT EXISTS `user_has_game` (
+  `user_id` INT NOT NULL,
+  `game_id` INT NOT NULL,
+  PRIMARY KEY (`user_id`, `game_id`),
+  INDEX `fk_user_has_game_game1_idx` (`game_id` ASC),
+  INDEX `fk_user_has_game_user1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_user_has_game_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_has_game_game1`
+    FOREIGN KEY (`game_id`)
+    REFERENCES `game` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS lorehunter@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -209,6 +247,18 @@ INSERT INTO `comment` (`id`, `content`, `created_at`, `status`, `last_edited`, `
 INSERT INTO `comment` (`id`, `content`, `created_at`, `status`, `last_edited`, `parent_id`, `user_id`, `post_id`, `enabled`) VALUES (4, 'I play all Souls game the same and have a lot of fun. I don’t look stuff up and begin as the most barren of character and just go from there', '2023-03-03T12:35:22', 'active', '2023-03-03T12:35:22', NULL, 2, 4, 1);
 INSERT INTO `comment` (`id`, `content`, `created_at`, `status`, `last_edited`, `parent_id`, `user_id`, `post_id`, `enabled`) VALUES (5, 'I\'m not sure which ad caused it, unfortunately, but I just got this pop up', '2023-03-03T12:35:22', 'active', '2023-03-03T12:35:22', NULL, 2, 5, 1);
 INSERT INTO `comment` (`id`, `content`, `created_at`, `status`, `last_edited`, `parent_id`, `user_id`, `post_id`, `enabled`) VALUES (6, 'What can more be said about Elden Ring? It\'s an evolved Souls game with absolutely massive scope. I was in the middle playing it when my first child was born, and playing through the rest of it over parental leave helped keep me sane? It was an amazing journey, and I\'m looking forward to seeing what else is coming with some DLC.', '2023-03-03T12:35:22', 'active', '2023-03-03T12:35:22', NULL, 2, 6, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `game`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `lorehunterdb`;
+INSERT INTO `game` (`id`, `api_key`, `url`, `created_at`) VALUES (1, 'a569b5c91c944880a78145c9280ce92c', 'https://api.rawg.io/api/games/resident-evil-2002?key=a569b5c91c944880a78145c9280ce92c', '2023-03-03T12:35:22');
+INSERT INTO `game` (`id`, `api_key`, `url`, `created_at`) VALUES (2, 'a569b5c91c944880a78145c9280ce92c', 'https://api.rawg.io/api/games/shadow-of-the-colossus?key=a569b5c91c944880a78145c9280ce92c', '2023-03-03T12:35:22');
+INSERT INTO `game` (`id`, `api_key`, `url`, `created_at`) VALUES (3, 'a569b5c91c944880a78145c9280ce92c', 'https://api.rawg.io/api/games/metal-gear-solid-1?key=a569b5c91c944880a78145c9280ce92c', '2023-03-03T12:35:22');
 
 COMMIT;
 
