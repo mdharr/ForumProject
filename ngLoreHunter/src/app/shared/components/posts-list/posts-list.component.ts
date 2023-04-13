@@ -71,17 +71,6 @@ export class PostsListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.loggedInUserSubscription = this.authService.getLoggedInUser().subscribe({
-      next: (user) => {
-        this.loggedInUser = user;
-        console.log(user);
-      },
-      error: (error) => {
-        console.log('Error getting loggedInUser');
-        console.log(error);
-      },
-    });
-
     this.authService.getCurrentLoggedInUser().subscribe((user: User) => {
       this.loggedInUser = user;
       // Do something with the logged-in user object, e.g. update UI

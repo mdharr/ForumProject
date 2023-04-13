@@ -16,16 +16,6 @@ export class LayoutsComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.authService.getLoggedInUser().subscribe({
-      next: (user) => {
-        this.loggedInUser = user;
-        console.log(user);
-      },
-      error: (error) => {
-        console.log('Error getting loggedInUser');
-        console.log(error);
-      },
-    });
 
   }
 

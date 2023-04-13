@@ -47,6 +47,11 @@ export class LoginComponent {
       error: (fail) => {
         console.error('login fail');
         console.error(fail);
+        this.snackBar.open('Incorrect username or password', 'Dismiss', {
+          duration: 1000,
+          panelClass: ['mat-toolbar', 'mat-primary'],
+          verticalPosition: 'bottom'
+        });
       }
     })
 
