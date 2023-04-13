@@ -12,6 +12,9 @@
 		<class>com.skilldistillery.lorehunter.entities.Category</class>
 		<class>com.skilldistillery.lorehunter.entities.Post</class>
 		<class>com.skilldistillery.lorehunter.entities.Comment</class>
+		<class>com.skilldistillery.lorehunter.entities.UserGame</class>
+		<class>com.skilldistillery.lorehunter.entities.UserGameId</class>
+		<class>com.skilldistillery.lorehunter.entities.Game</class>
 
 		<!-- end entities -->
 

@@ -262,3 +262,15 @@ INSERT INTO `game` (`id`, `api_key`, `url`, `created_at`) VALUES (3, 'a569b5c91c
 
 COMMIT;
 
+
+-- -----------------------------------------------------
+-- Data for table `user_has_game`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `lorehunterdb`;
+INSERT INTO `user_has_game` (`user_id`, `game_id`) VALUES (1, 1);
+INSERT INTO `user_has_game` (`user_id`, `game_id`) VALUES (2, 2);
+INSERT INTO `user_has_game` (`user_id`, `game_id`) VALUES (3, 3);
+
+COMMIT;
+
