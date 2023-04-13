@@ -1,8 +1,6 @@
 package com.skilldistillery.lorehunter.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,11 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
+class UserGameTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private UserGame userGame;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,42 +31,31 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		userGame = em.find(UserGame.class, new UserGameId(1,1));
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		userGame = null;
 	}
 
 	@Test
-	void test_User_entity_mapping() {
-		assertNotNull(user);
-		assertEquals("Wesker", user.getUsername());
-	}
-	
-	@Test
-	void test_User_Category_one_to_many_mapping() {
-		assertNotNull(user);
-		assertTrue(user.getCategories().size() > 0);
-	}
-	
-	@Test
-	void test_User_Post_one_to_many_mapping() {
-		assertNotNull(user);
-		assertTrue(user.getPosts().size() > 0);
-	}
-	
-	@Test
-	void test_User_Comment_one_to_many_mapping() {
-		assertNotNull(user);
-		assertTrue(user.getComments().size() > 0);
-	}
-	
-	@Test
 	void test_User_Game_many_to_many_mapping() {
-		assertNotNull(user.getUserGames().size() > 0);
+		assertNotNull(userGame);
+		assertEquals(1, userGame.getUser().getId());
+	}
+	
+	@Test
+	void test_Game_User_many_to_many_mapping() {
+		assertNotNull(userGame);
+		assertEquals(1, userGame.getGame().getId());
+	}
+	
+	@Test
+	void test_User_Game_many_to_many_mapping_2() {
+		assertNotNull(userGame);
+		assertEquals("Wesker", userGame.getGame().getUsers().get(0).getUsername());
 	}
 
 }

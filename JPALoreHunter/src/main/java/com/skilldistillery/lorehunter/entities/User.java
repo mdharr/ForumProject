@@ -1,6 +1,7 @@
 package com.skilldistillery.lorehunter.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -78,15 +82,19 @@ public class User {
 	
 	@Column(name = "is_online")
 	private Boolean isOnline;
+	
+	@OneToMany(mappedBy = "user")
+	private List<UserGame> userGames;
 
 	public User() {
 		super();
 	}
 
 	public User(int id, String username, String password, Boolean enabled, String role, String firstName,
-			String lastName, String email, String state, LocalDateTime createdAt, String imageUrl, LocalDateTime lastActivity,
-			String status, Integer commentCount, String bannerMessage, String bannerImage, List<Category> categories, List<Post> posts,
-			List<Comment> comments, Integer postCount, Boolean isOnline) {
+			String lastName, String email, String state, LocalDateTime createdAt, String imageUrl,
+			LocalDateTime lastActivity, String status, Integer commentCount, String bannerMessage, String bannerImage,
+			List<Category> categories, List<Post> posts, List<Comment> comments, Integer postCount, Boolean isOnline,
+			List<UserGame> userGames) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -109,6 +117,7 @@ public class User {
 		this.comments = comments;
 		this.postCount = postCount;
 		this.isOnline = isOnline;
+		this.userGames = userGames;
 	}
 
 	public int getId() {
@@ -279,6 +288,14 @@ public class User {
 		this.isOnline = isOnline;
 	}
 
+	public List<UserGame> getUserGames() {
+		return userGames;
+	}
+
+	public void setUserGames(List<UserGame> userGames) {
+		this.userGames = userGames;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -302,10 +319,7 @@ public class User {
 				+ ", role=" + role + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", state=" + state + ", createdAt=" + createdAt + ", imageUrl=" + imageUrl + ", lastActivity="
 				+ lastActivity + ", status=" + status + ", commentCount=" + commentCount + ", bannerMessage="
-				+ bannerMessage + ", bannerImage=" + bannerImage + ", categories=" + categories + ", posts=" + posts
-				+ ", comments=" + comments + ", postCount=" + postCount + ", isOnline=" + isOnline + "]";
+				+ bannerMessage + ", bannerImage=" + bannerImage + ", postCount=" + postCount + ", isOnline=" + isOnline + "]";
 	}
-	
-	
-	
+		
 }
