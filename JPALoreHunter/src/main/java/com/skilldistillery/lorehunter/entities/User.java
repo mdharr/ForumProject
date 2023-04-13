@@ -17,7 +17,9 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class User {
@@ -69,12 +71,12 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Category> categories;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "user")
+	@JsonBackReference("posts")
 	private List<Post> posts;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "user")
+	@JsonBackReference("comments")
 	private List<Comment> comments;
 	
 	@Column(name = "post_count")

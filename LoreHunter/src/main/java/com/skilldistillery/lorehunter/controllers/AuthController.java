@@ -1,8 +1,6 @@
 package com.skilldistillery.lorehunter.controllers;
 
 import java.security.Principal;
-import java.util.List;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

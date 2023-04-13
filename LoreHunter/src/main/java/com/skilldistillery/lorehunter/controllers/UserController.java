@@ -19,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.lorehunter.entities.Game;
 import com.skilldistillery.lorehunter.entities.User;
+import com.skilldistillery.lorehunter.repositories.GameRepository;
 import com.skilldistillery.lorehunter.repositories.UserRepository;
+import com.skilldistillery.lorehunter.services.GameService;
 import com.skilldistillery.lorehunter.services.UserService;
 
 @CrossOrigin({ "*", "http://localhost/"})
@@ -33,6 +36,7 @@ public class UserController {
 	
 	@Autowired
 	private UserRepository userRepo;
+	
 	
 	@GetMapping("users")
 	public List<User> index() {
@@ -135,6 +139,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+    
 	
 	@GetMapping("userCounts")
 	public ResponseEntity<UserCountResponse> getUserCounts() {

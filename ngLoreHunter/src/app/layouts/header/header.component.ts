@@ -71,7 +71,6 @@ export class HeaderComponent implements OnInit {
     this.authService.getLoggedInUser().subscribe({
       next: (user) => {
         this.loggedInUser = user;
-        console.log(user);
       },
       error: (error) => {
         console.log('Error getting loggedInUser');
@@ -82,7 +81,6 @@ export class HeaderComponent implements OnInit {
     this.loggedInUserSubscription = this.authService.getLoggedInUser().pipe(
       tap(user => {
         this.loggedInUser = user;
-        console.log(user);
       })
     ).subscribe({
       error: (error) => {
