@@ -1,0 +1,98 @@
+.p-main {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.p-body {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* Additional styles for row */
+}
+
+.item-card {
+  width: calc(20% - 20px); /* Adjust width as needed */
+  margin-bottom: 20px; /* Adjust margin as needed */
+  /* Additional styles for item-card */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: var(--container-bkg-color);
+  color: var(--text-color);
+}
+
+.card {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card:hover {
+  box-shadow: 0 6px 10px 0px rgb(0 0 0 / 14%), 0 1px 18px 0px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%) !important;
+  transform: translateY(-5px);
+}
+
+.card-clicked {
+  /* Add the following styles */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.1);
+  z-index: 999;
+}
+
+.item-card-image img {
+  width: 100%;
+  height: auto;
+  border: 2px solid #3f51b5;
+  /* Additional styles for item-card-image */
+}
+
+.item-card-details {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Additional styles for item-card-details */
+}
+
+.item-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 5px;
+  /* Additional styles for item-card-title */
+}
+
+.item-card-description {
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  /* Additional styles for item-card-description */
+}
+
+.item-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Additional styles for item-card-footer */
+}
+
+.item-card-price {
+  font-size: 14px;
+  /* Additional styles for item-card-price */
+}
+
+.item-card-link {
+  font-size: 14px;
+  text-decoration: none;
+  /* Additional styles for item-card-link */
+}

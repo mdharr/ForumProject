@@ -1,5 +1,4 @@
 export class Game {
-
   slug: string;
   name: string;
   description: string;
