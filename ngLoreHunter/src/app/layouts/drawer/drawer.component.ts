@@ -75,8 +75,8 @@ export class DrawerComponent implements OnInit {
   }
 
   onHideImagesButtonClick() {
-    // Get all img elements in the component
-    const imgElements = this.el.nativeElement.querySelectorAll('img');
+    // Get all img elements with class "user-avatar" in the component
+    const imgElements = this.el.nativeElement.querySelectorAll('img.user-avatar');
 
     // Loop through each img element
     for (let i = 0; i < imgElements.length; i++) {

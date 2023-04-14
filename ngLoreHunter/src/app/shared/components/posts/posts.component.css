@@ -232,7 +232,7 @@ mat-paginator {
 	margin: 6px;
 }
 
-.avatar {
+.user-avatar {
   width: 50px;
 }
 
@@ -366,7 +366,7 @@ mat-paginator {
   justify-content: space-evenly;
 }
 
-.user-avatar {
+.user-avatar-container {
   display: flex;
   justify-content: center;
   align-items: center;
