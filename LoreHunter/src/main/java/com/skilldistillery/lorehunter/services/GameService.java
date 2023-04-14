@@ -12,4 +12,8 @@ public interface GameService {
 
 	void storeGameUrl(int userId, int gameId, String gameUrl);
 
+	List<Game> getGamesFromExternalApi();
+
+//	Game createGameFromApi(Game game);
+
 }

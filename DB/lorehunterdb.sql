@@ -151,6 +151,11 @@ CREATE TABLE IF NOT EXISTS `game` (
   `api_key` VARCHAR(100) NULL DEFAULT 'a569b5c91c944880a78145c9280ce92c',
   `url` TEXT NULL,
   `created_at` TIMESTAMP NULL,
+  `slug` VARCHAR(255) NULL,
+  `name` VARCHAR(255) NULL,
+  `description` TEXT NULL,
+  `released` VARCHAR(45) NULL,
+  `background_image` VARCHAR(1000) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -256,9 +261,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `game` (`id`, `api_key`, `url`, `created_at`) VALUES (1, 'a569b5c91c944880a78145c9280ce92c', 'https://api.rawg.io/api/games/resident-evil-2002?key=a569b5c91c944880a78145c9280ce92c', '2023-03-03T12:35:22');
-INSERT INTO `game` (`id`, `api_key`, `url`, `created_at`) VALUES (2, 'a569b5c91c944880a78145c9280ce92c', 'https://api.rawg.io/api/games/shadow-of-the-colossus?key=a569b5c91c944880a78145c9280ce92c', '2023-03-03T12:35:22');
-INSERT INTO `game` (`id`, `api_key`, `url`, `created_at`) VALUES (3, 'a569b5c91c944880a78145c9280ce92c', 'https://api.rawg.io/api/games/metal-gear-solid-1?key=a569b5c91c944880a78145c9280ce92c', '2023-03-03T12:35:22');
+INSERT INTO `game` (`id`, `api_key`, `url`, `created_at`, `slug`, `name`, `description`, `released`, `background_image`) VALUES (1, 'a569b5c91c944880a78145c9280ce92c', 'https://api.rawg.io/api/games/resident-evil-2002?key=a569b5c91c944880a78145c9280ce92c', '2023-03-03T12:35:22', 'resident-evil-2002', 'Resident Evil (2002)', '<p>Resident Evil is a survival horror video game developed by Capcom Production Studio 4 and published by Capcom. Released for the GameCube video game console in 2002, it is a remake of the 1996 PlayStation game Resident Evil, the first installment in the Resident Evil video game series. The story takes place in 1998 near the fictional Midwestern town of Raccoon City where a series of bizarre murders have taken place. The player takes on the role of either Chris Redfield or Jill Valentine, S.T.A.R.S. agents sent in by the city to investigate the murders.</p>', '2002-03-22', 'https://media.rawg.io/media/games/d24/d24ceb45b267f4b69b5d51c36c9a46db.jpg');
+INSERT INTO `game` (`id`, `api_key`, `url`, `created_at`, `slug`, `name`, `description`, `released`, `background_image`) VALUES (2, 'a569b5c91c944880a78145c9280ce92c', 'https://api.rawg.io/api/games/shadow-of-the-colossus?key=a569b5c91c944880a78145c9280ce92c', '2023-03-03T12:35:22', 'shadow-of-the-colossus', 'Shadow of the Colossus (2011)', '<p>PlayStation 2 classic that never made it out of the Sony game system. An eerie and surreal tale about sacrifice and cruelty that the world contains. </p>\\n<p>Play as Wander -- young warrior that roams vast and hollow game universe that’s surrounded by sharp cliffs and endless water. He is on the mission to kill 16 gargantuan colossi all scattered around the game world. </p>\\n<p>Each colossus is a puzzle and can be killed only after solving it. At Wander’s disposal are his sword and bow that helps him climb the beasts. Each one requires the player to come up with a cunning strategy to topple each behemoth. The story is told in a very ascetic way and consists of only two in-game cutscenes. Nevertheless, it helps to build up the atmosphere mystery in the game epos. </p>\\n<p>Developers are no strangers in the dark, atmospheric games such as this: they also behind critically acclaimed ICO that also had been published on PlayStation 2.</p>', '2011-09-22', 'https://media.rawg.io/media/games/6ac/6ac602e70c837ababdf025e997391d9c.jpg');
+INSERT INTO `game` (`id`, `api_key`, `url`, `created_at`, `slug`, `name`, `description`, `released`, `background_image`) VALUES (3, 'a569b5c91c944880a78145c9280ce92c', 'https://api.rawg.io/api/games/metal-gear-solid-1?key=a569b5c91c944880a78145c9280ce92c', '2023-03-03T12:35:22', 'metal-gear-solid-1', 'Metal Gear Solid', '<p>You are Snake, a government agent on a mission to regain control of a secret nuclear weapons base from terrorist hands. Lightly armed and facing an army of foes, Snake must avoid firefights in order to survive. If Snake can locate them he can utilize advanced hardware, ranging from silenced pistols to ground-to-air missiles. Enemies react to sight and sound - so stay quiet and stay in the shadows. State-of-the-art graphics: textures, transparencies, models and explosions. Taut, gripping story with multiple endings - a truly cinematic experience.</p>', '1998-09-03', 'https://media.rawg.io/media/games/bbc/bbce6f1659d35ffc16aed8b66e9990a1.jpg');
 
 COMMIT;
 

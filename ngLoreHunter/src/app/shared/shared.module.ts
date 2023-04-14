@@ -38,6 +38,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { PostsListComponent } from './components/posts-list/posts-list.component';
 import { NoSanitizePipe } from '../utilities/nosanitizerpipe';
 import { AuthService } from '../services/auth.service';
+import { GamesComponent } from './components/games/games.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { AuthService } from '../services/auth.service';
     PostsListComponent,
     NoSanitizePipe,
     SortPipe,
-    FilterPipe
+    FilterPipe,
+    GamesComponent
   ],
   imports: [
     CommonModule,

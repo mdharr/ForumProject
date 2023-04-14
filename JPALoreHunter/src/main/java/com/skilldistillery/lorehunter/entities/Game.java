@@ -1,7 +1,6 @@
 package com.skilldistillery.lorehunter.entities;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,18 +39,31 @@ public class Game {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "game_id"))
     private List<User> users;
+	
+	private String slug;
+	private String name;
+	private String description;
+	private String released;
+	@Column(name = "background_image")
+	private String backgroundImage;
 
 	public Game() {
 		super();
 	}
 
-	public Game(int id, String apiKey, String url, LocalDateTime createdAt, List<User> users) {
+	public Game(int id, String apiKey, String url, LocalDateTime createdAt, List<User> users, String slug, String name,
+			String description, String released, String backgroundImage) {
 		super();
 		this.id = id;
 		this.apiKey = apiKey;
 		this.url = url;
 		this.createdAt = createdAt;
 		this.users = users;
+		this.slug = slug;
+		this.name = name;
+		this.description = description;
+		this.released = released;
+		this.backgroundImage = backgroundImage;
 	}
 
 	public int getId() {
@@ -94,6 +106,46 @@ public class Game {
 		this.users = users;
 	}
 
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getReleased() {
+		return released;
+	}
+
+	public void setReleased(String released) {
+		this.released = released;
+	}
+
+	public String getBackgroundImage() {
+		return backgroundImage;
+	}
+
+	public void setBackgroundImage(String backgroundImage) {
+		this.backgroundImage = backgroundImage;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(apiKey, createdAt, id, url);
@@ -114,7 +166,9 @@ public class Game {
 
 	@Override
 	public String toString() {
-		return "Game [id=" + id + ", apiKey=" + apiKey + ", url=" + url + ", createdAt=" + createdAt + "]";
+		return "Game [id=" + id + ", apiKey=" + apiKey + ", url=" + url + ", createdAt=" + createdAt + ", users="
+				+ users + ", slug=" + slug + ", name=" + name + ", description=" + description + ", released="
+				+ released + ", backgroundImage=" + backgroundImage + "]";
 	}
 
 }
