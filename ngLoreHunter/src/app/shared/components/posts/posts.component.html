@@ -252,7 +252,7 @@
       <div class="user-block">
         <div class="user-block-inner">
           <div class="user-avatar-container">
-            <a style="cursor: pointer;"><img id="user-avatar" src="{{ loggedInUser.imageUrl }}" alt="" *ngIf="loggedIn()"/></a>
+            <a style="cursor: pointer;"><img class="my-avatar" src="{{ loggedInUser.imageUrl }}" alt="" *ngIf="loggedIn()"/></a>
           </div>
           <div class="user-alias">
             <a *ngIf="loggedIn()">{{ loggedInUser.username }}</a>
