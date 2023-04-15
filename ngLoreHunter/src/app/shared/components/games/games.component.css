@@ -34,18 +34,17 @@
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
-.card:hover {
-  box-shadow: 0 6px 10px 0px rgb(0 0 0 / 14%), 0 1px 18px 0px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%) !important;
-  transform: translateY(-5px);
+.card-clicked {
+  position: fixed;
+  top: calc(50% - 150px); /* Adjust the value to center the card vertically */
+  left: calc(50% - 150px); /* Adjust the value to center the card horizontally */
+  transform: scale(1.5); /* Zoom in to 150% */
+  z-index: 999;
+  transition: transform 0.3s; /* Add a transition for smooth animation */
 }
 
-.card-clicked {
-  /* Add the following styles */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1.1);
-  z-index: 999;
+.card-clicked:hover {
+  transform: scale(1.1); /* Add a zoom effect on hover */
 }
 
 .item-card-image img {
