@@ -238,6 +238,10 @@ mat-paginator {
   width: 50px;
 }
 
+.my-avatar {
+  width: 100px;
+}
+
 .breadcrumb-outer {
   margin: 25px;
 }

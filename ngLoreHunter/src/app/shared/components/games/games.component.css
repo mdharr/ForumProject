@@ -38,13 +38,13 @@
   position: fixed;
   top: calc(50% - 150px); /* Adjust the value to center the card vertically */
   left: calc(50% - 150px); /* Adjust the value to center the card horizontally */
-  transform: scale(1.5); /* Zoom in to 150% */
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1.5); /* Add perspective, rotateX, and rotateY properties */
   z-index: 999;
-  transition: transform 0.3s; /* Add a transition for smooth animation */
+  transition: transform 0.05s ease-in-out;
 }
 
-.card-clicked:hover {
-  transform: scale(1.1); /* Add a zoom effect on hover */
+.card:hover {
+  transform: scale(1.05); /* Add a zoom effect on hover */
 }
 
 .item-card-image img {

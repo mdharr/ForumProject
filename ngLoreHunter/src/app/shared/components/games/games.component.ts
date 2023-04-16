@@ -14,6 +14,7 @@ export class GamesComponent implements OnInit {
 
   cardClicked = false; // Flag to track if the card is clicked
   cardElement: HTMLElement | null = null; // Reference to the card element
+  originalTransform: string = '';
 
   private subscription: Subscription = new Subscription();
 
@@ -43,18 +44,23 @@ export class GamesComponent implements OnInit {
       this.subscription.unsubscribe(); // Unsubscribe from the subscription to avoid memory leaks
     }
   }
-
+  @HostListener('document:click', ['$event'])
   onCardClick(event: MouseEvent) {
     const clickedCardElement = event.currentTarget as HTMLElement;
 
     // If a card is already clicked, return it to its original position
     if (this.cardElement && this.cardElement !== clickedCardElement) {
       this.cardElement.classList.remove('card-clicked');
+      this.cardElement.style.transform = this.originalTransform;
     }
 
     // Set the current clicked card as the new cardElement
-    this.cardElement = clickedCardElement;
-    this.cardElement.classList.add('card-clicked');
+    if (!this.cardElement?.classList.contains('card-clicked')) {
+      this.cardElement = clickedCardElement;
+      this.originalTransform = this.cardElement.style.transform;
+      this.cardElement.classList.add('card-clicked');
+    }
+
   }
 
   @HostListener('document:click', ['$event'])
@@ -62,29 +68,30 @@ export class GamesComponent implements OnInit {
     // If a card is clicked and the click is outside of the card, return the card to its original position
     if (this.cardElement && !this.cardElement.contains(event.target as Node)) {
       this.cardElement.classList.remove('card-clicked');
+      this.cardElement.style.transform = this.originalTransform;
       this.cardElement = null;
     }
   }
 
-  onDocumentMouseMove(event: MouseEvent) {
-    // Update the position of the card based on the mouse cursor position
-    if (this.cardElement && this.cardElement.classList.contains('card-clicked')) {
-      const mouseX = event.clientX;
-      const mouseY = event.clientY;
-      const cardRect = this.cardElement.getBoundingClientRect();
-      const cardX = cardRect.left + cardRect.width / 2;
-      const cardY = cardRect.top + cardRect.height / 2;
-      const offsetX = mouseX - cardX;
-      const offsetY = mouseY - cardY;
-      this.cardElement.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(1.5)`;
-    }
-  }
-
   @HostListener('document:mouseleave')
-  onDocumentMouseLeave() {
+  onDocumentMouseLeave(event: MouseEvent) {
     // Reset the position and zoom of the card when the mouse leaves the document
     if (this.cardElement && this.cardElement.classList.contains('card-clicked')) {
-      this.cardElement.style.transform = 'translate(-50%, -50%) scale(1.5)';
+      this.cardElement.style.transform = this.originalTransform;
+    }
+    event.stopPropagation();
+  }
+
+  @HostListener('document:mousemove', ['$event'])
+  onDocumentMouseMove(event: MouseEvent) {
+    // Update the transform property of the card to tilt it towards the mouse cursor when hovered
+    if (this.cardElement && this.cardElement.classList.contains('card-clicked')) {
+      const cardRect = this.cardElement.getBoundingClientRect();
+      const cardCenterX = cardRect.left + cardRect.width / 2;
+      const cardCenterY = cardRect.top + cardRect.height / 2;
+      const tiltX = ((event.clientX - cardRect.left) - cardRect.width / 2) * 0.05; // Adjust the scaling factor here
+      const tiltY = ((event.clientY - cardRect.top) - cardRect.height / 2) * -0.05; // Adjust the scaling factor here
+      this.cardElement.style.transform = `perspective(1000px) rotateX(${tiltY}deg) rotateY(${tiltX}deg) scale(1.5)`;
     }
   }
 
