@@ -1,7 +1,11 @@
 package com.skilldistillery.lorehunter.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -55,14 +60,59 @@ public class GameController {
 //        return gameService.getAllGames();
 //    }
     
+//    @GetMapping("games")
+//    public ResponseEntity<Object> getGames() {
+//        // Fetch data from external API
+//    	String apiUrl = API_BASE_URL + "?" + API_KEY_PARAM + "=" + API_KEY_VALUE;
+//        ResponseEntity<Object> response = restTemplate.getForEntity(apiUrl, Object.class);
+//
+//        // Return the API response as-is to the frontend
+//        return response;
+//    }
+    
+//    @GetMapping("games")
+//    public ResponseEntity<Object> getGames() {
+//        int page = 1;
+//        int pageSize = 40;
+//    	// Fetch data from external API
+//    	String apiUrl = API_BASE_URL + "?" + API_KEY_PARAM + "=" + API_KEY_VALUE
+//    			+ "&page=" + page + "&page_size=" + pageSize;
+//    	ResponseEntity<Object> response = restTemplate.getForEntity(apiUrl, Object.class);
+//    	
+//    	// Return the API response as-is to the frontend
+//    	return response;
+//    }
+    
     @GetMapping("games")
-    public ResponseEntity<Object> getGames() {
+    public ResponseEntity<Object> getGames(
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "pageSize", defaultValue = "40") int pageSize) {
         // Fetch data from external API
-    	String apiUrl = API_BASE_URL + "?" + API_KEY_PARAM + "=" + API_KEY_VALUE;
+        String apiUrl = API_BASE_URL + "?" + API_KEY_PARAM + "=" + API_KEY_VALUE
+                + "&page=" + page + "&page_size=" + pageSize;
         ResponseEntity<Object> response = restTemplate.getForEntity(apiUrl, Object.class);
+        
+        // Extract the results array from the API response
+        Object responseBody = response.getBody();
+        if (responseBody instanceof Map) {
+            Map<String, Object> responseMap = (Map<String, Object>) responseBody;
+            if (responseMap.containsKey("results")) {
+                List<Object> results = (List<Object>) responseMap.get("results");
+                int count = (int) responseMap.get("count");
+
+                // Create a custom response object that includes the count field
+                Map<String, Object> customResponse = new HashMap<>();
+                customResponse.put("results", results);
+                customResponse.put("count", count);
+
+                // Return the custom response object to the frontend
+                return ResponseEntity.ok().body(customResponse);
+            }
+        }
 
         // Return the API response as-is to the frontend
         return response;
     }
+
 
 }

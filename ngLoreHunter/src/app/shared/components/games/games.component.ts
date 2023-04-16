@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
 import { map, Subscription } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { GameService } from 'src/app/services/game.service';
@@ -12,31 +12,20 @@ export class GamesComponent implements OnInit {
 
   games: any[] = [];
 
+  page = 1; // Add page variable to track current page
+  pageSize = 40; // Add pageSize variable to set page size
+  totalPages: number = 0;
+
   cardClicked = false; // Flag to track if the card is clicked
   cardElement: HTMLElement | null = null; // Reference to the card element
   originalTransform: string = '';
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private gameService: GameService, private renderer: Renderer2, private el: ElementRef) { }
+  constructor(private gameService: GameService, private renderer: Renderer2, private el: ElementRef, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.getGames();
-  }
-
-  getGames() {
-    this.subscription = this.gameService.getGames().subscribe({
-      next: (response: { results: Game[] }) => { // Update the type of response to { results: Game[] }
-        if (Array.isArray(response.results)) { // Check if response.results is an array
-          this.games = response.results; // Assign API response to games variable
-        } else {
-          console.error('Failed to fetch games:', 'Response.results is not an array:', response.results);
-        }
-      },
-      error: error => {
-        console.error('Failed to fetch games:', error);
-      }
-    });
+    this.fetchGames(this.page, this.pageSize);
   }
 
   ngOnDestroy() {
@@ -79,7 +68,7 @@ export class GamesComponent implements OnInit {
     if (this.cardElement && this.cardElement.classList.contains('card-clicked')) {
       this.cardElement.style.transform = this.originalTransform;
     }
-    event.stopPropagation();
+    // event.stopPropagation();
   }
 
   @HostListener('document:mousemove', ['$event'])
@@ -93,6 +82,37 @@ export class GamesComponent implements OnInit {
       const tiltY = ((event.clientY - cardRect.top) - cardRect.height / 2) * -0.05; // Adjust the scaling factor here
       this.cardElement.style.transform = `perspective(1000px) rotateX(${tiltY}deg) rotateY(${tiltX}deg) scale(1.5)`;
     }
+  }
+
+  onPreviousPage() {
+    if (this.page > 1) { // Check if current page is greater than 1
+      this.page -= 1; // Decrement the page value
+      this.fetchGames(this.page, this.pageSize); // Call fetchGames with updated page value
+    }
+  }
+
+  onNextPage() {
+    this.page += 1; // Increment the page value
+    this.fetchGames(this.page, this.pageSize); // Call fetchGames with updated page value
+  }
+
+  fetchGames(page: number, pageSize: number) {
+    // Call the getGames() method of the gameService with the updated page and pageSize parameters, and subscribe to the response
+    this.subscription = this.gameService.getGames(page, pageSize).subscribe({
+      next: (response: { results: Game[], count: number }) => { // Update response type to include count field
+        if (Array.isArray(response.results)) {
+          this.games = response.results;
+          this.totalPages = Math.ceil(response.count / pageSize); // Update totalPages variable
+          console.log(this.games);
+          this.cdr.detectChanges();
+        } else {
+          console.error('Failed to fetch games:', 'Response.results is not an array:', response.results);
+        }
+      },
+      error: error => {
+        console.error('Failed to fetch games:', error);
+      }
+    });
   }
 
 }

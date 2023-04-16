@@ -1,25 +1,36 @@
-<div class="p-main">
+<div class="p-container">
+  <div class="paginator-container">
+    <button class="paginator-button mat-button" [disabled]="page <= 1" (click)="onPreviousPage()">
+      <mat-icon class="paginator-icon">chevron_left</mat-icon> Previous
+    </button>
+    <span class="paginator-page">Page {{page}} of {{totalPages}}</span>
+    <button class="paginator-button mat-button" (click)="onNextPage()" [disabled]="page >= totalPages">
+      Next <mat-icon class="paginator-icon">chevron_right</mat-icon>
+    </button>
+  </div>
 
-  <div class="p-body">
-    <div class="row item-grid2">
-      <div class="card item-card" *ngFor="let game of games" (click)="onCardClick($event)">
-        <div class="item-card-image">
-          <img src="{{ game.background_image }}" alt="Item Image">
-        </div>
-        <div class="item-card-details">
-          <h3 class="item-card-title">{{ game.name }}</h3>
-          <p class="item-card-description">Released: {{ game.released }}</p>
-          <p class="item-card-description">Metacritic: {{ game.metacritic }}</p>
-          <p class="item-card-description">Playtime: {{ game.playtime }} hours</p>
-          <div class="item-card-footer">
+  <div class="p-main">
 
+    <div class="p-body">
+      <div class="row item-grid2">
+        <div class="card item-card" *ngFor="let game of games" (click)="onCardClick($event)">
+          <div class="item-card-image">
+            <img src="{{ game.background_image }}" alt="Item Image">
+          </div>
+          <div class="item-card-details">
+            <h3 class="item-card-title">{{ game.name }}</h3>
+            <p class="item-card-description">Released: {{ game.released }}</p>
+            <p class="item-card-description">Metacritic: {{ game.metacritic }}</p>
+            <p class="item-card-description">Playtime: {{ game.playtime }} hours</p>
+            <div class="item-card-footer">
+
+            </div>
           </div>
         </div>
+
       </div>
-
-      <!-- Add more item-cards here as needed -->
-
     </div>
+
   </div>
 
 </div>
