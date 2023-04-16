@@ -32,6 +32,7 @@
 .card {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
 }
 
 .card-clicked {
@@ -41,10 +42,16 @@
   transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1.5); /* Add perspective, rotateX, and rotateY properties */
   z-index: 999;
   transition: transform 0.05s ease-in-out;
+  cursor: pointer;
+}
+
+.card-clicked:hover {
+  cursor: pointer;
 }
 
 .card:hover {
   transform: scale(1.05); /* Add a zoom effect on hover */
+  cursor: pointer;
 }
 
 .item-card-image img {
