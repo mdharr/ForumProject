@@ -1,15 +1,18 @@
 <div class="p-container">
-  <div class="paginator-container">
-    <button class="paginator-button mat-button" [disabled]="page <= 1" (click)="onPreviousPage()">
-      <mat-icon class="paginator-icon">chevron_left</mat-icon> Previous
-    </button>
-    <span class="paginator-page">Page {{page}} of {{totalPages}}</span>
-    <button class="paginator-button mat-button" (click)="onNextPage()" [disabled]="page >= totalPages">
-      Next <mat-icon class="paginator-icon">chevron_right</mat-icon>
-    </button>
-  </div>
 
   <div class="p-main">
+
+    <div class="page-navigation">
+      <button *ngIf="page !== 1" (click)="onPreviousPage()">Prev</button>
+      <button *ngFor="let page of pages" (click)="onJumpToPage(page)">
+        <!-- Display ellipsis for -1 values -->
+        <ng-container *ngIf="page === -1">...</ng-container>
+        <!-- Display page number for other values -->
+        <ng-container *ngIf="page !== -1">{{ page }}</ng-container>
+      </button>
+      <button *ngIf="page < totalPages" (click)="onNextPage()">Next</button>
+    </div>
+
 
     <div class="p-body">
       <div class="row item-grid2">

@@ -2,6 +2,8 @@ import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, 
 import { map, Subscription } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { GameService } from 'src/app/services/game.service';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 @Component({
   selector: 'app-games',
@@ -12,9 +14,14 @@ export class GamesComponent implements OnInit {
 
   games: any[] = [];
 
+  pages: number[] = [];
   page = 1; // Add page variable to track current page
   pageSize = 40; // Add pageSize variable to set page size
   totalPages: number = 0;
+  jumpToPageInput: number = 0;
+  currentPage: number = 0; // Define currentPage as a number variable
+
+
 
   cardClicked = false; // Flag to track if the card is clicked
   cardElement: HTMLElement | null = null; // Reference to the card element
@@ -84,17 +91,34 @@ export class GamesComponent implements OnInit {
     }
   }
 
+  onPageChange(event: any) {
+    this.page = event.pageIndex + 1;
+    this.setCurrentPage(this.page); // Call setCurrentPage with updated page value
+    this.fetchGames(this.page, this.pageSize); // Call fetchGames with updated page value
+  }
+
   onPreviousPage() {
     if (this.page > 1) { // Check if current page is greater than 1
       this.page -= 1; // Decrement the page value
+      this.setCurrentPage(this.page); // Call setCurrentPage with updated page value
       this.fetchGames(this.page, this.pageSize); // Call fetchGames with updated page value
     }
   }
 
   onNextPage() {
     this.page += 1; // Increment the page value
+    this.setCurrentPage(this.page); // Call setCurrentPage with updated page value
     this.fetchGames(this.page, this.pageSize); // Call fetchGames with updated page value
   }
+
+// Jump to a specific page
+onJumpToPage(page: number) {
+  if (page > 0 && page <= this.totalPages) {
+    this.page = page;
+    this.setCurrentPage(page); // Call setCurrentPage with updated page value
+    this.fetchGames(this.page, this.pageSize);
+  }
+}
 
   fetchGames(page: number, pageSize: number) {
     // Call the getGames() method of the gameService with the updated page and pageSize parameters, and subscribe to the response
@@ -103,6 +127,7 @@ export class GamesComponent implements OnInit {
         if (Array.isArray(response.results)) {
           this.games = response.results;
           this.totalPages = Math.ceil(response.count / pageSize); // Update totalPages variable
+          this.pages = this.generatePageNumbers(page, this.totalPages); // Update pages array with generated page numbers
           console.log(this.games);
           this.cdr.detectChanges();
         } else {
@@ -114,5 +139,77 @@ export class GamesComponent implements OnInit {
       }
     });
   }
+
+  // Generate page numbers based on current page and total pages
+generatePageNumbers(currentPage: number, totalPages: number): number[] {
+  const pageNumbers: number[] = [];
+  const maxVisiblePages = 5; // Maximum number of visible pages in the pagination
+
+  // Add previous button
+  pageNumbers.push(1);
+
+  // Add ellipsis if current page is not within the first 3 pages
+  if (currentPage > 3) {
+    pageNumbers.push(-1);
+  }
+
+  // Add visible page numbers
+  for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+    if (i > 1 && i < totalPages) {
+      pageNumbers.push(i);
+    }
+  }
+
+  // Add ellipsis if current page is not within the last 3 pages
+  if (currentPage < totalPages - 2) {
+    pageNumbers.push(-1);
+  }
+
+  // Add next button
+  pageNumbers.push(totalPages);
+
+  return pageNumbers;
+}
+
+  updatePaginationNumber() {
+    // Clear the pages array
+    this.pages = [];
+
+    // Calculate the start and end page numbers based on the current page
+    let startPage: number;
+    let endPage: number;
+    const totalVisiblePages = 5; // Number of visible pages in the pagination
+
+    if (this.page <= Math.floor(totalVisiblePages / 2) + 1) {
+      startPage = 1;
+      endPage = Math.min(totalVisiblePages, this.totalPages);
+    } else if (this.page >= this.totalPages - Math.floor(totalVisiblePages / 2)) {
+      startPage = Math.max(1, this.totalPages - totalVisiblePages + 1);
+      endPage = this.totalPages;
+    } else {
+      startPage = this.page - Math.floor(totalVisiblePages / 2);
+      endPage = this.page + Math.floor(totalVisiblePages / 2);
+    }
+
+    // Add ellipsis if necessary
+    if (startPage > 1) {
+      this.pages.push(-1);
+    }
+
+    // Add page numbers to the pages array
+    for (let i = startPage; i <= endPage; i++) {
+      this.pages.push(i);
+    }
+
+    // Add ellipsis if necessary
+    if (endPage < this.totalPages) {
+      this.pages.push(-1);
+    }
+  }
+
+  setCurrentPage(page: number) {
+    this.currentPage = page;
+  }
+
 
 }

@@ -39,6 +39,7 @@ import { PostsListComponent } from './components/posts-list/posts-list.component
 import { NoSanitizePipe } from '../utilities/nosanitizerpipe';
 import { AuthService } from '../services/auth.service';
 import { GamesComponent } from './components/games/games.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -58,7 +59,7 @@ import { GamesComponent } from './components/games/games.component';
     NoSanitizePipe,
     SortPipe,
     FilterPipe,
-    GamesComponent
+    GamesComponent,
   ],
   imports: [
     CommonModule,
