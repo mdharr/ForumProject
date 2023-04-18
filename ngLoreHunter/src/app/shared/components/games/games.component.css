@@ -1,6 +1,8 @@
 .p-container {
   display: flex;
   flex-direction: column;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .p-main {
@@ -15,7 +17,6 @@
 .p-body {
   display: flex;
   flex-wrap: wrap;
-  width: 90%
 }
 .row {
   display: flex;
@@ -28,7 +29,7 @@
   width: calc(20% - 20px); /* Adjust width as needed */
   margin-bottom: 20px; /* Adjust margin as needed */
   /* Additional styles for item-card */
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -122,44 +123,6 @@
   width: 100%;
 }
 
-/* border-pagination */
-.b-pagination-outer {
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  overflow: hidden;
-  display: flex
-}
-#border-pagination {
-  margin: 0 auto;
-  padding: 0;
-  text-align: center
-}
-#border-pagination li {
-  display: inline;
-
-}
-#border-pagination li a {
-  display: block;
-  text-decoration: none;
-  color: #000;
-  padding: 5px 10px;
-  border: 1px solid #ddd;
-  float: left;
-
-}
-#border-pagination li a {
-  -webkit-transition: background-color 0.4s;
-  transition: background-color 0.4s
-}
-#border-pagination li a.active {
-  background-color: #4caf50;
-  color: #fff;
-}
-#border-pagination li a:hover:not(.active) {
-  background: #ddd;
-}
-
 .pageNav-next {
   display: inline-block;
   background: var(--container-bkg-color);
@@ -226,5 +189,29 @@
   line-height: 26px;
   text-decoration: none;
   cursor: pointer;
+}
+
+.p-filter {
+  flex: 1; /* Add this line */
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.page-navigation {
+  flex: 1; /* Add flex property to take up remaining space */
+  width: 80%;
+}
+
+.queryInputElement {
+  flex: 0 0 auto; /* Add flex property to prevent it from growing or shrinking */
+  display: flex;
+  justify-content: end;
+  width: 20%;
+}
+
+.ghost-container {
+  width: 80%;
 }
 

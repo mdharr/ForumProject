@@ -16,7 +16,8 @@ import { JumpToPageDialogComponent } from '../jump-to-page-dialog/jump-to-page-d
 export class GamesComponent implements OnInit {
 
   games: any[] = [];
-  searchResults: any[] = [];
+  searchResults: any[] | null = null;
+  searchQuery: string = ''; // Add searchQuery variable
 
   pages: number[] = [];
   page = 1; // Add page variable to track current page
@@ -251,8 +252,14 @@ generatePageNumbers(currentPage: number, totalPages: number): number[] {
     });
   }
 
-
-
-
+  searchGames(searchQuery: string) {
+    if (searchQuery.trim() !== '') { // Check if search query is not empty
+      this.gameService.searchGames(searchQuery).subscribe(data => {
+        this.searchResults = data; // Store the search results data in the local variable
+      });
+    } else {
+      this.searchResults = null; // Clear the search results if search query is empty
+    }
+  }
 
 }

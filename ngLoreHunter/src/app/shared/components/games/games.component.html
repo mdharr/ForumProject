@@ -1,20 +1,47 @@
 <div class="p-container">
 
   <div class="p-main">
+    <div class="p-filter">
+      <div class="ghost-container" *ngIf="searchQuery !== ''">
 
-    <div class="page-navigation">
-      <a class="pageNav-prev" *ngIf="page !== 1" (click)="onPreviousPage()">Prev</a>
-      <a class="pageNav-pages" *ngFor="let page of pages" (click)="page === -1 ? onJumpToPageDialog() : onJumpToPage(page)">
-        <!-- Display ellipsis for -1 values -->
-        <ng-container *ngIf="page === -1">...</ng-container>
-        <!-- Display page number for other values -->
-        <ng-container *ngIf="page !== -1">{{ page }}</ng-container>
-      </a>
-      <a class="pageNav-next" *ngIf="page < totalPages" (click)="onNextPage()">Next</a>
+      </div>
+      <div *ngIf="searchQuery === ''" class="page-navigation">
+        <a class="pageNav-prev" *ngIf="page !== 1" (click)="onPreviousPage()">Prev</a>
+        <a class="pageNav-pages" *ngFor="let page of pages" (click)="page === -1 ? onJumpToPageDialog() : onJumpToPage(page)">
+          <!-- Display ellipsis for -1 values -->
+          <ng-container *ngIf="page === -1">...</ng-container>
+          <!-- Display page number for other values -->
+          <ng-container *ngIf="page !== -1">{{ page }}</ng-container>
+        </a>
+        <a class="pageNav-next" *ngIf="page < totalPages" (click)="onNextPage()">Next</a>
+      </div>
+      <div class="queryInputElement">
+        <input type="text" [(ngModel)]="searchQuery" (input)="searchGames(searchQuery)" placeholder="Search games by name">
+      </div>
+
     </div>
 
+      <div  *ngIf="searchResults" class="p-body">
+        <div class="row item-grid2">
+          <div class="card item-card" *ngFor="let game of searchResults" (click)="onCardClick($event)">
+            <div class="item-card-image">
+              <img src="{{ game.background_image }}" alt="Item Image">
+            </div>
+            <div class="item-card-details">
+              <h3 class="item-card-title">{{ game.name }}</h3>
+              <p class="item-card-description">Released: {{ game.released }}</p>
+              <p class="item-card-description">Metacritic: {{ game.metacritic }}</p>
+              <p class="item-card-description">Playtime: {{ game.playtime }} hours</p>
+              <div class="item-card-footer">
 
-    <div class="p-body">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    <div *ngIf="searchQuery === ''" class="p-body">
       <div class="row item-grid2">
         <div class="card item-card" *ngFor="let game of games" (click)="onCardClick($event)">
           <div class="item-card-image">
