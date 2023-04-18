@@ -16,6 +16,7 @@ import { JumpToPageDialogComponent } from '../jump-to-page-dialog/jump-to-page-d
 export class GamesComponent implements OnInit {
 
   games: any[] = [];
+  searchResults: any[] = [];
 
   pages: number[] = [];
   page = 1; // Add page variable to track current page
@@ -249,6 +250,8 @@ generatePageNumbers(currentPage: number, totalPages: number): number[] {
       }
     });
   }
+
+
 
 
 

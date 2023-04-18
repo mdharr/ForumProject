@@ -22,4 +22,10 @@ export class GameService {
 
     return this.http.get<any[]>(this.url + "/games", { params });
   }
+
+  searchGames(searchQuery: string): Observable<any[]> {
+    let params = new HttpParams()
+      .set('search', searchQuery); // Add the search query parameter
+    return this.http.get<any[]>(this.url + "/games/search", { params });
+  }
 }

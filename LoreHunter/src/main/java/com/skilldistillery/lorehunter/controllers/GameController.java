@@ -2,6 +2,7 @@ package com.skilldistillery.lorehunter.controllers;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -112,6 +113,27 @@ public class GameController {
 
         // Return the API response as-is to the frontend
         return response;
+    }
+    
+    @GetMapping("games/search")
+    public ResponseEntity<Object> searchGames(@RequestParam("search") String searchQuery) {
+      // Fetch data from external API based on search query
+      String apiUrl = API_BASE_URL + "?" + API_KEY_PARAM + "=" + API_KEY_VALUE
+          + "&search=" + searchQuery;
+      ResponseEntity<Object> response = restTemplate.getForEntity(apiUrl, Object.class);
+
+      // Extract the results array from the API response and return it to the frontend
+      Object responseBody = response.getBody();
+      if (responseBody instanceof Map) {
+        Map<String, Object> responseMap = (Map<String, Object>) responseBody;
+        if (responseMap.containsKey("results")) {
+          List<Object> results = (List<Object>) responseMap.get("results");
+          return ResponseEntity.ok().body(results);
+        }
+      }
+
+      // Return empty response if results not found
+      return ResponseEntity.ok().body(Collections.emptyList());
     }
 
 
