@@ -6,14 +6,14 @@
 
       </div>
       <div *ngIf="searchQuery === ''" class="page-navigation">
-        <a class="pageNav-prev" *ngIf="page !== 1" (click)="onPreviousPage()">Prev</a>
-        <a class="pageNav-pages" *ngFor="let page of pages" (click)="page === -1 ? onJumpToPageDialog() : onJumpToPage(page)">
+        <a class="pageNav-prev pageNav" *ngIf="page !== 1" (click)="onPreviousPage()">Prev</a>
+        <a class="pageNav-pages pageNav" [ngClass]="{'isCurrentPage': page === currentPage, 'notCurrentPage': page !== currentPage}" *ngFor="let page of pages" (click)="page === -1 ? onJumpToPageDialog() : onJumpToPage(page)">
           <!-- Display ellipsis for -1 values -->
           <ng-container *ngIf="page === -1">...</ng-container>
           <!-- Display page number for other values -->
           <ng-container *ngIf="page !== -1">{{ page }}</ng-container>
         </a>
-        <a class="pageNav-next" *ngIf="page < totalPages" (click)="onNextPage()">Next</a>
+        <a class="pageNav-next pageNav" *ngIf="page < totalPages" (click)="onNextPage()">Next</a>
       </div>
       <div class="queryInputElement">
         <input type="text" [(ngModel)]="searchQuery" (input)="searchGames(searchQuery)" placeholder="Search games by name">
