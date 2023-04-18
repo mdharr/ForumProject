@@ -39,8 +39,10 @@ import { PostsListComponent } from './components/posts-list/posts-list.component
 import { NoSanitizePipe } from '../utilities/nosanitizerpipe';
 import { AuthService } from '../services/auth.service';
 import { GamesComponent } from './components/games/games.component';
-import { MatDialog } from '@angular/material/dialog';
-
+import { JumpToPageDialogComponent } from './components/jump-to-page-dialog/jump-to-page-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,7 @@ import { MatDialog } from '@angular/material/dialog';
     SortPipe,
     FilterPipe,
     GamesComponent,
+    JumpToPageDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -82,6 +85,9 @@ import { MatDialog } from '@angular/material/dialog';
     MatPaginatorModule,
     CKEditorModule,
     MatFormFieldModule,
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule
   ],
   exports: [
     HomeComponent,

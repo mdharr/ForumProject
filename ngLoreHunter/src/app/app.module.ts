@@ -54,7 +54,6 @@ import { AuthService } from './services/auth.service';
     CKEditorModule,
     MatFormFieldModule,
     MatSnackBarModule,
-
   ],
   exports: [
 

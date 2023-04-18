@@ -3,6 +3,9 @@ import { map, Subscription } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { GameService } from 'src/app/services/game.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { JumpToPageDialogComponent } from '../jump-to-page-dialog/jump-to-page-dialog.component';
+
 
 
 @Component({
@@ -29,7 +32,7 @@ export class GamesComponent implements OnInit {
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private gameService: GameService, private renderer: Renderer2, private el: ElementRef, private cdr: ChangeDetectorRef) { }
+  constructor(private gameService: GameService, private renderer: Renderer2, private el: ElementRef, private cdr: ChangeDetectorRef, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.fetchGames(this.page, this.pageSize);
@@ -92,9 +95,12 @@ export class GamesComponent implements OnInit {
   }
 
   onPageChange(event: any) {
+
     this.page = event.pageIndex + 1;
     this.setCurrentPage(this.page); // Call setCurrentPage with updated page value
     this.fetchGames(this.page, this.pageSize); // Call fetchGames with updated page value
+    this.changeStyleIfCurrentPage(this.page === this.currentPage); // Call changeStyleIfCurrentPage to update the styles of the cards
+
   }
 
   onPreviousPage() {
@@ -102,6 +108,8 @@ export class GamesComponent implements OnInit {
       this.page -= 1; // Decrement the page value
       this.setCurrentPage(this.page); // Call setCurrentPage with updated page value
       this.fetchGames(this.page, this.pageSize); // Call fetchGames with updated page value
+      this.changeStyleIfCurrentPage(this.page === this.currentPage); // Call changeStyleIfCurrentPage to update the styles of the cards
+
     }
   }
 
@@ -109,6 +117,8 @@ export class GamesComponent implements OnInit {
     this.page += 1; // Increment the page value
     this.setCurrentPage(this.page); // Call setCurrentPage with updated page value
     this.fetchGames(this.page, this.pageSize); // Call fetchGames with updated page value
+    this.changeStyleIfCurrentPage(this.page === this.currentPage); // Call changeStyleIfCurrentPage to update the styles of the cards
+
   }
 
 // Jump to a specific page
@@ -117,6 +127,8 @@ onJumpToPage(page: number) {
     this.page = page;
     this.setCurrentPage(page); // Call setCurrentPage with updated page value
     this.fetchGames(this.page, this.pageSize);
+    this.changeStyleIfCurrentPage(this.page === this.currentPage); // Call changeStyleIfCurrentPage to update the styles of the cards
+
   }
 }
 
@@ -210,6 +222,34 @@ generatePageNumbers(currentPage: number, totalPages: number): number[] {
   setCurrentPage(page: number) {
     this.currentPage = page;
   }
+
+  changeStyleIfCurrentPage(currentPage: boolean) {
+    if (currentPage) {
+      const element = document.getElementById(`page-${this.page}`); // Replace 'yourElementId' with the actual ID of the element you want to change the style of
+      if (element) {
+        element.style.color = '#8050bf';
+        element.style.boxShadow = '0 -2px #8050bf inset';
+        element.style.cursor = 'pointer';
+      }
+    }
+  }
+
+  onJumpToPageDialog() {
+    console.log('onJumpToPageDialog called');
+
+    const dialogRef = this.dialog.open(JumpToPageDialogComponent, {
+      width: '250px',
+      data: { currentPage: this.currentPage, totalPages: this.totalPages } // Pass current page and total pages as data to the dialog
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.page) {
+        const page = result.page;
+        this.onJumpToPage(page); // Call the onJumpToPage method with the selected page number
+      }
+    });
+  }
+
 
 
 }
