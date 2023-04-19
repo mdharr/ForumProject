@@ -255,7 +255,7 @@
             <a style="cursor: pointer;"><img class="my-avatar" src="{{ loggedInUser.imageUrl }}" alt="" *ngIf="loggedIn()"/></a>
           </div>
           <div class="user-alias">
-            <a *ngIf="loggedIn()">{{ loggedInUser.username }}</a>
+            <a class="user-name-text" *ngIf="loggedIn()" [routerLink]="['/users', loggedInUser.id]">{{ loggedInUser.username }}</a>
           </div>
         </div>
       </div>

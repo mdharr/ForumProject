@@ -474,6 +474,24 @@ dd {
   color: var(--text-color);
 }
 
+.latest-member-bio {
+  cursor: pointer;
+}
+
+.started-by-link {
+  cursor: pointer;
+}
+
+.latest-member-bio:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.started-by-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 
 
 

@@ -420,6 +420,7 @@ mat-paginator {
 
 .login-prompt {
   font-weight: bolder;
+  color: var(--text-color);
 }
 
 .message-outer {
@@ -557,6 +558,12 @@ mat-paginator {
   display: flex !important;
   align-items: center !important;
   color: var(--text-color) !important;
+}
+
+.user-name-text {
+  color: #465ccc;
+  font-size: 18px;
+  font-weight: bolder;
 }
 
 

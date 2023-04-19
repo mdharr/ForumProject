@@ -413,6 +413,7 @@ mat-paginator {
 
 .login-prompt {
   font-weight: bolder;
+  color: var(--text-color);
 }
 
 blockquote {
@@ -688,8 +689,9 @@ li {
 }
 
 .user-name-text {
-  color: var(--text-color);
+  color: #465ccc;
   font-size: 18px;
+  font-weight: bolder;
 }
 
 .breadcrumb-value {
