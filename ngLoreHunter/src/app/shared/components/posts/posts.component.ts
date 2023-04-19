@@ -1,5 +1,5 @@
 import { PostDataSource } from './../../../services/post.dataSource';
-import { Component, OnDestroy, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
@@ -39,7 +39,8 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('ckeditorInstance') ckeditorInstance: any; // Add this line to access the CKEditor instance
 
-  currentPage: number = 1;
+  @Input() currentPage: number = 1;
+  @Input() pageCount: number = 0;
 
   pageSize: number = 5;
 
@@ -331,6 +332,10 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       })
     );
+  }
+
+  updatePagination(): void {
+    const totalPages = this.getTotalPages();
   }
 
 }
