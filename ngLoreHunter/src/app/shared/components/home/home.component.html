@@ -42,7 +42,7 @@
 
                       <div class="user-post" *ngIf="i === 0 && isLast">
                         <div class="post-title" >
-                          <a class="light-link" href="#"><p class="card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                          <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
                           <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
                         </div>
                         <div class="post-time">
@@ -87,7 +87,7 @@
 
                       <div class="user-post" *ngIf="i === 1 && isLast">
                         <div class="post-title" >
-                          <a class="light-link" href="#"><p class="card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                          <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
                           <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
                         </div>
                         <div class="post-time">
@@ -132,7 +132,7 @@
 
                       <div class="user-post" *ngIf="i === 2 && isLast">
                         <div class="post-title" >
-                          <a class="light-link" href="#"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                          <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
                           <p class=" card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
                         </div>
                         <div class="post-time">
@@ -179,7 +179,7 @@
 
                         <div class="user-post" *ngIf="i === 3 && isLast">
                           <div class="post-title" >
-                            <a class="light-link" href="#"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                            <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
                             <p class=" card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
                           </div>
                           <div class="post-time">
@@ -239,7 +239,7 @@
 
                     <div class="user-post" *ngIf="i === 4 && isLast">
                       <div class="post-title" >
-                        <a class="light-link" href="#"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                        <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
                         <p class=" card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
                       </div>
                       <div class="post-time">
@@ -284,7 +284,7 @@
 
                     <div class="user-post" *ngIf="i === 5 && isLast">
                       <div class="post-title" >
-                        <a class="light-link" href="#"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                        <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
                         <p class=" card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
                       </div>
                       <div class="post-time">
@@ -357,7 +357,7 @@
                 </a>
               </div>
               <div class="content-row-main">
-                <a class="dark-link" href="#" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><h4 class="dark-mode-text">{{ post.subject }}</h4></a>
+                <a class="dark-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><h4 class="dark-mode-text">{{ post.subject }}</h4></a>
                 <div>
                   <ul class="list-inline side-list dark-mode-text">
                     <li class="started-by-link" [routerLink]="['/users', post.user.id]">Started by {{ post.user.username }}</li>
