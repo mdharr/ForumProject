@@ -18,6 +18,8 @@ import { PostDataSource } from 'src/app/services/post.dataSource';
 import { CommentDataSource } from 'src/app/services/comment.dataSource';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { UserBannerImageDialogComponent } from '../user-banner-image-dialog/user-banner-image-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -86,7 +88,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
     private homeService: HomeService,
-    private http: HttpClient
+    private http: HttpClient,
+    public dialog: MatDialog
     ) {}
 
     ngOnInit() {
@@ -255,6 +258,34 @@ export class ProfileComponent implements OnInit, OnDestroy {
         })
       ).subscribe(categoryId => {
         this.navigateToComments(categoryId, postId);
+      });
+    }
+
+    editInformation(user: User): void {
+      console.log('in editInformation');
+      this.userService.update(user).subscribe({
+        next: (user) => {
+          user = this.loggedInUser;
+          // dismiss dialog here
+          this.reload();
+        },
+        error: (error) => {
+          console.log('Error getting loggedInUser Profile Component');
+          console.log(error);
+        },
+      });
+    }
+
+    openDialog(): void {
+      const dialogRef = this.dialog.open(UserBannerImageDialogComponent, {
+        width: '600px',
+        data: { user: this.profileUser }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        console.log(result);
+        // do something with the result
       });
     }
 

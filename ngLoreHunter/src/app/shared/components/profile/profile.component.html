@@ -26,7 +26,7 @@
                       <div class="memberHeader-content">
                         <div class="memberHeader-action">
                           <div class="button-group" *ngIf="profileUser.id === loggedInUser.id">
-                            <button mat-raised-button color="primary">Edit</button>
+                            <button mat-raised-button color="primary" (click)="openDialog()">Edit</button>
                           </div>
                         </div>
                         <h1 class="member-header-name">

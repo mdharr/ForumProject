@@ -43,6 +43,7 @@ import { JumpToPageDialogComponent } from './components/jump-to-page-dialog/jump
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { UserBannerImageDialogComponent } from './components/user-banner-image-dialog/user-banner-image-dialog.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { MatInputModule } from '@angular/material/input';
     FilterPipe,
     GamesComponent,
     JumpToPageDialogComponent,
+    UserBannerImageDialogComponent,
   ],
   imports: [
     CommonModule,
