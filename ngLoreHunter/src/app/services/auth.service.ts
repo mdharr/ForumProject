@@ -146,17 +146,6 @@ export class AuthService {
     );
   }
 
-  // getUserCounts(): Observable<any> {
-  //   return this.http.get<any>(this.url + 'userCounts').pipe(
-  //     catchError((err: any) => {
-  //       console.log(err);
-  //       return throwError(
-  //         () => new Error('AuthService.getUserCounts(): error fetching user counts.')
-  //       );
-  //     })
-  //   );
-  // }
-
     // Setter for user ID
     setUserId(userId: number): void {
       this.userId = userId;

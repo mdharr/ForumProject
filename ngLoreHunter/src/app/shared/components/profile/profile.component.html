@@ -25,7 +25,7 @@
                       </span>
                       <div class="memberHeader-content">
                         <div class="memberHeader-action">
-                          <div class="button-group">
+                          <div class="button-group" *ngIf="profileUser.id === loggedInUser.id">
                             <button mat-raised-button color="primary">Edit</button>
                           </div>
                         </div>
