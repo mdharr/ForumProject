@@ -49,6 +49,24 @@ export class UserService {
     );
   }
 
+  update(user: User): Observable<User> {
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    return this.http
+      .put<User>(`${this.url}/`, user, this.getHttpOptions())
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () => new Error('userService.update(): error updating user: ' + err)
+          );
+        })
+      );
+  }
+
   destroy(id: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${id}`).pipe(
       catchError((err: any) => {
