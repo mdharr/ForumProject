@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 import { Post } from 'src/app/models/post';
 import { Comment } from 'src/app/models/comment';
 import { HttpClient } from '@angular/common/http';
@@ -18,6 +18,8 @@ import { CommentDataSource } from 'src/app/services/comment.dataSource';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormControl, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-comments',
@@ -53,7 +55,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   postsByCategory: Post[] = [];
 
   comments: Comment[] = [];
-  comments$!: Observable<Comment[]>;
+  comments$: Observable<Comment[]> = this.commentService.commentsByPost(this.categoryId, this.postId);
 
   user: any;
 
@@ -81,7 +83,8 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
     private http: HttpClient,
     private sanitizer:DomSanitizer,
     private _renderer: Renderer2,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private dialog: MatDialog,
     ) {
 
     }
@@ -202,10 +205,6 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.paramsSub) {
       this.paramsSub.unsubscribe();
     }
-
-  }
-
-  ngAfterViewInit(){
 
   }
 
@@ -343,6 +342,10 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log('Refresh Component method called from LoginComponent');
     this.cdr.detectChanges();
     // ... implement your logic to refresh the component
+  }
+
+  ngAfterViewInit() {
+
   }
 
 }

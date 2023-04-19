@@ -177,29 +177,6 @@
   </div>
 </div>
 
-<!-- <div class="op-block" *ngFor="let post of posts">
-  <div class="op-block-inner">
-    <div *ngIf="this.post.id === postId">
-      <div class="op-user">
-        <div class="avatar-container">
-          <img class="avatar" src="{{ post.user.imageUrl }}" alt="">
-        </div>
-      </div>
-    </div>
-    <div *ngIf="this.post.id === postId" class="op-post-content">
-      <div class="op-post">
-        <div class="op-subject">
-          <h3 class="post-title">{{post.subject}}</h3>
-        </div>
-        <div class="op-content">
-          <p [innerHtml]="post.content">{{post.content}}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-
 <div class="wrapper">
     <div *ngFor="let post of posts; let i = index">
       <article *ngIf="post.id === this.postId" class="message-outer">
@@ -290,7 +267,7 @@
               <div class="user-details-wrapper">
                 <div class="userDetails">
                   <h4 class="message-name">
-                    <a href="username" [routerLink]="['/users', comment.user.id]">{{ comment.user.username }}</a>
+                    <a [routerLink]="['/users', comment.user.id]">{{ comment.user.username }}</a>
                   </h4>
                   <h5 class="userTitle message-userTitle" style="margin-bottom: 5px;">{{ comment.user.bannerMessage }}</h5>
                   <h5 class="userTitle message-userTitle member-status" *ngIf="comment.user.status === 'active'">Member</h5>
@@ -398,4 +375,3 @@
     </ol>
   </div>
 </div>
-

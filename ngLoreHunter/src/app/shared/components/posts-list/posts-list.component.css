@@ -555,3 +555,11 @@ mat-paginator {
   align-items: center !important;
   color: var(--text-color) !important;
 }
+
+.user-profile-link {
+  cursor: pointer;
+}
+.user-profile-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

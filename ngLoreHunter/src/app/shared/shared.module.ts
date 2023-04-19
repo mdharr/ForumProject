@@ -44,6 +44,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { UserBannerImageDialogComponent } from './components/user-banner-image-dialog/user-banner-image-dialog.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { UserBannerImageDialogComponent } from './components/user-banner-image-d
     MatFormFieldModule,
     MatDialogModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule
   ],
   exports: [
     HomeComponent,

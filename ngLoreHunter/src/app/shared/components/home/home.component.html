@@ -343,7 +343,7 @@
             <mat-icon style="color: gray;">comment</mat-icon>
           </div>
         </div>
-        <a class="dark-link" [routerLink]="['/posts']"><h3 class="dark-mode-text">Latest Threads</h3></a>
+        <a class="dark-link" [routerLink]="['/posts']"><h3 class="dark-mode-text">Latest Posts</h3></a>
       </div>
       <hr class="sidebar-hr dark-mode-text">
       <div *ngFor="let category of categories; index as i;">
@@ -353,7 +353,6 @@
               <div class="content-row-figure">
                 <a [routerLink]="['/users', post.user.id]">
                   <img class="user-avatar" [src]="post.user.imageUrl" alt="User Image">
-                  <!-- <img *ngIf="hideImages" class="user-avatar" [src]="defaultImageUrl" alt="User Image"> -->
                 </a>
               </div>
               <div class="content-row-main">
@@ -366,7 +365,7 @@
                   </ul>
                 </div>
                 <div class="content-row">
-                  <a class="neutral-link dark-mode-text" href="#">{{ category.name }}</a>
+                  <a class="neutral-link dark-mode-text" [routerLink]="['/categories', category.id, 'posts']">{{ category.name }}</a>
                 </div>
               </div>
             </div>
@@ -403,10 +402,18 @@
       <dl>
         <dt class="dark-mode-text">Latest Member</dt>
         <div *ngFor="let user of users; index as i; last as isLast;">
-          <dd [routerLink]="['/users', user.id]" class="dark-mode-text latest-member-bio" *ngIf="isLast">{{ user.username }} at {{ user.createdAt | date:'shortTime' }}</dd>
+          <dd [routerLink]="['/users', user.id]" class="dark-mode-text latest-member-bio" *ngIf="isLast"><span>{{ user.username }}</span> at {{ user.createdAt | date:'shortTime' }}</dd>
         </div>
       </dl>
     </div>
     </div>
 </div>
+
+<ng-template #tooltip let-username="username" let-bannerMessage="bannerMessage" let-imageUrl="imageUrl">
+  <div class="tooltip-content">
+    <div class="tooltip-username">{{ username }}</div>
+    <div class="tooltip-banner">{{ bannerMessage }}</div>
+    <img [src]="imageUrl" alt="User Image" class="tooltip-image" />
+  </div>
+</ng-template>
 
