@@ -9,7 +9,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { Category } from 'src/app/models/category';
-import { debounceTime, map, merge, Observable, Subscription, take, tap } from 'rxjs';
+import { catchError, debounceTime, EMPTY, map, merge, Observable, Subscription, take, tap } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -319,16 +319,18 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   goToNextPage(): void {
     if (this.posts$ !== undefined) {
       this.posts$.pipe(
-        take(1)
+        take(1),
+        catchError(error => {
+          console.error(error);
+          return EMPTY;
+        })
       ).subscribe(posts => {
         if (Array.isArray(posts) && (this.currentPage * 5) < (posts.length)) {
           this.currentPage++;
         }
-      }, error => {
-        console.error(error);
       });
     }
-  }
+}
 
   openFilterDialog() {
     this.dialog.open(this.filterDialog, {
