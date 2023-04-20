@@ -1,5 +1,5 @@
 import { PostDataSource } from './../../../services/post.dataSource';
-import { Component, OnDestroy, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, AfterViewInit, Input, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
@@ -16,6 +16,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-posts',
@@ -38,7 +39,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   public Editor = ClassicEditor;
 
   @ViewChild('ckeditorInstance') ckeditorInstance: any; // Add this line to access the CKEditor instance
-
+  @ViewChild('filterDialog') filterDialog!: TemplateRef<any>;
   @Input() currentPage: number = 1;
   @Input() pageCount: number = 0;
 
@@ -92,7 +93,8 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
     private categoryService: CategoryService,
     private activatedRoute: ActivatedRoute,
     private homeServ: HomeService,
-    private http: HttpClient
+    private http: HttpClient,
+    private dialog: MatDialog
     ) {
   }
 
@@ -326,6 +328,12 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
         console.error(error);
       });
     }
+  }
+
+  openFilterDialog() {
+    this.dialog.open(this.filterDialog, {
+      width: '400px'
+    });
   }
 
   public filterPosts(): void {

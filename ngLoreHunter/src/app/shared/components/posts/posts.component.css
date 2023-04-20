@@ -566,4 +566,7 @@ mat-paginator {
   font-weight: bolder;
 }
 
+::ng-deep .my-form-field .mat-mdc-form-field-bottom-align {
+  display: none !important;
+}
 
