@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
@@ -11,6 +11,7 @@ import { catchError, EMPTY, map, Observable, Subscription, tap, throwError } fro
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-posts-list',
@@ -23,6 +24,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
   public Editor = ClassicEditor;
 
   @ViewChild('ckeditorInstance') ckeditorInstance: any; // Add this line to access the CKEditor instance
+  @ViewChild('filterDialog') filterDialog!: TemplateRef<any>;
 
   currentPage: number = 1;
 
@@ -65,7 +67,8 @@ export class PostsListComponent implements OnInit, OnDestroy {
     private homeServ: HomeService,
     private router: Router,
     private categoryService: CategoryService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog
     ) {
   }
 
@@ -76,22 +79,16 @@ export class PostsListComponent implements OnInit, OnDestroy {
       // Do something with the logged-in user object, e.g. update UI
     });
 
-    this.indexAllSubscription = this.postService.indexAll().pipe(
-      tap(posts => {
-        // Set the posts data to the component's property
-        this.posts = posts;
+    this.posts$ = this.postService.getAllPosts().pipe(
+      map(posts => {
+        if (this.filterSubject && this.filterSubject !== '') {
+          return posts.filter(post => post.subject.toLowerCase().includes(this.filterSubject.toLowerCase()));
+        } else {
+          return posts;
+        }
       }),
       map(posts => posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
-    ).subscribe({
-      next: (sortedPosts) => {
-        // The sorted posts will be emitted here
-        console.log(sortedPosts);
-      },
-      error: (error) => {
-        console.log('Error getting posts');
-        console.log(error);
-      }
-    });
+    );
 
     this.homeServIndexSubscription = this.homeServ.index().subscribe({
       next: (categories) => {
@@ -137,23 +134,24 @@ export class PostsListComponent implements OnInit, OnDestroy {
     });
   }
 
+  openFilterDialog() {
+    this.dialog.open(this.filterDialog, {
+      width: '400px'
+    });
+  }
+
   public filterPosts(): void {
+    console.log('filterPosts called');
+
     this.posts$ = this.postService.getAllPosts().pipe(
       map(posts => {
-        return posts.filter(post => {
-          let subjectMatch = true;
-
-          if (this.filterSubject && this.filterSubject !== '') {
-            subjectMatch = post.subject.toLowerCase().includes(this.filterSubject.toLowerCase());
-
-            return subjectMatch;
-          } else {
-            return this.posts$ = this.postService.getAllPosts().pipe(
-              map(posts => posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
-            );
-          }
-        });
-      })
+        if (this.filterSubject && this.filterSubject !== '') {
+          return posts.filter(post => post.subject.toLowerCase().includes(this.filterSubject.toLowerCase()));
+        } else {
+          return posts;
+        }
+      }),
+      map(posts => posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
     );
   }
 

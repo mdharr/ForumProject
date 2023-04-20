@@ -563,3 +563,7 @@ mat-paginator {
   cursor: pointer;
   text-decoration: underline;
 }
+
+::ng-deep .my-form-field .mat-mdc-form-field-bottom-align {
+  display: none !important;
+}
