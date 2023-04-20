@@ -174,4 +174,10 @@ export class PostService {
       );
     }
 
+    getTotalPostsByCategory(categoryId: number): Observable<number> {
+      return this.http.get<Post[]>(`${this.url}/categories/${categoryId}/posts`).pipe(
+        map(posts => posts.length)
+      );
+    }
+
 }

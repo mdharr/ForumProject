@@ -36,7 +36,7 @@ export class DrawerComponent implements OnInit {
               private route: ActivatedRoute,
               public imageService: ImageService,
               private renderer: Renderer2,
-              private el: ElementRef
+              private el: ElementRef,
               ) {
   }
 

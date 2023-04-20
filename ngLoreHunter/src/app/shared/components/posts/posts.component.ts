@@ -1,5 +1,5 @@
 import { PostDataSource } from './../../../services/post.dataSource';
-import { Component, OnDestroy, OnInit, ViewChild, AfterViewInit, Input, TemplateRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, AfterViewInit, Input, TemplateRef, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
@@ -44,6 +44,8 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() pageCount: number = 0;
 
   pageSize: number = 5;
+  totalPosts: number = 0;
+  totalPages: number = 0;
 
   displayedColumns: string[] = ['user', 'subject', 'content'];
 
@@ -84,6 +86,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   checkCkEditor: boolean = false;
 
   private paramsSub: Subscription | undefined;
+  private totalPostsByCategorySubscription: Subscription | undefined;
 
   constructor(
     private postService: PostService,
@@ -104,6 +107,10 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
       // Do something with the logged-in user object, e.g. update UI
     });
 
+    if (this.totalPostsByCategorySubscription) {
+      this.totalPostsByCategorySubscription.unsubscribe();
+    }
+
     this.reload();
 
   }
@@ -111,6 +118,10 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     if (this.paramsSub) {
       this.paramsSub.unsubscribe();
+    }
+
+    if (this.totalPostsByCategorySubscription) {
+      this.totalPostsByCategorySubscription.unsubscribe();
     }
   }
 
@@ -159,6 +170,10 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
             }
           }))
         );
+
+        this.totalPostsByCategorySubscription = this.postService.getTotalPostsByCategory(this.categoryId).subscribe(totalPosts => {
+          this.totalPosts = totalPosts;
+        });
       }
     });
 
@@ -306,9 +321,9 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getTotalPages(): number {
-    const totalPosts = this.posts.length; // or use this.posts$.value.length if you're using BehaviorSubject
-    return Math.ceil(totalPosts / this.pageSize);
+    return Math.ceil(this.totalPosts / this.pageSize);
   }
+
 
   goToPreviousPage(): void {
     if (this.currentPage > 1) {
@@ -363,10 +378,6 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       })
     );
-  }
-
-  updatePagination(): void {
-    const totalPages = this.getTotalPages();
   }
 
 }
