@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -41,7 +42,7 @@ public class Comment {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@JsonIgnore
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "post_id")
 	private Post post;

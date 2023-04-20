@@ -72,7 +72,7 @@ public class PostServiceImpl implements PostService {
 		existing.setEnabled(post.getEnabled());
 		existing.setCreatedAt(post.getCreatedAt());
 		existing.setLastEdited(post.getLastEdited());
-		return postRepo.save(existing);
+		return postRepo.saveAndFlush(existing);
 	}
 	
 	

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,7 +56,8 @@ public class Post {
 	@JsonBackReference
 	private Category category;
 	
-	@OneToMany(mappedBy = "post")
+	@JsonManagedReference
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 	private List<Comment> comments;
 	
 	@Column(name = "view_count")

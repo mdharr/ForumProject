@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 		userUpdate.setBannerMessage(user.getBannerMessage());
 		userUpdate.setBannerImage(user.getBannerImage());
 		userUpdate.setState(user.getState());
-		return userRepo.save(userUpdate);
+		return userRepo.saveAndFlush(userUpdate);
 	}
 
 	@Override

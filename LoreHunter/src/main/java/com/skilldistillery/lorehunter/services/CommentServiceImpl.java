@@ -1,5 +1,6 @@
 package com.skilldistillery.lorehunter.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -70,6 +71,7 @@ public class CommentServiceImpl implements CommentService {
 		Optional<Post> postOpt = postRepo.findById(postId);
 		if(postOpt.isPresent()) {
 			post = postOpt.get();
+			post.setLastEdited(LocalDateTime.now());
 		}
 		if(user != null) {
 			comment.setUser(user);

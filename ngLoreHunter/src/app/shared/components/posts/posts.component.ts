@@ -148,7 +148,14 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
         }
 
         this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
-          map(posts => posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
+          map(posts => posts.sort((a, b) => {
+            let lastEditedComparison = new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime();
+            if (lastEditedComparison === 0) {
+                return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+            } else {
+                return lastEditedComparison;
+            }
+          }))
         );
       }
     });
@@ -223,7 +230,14 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.post = data;
         // this.posts$ = this.postService.postsByCategory(this.categoryId);
         this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
-          map(posts => posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
+          map(posts => posts.sort((a, b) => {
+            let lastEditedComparison = new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime();
+            if (lastEditedComparison === 0) {
+                return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+            } else {
+                return lastEditedComparison;
+            }
+          }))
         );
       },
       error: (nojoy) => {
@@ -326,7 +340,14 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
             return subjectMatch;
           } else {
             return this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
-              map(posts => posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
+              map(posts => posts.sort((a, b) => {
+                let lastEditedComparison = new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime();
+                if (lastEditedComparison === 0) {
+                    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+                } else {
+                    return lastEditedComparison;
+                }
+              }))
             );
           }
         });

@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -53,6 +54,7 @@ public class User {
 	@Column(name = "image_url")
 	private String imageUrl;
 	
+	@UpdateTimestamp
 	@Column(name = "last_activity")
 	private LocalDateTime lastActivity;
 	
