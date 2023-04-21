@@ -155,28 +155,28 @@ public class GameController {
       return ResponseEntity.ok().body(savedGame);
     }
     
-    @PostMapping("users/{userId}/games/{gameId}")
-    public ResponseEntity<?> saveUserGame(@PathVariable int userId, @PathVariable int gameId) {
-        User user = userService.getUser(userId);
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Game game = gameService.getGame(gameId);
-        if (game == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        UserGameId userGameId = new UserGameId(user.getId(), game.getId());
-        Optional<UserGame> optionalUserGame = userGameRepo.findByUserGameId(userGameId);
-        if (optionalUserGame.isPresent()) {
-            return ResponseEntity.badRequest().body("Game already added to collection.");
-        }
-
-        UserGame userGame = new UserGame(user, game);
-        userGameRepo.save(userGame);
-
-        return ResponseEntity.ok().build();
-    }
+//    @PostMapping("users/{userId}/games/{gameId}")
+//    public ResponseEntity<?> saveUserGame(@PathVariable int userId, @PathVariable int gameId) {
+//        User user = userService.getUser(userId);
+//        if (user == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        Game game = gameService.getGame(gameId);
+//        if (game == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        UserGameId userGameId = new UserGameId(user.getId(), game.getId());
+//        Optional<UserGame> optionalUserGame = userGameRepo.findByUserGameId(userGameId);
+//        if (optionalUserGame.isPresent()) {
+//            return ResponseEntity.badRequest().body("Game already added to collection.");
+//        }
+//
+//        UserGame userGame = new UserGame(user, game);
+//        userGameRepo.save(userGame);
+//
+//        return ResponseEntity.ok().build();
+//    }
 
 }
