@@ -7,6 +7,8 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +23,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.skilldistillery.lorehunter.enums.VerifiedStatus;
 
 @Entity
 public class User {
@@ -89,6 +92,19 @@ public class User {
 	
 	@OneToMany(mappedBy = "user")
 	private List<UserGame> userGames;
+	
+	private String verificationCode;
+	
+    @Enumerated(EnumType.STRING)
+    private VerifiedStatus verifiedStatus;
+	
+	private boolean emailVerified;
+	
+	private LocalDateTime verificationExpiryTime;
+	
+	private int resendCount;
+	
+	private LocalDateTime lastVerificationCodeSentTime;
 
 	public User() {
 		super();
