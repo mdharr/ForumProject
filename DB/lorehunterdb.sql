@@ -174,6 +174,8 @@ DROP TABLE IF EXISTS `user_has_game` ;
 CREATE TABLE IF NOT EXISTS `user_has_game` (
   `user_id` INT NOT NULL,
   `game_id` INT NOT NULL,
+  `category` ENUM('PLAYED', 'PLAYING') NULL,
+  `rating` ENUM('0', '0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5') NULL,
   PRIMARY KEY (`user_id`, `game_id`),
   INDEX `fk_user_has_game_game1_idx` (`game_id` ASC),
   INDEX `fk_user_has_game_user1_idx` (`user_id` ASC),
@@ -279,9 +281,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `user_has_game` (`user_id`, `game_id`) VALUES (1, 1);
-INSERT INTO `user_has_game` (`user_id`, `game_id`) VALUES (2, 2);
-INSERT INTO `user_has_game` (`user_id`, `game_id`) VALUES (3, 3);
+INSERT INTO `user_has_game` (`user_id`, `game_id`, `category`, `rating`) VALUES (1, 1, 'PLAYED', '5');
+INSERT INTO `user_has_game` (`user_id`, `game_id`, `category`, `rating`) VALUES (2, 2, 'PLAYED', '5');
+INSERT INTO `user_has_game` (`user_id`, `game_id`, `category`, `rating`) VALUES (3, 3, 'PLAYED', '5');
 
 COMMIT;
 
