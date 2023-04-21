@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.lorehunter.entities.User;
 import com.skilldistillery.lorehunter.services.AuthService;
+import com.skilldistillery.lorehunter.services.EmailService;
 import com.skilldistillery.lorehunter.services.UserService;
+import com.skilldistillery.lorehunter.enums.VerifiedStatus;
 
 @RestController
 @CrossOrigin({ "*", "http://localhost" })
@@ -33,30 +35,33 @@ public class AuthController {
 
 	@Autowired
 	private SessionRegistry sessionRegistry;
-
-	@PostMapping("register")
-	public User register(@RequestBody User user, HttpServletResponse res) {
-		if (user == null) {
-			res.setStatus(400);
-			return null;
-		}
-		user = authService.register(user);
-		return user;
-	}
 	
+	@Autowired
+	private EmailService emailService;
+
 //	@PostMapping("register")
 //	public User register(@RequestBody User user, HttpServletResponse res) {
-//	    if (user == null) {
-//	        res.setStatus(400);
-//	        return null;
-//	    }
-//	    user.setVerificationCode(UUID.randomUUID().toString());
-//	    user.setStatus(UserStatus.PENDING_VERIFICATION);
-//	    user = authService.register(user);
-//	    // Send verification email to the registered email address
-//	    emailService.sendVerificationEmail(user);
-//	    return user;
+//		if (user == null) {
+//			res.setStatus(400);
+//			return null;
+//		}
+//		user = authService.register(user);
+//		return user;
 //	}
+	
+	@PostMapping("register")
+	public User register(@RequestBody User user, HttpServletResponse res) {
+	    if (user == null) {
+	        res.setStatus(400);
+	        return null;
+	    }
+	    user.setVerificationCode(UUID.randomUUID().toString());
+	    user.setVerifiedStatus((VerifiedStatus.PENDING_VERIFICATION));;
+	    user = authService.register(user);
+	    // Send verification email to the registered email address
+	    emailService.sendVerificationEmail(user);
+	    return user;
+	}
 
 	@GetMapping("authenticate")
 	public User authenticate(Principal principal, HttpServletResponse res) {

@@ -93,17 +93,23 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<UserGame> userGames;
 	
+	@Column(name = "verification_code")
 	private String verificationCode;
 	
     @Enumerated(EnumType.STRING)
+    @Column(name = "verified_status")
     private VerifiedStatus verifiedStatus;
 	
+    @Column(name = "email_verified")
 	private boolean emailVerified;
 	
+    @Column(name = "verification_expiry_time")
 	private LocalDateTime verificationExpiryTime;
 	
+    @Column(name = "resend_count")
 	private int resendCount;
 	
+    @Column(name = "last_verification_code_sent_time")
 	private LocalDateTime lastVerificationCodeSentTime;
 
 	public User() {
@@ -114,7 +120,8 @@ public class User {
 			String lastName, String email, String state, LocalDateTime createdAt, String imageUrl,
 			LocalDateTime lastActivity, String status, Integer commentCount, String bannerMessage, String bannerImage,
 			List<Category> categories, List<Post> posts, List<Comment> comments, Integer postCount, Boolean isOnline,
-			List<UserGame> userGames) {
+			List<UserGame> userGames, String verificationCode, VerifiedStatus verifiedStatus, boolean emailVerified,
+			LocalDateTime verificationExpiryTime, int resendCount, LocalDateTime lastVerificationCodeSentTime) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -138,6 +145,12 @@ public class User {
 		this.postCount = postCount;
 		this.isOnline = isOnline;
 		this.userGames = userGames;
+		this.verificationCode = verificationCode;
+		this.verifiedStatus = verifiedStatus;
+		this.emailVerified = emailVerified;
+		this.verificationExpiryTime = verificationExpiryTime;
+		this.resendCount = resendCount;
+		this.lastVerificationCodeSentTime = lastVerificationCodeSentTime;
 	}
 
 	public int getId() {
@@ -316,6 +329,54 @@ public class User {
 		this.userGames = userGames;
 	}
 
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+
+	public VerifiedStatus getVerifiedStatus() {
+		return verifiedStatus;
+	}
+
+	public void setVerifiedStatus(VerifiedStatus verifiedStatus) {
+		this.verifiedStatus = verifiedStatus;
+	}
+
+	public boolean isEmailVerified() {
+		return emailVerified;
+	}
+
+	public void setEmailVerified(boolean emailVerified) {
+		this.emailVerified = emailVerified;
+	}
+
+	public LocalDateTime getVerificationExpiryTime() {
+		return verificationExpiryTime;
+	}
+
+	public void setVerificationExpiryTime(LocalDateTime verificationExpiryTime) {
+		this.verificationExpiryTime = verificationExpiryTime;
+	}
+
+	public int getResendCount() {
+		return resendCount;
+	}
+
+	public void setResendCount(int resendCount) {
+		this.resendCount = resendCount;
+	}
+
+	public LocalDateTime getLastVerificationCodeSentTime() {
+		return lastVerificationCodeSentTime;
+	}
+
+	public void setLastVerificationCodeSentTime(LocalDateTime lastVerificationCodeSentTime) {
+		this.lastVerificationCodeSentTime = lastVerificationCodeSentTime;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -335,11 +396,58 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
-				+ ", role=" + role + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", state=" + state + ", createdAt=" + createdAt + ", imageUrl=" + imageUrl + ", lastActivity="
-				+ lastActivity + ", status=" + status + ", commentCount=" + commentCount + ", bannerMessage="
-				+ bannerMessage + ", bannerImage=" + bannerImage + ", postCount=" + postCount + ", isOnline=" + isOnline + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [id=");
+		builder.append(id);
+		builder.append(", username=");
+		builder.append(username);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append(", enabled=");
+		builder.append(enabled);
+		builder.append(", role=");
+		builder.append(role);
+		builder.append(", firstName=");
+		builder.append(firstName);
+		builder.append(", lastName=");
+		builder.append(lastName);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", state=");
+		builder.append(state);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", imageUrl=");
+		builder.append(imageUrl);
+		builder.append(", lastActivity=");
+		builder.append(lastActivity);
+		builder.append(", status=");
+		builder.append(status);
+		builder.append(", commentCount=");
+		builder.append(commentCount);
+		builder.append(", bannerMessage=");
+		builder.append(bannerMessage);
+		builder.append(", bannerImage=");
+		builder.append(bannerImage);
+		builder.append(", postCount=");
+		builder.append(postCount);
+		builder.append(", isOnline=");
+		builder.append(isOnline);
+		builder.append(", verificationCode=");
+		builder.append(verificationCode);
+		builder.append(", verifiedStatus=");
+		builder.append(verifiedStatus);
+		builder.append(", emailVerified=");
+		builder.append(emailVerified);
+		builder.append(", verificationExpiryTime=");
+		builder.append(verificationExpiryTime);
+		builder.append(", resendCount=");
+		builder.append(resendCount);
+		builder.append(", lastVerificationCodeSentTime=");
+		builder.append(lastVerificationCodeSentTime);
+		builder.append("]");
+		return builder.toString();
 	}
+
 		
 }
