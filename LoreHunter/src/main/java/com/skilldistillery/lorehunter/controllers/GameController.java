@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,8 +23,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.skilldistillery.lorehunter.entities.Game;
+import com.skilldistillery.lorehunter.entities.User;
+import com.skilldistillery.lorehunter.entities.UserGame;
+import com.skilldistillery.lorehunter.entities.UserGameId;
 import com.skilldistillery.lorehunter.repositories.GameRepository;
+import com.skilldistillery.lorehunter.repositories.UserGameRepository;
 import com.skilldistillery.lorehunter.services.GameService;
+import com.skilldistillery.lorehunter.services.UserService;
 
 @CrossOrigin({ "*", "http://localhost/"})
 @RestController
@@ -43,6 +50,12 @@ public class GameController {
 	
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private UserGameRepository userGameRepo;
 	
     // store url for user in game table of database
     @PostMapping("users/{userId}/games/{gameId}/url")
@@ -135,6 +148,35 @@ public class GameController {
       // Return empty response if results not found
       return ResponseEntity.ok().body(Collections.emptyList());
     }
+    
+    @PostMapping("games")
+    public ResponseEntity<Game> addGame(@RequestBody Game game) {
+      Game savedGame = gameRepo.save(game);
+      return ResponseEntity.ok().body(savedGame);
+    }
+    
+    @PostMapping("users/{userId}/games/{gameId}")
+    public ResponseEntity<?> saveUserGame(@PathVariable int userId, @PathVariable int gameId) {
+        User user = userService.getUser(userId);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
 
+        Game game = gameService.getGame(gameId);
+        if (game == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        UserGameId userGameId = new UserGameId(user.getId(), game.getId());
+        Optional<UserGame> optionalUserGame = userGameRepo.findByUserGameId(userGameId);
+        if (optionalUserGame.isPresent()) {
+            return ResponseEntity.badRequest().body("Game already added to collection.");
+        }
+
+        UserGame userGame = new UserGame(user, game);
+        userGameRepo.save(userGame);
+
+        return ResponseEntity.ok().build();
+    }
 
 }

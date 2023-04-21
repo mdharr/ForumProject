@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.skilldistillery.lorehunter.entities.Game;
 import com.skilldistillery.lorehunter.entities.User;
 import com.skilldistillery.lorehunter.entities.UserGame;
@@ -84,36 +85,6 @@ public class GameServiceImpl implements GameService {
 	    userGameRepo.save(userGame);
 	}
 	
-//	@Override
-//	public Game createGameFromApi(Game game) {
-//		// Make API call to retrieve game data
-//		// Example using RestTemplate
-//		RestTemplate restTemplate = new RestTemplate();
-//		String apiUrl = "https://api.example.com/games/{gameId}"; // replace with your actual API URL
-//		Map<String, String> params = new HashMap<>();
-//		params.put("gameId", game.getApiKey()); // assuming apiKey is used as the game ID in the API
-//		GameApiResponse gameApiResponse = restTemplate.getForObject(apiUrl, GameApiResponse.class, params);
-//
-//		// Extract fields from API response
-//		String slug = gameApiResponse.getSlug();
-//		String name = gameApiResponse.getName();
-//		String description = gameApiResponse.getDescription();
-//		String released = gameApiResponse.getReleased();
-//		String backgroundImage = gameApiResponse.getBackgroundImage();
-//
-//		// Set fields in Game entity
-//		game.setSlug(slug);
-//		game.setName(name);
-//		game.setDescription(description);
-//		game.setReleased(released);
-//		game.setBackgroundImage(backgroundImage);
-//
-//		// Save Game entity to database
-//		gameRepository.save(game);
-//
-//		return game;
-//	}
-	
     @Override
     public List<Game> getGamesFromExternalApi() {
     	String url = API_BASE_URL + "?" + API_KEY_PARAM + "=" + API_KEY_VALUE;
@@ -127,5 +98,26 @@ public class GameServiceImpl implements GameService {
 
         return gameList;
     }
+    
+    @Override
+	public void saveGame(JsonNode jsonNode) {
+		Game game = new Game();
+		game.setSlug(jsonNode.get("slug").asText());
+		game.setName(jsonNode.get("name").asText());
+		game.setDescription(jsonNode.get("description").asText());
+		game.setReleased(jsonNode.get("released").asText());
+		game.setBackgroundImage(jsonNode.get("background_image").asText());
+		gameRepo.save(game);
+	}
+    
+	@Override
+	public Game getGame(int gameId) {
+		Game game = null;
+		Optional<Game> gameOpt = gameRepo.findById(gameId);
+		if (gameOpt.isPresent()) {
+			game = gameOpt.get();
+		}
+		return game;
+	}
 
 }

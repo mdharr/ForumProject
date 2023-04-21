@@ -55,6 +55,11 @@ public class UserGame {
 		this.rating = rating;
 	}
 
+	public UserGame(User user, Game game) {
+		this.user = user;
+		this.game = game;
+	}
+
 	public UserGameId getId() {
 		return id;
 	}
