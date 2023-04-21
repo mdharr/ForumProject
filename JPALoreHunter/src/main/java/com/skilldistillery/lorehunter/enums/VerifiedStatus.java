@@ -1,8 +1,8 @@
 package com.skilldistillery.lorehunter.enums;
 
 public enum VerifiedStatus {
-    PENDING,
-    ACTIVE,
-    INACTIVE
+	ACTIVE,
+	PENDING_VERIFICATION,
+	DISABLED
 
 }
