@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.lorehunter.entities.User;
+import com.skilldistillery.lorehunter.enums.VerifiedStatus;
 import com.skilldistillery.lorehunter.repositories.UserRepository;
 
 
@@ -31,6 +32,9 @@ public class AuthServiceImpl implements AuthService {
 		user.setPassword(encoder.encode(user.getPassword()));
 		user.setEnabled(true);
 		user.setRole("standard");
+		user.setVerificationCode("1287ce4e-93c9-439c-9673-d166bb948482");
+		user.setVerifiedStatus(VerifiedStatus.ACTIVE);
+		user.setResendCount(0);
 		userRepo.saveAndFlush(user);
 		return user;
 	}

@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `state` VARCHAR(45) NULL,
   `banner_image` TEXT NULL,
   `is_online` TINYINT NULL DEFAULT 0,
-  `verification_code` VARCHAR(255) NULL DEFAULT '1287ce4e-93c9-439c-9673-d166bb948482',
+  `verification_code` VARCHAR(255) NOT NULL DEFAULT '1287ce4e-93c9-439c-9673-d166bb948482',
   `verified_status` ENUM('ACTIVE', 'PENDING_VERIFICATION', 'DISABLED') NOT NULL DEFAULT 'PENDING_VERIFICATION',
   `email_verified` TINYINT NULL DEFAULT 0,
   `verification_expiry_time` DATETIME NULL,
