@@ -48,8 +48,10 @@ public class AuthController {
 		user = authService.register(user);
 		return user;
 	}
-	
+
+//	Credentials needed in application.properties for username and password
 //  Post Mapping for registering new user with email verification WIP!!
+	
 //	@PostMapping("register")
 //	public User register(@RequestBody User user, HttpServletResponse res) {
 //	    if (user == null) {
