@@ -2,14 +2,19 @@ package com.skilldistillery.lorehunter.entities;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.skilldistillery.lorehunter.enums.GameCategory;
+import com.skilldistillery.lorehunter.enums.GameRating;
 
 @Entity
 @Table(name = "user_has_game")
@@ -29,15 +34,25 @@ public class UserGame {
 	@MapsId(value = "gameId")
 	private Game game;
 	
+	@Column(name = "category")
+	@Enumerated(EnumType.STRING)
+	private GameCategory category;
+	
+	@Column(name = "rating")
+	@Enumerated(EnumType.STRING)
+	private GameRating rating;
+	
 	public UserGame() {
 		super();
 	}
 	
-	public UserGame(UserGameId id, User user, Game game) {
+	public UserGame(UserGameId id, User user, Game game, GameCategory category, GameRating rating) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.game = game;
+		this.category = category;
+		this.rating = rating;
 	}
 
 	public UserGameId getId() {
@@ -64,6 +79,22 @@ public class UserGame {
 		this.game = game;
 	}
 
+	public GameCategory getCategory() {
+		return category;
+	}
+
+	public void setCategory(GameCategory category) {
+		this.category = category;
+	}
+
+	public GameRating getRating() {
+		return rating;
+	}
+
+	public void setRating(GameRating rating) {
+		this.rating = rating;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(game, id, user);
@@ -83,9 +114,19 @@ public class UserGame {
 
 	@Override
 	public String toString() {
-		return "UserGame [id=" + id + ", user=" + user + ", game=" + game + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("UserGame [id=");
+		builder.append(id);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", game=");
+		builder.append(game);
+		builder.append(", category=");
+		builder.append(category);
+		builder.append(", rating=");
+		builder.append(rating);
+		builder.append("]");
+		return builder.toString();
 	}
-	
-	
 
 }
