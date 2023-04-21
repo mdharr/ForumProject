@@ -39,29 +39,30 @@ public class AuthController {
 	@Autowired
 	private EmailService emailService;
 
-//	@PostMapping("register")
-//	public User register(@RequestBody User user, HttpServletResponse res) {
-//		if (user == null) {
-//			res.setStatus(400);
-//			return null;
-//		}
-//		user = authService.register(user);
-//		return user;
-//	}
-	
 	@PostMapping("register")
 	public User register(@RequestBody User user, HttpServletResponse res) {
-	    if (user == null) {
-	        res.setStatus(400);
-	        return null;
-	    }
-	    user.setVerificationCode(UUID.randomUUID().toString());
-	    user.setVerifiedStatus((VerifiedStatus.PENDING_VERIFICATION));;
-	    user = authService.register(user);
-	    // Send verification email to the registered email address
-	    emailService.sendVerificationEmail(user);
-	    return user;
+		if (user == null) {
+			res.setStatus(400);
+			return null;
+		}
+		user = authService.register(user);
+		return user;
 	}
+	
+//  Post Mapping for registering new user with email verification WIP!!
+//	@PostMapping("register")
+//	public User register(@RequestBody User user, HttpServletResponse res) {
+//	    if (user == null) {
+//	        res.setStatus(400);
+//	        return null;
+//	    }
+//	    user.setVerificationCode(UUID.randomUUID().toString());
+//	    user.setVerifiedStatus((VerifiedStatus.PENDING_VERIFICATION));;
+//	    user = authService.register(user);
+//	    // Send verification email to the registered email address
+//	    emailService.sendVerificationEmail(user);
+//	    return user;
+//	}
 
 	@GetMapping("authenticate")
 	public User authenticate(Principal principal, HttpServletResponse res) {
