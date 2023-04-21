@@ -1,6 +1,8 @@
 package com.skilldistillery.lorehunter.controllers;
 
 import java.security.Principal;
+import java.util.UUID;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +43,20 @@ public class AuthController {
 		user = authService.register(user);
 		return user;
 	}
+	
+//	@PostMapping("register")
+//	public User register(@RequestBody User user, HttpServletResponse res) {
+//	    if (user == null) {
+//	        res.setStatus(400);
+//	        return null;
+//	    }
+//	    user.setVerificationCode(UUID.randomUUID().toString());
+//	    user.setStatus(UserStatus.PENDING_VERIFICATION);
+//	    user = authService.register(user);
+//	    // Send verification email to the registered email address
+//	    emailService.sendVerificationEmail(user);
+//	    return user;
+//	}
 
 	@GetMapping("authenticate")
 	public User authenticate(Principal principal, HttpServletResponse res) {
