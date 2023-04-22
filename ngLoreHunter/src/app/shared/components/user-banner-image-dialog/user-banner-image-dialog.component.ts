@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-banner-image-dialog.component.css']
 })
 export class UserBannerImageDialogComponent {
-  bannerImageUrlForm: FormGroup;
+  bannerForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -18,8 +18,10 @@ export class UserBannerImageDialogComponent {
     public dialogRef: MatDialogRef<UserBannerImageDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { user: User }
   ) {
-    this.bannerImageUrlForm = this.fb.group({
-      bannerImageUrl: ['', Validators.required]
+    this.bannerForm = this.fb.group({
+      bannerMessage: [this.data.user.bannerMessage, Validators.required],
+      imageUrl: [this.data.user.imageUrl, Validators.required],
+      bannerImage: [this.data.user.bannerImage, Validators.required]
     });
   }
 
@@ -28,13 +30,11 @@ export class UserBannerImageDialogComponent {
   }
 
   onSubmit() {
-    const bannerImageUrl = this.bannerImageUrlForm.get('bannerImageUrl')?.value;
-    if (bannerImageUrl) {
-      const updatedUser = { ...this.data.user, bannerImage: bannerImageUrl };
-      this.userService.update(updatedUser).subscribe((user) => {
-        this.dialogRef.close(user);
-      });
-    }
+    const { bannerMessage, imageUrl, bannerImage } = this.bannerForm.value;
+    const updatedUser = { ...this.data.user, bannerMessage, imageUrl, bannerImage };
+    this.userService.update(updatedUser).subscribe((user) => {
+      this.dialogRef.close(user);
+    });
   }
 
 }

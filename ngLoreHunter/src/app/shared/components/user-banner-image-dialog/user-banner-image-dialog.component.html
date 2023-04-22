@@ -1,8 +1,17 @@
-<h2 mat-dialog-title>Edit Banner Image</h2>
-<form [formGroup]="bannerImageUrlForm" (ngSubmit)="onSubmit()">
+<h2 mat-dialog-title>Edit Profile</h2>
+<form [formGroup]="bannerForm" (ngSubmit)="onSubmit()">
   <mat-dialog-content>
     <mat-form-field>
-      <input matInput placeholder="Banner Image URL" formControlName="bannerImageUrl">
+      <mat-label>Banner Message</mat-label>
+      <input matInput placeholder="Banner Message" formControlName="bannerMessage">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Profile Image</mat-label>
+      <input matInput placeholder="Image URL" formControlName="imageUrl">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Banner Image</mat-label>
+      <input matInput placeholder="Banner Image" formControlName="bannerImage">
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions>
