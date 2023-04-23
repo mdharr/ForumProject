@@ -14,12 +14,12 @@
       <div class="title" *ngFor="let category of categories; let i = index">
         <a mat-list-item *ngIf="i === 3" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">groups</mat-icon></dt><dd class="sidenav-items">{{ category.name }}</dd></dl></a>
       </div>
-      <div class="title">
-        <a mat-list-item class="light-link" [routerLink]="['/games']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">videogame_asset</mat-icon></dt><dd class="sidenav-items">Games</dd></dl></a>
-      </div>
       <a mat-list-item><dl class="pairs" [routerLink]="['/trending',]"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">trending_up</mat-icon></dt><dd class="sidenav-items">Trending Posts</dd></dl></a>
       <!-- TODO: PASS CATEGORY ID THROUGH ROUTERLINK EITHER HERE OR IN POST LIST COMPONENT (LIKELY THE LATTER) -->
       <a mat-list-item><dl class="pairs" [routerLink]="['/posts',]"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">chat</mat-icon></dt><dd class="sidenav-items">Latest Posts</dd></dl></a>
+      <div class="title">
+        <a mat-list-item class="light-link" [routerLink]="['/games']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">videogame_asset</mat-icon></dt><dd class="sidenav-items">Games</dd></dl></a>
+      </div>
       <mat-accordion elevation={0}>
         <mat-expansion-panel hideToggle class="mat-elevation-z0" style="background: var(--bkg-color); padding: 0;">
           <mat-expansion-panel-header style="padding: 16px; background: var(--bkg-color);">
