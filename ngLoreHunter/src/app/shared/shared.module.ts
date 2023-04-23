@@ -46,6 +46,7 @@ import { MatInputModule } from '@angular/material/input';
 import { UserBannerImageDialogComponent } from './components/user-banner-image-dialog/user-banner-image-dialog.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
+import { TrendingComponent } from './components/trending/trending.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { MatMenuModule } from '@angular/material/menu';
     GamesComponent,
     JumpToPageDialogComponent,
     UserBannerImageDialogComponent,
+    TrendingComponent,
   ],
   imports: [
     CommonModule,
