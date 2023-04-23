@@ -116,7 +116,9 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
                       console.log(this.comments);
                       // Perform actions with category data
                       // this.navigateToComments(this.categoryId, this.postId);
-                      this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe();
+                      this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe(
+                        map(comments => comments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
+                      );
                       return this.postService.show(this.categoryId, this.postId);
                     }),
                     switchMap((post) => {
@@ -149,8 +151,9 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
                   console.log(this.postId);
                   console.log(this.comments);
                   // Perform actions with category data
-                  this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe();
-
+                  this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe(
+                    map(comments => comments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
+                  );
                   return this.postService.show(this.categoryId, this.postId);
                 }),
                 switchMap((post) => {
@@ -197,8 +200,9 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     // this.comments$ = this.dataSource.loadComments(this.categoryId, this.postId);
-    this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe();
-
+    this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe(
+      map(comments => comments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
+      );
   }
 
   ngOnDestroy() {
