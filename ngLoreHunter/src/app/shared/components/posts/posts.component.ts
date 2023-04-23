@@ -57,7 +57,8 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   post: Post = new Post();
   posts: Post[] = [];
-  posts$!: Observable<Post[]> | undefined;
+  posts$: Observable<Post[]>;
+  pinnedPosts$: Observable<Post[]>;
   categories: Category[] = [];
 
   users: User[] = [];
@@ -99,6 +100,10 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
     private http: HttpClient,
     private dialog: MatDialog
     ) {
+      this.posts$ = postService.getPosts(this.categoryId);
+      this.pinnedPosts$ = this.posts$.pipe(
+        map(posts => posts.filter(post => post.isPinned))
+      );
   }
 
   ngOnInit() {
@@ -110,6 +115,10 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.totalPostsByCategorySubscription) {
       this.totalPostsByCategorySubscription.unsubscribe();
     }
+
+    this.pinnedPosts$ = this.posts$.pipe(
+      map(posts => posts.filter(post => post.isPinned))
+    );
 
     this.reload();
 
@@ -169,6 +178,10 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
                 return lastEditedComparison;
             }
           }))
+        );
+
+        this.pinnedPosts$ = this.posts$.pipe(
+          map(posts => posts.filter(post => post.isPinned))
         );
 
         this.totalPostsByCategorySubscription = this.postService.getTotalPostsByCategory(this.categoryId).subscribe(totalPosts => {
@@ -255,6 +268,9 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
                 return lastEditedComparison;
             }
           }))
+        );
+        this.pinnedPosts$ = this.posts$.pipe(
+          map(posts => posts.filter(post => post.isPinned))
         );
       },
       error: (nojoy) => {

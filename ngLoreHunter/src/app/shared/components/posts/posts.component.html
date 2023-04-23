@@ -140,8 +140,70 @@
   </div>
 </div>
 
+<div class="pinned-container" *ngFor="let post of (pinnedPosts$ | async); let i = index">
+  <article class="pinned-message-outer">
+      <span class="anchorTarget"></span>
+      <div class="message-inner">
+        <div class="message-cell message-cell-user">
+          <section class="message-user">
+            <div class="message-avatar">
+              <div class="message-avatar-wrapper">
+                <a href="">
+                  <img class="user-avatar" src="{{ post.user.imageUrl }}" alt="">
+                </a>
+              </div>
+            </div>
+            <div class="user-details-wrapper">
+              <div class="userDetails"></div>
+              <div class="userExtras"></div>
+            </div>
+          </section>
+        </div>
+        <div class="message-cell message-cell-main">
+          <div class="message-main">
+            <div class="message-content">
+              <a class="post-link" [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']" [innerHtml]='post.subject'>{{ post.subject }}</a>
+              <!-- This is a placeholder for click event on post in above anchor tag:  (click)="incrementViewCount(this.categoryId, post.id)" -->
+            </div>
+            <div class="message-content-details">
+              <div class="message-user-details">
+                <div>
+                  <a class="post-link" [routerLink]="['/users', post.user.id]"><p class="p-content">{{ post.user.username }}</p></a>
+                </div>
+                <div>
+                  <p class="p-content"><span style="margin-left: 5px; margin-right: 5px;">&#183;</span> {{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</p>
+                </div>
+              </div>
+              <div class="message-metadetails">
+                <mat-icon *ngIf="post.isTrending">trending_up</mat-icon>
+                <mat-icon id="trending-icon" *ngIf="post.isPinned">push_pin</mat-icon>
+                <div class="view-count">
+                  <mat-icon class="mat-icons">visibility</mat-icon>
+                  <p class="p-content">{{ post.viewCount }}</p>
+                </div>
+                <div class="comment-count">
+                  <mat-icon class="mat-icons" style="margin-left: 8px;">chat_bubble</mat-icon>
+                  <p class="p-content">{{ post.comments.length + 1}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="latest-comment-details" *ngFor="let comment of post.comments; let i = index;">
+          <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-date">{{ comment.createdAt | date:'shortDate' }} at {{ comment.createdAt | date:'shortTime' }}</div>
+          <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-user">{{ comment.user.username }}</div>
+          <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
+          <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.user.username }}</div>
+        </div>
+        <div class="latest-comment-details" *ngIf="post.comments.length < 1">
+          <div class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
+          <div class="latest-comment-date">{{ post.user.username }}</div>
+        </div>
+      </div>
+    </article>
+  </div>
   <div class="article-container" *ngFor="let post of (posts$ | async)?.slice((currentPage - 1) * 5, currentPage * 5); let i = index">
-    <article class="message-outer">
+    <article class="message-outer" *ngIf="!post.isPinned">
       <span class="anchorTarget"></span>
       <div class="message-inner">
         <div class="message-cell message-cell-user">

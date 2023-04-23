@@ -576,3 +576,30 @@ input:focus {
   border-radius: 3px;
 }
 
+/* .pinned-container:nth-child(odd) article {
+  background-color: var(--table-row-color-odd) !important;
+}
+
+.pinned-container:nth-child(even) article {
+  background-color: var(--table-row-color-even) !important;
+}
+
+.pinned-container article:hover {
+  background-color: var(--table-filter-row) !important;
+}
+
+.pinned-container:last-child article {
+  border-bottom: 2px solid #3f51b5;
+} */
+
+#trending-icon {
+  color: #c84448;
+}
+
+.pinned-message-outer:last-child {
+  color: var(--text-color);
+  font-size: 15px;
+  background-color: var(--container-bkg-color);
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
