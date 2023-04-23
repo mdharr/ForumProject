@@ -64,13 +64,16 @@ public class Post {
 	private Integer viewCount;
 	
 	private Boolean enabled;
+	
+	@Column(name = "is_pinned")
+	private Boolean isPinned;
 
 	public Post() {
 		super();
 	}
 
 	public Post(int id, String subject, String content, LocalDateTime createdAt, String status, LocalDateTime lastEdited,
-			Integer commentCount, User user, Category category, List<Comment> comments, Integer viewCount, Boolean enabled) {
+			Integer commentCount, User user, Category category, List<Comment> comments, Integer viewCount, Boolean enabled, Boolean isPinned) {
 		super();
 		this.id = id;
 		this.subject = subject;
@@ -84,6 +87,7 @@ public class Post {
 		this.comments = comments;
 		this.viewCount = viewCount;
 		this.enabled = enabled;
+		this.isPinned = isPinned;
 	}
 
 	public int getId() {
@@ -182,6 +186,14 @@ public class Post {
 		this.enabled = enabled;
 	}
 
+	public Boolean getIsPinned() {
+		return isPinned;
+	}
+
+	public void setIsPinned(Boolean isPinned) {
+		this.isPinned = isPinned;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -220,12 +232,12 @@ public class Post {
 		builder.append(user);
 		builder.append(", category=");
 		builder.append(category);
-		builder.append(", comments=");
-		builder.append(comments);
 		builder.append(", viewCount=");
 		builder.append(viewCount);
 		builder.append(", enabled=");
 		builder.append(enabled);
+		builder.append(", isPinned=");
+		builder.append(isPinned);
 		builder.append("]");
 		return builder.toString();
 	}

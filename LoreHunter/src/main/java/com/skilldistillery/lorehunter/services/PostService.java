@@ -20,5 +20,7 @@ public interface PostService {
 	public boolean archive(String username, int postId, int categoryId);
 	
 	public Post updateViewCount(int postId, int categoryId);
+	
+	public Boolean pinPost(String username, int postId, int categoryId);
 
 }

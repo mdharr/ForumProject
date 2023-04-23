@@ -56,6 +56,7 @@ public class PostServiceImpl implements PostService {
 			post.setCategory(category);
 			post.setStatus("active");
 			post.setEnabled(true);
+			post.setIsPinned(false);
 			return postRepo.saveAndFlush(post);
 		}
 		return null;
@@ -72,6 +73,7 @@ public class PostServiceImpl implements PostService {
 		existing.setEnabled(post.getEnabled());
 		existing.setCreatedAt(post.getCreatedAt());
 		existing.setLastEdited(post.getLastEdited());
+		existing.setIsPinned(post.getIsPinned());
 		return postRepo.saveAndFlush(existing);
 	}
 	
@@ -97,6 +99,12 @@ public class PostServiceImpl implements PostService {
 	        return postRepo.saveAndFlush(updated); // Return the updated post object
 	    }
 	    return null;
+	}
+
+	@Override
+	public Boolean pinPost(String username, int postId, int categoryId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
