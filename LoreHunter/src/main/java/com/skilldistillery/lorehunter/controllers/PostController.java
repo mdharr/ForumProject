@@ -113,6 +113,7 @@ public class PostController {
 	    return post;
 	}
 	
+	// Modify Post isPinned property to be true or false depending on current value
 	@PutMapping("categories/{cid}/posts/{pid}/pin")
 	public Post pinPost(@PathVariable("cid") int categoryId, @PathVariable("pid") int postId, @RequestBody Post post, HttpServletResponse res) {
 		try {
