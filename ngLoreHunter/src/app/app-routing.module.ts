@@ -15,6 +15,7 @@ import { ProfileComponent } from './shared/components/profile/profile.component'
 import { PostsListComponent } from './shared/components/posts-list/posts-list.component';
 import { LogoutComponent } from './shared/components/logout/logout.component';
 import { GamesComponent } from './shared/components/games/games.component';
+import { TrendingComponent } from './shared/components/trending/trending.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'layouts', component: LayoutsComponent },
   { path: 'categories/:categoryId/posts', component: PostsComponent},
   { path: 'posts', component: PostsListComponent },
+  { path: 'trending', component: TrendingComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'games', component: GamesComponent },

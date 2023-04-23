@@ -1,0 +1,569 @@
+.breadcrumbnav {
+  list-style: none;
+}
+
+.breadcrumbnav > li {
+  display: inline-block;
+  font-weight: bold;
+  font-family: "Palanquin Dark",serif;
+  font-size: 1em;
+}
+
+.breadcrumbnav li::after {
+  content: " \a0> \a0";
+}
+
+.breadcrumbnav li:last-child::after {
+  content: "";
+}
+
+.breadcrumbnav > a {
+  font-weight: normal;
+  text-decoration: none;
+  color: #222;
+}
+
+.breadcrumbnav > a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-value {
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.breadcrumb-outer-bottom {
+  margin-bottom: 100px !important;
+  margin-top: 100px !important;
+  margin: 25px;
+}
+
+.subject {
+  font-family: "Palanquin Dark",serif;
+  font-size: 1.25em;
+}
+
+ .topic {
+  font-size: 1.15em;
+
+}
+
+.cat-description {
+  color: rgba(255,255,255,.7);
+  font-size: 15px;
+
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: middle;
+}
+
+input:focus {
+	outline:none;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+  cursor: pointer;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+p {
+  line-height: inherit;
+}
+
+body {
+  background: #222;
+  min-height: 100%;
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+  }
+
+/* -------------------------------------------- */
+/*            material design icons             */
+/* -------------------------------------------- */
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;  /* Preferred icon size */
+  display: inline-block;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: inherit;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  cursor: default;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 90%;
+	margin: 50px auto;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  cursor: pointer;
+}
+
+th {
+	background: #ffffff;
+  font-size: 20px;
+  font-weight: lighter;
+	padding: 10px;
+	color: black;
+  font-weight: bold;
+  font-family: "Palanquin Dark",serif;
+  font-size: 1.25em;
+}
+
+.forum-topicview-row {
+  background-color: #f1f0f1;
+	border-bottom: 1px solid #3f51b5;
+  font-weight: bold;
+  font-family: "Josefin Sans",serif;
+  font-size: 13px;
+}
+
+td {
+	background: #ffffff;
+	padding: 12px;
+  font-size: 18px;
+	color: black;
+}
+
+mat-paginator {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.forum-topicsview-header {
+	background-color:#3f51b5;
+	color: #ffffff;
+}
+
+.header-row {
+  background-color: #f1f0f1;
+  border-bottom: #3f51b5;
+}
+
+.forum-topics-col-views {
+	width: 70px;
+	text-align: center;
+}
+
+
+.forum-topics-col-icon {
+	width: 70px;
+	color: black;
+	text-align: center;
+}
+
+.forum-topics-col-lastpost {
+	width: 200px;
+	text-align: center;
+}
+
+.forum-topics-col-lastpost p {
+		font-size: 16px;
+		color: black;
+}
+
+.forum_footer_wrap {
+	display: flex;
+	flex-direction: row;
+  background-color: #ffffff;
+	margin-top: 12px;
+	width: 100%;
+}
+
+.forum_ledgend_wrap {
+	padding: 16px;
+	color: black;
+}
+
+.forum_ledgend_wrap  p {
+	margin: 6px;
+}
+
+.user-avatar {
+  width: 50px;
+}
+
+.breadcrumb-outer {
+  margin: 25px;
+}
+
+.pairs {
+  display: flex;
+  float: left;
+  max-width: 100%;
+  margin-right: 12px;
+  flex-shrink: 0;
+
+}
+
+.dt-icon {
+  margin-right: 10px;
+}
+
+.card {
+  margin: 10px;
+  max-width: 95%;
+  padding: 0;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  color: #ffffff;
+  margin-left: 25px;
+  margin-top: 20px;
+}
+
+.card:hover {
+  box-shadow: 0 6px 10px 0px rgb(0 0 0 / 14%), 0 1px 18px 0px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%) !important;
+  transform: translateY(-5px);
+}
+
+.card-gaming {
+  padding: 16px;
+  background: rgb(6,142,167);
+  background: linear-gradient(90deg, rgba(6,142,167,1) 0%, rgba(36,161,159,1) 40%);
+  min-height: 100px;
+  border-radius:5px;
+
+}
+
+.card-gaming-hangouts {
+  padding: 16px;
+  background: rgb(6,142,167);
+  background: linear-gradient(90deg, rgba(6,142,167,1) 0%, rgba(36,161,159,1) 40%);
+  min-height: 100px;
+  border-radius:5px;
+
+}
+
+.card-lore {
+  padding: 16px;
+  background: rgb(152,57,124);
+  background: linear-gradient(90deg, rgba(152,57,124,1) 40%, rgba(131,56,122,1) 100%);
+  border-radius:5px;
+}
+
+.card-lore-hangouts {
+  padding: 16px;
+  background: rgb(152,57,124);
+  background: linear-gradient(90deg, rgba(152,57,124,1) 40%, rgba(131,56,122,1) 100%);
+  border-radius:5px;
+}
+
+
+.card-announcements {
+  padding: 16px;
+  background: rgb(234,157,44);
+  background: linear-gradient(90deg, rgba(234,157,44,1) 40%, rgba(227,127,58,1) 100%);
+  border-radius:5px;
+}
+
+
+.card-vault {
+  padding: 16px;
+  background: rgb(62,178,91);
+  background: linear-gradient(90deg, rgba(62,178,91,1) 0%, rgba(89,185,73,1) 45%);
+  border-radius:5px;
+}
+
+.post-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.post-block-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;;
+  align-items: center;
+  width: 90%;
+  background-color: var(--container-bkg-color);
+  box-shadow: var(--box-shadow-style);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+#userThumbnail {
+  width: 96px;
+  height: 96px;
+  border: 1px solid white;
+}
+
+#username {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+.user-block-outer {
+  width: 15%;
+  height: 200px;
+}
+
+.user-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.user-block-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.user-avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-alias {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color);
+}
+
+:host ::ng-deep .ck.ck-editor__editable {
+	min-height: 20vh;
+  min-width: 100%;
+  color: var(--text-color);
+  background-color: var(--container-bkg-color);
+}
+
+.custom-ckeditor-toolbar {
+  color: var(--text-color);
+  background-color: var(--bkg-color); /* Change this to the desired background color */
+}
+
+/* .ck.ck-editor__main>.ck-editor__editable {
+  background: var(--bkg-color);
+  border-radius: 0;
+} */
+
+.editor-outer {
+  width: 85%;
+  border-left: 1px solid #3f51b5;
+}
+
+.editor-inner {
+  width: 100%;
+}
+
+.submitBtn {
+  color: var(--text-color);
+}
+
+.submitBtn:hover {
+  color: #ffffff;
+  background-color: #3f51b5;
+}
+
+.login-prompt {
+  font-weight: bolder;
+}
+
+.message-outer {
+  color: var(--text-color);
+  font-size: 15px;
+  background-color: var(--container-bkg-color);
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.message-inner {
+  display: flex;
+}
+
+.message-cell-user {
+  margin-right: 10px;
+}
+
+.post-link:hover {
+  text-decoration: underline;
+  color: #3f51b5;
+}
+
+.message-user-details {
+  display: inline-flex;
+}
+
+.p-content {
+  margin: 0;
+  font-size: 13px;
+  color:#58595b;
+}
+
+.message-metadetails {
+  display: flex;
+}
+
+.message-content-details {
+  display: flex;
+  justify-content:space-between;
+}
+
+.message-cell-main {
+  width: 100%;
+}
+
+.mat-icons {
+  font-size: 13px;
+  color:#58595b;
+  display:flex;
+  justify-content:center;
+}
+
+.comment-count,
+.view-count {
+  display: flex;
+  width: 75px !important;
+  justify-content: flex-start;
+}
+
+.latest-comment-date,
+.latest-comment-user {
+  width: 190px !important;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.article-container:nth-child(odd) article {
+  background-color: var(--table-row-color-odd) !important;
+}
+
+.article-container:nth-child(even) article {
+  background-color: var(--table-row-color-even) !important;
+}
+
+.article-container article:hover {
+  background-color: var(--table-filter-row) !important;
+}
+
+.article-container:last-child article {
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.block-filter-bar {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 6px;
+    font-size: 1.3rem;
+    color: var(--text-color);
+    background: var(--table-filter-row);
+    border-bottom:  2px solid #3f51b5;
+    box-shadow: var(--box-shadow-style);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.filter-bar {
+  display: flex;
+}
+
+.filter-bar-menu-trigger {
+  flex: 0 0 auto;
+    margin-left: auto;
+    white-space: nowrap;
+    border-radius: 6px;
+    text-decoration: none;
+    padding: 1px 5px;
+    font-size: 1rem;
+    padding: 0;
+    padding-right: 8px;
+    padding-left: 8px;
+    height: 28px;
+    line-height: 28px;
+    color: #3f51b5;
+}
+
+.filter-bar-icon {
+  font: normal normal normal 18px/1 "Material Design Icons";
+  font-size: 110%;
+  font-weight: 400;
+  line-height: inherit;
+  width: auto;
+  display: inline-block;
+  text-align: center;
+  font-weight: 900;
+  font-size: inherit;
+}
+
+.custom-ckeditor {
+  background-color: var(--container-bkg-color); /* Change this to the desired background color */
+}
+
+.mat-paginator-container {
+  display: flex !important;
+  align-items: center !important;
+  color: var(--text-color) !important;
+}
+
+.user-profile-link {
+  cursor: pointer;
+}
+.user-profile-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+::ng-deep .my-form-field .mat-mdc-form-field-bottom-align {
+  display: none !important;
+}
