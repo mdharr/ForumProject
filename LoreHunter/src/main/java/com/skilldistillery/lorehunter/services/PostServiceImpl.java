@@ -102,7 +102,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Boolean pinPost(String username, int postId, int categoryId) {
+	public Boolean pinPost(int postId, int categoryId) {
 		Optional<Post> postOpt = postRepo.findById(postId);
 		if(postOpt.isPresent() && !postOpt.get().getIsPinned()) {
 			Post post = postOpt.get();

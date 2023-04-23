@@ -112,5 +112,20 @@ public class PostController {
 	    }
 	    return post;
 	}
+	
+	@PutMapping("categories/{cid}/posts/{pid}/pin")
+	public Post pinPost(@PathVariable("cid") int categoryId, @PathVariable("pid") int postId, @RequestBody Post post, HttpServletResponse res) {
+		try {
+			post = postRepo.findByIdAndCategoryId(postId, categoryId);
+			if (post == null) {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+		postService.pinPost(post.getId(), post.getCategory().getId());
+		return post;
+	}
 
 }
