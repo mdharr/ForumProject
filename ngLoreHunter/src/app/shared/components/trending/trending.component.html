@@ -18,8 +18,8 @@
     </div>
   </div>
 
-  <div class="article-container" *ngFor="let post of trendingPosts$ | async; let i = index">
-    <article class="message-outer">
+  <div class="article-container"  *ngIf="(trendingPosts$ | async)!.length > 0">
+    <article class="message-outer" *ngFor="let post of trendingPosts$ | async; let i = index">
       <span class="anchorTarget"></span>
       <div class="message-inner">
         <div class="message-cell message-cell-user">
@@ -75,6 +75,25 @@
         <div class="latest-comment-details" *ngIf="post.comments.length < 1">
           <div class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
           <div class="latest-comment-date user-profile-link" [routerLink]="['/users', post.user.id]">{{ post.user.username }}</div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="article-container"  *ngIf="(trendingPosts$ | async)!.length == 0">
+    <article class="message-outer">
+      <span class="anchorTarget"></span>
+      <div class="message-inner">
+        <div class="message-cell message-cell-main">
+          <div class="message-main">
+            <div class="no-trendingPosts-container">
+              <div class="message-user-details">
+                <div>
+                  <p class="p-content"><span class="no-trending-posts">No posts currently trending.</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </article>

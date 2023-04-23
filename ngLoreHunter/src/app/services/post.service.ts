@@ -180,4 +180,21 @@ export class PostService {
       );
     }
 
+    // TODO: Test this function!!
+    pinPost(categoryId: number, postId: number, post: Post): Observable<Post> {
+      const url = `${this.url}/categories/${categoryId}/posts/${postId}/pin`;
+      return this.http.put(url, post).pipe(
+        map((response: any) => response as Post),
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () =>
+            new Error(
+              'PostService.pinPost(): error modifying isPinned property for post: ' + err
+            )
+          )
+        })
+      );
+    }
+
 }

@@ -571,3 +571,14 @@ mat-paginator {
 #trending-icon {
   color: #e200ec;
 }
+
+.no-trending-posts {
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 1.3rem;
+}
+
+.no-trendingPosts-container {
+  display: flex;
+  justify-content: center;
+}
