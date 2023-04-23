@@ -103,8 +103,17 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public Boolean pinPost(String username, int postId, int categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Post> postOpt = postRepo.findById(postId);
+		if(postOpt.isPresent() && !postOpt.get().getIsPinned()) {
+			Post post = postOpt.get();
+			post.setIsPinned(true);
+			postRepo.saveAndFlush(post);		
+		} else if(postOpt.isPresent() && postOpt.get().getIsPinned()) {
+			Post post = postOpt.get();
+			post.setIsPinned(false);
+			postRepo.saveAndFlush(post);
+		}
+		return true;
 	}
 
 }
