@@ -175,6 +175,7 @@
                 </div>
               </div>
               <div class="message-metadetails">
+                <mat-icon *ngIf="post.isTrending">trending_up</mat-icon>
                 <div class="view-count">
                   <mat-icon class="mat-icons">visibility</mat-icon>
                   <p class="p-content">{{ post.viewCount }}</p>

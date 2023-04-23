@@ -11,10 +11,10 @@
 
   <div class="block-filter-bar">
     <div class="filter-bar" style="height: 25px;">
-      <button class="filter-bar-menu-trigger" mat-button [matMenuTriggerFor]="menu" style="display: flex; align-items: center;">
+      <!-- <button class="filter-bar-menu-trigger" mat-button [matMenuTriggerFor]="menu" style="display: flex; align-items: center;"> -->
         <span style="flex-grow: 1;">Filters</span>
         <span class="filter-bar-icon" style="margin-left: 5px;"><mat-icon style="vertical-align: top; margin-left:-10px;">arrow_drop_down</mat-icon></span>
-      </button>
+      <!-- </button> -->
     </div>
   </div>
 
@@ -53,6 +53,7 @@
                 </div>
               </div>
               <div class="message-metadetails">
+                <mat-icon *ngIf="post.isTrending">trending_up</mat-icon>
                 <div class="view-count">
                   <mat-icon class="mat-icons">visibility</mat-icon>
                   <p class="p-content">{{ post.viewCount }}</p>
@@ -90,13 +91,13 @@
   </div>
 </div>
 
-<mat-menu #menu="matMenu">
+<!-- <mat-menu #menu="matMenu">
   <ng-container *ngIf="currentPage === 1">
       <mat-form-field class="my-form-field" style="padding:10px;">
         <input matInput [(ngModel)]="filterSubject" (input)="filterPosts()" (click)="$event.stopPropagation()" placeholder="Filter by subject">
       </mat-form-field>
   </ng-container>
-</mat-menu>
+</mat-menu> -->
 
 
 

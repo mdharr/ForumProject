@@ -16,6 +16,7 @@ export class Post {
   category: Category;
   comments: Comment[];
   sort: any;
+  isTrending: boolean = false;
 
   constructor(
     id: number = 0,
