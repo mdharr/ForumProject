@@ -15,6 +15,7 @@ export class Post {
   user: User;
   category: Category;
   comments: Comment[];
+  isPinned: boolean;
   sort: any;
   isTrending: boolean = false;
 
@@ -30,7 +31,8 @@ export class Post {
     viewCount: number = 0,
     user: User = new User(),
     category: Category = new Category(),
-    comments: Comment[] = []
+    comments: Comment[] = [],
+    isPinned: boolean = false
   ) {
     this.id = id;
     this.subject = subject;
@@ -44,6 +46,7 @@ export class Post {
     this.user = user;
     this.category = category;
     this.comments = comments;
+    this.isPinned = isPinned;
   }
 
 }
