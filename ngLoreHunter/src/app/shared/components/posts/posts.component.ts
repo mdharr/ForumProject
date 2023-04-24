@@ -1,5 +1,5 @@
 import { PostDataSource } from './../../../services/post.dataSource';
-import { Component, OnDestroy, OnInit, ViewChild, AfterViewInit, Input, TemplateRef, OnChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, AfterViewInit, Input, TemplateRef, OnChanges, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
@@ -98,7 +98,8 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private homeServ: HomeService,
     private http: HttpClient,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private elementRef: ElementRef
     ) {
       this.posts$ = postService.getPosts(this.categoryId);
       this.pinnedPosts$ = this.posts$.pipe(
@@ -140,6 +141,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (toolbarElement) {
       (toolbarElement as HTMLElement).style.backgroundColor = 'red !important'; // Replace with your desired background color
     }
+
   }
 
   loggedIn(): boolean {

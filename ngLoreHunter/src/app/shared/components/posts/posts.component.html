@@ -139,6 +139,7 @@
     </button>
   </div>
 </div>
+<ng-container *ngIf="(pinnedPosts$ | async)?.length">
 <div class="pinned-main-container">
   <div class="pinned-container" *ngFor="let post of (pinnedPosts$ | async); let i = index">
     <article class="pinned-message-outer">
@@ -203,6 +204,7 @@
       </article>
   </div>
 </div>
+</ng-container>
     <div class="article-container" *ngFor="let post of (posts$ | async)?.slice((currentPage - 1) * 5, currentPage * 5); let i = index">
       <article class="message-outer" *ngIf="!post.isPinned">
         <span class="anchorTarget"></span>
