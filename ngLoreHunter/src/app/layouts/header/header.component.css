@@ -38,12 +38,29 @@ p {
 .logo {
   font-family: "Palanquin Dark",serif;
   font-size:1.6em;
+  transition: all cubic-bezier(.4,0,.2,1) .15s;
+  padding: 5px;
 }
+
+/* .logo:hover {
+  font-family: "Palanquin Dark",serif;
+  font-size:1.6em;
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12),0 3px 5px 0 rgba(0,0,0,.2)!important;
+  transform: translateY(-5px);
+  border-radius: 5px;
+} */
 
 #quick-jump-btn {
   margin-left: 5px;
   background: #4255c0;
   border: 1px solid rgba(158,159,162,.12);
+  box-shadow: 0 20px 20px 0 rgba(0,0,0,.08);
+  transition: all cubic-bezier(.4,0,.2,1) .15s;
+}
+
+#quick-jump-btn:hover {
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12),0 3px 5px 0 rgba(0,0,0,.2)!important;
+  transform: translateY(-1px);
 }
 
 
