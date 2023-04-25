@@ -15,6 +15,9 @@
 		<class>com.skilldistillery.lorehunter.entities.UserGame</class>
 		<class>com.skilldistillery.lorehunter.entities.UserGameId</class>
 		<class>com.skilldistillery.lorehunter.entities.Game</class>
+		<class>com.skilldistillery.lorehunter.entities.Notification</class>
+		<class>com.skilldistillery.lorehunter.entities.UserNotification</class>
+		<class>com.skilldistillery.lorehunter.entities.UserNotificationId</class>
 
 		<!-- end entities -->
 
