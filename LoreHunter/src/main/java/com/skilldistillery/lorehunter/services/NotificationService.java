@@ -23,4 +23,6 @@ public interface NotificationService {
 
 	void deleteNotification(int notificationId);
 
+	Notification updateNotification(int id, Notification updatedNotification);
+
 }

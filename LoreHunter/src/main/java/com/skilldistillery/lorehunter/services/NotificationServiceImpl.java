@@ -1,5 +1,6 @@
 package com.skilldistillery.lorehunter.services;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,8 +56,23 @@ public class NotificationServiceImpl implements NotificationService{
     }
 
     @Override
-    public Notification updateNotification(Notification notification) {
-        return notificationRepo.save(notification);
+    public Notification updateNotification(int id, Notification updatedNotification) {
+      Notification notificationToUpdate = notificationRepo.findById(id);
+      if (notificationToUpdate == null) {
+        throw new RuntimeException("Notification with ID " + id + " not found.");
+      }
+      boolean dismissed = updatedNotification.isDismissed();
+      boolean read = updatedNotification.isRead();
+      if (dismissed && !notificationToUpdate.isDismissed()) {
+        notificationToUpdate.setDismissed(true);
+        notificationToUpdate.setDismissedAt(LocalDateTime.now());
+        notificationToUpdate.setRead(false);
+        notificationToUpdate.setReadAt(null);
+      } else if (read && !notificationToUpdate.isRead()) {
+        notificationToUpdate.setRead(true);
+        notificationToUpdate.setReadAt(LocalDateTime.now());
+      }
+      return notificationRepo.save(notificationToUpdate);
     }
 
     @Override
@@ -83,5 +99,11 @@ public class NotificationServiceImpl implements NotificationService{
         userNotificationRepo.deleteByNotificationId(notificationId);
         notificationRepo.deleteById(notificationId);
     }
+
+	@Override
+	public Notification updateNotification(Notification notification) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
