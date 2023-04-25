@@ -19,6 +19,8 @@ public interface UserNotificationRepository extends JpaRepository<UserNotificati
 	
 	UserNotification findByUserAndNotification(User user, Notification notification);
 	
+	UserNotification findByUserIdAndNotificationId(int userId, int notificationId);
+	
 	List<UserNotification> findByUserId(int userId);
 	
 	@Query("SELECT u FROM UserNotification u WHERE u.id = :userNotificationId")

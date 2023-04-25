@@ -30,16 +30,6 @@ public class Notification {
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
 	
-	private boolean viewed;
-	
-	@Column(name = "viewed_at")
-	private LocalDateTime viewedAt;
-	
-	private boolean dismissed;
-	
-	@Column(name = "dismissed_at")
-	private LocalDateTime dismissedAt;
-	
 	@JsonIgnore
     @ManyToMany
     @JoinTable(name = "user_notification", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "notification_id"))
@@ -50,16 +40,11 @@ public class Notification {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Notification(int id, String message, LocalDateTime createdAt, boolean viewed, LocalDateTime viewedAt,
-			boolean dismissed, LocalDateTime dismissedAt, List<User> users) {
+	public Notification(int id, String message, LocalDateTime createdAt, List<User> users) {
 		super();
 		this.id = id;
 		this.message = message;
 		this.createdAt = createdAt;
-		this.viewed = viewed;
-		this.viewedAt = viewedAt;
-		this.dismissed = dismissed;
-		this.dismissedAt = dismissedAt;
 		this.users = users;
 	}
 
@@ -85,38 +70,6 @@ public class Notification {
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
-	}
-
-	public boolean isViewed() {
-		return viewed;
-	}
-
-	public void setViewed(boolean viewed) {
-		this.viewed = viewed;
-	}
-
-	public LocalDateTime getViewedAt() {
-		return viewedAt;
-	}
-
-	public void setViewedAt(LocalDateTime viewedAt) {
-		this.viewedAt = viewedAt;
-	}
-
-	public boolean isDismissed() {
-		return dismissed;
-	}
-
-	public void setDismissed(boolean dismissed) {
-		this.dismissed = dismissed;
-	}
-
-	public LocalDateTime getDismissedAt() {
-		return dismissedAt;
-	}
-
-	public void setDismissedAt(LocalDateTime dismissedAt) {
-		this.dismissedAt = dismissedAt;
 	}
 
 	public List<User> getUsers() {
@@ -153,14 +106,6 @@ public class Notification {
 		builder.append(message);
 		builder.append(", createdAt=");
 		builder.append(createdAt);
-		builder.append(", viewed=");
-		builder.append(viewed);
-		builder.append(", viewedAt=");
-		builder.append(viewedAt);
-		builder.append(", dismissed=");
-		builder.append(dismissed);
-		builder.append(", dismissedAt=");
-		builder.append(dismissedAt);
 		builder.append("]");
 		return builder.toString();
 	}

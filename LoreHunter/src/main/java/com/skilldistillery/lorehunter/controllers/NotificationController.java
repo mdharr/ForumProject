@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.lorehunter.entities.Notification;
 import com.skilldistillery.lorehunter.entities.User;
+import com.skilldistillery.lorehunter.entities.UserNotification;
 import com.skilldistillery.lorehunter.repositories.UserRepository;
 import com.skilldistillery.lorehunter.services.AuthService;
 import com.skilldistillery.lorehunter.services.NotificationService;
+import com.skilldistillery.lorehunter.services.UserNotificationService;
 import com.skilldistillery.lorehunter.services.UserService;
 
 @CrossOrigin({ "*", "http://localhost/"})
@@ -38,6 +40,9 @@ public class NotificationController {
 	
 	@Autowired
 	private NotificationService notificationService;
+	
+	@Autowired
+	private UserNotificationService userNotificationService;
 	
 	// postman success
 	@GetMapping("notifications")
@@ -68,9 +73,6 @@ public class NotificationController {
 	
 	@PostMapping("notifications")
 	public ResponseEntity<Notification> createNotification(@RequestBody Notification notification) {
-	    // Set initial isDismissed value to false
-	    notification.setDismissed(false);
-
 	    // Send notification to all users
 	    List<User> allUsers = userService.index();
 	    notificationService.sendNotification(notification, allUsers);
@@ -79,11 +81,11 @@ public class NotificationController {
 	    return new ResponseEntity<>(notificationService.createNotification(notification), HttpStatus.CREATED);
 	}
 	
-	  @PutMapping("notifications/{id}")
-	  public ResponseEntity<Notification> updateNotification(@PathVariable int id, @RequestBody Notification notification) {
-	    Notification updatedNotification = notificationService.updateNotification(id, notification);
-	    return new ResponseEntity<>(updatedNotification, HttpStatus.OK);
-	  }
+//	  @PutMapping("notifications/{id}")
+//	  public ResponseEntity<Notification> updateNotification(@PathVariable int id, @RequestBody Notification notification) {
+//	    Notification updatedNotification = notificationService.updateNotification(id);
+//	    return new ResponseEntity<>(updatedNotification, HttpStatus.OK);
+//	  }
 	  
 	  @PostMapping("notifications/send")
 	  public ResponseEntity<?> sendNotification(@RequestBody Notification notification) {
@@ -98,6 +100,12 @@ public class NotificationController {
 	      } else {
 	          return new ResponseEntity<>("User is not authorized to perform this action", HttpStatus.FORBIDDEN);
 	      }
+	  }
+	  
+	  @PutMapping("users/{uid}/notifications/active/{nid}/dismiss")
+	  public ResponseEntity<UserNotification> dismissNotification(@PathVariable("uid") int userId, @PathVariable("nid") int notificationId) {
+	      UserNotification dismissedUserNotification = userNotificationService.dismissUserNotification(userId, notificationId);
+	      return new ResponseEntity<>(dismissedUserNotification, HttpStatus.OK);
 	  }
 
 }

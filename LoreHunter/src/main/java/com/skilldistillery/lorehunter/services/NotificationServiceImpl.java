@@ -31,7 +31,7 @@ public class NotificationServiceImpl implements NotificationService{
         List<Notification> notifications = new ArrayList<>();
         List<UserNotification> userNotifications = userNotificationRepo.findByUserId(userId);
         for (UserNotification userNotification : userNotifications) {
-            if (!userNotification.getNotification().isViewed()) {
+            if (!userNotification.isViewed()) {
                 Notification notification = notificationRepo.findById(userNotification.getNotification().getId());
                 if (notification != null) {
                     notifications.add(notification);
@@ -57,18 +57,15 @@ public class NotificationServiceImpl implements NotificationService{
     }
 
     @Override
-    public Notification updateNotification(int id, Notification updatedNotification) {
-      Notification notificationToUpdate = notificationRepo.findById(id);
-      if (notificationToUpdate == null) {
-        throw new RuntimeException("Notification with ID " + id + " not found.");
-      }
-      if (!notificationToUpdate.isDismissed()) {
-        notificationToUpdate.setDismissed(true);
-        notificationToUpdate.setDismissedAt(LocalDateTime.now());
-        notificationToUpdate.setViewed(true);
-        notificationToUpdate.setViewedAt(LocalDateTime.now());
-      }
-      return notificationRepo.save(notificationToUpdate);
+    public UserNotification dismissNotification(int userId, int notificationId) {
+        UserNotification userNotification = userNotificationRepo.findByUserIdAndNotificationId(userId, notificationId);
+        if (userNotification == null) {
+            throw new RuntimeException("User notification with user ID " + userId + " and notification ID " + notificationId + " not found.");
+        }
+        userNotification.setDismissed(true);
+        userNotification.setDismissedAt(LocalDateTime.now());
+        userNotificationRepo.save(userNotification);
+        return userNotification;
     }
 
     @Override
@@ -83,15 +80,7 @@ public class NotificationServiceImpl implements NotificationService{
     
     @Override
     public List<Notification> getActiveNotifications() {
-    	List<Notification> activeNotifications = new ArrayList<>();
-    	List<Notification> notifications = notificationRepo.findAll();
-    	for (Notification notification : notifications) {
-			if(!notification.isDismissed()) {
-				activeNotifications.add(notification);
-			}
-			return activeNotifications;
-		}
-    	return null;
+    	return notificationRepo.findAll();
     }
 
     @Override
@@ -99,6 +88,8 @@ public class NotificationServiceImpl implements NotificationService{
         notificationRepo.save(notification);
         for (User user : users) {
             UserNotification userNotification = new UserNotification(user, notification);
+            userNotification.setViewed(false);
+            userNotification.setDismissed(false);
             userNotificationRepo.addUserNotification(userNotification);
         }
     }

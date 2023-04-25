@@ -12,7 +12,7 @@ import com.skilldistillery.lorehunter.entities.User;
 public interface NotificationRepository extends JpaRepository<Notification, Integer>{
 	
 	Notification findById(int id);
-	
+		
     @Query("SELECT n FROM Notification n JOIN n.users u WHERE u = :user")
     List<Notification> findByUser(@Param("user") User user);
 

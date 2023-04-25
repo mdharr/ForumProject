@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.skilldistillery.lorehunter.entities.Notification;
 import com.skilldistillery.lorehunter.entities.User;
+import com.skilldistillery.lorehunter.entities.UserNotification;
 
 public interface NotificationService {
 
@@ -13,7 +14,7 @@ public interface NotificationService {
 
 	Notification createNotification(Notification notification);
 
-	Notification updateNotification(int id, Notification updatedNotification);
+//	Notification updateNotification(int id);
 
 	void deleteNotificationById(int id);
 
@@ -26,6 +27,8 @@ public interface NotificationService {
 	List<Notification> getActiveNotifications();
 	
 	List<Notification> getUnreadNotificationsByUserId(int userId);
+
+	UserNotification dismissNotification(int userId, int notificationId);
 
 
 }

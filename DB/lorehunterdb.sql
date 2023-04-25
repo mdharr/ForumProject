@@ -202,10 +202,6 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `message` TEXT NULL,
   `created_at` TIMESTAMP NULL,
-  `viewed` TINYINT NULL,
-  `viewed_at` TIMESTAMP NULL,
-  `dismissed` TINYINT NULL,
-  `dismissed_at` TIMESTAMP NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -218,6 +214,10 @@ DROP TABLE IF EXISTS `user_notification` ;
 CREATE TABLE IF NOT EXISTS `user_notification` (
   `user_id` INT NOT NULL,
   `notification_id` INT NOT NULL,
+  `viewed` TINYINT NULL DEFAULT 0,
+  `viewed_at` TIMESTAMP NULL,
+  `dismissed` TINYINT NULL DEFAULT 0,
+  `dismissed_at` TIMESTAMP NULL,
   INDEX `fk_user_notification_user1_idx` (`user_id` ASC),
   INDEX `fk_user_notification_notification1_idx` (`notification_id` ASC),
   CONSTRAINT `fk_user_notification_user1`
@@ -335,7 +335,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `notification` (`id`, `message`, `created_at`, `viewed`, `viewed_at`, `dismissed`, `dismissed_at`) VALUES (1, 'Staff have decided to place a soft ban on topics concerning AI content generation and their algorithms like Stable Diffusion and ChatGPT. You can read more about the update here.', '2023-03-03T12:35:22', 0, NULL, 0, NULL);
+INSERT INTO `notification` (`id`, `message`, `created_at`) VALUES (1, 'Staff have decided to place a soft ban on topics concerning AI content generation and their algorithms like Stable Diffusion and ChatGPT. You can read more about the update here.', '2023-03-03T12:35:22');
 
 COMMIT;
 
@@ -345,7 +345,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `user_notification` (`user_id`, `notification_id`) VALUES (3, 1);
+INSERT INTO `user_notification` (`user_id`, `notification_id`, `viewed`, `viewed_at`, `dismissed`, `dismissed_at`) VALUES (3, 1, 0, NULL, 0, NULL);
 
 COMMIT;
 
