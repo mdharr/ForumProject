@@ -3,8 +3,13 @@ package com.skilldistillery.lorehunter.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,7 +30,6 @@ public class AuthServiceImpl implements AuthService {
 	
 	@Autowired
 	private SessionRegistry sessionRegistry;
-
 
 	@Override
 	public User register(User user) {
@@ -86,8 +90,15 @@ public class AuthServiceImpl implements AuthService {
 	    return encoder.matches(password, hashedPassword);
 	}
 	
-	
-	
-
+	@Override
+	public boolean isAdmin() {
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName();
+	    User user = userRepo.findByUsername(username);
+	    if (user == null) {
+	        return false;
+	    }
+	    return "ADMIN".equals(user.getRole());
+	}
 
 }

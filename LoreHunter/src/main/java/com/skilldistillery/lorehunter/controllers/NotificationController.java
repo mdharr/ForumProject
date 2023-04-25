@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.lorehunter.entities.Notification;
 import com.skilldistillery.lorehunter.entities.User;
+import com.skilldistillery.lorehunter.repositories.UserRepository;
+import com.skilldistillery.lorehunter.services.AuthService;
 import com.skilldistillery.lorehunter.services.NotificationService;
 import com.skilldistillery.lorehunter.services.UserService;
 
@@ -25,7 +28,13 @@ import com.skilldistillery.lorehunter.services.UserService;
 public class NotificationController {
 	
 	@Autowired
+	private AuthService authService;
+	
+	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserRepository userRepo;
 	
 	@Autowired
 	private NotificationService notificationService;
@@ -34,6 +43,17 @@ public class NotificationController {
 	@GetMapping("notifications")
 	public List<Notification> getAllNotifications() {
 	    return notificationService.getAllNotifications();
+	}
+	
+	@GetMapping("users/{uid}/notifications/active")
+	public List<Notification> getActiveNotifications(@PathVariable("uid") int userId) {
+		return notificationService.getAllNotifications();
+	}
+	
+	@GetMapping("users/{userId}/notifications/unread")
+	public ResponseEntity<List<Notification>> getUnreadNotificationsByUserId(@PathVariable int userId) {
+	    List<Notification> notifications = notificationService.getUnreadNotificationsByUserId(userId);
+	    return new ResponseEntity<>(notifications, HttpStatus.OK);
 	}
 
 	@GetMapping("notifications/{id}")
@@ -62,6 +82,21 @@ public class NotificationController {
 	  public ResponseEntity<Notification> updateNotification(@PathVariable int id, @RequestBody Notification notification) {
 	    Notification updatedNotification = notificationService.updateNotification(id, notification);
 	    return new ResponseEntity<>(updatedNotification, HttpStatus.OK);
+	  }
+	  
+	  @PostMapping("notifications/send")
+	  public ResponseEntity<?> sendNotification(@RequestBody Notification notification) {
+	      // Authenticate that the user has ADMIN role
+	      if (authService.isAdmin()) {
+	          // Fetch all users from the database
+	          List<User> users = userRepo.findAll();
+	          
+	          // Use the NotificationService to send the notification to all users
+	          notificationService.sendNotification(notification, users);
+	          return new ResponseEntity<>(HttpStatus.CREATED);
+	      } else {
+	          return new ResponseEntity<>("User is not authorized to perform this action", HttpStatus.FORBIDDEN);
+	      }
 	  }
 
 }

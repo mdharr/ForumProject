@@ -202,8 +202,8 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `message` TEXT NULL,
   `created_at` TIMESTAMP NULL,
-  `read` TINYINT NULL,
-  `read_at` TIMESTAMP NULL,
+  `viewed` TINYINT NULL,
+  `viewed_at` TIMESTAMP NULL,
   `dismissed` TINYINT NULL,
   `dismissed_at` TIMESTAMP NULL,
   PRIMARY KEY (`id`))
@@ -335,7 +335,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `notification` (`id`, `message`, `created_at`, `read`, `read_at`, `dismissed`, `dismissed_at`) VALUES (1, 'Staff have decided to place a soft ban on topics concerning AI content generation and their algorithms like Stable Diffusion and ChatGPT. You can read more about the update here.', '2023-03-03T12:35:22', 0, NULL, 0, NULL);
+INSERT INTO `notification` (`id`, `message`, `created_at`, `viewed`, `viewed_at`, `dismissed`, `dismissed_at`) VALUES (1, 'Staff have decided to place a soft ban on topics concerning AI content generation and their algorithms like Stable Diffusion and ChatGPT. You can read more about the update here.', '2023-03-03T12:35:22', 0, NULL, 0, NULL);
 
 COMMIT;
 

@@ -26,11 +26,12 @@ public class NotificationServiceImpl implements NotificationService{
     @Autowired
     private UserNotificationRepository userNotificationRepo;
     
+    @Override
     public List<Notification> getUnreadNotificationsByUserId(int userId) {
         List<Notification> notifications = new ArrayList<>();
         List<UserNotification> userNotifications = userNotificationRepo.findByUserId(userId);
         for (UserNotification userNotification : userNotifications) {
-            if (!userNotification.getNotification().isRead()) {
+            if (!userNotification.getNotification().isViewed()) {
                 Notification notification = notificationRepo.findById(userNotification.getNotification().getId());
                 if (notification != null) {
                     notifications.add(notification);
@@ -64,8 +65,8 @@ public class NotificationServiceImpl implements NotificationService{
       if (!notificationToUpdate.isDismissed()) {
         notificationToUpdate.setDismissed(true);
         notificationToUpdate.setDismissedAt(LocalDateTime.now());
-        notificationToUpdate.setRead(true);
-        notificationToUpdate.setReadAt(LocalDateTime.now());
+        notificationToUpdate.setViewed(true);
+        notificationToUpdate.setViewedAt(LocalDateTime.now());
       }
       return notificationRepo.save(notificationToUpdate);
     }

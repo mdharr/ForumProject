@@ -30,10 +30,10 @@ public class Notification {
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
 	
-	private boolean read;
+	private boolean viewed;
 	
-	@Column(name = "read_at")
-	private LocalDateTime readAt;
+	@Column(name = "viewed_at")
+	private LocalDateTime viewedAt;
 	
 	private boolean dismissed;
 	
@@ -50,14 +50,14 @@ public class Notification {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Notification(int id, String message, LocalDateTime createdAt, boolean read, LocalDateTime readAt,
+	public Notification(int id, String message, LocalDateTime createdAt, boolean viewed, LocalDateTime viewedAt,
 			boolean dismissed, LocalDateTime dismissedAt, List<User> users) {
 		super();
 		this.id = id;
 		this.message = message;
 		this.createdAt = createdAt;
-		this.read = read;
-		this.readAt = readAt;
+		this.viewed = viewed;
+		this.viewedAt = viewedAt;
 		this.dismissed = dismissed;
 		this.dismissedAt = dismissedAt;
 		this.users = users;
@@ -87,20 +87,20 @@ public class Notification {
 		this.createdAt = createdAt;
 	}
 
-	public boolean isRead() {
-		return read;
+	public boolean isViewed() {
+		return viewed;
 	}
 
-	public void setRead(boolean read) {
-		this.read = read;
+	public void setViewed(boolean viewed) {
+		this.viewed = viewed;
 	}
 
-	public LocalDateTime getReadAt() {
-		return readAt;
+	public LocalDateTime getViewedAt() {
+		return viewedAt;
 	}
 
-	public void setReadAt(LocalDateTime readAt) {
-		this.readAt = readAt;
+	public void setViewedAt(LocalDateTime viewedAt) {
+		this.viewedAt = viewedAt;
 	}
 
 	public boolean isDismissed() {
@@ -153,10 +153,10 @@ public class Notification {
 		builder.append(message);
 		builder.append(", createdAt=");
 		builder.append(createdAt);
-		builder.append(", read=");
-		builder.append(read);
-		builder.append(", readAt=");
-		builder.append(readAt);
+		builder.append(", viewed=");
+		builder.append(viewed);
+		builder.append(", viewedAt=");
+		builder.append(viewedAt);
 		builder.append(", dismissed=");
 		builder.append(dismissed);
 		builder.append(", dismissedAt=");

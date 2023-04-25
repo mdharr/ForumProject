@@ -24,6 +24,8 @@ public interface NotificationService {
 	void deleteNotification(int notificationId);
 
 	List<Notification> getActiveNotifications();
+	
+	List<Notification> getUnreadNotificationsByUserId(int userId);
 
 
 }

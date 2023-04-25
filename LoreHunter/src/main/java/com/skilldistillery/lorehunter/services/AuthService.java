@@ -9,5 +9,6 @@ public interface AuthService {
 	public int getOnlineUsers();
 	public int getLoggedInUsers();
 	User authenticate(String username, String password);
+	boolean isAdmin();
 
 }
