@@ -57,8 +57,8 @@ public class NotificationController {
 	}
 	
 	@GetMapping("users/{userId}/notifications/unread")
-	public ResponseEntity<List<Notification>> getUnreadNotificationsByUserId(@PathVariable int userId) {
-	    List<Notification> notifications = notificationService.getUnreadNotificationsByUserId(userId);
+	public ResponseEntity<List<UserNotification>> getUnreadNotificationsByUserId(@PathVariable int userId) {
+	    List<UserNotification> notifications = userNotificationService.getUnreadNotificationsByUserId(userId);
 	    return new ResponseEntity<>(notifications, HttpStatus.OK);
 	}
 

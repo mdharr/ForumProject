@@ -1,6 +1,7 @@
 package com.skilldistillery.lorehunter.services;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,11 @@ public class UserNotificationServiceImpl implements UserNotificationService {
 	    userNotification.setDismissedAt(LocalDateTime.now());
 	    userNotificationRepo.save(userNotification);
 	    return userNotification;
+	}
+
+	@Override
+	public List<UserNotification> getUnreadNotificationsByUserId(int userId) {
+        return userNotificationRepo.findByUserId(userId);
 	}
 
 }
