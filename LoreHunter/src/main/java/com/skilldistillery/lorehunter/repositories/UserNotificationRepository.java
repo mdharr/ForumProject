@@ -1,8 +1,12 @@
 package com.skilldistillery.lorehunter.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -15,7 +19,29 @@ public interface UserNotificationRepository extends JpaRepository<UserNotificati
 	
 	UserNotification findByUserAndNotification(User user, Notification notification);
 	
+	List<UserNotification> findByUserId(int userId);
+	
 	@Query("SELECT u FROM UserNotification u WHERE u.id = :userNotificationId")
     Optional<UserNotification> findByUserNotificationId(@Param("userNotificationId") UserNotificationId userNotificationId);
+	
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM UserNotification un WHERE un.id.notificationId = :notificationId")
+    void deleteByNotificationId(@Param("notificationId") int notificationId);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM UserNotification un WHERE un.id.userId = :userId")
+    void deleteByUserId(@Param("userId") int userId);
+
+    @Transactional
+    default void addUserNotification(UserNotification userNotification) {
+        save(userNotification);
+    }
+
+    @Transactional
+    default void removeUserNotification(UserNotification userNotification) {
+        delete(userNotification);
+    }
 
 }

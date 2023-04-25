@@ -34,9 +34,8 @@ public class UserNotification {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserNotification(UserNotificationId id, User user, Notification notification) {
-		super();
-		this.id = id;
+	public UserNotification(User user, Notification notification) {
+		this.id = new UserNotificationId(user.getId(), notification.getId());;
 		this.user = user;
 		this.notification = notification;
 	}
