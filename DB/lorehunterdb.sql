@@ -192,6 +192,46 @@ CREATE TABLE IF NOT EXISTS `user_has_game` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `notification`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `notification` ;
+
+CREATE TABLE IF NOT EXISTS `notification` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `message` TEXT NULL,
+  `created_at` TIMESTAMP NULL,
+  `read` TINYINT NULL,
+  `read_at` TIMESTAMP NULL,
+  `dismissed` TINYINT NULL,
+  `dismissed_at` TIMESTAMP NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `user_notification`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_notification` ;
+
+CREATE TABLE IF NOT EXISTS `user_notification` (
+  `user_id` INT NOT NULL,
+  `notification_id` INT NOT NULL,
+  INDEX `fk_user_notification_user1_idx` (`user_id` ASC),
+  INDEX `fk_user_notification_notification1_idx` (`notification_id` ASC),
+  CONSTRAINT `fk_user_notification_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_notification_notification1`
+    FOREIGN KEY (`notification_id`)
+    REFERENCES `notification` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS lorehunter@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -286,6 +326,26 @@ USE `lorehunterdb`;
 INSERT INTO `user_has_game` (`user_id`, `game_id`, `category`, `rating`) VALUES (1, 1, 'PLAYED', '5');
 INSERT INTO `user_has_game` (`user_id`, `game_id`, `category`, `rating`) VALUES (2, 2, 'PLAYED', '5');
 INSERT INTO `user_has_game` (`user_id`, `game_id`, `category`, `rating`) VALUES (3, 3, 'PLAYED', '5');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `notification`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `lorehunterdb`;
+INSERT INTO `notification` (`id`, `message`, `created_at`, `read`, `read_at`, `dismissed`, `dismissed_at`) VALUES (1, 'Staff have decided to place a soft ban on topics concerning AI content generation and their algorithms like Stable Diffusion and ChatGPT. You can read more about the update here.', '2023-03-03T12:35:22', 0, NULL, 0, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_notification`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `lorehunterdb`;
+INSERT INTO `user_notification` (`user_id`, `notification_id`) VALUES (3, 1);
 
 COMMIT;
 
