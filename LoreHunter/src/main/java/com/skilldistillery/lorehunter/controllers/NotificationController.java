@@ -1,5 +1,6 @@
 package com.skilldistillery.lorehunter.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,13 @@ public class NotificationController {
 	@GetMapping("users/{userId}/notifications/unread")
 	public ResponseEntity<List<UserNotification>> getUnreadNotificationsByUserId(@PathVariable int userId) {
 	    List<UserNotification> notifications = userNotificationService.getUnreadNotificationsByUserId(userId);
-	    return new ResponseEntity<>(notifications, HttpStatus.OK);
+	    List<UserNotification> unreadNotifications = new ArrayList<>();
+	    for (UserNotification userNotification : notifications) {
+	        if (!userNotification.isDismissed()) {
+	            unreadNotifications.add(userNotification);
+	        }
+	    }
+	    return new ResponseEntity<>(unreadNotifications, HttpStatus.OK);
 	}
 
 	@GetMapping("notifications/{id}")
