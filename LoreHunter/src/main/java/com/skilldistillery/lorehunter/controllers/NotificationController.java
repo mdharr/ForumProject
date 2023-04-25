@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,5 +57,11 @@ public class NotificationController {
 	    // Return created notification with status 201 Created
 	    return new ResponseEntity<>(notificationService.createNotification(notification), HttpStatus.CREATED);
 	}
+	
+	  @PutMapping("notifications/{id}")
+	  public ResponseEntity<Notification> updateNotification(@PathVariable int id, @RequestBody Notification notification) {
+	    Notification updatedNotification = notificationService.updateNotification(id, notification);
+	    return new ResponseEntity<>(updatedNotification, HttpStatus.OK);
+	  }
 
 }
