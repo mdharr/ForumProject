@@ -29,6 +29,7 @@ public class NotificationController {
 	@Autowired
 	private NotificationService notificationService;
 	
+	// postman success
 	@GetMapping("notifications")
 	public List<Notification> getAllNotifications() {
 	    return notificationService.getAllNotifications();
