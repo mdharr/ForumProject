@@ -2,18 +2,20 @@
   <mat-sidenav #sidenav mode="side" class="mat-elevation-z0">
     <mat-nav-list style="margin-top: 50px;">
       <a mat-list-item [routerLink]="['/home']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons forum-icon">forum</mat-icon></dt><dd><span class="sidenav-forum">Forums</span></dd></dl></a>
-      <div class="title" *ngFor="let category of categories; let i = index">
-        <a mat-list-item *ngIf="i === 0" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">sports_esports</mat-icon></dt><dd class="sidenav-items">{{ category.name }}</dd></dl></a>
-      </div>
-      <div class="title" *ngFor="let category of categories; let i = index">
-        <a mat-list-item *ngIf="i === 1" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">headset_mic</mat-icon></dt><dd class="sidenav-items">{{ category.name }}</dd></dl></a>
-      </div>
-      <div class="title" *ngFor="let category of categories; let i = index">
-        <a mat-list-item *ngIf="i === 2" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">forum</mat-icon></dt><dd class="sidenav-items">{{ category.name }}</dd></dl></a>
-      </div>
-      <div class="title" *ngFor="let category of categories; let i = index">
-        <a mat-list-item *ngIf="i === 3" class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">groups</mat-icon></dt><dd class="sidenav-items">{{ category.name }}</dd></dl></a>
-      </div>
+      <ng-container *ngFor="let category of categories; let i = index">
+        <div class="title" *ngIf="i === 0">
+          <a mat-list-item class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">sports_esports</mat-icon></dt><dd class="sidenav-items">{{ category.name }}</dd></dl></a>
+        </div>
+        <div class="title" *ngIf="i === 1">
+          <a mat-list-item class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">headset_mic</mat-icon></dt><dd class="sidenav-items">{{ category.name }}</dd></dl></a>
+        </div>
+        <div class="title" *ngIf="i === 2">
+          <a mat-list-item class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">forum</mat-icon></dt><dd class="sidenav-items">{{ category.name }}</dd></dl></a>
+        </div>
+        <div class="title" *ngIf="i === 3">
+          <a mat-list-item class="light-link" [routerLink]="['/categories', category.id, 'posts']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">groups</mat-icon></dt><dd class="sidenav-items">{{ category.name }}</dd></dl></a>
+        </div>
+      </ng-container>
       <a mat-list-item><dl class="pairs" [routerLink]="['/trending',]"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">trending_up</mat-icon></dt><dd class="sidenav-items">Trending Posts</dd></dl></a>
       <!-- TODO: PASS CATEGORY ID THROUGH ROUTERLINK EITHER HERE OR IN POST LIST COMPONENT (LIKELY THE LATTER) -->
       <a mat-list-item><dl class="pairs" [routerLink]="['/posts',]"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">chat</mat-icon></dt><dd class="sidenav-items">Latest Posts</dd></dl></a>

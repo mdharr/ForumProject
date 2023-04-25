@@ -17,6 +17,11 @@ a {
   font-family: "Palanquin Dark",serif !important;
 } */
 
+.title {
+  display:flex;
+  align-items: center;
+}
+
 
 .pairs {
   display: flex;
@@ -47,6 +52,8 @@ mat-sidenav {
 .sidenav-items {
   font: 16px 'Roboto', sans-serif;
   color: var(--text-color);
+  display: flex;
+  align-items:center;
 }
 
 .sidenav-forum {

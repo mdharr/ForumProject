@@ -567,3 +567,16 @@ mat-paginator {
 ::ng-deep .my-form-field .mat-mdc-form-field-bottom-align {
   display: none !important;
 }
+
+.title-container {
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  background: var(--bkg-color);
+  padding-left: 10px;
+}
+
+.forum-list-title {
+  color: var(--text-color);
+  font-family: "Palanquin Dark",serif;
+  font-size: 1.8em;
+}
