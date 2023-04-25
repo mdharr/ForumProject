@@ -13,7 +13,7 @@ public interface NotificationService {
 
 	Notification createNotification(Notification notification);
 
-	Notification updateNotification(Notification notification);
+	Notification updateNotification(int id, Notification updatedNotification);
 
 	void deleteNotificationById(int id);
 
@@ -23,6 +23,7 @@ public interface NotificationService {
 
 	void deleteNotification(int notificationId);
 
-	Notification updateNotification(int id, Notification updatedNotification);
+	List<Notification> getActiveNotifications();
+
 
 }
