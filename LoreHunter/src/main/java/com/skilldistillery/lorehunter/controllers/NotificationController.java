@@ -45,6 +45,7 @@ public class NotificationController {
 	    return notificationService.getAllNotifications();
 	}
 	
+	// postman success
 	@GetMapping("users/{uid}/notifications/active")
 	public List<Notification> getActiveNotifications(@PathVariable("uid") int userId) {
 		return notificationService.getAllNotifications();
