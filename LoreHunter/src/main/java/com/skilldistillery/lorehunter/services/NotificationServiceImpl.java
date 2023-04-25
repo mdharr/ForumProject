@@ -67,10 +67,12 @@ public class NotificationServiceImpl implements NotificationService{
         notificationRepo.deleteById(id);
     }
 
+    @Override
     public List<Notification> getNotifications() {
         return notificationRepo.findAll();
     }
 
+    @Override
     public void sendNotification(Notification notification, List<User> users) {
         notificationRepo.save(notification);
         for (User user : users) {
@@ -79,6 +81,7 @@ public class NotificationServiceImpl implements NotificationService{
         }
     }
 
+    @Override
     public void deleteNotification(int notificationId) {
         userNotificationRepo.deleteByNotificationId(notificationId);
         notificationRepo.deleteById(notificationId);
