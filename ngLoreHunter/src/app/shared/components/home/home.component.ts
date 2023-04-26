@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   loggedInUsers: number = 0;
   activeSessionCount: number = 0;
   loggedInUserCount: number = 0;
-  unreadNotifications: UserNotification[] = [];
+  userNotifications: UserNotification[] = [];
   loggedInUserId: number = 0;
   loggedInUser: User = new User();
 
@@ -179,8 +179,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.userNotificationsSubscription = this.userNotificationService.getUnreadUserNotificationsByUserId(this.loggedInUserId)
     .subscribe({
-      next: (notifications: UserNotification[]) => {
-        this.unreadNotifications = notifications;
+      next: (userNotifications) => {
+        this.userNotifications = userNotifications;
       },
       error: (error: any) => {
         console.error('Error getting user notifications: ')
@@ -290,6 +290,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         console.error(fail);
       }
     });
+  }
+
+  loggedIn(): boolean {
+    return this.auth.checkLogin();
   }
 
 }
