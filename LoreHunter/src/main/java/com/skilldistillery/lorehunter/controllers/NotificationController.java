@@ -56,6 +56,7 @@ public class NotificationController {
 	public List<Notification> getActiveNotifications(@PathVariable("uid") int userId) {
 		return notificationService.getAllNotifications();
 	}
+	
 	// postman success
 	@GetMapping("users/{userId}/notifications/unread")
 	public ResponseEntity<List<UserNotification>> getUnreadNotificationsByUserId(@PathVariable int userId) {
@@ -109,7 +110,7 @@ public class NotificationController {
 	      }
 	  }
 	  
-	  @PutMapping("users/{uid}/notifications/active/{nid}/dismiss")
+	  @PutMapping("users/{uid}/notifications/{nid}/dismiss")
 	  public ResponseEntity<UserNotification> dismissNotification(@PathVariable("uid") int userId, @PathVariable("nid") int notificationId) {
 	      UserNotification dismissedUserNotification = userNotificationService.dismissUserNotification(userId, notificationId);
 	      return new ResponseEntity<>(dismissedUserNotification, HttpStatus.OK);
