@@ -492,6 +492,120 @@ dd {
   cursor: pointer;
 }
 
+/* notices start */
+.notices {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  /* padding-inline-start: 40px; */
+}
+
+.notices.notices--block .notice {
+  margin-bottom: 20px;
+}
+
+.notices--block .notice {
+  font-size: 1.4rem;
+  border-radius: 6px;
+}
+
+.notice.notice--primary {
+  color: #333;
+  background: #fff;
+  border: 2px solid #8050bf;
+}
+
+.notice {
+  position: relative;
+  border-width: 0;
+  border-style: solid;
+  border-top-color: #e0e0e0;
+  border-right-color: #e0e0e0;
+  border-bottom-color: #e0e0e0;
+  border-left-color: #e0e0e0;
+  color: #333;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  list-style: none;
+}
+
+.notice:before, .notice:after {
+  content: " ";
+  display: table;
+}
+
+.notice:after {
+  clear: both;
+}
+
+.notices .uix_noticeInner {
+  display: flex;
+}
+
+.notice.notice--primary .uix_noticeIcon {
+  background: #8050bf;
+}
+
+.notices .uix_noticeIcon {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  color: rgba(255,255,255,.5);
+  font-size: 24px;
+}
+
+.far, .fa, .fas, .fab, .fal {
+  display: inline-block;
+  font: normal normal normal 18px/1 "Material Design Icons";
+  font-size: inherit;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0,0);
+  width: auto;
+}
+
+.fa-info-circle:before {
+  content: "\F02FC";
+}
+
+.notice-content {
+  padding: 15px;
+  flex-grow: 1;
+}
+
+.notice-content a.notice-dismiss {
+  float: right;
+  color: inherit;
+  font-size: 16px;
+  line-height: 1;
+  height: 1em;
+  box-sizing: content-box;
+  padding: 0 0 5px 5px;
+  opacity: .5;
+  -webkit-transition: opacity .2s ease;
+  transition: opacity .2s ease;
+  cursor: pointer;
+}
+
+.notice-content a.notice-dismiss:before {
+  font: normal normal normal 18px/1 "Material Design Icons";
+  font-size: 110%;
+  font-weight: 400;
+  line-height: inherit;
+  width: auto;
+  content: "\F0156";
+  display: inline-block;
+  text-align: center;
+}
+
 
 
 
