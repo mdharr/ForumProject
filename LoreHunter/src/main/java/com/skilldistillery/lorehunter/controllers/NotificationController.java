@@ -56,7 +56,7 @@ public class NotificationController {
 	public List<Notification> getActiveNotifications(@PathVariable("uid") int userId) {
 		return notificationService.getAllNotifications();
 	}
-	
+	// postman success
 	@GetMapping("users/{userId}/notifications/unread")
 	public ResponseEntity<List<UserNotification>> getUnreadNotificationsByUserId(@PathVariable int userId) {
 	    List<UserNotification> notifications = userNotificationService.getUnreadNotificationsByUserId(userId);
