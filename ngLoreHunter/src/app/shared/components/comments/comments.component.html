@@ -10,12 +10,12 @@
             <ul *ngIf="post.id === this.postId" class="cat-description listInline">
               <li>
                 <mat-icon class="top-icon">person</mat-icon>
-                <a href="">{{ post.user.username }}</a>
+                <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
               </li>
               <li>
                 <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
                 <mat-icon class="top-icon">access_time_filled</mat-icon>
-                <a href="">{{ post.createdAt | date:'shortDate' }}</a>
+                <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | date:'shortDate' }}</a>
               </li>
             </ul>
           </div>
@@ -37,12 +37,12 @@
             <ul *ngIf="post.id === this.postId" class="cat-description listInline">
               <li>
                 <mat-icon class="top-icon">person</mat-icon>
-                <a href="">{{ post.user.username }}</a>
+                <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
               </li>
               <li>
                 <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
                 <mat-icon class="top-icon">access_time_filled</mat-icon>
-                <a href="">{{ post.createdAt | date:'shortDate' }}</a>
+                <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | date:'shortDate' }}</a>
               </li>
             </ul>
           </div>
@@ -64,12 +64,12 @@
             <ul *ngIf="post.id === this.postId" class="cat-description listInline">
               <li>
                 <mat-icon class="top-icon">person</mat-icon>
-                <a href="">{{ post.user.username }}</a>
+                <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
               </li>
               <li>
                 <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
                 <mat-icon class="top-icon">access_time_filled</mat-icon>
-                <a href="">{{ post.createdAt | date:'shortDate' }}</a>
+                <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | date:'shortDate' }}</a>
               </li>
             </ul>
           </div>
@@ -91,12 +91,12 @@
             <ul *ngIf="post.id === this.postId" class="cat-description listInline">
               <li>
                 <mat-icon class="top-icon">person</mat-icon>
-                <a href="">{{ post.user.username }}</a>
+                <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
               </li>
               <li>
                 <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
                 <mat-icon class="top-icon">access_time_filled</mat-icon>
-                <a href="">{{ post.createdAt | date:'shortDate' }}</a>
+                <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | date:'shortDate' }}</a>
               </li>
             </ul>
           </div>
@@ -118,12 +118,12 @@
             <ul *ngIf="post.id === this.postId" class="cat-description listInline">
               <li>
                 <mat-icon class="top-icon">person</mat-icon>
-                <a href="">{{ post.user.username }}</a>
+                <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
               </li>
               <li>
                 <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
                 <mat-icon class="top-icon">access_time_filled</mat-icon>
-                <a href="">{{ post.createdAt | date:'shortDate' }}</a>
+                <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | date:'shortDate' }}</a>
               </li>
             </ul>
           </div>
@@ -145,12 +145,12 @@
             <ul *ngIf="post.id === this.postId" class="cat-description listInline">
               <li>
                 <mat-icon class="top-icon">person</mat-icon>
-                <a href="">{{ post.user.username }}</a>
+                <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
               </li>
               <li>
                 <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
                 <mat-icon class="top-icon">access_time_filled</mat-icon>
-                <a href="">{{ post.createdAt | date:'shortDate' }}</a>
+                <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | date:'shortDate' }}</a>
               </li>
             </ul>
           </div>
@@ -186,7 +186,7 @@
             <section class="message-user">
               <div class="message-avatar">
                 <div class="message-avatar-wrapper">
-                  <a href="" class="avatar avatar--l">
+                  <a [routerLink]="['/users', post.user.id]" class="avatar avatar--l">
                     <img class="user-avatar" src="{{ post.user.imageUrl }}" alt="">
                   </a>
                 </div>
@@ -217,7 +217,7 @@
               <header class="message-attribution">
                 <ul class="message-attribution-main">
                   <li class="u-concealed">
-                    <a href="">
+                    <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">
                       <time class="u-dt">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</time>
                     </a>
                   </li>
@@ -259,7 +259,7 @@
             <section class="message-user">
               <div class="message-avatar">
                 <div class="message-avatar-wrapper">
-                  <a href="" class="avatar avatar--l">
+                  <a [routerLink]="['/users', comment.user.id]" class="avatar avatar--l">
                     <img class="user-avatar" src="{{ comment.user.imageUrl }}" alt="">
                   </a>
                 </div>
