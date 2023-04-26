@@ -347,7 +347,7 @@
     <div class="editor-outer" style="padding: 10px;">
       <div class="editor-inner" style="padding: 10px;">
           <ckeditor #ckeditorInstance name="newComment.content" [editor]="Editor" [config]="{placeholder: 'Hello, Colonel! This is Snake.', contentsCSS: ['src/app/shared/components/comments/comments.component.css']}" [formControl]="content" [(ngModel)]="newComment.content" required></ckeditor>
-          <mat-error *ngIf="content.invalid && checkCkEditor">{{getErrorMessageContent()}}</mat-error>
+          <mat-error *ngIf="content.invalid && checkCkEditor">{{ getErrorMessageContent() }}</mat-error>
       </div>
       <div class="submitButtonContainer" style="float: right; padding-right: 10px;">
         <button class="submitBtn" mat-stroked-button (click)="submitButtonClicked();">Submit</button>

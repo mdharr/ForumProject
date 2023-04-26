@@ -149,7 +149,7 @@
             <section class="message-user">
               <div class="message-avatar">
                 <div class="message-avatar-wrapper">
-                  <a href="">
+                  <a [routerLink]="['/users', post.user.id]">
                     <img class="user-avatar" src="{{ post.user.imageUrl }}" alt="">
                   </a>
                 </div>
@@ -192,13 +192,13 @@
           </div>
           <div class="latest-comment-details" *ngFor="let comment of post.comments; let i = index;">
             <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-date">{{ comment.createdAt | date:'shortDate' }} at {{ comment.createdAt | date:'shortTime' }}</div>
-            <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-user">{{ comment.user.username }}</div>
+            <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-user" [routerLink]="['/users', comment.user.id]">{{ comment.user.username }}</div>
             <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
             <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.user.username }}</div>
           </div>
           <div class="latest-comment-details" *ngIf="post.comments.length < 1">
             <div class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
-            <div class="latest-comment-date">{{ post.user.username }}</div>
+            <div class="latest-comment-date" [routerLink]="['/users', post.user.id]">{{ post.user.username }}</div>
           </div>
         </div>
       </article>
@@ -213,7 +213,7 @@
             <section class="message-user">
               <div class="message-avatar">
                 <div class="message-avatar-wrapper">
-                  <a href="">
+                  <a [routerLink]="['/users', post.user.id]">
                     <img class="user-avatar" src="{{ post.user.imageUrl }}" alt="">
                   </a>
                 </div>
@@ -255,13 +255,13 @@
           </div>
           <div class="latest-comment-details" *ngFor="let comment of post.comments; let i = index;">
             <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-date">{{ comment.createdAt | date:'shortDate' }} at {{ comment.createdAt | date:'shortTime' }}</div>
-            <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-user">{{ comment.user.username }}</div>
+            <div style="cursor: pointer;" *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-user" [routerLink]="['/users', post.user.id]">{{ comment.user.username }}</div>
             <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
-            <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.user.username }}</div>
+            <div *ngIf="post.comments.length < 1" class="latest-comment-date" [routerLink]="['/users', post.user.id]">{{ post.user.username }}</div>
           </div>
           <div class="latest-comment-details" *ngIf="post.comments.length < 1">
             <div class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
-            <div class="latest-comment-date">{{ post.user.username }}</div>
+            <div class="latest-comment-date" [routerLink]="['/users', post.user.id]">{{ post.user.username }}</div>
           </div>
         </div>
       </article>
@@ -277,7 +277,7 @@
       <div class="user-block">
         <div class="user-block-inner">
           <div class="user-avatar-container">
-            <a style="cursor: pointer;"><img class="my-avatar" src="{{ loggedInUser.imageUrl }}" alt="" *ngIf="loggedIn()"/></a>
+            <a style="cursor: pointer;" [routerLink]="['/users', loggedInUser.id]"><img class="my-avatar" src="{{ loggedInUser.imageUrl }}" alt="" *ngIf="loggedIn()"/></a>
           </div>
           <div class="user-alias">
             <a class="user-name-text" *ngIf="loggedIn()" [routerLink]="['/users', loggedInUser.id]">{{ loggedInUser.username }}</a>
