@@ -24,7 +24,7 @@ export class UserNotificationService {
     return options;
   }
 
-  getUnreadNotificationsByUserId(userId: number): Observable<UserNotification[]> {
+  getUnreadUserNotificationsByUserId(userId: number): Observable<UserNotification[]> {
     return this.http.get<UserNotification[]>(this.url + '/users/' + userId + '/notifications/unread').pipe(
       catchError((err: any) => {
         console.log(err);
@@ -38,7 +38,7 @@ export class UserNotificationService {
     );
   }
 
-  dismissNotification(userId: number, notificationId: number): Observable<void> {
+  dismissUserNotification(userId: number, notificationId: number): Observable<void> {
     const url = `${this.url}/users/${userId}/notifications/${notificationId}/dismiss`;
     return this.http.put<void>(url, null).pipe(
       catchError((err: any) => {

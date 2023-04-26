@@ -11,9 +11,11 @@ import { Comment } from 'src/app/models/comment';
 import { CommentService } from 'src/app/services/comment.service';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, tap } from 'rxjs';
 import { ImageService } from 'src/app/services/image.service';
 import { SessionService } from 'src/app/services/session.service';
+import { UserNotification } from 'src/app/models/user-notification';
+import { UserNotificationService } from 'src/app/services/user-notification.service';
 
 
 @Component({
@@ -37,6 +39,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   loggedInUsers: number = 0;
   activeSessionCount: number = 0;
   loggedInUserCount: number = 0;
+  unreadNotifications: UserNotification[] = [];
+  loggedInUserId: number = 0;
+  loggedInUser: User = new User();
 
   isRotated1: boolean = false;
   isRotated2: boolean = false;
@@ -51,6 +56,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   private loggedInUserCountSubscription: Subscription | undefined;
   private loggedInUsersSubscription: Subscription | undefined;
   private getLoggedInUserSubscription: Subscription | undefined;
+  private userNotificationsSubscription: Subscription | undefined;
+  private loggedInUserSubscription: Subscription | undefined;
+
 
   constructor(
               private auth: AuthService,
@@ -61,7 +69,8 @@ export class HomeComponent implements OnInit, OnDestroy {
               private postDataSource: PostDataSource,
               private http: HttpClient,
               public imageService: ImageService,
-              private sessionService: SessionService
+              private sessionService: SessionService,
+              private userNotificationService: UserNotificationService
               ) {}
 
   ngOnInit() {
@@ -89,6 +98,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loggedInUsersSubscription = this.auth.getLoggedInUsers().subscribe((count) => {
       this.loggedInUserCount = count;
     });
+
+    this.loggedInUserSubscription = this.auth.getLoggedInUser().pipe(
+      tap(user => {
+        this.loggedInUser = user;
+      })
+    ).subscribe({
+      error: (error) => {
+        console.log('Error getting loggedInUser Profile Component');
+        console.log(error);
+      },
+    });
   }
 
   reload(): void {
@@ -107,6 +127,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     if (this.usersSubscription) {
       this.usersSubscription.unsubscribe();
+    }
+
+    if (this.userNotificationsSubscription) {
+      this.userNotificationsSubscription.unsubscribe();
+    }
+
+    if (this.loggedInUserSubscription) {
+      this.loggedInUserSubscription.unsubscribe();
     }
 
     this.categoriesSubscription = this.homeServ.index().subscribe({
@@ -149,6 +177,18 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.userNotificationsSubscription = this.userNotificationService.getUnreadUserNotificationsByUserId(this.loggedInUserId)
+    .subscribe({
+      next: (notifications: UserNotification[]) => {
+        this.unreadNotifications = notifications;
+      },
+      error: (error: any) => {
+        console.error('Error getting user notifications: ')
+        console.error(error);
+        // Handle error accordingly
+      }
+    });
+
   }
 
   ngOnDestroy() {
@@ -179,6 +219,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     if (this.getLoggedInUserSubscription) {
       this.getLoggedInUserSubscription.unsubscribe();
+    }
+
+    if (this.loggedInUserSubscription) {
+      this.loggedInUserSubscription.unsubscribe();
+    }
+
+    if (this.userNotificationsSubscription) {
+      this.userNotificationsSubscription.unsubscribe();
     }
 
   }
