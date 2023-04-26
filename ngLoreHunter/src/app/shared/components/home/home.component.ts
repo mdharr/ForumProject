@@ -74,6 +74,7 @@ export class HomeComponent implements OnInit, OnDestroy {
               ) {}
 
   ngOnInit() {
+
     this.posts$ = this.postService.indexAll();
 
     this.reload();
@@ -99,16 +100,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.loggedInUserCount = count;
     });
 
-    this.loggedInUserSubscription = this.auth.getLoggedInUser().pipe(
-      tap(user => {
-        this.loggedInUser = user;
-      })
-    ).subscribe({
-      error: (error) => {
-        console.log('Error getting loggedInUser Profile Component');
-        console.log(error);
-      },
-    });
   }
 
   reload(): void {
@@ -123,18 +114,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     if (this.commentsSubscription) {
       this.commentsSubscription.unsubscribe();
-    }
-
-    if (this.usersSubscription) {
-      this.usersSubscription.unsubscribe();
-    }
-
-    if (this.userNotificationsSubscription) {
-      this.userNotificationsSubscription.unsubscribe();
-    }
-
-    if (this.loggedInUserSubscription) {
-      this.loggedInUserSubscription.unsubscribe();
     }
 
     this.categoriesSubscription = this.homeServ.index().subscribe({
@@ -177,16 +156,28 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.userNotificationsSubscription = this.userNotificationService.getUnreadUserNotificationsByUserId(this.loggedInUserId)
-    .subscribe({
-      next: (userNotifications) => {
-        this.userNotifications = userNotifications;
+    this.auth.getLoggedInUser().subscribe({
+      next: (user) => {
+        this.loggedInUser = user;
+        console.log(user);
+        console.log(this.loggedInUser);
+
+        this.userNotificationsSubscription = this.userNotificationService.getUnreadUserNotificationsByUserId(user.id)
+          .subscribe({
+            next: (userNotifications) => {
+              this.userNotifications = userNotifications;
+            },
+            error: (error: any) => {
+              console.error('Error getting user notifications:');
+              console.error(error);
+              // Handle error accordingly
+            }
+          });
       },
-      error: (error: any) => {
-        console.error('Error getting user notifications: ')
-        console.error(error);
-        // Handle error accordingly
-      }
+      error: (error) => {
+        console.log('Error getting loggedInUser');
+        console.log(error);
+      },
     });
 
   }

@@ -48,7 +48,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatMenuModule,
     MatSlideToggleModule,
     MatProgressBarModule,
-    SharedModule
   ],
   exports: [
     HeaderComponent,
