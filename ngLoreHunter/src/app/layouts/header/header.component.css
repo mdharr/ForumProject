@@ -80,5 +80,38 @@ p {
   transform:rotate(-180deg);
 }
 
+mat-toolbar .animated-ui:before {
+  content: "";
+  width: 0;
+  height: 5px;
+  background-color: #f44336;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transition: all 0.5s;
+}
+
+mat-toolbar .animated-ui:after {
+  content: "";
+  width: 0;
+  height: 5px;
+  background-color: #f44336;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  transition: all 0.5s;
+}
+
+mat-toolbar .animated-ui:hover:before {
+  width: 50%;
+  transform: translateX(100%);
+}
+
+mat-toolbar .animated-ui:hover:after {
+  width: 50%;
+  transform: translateX(-100%);
+}
+
+
 
 

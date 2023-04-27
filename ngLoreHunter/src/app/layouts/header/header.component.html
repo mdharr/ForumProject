@@ -1,9 +1,9 @@
 <mat-toolbar color="primary" role="heading" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
-      <button mat-icon-button (click)="clickMenu()">
-       <mat-icon>menu</mat-icon>
+     <button mat-icon-button (click)="clickMenu()">
+      <mat-icon>menu</mat-icon>
      </button>
      <button mat-button [routerLink]="['/home']">
-       <span class="logo">Lore Hunters</span>
+       <span class="logo animated-ui">Lore Hunters</span>
        <!-- <img class="logo" src="https://media.discordapp.net/attachments/1080302897599877181/1099922346682359889/loreHunter_logo.png?width=1746&height=346" alt=""> -->
      </button>
      <button mat-button [matMenuTriggerFor]="afterMenu" id="quick-jump-btn" (menuOpened)="menuOpen()" (click)="rotateChevronTop()"><span style="vertical-align: middle;">Quick Jump</span><span><mat-icon class="rotate" style="vertical-align: middle;" [ngClass]="{down: isRotated1}">arrow_drop_down</mat-icon></span></button>
@@ -18,15 +18,17 @@
       </div>
       </mat-menu>
      <span class="example-spacer"></span>
-     <button mat-button *ngIf="!loggedIn()" (click)="open(loginmodal)">
+     <button class="animated-ui" mat-button *ngIf="!loggedIn()" (click)="open(loginmodal)">
        <span>Login</span>
      </button>
-     <button mat-button *ngIf="!loggedIn()" (click)="open(registermodal)">
+     <button mat-button class="animated-ui" *ngIf="!loggedIn()" (click)="open(registermodal)">
       <span>Register</span>
     </button>
-      <a *ngIf="loggedIn()" style="cursor: pointer;" [routerLink]="['/users', loggedInUser.id]"><img id="userThumbnail" src="{{ loggedInUser.imageUrl }}" alt=""/></a>
-      <button mat-button *ngIf="loggedIn()" [routerLink]="['/users', loggedInUser.id]">{{ loggedInUser.username }}</button>
-      <app-logout *ngIf="loggedIn()"></app-logout>
+      <a *ngIf="loggedIn()" style="cursor: pointer;" [routerLink]="['/users', loggedInUser.id]"><img class="avatar" id="userThumbnail" src="{{ loggedInUser.imageUrl }}" alt=""/></a>
+      <button mat-button class="animated-ui" *ngIf="loggedIn()" [routerLink]="['/users', loggedInUser.id]">{{ loggedInUser.username }}</button>
+      <button class="animated-ui" mat-button *ngIf="loggedIn()">
+        <app-logout></app-logout>
+      </button>
 </mat-toolbar>
 <mat-progress-bar *ngIf="displayProgressBar" style="z-index: 2;" mode="indeterminate" color="warn"></mat-progress-bar>
 
