@@ -318,6 +318,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         next: (userNotifications: UserNotification[]) => {
           this.userNotifications = userNotifications;
           this.userNotificationsSubject.next(userNotifications);
+          console.log('User notifications retrieved');
+
         },
         error: (error: any) => {
           // Handle error accordingly
