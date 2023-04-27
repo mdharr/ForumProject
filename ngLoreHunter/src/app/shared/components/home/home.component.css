@@ -555,14 +555,14 @@ dd {
 .notices .uix_noticeIcon {
   display: flex;
   align-items: center;
-  padding: 0 8px;
+  padding: 0;
   color: rgba(255,255,255,.5);
   font-size: 24px;
 }
 
 .far, .fa, .fas, .fab, .fal {
-  display: inline-block;
-  font: normal normal normal 18px/1 "Material Design Icons";
+  display: flex;
+  /* font: normal normal normal 18px/1 "Material Design Icons"; */
   font-size: inherit;
   text-rendering: auto;
   line-height: 1;
@@ -572,13 +572,26 @@ dd {
   width: auto;
 }
 
-.fa-info-circle:before {
+/* .fa-info-circle:before {
   content: "\F02FC";
-}
+} */
 
 .notice-content {
   padding: 15px;
   flex-grow: 1;
+}
+
+.notice-content a.notice-text {
+  color: var(--text-color) !important;
+  font-size: 16px;
+  line-height: 1;
+  height: 1em;
+  box-sizing: content-box;
+  padding: 0;
+  -webkit-transition: opacity .2s ease;
+  transition: opacity .2s ease;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .notice-content a.notice-dismiss {
@@ -601,7 +614,7 @@ dd {
   font-weight: 400;
   line-height: inherit;
   width: auto;
-  content: "\F0156";
+  /* content: "\F0156"; */
   display: inline-block;
   text-align: center;
 }

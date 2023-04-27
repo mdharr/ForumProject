@@ -11,7 +11,7 @@ import { Comment } from 'src/app/models/comment';
 import { CommentService } from 'src/app/services/comment.service';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
-import { Observable, Subscription, tap } from 'rxjs';
+import { map, Observable, Observer, Subject, Subscription, switchMap, tap } from 'rxjs';
 import { ImageService } from 'src/app/services/image.service';
 import { SessionService } from 'src/app/services/session.service';
 import { UserNotification } from 'src/app/models/user-notification';
@@ -40,6 +40,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   activeSessionCount: number = 0;
   loggedInUserCount: number = 0;
   userNotifications: UserNotification[] = [];
+  // userNotifications$!: Observable<UserNotification[]>;
+  private userNotificationsSubject = new Subject<UserNotification[]>();
+  userNotifications$ = this.userNotificationsSubject.asObservable();
   loggedInUserId: number = 0;
   loggedInUser: User = new User();
 
@@ -156,28 +159,42 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.auth.getLoggedInUser().subscribe({
-      next: (user) => {
-        this.loggedInUser = user;
-        console.log(user);
-        console.log(this.loggedInUser);
+    // this.userNotifications$ = this.auth.getLoggedInUser().pipe(
+    //   switchMap((user: User) => {
+    //     this.loggedInUser = user;
+    //     console.log(user);
+    //     console.log(this.loggedInUser);
 
-        this.userNotificationsSubscription = this.userNotificationService.getUnreadUserNotificationsByUserId(user.id)
-          .subscribe({
-            next: (userNotifications) => {
-              this.userNotifications = userNotifications;
-            },
-            error: (error: any) => {
-              console.error('Error getting user notifications:');
-              console.error(error);
-              // Handle error accordingly
-            }
-          });
+    //     return new Observable((observer: Observer<UserNotification[]>) => {
+    //       this.userNotificationService.getUnreadUserNotificationsByUserId(user.id)
+    //         .subscribe({
+    //           next: (userNotifications: UserNotification[]) => {
+    //             observer.next(userNotifications);
+    //           },
+    //           error: (error: any) => {
+    //             observer.error(error);
+    //           },
+    //           complete: () => {
+    //             observer.complete();
+    //           }
+    //         });
+    //     });
+    //   })
+    // );
+    this.auth.getLoggedInUser().pipe(
+      switchMap((user: User) => {
+        this.loggedInUser = user;
+        // ...
+        return this.userNotificationService.getUnreadUserNotificationsByUserId(user.id);
+      })
+    ).subscribe({
+      next: (userNotifications: UserNotification[]) => {
+        this.userNotifications = userNotifications;
+        this.userNotificationsSubject.next(userNotifications);
       },
-      error: (error) => {
-        console.log('Error getting loggedInUser');
-        console.log(error);
-      },
+      error: (error: any) => {
+        console.error('Error retrieving user notifications: ' + error);
+      }
     });
 
   }
@@ -289,18 +306,27 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   dismissUserNotification(userId: number, notificationId: number) {
     this.userNotificationService.dismissUserNotification(userId, notificationId)
-    .subscribe({
-      next: () => {
-        // User notification dismissed successfully
-        console.log('User notification dismissed successfully');
-        // Perform any necessary actions, such as removing the notification from the UI
-      },
-      error: (error: any) => {
-        console.error('Error dismissing user notification:');
-        console.error(error);
-        // Handle error accordingly
-      }
-    });
+      .subscribe({
+        next: () => {
+          // User notification dismissed successfully
+          console.log('User notification dismissed successfully');
+
+          // Update the userNotifications array directly to exclude the dismissed notification
+          this.userNotifications = this.userNotifications.filter(userNotification => userNotification.notification.id !== notificationId);
+
+          // Emit the updated userNotifications array as a new value in the stream
+          this.userNotificationsSubject.next(this.userNotifications);
+        },
+        error: (error: any) => {
+          console.error('Error dismissing user notification:');
+          console.error(error);
+          // Handle error accordingly
+        }
+      });
+  }
+
+  trackNotificationById(index: number, notification: UserNotification): number {
+    return notification.notification.id;
   }
 
 }

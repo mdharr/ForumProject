@@ -60,6 +60,7 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.PUT, "/logout").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.PUT, "/api/users/**/setOnline").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.PUT, "/api/users/**/setOffline").permitAll() // will hit the OPTIONS on the route
+        .antMatchers(HttpMethod.PUT, "/api/users/**/notifications/**/dismiss").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/posts").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/posts/**/category").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/comments").permitAll() // will hit the OPTIONS on the route
