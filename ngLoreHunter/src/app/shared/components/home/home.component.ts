@@ -287,4 +287,20 @@ export class HomeComponent implements OnInit, OnDestroy {
     return this.auth.checkLogin();
   }
 
+  dismissUserNotification(userId: number, notificationId: number) {
+    this.userNotificationService.dismissUserNotification(userId, notificationId)
+    .subscribe({
+      next: () => {
+        // User notification dismissed successfully
+        console.log('User notification dismissed successfully');
+        // Perform any necessary actions, such as removing the notification from the UI
+      },
+      error: (error: any) => {
+        console.error('Error dismissing user notification:');
+        console.error(error);
+        // Handle error accordingly
+      }
+    });
+  }
+
 }
