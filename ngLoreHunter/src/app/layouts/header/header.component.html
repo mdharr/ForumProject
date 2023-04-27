@@ -3,8 +3,8 @@
       <mat-icon>menu</mat-icon>
      </button>
      <button mat-button [routerLink]="['/home']">
-       <span class="logo animated-ui">Lore Hunters</span>
-       <!-- <img class="logo" src="https://media.discordapp.net/attachments/1080302897599877181/1099922346682359889/loreHunter_logo.png?width=1746&height=346" alt=""> -->
+       <!-- <span class="logo animated-ui">Lore Hunters</span> -->
+       <img class="logo animated-ui" src="https://media.discordapp.net/attachments/1080302897599877181/1101024290301808730/mmexport1682574877969.png?width=2160&height=486" alt="">
      </button>
      <button mat-button [matMenuTriggerFor]="afterMenu" id="quick-jump-btn" (menuOpened)="menuOpen()" (click)="rotateChevronTop()"><span style="vertical-align: middle;">Quick Jump</span><span><mat-icon class="rotate" style="vertical-align: middle;" [ngClass]="{down: isRotated1}">arrow_drop_down</mat-icon></span></button>
      <mat-menu #afterMenu="matMenu" xPosition="after" class="toolbar-menu" (closed)="resetRotationState()">

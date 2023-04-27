@@ -40,7 +40,18 @@ p {
   font-size:1.6em;
   transition: all cubic-bezier(.4,0,.2,1) .15s;
   padding: 5px;
+  width: 225px;
+  height: auto;
 }
+
+/* .logo:hover {
+  font-family: "Palanquin Dark",serif;
+  font-size:1.6em;
+  transition: all cubic-bezier(.4,0,.2,1) .15s;
+  padding: 5px;
+  width: 500px;
+  height: auto;
+} */
 
 /* .logo:hover {
   font-family: "Palanquin Dark",serif;
