@@ -7,8 +7,8 @@
        <!-- <img class="logo" src="https://media.discordapp.net/attachments/1080302897599877181/1099922346682359889/loreHunter_logo.png?width=1746&height=346" alt=""> -->
      </button>
      <button mat-button [matMenuTriggerFor]="afterMenu" id="quick-jump-btn" (menuOpened)="menuOpen()" (click)="rotateChevronTop()"><span style="vertical-align: middle;">Quick Jump</span><span><mat-icon class="rotate" style="vertical-align: middle;" [ngClass]="{down: isRotated1}">arrow_drop_down</mat-icon></span></button>
-     <mat-menu #afterMenu="matMenu" xPosition="after" (closed)="resetRotationState()">
-      <div *ngFor="let category of categories; let i = index">
+     <mat-menu #afterMenu="matMenu" xPosition="after" class="toolbar-menu" (closed)="resetRotationState()">
+      <div class="menu-categories" *ngFor="let category of categories; let i = index">
         <button *ngIf="i === 0" mat-menu-item [routerLink]="['/categories', category.id, 'posts']">{{category.name}}</button>
         <button *ngIf="i === 1" mat-menu-item [routerLink]="['/categories', category.id, 'posts']">{{category.name}}</button>
         <button *ngIf="i === 2" mat-menu-item [routerLink]="['/categories', category.id, 'posts']">{{category.name}}</button>

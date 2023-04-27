@@ -46,6 +46,12 @@ p {
   background: var(--bkg-color);
 }
 
+.notifications-container {
+  margin-top: 5vh;
+  margin-bottom: 2vh;
+  background: var(--bkg-color);
+}
+
 .discussion-container {
   display: flex;
   flex-wrap: wrap;

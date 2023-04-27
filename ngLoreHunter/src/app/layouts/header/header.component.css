@@ -112,6 +112,18 @@ mat-toolbar .animated-ui:hover:after {
   transform: translateX(-100%);
 }
 
+.menu-categories:hover {
+  background: #f44336;
+  color: #fff;
+}
+
+::ng-deep .mat-mdc-menu-content {
+  background: var(--container-bkg-color);
+  color: var(--text-color);
+  padding: 0 !important;
+}
+
+
 
 
 
