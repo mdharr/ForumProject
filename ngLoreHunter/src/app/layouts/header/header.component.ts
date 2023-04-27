@@ -28,6 +28,8 @@ export class HeaderComponent implements OnInit {
 
   displayProgressBar: boolean = false;
 
+  isRotated1: boolean = false;
+
   private categoriesSubscription: Subscription | undefined;
   private loggedInUserSubscription: Subscription | undefined;
 
@@ -163,6 +165,28 @@ export class HeaderComponent implements OnInit {
   getCurrentTimestamp(): number {
     // Logic to get current timestamp
     return Math.floor(Date.now() / 1000);
+  }
+
+  rotateChevronTop() {
+    this.isRotated1 = !this.isRotated1;
+
+  }
+
+  resetRotationState() {
+    console.log('reset rotation state function called');
+
+    this.isRotated1 = false;
+  }
+
+  menuOpen(){
+    console.log("open")
+  }
+  menuClose(event:any){
+    //event is undefined if you click outside
+    if (event)
+         console.log("click inside the menu")
+      else
+         console.log("click outside the menu")
   }
 
 }

@@ -68,5 +68,17 @@ p {
   align-items: center;
 } */
 
+.rotate {
+  -moz-transition: all .0.1s linear;
+  -webkit-transition: all .0.1s linear;
+  transition: all 0.1s linear;
+}
+
+.down {
+  -moz-transform:rotate(-180deg);
+  -webkit-transform:rotate(-180deg);
+  transform:rotate(-180deg);
+}
+
 
 
