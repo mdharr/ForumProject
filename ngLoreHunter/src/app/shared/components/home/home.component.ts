@@ -11,7 +11,7 @@ import { Comment } from 'src/app/models/comment';
 import { CommentService } from 'src/app/services/comment.service';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
-import { map, Observable, Observer, Subject, Subscription, switchMap, tap } from 'rxjs';
+import { interval, map, Observable, Observer, Subject, Subscription, switchMap, tap } from 'rxjs';
 import { ImageService } from 'src/app/services/image.service';
 import { SessionService } from 'src/app/services/session.service';
 import { UserNotification } from 'src/app/models/user-notification';
@@ -159,28 +159,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     });
 
-    // this.userNotifications$ = this.auth.getLoggedInUser().pipe(
-    //   switchMap((user: User) => {
-    //     this.loggedInUser = user;
-    //     console.log(user);
-    //     console.log(this.loggedInUser);
-
-    //     return new Observable((observer: Observer<UserNotification[]>) => {
-    //       this.userNotificationService.getUnreadUserNotificationsByUserId(user.id)
-    //         .subscribe({
-    //           next: (userNotifications: UserNotification[]) => {
-    //             observer.next(userNotifications);
-    //           },
-    //           error: (error: any) => {
-    //             observer.error(error);
-    //           },
-    //           complete: () => {
-    //             observer.complete();
-    //           }
-    //         });
-    //     });
-    //   })
-    // );
     this.auth.getLoggedInUser().pipe(
       switchMap((user: User) => {
         this.loggedInUser = user;
@@ -196,6 +174,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         console.error('Error retrieving user notifications: ' + error);
       }
     });
+
+    this.pollUserNotifications();
 
   }
 
@@ -327,6 +307,22 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   trackNotificationById(index: number, notification: UserNotification): number {
     return notification.notification.id;
+  }
+
+  pollUserNotifications(): void {
+    interval(5000) // Poll every 5 seconds (adjust the interval as needed)
+      .pipe(
+        switchMap(() => this.userNotificationService.getUnreadUserNotificationsByUserId(this.loggedInUser.id))
+      )
+      .subscribe({
+        next: (userNotifications: UserNotification[]) => {
+          this.userNotifications = userNotifications;
+          this.userNotificationsSubject.next(userNotifications);
+        },
+        error: (error: any) => {
+          // Handle error accordingly
+        }
+      });
   }
 
 }

@@ -605,6 +605,10 @@ dd {
   opacity: .5;
   -webkit-transition: opacity .2s ease;
   transition: opacity .2s ease;
+
+}
+
+.notice-dismiss {
   cursor: pointer;
 }
 
