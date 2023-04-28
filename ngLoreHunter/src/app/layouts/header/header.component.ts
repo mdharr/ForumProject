@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { SideNavService } from 'src/app/services/side-nav.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AuthService } from 'src/app/services/auth.service';
@@ -12,6 +12,8 @@ import { Category } from 'src/app/models/category';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ChangeDetectorRef } from '@angular/core';
 import { Subscription, tap } from 'rxjs';
+import { ViewportScroller } from '@angular/common';
+import { ScrollService } from 'src/app/services/scroll.service';
 
 
 @Component({
@@ -21,6 +23,8 @@ import { Subscription, tap } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   title: string = "Dashboard";
+
+  @ViewChild('mainContainer') mainContainer!: ElementRef;
 
   loggedInUser: User = new User();
 
@@ -42,6 +46,8 @@ export class HeaderComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
+    private viewportScroller: ViewportScroller,
+    private scrollService: ScrollService,
     private cdr: ChangeDetectorRef
     ) {
 
@@ -91,6 +97,13 @@ export class HeaderComponent implements OnInit {
       },
     });
     this.reload();
+
+    this.scrollService.scrollEvent$.subscribe(() => {
+      // Scroll to the top or bottom of the page
+      window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+      // Or
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); // Scroll to bottom
+    });
   }
 
 
@@ -187,6 +200,16 @@ export class HeaderComponent implements OnInit {
          console.log("click inside the menu")
       else
          console.log("click outside the menu")
+  }
+
+  scrollToTop(): void {
+    this.viewportScroller.scrollToPosition([0, 0]);
+  }
+
+  scrollToBottom(): void {
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    this.viewportScroller.scrollToPosition([0, documentHeight - windowHeight]);
   }
 
 }

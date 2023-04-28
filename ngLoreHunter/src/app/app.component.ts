@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from './models/user';
+import { ScrollService } from './services/scroll.service';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -27,7 +28,8 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private http: HttpClient,
     private userService: UserService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private scrollService: ScrollService,
     ) {}
 
   ngOnInit() {

@@ -134,6 +134,28 @@ mat-toolbar .animated-ui:hover:after {
   padding: 0 !important;
 }
 
+/* scroll to top and bottom */
+.scroll-to-icons {
+  color: #fff;
+}
+
+.scroll-to-icons:hover {
+  color: #fff;
+  background-color: #4050b5;
+}
+
+.u-scrollButtons {
+  display: flex;
+}
+
+.scroll-to-top {
+  margin-left: 12px;
+  margin-right: 8px;
+}
+
+.scroll-to-bottom {
+  margin-right: 30px;
+}
 
 
 

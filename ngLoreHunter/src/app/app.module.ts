@@ -25,6 +25,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from './services/auth.service';
+import { ScrollService } from './services/scroll.service';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { AuthService } from './services/auth.service';
   ],
   providers: [
     DatePipe,
-    AuthService
+    AuthService,
+    ScrollService
   ],
   bootstrap: [AppComponent]
 })

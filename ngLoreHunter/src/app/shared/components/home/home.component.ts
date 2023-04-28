@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { Category } from 'src/app/models/category';
 import { AuthService } from 'src/app/services/auth.service';
 import { HomeService } from 'src/app/services/home.service';
@@ -16,6 +16,7 @@ import { ImageService } from 'src/app/services/image.service';
 import { SessionService } from 'src/app/services/session.service';
 import { UserNotification } from 'src/app/models/user-notification';
 import { UserNotificationService } from 'src/app/services/user-notification.service';
+import { ScrollService } from 'src/app/services/scroll.service';
 
 
 @Component({
@@ -73,7 +74,9 @@ export class HomeComponent implements OnInit, OnDestroy {
               private http: HttpClient,
               public imageService: ImageService,
               private sessionService: SessionService,
-              private userNotificationService: UserNotificationService
+              private userNotificationService: UserNotificationService,
+              private scrollService: ScrollService,
+              private elementRef: ElementRef
               ) {}
 
   ngOnInit() {
@@ -325,6 +328,14 @@ export class HomeComponent implements OnInit, OnDestroy {
           // Handle error accordingly
         }
       });
+  }
+
+  scrollToTop(): void {
+    this.scrollService.scrollToTop();
+  }
+
+  scrollToBottom(): void {
+    this.scrollService.scrollToBottom();
   }
 
 }

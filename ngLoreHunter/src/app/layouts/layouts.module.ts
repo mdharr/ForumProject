@@ -21,6 +21,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ScrollService } from '../services/scroll.service';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     HeaderComponent,
     DrawerComponent,
     LayoutsComponent
+  ],
+  providers: [
+    ScrollService
   ]
 })
 export class LayoutsModule { }

@@ -1,3 +1,4 @@
+import { ScrollService } from 'src/app/services/scroll.service';
 import { FilterPipe } from './../pipes/filter.pipe';
 import { SortPipe } from './../pipes/sort.pipe';
 import { PostDataSource } from './../services/post.dataSource';
@@ -116,7 +117,8 @@ import { TrendingComponent } from './components/trending/trending.component';
     PostDataSource,
     CommentService,
     CommentDataSource,
-    AuthService
+    AuthService,
+    ScrollService
   ]
 })
 export class SharedModule { }
