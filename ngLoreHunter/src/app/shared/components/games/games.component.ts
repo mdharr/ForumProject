@@ -15,6 +15,8 @@ import { JumpToPageDialogComponent } from '../jump-to-page-dialog/jump-to-page-d
 })
 export class GamesComponent implements OnInit {
 
+  isLoading: boolean = false;
+
   games: any[] = [];
   searchResults: any[] | null = null;
   searchQuery: string = ''; // Add searchQuery variable
@@ -37,6 +39,7 @@ export class GamesComponent implements OnInit {
   constructor(private gameService: GameService, private renderer: Renderer2, private el: ElementRef, private cdr: ChangeDetectorRef, private dialog: MatDialog) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.fetchGames(this.page, this.pageSize);
   }
 
@@ -134,25 +137,28 @@ onJumpToPage(page: number) {
   }
 }
 
-  fetchGames(page: number, pageSize: number) {
-    // Call the getGames() method of the gameService with the updated page and pageSize parameters, and subscribe to the response
-    this.subscription = this.gameService.getGames(page, pageSize).subscribe({
-      next: (response: { results: Game[], count: number }) => { // Update response type to include count field
-        if (Array.isArray(response.results)) {
-          this.games = response.results;
-          this.totalPages = Math.ceil(response.count / pageSize); // Update totalPages variable
-          this.pages = this.generatePageNumbers(page, this.totalPages); // Update pages array with generated page numbers
-          console.log(this.games);
-          this.cdr.detectChanges();
-        } else {
-          console.error('Failed to fetch games:', 'Response.results is not an array:', response.results);
-        }
-      },
-      error: error => {
-        console.error('Failed to fetch games:', error);
+fetchGames(page: number, pageSize: number) {
+  this.isLoading = true; // Show the loading indicator
+
+  this.subscription = this.gameService.getGames(page, pageSize).subscribe(
+    (response: { results: Game[], count: number }) => {
+      if (Array.isArray(response.results)) {
+        this.games = response.results;
+        this.totalPages = Math.ceil(response.count / pageSize);
+        this.pages = this.generatePageNumbers(page, this.totalPages);
+        console.log(this.games);
+        this.cdr.detectChanges();
+      } else {
+        console.error('Failed to fetch games:', 'Response.results is not an array:', response.results);
       }
-    });
-  }
+      this.isLoading = false; // Hide the loading indicator
+    },
+    error => {
+      console.error('Failed to fetch games:', error);
+      this.isLoading = false; // Hide the loading indicator in case of error
+    }
+  );
+}
 
   // Generate page numbers based on current page and total pages
 generatePageNumbers(currentPage: number, totalPages: number): number[] {
@@ -253,12 +259,21 @@ generatePageNumbers(currentPage: number, totalPages: number): number[] {
   }
 
   searchGames(searchQuery: string) {
-    if (searchQuery.trim() !== '') { // Check if search query is not empty
-      this.gameService.searchGames(searchQuery).subscribe(data => {
-        this.searchResults = data; // Store the search results data in the local variable
-      });
+    if (searchQuery.trim() !== '') {
+      this.isLoading = true; // Show the loading indicator
+
+      this.subscription = this.gameService.searchGames(searchQuery).subscribe(
+        (data: any[]) => {
+          this.searchResults = data;
+          this.isLoading = false; // Hide the loading indicator
+        },
+        error => {
+          console.error('Failed to search games:', error);
+          this.isLoading = false; // Hide the loading indicator in case of error
+        }
+      );
     } else {
-      this.searchResults = null; // Clear the search results if search query is empty
+      this.searchResults = null;
     }
   }
 

@@ -34,11 +34,15 @@
 
     </div>
 
+    <div *ngIf="isLoading">
+      <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+    </div>
+
       <div  *ngIf="searchResults" class="p-body">
         <div class="row item-grid2">
           <div class="card item-card" *ngFor="let game of searchResults" (click)="onCardClick($event)">
             <div class="item-card-image">
-              <img src="{{ game.background_image }}" alt="Item Image">
+              <img src="{{ game.background_image }}" alt="Item Image" loading="lazy">
             </div>
             <div class="item-card-details">
               <h3 class="item-card-title">{{ game.name }}</h3>

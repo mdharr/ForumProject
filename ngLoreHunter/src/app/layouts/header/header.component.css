@@ -40,7 +40,7 @@ p {
   font-size:1.6em;
   transition: all cubic-bezier(.4,0,.2,1) .15s;
   padding: 5px;
-  width: 225px;
+  width: 200px;
   height: auto;
 }
 
@@ -95,7 +95,7 @@ mat-toolbar .animated-ui:before {
   content: "";
   width: 0;
   height: 5px;
-  background-color: #f44336;
+  background-color: #fff;
   position: absolute;
   top: 100%;
   left: 0;
@@ -106,7 +106,7 @@ mat-toolbar .animated-ui:after {
   content: "";
   width: 0;
   height: 5px;
-  background-color: #f44336;
+  background-color: #fff;
   position: absolute;
   top: 100%;
   right: 0;
@@ -114,12 +114,12 @@ mat-toolbar .animated-ui:after {
 }
 
 mat-toolbar .animated-ui:hover:before {
-  width: 50%;
+  width: 49%;
   transform: translateX(100%);
 }
 
 mat-toolbar .animated-ui:hover:after {
-  width: 50%;
+  width: 49%;
   transform: translateX(-100%);
 }
 

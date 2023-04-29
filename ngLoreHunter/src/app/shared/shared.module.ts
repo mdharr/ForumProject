@@ -48,6 +48,7 @@ import { UserBannerImageDialogComponent } from './components/user-banner-image-d
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { TrendingComponent } from './components/trending/trending.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -97,7 +98,8 @@ import { TrendingComponent } from './components/trending/trending.component';
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     HomeComponent,

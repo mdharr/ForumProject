@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { finalize, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -20,12 +20,19 @@ export class GameService {
       .set('page', page.toString())
       .set('page_size', pageSize.toString());
 
-    return this.http.get<any[]>(this.url + "/games", { params });
+    return this.http.get<any[]>(this.url + "/games", { params })
+      .pipe(
+        finalize(() => console.log('API call completed')) // Optional: Perform any finalization logic here
+      );
   }
 
   searchGames(searchQuery: string): Observable<any[]> {
     let params = new HttpParams()
-      .set('search', searchQuery); // Add the search query parameter
-    return this.http.get<any[]>(this.url + "/games/search", { params });
+      .set('search', searchQuery);
+
+    return this.http.get<any[]>(this.url + "/games/search", { params })
+      .pipe(
+        finalize(() => console.log('API call completed')) // Optional: Perform any finalization logic here
+      );
   }
 }
