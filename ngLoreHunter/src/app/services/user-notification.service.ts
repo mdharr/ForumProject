@@ -24,6 +24,12 @@ export class UserNotificationService {
     return options;
   }
 
+  sendNotification(message: string) {
+    const notification = { message: message };
+    return this.http.post(this.url + '/notifications/send', notification);
+  }
+
+
   getUnreadUserNotificationsByUserId(userId: number): Observable<UserNotification[]> {
     return this.http.get<UserNotification[]>(this.url + '/users/' + userId + '/notifications/unread').pipe(
       catchError((err: any) => {
