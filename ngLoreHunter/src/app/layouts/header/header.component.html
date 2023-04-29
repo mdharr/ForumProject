@@ -38,7 +38,7 @@
           <a class="button--scroll" (click)="scrollToBottom()"><mat-icon class="material-icons scroll-to-icons" aria-hidden="true">arrow_downward</mat-icon></a>
         </div>
         <div class="send-notification-wrapper" *ngIf="loggedIn() && loggedInUser.role === 'ADMIN'">
-          <a class="button--scroll"><mat-icon class="material-icons scroll-to-icons" aria-hidden="true">send</mat-icon></a>
+          <a class="button--scroll" (click)="openNotificationDialog()"><mat-icon class="material-icons scroll-to-icons" aria-hidden="true">send</mat-icon></a>
         </div>
       </div>
 </mat-toolbar>

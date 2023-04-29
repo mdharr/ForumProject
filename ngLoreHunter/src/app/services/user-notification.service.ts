@@ -26,7 +26,15 @@ export class UserNotificationService {
 
   sendNotification(message: string) {
     const notification = { message: message };
-    return this.http.post(this.url + '/notifications/send', notification);
+    return this.http.post(this.url + '/notifications/send', notification, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error('UserNotificationService.sendNotification(): error sending notification.')
+        );
+      })
+    );
   }
 
 

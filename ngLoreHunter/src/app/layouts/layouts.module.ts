@@ -22,6 +22,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ScrollService } from '../services/scroll.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ScrollService } from '../services/scroll.service';
     MatMenuModule,
     MatSlideToggleModule,
     MatProgressBarModule,
+    MatDialogModule
   ],
   exports: [
     HeaderComponent,

@@ -1,1 +1,13 @@
-<p>notification-dialog works!</p>
+<h2 mat-dialog-title>Send Notification</h2>
+<form [formGroup]="notificationForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Notification Message</mat-label>
+      <input matInput placeholder="Notification Message" formControlName="message">
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button type="submit">Save</button>
+  </mat-dialog-actions>
+</form>

@@ -26,6 +26,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from './services/auth.service';
 import { ScrollService } from './services/scroll.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ScrollService } from './services/scroll.service';
     CKEditorModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    MatDialogModule
   ],
   exports: [
 

@@ -14,6 +14,9 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Subscription, tap } from 'rxjs';
 import { ViewportScroller } from '@angular/common';
 import { ScrollService } from 'src/app/services/scroll.service';
+import { NotificationDialogComponent } from 'src/app/shared/components/notification-dialog/notification-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { UserNotificationService } from 'src/app/services/user-notification.service';
 
 
 @Component({
@@ -48,7 +51,9 @@ export class HeaderComponent implements OnInit {
     private snackBar: MatSnackBar,
     private viewportScroller: ViewportScroller,
     private scrollService: ScrollService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private dialog: MatDialog,
+    private userNotificationService: UserNotificationService
     ) {
 
   }
@@ -212,6 +217,31 @@ export class HeaderComponent implements OnInit {
     this.viewportScroller.scrollToPosition([0, documentHeight - windowHeight]);
   }
 
+  openNotificationDialog(): void {
+    const dialogRef = this.dialog.open(NotificationDialogComponent, {
+      width: '400px',
+      data: {
+        userNotification: {
+          message: 'Initial message value' // Provide the initial message value here
+        }
+      }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Handle the submitted message here, e.g., call the notification service
+        this.userNotificationService.sendNotification(result).subscribe({
+          next: () => {
+            // Handle success
+            console.log('Notification sent successfully');
+          },
+          error: (error) => {
+            // Handle error
+            console.log('Error sending notification:', error);
+          }
+        });
+      }
+    });
+  }
 
 }
