@@ -222,7 +222,7 @@ export class HeaderComponent implements OnInit {
       width: '400px',
       data: {
         userNotification: {
-          message: 'Initial message value' // Provide the initial message value here
+          message: '' // Provide the initial message value here
         }
       }
     });

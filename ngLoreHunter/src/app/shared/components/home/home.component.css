@@ -587,7 +587,7 @@ dd {
   flex-grow: 1;
 }
 
-.notice-content a.notice-text {
+.notice-content p.notice-text {
   color: var(--text-color) !important;
   font-size: 16px;
   line-height: 1;
@@ -596,11 +596,10 @@ dd {
   padding: 0;
   -webkit-transition: opacity .2s ease;
   transition: opacity .2s ease;
-  cursor: pointer;
   text-decoration: none;
 }
 
-.notice-content a.notice-dismiss {
+.notice-content p.notice-dismiss {
   float: right;
   color: inherit;
   font-size: 16px;
@@ -619,7 +618,7 @@ dd {
   color: var(--text-color);
 }
 
-.notice-content a.notice-dismiss:before {
+.notice-content p.notice-dismiss:before {
   font: normal normal normal 18px/1 "Material Design Icons";
   font-size: 110%;
   font-weight: 400;

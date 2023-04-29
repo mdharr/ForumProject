@@ -29,15 +29,17 @@ export class NotificationDialogComponent {
 
   onSubmit() {
     const { message } = this.notificationForm.value;
-    this.userNotificationService.sendNotification(message).subscribe({
-      next: () => {
-        console.log('Notification sent successfully');
-        this.dialogRef.close();
-      },
-      error: (error) => {
-        console.error('Error sending notification:', error);
-      }
-    });
+    if(message !== '') {
+      this.userNotificationService.sendNotification(message).subscribe({
+        next: () => {
+          console.log('Notification sent successfully');
+          this.dialogRef.close();
+        },
+        error: (error) => {
+          console.error('Error sending notification:', error);
+        }
+      });
+    }
   }
 
 }

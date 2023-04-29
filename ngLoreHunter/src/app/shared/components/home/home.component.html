@@ -6,7 +6,7 @@
           <mat-icon class="material-icons fa--xf fas fa-info-circle" style="margin-left: 5px; margin-right: 7px;" aria-hidden="true">info</mat-icon>
         </div>
         <div class="notice-content">
-          <a href="" class="notice-text js-noticeDismiss" data-xf-init="tooltip" data-original-title="Dismiss notice" id="js-XFUniqueId4">{{ userNotification.notification.message }}</a>
+          <p class="notice-text js-noticeDismiss" data-xf-init="tooltip" data-original-title="Dismiss notice" id="js-XFUniqueId4">{{ userNotification.notification.message }}</p>
         </div>
         <div>
           <mat-icon class="notice-dismiss js-noticeDismiss" (click)="dismissUserNotification(loggedInUser.id, userNotification.notification.id)">close</mat-icon>
