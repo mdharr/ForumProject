@@ -212,4 +212,6 @@ export class HeaderComponent implements OnInit {
     this.viewportScroller.scrollToPosition([0, documentHeight - windowHeight]);
   }
 
+
+
 }

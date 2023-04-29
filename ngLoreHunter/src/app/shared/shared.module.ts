@@ -49,6 +49,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { TrendingComponent } from './components/trending/trending.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     JumpToPageDialogComponent,
     UserBannerImageDialogComponent,
     TrendingComponent,
+    NotificationDialogComponent,
   ],
   imports: [
     CommonModule,
