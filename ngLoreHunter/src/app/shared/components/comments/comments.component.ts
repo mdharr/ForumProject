@@ -30,7 +30,8 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   title = 'ngLoreHunter';
 
   public Editor = ClassicEditor;
-  @ViewChild('ckeditorInstance') ckeditorInstance: any; // Add this line to access the CKEditor instance
+  @ViewChild('ckeditorInstance', { static: false }) ckeditorInstance: any; // Add this line to access the CKEditor instance
+  contentEditor: any;
 
   displayedColumns: string[] = ['user', 'content'];
 
@@ -352,13 +353,42 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  addReply(content: string) {
-    const blockquote = `<blockquote>${content}</blockquote>`;
+// addReply(content: string, username: string) {
+//   const blockquote = `
+//     <blockquote class="my-blockquote">
+//       <div class="blockquote-body">
+//         <div class="blockquote-user">
+//           <p>${username} said:</p>
+//         </div>
+//         <div class="blockquote-content">
+//           <p>${content}</p>
+//         </div>
+//       </div>
+//     </blockquote><br>
+//   `;
 
-    // Append the blockquote to the existing content in the CKEditor
-    const editorInstance = this.ckeditorInstance.instance;
-    const currentContent = editorInstance.getData();
-    editorInstance.setData(currentContent + blockquote);
+//   if (this.ckeditorInstance && this.ckeditorInstance.editorInstance) {
+//     const currentData = this.ckeditorInstance.editorInstance.getData();
+//     this.ckeditorInstance.editorInstance.setData(currentData);
+//     this.ckeditorInstance.editorInstance.insertText(blockquote);
+//   }
+// }
+addReply(content: string, username: string) {
+  const blockquote = `<blockquote class="my-blockquote">
+                      <div class="blockquote-body">
+                        <div class="blockquote-user">
+                          <p>${username} said:</p>
+                        </div>
+                        <div class="blockquote-content">
+                          <p>${content}</p>
+                        </div>
+                      </div>
+                      </blockquote><br>`;
+
+  if (this.ckeditorInstance && this.ckeditorInstance.editorInstance) {
+    const currentData = this.ckeditorInstance.editorInstance.getData();
+    this.ckeditorInstance.editorInstance.setData(currentData + blockquote);
   }
+}
 
 }
