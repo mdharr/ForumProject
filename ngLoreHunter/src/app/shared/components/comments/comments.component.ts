@@ -352,4 +352,13 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
+  addReply(content: string) {
+    const blockquote = `<blockquote>${content}</blockquote>`;
+
+    // Append the blockquote to the existing content in the CKEditor
+    const editorInstance = this.ckeditorInstance.instance;
+    const currentContent = editorInstance.getData();
+    editorInstance.setData(currentContent + blockquote);
+  }
+
 }
