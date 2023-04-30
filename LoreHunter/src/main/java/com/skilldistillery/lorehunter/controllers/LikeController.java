@@ -64,6 +64,7 @@ public class LikeController {
 	    return ResponseEntity.status(HttpStatus.CREATED).body(like);
 	}
 
+	// rest api endpoint test success in postman
 	@DeleteMapping("likes/{likeId}")
 	public ResponseEntity<?> deleteLike(@PathVariable int likeId) {
 	    try {
