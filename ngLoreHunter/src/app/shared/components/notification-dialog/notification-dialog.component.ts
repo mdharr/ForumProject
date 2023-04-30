@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserNotificationService } from 'src/app/services/user-notification.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class NotificationDialogComponent {
   message: string = '';
 
   constructor(
+    private snackBar: MatSnackBar,
     private fb: FormBuilder,
     private userNotificationService: UserNotificationService,
     public dialogRef: MatDialogRef<NotificationDialogComponent>,
@@ -34,9 +36,19 @@ export class NotificationDialogComponent {
         next: () => {
           console.log('Notification sent successfully');
           this.dialogRef.close();
+          this.snackBar.open('Notification Sent!', 'Dismiss', {
+            duration: 4000,
+            panelClass: ['mat-toolbar', 'mat-primary'],
+            verticalPosition: 'bottom'
+          });
         },
         error: (error) => {
           console.error('Error sending notification:', error);
+          this.snackBar.open('Notification Not Sent', 'Dismiss', {
+            duration: 1000,
+            panelClass: ['mat-toolbar', 'mat-primary'],
+            verticalPosition: 'bottom'
+          });
         }
       });
     }
