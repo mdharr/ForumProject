@@ -353,6 +353,10 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
+  createLike() {
+
+  }
+
   // addReply(content: string, username: string) {
   //   const blockquote = `<blockquote class="my-blockquote">
   //                       <div class="blockquote-body">
