@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "user_likes_comment")
 public class Like {
@@ -18,6 +20,7 @@ public class Like {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "comment_id")
 	private Comment comment;

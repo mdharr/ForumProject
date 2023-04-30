@@ -22,6 +22,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Comment {
@@ -53,6 +54,7 @@ public class Comment {
 	
 	private Boolean enabled;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Like> likes = new ArrayList<>();
 	

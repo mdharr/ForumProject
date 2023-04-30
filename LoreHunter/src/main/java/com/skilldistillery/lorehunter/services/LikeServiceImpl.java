@@ -23,9 +23,18 @@ public class LikeServiceImpl implements LikeService {
     }
 
 	@Override
-    public void deleteLike(Like like) {
-        likeRepo.delete(like);
-    }
+	public void deleteLike(Like like) {
+	    Comment comment = like.getComment();
+
+	    // Remove the like from the comment's list of likes
+	    comment.getLikes().remove(like);
+
+	    // Remove the comment reference from the like
+	    like.setComment(null);
+
+	    // Delete the like from the database
+	    likeRepo.delete(like);
+	}
 
 	@Override
     public int getLikeCount(Comment comment) {
