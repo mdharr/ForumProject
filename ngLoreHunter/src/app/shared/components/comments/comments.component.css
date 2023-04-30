@@ -386,6 +386,16 @@ mat-paginator {
 	min-height: 20vh;
   min-width: 100%;
   color: var(--text-color);
+  background-color: var(--bkg-color);
+}
+
+:host ::ng-deep .ck.ck-toolbar {
+  color: var(--text-color);
+  background-color: var(--container-bkg-color);
+}
+
+:host ::ng-deep .ck.ck-toolbar button {
+  color: var(--text-color);
   background-color: var(--container-bkg-color);
 }
 
