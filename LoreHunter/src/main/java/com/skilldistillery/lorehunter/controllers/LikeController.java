@@ -108,6 +108,7 @@ public class LikeController {
 	    }
 	}
 
+	// rest api endpoint test success in postman
 	@GetMapping("comments/{commentId}/likes/has-liked")
 	public ResponseEntity<Boolean> hasUserLikedComment(
 		    @PathVariable int commentId,
