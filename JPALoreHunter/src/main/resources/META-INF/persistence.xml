@@ -18,6 +18,7 @@
 		<class>com.skilldistillery.lorehunter.entities.Notification</class>
 		<class>com.skilldistillery.lorehunter.entities.UserNotification</class>
 		<class>com.skilldistillery.lorehunter.entities.UserNotificationId</class>
+		<class>com.skilldistillery.lorehunter.entities.Like</class>
 
 		<!-- end entities -->
 
