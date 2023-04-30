@@ -353,42 +353,110 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-// addReply(content: string, username: string) {
-//   const blockquote = `
-//     <blockquote class="my-blockquote">
-//       <div class="blockquote-body">
-//         <div class="blockquote-user">
-//           <p>${username} said:</p>
-//         </div>
-//         <div class="blockquote-content">
-//           <p>${content}</p>
-//         </div>
-//       </div>
-//     </blockquote><br>
-//   `;
+  // addReply(content: string, username: string) {
+  //   const blockquote = `<blockquote class="my-blockquote">
+  //                       <div class="blockquote-body">
+  //                         <div class="blockquote-user">
+  //                           <p>${username} said:</p>
+  //                         </div>
+  //                         <div class="blockquote-content">
+  //                           <p>${content}</p>
+  //                         </div>
+  //                       </div>
+  //                       </blockquote><br>`;
 
-//   if (this.ckeditorInstance && this.ckeditorInstance.editorInstance) {
-//     const currentData = this.ckeditorInstance.editorInstance.getData();
-//     this.ckeditorInstance.editorInstance.setData(currentData);
-//     this.ckeditorInstance.editorInstance.insertText(blockquote);
-//   }
-// }
-addReply(content: string, username: string) {
-  const blockquote = `<blockquote class="my-blockquote">
-                      <div class="blockquote-body">
-                        <div class="blockquote-user">
-                          <p>${username} said:</p>
-                        </div>
-                        <div class="blockquote-content">
-                          <p>${content}</p>
-                        </div>
-                      </div>
-                      </blockquote><br>`;
+  //   if (this.ckeditorInstance && this.ckeditorInstance.editorInstance) {
+  //     const currentData = this.ckeditorInstance.editorInstance.getData();
+  //     this.ckeditorInstance.editorInstance.setData(currentData + blockquote);
+  //   }
+  // }
 
-  if (this.ckeditorInstance && this.ckeditorInstance.editorInstance) {
-    const currentData = this.ckeditorInstance.editorInstance.getData();
-    this.ckeditorInstance.editorInstance.setData(currentData + blockquote);
+  addReply(content: string, username: string) {
+    const blockquote = `<blockquote class="my-blockquote">
+                          <div class="blockquote-body">
+                            <div class="blockquote-user">
+                              <p>${username} said:</p>
+                            </div>
+                            <div class="blockquote-content">
+                              <p>${content}</p>
+                            </div>
+                          </div>
+                        </blockquote><br>`;
+
+    if (this.ckeditorInstance && this.ckeditorInstance.editorInstance) {
+      const currentData = this.ckeditorInstance.editorInstance.getData();
+
+      // Check if the currentData already contains a blockquote
+      if (currentData.includes('<blockquote')) {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = currentData;
+
+        const paragraphs = tempDiv.querySelectorAll(':scope > p');
+
+        let nonBlockquoteContent = '';
+
+        paragraphs.forEach((paragraph: any) => {
+          if (!paragraph.closest('blockquote')) {
+            nonBlockquoteContent += paragraph.outerHTML;
+            paragraph.parentNode.removeChild(paragraph);
+          }
+        });
+
+        if (nonBlockquoteContent.trim() !== '') {
+          const updatedData = tempDiv.innerHTML + blockquote;
+
+          this.ckeditorInstance.editorInstance.setData(updatedData);
+          return;
+        }
+      }
+
+      // If no existing blockquote, add the new blockquote directly
+      this.ckeditorInstance.editorInstance.setData(currentData + blockquote);
+    }
   }
-}
+
+  // addReply(content: string, username: string) {
+  //   const blockquote = `
+  //     <blockquote class="my-blockquote">
+  //       <div class="blockquote-body">
+  //         <div class="blockquote-user">
+  //           <p>${username} said:</p>
+  //         </div>
+  //         <div class="blockquote-content">
+  //           <p>${content}</p>
+  //         </div>
+  //       </div>
+  //     </blockquote>
+  //   `;
+
+  //   const parser = new DOMParser();
+  //   const htmlDoc = parser.parseFromString(content, 'text/html');
+
+  //   const blockquoteElement = htmlDoc.querySelector('blockquote');
+  //   let extractedContent = '';
+
+  //   if (blockquoteElement) {
+  //     const nextSibling = blockquoteElement.nextElementSibling;
+
+  //     if (nextSibling) {
+  //       extractedContent = nextSibling.outerHTML;
+  //     }
+  //   }
+
+  //   if (blockquoteElement && extractedContent) {
+  //     const currentData = this.ckeditorInstance.editorInstance.getData();
+  //     const updatedData = currentData + extractedContent;
+
+  //     this.ckeditorInstance.editorInstance.setData(updatedData);
+  //   } else {
+  //     const currentData = this.ckeditorInstance.editorInstance.getData();
+  //     const updatedData = currentData + content;
+
+  //     this.ckeditorInstance.editorInstance.setData(updatedData);
+  //   }
+  // }
+
+
+
 
 }
