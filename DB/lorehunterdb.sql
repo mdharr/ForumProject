@@ -232,6 +232,31 @@ CREATE TABLE IF NOT EXISTS `user_notification` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `user_likes_comment`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_likes_comment` ;
+
+CREATE TABLE IF NOT EXISTS `user_likes_comment` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `comment_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_user_likes_comment_user1_idx` (`user_id` ASC),
+  INDEX `fk_user_likes_comment_comment1_idx` (`comment_id` ASC),
+  CONSTRAINT `fk_user_likes_comment_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_likes_comment_comment1`
+    FOREIGN KEY (`comment_id`)
+    REFERENCES `comment` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS lorehunter@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
