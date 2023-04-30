@@ -374,3 +374,13 @@ INSERT INTO `user_notification` (`user_id`, `notification_id`, `viewed`, `viewed
 
 COMMIT;
 
+
+-- -----------------------------------------------------
+-- Data for table `user_likes_comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `lorehunterdb`;
+INSERT INTO `user_likes_comment` (`id`, `user_id`, `comment_id`) VALUES (1, 3, 1);
+
+COMMIT;
+
