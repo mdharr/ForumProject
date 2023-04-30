@@ -23,6 +23,9 @@ body {
   --table-row-color-odd: #ffffff;
   --table-row-color-even: #f9f9fb;
   --table-filter-row: #f1f0f1;
+  --reply-user-bkg-color: #ffffff;
+  --reply-content-bkg-color: #f1f0f1;
+  --reply-border-color: rgb(158 159 162 / 12%);
 }
 body.dark-theme {
   --text-color: #eee;
@@ -36,6 +39,9 @@ body.dark-theme {
   --table-row-color-odd: #2a2a2c;
   --table-row-color-even: #2f2f31;
   --table-filter-row: #343436;
+  --reply-user-bkg-color: #2a2a2c;
+  --reply-content-bkg-color: #343436;
+  --reply-border-color: rgb(158 159 162 / 12%);
 }
 
 body {

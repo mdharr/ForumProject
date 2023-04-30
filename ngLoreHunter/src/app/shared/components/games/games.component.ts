@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
-import { map, Subscription } from 'rxjs';
+import { debounceTime, map, Subscription } from 'rxjs';
 import { Game } from 'src/app/models/game';
 import { GameService } from 'src/app/services/game.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -20,6 +20,7 @@ export class GamesComponent implements OnInit {
   games: any[] = [];
   searchResults: any[] | null = null;
   searchQuery: string = ''; // Add searchQuery variable
+  private searchDelay = 300; // Delay in milliseconds
 
   pages: number[] = [];
   page = 1; // Add page variable to track current page
@@ -35,6 +36,7 @@ export class GamesComponent implements OnInit {
   originalTransform: string = '';
 
   private subscription: Subscription = new Subscription();
+  private searchSubscription: Subscription = new Subscription;
 
   constructor(private gameService: GameService, private renderer: Renderer2, private el: ElementRef, private cdr: ChangeDetectorRef, private dialog: MatDialog) { }
 
@@ -46,6 +48,9 @@ export class GamesComponent implements OnInit {
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe(); // Unsubscribe from the subscription to avoid memory leaks
+    }
+    if (this.searchSubscription) {
+      this.searchSubscription.unsubscribe();
     }
   }
   @HostListener('document:click', ['$event'])
@@ -262,16 +267,24 @@ generatePageNumbers(currentPage: number, totalPages: number): number[] {
     if (searchQuery.trim() !== '') {
       this.isLoading = true; // Show the loading indicator
 
-      this.subscription = this.gameService.searchGames(searchQuery).subscribe(
-        (data: any[]) => {
-          this.searchResults = data;
-          this.isLoading = false; // Hide the loading indicator
-        },
-        error => {
-          console.error('Failed to search games:', error);
-          this.isLoading = false; // Hide the loading indicator in case of error
-        }
-      );
+      if (this.searchSubscription) {
+        this.searchSubscription.unsubscribe(); // Unsubscribe from previous search subscription
+      }
+
+      this.searchSubscription = this.gameService.searchGames(searchQuery)
+        .pipe(
+          debounceTime(this.searchDelay) // Add debounceTime operator to introduce delay
+        )
+        .subscribe({
+          next: (data: any[]) => {
+            this.searchResults = data;
+            this.isLoading = false; // Hide the loading indicator
+          },
+          error: (error: any) => {
+            console.error('Failed to search games:', error);
+            this.isLoading = false; // Hide the loading indicator in case of error
+          }
+        });
     } else {
       this.searchResults = null;
     }

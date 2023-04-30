@@ -18,11 +18,11 @@ export class NoSanitizePipe implements PipeTransform {
   blockquotes.forEach((blockquote: any) => {
     this.renderer.addClass(blockquote, 'message-body');
     this.renderer.setStyle(blockquote, 'margin', '0.5em 0');
-    this.renderer.setStyle(blockquote, 'background', '#f9fafa');
-    this.renderer.setStyle(blockquote, 'border', '1px solid #e0e0e0');
-    this.renderer.setStyle(blockquote, 'border-left', '2px solid #3f51b5');
+    // this.renderer.setStyle(blockquote, 'background', '#f9fafa');
+    // this.renderer.setStyle(blockquote, 'border', '1px solid #e0e0e0');
+    // this.renderer.setStyle(blockquote, 'border-left', '2px solid #3f51b5');
     this.renderer.setStyle(blockquote, 'padding-bottom', '0');
-    this.renderer.setStyle(blockquote, 'border-radius', '6px');
+    // this.renderer.setStyle(blockquote, 'border-radius', '6px');
 
   // Find all <p> tags inside the blockquote
   const paragraphs = blockquote.querySelectorAll('p');

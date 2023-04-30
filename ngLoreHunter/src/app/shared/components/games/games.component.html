@@ -38,7 +38,7 @@
       <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
     </div>
 
-      <div  *ngIf="searchResults" class="p-body">
+      <div *ngIf="searchResults && !isLoading" class="p-body">
         <div class="row item-grid2">
           <div class="card item-card" *ngFor="let game of searchResults" (click)="onCardClick($event)">
             <div class="item-card-image">
@@ -58,7 +58,7 @@
         </div>
       </div>
 
-    <div *ngIf="searchQuery === ''" class="p-body">
+    <div *ngIf="searchQuery === '' && !isLoading" class="p-body">
       <div class="row item-grid2">
         <div class="card item-card" *ngFor="let game of games" (click)="onCardClick($event)">
           <div class="item-card-image">
