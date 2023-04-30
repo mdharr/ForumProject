@@ -320,7 +320,9 @@
                   </article>
                 </div>
               </div>
-              <button class="reply-button" (click)="addReply(comment.content, comment.user.username)">Reply</button>
+              <div *ngIf="!comment.content.includes('blockquote')" class="reply-container" style="flex: 1;">
+                <a class="reply-button" (click)="addReply(comment.content, comment.user.username)"><span class="reply-element"><mat-icon class="material-icons reply-icon">reply</mat-icon><span>Reply</span></span></a>
+              </div>
             </div>
           </div>
         </div>

@@ -372,7 +372,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   // }
 
   addReply(content: string, username: string) {
-    const blockquote = `<blockquote class="my-blockquote">
+    const blockquote = `<br><blockquote class="my-blockquote">
                           <div class="blockquote-body">
                             <div class="blockquote-user">
                               <p>${username} said:</p>

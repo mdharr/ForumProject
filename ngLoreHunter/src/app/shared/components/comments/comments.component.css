@@ -950,3 +950,21 @@ blockquote span{
   margin: 0;
 }
 
+.reply-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.reply-element {
+  display:flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.reply-icon {
+  cursor: pointer;
+  color: var(--text-color);
+}
+
