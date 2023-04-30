@@ -10,7 +10,7 @@ import { HomeService } from 'src/app/services/home.service';
 import { PostService } from 'src/app/services/post.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
-import { catchError, EMPTY, map, Observable, of, Subscription, switchMap } from 'rxjs';
+import { catchError, EMPTY, map, Observable, of, Subscription, switchMap, Observer } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { User } from 'src/app/models/user';
 import { PostDataSource } from 'src/app/services/post.dataSource';
@@ -19,6 +19,8 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormControl, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
+import { LikeService } from 'src/app/services/like.service';
+import { Like } from 'src/app/models/like';
 
 
 @Component({
@@ -86,6 +88,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
     private _renderer: Renderer2,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
+    private likeService: LikeService,
     ) {
 
     }
@@ -353,8 +356,25 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  createLike() {
+  createLike(commentId: number, user: User) {
+    this.likeService.createLike(commentId, user)
+      .subscribe(
+        (like: Like) => {
+          // Like created successfully
+          // Update the UI or perform any other necessary actions
+          // this.showFireworkAnimation = true; // Set the flag to show the firework animation
 
+          // Refresh the comments or update the affected comment in the comments array if needed
+          // this.loadComments();
+        },
+        (error: any) => {
+          // Handle the error
+          console.error('Error creating like:', error);
+        },
+        () => {
+          // Optional complete callback
+        }
+      );
   }
 
   // addReply(content: string, username: string) {

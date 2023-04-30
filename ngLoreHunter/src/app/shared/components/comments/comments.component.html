@@ -325,13 +325,13 @@
               </div>
               <!-- Add the like button here -->
               <div class="like-button-container">
-                <button (click)="createLike(comment.id, loggedInUser.id)" class="like-button">
+                <button (click)="createLike(comment.id, loggedInUser)" class="like-button">
                   <mat-icon class="like-icon">thumb_up</mat-icon>
                   Like
                 </button>
-                <div *ngIf="showFireworkAnimation" class="firework-animation">
+                <!-- <div *ngIf="showFireworkAnimation" class="firework-animation"> -->
                   <!-- Add your firework animation markup or component here -->
-                </div>
+                <!-- </div> -->
               </div>
               <div *ngIf="!comment.content.includes('blockquote')" class="reply-container" style="flex: 1;">
                 <a class="reply-button" (click)="addReply(comment.content, comment.user.username)"><span class="reply-element"><mat-icon class="material-icons reply-icon">reply</mat-icon><span>Reply</span></span></a>
