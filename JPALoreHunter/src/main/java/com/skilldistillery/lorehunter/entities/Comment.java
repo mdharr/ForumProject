@@ -1,8 +1,11 @@
 package com.skilldistillery.lorehunter.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -49,6 +53,9 @@ public class Comment {
 	
 	private Boolean enabled;
 	
+	@OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Like> likes = new ArrayList<>();
+	
 //    @Column(name = "parent_id")
 //    private Integer parentId;
 
@@ -56,10 +63,8 @@ public class Comment {
 		super();
 	}
 
-
-
 	public Comment(int id, String content, LocalDateTime createdAt, String status, LocalDateTime lastEdited, User user,
-			Post post, Boolean enabled, Integer parentId) {
+			Post post, Boolean enabled, List<Like> likes) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -69,10 +74,8 @@ public class Comment {
 		this.user = user;
 		this.post = post;
 		this.enabled = enabled;
-//		this.parentId = parentId;
+		this.likes = likes;
 	}
-
-
 
 	public int getId() {
 		return id;
@@ -146,6 +149,14 @@ public class Comment {
 //		this.parentId = parentId;
 //	}
 
+	public List<Like> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(List<Like> likes) {
+		this.likes = likes;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -163,15 +174,29 @@ public class Comment {
 		return id == other.id;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", content=" + content + ", createdAt=" + createdAt + ", status=" + status
-				+ ", lastEdited=" + lastEdited + ", user=" + user + ", post=" + post + ", enabled=" + enabled
-				+ "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Comment [id=");
+		builder.append(id);
+		builder.append(", content=");
+		builder.append(content);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", status=");
+		builder.append(status);
+		builder.append(", lastEdited=");
+		builder.append(lastEdited);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", post=");
+		builder.append(post);
+		builder.append(", enabled=");
+		builder.append(enabled);
+		builder.append(", likes=");
+		builder.append(likes);
+		builder.append("]");
+		return builder.toString();
 	}
-
-
 
 }
