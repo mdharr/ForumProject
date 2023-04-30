@@ -357,25 +357,57 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   createLike(commentId: number, user: User) {
-    this.likeService.createLike(commentId, user)
-      .subscribe(
-        (like: Like) => {
-          // Like created successfully
-          // Update the UI or perform any other necessary actions
-          // this.showFireworkAnimation = true; // Set the flag to show the firework animation
+    this.likeService.hasUserLikedComment(commentId, user).subscribe(
+      (hasLiked: boolean) => {
+        if (hasLiked) {
+          // User has already liked the comment, delete the like instead
+          this.likeService.deleteLike(commentId).subscribe(
+            () => {
+              // Like deleted successfully
+              // Update the UI or perform any other necessary actions
 
-          // Refresh the comments or update the affected comment in the comments array if needed
-          // this.loadComments();
-        },
-        (error: any) => {
-          // Handle the error
-          console.error('Error creating like:', error);
-        },
-        () => {
-          // Optional complete callback
+              // Remove the animated class if it exists
+              const button = document.querySelector('.like-button');
+              button?.classList.remove('animated');
+
+              // Refresh the comments or update the affected comment in the comments array if needed
+              // this.loadComments();
+            },
+            (error: any) => {
+              // Handle the error
+              console.error('Error deleting like:', error);
+            }
+          );
+        } else {
+          // User hasn't liked the comment, create the like
+          this.likeService.createLike(commentId, user).subscribe(
+            (like: Like) => {
+              // Like created successfully
+              // Update the UI or perform any other necessary actions
+
+              // Add the animated class to trigger the animation
+              const button = document.querySelector('.like-button');
+              button?.classList.add('animated');
+
+              // Refresh the comments or update the affected comment in the comments array if needed
+              // this.loadComments();
+            },
+            (error: any) => {
+              // Handle the error
+              console.error('Error creating like:', error);
+            }
+          );
         }
-      );
+      },
+      (error: any) => {
+        // Handle the error
+        console.error('Error checking if user liked comment:', error);
+      }
+    );
   }
+
+
+
 
   // addReply(content: string, username: string) {
   //   const blockquote = `<blockquote class="my-blockquote">

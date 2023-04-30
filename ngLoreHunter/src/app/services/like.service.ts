@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Like } from '../models/like';
 import { User } from '../models/user';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,17 @@ import { User } from '../models/user';
 export class LikeService {
   private url = environment.baseUrl + 'api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
+
+  getHttpOptions() {
+    let options = {
+      headers: {
+        Authorization: 'Basic ' + this.authService.getCredentials(),
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    };
+    return options;
+  }
 
   createLike(commentId: number, user: User): Observable<Like> {
     const url = `${this.url}/comments/${commentId}/likes`;
@@ -28,19 +39,19 @@ export class LikeService {
     );
   }
 
-  deleteLike(likeId: number): Observable<any> {
+  deleteLike(likeId: number) {
     const url = `${this.url}/likes/${likeId}`;
-    return this.http.delete(url).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(
-          () =>
-            new Error(
-              'LikeService.deleteLike() error deleting like' + err
-            )
-        );
-      })
-    );
+    const options = this.getHttpOptions();
+
+    return this.http.delete(url, options)
+      .pipe(
+        catchError((error: any) => {
+          console.log(error);
+          return throwError(
+            new Error('LikeService.deleteLike() error deleting like')
+          );
+        })
+      );
   }
 
   getLikeCount(commentId: number): Observable<number> {
@@ -60,16 +71,23 @@ export class LikeService {
 
   hasUserLikedComment(commentId: number, user: User): Observable<boolean> {
     const url = `${this.url}/comments/${commentId}/likes/has-liked`;
-    return this.http.post<boolean>(url, user).pipe(
+    const options = this.getHttpOptions();
+    return this.http.post<boolean>(url, user, options).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError(
-          () =>
-            new Error(
-              'LikeService.hasUserLikedComment() error retrieving user liked comment boolean value' + err
-            )
-        );
+        return throwError(() => {
+          const error = new Error(
+            'LikeService.hasUserLikedComment() error retrieving user liked comment boolean value' + err
+          );
+          return error;
+        });
       })
     );
   }
+
+
+
+
+
+
 }
