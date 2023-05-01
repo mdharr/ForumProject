@@ -21,70 +21,72 @@
       </button>
     </div>
   </div>
-
-  <div class="article-container"  *ngIf="(trendingPosts$ | async)!.length > 0">
-    <article class="message-outer" *ngFor="let post of trendingPosts$ | async; let i = index">
-      <span class="anchorTarget"></span>
-      <div class="message-inner">
-        <div class="message-cell message-cell-user">
-          <section class="message-user">
-            <div class="message-avatar">
-              <div class="message-avatar-wrapper">
-                <a class="user-profile-link" [routerLink]="['/users', post.user.id]">
-                  <img class="user-avatar" src="{{ post.user.imageUrl }}" alt="">
-                </a>
-              </div>
-            </div>
-            <div class="user-details-wrapper">
-              <div class="userDetails"></div>
-              <div class="userExtras"></div>
-            </div>
-          </section>
-        </div>
-        <div class="message-cell message-cell-main">
-          <div class="message-main">
-            <div class="message-content">
-              <a class="post-link" (click)="getCategoryIdAndNavigateToComments(post.id);" [innerHtml]='post.subject'></a>
-              <!-- (click)="incrementViewCount(this.categoryId, post.id);" -->
-            </div>
-            <div class="message-content-details">
-              <div class="message-user-details">
-                <div>
-                  <p [routerLink]="['/users', post.user.id]" class="p-content user-profile-link">{{ post.user.username }}</p>
-                </div>
-                <div>
-                  <p class="p-content"><span style="margin-left: 5px; margin-right: 5px;">&#183;</span> {{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</p>
+  <ng-container *ngIf="trendingPosts$ | async as trendingPosts">
+    <div class="article-container"  *ngIf="trendingPosts.length > 0">
+      <article class="message-outer" *ngFor="let post of trendingPosts$ | async; let i = index">
+        <span class="anchorTarget"></span>
+        <div class="message-inner">
+          <div class="message-cell message-cell-user">
+            <section class="message-user">
+              <div class="message-avatar">
+                <div class="message-avatar-wrapper">
+                  <a class="user-profile-link" [routerLink]="['/users', post.user.id]">
+                    <img class="user-avatar" src="{{ post.user.imageUrl }}" alt="">
+                  </a>
                 </div>
               </div>
-              <div class="message-metadetails">
-                <mat-icon id="trending-icon" *ngIf="post.isTrending">bar_chart</mat-icon>
-                <div class="view-count">
-                  <mat-icon class="mat-icons">visibility</mat-icon>
-                  <p class="p-content">{{ post.viewCount }}</p>
+              <div class="user-details-wrapper">
+                <div class="userDetails"></div>
+                <div class="userExtras"></div>
+              </div>
+            </section>
+          </div>
+          <div class="message-cell message-cell-main">
+            <div class="message-main">
+              <div class="message-content">
+                <a class="post-link" (click)="getCategoryIdAndNavigateToComments(post.id);" [innerHtml]='post.subject'></a>
+                <!-- (click)="incrementViewCount(this.categoryId, post.id);" -->
+              </div>
+              <div class="message-content-details">
+                <div class="message-user-details">
+                  <div>
+                    <p [routerLink]="['/users', post.user.id]" class="p-content user-profile-link">{{ post.user.username }}</p>
+                  </div>
+                  <div>
+                    <p class="p-content"><span style="margin-left: 5px; margin-right: 5px;">&#183;</span> {{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</p>
+                  </div>
                 </div>
-                <div class="comment-count">
-                  <mat-icon class="mat-icons" style="margin-left: 8px;">chat_bubble</mat-icon>
-                  <p class="p-content">{{ post.comments.length + 1}}</p>
+                <div class="message-metadetails">
+                  <mat-icon id="trending-icon" *ngIf="post.isTrending">bar_chart</mat-icon>
+                  <div class="view-count">
+                    <mat-icon class="mat-icons">visibility</mat-icon>
+                    <p class="p-content">{{ post.viewCount }}</p>
+                  </div>
+                  <div class="comment-count">
+                    <mat-icon class="mat-icons" style="margin-left: 8px;">chat_bubble</mat-icon>
+                    <p class="p-content">{{ post.comments.length + 1}}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <div class="latest-comment-details" *ngFor="let comment of post.comments; let i = index;">
+            <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-date">{{ comment.createdAt | date:'shortDate' }} at {{ comment.createdAt | date:'shortTime' }}</div>
+            <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-user user-profile-link" [routerLink]="['/users', comment.user.id]">{{ comment.user.username }}</div>
+            <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
+            <div *ngIf="post.comments.length < 1" class="latest-comment-date user-profile-link" [routerLink]="['/users', post.user.id]">{{ post.user.username }}</div>
+          </div>
+          <div class="latest-comment-details" *ngIf="post.comments.length < 1">
+            <div class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
+            <div class="latest-comment-date user-profile-link" [routerLink]="['/users', post.user.id]">{{ post.user.username }}</div>
+          </div>
         </div>
-        <div class="latest-comment-details" *ngFor="let comment of post.comments; let i = index;">
-          <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-date">{{ comment.createdAt | date:'shortDate' }} at {{ comment.createdAt | date:'shortTime' }}</div>
-          <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-user user-profile-link" [routerLink]="['/users', comment.user.id]">{{ comment.user.username }}</div>
-          <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
-          <div *ngIf="post.comments.length < 1" class="latest-comment-date user-profile-link" [routerLink]="['/users', post.user.id]">{{ post.user.username }}</div>
-        </div>
-        <div class="latest-comment-details" *ngIf="post.comments.length < 1">
-          <div class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
-          <div class="latest-comment-date user-profile-link" [routerLink]="['/users', post.user.id]">{{ post.user.username }}</div>
-        </div>
-      </div>
-    </article>
-  </div>
+      </article>
+    </div>
+  </ng-container>
 
-  <div class="article-container"  *ngIf="(trendingPosts$ | async)!.length == 0">
+  <ng-container *ngIf="trendingPosts$ | async as trendingPosts">
+  <div class="article-container"  *ngIf="trendingPosts.length == 0">
     <article class="message-outer">
       <span class="anchorTarget"></span>
       <div class="message-inner">
@@ -102,7 +104,7 @@
       </div>
     </article>
   </div>
-
+  </ng-container>
 </div>
 
 <div class="breadcrumb-outer-bottom">
