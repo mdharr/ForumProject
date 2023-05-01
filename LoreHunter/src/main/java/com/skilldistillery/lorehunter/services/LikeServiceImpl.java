@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.lorehunter.entities.Comment;
 import com.skilldistillery.lorehunter.entities.Like;
 import com.skilldistillery.lorehunter.entities.User;
+import com.skilldistillery.lorehunter.repositories.CommentRepository;
 import com.skilldistillery.lorehunter.repositories.LikeRepository;
 import com.skilldistillery.lorehunter.repositories.UserRepository;
 
@@ -21,6 +22,9 @@ public class LikeServiceImpl implements LikeService {
 	
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private CommentRepository commentRepo;
 
 	@Override
 	public Like createLike(Comment comment, String username) {
@@ -61,6 +65,14 @@ public class LikeServiceImpl implements LikeService {
 	    User user = userRepo.findByUsername(username);
 	    return likeRepo.existsByUserAndComment(user, comment);
 	}
+
+	@Override
+	public Integer getLikeId(String username, Comment comment) {
+	    User user = userRepo.findByUsername(username);
+	    Like like = likeRepo.findByUserAndComment(user, comment);
+	    return like != null ? like.getId() : null;
+	}
+
 
 
 }

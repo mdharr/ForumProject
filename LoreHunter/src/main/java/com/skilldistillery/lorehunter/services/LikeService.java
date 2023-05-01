@@ -16,4 +16,6 @@ public interface LikeService {
 
     public boolean hasUserLikedComment(String username, Comment comment);
 
+	Integer getLikeId(String username, Comment comment);
+
 }

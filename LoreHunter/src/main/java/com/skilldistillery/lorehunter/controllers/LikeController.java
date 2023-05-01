@@ -134,7 +134,33 @@ public class LikeController {
 
 	// rest api endpoint test success in postman
 	@GetMapping("comments/{commentId}/likes/has-liked")
-	public ResponseEntity<Boolean> hasUserLikedComment(
+	public boolean hasUserLikedComment(
+	    @PathVariable int commentId,
+	    Principal principal) {
+	    try {
+	        // Retrieve the comment from the database using commentId
+	        Optional<Comment> commentOptional = commentRepo.findById(commentId);
+	        if (!commentOptional.isPresent()) {
+	            return false;
+	        }
+	        Comment comment = commentOptional.get();
+
+	        // Retrieve the username from the Principal
+	        String username = principal.getName();
+
+	        // Invoke the likeService.hasUserLikedComment() method to check if the user has liked the comment
+	        boolean hasLiked = likeService.hasUserLikedComment(username, comment);
+
+	        return hasLiked;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
+
+	@GetMapping("comments/{commentId}/likes/like-id")
+	public ResponseEntity<Integer> getLikeId(
 	        @PathVariable int commentId,
 	        Principal principal) {
 	    try {
@@ -148,16 +174,17 @@ public class LikeController {
 	        // Retrieve the username from the Principal
 	        String username = principal.getName();
 
-	        // Invoke the likeService.hasUserLikedComment() method to check if the user has liked the comment
-	        boolean hasLiked = likeService.hasUserLikedComment(username, comment);
+	        // Retrieve the likeId from the likeService
+	        Integer likeId = likeService.getLikeId(username, comment);
 
-	        // Return the result in the response body (e.g., 200 OK)
-	        return ResponseEntity.ok(hasLiked);
+	        // Return the likeId in the response body (e.g., 200 OK)
+	        return ResponseEntity.ok(likeId);
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	    }
 	}
+
 
 
 

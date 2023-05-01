@@ -361,29 +361,22 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.likeService.hasUserLikedComment(commentId).subscribe(
       (response: { hasLiked: boolean; likeId: number | null }) => {
-        console.log('Has user liked comment?', response.hasLiked);
+        console.log('Response:', response);
 
+        const hasLiked = response.hasLiked;
         const likeId = response.likeId;
 
-        if (response.hasLiked && likeId) {
+        console.log('Has user liked comment?', hasLiked);
+        console.log('likeId:', likeId);
+
+        if (hasLiked && likeId) {
           // User has already liked the comment, delete the previous like first
           console.log('Deleting previous like');
           this.likeService.deleteLike(likeId).subscribe(
             () => {
               console.log('Previous like deleted successfully');
               // Previous like deleted successfully
-              // Proceed with creating the new like
-              this.likeService.createLike(commentId).subscribe(
-                (like: Like) => {
-                  console.log('Like created successfully:', like);
-                  // Like created successfully
-                  // Update the UI or perform any other necessary actions
-                  // ...
-                },
-                (error: any) => {
-                  console.error('Error creating like:', error);
-                }
-              );
+              // Do not proceed with creating a new like
             },
             (error: any) => {
               console.error('Error deleting previous like:', error);
@@ -409,8 +402,8 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
         console.error('Error checking if user liked comment:', error);
       }
     );
-
   }
+
 
   // addReply(content: string, username: string) {
   //   const blockquote = `<blockquote class="my-blockquote">
