@@ -1,5 +1,6 @@
 package com.skilldistillery.lorehunter.controllers;
 
+import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,8 @@ public class LikeController {
 	
 	@PostMapping("comments/{commentId}/likes")
 	public ResponseEntity<?> createLike(
-		    @PathVariable int commentId,
-		    @RequestBody User user) {
+	        Principal principal,
+	        @PathVariable int commentId) {
 	    // Retrieve the comment from the database using commentId
 	    Optional<Comment> commentOptional = commentRepo.findById(commentId);
 	    if (!commentOptional.isPresent()) {
@@ -50,12 +51,14 @@ public class LikeController {
 	    }
 	    Comment comment = commentOptional.get();
 
-	    // Retrieve the user from the database using user ID or any authentication mechanism
-	    Optional<User> userOptional = userRepo.findById(user.getId());
-	    if (!userOptional.isPresent()) {
+	    // Get the authenticated user's username from the Principal
+	    String username = principal.getName();
+
+	    // Retrieve the user from the database using the username
+	    User authenticatedUser = userRepo.findByUsername(username);
+	    if (authenticatedUser == null) {
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	    }
-	    User authenticatedUser = userOptional.get();
 
 	    // Invoke the likeService.createLike() method to create a like
 	    Like like = likeService.createLike(comment, authenticatedUser);
@@ -64,9 +67,13 @@ public class LikeController {
 	    return ResponseEntity.status(HttpStatus.CREATED).body(like);
 	}
 
+
+
 	// rest api endpoint test success in postman
 	@DeleteMapping("likes/{likeId}")
-	public ResponseEntity<?> deleteLike(@PathVariable int likeId) {
+	public ResponseEntity<?> deleteLike(
+	        Principal principal,
+	        @PathVariable int likeId) {
 	    try {
 	        // Retrieve the like from the database using likeId
 	        Optional<Like> likeOptional = likeRepo.findById(likeId);
@@ -75,11 +82,31 @@ public class LikeController {
 	        }
 	        Like like = likeOptional.get();
 
-	        // Invoke the likeService.deleteLike() method to delete the like
-	        likeService.deleteLike(like);
+	        // Get the authenticated user's username from the Principal
+	        String username = principal.getName();
 
-	        // Return the appropriate response (e.g., 200 OK)
-	        return ResponseEntity.ok().build();
+	        // Retrieve the user from the database using the username
+	        User authenticatedUser = userRepo.findByUsername(username);
+	        if (authenticatedUser == null) {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	        }
+
+	        // Check if the authenticated user is the owner of the like
+	        if (like.getUser().equals(authenticatedUser)) {
+	            // Invoke the likeService.deleteLike() method to delete the like
+	            ResponseEntity<?> response = likeService.deleteLike(likeId);
+
+	            if (response.getStatusCode() == HttpStatus.OK) {
+	                // Like deleted successfully
+	                return ResponseEntity.ok().build();
+	            } else {
+	                // Other error occurred
+	                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	            }
+	        } else {
+	            // Unauthorized access, authenticated user is not the owner of the like
+	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -111,10 +138,10 @@ public class LikeController {
 	}
 
 	// rest api endpoint test success in postman
-	@PostMapping("comments/{commentId}/likes/has-liked")
+	@GetMapping("comments/{commentId}/likes/has-liked")
 	public ResponseEntity<Boolean> hasUserLikedComment(
-		    @PathVariable int commentId,
-		    @RequestBody User user) {
+	        @PathVariable int commentId,
+	        Principal principal) {
 	    try {
 	        // Retrieve the comment from the database using commentId
 	        Optional<Comment> commentOptional = commentRepo.findById(commentId);
@@ -123,15 +150,11 @@ public class LikeController {
 	        }
 	        Comment comment = commentOptional.get();
 
-	        // Retrieve the user from the database using user ID or any authentication mechanism
-	        Optional<User> userOptional = userRepo.findById(user.getId());
-	        if (!userOptional.isPresent()) {
-	            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-	        }
-	        User authenticatedUser = userOptional.get();
+	        // Retrieve the username from the Principal
+	        String username = principal.getName();
 
 	        // Invoke the likeService.hasUserLikedComment() method to check if the user has liked the comment
-	        boolean hasLiked = likeService.hasUserLikedComment(authenticatedUser, comment);
+	        boolean hasLiked = likeService.hasUserLikedComment(username, comment);
 
 	        // Return the result in the response body (e.g., 200 OK)
 	        return ResponseEntity.ok(hasLiked);
@@ -140,6 +163,7 @@ public class LikeController {
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	    }
 	}
+
 
 
 

@@ -39,20 +39,17 @@ export class LikeService {
     );
   }
 
-  deleteLike(likeId: number) {
+  deleteLike(likeId: number): Observable<void> {
     const url = `${this.url}/likes/${likeId}`;
     const options = this.getHttpOptions();
-
-    return this.http.delete(url, options)
-      .pipe(
-        catchError((error: any) => {
-          console.log(error);
-          return throwError(
-            new Error('LikeService.deleteLike() error deleting like')
-          );
-        })
-      );
+    return this.http.delete<void>(url, options).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(new Error('LikeService.deleteLike() error deleting like: ' + err));
+      })
+    );
   }
+
 
   getLikeCount(commentId: number): Observable<number> {
     const url = `${this.url}/comments/${commentId}/likes/count`;
@@ -69,10 +66,10 @@ export class LikeService {
     );
   }
 
-  hasUserLikedComment(commentId: number, user: User): Observable<boolean> {
+  hasUserLikedComment(commentId: number, user: User): Observable<{ hasLiked: boolean, likeId: number }> {
     const url = `${this.url}/comments/${commentId}/likes/has-liked`;
     const options = this.getHttpOptions();
-    return this.http.post<boolean>(url, user, options).pipe(
+    return this.http.post<{ hasLiked: boolean, likeId: number }>(url, user, options).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(() => {
@@ -84,6 +81,7 @@ export class LikeService {
       })
     );
   }
+
 
 
 

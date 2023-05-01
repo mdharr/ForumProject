@@ -1,18 +1,26 @@
 package com.skilldistillery.lorehunter.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.lorehunter.entities.Comment;
 import com.skilldistillery.lorehunter.entities.Like;
 import com.skilldistillery.lorehunter.entities.User;
 import com.skilldistillery.lorehunter.repositories.LikeRepository;
+import com.skilldistillery.lorehunter.repositories.UserRepository;
 
 @Service
 public class LikeServiceImpl implements LikeService {
 	
 	@Autowired
 	private LikeRepository likeRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override
     public Like createLike(Comment comment, User user) {
@@ -23,17 +31,16 @@ public class LikeServiceImpl implements LikeService {
     }
 
 	@Override
-	public void deleteLike(Like like) {
-	    Comment comment = like.getComment();
-
-	    // Remove the like from the comment's list of likes
-	    comment.getLikes().remove(like);
-
-	    // Remove the comment reference from the like
-	    like.setComment(null);
-
-	    // Delete the like from the database
-	    likeRepo.delete(like);
+	public ResponseEntity<?> deleteLike(int likeId) {
+	    // Retrieve the like from the database using likeId
+	    Optional<Like> likeOptional = likeRepo.findById(likeId);
+	    if (likeOptional.isPresent()) {
+	        Like like = likeOptional.get();
+	        likeRepo.delete(like);
+	        return ResponseEntity.ok().build();
+	    } else {
+	        return ResponseEntity.notFound().build();
+	    }
 	}
 
 	@Override
@@ -42,8 +49,10 @@ public class LikeServiceImpl implements LikeService {
     }
 
 	@Override
-    public boolean hasUserLikedComment(User user, Comment comment) {
-        return likeRepo.existsByUserAndComment(user, comment);
-    }
+	public boolean hasUserLikedComment(String username, Comment comment) {
+	    User user = userRepo.findByUsername(username);
+	    return likeRepo.existsByUserAndComment(user, comment);
+	}
+
 
 }
