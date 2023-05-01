@@ -24,9 +24,16 @@ export class LikeService {
     return options;
   }
 
-  createLike(commentId: number, user: User): Observable<Like> {
+  createLike(commentId: number): Observable<Like> {
     const url = `${this.url}/comments/${commentId}/likes`;
-    return this.http.post<Like>(url, user).pipe(
+    const options = this.getHttpOptions();
+
+    // Create the request body object
+    const requestBody = {
+      commentId: commentId
+    };
+
+    return this.http.post<Like>(url, requestBody, options).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -38,6 +45,8 @@ export class LikeService {
       })
     );
   }
+
+
 
   deleteLike(likeId: number): Observable<void> {
     const url = `${this.url}/likes/${likeId}`;
@@ -66,10 +75,10 @@ export class LikeService {
     );
   }
 
-  hasUserLikedComment(commentId: number, user: User): Observable<{ hasLiked: boolean, likeId: number }> {
+  hasUserLikedComment(commentId: number): Observable<{ hasLiked: boolean, likeId: number | null }> {
     const url = `${this.url}/comments/${commentId}/likes/has-liked`;
     const options = this.getHttpOptions();
-    return this.http.post<{ hasLiked: boolean, likeId: number }>(url, user, options).pipe(
+    return this.http.get<{ hasLiked: boolean, likeId: number | null }>(url, options).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(() => {
@@ -81,11 +90,5 @@ export class LikeService {
       })
     );
   }
-
-
-
-
-
-
 
 }

@@ -356,77 +356,61 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  createLike(commentId: number, user: User) {
-    this.likeService.hasUserLikedComment(commentId, user).subscribe(
-      (result: { hasLiked: boolean, likeId: number }) => {
-        if (result.hasLiked) {
+  createLike(commentId: number) {
+    console.log('Creating like for commentId:', commentId);
+
+    this.likeService.hasUserLikedComment(commentId).subscribe(
+      (response: { hasLiked: boolean; likeId: number | null }) => {
+        console.log('Has user liked comment?', response.hasLiked);
+
+        const likeId = response.likeId;
+
+        if (response.hasLiked && likeId) {
           // User has already liked the comment, delete the previous like first
-          this.likeService.deleteLike(result.likeId).subscribe(
+          console.log('Deleting previous like');
+          this.likeService.deleteLike(likeId).subscribe(
             () => {
+              console.log('Previous like deleted successfully');
               // Previous like deleted successfully
               // Proceed with creating the new like
-              this.likeService.createLike(commentId, user).subscribe(
+              this.likeService.createLike(commentId).subscribe(
                 (like: Like) => {
+                  console.log('Like created successfully:', like);
                   // Like created successfully
                   // Update the UI or perform any other necessary actions
-
-                  // Remove the animated class if it exists
-                  const button = document.querySelector('.like-button');
-                  button?.classList.remove('animated');
-
-                  // Add the animated class to trigger the animation
-                  setTimeout(() => {
-                    button?.classList.add('animated');
-                  }, 0);
-
-                  // Refresh the comments or update the affected comment in the comments array if needed
-                  // this.loadComments();
+                  // ...
                 },
                 (error: any) => {
-                  // Handle the error
                   console.error('Error creating like:', error);
                 }
               );
             },
             (error: any) => {
-              // Handle the error
               console.error('Error deleting previous like:', error);
             }
           );
         } else {
           // User hasn't liked the comment, create the like directly
-          this.likeService.createLike(commentId, user).subscribe(
+          console.log('Creating new like');
+          this.likeService.createLike(commentId).subscribe(
             (like: Like) => {
+              console.log('Like created successfully:', like);
               // Like created successfully
               // Update the UI or perform any other necessary actions
-
-              // Add the animated class to trigger the animation
-              const button = document.querySelector('.like-button');
-              button?.classList.add('animated');
-
-              // Refresh the comments or update the affected comment in the comments array if needed
-              // this.loadComments();
+              // ...
             },
             (error: any) => {
-              // Handle the error
               console.error('Error creating like:', error);
             }
           );
         }
       },
       (error: any) => {
-        // Handle the error
         console.error('Error checking if user liked comment:', error);
       }
     );
+
   }
-
-
-
-
-
-
-
 
   // addReply(content: string, username: string) {
   //   const blockquote = `<blockquote class="my-blockquote">

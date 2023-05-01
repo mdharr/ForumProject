@@ -8,7 +8,7 @@ import com.skilldistillery.lorehunter.entities.User;
 
 public interface LikeService {
 
-    public Like createLike(Comment comment, User user);
+    public Like createLike(Comment comment, String username);
 
     public ResponseEntity<?> deleteLike(int likeId);
 

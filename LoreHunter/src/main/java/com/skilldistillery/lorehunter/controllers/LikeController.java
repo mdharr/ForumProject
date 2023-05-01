@@ -42,8 +42,8 @@ public class LikeController {
 	
 	@PostMapping("comments/{commentId}/likes")
 	public ResponseEntity<?> createLike(
-	        Principal principal,
-	        @PathVariable int commentId) {
+	    Principal principal,
+	    @PathVariable int commentId) {
 	    // Retrieve the comment from the database using commentId
 	    Optional<Comment> commentOptional = commentRepo.findById(commentId);
 	    if (!commentOptional.isPresent()) {
@@ -54,20 +54,16 @@ public class LikeController {
 	    // Get the authenticated user's username from the Principal
 	    String username = principal.getName();
 
-	    // Retrieve the user from the database using the username
-	    User authenticatedUser = userRepo.findByUsername(username);
-	    if (authenticatedUser == null) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-	    }
-
 	    // Invoke the likeService.createLike() method to create a like
-	    Like like = likeService.createLike(comment, authenticatedUser);
+	    Like like = likeService.createLike(comment, username);
+
+	    if (like == null) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	    }
 
 	    // Return the appropriate response (e.g., 201 Created)
 	    return ResponseEntity.status(HttpStatus.CREATED).body(like);
 	}
-
-
 
 	// rest api endpoint test success in postman
 	@DeleteMapping("likes/{likeId}")
@@ -112,7 +108,6 @@ public class LikeController {
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	    }
 	}
-
 
 	// rest api endpoint test success in postman
 	@GetMapping("comments/{commentId}/likes/count")

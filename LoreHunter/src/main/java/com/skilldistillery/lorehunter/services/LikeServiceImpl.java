@@ -23,12 +23,20 @@ public class LikeServiceImpl implements LikeService {
 	private UserRepository userRepo;
 
 	@Override
-    public Like createLike(Comment comment, User user) {
-        Like like = new Like();
-        like.setComment(comment);
-        like.setUser(user);
-        return likeRepo.save(like);
-    }
+	public Like createLike(Comment comment, String username) {
+	    // Retrieve the user from the database using the username
+	    User user = userRepo.findByUsername(username);
+	    if (user == null) {
+	        // Handle the case where the user is not found
+	        return null;
+	    }
+
+	    Like like = new Like();
+	    like.setComment(comment);
+	    like.setUser(user);
+	    return likeRepo.save(like);
+	}
+
 
 	@Override
 	public ResponseEntity<?> deleteLike(int likeId) {
