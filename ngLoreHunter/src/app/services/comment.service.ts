@@ -93,4 +93,18 @@ export class CommentService {
     );
   }
 
+  getUserComments(userId: number): Observable<Comment[]> {
+    return this.http.get<Comment[]>(this.url + '/users/' + userId + '/comments').pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(
+              'CommentService.getUserComments(): error retrieving user comments: ' + err
+            )
+        );
+      })
+    );
+  }
+
 }

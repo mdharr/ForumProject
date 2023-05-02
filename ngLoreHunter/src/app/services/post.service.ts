@@ -204,7 +204,7 @@ export class PostService {
           return throwError(
             () =>
               new Error(
-                'PostService.index(): error retrieving post list: ' + err
+                'PostService.getUserPosts(): error retrieving user posts: ' + err
               )
           );
         })
