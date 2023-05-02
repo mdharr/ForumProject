@@ -39,7 +39,11 @@ dl.pairs {
 
 ::ng-deep .mdc-list-item:hover {
   background: #f44336;
-  color: #fff;
+  color: #fff !important;
+}
+
+::ng-deep .mdc-list-item .mdc-list-item__content .mat-mdc-list-item-unscoped-content .mdc-list-item__primary-text .pairs:hover {
+  color: #fff !important;
 }
 
 .pairs {
