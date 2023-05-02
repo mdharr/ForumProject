@@ -128,5 +128,11 @@ public class PostController {
 		postService.pinPost(post.getId(), post.getCategory().getId());
 		return post;
 	}
+	
+	@GetMapping("users/{uid}/posts")
+	public List<Post> userPosts(@PathVariable("uid") int userId, HttpServletRequest req, HttpServletResponse res) {
+		return postService.findByUserId(userId);
+	}
+		
 
 }

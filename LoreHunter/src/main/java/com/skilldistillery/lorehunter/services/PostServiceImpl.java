@@ -116,4 +116,9 @@ public class PostServiceImpl implements PostService {
 		return true;
 	}
 
+	@Override
+	public List<Post> findByUserId(int userId) {
+		return postRepo.findByUser_Id(userId);
+	}
+
 }

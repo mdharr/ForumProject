@@ -22,5 +22,7 @@ public interface PostService {
 	public Post updateViewCount(int postId, int categoryId);
 	
 	public Boolean pinPost(int postId, int categoryId);
+	
+	public List<Post> findByUserId(int userId);
 
 }
