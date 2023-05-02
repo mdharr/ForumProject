@@ -489,6 +489,8 @@ section {
   display: block;
   vertical-align: top;
   padding: 12px;
+  padding-bottom: 5px;
+  padding-top: 0px;
 }
 
 .message-cell-main {
@@ -584,6 +586,10 @@ section {
   min-width: 0;
 }
 
+.message-attribution {
+  margin-top: 5px;
+}
+
 .message-attribution,
 .message-attribution--split {
   display: flex;
@@ -652,25 +658,81 @@ section {
 .message-attribution-opposite > li {
   margin-left: 14px;
   font-size: 14px !important;
+  display: flex;
+  align-items: center;
 
+}
+
+.message-attribution-opposite > li:hover {
+
+
+}
+
+.count-tracker {
+  padding: 5px;
+  border-radius: 30px;
+}
+
+.count-tracker:hover {
+  background: #3f51b5;
+  color: #fff !important;
+  border-radius: 30px;
 }
 
 #post-share-icon {
   font-size: 14px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+#post-share-icon:hover {
+  background: #3f51b5;
+  color: #fff !important;
+  border-radius: 30px;
+}
+
 #comment-share-icon {
   font-size: 14px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#comment-share-icon:hover {
+  background: #3f51b5;
+  color: #fff !important;
+  border-radius: 30px;
 }
 
 #post-bookmark-icon {
   font-size: 14px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+#post-bookmark-icon:hover {
+  background: #3f51b5;
+  color: #fff !important;
+  border-radius: 30px;
+}
+
 #comment-bookmark-icon {
   font-size: 14px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#comment-bookmark-icon:hover {
+  background: #3f51b5;
+  color: #fff !important;
+  border-radius: 30px;
 }
 
 li {
@@ -680,8 +742,6 @@ li {
 
 .message-attribution-gadget {
   display: inline-block;
-  margin: -3px -7px;
-  padding: 3px 7px;
 }
 
 .message-content {
@@ -983,6 +1043,7 @@ blockquote span{
   align-items: flex-end;
   border-top: var(--border-style);
   width: 100%;
+  padding-top: 5px;
 }
 
 .reply-container {
@@ -991,6 +1052,7 @@ blockquote span{
   align-items: flex-end;
   border-top: var(--border-style);
   width: 100%;
+  padding-top: 5px;
 }
 
 .reply-element {

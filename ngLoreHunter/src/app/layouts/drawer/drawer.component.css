@@ -18,10 +18,29 @@ a {
 } */
 
 .title {
-  display:flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
 }
 
+dl.pairs {
+  margin: 0;
+}
+
+::ng-deep .mdc-list-item {
+  background: var(--container-bkg-color);
+  color: var(--text-color);
+}
+
+::ng-deep .mdc-list-item {
+  background: var(--container-bkg-color);
+  color: var(--text-color);
+}
+
+::ng-deep .mdc-list-item:hover {
+  background: #f44336;
+  color: #fff;
+}
 
 .pairs {
   display: flex;
