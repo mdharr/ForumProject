@@ -26,9 +26,12 @@ p {
 
 #userThumbnail {
   width: 35px;
+  height: 35px; /* Set the height to match the desired width */
   border: 1px solid white;
   margin-right: 15px;
+  background-size: cover;
 }
+
 
 #username {
   font-family: 'Roboto', sans-serif;

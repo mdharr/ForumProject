@@ -25,7 +25,7 @@
      <button mat-button class="animated-ui" *ngIf="!loggedIn()" (click)="open(registermodal)">
       <span>Register</span>
     </button>
-      <a *ngIf="loggedIn()" style="cursor: pointer;" [routerLink]="['/users', loggedInUser.id]"><img class="avatar" id="userThumbnail" src="{{ loggedInUser.imageUrl }}" alt=""/></a>
+      <a *ngIf="loggedIn()" style="cursor: pointer;" [routerLink]="['/users', loggedInUser.id]"><div class="avatar" id="userThumbnail" [style.background-image]="'url(' + loggedInUser.imageUrl + ')'" [style.background-position]="'center'"></div></a>
       <button mat-button class="animated-ui" *ngIf="loggedIn()" [routerLink]="['/users', loggedInUser.id]">{{ loggedInUser.username }}</button>
       <button class="animated-ui" mat-button *ngIf="loggedIn()">
         <app-logout></app-logout>
