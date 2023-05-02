@@ -51,6 +51,7 @@ import { TrendingComponent } from './components/trending/trending.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
 import { UserPostsComponent } from './components/user-posts/user-posts.component';
+import { UserCommentsComponent } from './components/user-comments/user-comments.component';
 
 
 @NgModule({
@@ -76,6 +77,7 @@ import { UserPostsComponent } from './components/user-posts/user-posts.component
     TrendingComponent,
     NotificationDialogComponent,
     UserPostsComponent,
+    UserCommentsComponent,
   ],
   imports: [
     CommonModule,
