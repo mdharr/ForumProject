@@ -508,7 +508,4 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   //   }
   // }
 
-
-
-
 }

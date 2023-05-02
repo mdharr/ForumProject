@@ -187,7 +187,7 @@
               <div class="message-avatar">
                 <div class="message-avatar-wrapper">
                   <a [routerLink]="['/users', post.user.id]" class="avatar avatar--l">
-                    <img class="user-avatar" src="{{ post.user.imageUrl }}" alt="">
+                    <div class="user-avatar" [style.background-image]="'url(' + post.user.imageUrl + ')'" [style.background-position]="'center'"></div>
                   </a>
                 </div>
               </div>
@@ -405,7 +405,8 @@
       <div class="user-block">
         <div class="user-block-inner">
           <div class="user-avatar-container">
-            <a style="cursor: pointer; padding-left: 10px;"><img class="my-avatar" [src]="loggedInUser.imageUrl" alt="" *ngIf="loggedIn()"/></a>
+            <!-- <a style="cursor: pointer; padding-left: 10px;"><img class="my-avatar" [src]="loggedInUser.imageUrl" alt="" *ngIf="loggedIn()"/></a> -->
+            <div class="my-avatar" [style.background-image]="'url(' + loggedInUser.imageUrl + ')'" [style.background-position]="'center'" *ngIf="loggedIn()"></div>
           </div>
           <div class="user-alias">
             <a class="user-name-text" *ngIf="loggedIn()" [routerLink]="['/users', loggedInUser.id]">{{ loggedInUser.username }}</a>
