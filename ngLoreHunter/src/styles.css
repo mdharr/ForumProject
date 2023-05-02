@@ -18,7 +18,7 @@ body {
   --btn-txt-color: white;
   --btn-bg-color: rgb(11, 88, 160);
   --icon-color: #58595b;
-  --border-style: 0.25px solid #fff;
+  --border-style: 1px solid rgba(46, 46, 46, 0.12);
   --box-shadow-style: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
   --table-row-color-odd: #ffffff;
   --table-row-color-even: #f9f9fb;
@@ -34,7 +34,7 @@ body.dark-theme {
   --btn-txt-color: rgb(46, 43, 43);
   --btn-bg-color: rgb(20, 211, 195);
   --icon-color: #58595b;
-  --border-style: 0.25px solid #fff;
+  --border-style: 1px solid rgba(252,252,252,0.12);
   --box-shadow-style: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
   --table-row-color-odd: #2a2a2c;
   --table-row-color-even: #2f2f31;

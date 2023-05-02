@@ -32,13 +32,13 @@
       </button>
       <div class="u-scrollButtons js-scrollButtons is-active" data-trigger-type="">
         <div class="scroll-to-top">
-          <a class="button--scroll" (click)="scrollToTop()"><mat-icon class="material-icons scroll-to-icons" aria-hidden="true">arrow_upward</mat-icon></a>
+          <button mat-button class="button--scroll" (click)="scrollToTop()"><mat-icon class="material-icons scroll-to-icons" aria-hidden="true">arrow_upward</mat-icon></button>
         </div>
         <div class="scroll-to-bottom">
-          <a class="button--scroll" (click)="scrollToBottom()"><mat-icon class="material-icons scroll-to-icons" aria-hidden="true">arrow_downward</mat-icon></a>
+          <button mat-button class="button--scroll" (click)="scrollToBottom()"><mat-icon class="material-icons scroll-to-icons" aria-hidden="true">arrow_downward</mat-icon></button>
         </div>
         <div class="send-notification-wrapper" *ngIf="loggedIn() && loggedInUser.role === 'ADMIN'">
-          <a class="button--scroll" (click)="openNotificationDialog()"><mat-icon class="material-icons scroll-to-icons" aria-hidden="true">send</mat-icon></a>
+          <button mat-button class="button--scroll" (click)="openNotificationDialog()"><mat-icon class="material-icons scroll-to-icons" aria-hidden="true">send</mat-icon></button>
         </div>
       </div>
 </mat-toolbar>

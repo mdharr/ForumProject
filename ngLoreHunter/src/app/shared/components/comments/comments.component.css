@@ -971,17 +971,26 @@ blockquote span{
   margin: 0;
 }
 
+.reply-main {
+  display: flex;
+  align-items: flex-end;
+  flex: 1;
+}
+
 .post-reply-container {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  flex:1;
+  border-top: var(--border-style);
+  width: 100%;
 }
 
 .reply-container {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  border-top: var(--border-style);
+  width: 100%;
 }
 
 .reply-element {
@@ -1020,15 +1029,9 @@ blockquote span{
 
 /* Animated like button start */
 
-/* #main-content {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  background: white;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-} */
+#main-content {
+  border-top: var(--border-style);
+}
 
 svg {
   cursor: pointer;

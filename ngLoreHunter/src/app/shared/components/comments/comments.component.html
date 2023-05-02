@@ -245,8 +245,10 @@
                   <article class="message-body" [innerHtml]='post.content | noSanitize'></article>
                 </div>
               </div>
-              <div *ngIf="!post.content.includes('blockquote')" class="post-reply-container">
-                <a class="reply-button" (click)="addReply(post.content, post.user.username)"><span class="reply-element"><mat-icon class="material-icons reply-icon">keyboard_return</mat-icon><span>Reply</span></span></a>
+              <div class="reply-main">
+                <div *ngIf="!post.content.includes('blockquote')" class="post-reply-container">
+                  <a class="reply-button" (click)="addReply(post.content, post.user.username)"><span class="reply-element"><mat-icon class="material-icons reply-icon">keyboard_return</mat-icon><span>Reply</span></span></a>
+                </div>
               </div>
             </div>
           </div>
@@ -323,6 +325,7 @@
                   </article>
                 </div>
               </div>
+              <div class="reply-main">
               <!-- Add the like button here -->
               <div class="like-reply-container">
 
@@ -383,8 +386,10 @@
                     <!-- Add your firework animation markup or component here -->
                   <!-- </div> -->
                 </div>
-                <div *ngIf="!comment.content.includes('blockquote')" class="reply-container">
-                  <a class="reply-button" (click)="addReply(comment.content, comment.user.username)"><span class="reply-element"><mat-icon class="material-icons reply-icon">keyboard_return</mat-icon><span>Reply</span></span></a>
+
+                  <div *ngIf="!comment.content.includes('blockquote')" class="reply-container">
+                    <a class="reply-button" (click)="addReply(comment.content, comment.user.username)"><span class="reply-element"><mat-icon class="material-icons reply-icon">keyboard_return</mat-icon><span>Reply</span></span></a>
+                  </div>
                 </div>
               </div>
             </div>
