@@ -21,5 +21,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 	Post findByUser_UsernameAndId(String username, int postId);
 	
 	Post findByIdAndCategoryId(int postId, int categoryId);
+	
+	List<Post> findByUser_Id(int userId);
 
 }
