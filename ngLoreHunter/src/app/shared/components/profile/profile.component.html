@@ -63,7 +63,7 @@
                         <dl class="stats-pairs">
                           <dt>Posts</dt>
                           <dd>
-                            <a href="">{{ profileUser.postCount }}</a>
+                            <a [routerLink]="['/users', userId, 'posts']">{{ profileUser.postCount }}</a>
                           </dd>
                         </dl>
                         <dl class="stats-pairs">
