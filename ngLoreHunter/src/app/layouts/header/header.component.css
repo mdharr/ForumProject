@@ -27,9 +27,15 @@ p {
 #userThumbnail {
   width: 35px;
   height: 35px; /* Set the height to match the desired width */
-  border: 1px solid white;
   margin-right: 15px;
   background-size: cover;
+  border-radius: 6px;
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#userThumbnail:hover {
+  transform: scale(1.05);
 }
 
 

@@ -55,7 +55,8 @@
                 <div class="node-title-container" *ngFor="let category of categories; index as i;">
                   <div class="latest-post" *ngFor="let post of category.posts; last as isLast;">
                       <div class="user-avatar-container"*ngIf="i === 0 && isLast">
-                        <a class="light-link" style="text-decoration:none;" [routerLink]="['/users', post.user.id]"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
+                        <a class="light-link" style="text-decoration:none;" [routerLink]="['/users', post.user.id]"><div class="user-avatar" [style.background-image]="'url(' + post.user.imageUrl + ')'" [style.background-position]="'center'"></div></a>
+
                       </div>
 
                       <div class="user-post" *ngIf="i === 0 && isLast">
