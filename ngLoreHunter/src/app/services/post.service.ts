@@ -197,4 +197,18 @@ export class PostService {
       );
     }
 
+    getUserPosts(userId: number): Observable<Post[]> {
+      return this.http.get<Post[]>(this.url + '/users/' + userId + '/posts').pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () =>
+              new Error(
+                'PostService.index(): error retrieving post list: ' + err
+              )
+          );
+        })
+      );
+    }
+
 }
