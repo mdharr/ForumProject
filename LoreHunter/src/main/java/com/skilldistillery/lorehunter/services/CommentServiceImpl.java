@@ -105,4 +105,9 @@ public class CommentServiceImpl implements CommentService {
 		return true;
 	}
 
+	@Override
+	public List<Comment> findByUserId(int userId) {
+		return commentRepo.findByUser_Id(userId);
+	}
+
 }

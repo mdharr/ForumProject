@@ -20,4 +20,6 @@ public interface CommentService {
 	
 	public boolean archive(String username, int commentId);
 	
+	public List<Comment> findByUserId(int userId);
+	
 }

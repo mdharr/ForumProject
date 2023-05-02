@@ -91,5 +91,10 @@ public class CommentController {
 			res.setStatus(400);
 		}
 	}
+	
+	@GetMapping("users/{uid}/comments")
+	public List<Comment> userComments(@PathVariable("uid") int userId, HttpServletRequest req, HttpServletResponse res) {
+		return commentService.findByUserId(userId);
+	}
 
 }
