@@ -22,4 +22,6 @@ public interface CommentService {
 	
 	public List<Comment> findByUserId(int userId);
 	
+	public Post findPostByPostId(int postId);
+	
 }
