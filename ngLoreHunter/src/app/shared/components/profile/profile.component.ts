@@ -205,7 +205,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.posts = posts;
           let totalUserPosts = 0;
           for(let i = 0; i < posts.length; i++) {
-            totalUserPosts += i;
+            totalUserPosts++;
           }
           this.postsCount = totalUserPosts;
         },
