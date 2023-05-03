@@ -17,6 +17,7 @@ import { LogoutComponent } from './shared/components/logout/logout.component';
 import { GamesComponent } from './shared/components/games/games.component';
 import { TrendingComponent } from './shared/components/trending/trending.component';
 import { UserPostsComponent } from './shared/components/user-posts/user-posts.component';
+import { UserCommentsComponent } from './shared/components/user-comments/user-comments.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'user', component: UserComponent },
   { path: 'users/:userId', component: ProfileComponent },
   { path: 'users/:userId/posts', component: UserPostsComponent },
+  { path: 'users/:userId/comments', component: UserCommentsComponent },
   { path: 'comments', component: CommentsComponent },
   { path: 'categories/:categoryId/posts/:postId/comments', component: CommentsComponent },
   { path: 'header', component: HeaderComponent },
