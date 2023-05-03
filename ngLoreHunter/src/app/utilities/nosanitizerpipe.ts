@@ -58,13 +58,20 @@ export class NoSanitizePipe implements PipeTransform {
       if (youtubeUrl) {
         const iframe = this.renderer.createElement('iframe');
         this.renderer.setAttribute(iframe, 'src', youtubeUrl.replace('/watch?v=', '/embed/'));
-        this.renderer.setStyle(iframe, 'width', '100%');
-        this.renderer.setStyle(iframe, 'height', '400px');
+        this.renderer.setStyle(iframe, 'width', '640px');
+        this.renderer.setStyle(iframe, 'height', '360px');
         this.renderer.setStyle(iframe, 'border', 'none');
-        this.renderer.insertBefore(oembed.parentNode, iframe, oembed);
+
+        const container = this.renderer.createElement('div');
+        this.renderer.setStyle(container, 'display', 'flex');
+        this.renderer.setStyle(container, 'justify-content', 'center');
+        this.renderer.appendChild(container, iframe);
+
+        this.renderer.insertBefore(oembed.parentNode, container, oembed);
         this.renderer.removeChild(oembed.parentNode, oembed);
       }
     });
+
 
     // Return the sanitized HTML content as SafeHtml
     return this.domSanitizer.bypassSecurityTrustHtml(tempDiv.innerHTML);
