@@ -97,8 +97,9 @@ public class CommentController {
 		return commentService.findByUserId(userId);
 	}
 	
+	// postman test success
 	@GetMapping("users/{uid}/comments/{cid}/post")
-	public Post getPostByPostIdFromComment(@PathVariable("uid") int userId, HttpServletRequest req, HttpServletResponse res, @PathVariable("cid") int commentId) {
+	public Post getPostByCommentId(@PathVariable("uid") int userId, HttpServletRequest req, HttpServletResponse res, @PathVariable("cid") int commentId) {
 		return commentService.getPostByCommentId(commentId);
 	}
 
