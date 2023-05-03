@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, Subscription, map, take, catchError, EMPTY } from 'rxjs';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { Observable, Subscription, map, take, catchError, EMPTY, of, throwError } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
@@ -41,7 +41,7 @@ export class UserPostsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   post: Post = new Post();
   posts: Post[] = [];
-  posts$: Observable<Post[]>;
+  posts$!: Observable<Post[]>;
   categories: Category[] = [];
 
   users: User[] = [];
@@ -72,6 +72,7 @@ export class UserPostsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private paramsSub: Subscription | undefined;
   private totalPostsByCategorySubscription: Subscription | undefined;
+  private userPostsSubscription: Subscription | undefined;
 
   constructor(
     private postService: PostService,
@@ -84,30 +85,30 @@ export class UserPostsComponent implements OnInit, AfterViewInit, OnDestroy {
     private http: HttpClient,
     private dialog: MatDialog,
     private elementRef: ElementRef
-    ) {
-      this.posts$ = postService.getUserPosts(this.userId);
-  }
+    ) {}
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      this.userId = params['userId'];
+      console.log(this.userId);
+
+      this.reload();
+    });
+
     this.authService.getCurrentLoggedInUser().subscribe((user: User) => {
       this.loggedInUser = user;
-      console.log(this.loggedInUser);
-
       // Do something with the logged-in user object, e.g. update UI
     });
 
-    if (this.totalPostsByCategorySubscription) {
-      this.totalPostsByCategorySubscription.unsubscribe();
+    if (this.userPostsSubscription) {
+      this.userPostsSubscription.unsubscribe();
     }
 
-    this.reload();
+    // this.reload();
 
   }
 
   ngOnDestroy() {
-    if (this.paramsSub) {
-      this.paramsSub.unsubscribe();
-    }
 
     if (this.totalPostsByCategorySubscription) {
       this.totalPostsByCategorySubscription.unsubscribe();
@@ -128,18 +129,22 @@ export class UserPostsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   reload() {
-    console.log(this.activatedRoute);
+    console.log('reload called');
+    console.log('userId: ' + this.userId);
 
-    this.posts$ = this.postService.getUserPosts(this.userId).pipe(
-      map(posts => posts.sort((a, b) => {
-        let lastEditedComparison = new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime();
-        if (lastEditedComparison === 0) {
-            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-        } else {
-            return lastEditedComparison;
-        }
-      }))
-    );
+    this.postService.getUserPosts(this.userId).subscribe({
+      next: (posts) => {
+        this.posts = posts;
+        console.log(posts);
+        this.posts$ = of(posts); // Assign the received posts to this.posts$
+      },
+      error: (error) => {
+        console.log('Error getting user posts');
+        console.log(error);
+      },
+    });
+
+
 
     this.authService.getLoggedInUser().subscribe({
       next: (user) => {
@@ -154,118 +159,152 @@ export class UserPostsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  resetForm() {
-    this.newPost = new Post();
-    this.postCreated = false;
-  }
-
-  displayPost(post: Post | null) {
-    this.selected = post;
-    if (this.selected) {
-      this.postId = this.selected.id;
-      console.log('user name');
-
-    }
-
-    if (this.selected && this.selected.id) {
-      // invoke getComments method with this.selected.id as argument
-    }
-  }
-
-  editPost: Post | null = null;
-  setEditPost(): void {
-    this.editPost = Object.assign({}, this.selected);
-  }
-
-  getErrorMessageSubject() {
-    if(this.subject.hasError('required')) {
-      return 'Must enter valid subject to submit';
-    }
-    return this.subject.hasError('subject') ? 'Not valid subject' : '';
-  }
-  getErrorMessageContent() {
-    if(this.content.hasError('required')) {
-      return 'Must enter valid content to submit';
-    }
-    return this.content.hasError('content') ? 'Not valid content' : '';
-  }
-
-  incrementViewCount(categoryId: number, postId: number): void {
-    // Call the API to increment the view count
-    this.postService.updateViewCount(categoryId, postId).subscribe({
-      next: (data) => {
-        this.postCreated = true;
-        this.post = data;
-        this.posts$ = this.postService.postsByCategory(this.categoryId);
-      },
-      error: (nojoy) => {
-        console.error(
-          'PostsComponent.addPost: error creating post'
-        );
-          console.error(nojoy);
-      }
-    }
-  );
-  }
-
-  getTotalPages(): number {
-    return Math.ceil(this.totalPosts / this.pageSize);
-  }
-
-
-  goToPreviousPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-    }
-  }
-
-  goToNextPage(): void {
-    if (this.posts$ !== undefined) {
-      this.posts$.pipe(
-        take(1),
-        catchError(error => {
-          console.error(error);
-          return EMPTY;
-        })
-      ).subscribe(posts => {
-        if (Array.isArray(posts) && (this.currentPage * 5) < (posts.length)) {
-          this.currentPage++;
-        }
-      });
-    }
-}
-
-  openFilterDialog() {
-    this.dialog.open(this.filterDialog, {
-      width: '400px'
+  getCategoryIdByPostId(postId: number): void {
+    this.categoryService.getCategoryIdByPostId(postId).pipe(
+      catchError(error => {
+        console.error(error);
+        return throwError(() => new Error('Error retrieving category ID: ' + error));
+      })
+    ).subscribe(categoryId => {
+      this.navigateToComments(categoryId, postId); // Call navigateToComments with categoryId and postId as arguments
     });
   }
 
-  public filterPosts(): void {
-    this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
-      map(posts => {
-        return posts.filter(post => {
-          let subjectMatch = true;
-
-          if (this.filterSubject && this.filterSubject !== '') {
-            subjectMatch = post.subject.toLowerCase().includes(this.filterSubject.toLowerCase());
-
-            return subjectMatch;
-          } else {
-            return this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
-              map(posts => posts.sort((a, b) => {
-                let lastEditedComparison = new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime();
-                if (lastEditedComparison === 0) {
-                    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-                } else {
-                    return lastEditedComparison;
-                }
-              }))
-            );
-          }
-        });
-      })
-    );
+  navigateToComments(categoryId: number, postId: number): void {
+    const url = `/categories/${categoryId}/posts/${postId}/comments`;
+    const queryParams: NavigationExtras = {
+      queryParams: {
+        categoryId: categoryId,
+        postId: postId
+      }
+    };
+    this.router.navigate([url], queryParams);
   }
+
+  getCategoryIdAndNavigateToComments(postId: number): void {
+    this.categoryService.getCategoryIdByPostId(postId).pipe(
+      catchError(error => {
+        console.error(error);
+        // Handle error case here, if needed
+        return EMPTY; // Return an empty observable to prevent error propagation
+      })
+    ).subscribe(categoryId => {
+      this.navigateToComments(categoryId, postId);
+    });
+  }
+
+//   resetForm() {
+//     this.newPost = new Post();
+//     this.postCreated = false;
+//   }
+
+//   displayPost(post: Post | null) {
+//     this.selected = post;
+//     if (this.selected) {
+//       this.postId = this.selected.id;
+//       console.log('user name');
+
+//     }
+
+//     if (this.selected && this.selected.id) {
+//       // invoke getComments method with this.selected.id as argument
+//     }
+//   }
+
+//   editPost: Post | null = null;
+//   setEditPost(): void {
+//     this.editPost = Object.assign({}, this.selected);
+//   }
+
+//   getErrorMessageSubject() {
+//     if(this.subject.hasError('required')) {
+//       return 'Must enter valid subject to submit';
+//     }
+//     return this.subject.hasError('subject') ? 'Not valid subject' : '';
+//   }
+//   getErrorMessageContent() {
+//     if(this.content.hasError('required')) {
+//       return 'Must enter valid content to submit';
+//     }
+//     return this.content.hasError('content') ? 'Not valid content' : '';
+//   }
+
+//   incrementViewCount(categoryId: number, postId: number): void {
+//     // Call the API to increment the view count
+//     this.postService.updateViewCount(categoryId, postId).subscribe({
+//       next: (data) => {
+//         this.postCreated = true;
+//         this.post = data;
+//         this.posts$ = this.postService.postsByCategory(this.categoryId);
+//       },
+//       error: (nojoy) => {
+//         console.error(
+//           'PostsComponent.addPost: error creating post'
+//         );
+//           console.error(nojoy);
+//       }
+//     }
+//   );
+//   }
+
+//   getTotalPages(): number {
+//     return Math.ceil(this.totalPosts / this.pageSize);
+//   }
+
+
+//   goToPreviousPage(): void {
+//     if (this.currentPage > 1) {
+//       this.currentPage--;
+//     }
+//   }
+
+//   goToNextPage(): void {
+//     if (this.posts$ !== undefined) {
+//       this.posts$.pipe(
+//         take(1),
+//         catchError(error => {
+//           console.error(error);
+//           return EMPTY;
+//         })
+//       ).subscribe(posts => {
+//         if (Array.isArray(posts) && (this.currentPage * 5) < (posts.length)) {
+//           this.currentPage++;
+//         }
+//       });
+//     }
+// }
+
+//   openFilterDialog() {
+//     this.dialog.open(this.filterDialog, {
+//       width: '400px'
+//     });
+//   }
+
+  // public filterPosts(): void {
+  //   this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
+  //     map(posts => {
+  //       return posts.filter(post => {
+  //         let subjectMatch = true;
+
+  //         if (this.filterSubject && this.filterSubject !== '') {
+  //           subjectMatch = post.subject.toLowerCase().includes(this.filterSubject.toLowerCase());
+
+  //           return subjectMatch;
+  //         } else {
+  //           return this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
+  //             map(posts => posts.sort((a, b) => {
+  //               let lastEditedComparison = new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime();
+  //               if (lastEditedComparison === 0) {
+  //                   return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  //               } else {
+  //                   return lastEditedComparison;
+  //               }
+  //             }))
+  //           );
+  //         }
+  //       });
+  //     })
+  //   );
+  // }
 
 }

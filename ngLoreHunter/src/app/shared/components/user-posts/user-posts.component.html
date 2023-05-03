@@ -16,7 +16,7 @@
 
 <div class="wrapper">
 
-<div class="mat-paginator-container" fxLayout="row" fxLayoutAlign="center center">
+<!-- <div class="mat-paginator-container" fxLayout="row" fxLayoutAlign="center center">
   <button mat-icon-button [disabled]="currentPage === 1" (click)="goToPreviousPage()">
     <mat-icon>keyboard_arrow_left</mat-icon>
   </button>
@@ -26,17 +26,17 @@
   <button mat-icon-button [disabled]="currentPage === getTotalPages()" (click)="goToNextPage()">
     <mat-icon>keyboard_arrow_right</mat-icon>
   </button>
-</div>
+</div> -->
 
-<div class="block-filter-bar">
+<!-- <div class="block-filter-bar">
   <div class="filter-bar" style="height: 25px;">
     <button class="filter-bar-menu-trigger" mat-button [matMenuTriggerFor]="menu" style="display: flex; align-items: center;">
       <span style="flex-grow: 1;">Filters</span>
       <span class="filter-bar-icon" style="margin-left: 5px;"><mat-icon style="vertical-align: top; margin-left:-10px;">arrow_drop_down</mat-icon></span>
     </button>
   </div>
-</div>
-    <div class="article-container" *ngFor="let post of (posts$ | async)?.slice((currentPage - 1) * 5, currentPage * 5); let i = index">
+</div> -->
+    <div class="article-container" *ngFor="let post of posts$ | async; let i = index">
       <article class="message-outer" *ngIf="!post.isPinned">
         <span class="anchorTarget"></span>
         <div class="message-inner">
@@ -58,7 +58,7 @@
           <div class="message-cell message-cell-main">
             <div class="message-main">
               <div class="message-content">
-                <a class="post-link" [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']" [innerHtml]='post.subject'>{{ post.subject }}</a>
+                <a class="post-link" (click)="getCategoryIdAndNavigateToComments(post.id)" [innerHtml]='post.subject'>{{ post.subject }}</a>
                 <!-- This is a placeholder for click event on post in above anchor tag:  (click)="incrementViewCount(this.categoryId, post.id)" -->
               </div>
               <div class="message-content-details">
@@ -98,7 +98,7 @@
       </article>
     </div>
 
-  </div>
+</div>
 
 <div class="breadcrumb-outer-bottom">
   <div class="breadcrumb-inner">
@@ -114,7 +114,7 @@
   </div>
 </div>
 
-<ng-template #filterDialog>
+<!-- <ng-template #filterDialog>
   <div mat-dialog-content>
     <input [(ngModel)]="filterSubject" (input)="filterPosts()" size="15" placeholder="Filter by subject" style="line-height: 2px;">
   </div>
@@ -126,7 +126,7 @@
         <input matInput [(ngModel)]="filterSubject" (input)="filterPosts()" (click)="$event.stopPropagation()" placeholder="Filter by subject">
       </mat-form-field>
   </ng-container>
-</mat-menu>
+</mat-menu> -->
 
 
 
