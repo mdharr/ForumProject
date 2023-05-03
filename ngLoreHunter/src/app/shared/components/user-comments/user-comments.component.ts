@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { catchError, EMPTY, map, Observable, of, Subscription, switchMap } from 'rxjs';
+import { catchError, EMPTY, map, Observable, of, Subscription, switchMap, throwError } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { Post } from 'src/app/models/post';
 import { Comment } from 'src/app/models/comment';
@@ -99,7 +99,7 @@ export class UserCommentsComponent {
       error: (error) => {
 
       }
-    })
+    });
 
   }
 
@@ -118,22 +118,28 @@ export class UserCommentsComponent {
 
   }
 
-  navigateToComments(categoryId: number, postId: number): void {
-    const url = `/categories/${categoryId}/posts/${postId}/comments`;
-    const queryParams: NavigationExtras = {
-      queryParams: {
-        categoryId: categoryId,
-        postId: postId
-      }
-    };
-    this.router.navigate([url], queryParams);
-  }
-
   refreshComponent() {
     // Method to be triggered from LoginComponent
     console.log('Refresh Component method called from LoginComponent');
     this.cdr.detectChanges();
     // ... implement your logic to refresh the component
   }
+
+  navigateToCommentsByCommentId(commentId: number): void {
+    this.commentService.getPostByCommentId(commentId).pipe(
+      switchMap(post => this.categoryService.getCategoryIdByPostId(post.id).pipe(
+        map(categoryId => ({ postId: post.id, categoryId: categoryId }))
+      )),
+      catchError(error => {
+        console.error(error);
+        return throwError(() => new Error('Error retrieving postId or categoryId: ' + error));
+      })
+    ).subscribe(({ postId, categoryId }) => {
+      const url = `/categories/${categoryId}/posts/${postId}/comments`;
+      this.router.navigate([url]);
+    });
+  }
+
+
 
 }

@@ -53,7 +53,7 @@
               <header class="message-attribution message-attribution--split">
                 <ul class="message-attribution-main">
                   <li class="u-concealed">
-                    <a href="">
+                    <a (click)="navigateToCommentsByCommentId(comment.id)">
                       <time class="u-dt">{{ comment.createdAt | date:'shortDate' }} at {{ comment.createdAt | date:'shortTime' }}</time>
                     </a>
                   </li>

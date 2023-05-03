@@ -63,6 +63,7 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.PUT, "/api/users/**/notifications/**/dismiss").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.POST, "/api/notifications/send").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/comments/**/likes/count").permitAll() // will hit the OPTIONS on the route
+        .antMatchers(HttpMethod.GET, "/api/comments/**/post").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.POST, "/api/comments/**/likes").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.DELETE, "/api/likes/**").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/comments/**/likes/has-liked").permitAll() // will hit the OPTIONS on the route
