@@ -60,17 +60,17 @@
                 </ul>
                 <ul class="message-attribution-opposite">
                   <li>
-                    <a href="" class="message-attribution-gadget">
+                    <a (click)="navigateToCommentsByCommentId(comment.id)" class="message-attribution-gadget">
                       <mat-icon id="comment-share-icon" class="mat-18">share</mat-icon>
                     </a>
                   </li>
                   <li>
-                    <a href="" class="message-attribution-gadget">
+                    <a (click)="navigateToCommentsByCommentId(comment.id)" class="message-attribution-gadget">
                       <mat-icon id="comment-bookmark-icon" class="mat-18">bookmark_border</mat-icon>
                     </a>
                   </li>
                   <li class="count-tracker">
-                    <a href="" class="message-attribution-gadget">
+                    <a (click)="navigateToCommentsByCommentId(comment.id)" class="message-attribution-gadget">
                       <i>#{{i + 1}}</i>
                     </a>
                   </li>
