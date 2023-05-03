@@ -142,9 +142,9 @@
                   </div> -->
                 </div>
 
-                  <!-- <div *ngIf="!comment.content.includes('blockquote')" class="reply-container">
-                    <a class="reply-button" (click)="addReply(comment.content, comment.user.username)"><span class="reply-element"><mat-icon class="material-icons reply-icon">keyboard_return</mat-icon><span>Reply</span></span></a>
-                  </div> -->
+                  <div *ngIf="!comment.content.includes('blockquote')" class="reply-container">
+                    <a class="reply-button" (click)="navigateToCommentsByCommentId(comment.id)"><span class="reply-element"><mat-icon class="material-icons reply-icon">keyboard_return</mat-icon><span>Original Post</span></span></a>
+                  </div>
                 </div>
               </div>
             </div>
