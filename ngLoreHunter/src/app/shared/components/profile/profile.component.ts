@@ -52,6 +52,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   postId: number = 0;
   userId: number = 0;
   value: any;
+  postsCount: number = 0;
 
   newPost: Post = new Post();
 
@@ -95,8 +96,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     ngOnInit() {
 
       console.log(this.activatedRoute);
-
-      // ...
 
       this.paramsSubscription = this.activatedRoute.paramMap.pipe(
         switchMap((param) => {
@@ -201,9 +200,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     reload() {
-      this.postsByCategorySubscription = this.postService.postsByCategory(this.categoryId).subscribe({
+      this.postsByCategorySubscription = this.postService.getUserPosts(this.userId).subscribe({
         next: (posts) => {
           this.posts = posts;
+          let totalUserPosts = 0;
+          for(let i = 0; i < posts.length; i++) {
+            totalUserPosts += i;
+          }
+          this.postsCount = totalUserPosts;
         },
         error: (err) => {
           console.error('Error loading posts');

@@ -37,7 +37,7 @@
   </div>
 </div> -->
     <div class="article-container" *ngFor="let post of posts$ | async; let i = index">
-      <article class="message-outer" *ngIf="!post.isPinned">
+      <article class="message-outer">
         <span class="anchorTarget"></span>
         <div class="message-inner">
           <div class="message-cell message-cell-user">
