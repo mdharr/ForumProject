@@ -92,6 +92,7 @@ public class CommentController {
 		}
 	}
 	
+	// postman test success
 	@GetMapping("users/{uid}/comments")
 	public List<Comment> userComments(@PathVariable("uid") int userId, HttpServletRequest req, HttpServletResponse res) {
 		return commentService.findByUserId(userId);
