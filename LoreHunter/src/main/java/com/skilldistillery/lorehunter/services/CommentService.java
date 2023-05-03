@@ -22,6 +22,8 @@ public interface CommentService {
 	
 	public List<Comment> findByUserId(int userId);
 	
-	public Post findPostByPostId(int postId);
+//	public Post findPostByPostId(Integer postId);
+	
+	public Post getPostByCommentId(int commentId);
 	
 }

@@ -96,5 +96,10 @@ public class CommentController {
 	public List<Comment> userComments(@PathVariable("uid") int userId, HttpServletRequest req, HttpServletResponse res) {
 		return commentService.findByUserId(userId);
 	}
+	
+	@GetMapping("users/{uid}/comments/{cid}/post")
+	public Post getPostByPostIdFromComment(@PathVariable("uid") int userId, HttpServletRequest req, HttpServletResponse res, @PathVariable("cid") int commentId) {
+		return commentService.getPostByCommentId(commentId);
+	}
 
 }

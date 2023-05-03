@@ -111,8 +111,20 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public Post findPostByPostId(int postId) {
-		return commentRepo.findPostByPostId(postId);
-	}
+    public Post getPostByCommentId(int commentId) {
+        Optional<Comment> commentOpt = commentRepo.findById(commentId);
+        
+        if (commentOpt != null) {
+        	Comment comment = commentOpt.get();
+            return comment.getPost();
+        } else {
+            return null;
+        }
+    }
+
+//	@Override
+//	public Post findPostByPostId(Integer postId) {
+//		return commentRepo.findPostByPostId(postId);
+//	}
 
 }
