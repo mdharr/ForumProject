@@ -55,7 +55,7 @@ class UserGameTest {
 	@Test
 	void test_User_Game_many_to_many_mapping_2() {
 		assertNotNull(userGame);
-		assertEquals("Wesker", userGame.getGame().getUsers().get(0).getUsername());
+		assertEquals("Jill", userGame.getGame().getUsers().get(0).getUsername());
 	}
 
 }

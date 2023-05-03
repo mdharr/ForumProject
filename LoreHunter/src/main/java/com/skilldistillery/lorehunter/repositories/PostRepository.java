@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.skilldistillery.lorehunter.entities.Comment;
 import com.skilldistillery.lorehunter.entities.Post;
 
 public interface PostRepository extends JpaRepository<Post, Integer> {
@@ -23,5 +24,5 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 	Post findByIdAndCategoryId(int postId, int categoryId);
 	
 	List<Post> findByUser_Id(int userId);
-
+	
 }

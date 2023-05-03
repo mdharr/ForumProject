@@ -43,7 +43,7 @@ class LikeTest {
 	@Test
 	void test_Comment_Like_one_to_many_mapping() {
 		assertNotNull(like);
-		assertEquals("Wesker", like.getComment().getUser().getUsername());
+		assertEquals("Jill", like.getComment().getUser().getUsername());
 	}
 	
 	@Test
