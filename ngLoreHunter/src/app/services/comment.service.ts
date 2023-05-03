@@ -107,4 +107,18 @@ export class CommentService {
     );
   }
 
+  getPostByCommentId(commentId: number): Observable<Post> {
+    return this.http.get<Post>(this.url + '/comments/' + commentId + '/post').pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+          new Error(
+            'CommentService.getPostByCommentId(): error retrieving post: ' + err
+          )
+        );
+      })
+    );
+  }
+
 }
