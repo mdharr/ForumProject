@@ -2,12 +2,10 @@
   <div class="breadcrumb-inner">
     <ol class="breadcrumbnav" style="padding:0;">
       <li class="breadcrumb-value" [routerLink]="['/home']">Discussion</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 1" [routerLink]="['/categories', categoryId, 'posts']">Gaming Forum</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 2" [routerLink]="['/categories', categoryId, 'posts']">Gaming Hangouts</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 3" [routerLink]="['/categories', categoryId, 'posts']">Lore Forum</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 4" [routerLink]="['/categories', categoryId, 'posts']">Lore Hangouts</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 5" [routerLink]="['/categories', categoryId, 'posts']">Announcements</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 6" [routerLink]="['/categories', categoryId, 'posts']">The Vault</li>
+      <ng-container *ngFor="let comment of comments$ | async; let i = index">
+        <li *ngIf="i === 0" class="breadcrumb-value" [routerLink]="['/users/' + comment.user.id]">{{ comment.user.username }}'s Profile</li>
+        <li *ngIf="i === 0" class="breadcrumb-value">{{ comment.user.username }}'s Comments</li>
+      </ng-container>
     </ol>
   </div>
 </div>
@@ -159,12 +157,10 @@
   <div class="breadcrumb-inner">
     <ol class="breadcrumbnav" style="padding:0;">
       <li class="breadcrumb-value" [routerLink]="['/home']">Discussion</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 1" [routerLink]="['/categories', categoryId, 'posts']">Gaming Forum</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 2" [routerLink]="['/categories', categoryId, 'posts']">Gaming Hangouts</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 3" [routerLink]="['/categories', categoryId, 'posts']">Lore Forum</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 4" [routerLink]="['/categories', categoryId, 'posts']">Lore Hangouts</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 5" [routerLink]="['/categories', categoryId, 'posts']">Announcements</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 6" [routerLink]="['/categories', categoryId, 'posts']">The Vault</li>
+      <ng-container *ngFor="let comment of comments$ | async; let i = index">
+        <li *ngIf="i === 0" class="breadcrumb-value" [routerLink]="['/users/' + comment.user.id]">{{ comment.user.username }}'s Profile</li>
+        <li *ngIf="i === 0" class="breadcrumb-value">{{ comment.user.username }}'s Comments</li>
+      </ng-container>
     </ol>
   </div>
 </div>

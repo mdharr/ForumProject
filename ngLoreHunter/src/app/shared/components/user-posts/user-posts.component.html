@@ -1,15 +1,11 @@
-<h1>User Posts</h1>
-
 <div class="breadcrumb-outer">
   <div class="breadcrumb-inner">
     <ol class="breadcrumbnav" style="padding:0;">
       <li class="breadcrumb-value" [routerLink]="['/home']">Discussion</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 1">Gaming Forum</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 2">Gaming Hangouts</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 3">Lore Forum</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 4">Lore Hangouts</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 5">Announcements</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 6">The Vault</li>
+      <ng-container *ngFor="let post of posts$ | async; let i = index">
+        <li *ngIf="i === 0" class="breadcrumb-value" [routerLink]="['/users/' + post.user.id]">{{ post.user.username }}'s Profile</li>
+        <li *ngIf="i === 0" class="breadcrumb-value">{{ post.user.username }}'s Posts</li>
+      </ng-container>
     </ol>
   </div>
 </div>
@@ -104,12 +100,10 @@
   <div class="breadcrumb-inner">
     <ol class="breadcrumbnav" style="padding:0;">
       <li class="breadcrumb-value" [routerLink]="['/home']">Discussion</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 1">Gaming Forum</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 2">Gaming Hangouts</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 3">Lore Forum</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 4">Lore Hangouts</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 5">Announcements</li>
-      <li class="breadcrumb-value" *ngIf="categoryId === 6">The Vault</li>
+      <ng-container *ngFor="let post of posts$ | async; let i = index">
+        <li *ngIf="i === 0" class="breadcrumb-value" [routerLink]="['/users/' + post.user.id]">{{ post.user.username }}'s Profile</li>
+        <li *ngIf="i === 0" class="breadcrumb-value">{{ post.user.username }}'s Posts</li>
+      </ng-container>
     </ol>
   </div>
 </div>
