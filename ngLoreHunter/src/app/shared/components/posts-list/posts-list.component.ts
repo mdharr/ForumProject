@@ -10,7 +10,6 @@ import { Category } from 'src/app/models/category';
 import { catchError, EMPTY, map, Observable, Subscription, tap, throwError } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -21,7 +20,6 @@ import { MatDialog } from '@angular/material/dialog';
 export class PostsListComponent implements OnInit, OnDestroy {
 
   title = 'ngLoreHunter';
-  public Editor = ClassicEditor;
 
   @ViewChild('ckeditorInstance') ckeditorInstance: any; // Add this line to access the CKEditor instance
   @ViewChild('filterDialog') filterDialog!: TemplateRef<any>;

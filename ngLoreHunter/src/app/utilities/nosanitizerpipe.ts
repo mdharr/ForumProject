@@ -48,6 +48,14 @@ export class NoSanitizePipe implements PipeTransform {
 
   });
 
+  const images = tempDiv.querySelectorAll('img');
+
+  // Add the "post-img" class to each <img> element
+  images.forEach((image: any) => {
+    this.renderer.setStyle(image, 'width', '100%');
+    this.renderer.setStyle(image, 'height', 'auto');
+  });
+
 
     // Find all oembed elements within the HTML content
     const oembeds = tempDiv.querySelectorAll('oembed');

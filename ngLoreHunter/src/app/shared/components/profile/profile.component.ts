@@ -16,7 +16,7 @@ import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { PostDataSource } from 'src/app/services/post.dataSource';
 import { CommentDataSource } from 'src/app/services/comment.dataSource';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UserBannerImageDialogComponent } from '../user-banner-image-dialog/user-banner-image-dialog.component';
@@ -29,8 +29,6 @@ import { UserBannerImageDialogComponent } from '../user-banner-image-dialog/user
 export class ProfileComponent implements OnInit, OnDestroy {
 
   title = 'ngLoreHunter';
-
-  public Editor = ClassicEditor;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;

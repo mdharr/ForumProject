@@ -1363,6 +1363,11 @@ svg:hover {
 }
 
 
+.comment-img {
+  width: 100%;
+  height: auto;
+}
+
 
 /* Animated like button end */
 

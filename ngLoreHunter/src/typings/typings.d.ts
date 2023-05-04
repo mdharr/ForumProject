@@ -1,5 +1,6 @@
-declare module '@ckeditor/ckeditor5-build-classic' {
-  const ClassicEditorBuild: any;
-
-  export = ClassicEditorBuild;
+// typings.d.ts
+declare module 'src/assets/ckeditor/ckeditor5-37.1.0-hicq7jejpz5/build/ckeditor' {
+  const ClassicEditor: any;
+  export = ClassicEditor;
 }
+

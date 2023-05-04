@@ -613,3 +613,8 @@ input:focus {
 .pinned-main-container {
   border-bottom: 2px solid #3f51b5;
 }
+
+.post-img {
+  width: 100%;
+  height: auto;
+}

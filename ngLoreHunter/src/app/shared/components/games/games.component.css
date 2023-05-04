@@ -278,7 +278,7 @@
 .queryInputElement {
   flex: 0 0 auto; /* Add flex property to prevent it from growing or shrinking */
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   width: 20%;
 }
 
