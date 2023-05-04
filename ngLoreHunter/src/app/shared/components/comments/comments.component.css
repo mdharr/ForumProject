@@ -767,6 +767,11 @@ li {
   margin: 12px 0;
   padding-bottom: 12px;
   margin: 0;
+  color: var(--text-color);
+}
+
+p > span {
+  color: var(--text-color) !important;
 }
 
 .message-body:last-child {
@@ -1361,7 +1366,6 @@ svg:hover {
     transform: scale(1);
   }
 }
-
 
 .comment-img {
   width: 100%;
