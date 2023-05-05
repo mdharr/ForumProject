@@ -49,7 +49,7 @@ class CommentTest {
 	@Test
 	void test_Comment_Post_one_to_one_mapping() {
 		assertNotNull(comment);
-		assertEquals("[Reddit Rumor] Embargo preview FFXVI lifted next week", comment.getPost().getSubject());
+		assertEquals("Resident Evil 4 |OT| Back in the Saddler", comment.getPost().getSubject());
 	}
 	
 	@Test

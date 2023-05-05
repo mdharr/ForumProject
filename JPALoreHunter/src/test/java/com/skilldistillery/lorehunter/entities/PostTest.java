@@ -43,7 +43,7 @@ class PostTest {
 	@Test
 	void test_Post_entity_mapping() {
 		assertNotNull(post);
-		assertEquals("[Reddit Rumor] Embargo preview FFXVI lifted next week", post.getSubject());
+		assertEquals("Resident Evil 4 |OT| Back in the Saddler", post.getSubject());
 	}
 	
 	@Test
