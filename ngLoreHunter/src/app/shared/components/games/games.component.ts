@@ -27,7 +27,7 @@ export class GamesComponent implements OnInit {
   pageSize = 40; // Add pageSize variable to set page size
   totalPages: number = 0;
   jumpToPageInput: number = 0;
-  currentPage: number = 0; // Define currentPage as a number variable
+  currentPage: number = 1; // Define currentPage as a number variable
 
 
 
