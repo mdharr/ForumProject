@@ -24,6 +24,13 @@ p {
   color: #FFFFFF !important;
 }
 
+.card-recent-post-text {
+  color: #FFFFFF !important;
+  overflow: hidden;
+  /* white-space: nowrap; */
+  text-overflow: ellipsis;
+}
+
 .disable-hover-color {
   background-color: var(--bkg-color);
 }
@@ -123,6 +130,7 @@ p {
   background: linear-gradient(310.77deg,#29aa9f 0%,#098ea6 100%);
   min-height: auto;
   border-radius: 5px 5px 0 0;
+  display: flex;
 }
 
 .card-lore {
@@ -131,6 +139,7 @@ p {
   background: linear-gradient(310.3deg,#863a81 0%,#9a387b 100%);
   min-height: auto;
   border-radius: 5px 5px 0 0;
+  display: flex;
 }
 
 .card-announcements {
@@ -139,6 +148,7 @@ p {
   background-image: linear-gradient(312.03deg,#ea7e3e 0%,#e9a127 100%)!important;
   min-height: auto;
   border-radius: 5px 5px 0 0;
+  display: flex;
 }
 
 .card-vault {
@@ -147,6 +157,7 @@ p {
   background-image: linear-gradient(308.41deg,#5fba43 0%,#3ab25d 100%)!important;
   min-height: auto;
   border-radius: 5px 5px 0 0;
+  display: flex;
 }
 
 .ghost-container {
@@ -288,17 +299,16 @@ p {
 .user-avatar-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  overflow: hidden;
+  min-width: 50px;
+  min-height: 50px;
   margin-right: 10px;
+  align-items: flex-end;
 }
 
 .user-avatar {
-  width: 30px;
-  height: 30px;
-  box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  width: 36px;
+  height: 36px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

@@ -52,24 +52,27 @@
                   </div>
 
                 </div>
-                <div class="node-title-container" *ngFor="let category of categories; index as i;">
-                  <div class="latest-post" *ngFor="let post of category.posts; last as isLast;">
-                      <div class="user-avatar-container"*ngIf="i === 0 && isLast">
-                        <a class="light-link" style="text-decoration:none;" [routerLink]="['/users', post.user.id]"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
+                <ng-container *ngFor="let category of categories; index as i;">
+                  <ng-container  *ngFor="let post of category.posts; last as isLast;">
+                    <div class="node-title-container" style="flex: 1;" *ngIf="i === 0 && isLast">
+                      <div class="latest-post">
+                          <div class="user-avatar-container">
+                            <a  class="light-link" style="text-decoration:none;" [routerLink]="['/users', post.user.id]"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
+                          </div>
 
+                          <div class="user-post" *ngIf="i === 0 && isLast">
+                            <div class="post-title" >
+                              <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-recent-post-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                              <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
+                            </div>
+                            <div class="post-time">
+
+                            </div>
+                          </div>
                       </div>
-
-                      <div class="user-post" *ngIf="i === 0 && isLast">
-                        <div class="post-title" >
-                          <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
-                          <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
-                        </div>
-                        <div class="post-time">
-
-                        </div>
-                      </div>
-                  </div>
-                </div>
+                    </div>
+                  </ng-container>
+                </ng-container>
               </div>
             </div>
             <div class="more-container" style="color: #098ea6 !important;">
@@ -98,23 +101,27 @@
                   </div>
 
                 </div>
-                <div class="node-title-container" *ngFor="let category of categories; index as i;">
-                  <div class="latest-post" *ngFor="let post of category.posts; last as isLast;">
-                      <div class="user-avatar-container"*ngIf="i === 1 && isLast">
-                        <a class="light-link" style="text-decoration:none;" [routerLink]="['/users', post.user.id]"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
-                      </div>
+                <ng-container *ngFor="let category of categories; index as i;">
+                  <ng-container  *ngFor="let post of category.posts; last as isLast;">
+                    <div class="node-title-container" style="flex: 1;" *ngIf="i === 1 && isLast">
+                      <div class="latest-post">
+                          <div class="user-avatar-container">
+                            <a  class="light-link" style="text-decoration:none;" [routerLink]="['/users', post.user.id]"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
+                          </div>
 
-                      <div class="user-post" *ngIf="i === 1 && isLast">
-                        <div class="post-title" >
-                          <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
-                          <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
-                        </div>
-                        <div class="post-time">
+                          <div class="user-post" *ngIf="i === 1 && isLast">
+                            <div class="post-title" >
+                              <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-recent-post-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                              <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
+                            </div>
+                            <div class="post-time">
 
-                        </div>
+                            </div>
+                          </div>
                       </div>
-                  </div>
-                </div>
+                    </div>
+                  </ng-container>
+                </ng-container>
               </div>
             </div>
             <div class="more-container" style="color: #098ea6 !important;">
@@ -124,7 +131,7 @@
             </div>
           </div>
           <div class="container-fluid card">
-            <div class="card-lore">
+            <div class="card-lore" style="display: flex;">
               <div class="node-container">
                 <div class="node-title-container">
                   <div class="card-icon">
@@ -143,23 +150,27 @@
                   </div>
 
                 </div>
-                <div class="node-title-container" *ngFor="let category of categories; index as i;">
-                  <div class="latest-post" *ngFor="let post of category.posts; last as isLast;">
-                      <div class="user-avatar-container"*ngIf="i === 2 && isLast">
-                        <a  class="light-link" style="text-decoration:none;" [routerLink]="['/users', post.user.id]"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
-                      </div>
+                <ng-container *ngFor="let category of categories; index as i;">
+                  <ng-container  *ngFor="let post of category.posts; last as isLast;">
+                    <div class="node-title-container" style="flex: 1;" *ngIf="i === 2 && isLast">
+                      <div class="latest-post">
+                          <div class="user-avatar-container">
+                            <a  class="light-link" style="text-decoration:none;" [routerLink]="['/users', post.user.id]"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
+                          </div>
 
-                      <div class="user-post" *ngIf="i === 2 && isLast">
-                        <div class="post-title" >
-                          <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
-                          <p class=" card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
-                        </div>
-                        <div class="post-time">
+                          <div class="user-post" *ngIf="i === 2 && isLast">
+                            <div class="post-title" >
+                              <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-recent-post-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                              <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
+                            </div>
+                            <div class="post-time">
 
-                        </div>
+                            </div>
+                          </div>
                       </div>
-                  </div>
-                </div>
+                    </div>
+                  </ng-container>
+                </ng-container>
               </div>
             </div>
             <div class="more-container" style="color: #9a387b;">
@@ -190,23 +201,27 @@
                     </div>
 
                   </div>
-                  <div class="node-title-container" *ngFor="let category of categories; index as i;">
-                    <div class="latest-post" *ngFor="let post of category.posts; last as isLast;">
-                        <div class="user-avatar-container"*ngIf="i === 3 && isLast">
-                          <a  class="light-link" style="text-decoration:none;" [routerLink]="['/users', post.user.id]"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
-                        </div>
+                  <ng-container *ngFor="let category of categories; index as i;">
+                    <ng-container  *ngFor="let post of category.posts; last as isLast;">
+                      <div class="node-title-container" style="flex: 1;" *ngIf="i === 3 && isLast">
+                        <div class="latest-post">
+                            <div class="user-avatar-container">
+                              <a  class="light-link" style="text-decoration:none;" [routerLink]="['/users', post.user.id]"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
+                            </div>
 
-                        <div class="user-post" *ngIf="i === 3 && isLast">
-                          <div class="post-title" >
-                            <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
-                            <p class=" card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
-                          </div>
-                          <div class="post-time">
+                            <div class="user-post" *ngIf="i === 3 && isLast">
+                              <div class="post-title" >
+                                <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-recent-post-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                                <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
+                              </div>
+                              <div class="post-time">
 
-                          </div>
+                              </div>
+                            </div>
                         </div>
-                    </div>
-                  </div>
+                      </div>
+                    </ng-container>
+                  </ng-container>
                 </div>
               </div>
               <div class="more-container" style="color: #9a387b; align-self: flex-end;">
@@ -250,23 +265,27 @@
                 </div>
 
               </div>
-              <div class="node-title-container" *ngFor="let category of categories; index as i;">
-                <div class="latest-post" *ngFor="let post of category.posts; last as isLast;">
-                    <div class="user-avatar-container"*ngIf="i === 4 && isLast">
-                      <a  class="light-link" style="text-decoration:none;" [routerLink]="['/users', post.user.id]"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
-                    </div>
+              <ng-container *ngFor="let category of categories; index as i;">
+                <ng-container  *ngFor="let post of category.posts; last as isLast;">
+                  <div class="node-title-container" style="flex: 1;" *ngIf="i === 4 && isLast">
+                    <div class="latest-post">
+                        <div class="user-avatar-container">
+                          <a  class="light-link" style="text-decoration:none;" [routerLink]="['/users', post.user.id]"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
+                        </div>
 
-                    <div class="user-post" *ngIf="i === 4 && isLast">
-                      <div class="post-title" >
-                        <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
-                        <p class=" card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
-                      </div>
-                      <div class="post-time">
+                        <div class="user-post" *ngIf="i === 4 && isLast">
+                          <div class="post-title" >
+                            <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-recent-post-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                            <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
+                          </div>
+                          <div class="post-time">
 
-                      </div>
+                          </div>
+                        </div>
                     </div>
-                </div>
-              </div>
+                  </div>
+                </ng-container>
+              </ng-container>
             </div>
           </div>
           <div class="more-container" style="color: #ea7e3e;">
@@ -295,23 +314,27 @@
                 </div>
 
               </div>
-              <div class="node-title-container" *ngFor="let category of categories; index as i;">
-                <div class="latest-post" *ngFor="let post of category.posts; last as isLast;">
-                    <div class="user-avatar-container"*ngIf="i === 5 && isLast">
-                      <a  class="light-link" style="text-decoration:none;" [routerLink]="['/users', post.user.id]"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
-                    </div>
+              <ng-container *ngFor="let category of categories; index as i;">
+                <ng-container  *ngFor="let post of category.posts; last as isLast;">
+                  <div class="node-title-container" style="flex: 1;" *ngIf="i === 5 && isLast">
+                    <div class="latest-post">
+                        <div class="user-avatar-container">
+                          <a  class="light-link" style="text-decoration:none;" [routerLink]="['/users', post.user.id]"><img class="user-avatar" src="{{ post.user.imageUrl }}"></a>
+                        </div>
 
-                    <div class="user-post" *ngIf="i === 5 && isLast">
-                      <div class="post-title" >
-                        <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class=" card-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
-                        <p class=" card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
-                      </div>
-                      <div class="post-time">
+                        <div class="user-post" *ngIf="i === 5 && isLast">
+                          <div class="post-title" >
+                            <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-recent-post-text" style="margin-bottom: 0;"><strong>{{ post.subject }}</strong></p></a>
+                            <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
+                          </div>
+                          <div class="post-time">
 
-                      </div>
+                          </div>
+                        </div>
                     </div>
-                </div>
-              </div>
+                  </div>
+                </ng-container>
+              </ng-container>
             </div>
           </div>
           <div class="more-container" style="color: #3ab25d;">
