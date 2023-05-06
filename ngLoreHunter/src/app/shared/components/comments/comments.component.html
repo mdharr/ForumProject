@@ -245,11 +245,12 @@
                   <article class="message-body" [innerHtml]='post.content | noSanitize'></article>
                 </div>
               </div>
-              <div class="reply-main">
+              <!-- REPLY TO ORIGINAL POST -->
+              <!-- <div class="reply-main">
                 <div *ngIf="!post.content.includes('blockquote')" class="post-reply-container">
                   <a class="reply-button" (click)="addReply(post.content, post.user.username)"><span class="reply-element"><mat-icon class="material-icons reply-icon">keyboard_return</mat-icon><span>Reply</span></span></a>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

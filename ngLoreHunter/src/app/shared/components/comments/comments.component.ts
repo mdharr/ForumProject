@@ -122,7 +122,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
                       // Perform actions with category data
                       // this.navigateToComments(this.categoryId, this.postId);
                       this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe(
-                        map(comments => comments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
+                        map(comments => comments.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
                       );
                       return this.postService.show(this.categoryId, this.postId);
                     }),
