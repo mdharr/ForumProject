@@ -44,7 +44,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() currentPage: number = 1;
   @Input() pageCount: number = 0;
 
-  pageSize: number = 5;
+  pageSize: number = 10;
   totalPosts: number = 0;
   totalPages: number = 0;
 
