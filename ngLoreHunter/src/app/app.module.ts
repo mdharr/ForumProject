@@ -27,6 +27,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from './services/auth.service';
 import { ScrollService } from './services/scroll.service';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TruncateTextDirective } from './directives/truncate-text.directive';
 
 @NgModule({
   declarations: [

@@ -52,6 +52,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotificationDialogComponent } from './components/notification-dialog/notification-dialog.component';
 import { UserPostsComponent } from './components/user-posts/user-posts.component';
 import { UserCommentsComponent } from './components/user-comments/user-comments.component';
+import { TruncateTextDirective } from '../directives/truncate-text.directive';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { UserCommentsComponent } from './components/user-comments/user-comments.
     NotificationDialogComponent,
     UserPostsComponent,
     UserCommentsComponent,
+    TruncateTextDirective
   ],
   imports: [
     CommonModule,

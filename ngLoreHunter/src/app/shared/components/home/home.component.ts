@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { Category } from 'src/app/models/category';
 import { AuthService } from 'src/app/services/auth.service';
 import { HomeService } from 'src/app/services/home.service';
@@ -22,9 +22,10 @@ import { ScrollService } from 'src/app/services/scroll.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('postTitle') postTitle: ElementRef | undefined;
 
   public posts$: Observable<Post[]> | undefined;
 
@@ -78,6 +79,9 @@ export class HomeComponent implements OnInit, OnDestroy {
               private scrollService: ScrollService,
               private elementRef: ElementRef
               ) {}
+  ngAfterViewInit(): void {
+
+  }
 
   ngOnInit() {
 
@@ -337,5 +341,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   scrollToBottom(): void {
     this.scrollService.scrollToBottom();
   }
+
+  trimSubject(subject: string): string {
+    const maxLength = 45;
+    return subject.length > maxLength ? subject.slice(0, maxLength) + '...' : subject;
+  }
+
 
 }
