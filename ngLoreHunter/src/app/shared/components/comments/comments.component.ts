@@ -284,7 +284,9 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
         // this.newComment.user.id = this.loggedInUser.id;
         // this.newComment = new Comment();
         // this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId);
-        this.comments$ = this.dataSource.loadComments(this.categoryId, this.postId);
+        this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe(
+          map(comments => comments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
+        );
       },
       error: (nojoy) => {
         console.error('CommentComponent.createComment: Error creating comment.');
