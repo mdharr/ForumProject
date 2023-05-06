@@ -139,7 +139,7 @@
     </button>
   </div>
 </div>
-<ng-container *ngIf="(pinnedPosts$ | async)?.length">
+<ng-container *ngIf="(pinnedPosts$ | async)?.length && this.currentPage === 1">
 <div class="pinned-main-container">
   <div class="pinned-container" *ngFor="let post of (pinnedPosts$ | async); let i = index">
     <article class="pinned-message-outer">
