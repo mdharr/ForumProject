@@ -20,7 +20,7 @@
                     <div class="member-main-content">
                       <span class="member-avatar">
                         <span class="avatar-wrapper">
-                          <a class="avatar-url"><img class="user-profile-avatar" src="{{ profileUser.imageUrl }}" alt=""></a>
+                          <a class="avatar-url"><img class="user-profile-avatar" [style.background-image]="'url(' + profileUser.imageUrl + ')'" [style.background-position]="'center'"></a>
                         </span>
                       </span>
                       <div class="memberHeader-content">

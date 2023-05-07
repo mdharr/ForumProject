@@ -30,6 +30,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   public posts$: Observable<Post[]> | undefined;
 
   categories: Category[] = [];
+  allCategories: Category[] = [];
+  latestPosts: Post[] = [];
   categoryId: number = 0;
   posts: Post[] = [];
   comments: Comment[] = [];
@@ -54,6 +56,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   dataSource = new PostDataSource(this.postService);
 
   private categoriesSubscription: Subscription | undefined;
+  private allCategoriesSubscription: Subscription | undefined;
   private postsSubscription: Subscription | undefined;
   private commentsSubscription: Subscription | undefined;
   private usersSubscription: Subscription | undefined;
@@ -126,9 +129,27 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       this.commentsSubscription.unsubscribe();
     }
 
+    if (this.allCategoriesSubscription) {
+      this.allCategoriesSubscription.unsubscribe();
+    }
+
     this.categoriesSubscription = this.homeServ.index().subscribe({
       next: (categories) => {
         this.categories = categories;
+      },
+      error:(fail) => {
+        console.error('Error getting categories:');
+        console.error(fail);
+      }
+    });
+
+    this.allCategoriesSubscription = this.homeServ.index().subscribe({
+      next: (categories) => {
+        this.allCategories = categories;
+        for (let category of this.allCategories) {
+          let latestPost = category.posts.sort((a, b) => new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime())[0];
+          this.latestPosts.push(latestPost);
+        }
       },
       error:(fail) => {
         console.error('Error getting categories:');
@@ -194,6 +215,10 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     if (this.categoriesSubscription) {
       this.categoriesSubscription.unsubscribe();
+    }
+
+    if (this.allCategoriesSubscription) {
+      this.allCategoriesSubscription.unsubscribe();
     }
 
     if (this.postsSubscription) {
