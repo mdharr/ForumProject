@@ -13,14 +13,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
 
+import org.hibernate.annotations.ColumnTransformer;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.skilldistillery.lorehunter.annotations.ExcludeOnUpdate;
 
 @Entity
 public class Post {
@@ -58,6 +63,7 @@ public class Post {
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+	@Formula("(SELECT MAX(c.created_at) FROM comment c WHERE c.post_id = id)")
 	private List<Comment> comments;
 	
 	@Column(name = "view_count")
@@ -67,13 +73,16 @@ public class Post {
 	
 	@Column(name = "is_pinned")
 	private Boolean isPinned;
+	
+	@Column(name = "last_comment")
+	private LocalDateTime lastComment;
 
 	public Post() {
 		super();
 	}
 
 	public Post(int id, String subject, String content, LocalDateTime createdAt, String status, LocalDateTime lastEdited,
-			Integer commentCount, User user, Category category, List<Comment> comments, Integer viewCount, Boolean enabled, Boolean isPinned) {
+			Integer commentCount, User user, Category category, List<Comment> comments, Integer viewCount, Boolean enabled, Boolean isPinned, LocalDateTime lastComment) {
 		super();
 		this.id = id;
 		this.subject = subject;
@@ -88,6 +97,7 @@ public class Post {
 		this.viewCount = viewCount;
 		this.enabled = enabled;
 		this.isPinned = isPinned;
+		this.lastComment = lastComment;
 	}
 
 	public int getId() {
@@ -194,6 +204,20 @@ public class Post {
 		this.isPinned = isPinned;
 	}
 
+	public LocalDateTime getLastComment() {
+		return lastComment;
+	}
+
+	public void setLastComment(LocalDateTime lastComment) {
+		this.lastComment = lastComment;
+	}
+	
+	@PostPersist
+	@PostUpdate
+	private void updateLastComment() {
+	    this.lastComment = LocalDateTime.now();
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -238,6 +262,8 @@ public class Post {
 		builder.append(enabled);
 		builder.append(", isPinned=");
 		builder.append(isPinned);
+		builder.append(", lastComment=");
+		builder.append(lastComment);
 		builder.append("]");
 		return builder.toString();
 	}
