@@ -2,11 +2,13 @@ package com.skilldistillery.lorehunter.controllers;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -99,19 +101,21 @@ public class PostController {
 		}
 	}
 
-	@PutMapping("categories/{cid}/posts/{pid}/viewCount")
-	public Post updateViewCount(@PathVariable("cid") int categoryId, @PathVariable("pid") int postId, @RequestBody Post post, HttpServletResponse res) {
+	@PutMapping("posts/{pid}/viewCount")
+	public Post updateViewCount(@PathVariable("pid") int postId, HttpServletResponse res) {
 	    try {
-	        post = postService.updateViewCount(postId, categoryId);
-	        if (post == null) {
-	            res.setStatus(404);
-	        }
+	        return postService.updateViewCount(postId);
+	    } catch (NoSuchElementException e) {
+	        e.printStackTrace();
+	        res.setStatus(404);
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        res.setStatus(400);
 	    }
-	    return post;
+	    return null;
 	}
+
+
 	
 	// Modify Post isPinned property to be true or false depending on current value
 	@PutMapping("categories/{cid}/posts/{pid}/pin")

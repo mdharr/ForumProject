@@ -43,6 +43,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   paramsSub: Subscription | undefined;
 
   posts: Post[] = [];
+  currentPost: Post = new Post();
 
   categories: Category[] = [];
   // post: null | Post = null;
@@ -129,6 +130,16 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
                     switchMap((post) => {
                       console.log(post);
                       console.log(this.postId);
+                      this.currentPost = post;
+                      console.log('update view count start');
+                      console.log(this.currentPost.id);
+                      console.log(this.currentPost.viewCount);
+
+                      this.updateViewCount(this.currentPost.id, this.categoryId);
+                      console.log(this.currentPost.id);
+                      console.log(this.currentPost.viewCount);
+                      console.log('update view count finish');
+
                       // Perform actions with post data
                       // this.updateViewCount(this.postId, this.categoryId);
                       return EMPTY; // Replace with appropriate observable if needed
@@ -155,6 +166,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
                   console.log(this.categoryId);
                   console.log(this.postId);
                   console.log(this.comments);
+                  this.updateViewCount(this.postId, this.categoryId);
                   // Perform actions with category data
                   this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe(
                     map(comments => comments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
@@ -220,11 +232,11 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   // needs work
   updateViewCount(postId: number, categoryId: number): void {
     console.log('in editInformation');
-    this.postService.update(this.postId, this.categoryId).subscribe({
+    this.postService.update(postId, categoryId).subscribe({
       next: (post) => {
-        post.viewCount += post.viewCount;
+        this.currentPost = post;
         console.log("Before view count update" + post.viewCount);
-        post.viewCount += post.viewCount;
+        this.currentPost.viewCount++;
         console.log("After first view count update" + post.viewCount);
       }
     });

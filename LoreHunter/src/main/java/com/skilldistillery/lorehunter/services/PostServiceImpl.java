@@ -1,6 +1,7 @@
 package com.skilldistillery.lorehunter.services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 
@@ -65,16 +66,21 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public Post update(String username, int postId, Post post, int categoryId) {
 		Post existing = postRepo.findByUser_UsernameAndId(username, postId);
-		existing.setSubject(post.getSubject());
-		existing.setContent(post.getContent());
-		existing.setStatus(post.getStatus());
-		existing.setViewCount(post.getViewCount());
-		existing.setCommentCount(post.getCommentCount());
-		existing.setEnabled(post.getEnabled());
-		existing.setCreatedAt(post.getCreatedAt());
-		existing.setLastEdited(post.getLastEdited());
-		existing.setIsPinned(post.getIsPinned());
-		return postRepo.saveAndFlush(existing);
+		if(existing != null) {
+			existing.setSubject(post.getSubject());
+			existing.setContent(post.getContent());
+			existing.setStatus(post.getStatus());
+			existing.setViewCount(post.getViewCount());
+			existing.setCommentCount(post.getCommentCount());
+			existing.setEnabled(post.getEnabled());
+			existing.setCreatedAt(post.getCreatedAt());
+			existing.setLastEdited(post.getLastEdited());
+			existing.setIsPinned(post.getIsPinned());
+			return postRepo.saveAndFlush(existing);
+			
+		} else {
+			return null;
+		}
 	}
 	
 	
@@ -91,15 +97,13 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Post updateViewCount(int postId, int categoryId) {
-	    Optional<Post> postOpt = postRepo.findById(postId);
-	    if(postOpt.isPresent()) {
-	        Post updated = postOpt.get();
-	        updated.setViewCount(updated.getViewCount() + 1); // Increment viewCount by 1
-	        return postRepo.saveAndFlush(updated); // Return the updated post object
-	    }
-	    return null;
+	public Post updateViewCount(int postId) {
+	    Post post = postRepo.findById(postId)
+	                         .orElseThrow(NoSuchElementException::new);
+	    post.setViewCount(post.getViewCount() + 1);
+	    return postRepo.save(post);
 	}
+
 
 	@Override
 	public Boolean pinPost(int postId, int categoryId) {
