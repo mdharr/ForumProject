@@ -244,6 +244,7 @@ mat-paginator {
   width: 100%;
   height: 100%;
   background-size: cover;
+  cursor: pointer;
 }
 
 .breadcrumb-outer {
