@@ -277,7 +277,8 @@
       <div class="user-block">
         <div class="user-block-inner">
           <div class="user-avatar-container">
-            <a style="cursor: pointer;" [routerLink]="['/users', loggedInUser.id]"><img class="my-avatar" [style.background-image]="'url(' + loggedInUser.imageUrl + ')'" [style.background-position]="'center'" *ngIf="loggedIn()"/></a>
+            <!-- <a style="cursor: pointer;" [routerLink]="['/users', loggedInUser.id]"><img class="my-avatar" [style.background-image]="'url(' + loggedInUser.imageUrl + ')'" [style.background-position]="'center'" *ngIf="loggedIn()"/></a> -->
+            <div class="my-avatar" [routerLink]="['/users', loggedInUser.id]" [style.background-image]="'url(' + loggedInUser.imageUrl + ')'" [style.background-position]="'center'" *ngIf="loggedIn()"></div>
           </div>
           <div class="user-alias">
             <a class="user-name-text" *ngIf="loggedIn()" [routerLink]="['/users', loggedInUser.id]">{{ loggedInUser.username }}</a>
