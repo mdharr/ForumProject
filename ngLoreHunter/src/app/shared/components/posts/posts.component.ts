@@ -323,13 +323,12 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  incrementViewCount(categoryId: number, postId: number): void {
+  incrementViewCount(postId: number): void {
     // Call the API to increment the view count
-    this.postService.updateViewCount(categoryId, postId).subscribe({
+    this.postService.incrementViewCount(postId).subscribe({
       next: (data) => {
         this.postCreated = true;
         this.post = data;
-        this.posts$ = this.postService.postsByCategory(this.categoryId);
       },
       error: (nojoy) => {
         console.error(
@@ -337,8 +336,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
         );
           console.error(nojoy);
       }
-    }
-  );
+    });
   }
 
   getTotalPages(): number {

@@ -114,14 +114,12 @@ export class PostsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  incrementViewCount(categoryId: number, postId: number): void {
+  incrementViewCount(postId: number): void {
     // Call the API to increment the view count
-    this.postService.updateViewCount(categoryId, postId).subscribe({
+    this.postService.incrementViewCount(postId).subscribe({
       next: (data) => {
         this.postCreated = true;
         this.post = data;
-
-        this.posts$ = this.postService.postsByCategory(categoryId);
       },
       error: (nojoy) => {
         console.error(

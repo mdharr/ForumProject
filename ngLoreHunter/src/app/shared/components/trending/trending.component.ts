@@ -121,24 +121,6 @@ export class TrendingComponent implements OnInit {
     );
   }
 
-  incrementViewCount(categoryId: number, postId: number): void {
-    // Call the API to increment the view count
-    this.postService.updateViewCount(categoryId, postId).subscribe({
-      next: (data) => {
-        this.postCreated = true;
-        this.post = data;
-
-        this.posts$ = this.postService.postsByCategory(categoryId);
-      },
-      error: (nojoy) => {
-        console.error(
-          'PostsComponent.addPost: error creating post'
-        );
-          console.error(nojoy);
-      }
-    });
-  }
-
   openFilterDialog() {
     this.dialog.open(this.filterDialog, {
       width: '400px'

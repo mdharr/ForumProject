@@ -135,7 +135,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
                       console.log(this.currentPost.id);
                       console.log(this.currentPost.viewCount);
 
-                      this.updateViewCount(this.currentPost.id, this.categoryId);
+                      this.updateViewCount(this.currentPost.id);
                       console.log(this.currentPost.id);
                       console.log(this.currentPost.viewCount);
                       console.log('update view count finish');
@@ -166,7 +166,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
                   console.log(this.categoryId);
                   console.log(this.postId);
                   console.log(this.comments);
-                  this.updateViewCount(this.postId, this.categoryId);
+                  this.updateViewCount(this.postId);
                   // Perform actions with category data
                   this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe(
                     map(comments => comments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
@@ -230,16 +230,18 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // needs work
-  updateViewCount(postId: number, categoryId: number): void {
+  updateViewCount(postId: number): void {
     console.log('in editInformation');
-    this.postService.update(postId, categoryId).subscribe({
-      next: (post) => {
-        this.currentPost = post;
-        console.log("Before view count update" + post.viewCount);
-        this.currentPost.viewCount++;
-        console.log("After first view count update" + post.viewCount);
+    this.postService.incrementViewCount(postId)
+    .subscribe(
+      (post) => {
+        console.log(`View count for post ${postId} incremented to ${post.viewCount}`);
+      },
+      (error) => {
+        console.error('Error updating view count:', error);
       }
-    });
+    );
+
   }
 
   loggedIn(): boolean {

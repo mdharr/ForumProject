@@ -107,7 +107,9 @@ export class PostService {
         return this.http.get<Post>(this.url + '/categories/' + categoryId + '/posts/' + postId).pipe(
           tap((post: Post) => {
             // Update the view count of the fetched post
-            post.viewCount++;
+            // post.viewCount++;
+            console.log(post);
+
           }),
           catchError((err: any) => {
             console.log(err);
@@ -132,8 +134,18 @@ export class PostService {
     );
   }
 
-  updateViewCount(categoryId: number, postId: number): Observable<Post> {
-    return this.http.put<Post>(this.url + '/categories/' + categoryId + '/posts/' + postId + '/viewCount', {});
+  incrementViewCount(postId: number): Observable<Post> {
+    return this.http.put<Post>(this.url + '/posts/' + postId + '/viewCount', {}).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(
+              'PostService.incrementViewCount(): error incrementing post view count: ' + err
+            )
+        );
+      })
+    );
   }
 
   fetchPosts(categoryId: number, sort: Sort): Observable<Post[]>{
