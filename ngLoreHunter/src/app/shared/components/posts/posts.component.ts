@@ -176,7 +176,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
           map(posts => posts.sort((a, b) => {
-            let lastEditedComparison = new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime();
+            let lastEditedComparison = new Date(b.lastComment).getTime() - new Date(a.lastComment).getTime();
             if (lastEditedComparison === 0) {
                 return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
             } else {
@@ -266,7 +266,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
         // this.posts$ = this.postService.postsByCategory(this.categoryId);
         this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
           map(posts => posts.sort((a, b) => {
-            let lastEditedComparison = new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime();
+            let lastEditedComparison = new Date(b.lastComment).getTime() - new Date(a.lastComment).getTime();
             if (lastEditedComparison === 0) {
                 return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
             } else {
@@ -385,7 +385,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
           } else {
             return this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
               map(posts => posts.sort((a, b) => {
-                let lastEditedComparison = new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime();
+                let lastEditedComparison = new Date(b.lastComment).getTime() - new Date(a.lastComment).getTime();
                 if (lastEditedComparison === 0) {
                     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
                 } else {
