@@ -258,6 +258,30 @@ CREATE TABLE IF NOT EXISTS `user_likes_comment` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `ticket`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ticket` ;
+
+CREATE TABLE IF NOT EXISTS `ticket` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(255) NULL,
+  `description` TEXT NULL,
+  `status` ENUM('OPEN', 'IN PROGRESS', 'RESOLVED', 'CLOSED') NULL DEFAULT 'OPEN',
+  `priority` ENUM('LOW', 'MEDIUM', 'HIGH', 'URGENT') NULL DEFAULT 'MEDIUM',
+  `created_at` TIMESTAMP NULL,
+  `updated_at` TIMESTAMP NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_ticket_user1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_ticket_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS lorehunter@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -277,8 +301,8 @@ USE `lorehunterdb`;
 INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `created_at`, `image_url`, `last_activity`, `status`, `comment_count`, `banner_message`, `post_count`, `state`, `banner_image`, `is_online`, `verification_code`, `verified_status`, `email_verified`, `verification_expiry_time`, `resend_count`, `last_verification_code_sent_time`) VALUES (1, 'Jill', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'ADMIN', 'Albert', 'Jill', 'jill@valentine.com', '2023-03-03T12:35:22', 'https://64.media.tumblr.com/8611a4dab286090923c8876380df032a/tumblr_nv8mgo9YfZ1u8intho1_500.gif', '2023-03-03T12:35:22', 'active', 1, 'I am the master of this domain.', 5, 'offline', 'https://static.wikia.nocookie.net/residentevil/images/f/ff/Resident_Evil_Series_ECG.gif', 0, '1287ce4e-93c9-439c-9673-d166bb948482', 'ACTIVE', 1, NULL, 0, NULL);
 INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `created_at`, `image_url`, `last_activity`, `status`, `comment_count`, `banner_message`, `post_count`, `state`, `banner_image`, `is_online`, `verification_code`, `verified_status`, `email_verified`, `verification_expiry_time`, `resend_count`, `last_verification_code_sent_time`) VALUES (2, 'Wander', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'ADMIN', 'Michael', 'Harrington', 'wander@sotc.com', '2023-03-03T12:35:22', 'https://cdna.artstation.com/p/assets/images/images/016/596/266/original/fernando-henrique-shadowofthecolossus.gif', '2023-03-03T12:35:22', 'active', 5, 'Raise thy sword by the light.', 6, 'offline', 'https://cdna.artstation.com/p/assets/images/images/016/596/266/original/fernando-henrique-shadowofthecolossus.gif', 0, '1287ce4e-93c9-439c-9673-d166bb948482', 'ACTIVE', 1, NULL, 0, NULL);
 INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `created_at`, `image_url`, `last_activity`, `status`, `comment_count`, `banner_message`, `post_count`, `state`, `banner_image`, `is_online`, `verification_code`, `verified_status`, `email_verified`, `verification_expiry_time`, `resend_count`, `last_verification_code_sent_time`) VALUES (3, 'Snake', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'ADMIN', 'Solid', 'Snake', 'snake@mgs.com', '2023-03-03T12:35:22', 'https://i.gifer.com/origin/ae/ae9c3e23b51b8122e879220927d72dd2_w200.gif', '2023-03-03T12:35:22', 'active', 0, 'A legend is nothing but fiction.', 5, 'offline', 'https://i.pinimg.com/originals/3b/96/34/3b9634ada93c603291ed0250a1b8b892.gif', 0, '1287ce4e-93c9-439c-9673-d166bb948482', 'ACTIVE', 1, NULL, 0, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `created_at`, `image_url`, `last_activity`, `status`, `comment_count`, `banner_message`, `post_count`, `state`, `banner_image`, `is_online`, `verification_code`, `verified_status`, `email_verified`, `verification_expiry_time`, `resend_count`, `last_verification_code_sent_time`) VALUES (4, 'Samus', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'MEMBER', 'Samus', 'Aran', 'samus_aran@metroid.com', '2023-03-03T12:35:22', 'https://static.wixstatic.com/media/2d0812_6e0dd32dd9ef4188880cf657f2714a98~mv2.gif', '2023-03-03T12:35:22', 'active', 0, 'The galaxy is at peace…', 2, 'offline', 'https://cdna.artstation.com/p/assets/images/images/038/997/074/original/bryan-heemskerk-metroiddread12animated7.gif', 0, '1287ce4e-93c9-439c-9673-d166bb948482', 'ACTIVE', 1, NULL, 0, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `created_at`, `image_url`, `last_activity`, `status`, `comment_count`, `banner_message`, `post_count`, `state`, `banner_image`, `is_online`, `verification_code`, `verified_status`, `email_verified`, `verification_expiry_time`, `resend_count`, `last_verification_code_sent_time`) VALUES (5, 'Drifter', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'MEMBER', 'Hyper', 'Drifter', 'drifter@hyperlight.com', '2023-03-03T12:35:22', 'https://giffiles.alphacoders.com/162/162757.gif', '2023-03-03T12:35:22', 'active', 0, 'A lonely soul, in a desperate search.', 0, 'offline', 'https://bitchingamergrl.files.wordpress.com/2017/11/hld-vid-3-0-0.gif', 0, '1287ce4e-93c9-439c-9673-d166bb948482', 'ACTIVE', 1, NULL, 0, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `created_at`, `image_url`, `last_activity`, `status`, `comment_count`, `banner_message`, `post_count`, `state`, `banner_image`, `is_online`, `verification_code`, `verified_status`, `email_verified`, `verification_expiry_time`, `resend_count`, `last_verification_code_sent_time`) VALUES (4, 'Samus', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'STANDARD', 'Samus', 'Aran', 'samus_aran@metroid.com', '2023-03-03T12:35:22', 'https://static.wixstatic.com/media/2d0812_6e0dd32dd9ef4188880cf657f2714a98~mv2.gif', '2023-03-03T12:35:22', 'active', 0, 'The galaxy is at peace…', 2, 'offline', 'https://cdna.artstation.com/p/assets/images/images/038/997/074/original/bryan-heemskerk-metroiddread12animated7.gif', 0, '1287ce4e-93c9-439c-9673-d166bb948482', 'ACTIVE', 1, NULL, 0, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `created_at`, `image_url`, `last_activity`, `status`, `comment_count`, `banner_message`, `post_count`, `state`, `banner_image`, `is_online`, `verification_code`, `verified_status`, `email_verified`, `verification_expiry_time`, `resend_count`, `last_verification_code_sent_time`) VALUES (5, 'Drifter', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'STANDARD', 'Hyper', 'Drifter', 'drifter@hyperlight.com', '2023-03-03T12:35:22', 'https://giffiles.alphacoders.com/162/162757.gif', '2023-03-03T12:35:22', 'active', 0, 'A lonely soul, in a desperate search.', 0, 'offline', 'https://bitchingamergrl.files.wordpress.com/2017/11/hld-vid-3-0-0.gif', 0, '1287ce4e-93c9-439c-9673-d166bb948482', 'ACTIVE', 1, NULL, 0, NULL);
 
 COMMIT;
 
@@ -390,6 +414,16 @@ COMMIT;
 START TRANSACTION;
 USE `lorehunterdb`;
 INSERT INTO `user_likes_comment` (`id`, `user_id`, `comment_id`) VALUES (1, 3, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `ticket`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `lorehunterdb`;
+INSERT INTO `ticket` (`id`, `title`, `description`, `status`, `priority`, `created_at`, `updated_at`, `user_id`) VALUES (1, 'Idea for New Feature', 'I think more customization is needed for profile pages.', 'OPEN', 'MEDIUM', '2023-03-03T12:35:22', '2023-03-03T12:35:22', 5);
 
 COMMIT;
 
