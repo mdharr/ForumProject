@@ -46,10 +46,10 @@ class TicketTest {
 		assertEquals("Idea for New Feature", ticket.getTitle());
 	}
 	
-//	@Test
-//	void test_Ticket_User_many_to_one_mapping() {
-//		assertNotNull(ticket);
-//		assertEquals("Resident Evil 4 |OT| Back in the Saddler", ticket.getTitle());
-//	}
+	@Test
+	void test_Ticket_User_many_to_one_mapping() {
+		assertNotNull(ticket);
+		assertEquals("Drifter", ticket.getUser().getUsername());
+	}
 
 }
