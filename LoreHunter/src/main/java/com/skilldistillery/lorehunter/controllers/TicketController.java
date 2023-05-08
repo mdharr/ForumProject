@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,7 @@ import com.skilldistillery.lorehunter.entities.Ticket;
 import com.skilldistillery.lorehunter.entities.User;
 import com.skilldistillery.lorehunter.repositories.TicketRepository;
 import com.skilldistillery.lorehunter.services.TicketService;
+import com.skilldistillery.lorehunter.services.UserService;
 
 @CrossOrigin({ "*", "http://localhost/"})
 @RestController
@@ -33,17 +36,21 @@ public class TicketController {
 	@Autowired
 	private TicketRepository ticketRepo;
 	
+	@Autowired
+	private UserService userService;
+	
 	
 	@GetMapping("tickets")
-	public List<Ticket> listAllTickets(Principal principal) {
-		User adminUser = new User();
-		adminUser = (User) principal;
-		if(adminUser.getRole().equals("ADMIN")) {
-			return ticketService.getAllTickets();
-		}
-		return null;
-		
+	public ResponseEntity<List<Ticket>> listAllTickets(Principal principal) {
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String username = authentication.getName();
+	    User authenticatedUser = userService.showByUsername(username);
+	    if (authenticatedUser.getRole().equals("ADMIN")) {
+	        return new ResponseEntity<>(ticketService.getAllTickets(), HttpStatus.OK);
+	    }
+	    return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
+
 
 	@GetMapping("tickets/{id}")
 	public ResponseEntity<Ticket> getTicketById(@PathVariable int id, Principal principal) {
