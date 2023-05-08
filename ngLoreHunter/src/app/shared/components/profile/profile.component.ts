@@ -51,6 +51,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   userId: number = 0;
   value: any;
   postsCount: number = 0;
+  commentsCount: number = 0;
 
   newPost: Post = new Post();
 
@@ -77,6 +78,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private homeServIndexSubscription: Subscription | undefined;
   private postsByCategorySubscription: Subscription | undefined;
   private profileUserSubscription: Subscription | undefined;
+  private profileUserCommentsSubscription: Subscription | undefined;
 
   constructor(
     private postService: PostService,
@@ -191,6 +193,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       if (this.profileUserSubscription) {
         this.profileUserSubscription.unsubscribe();
       }
+
+      if (this.profileUserCommentsSubscription) {
+        this.profileUserCommentsSubscription.unsubscribe();
+      }
     }
 
     loggedIn(): boolean {
@@ -211,6 +217,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
           console.error('Error loading posts');
           console.error(err);
         },
+      });
+
+      this.profileUserCommentsSubscription = this.commentService.getUserComments(this.userId).subscribe({
+        next: (comments) => {
+          this.comments = comments;
+          let totalUserComments = 0;
+          for(let i = 0; i < comments.length; i++) {
+            totalUserComments++;
+          }
+          this.commentsCount = totalUserComments;
+        },
+        error: (err) => {
+          console.error('Error loading comments');
+          console.error(err);
+        }
       });
 
       this.homeServIndexSubscription = this.homeService.index().subscribe({
