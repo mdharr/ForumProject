@@ -1,5 +1,6 @@
 package com.skilldistillery.lorehunter.controllers;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.lorehunter.entities.Ticket;
+import com.skilldistillery.lorehunter.entities.User;
 import com.skilldistillery.lorehunter.repositories.TicketRepository;
 import com.skilldistillery.lorehunter.services.TicketService;
 
@@ -33,15 +35,29 @@ public class TicketController {
 	
 	
 	@GetMapping("tickets")
-	public List<Ticket> listAllTickets() {
-		return ticketService.getAllTickets();
+	public List<Ticket> listAllTickets(Principal principal) {
+		User adminUser = new User();
+		adminUser = (User) principal;
+		if(adminUser.getRole().equals("ADMIN")) {
+			return ticketService.getAllTickets();
+		}
+		return null;
+		
 	}
 
 	@GetMapping("tickets/{id}")
-	public ResponseEntity<Ticket> getTicketById(@PathVariable int id) {
+	public ResponseEntity<Ticket> getTicketById(@PathVariable int id, Principal principal) {
 		Optional<Ticket> optTicket = ticketRepo.findById(id);
 		if (optTicket.isPresent()) {
 			Ticket ticket = optTicket.get();
+			
+			// Example of how to check user information from principal
+			User adminUser = new User();
+			adminUser = (User) principal;
+			if (!adminUser.getRole().equals("ADMIN")) {
+				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+			}
+			
 			return new ResponseEntity<>(ticket, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -49,12 +65,22 @@ public class TicketController {
 	}
 
 	@GetMapping("tickets/users/{userId}")
-	public List<Ticket> listTicketsByUserId(@PathVariable int userId) {
+	public List<Ticket> listTicketsByUserId(@PathVariable int userId, Principal principal) {
+		// Example of how to check user information from principal
+		User loggedInUser = new User();
+		loggedInUser = (User) principal;
+		if (userId != loggedInUser.getId() && !loggedInUser.getRole().equals("ADMIN")) {
+			return null;
+		}
+		
 		return ticketService.getAllTicketsByUserId(userId);
 	}
 
 	@PostMapping("tickets")
-	public ResponseEntity<Ticket> addTicket(@RequestBody Ticket ticket) {
+	public ResponseEntity<Ticket> addTicket(@RequestBody Ticket ticket, Principal principal) {
+
+		ticket.setUser((User) principal);
+		
 		Ticket newTicket = ticketService.createTicket(ticket);
 		if (newTicket == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -64,12 +90,32 @@ public class TicketController {
 	}
 
 	@PutMapping("tickets/{id}")
-	public ResponseEntity<Ticket> updateTicket(@PathVariable int id, @RequestBody Ticket ticket) {
-		Ticket updatedTicket = ticketService.updateTicket(id, ticket);
-		if (updatedTicket == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	public ResponseEntity<Ticket> updateTicket(@PathVariable int id, @RequestBody Ticket ticket, Principal principal) {
+		Optional<Ticket> optTicket = ticketRepo.findById(id);
+		User adminUser = new User();
+		adminUser = (User) principal;
+		if (optTicket.isPresent()) {
+			Ticket existingTicket = optTicket.get();
+			
+			// Example of how to check user information from principal
+			if (existingTicket.getUser().getUsername() != principal.getName() && !adminUser.getRole().equals("ADMIN")) {
+				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+			}
+			
+			existingTicket.setTitle(ticket.getTitle());
+			existingTicket.setDescription(ticket.getDescription());
+			existingTicket.setPriority(ticket.getPriority());
+			existingTicket.setStatus(ticket.getStatus());
+			
+			Ticket updatedTicket = ticketService.updateTicket(id, existingTicket);
+			
+			if (updatedTicket == null) {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			} else {
+				return new ResponseEntity<>(updatedTicket, HttpStatus.OK);
+			}
 		} else {
-			return new ResponseEntity<>(updatedTicket, HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
