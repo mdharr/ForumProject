@@ -41,7 +41,7 @@
               <div class="message-avatar">
                 <div class="message-avatar-wrapper">
                   <a [routerLink]="['/users', post.user.id]">
-                    <img class="user-avatar" src="{{ post.user.imageUrl }}" alt="">
+                    <img class="user-avatar" [style.background-image]="'url(' + post.user.imageUrl + ')'" [style.background-position]="'center'">
                   </a>
                 </div>
               </div>

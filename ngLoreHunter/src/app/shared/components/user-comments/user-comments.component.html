@@ -21,7 +21,7 @@
               <div class="message-avatar">
                 <div class="message-avatar-wrapper">
                   <a [routerLink]="['/users', comment.user.id]" class="avatar avatar--l">
-                    <img class="user-avatar" src="{{ comment.user.imageUrl }}" alt="">
+                    <img class="user-avatar" [style.background-image]="'url(' + comment.user.imageUrl + ')'" [style.background-position]="'center'">
                   </a>
                 </div>
               </div>
