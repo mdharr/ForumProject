@@ -75,30 +75,32 @@ export class DrawerComponent implements OnInit {
   }
 
   onHideImagesButtonClick() {
-    // Get all img elements with class "user-avatar" in the component
-    const imgElements = this.el.nativeElement.querySelectorAll('img.user-avatar');
+    // Get all elements with class "user-avatar" in the component
+    const elements = this.el.nativeElement.querySelectorAll('.user-avatar');
 
-    // Loop through each img element
-    for (let i = 0; i < imgElements.length; i++) {
-      const imgElement = imgElements[i];
+    // Loop through each element
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements[i];
 
-      // Check if the img element has the data-original-src attribute
-      const originalSrc = imgElement.getAttribute('data-original-src');
-      if (!originalSrc) {
-        // If the data-original-src attribute doesn't exist, store the original src
-        imgElement.setAttribute('data-original-src', imgElement.src);
+      // Check if the element has the data-original-background-image attribute
+      const originalBackgroundImage = element.getAttribute('data-original-background-image');
+      if (!originalBackgroundImage) {
+        // If the data-original-background-image attribute doesn't exist, store the original background image
+        element.setAttribute('data-original-background-image', element.style.backgroundImage);
       }
 
-      // Update the src attribute of the img element based on hideImages value
+      // Update the background-image style of the element based on hideImages value
       if (!this.hideImages) {
-        imgElement.src = this.defaultImageUrl;
+        element.style.backgroundImage = `url(${this.defaultImageUrl})`;
       } else {
-        imgElement.src = originalSrc || '';
+        element.style.backgroundImage = originalBackgroundImage || '';
       }
     }
 
     // Update the hideImages value
     this.hideImages = !this.hideImages;
   }
+
+
 
 }
