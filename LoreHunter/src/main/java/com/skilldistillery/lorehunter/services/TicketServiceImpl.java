@@ -6,7 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.lorehunter.entities.Category;
+import com.skilldistillery.lorehunter.entities.Post;
 import com.skilldistillery.lorehunter.entities.Ticket;
+import com.skilldistillery.lorehunter.entities.User;
 import com.skilldistillery.lorehunter.repositories.TicketRepository;
 
 @Service

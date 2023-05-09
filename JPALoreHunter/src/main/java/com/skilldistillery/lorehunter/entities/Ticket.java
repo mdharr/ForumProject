@@ -32,10 +32,10 @@ public class Ticket {
 	private String description;
 	
 	@Enumerated(EnumType.STRING)
-	private TicketStatus status;
+	private TicketStatus status =  TicketStatus.OPEN;
 	
 	@Enumerated(EnumType.STRING)
-	private TicketPriority priority;
+	private TicketPriority priority = TicketPriority.MEDIUM;
 	
 	@CreationTimestamp
 	@Column(name = "created_at")
