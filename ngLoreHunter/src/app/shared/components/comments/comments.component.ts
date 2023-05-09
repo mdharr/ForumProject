@@ -86,7 +86,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private homeService: HomeService,
     private http: HttpClient,
-    private sanitizer:DomSanitizer,
+    private sanitizer: DomSanitizer,
     private _renderer: Renderer2,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog,

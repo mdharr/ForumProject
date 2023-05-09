@@ -1,3 +1,4 @@
+import { NoSanitizePipe } from './../../../utilities/nosanitizerpipe';
 import { PostDataSource } from './../../../services/post.dataSource';
 import { Component, OnDestroy, OnInit, ViewChild, AfterViewInit, Input, TemplateRef, OnChanges, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,6 +19,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import * as ClassicEditor from 'src/assets/ckeditor/ckeditor5-37.1.0-hicq7jejpz5/build/ckeditor';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-posts',
@@ -43,6 +45,8 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('filterDialog') filterDialog!: TemplateRef<any>;
   @Input() currentPage: number = 1;
   @Input() pageCount: number = 0;
+
+  postContent: SafeHtml | undefined;
 
   pageSize: number = 10;
   totalPosts: number = 0;
@@ -100,7 +104,9 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
     private homeServ: HomeService,
     private http: HttpClient,
     private dialog: MatDialog,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private sanitizer: DomSanitizer,
+
     ) {
       this.posts$ = postService.getPosts(this.categoryId);
       this.pinnedPosts$ = this.posts$.pipe(
@@ -125,6 +131,9 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
     );
 
     this.reload();
+
+    this.post = new Post();
+    this.postContent = this.sanitizer.bypassSecurityTrustHtml(this.post.content);
 
   }
 
@@ -397,6 +406,14 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       })
     );
+  }
+
+  showTooltip(content: string): void {
+    this.postContent = this.sanitizer.bypassSecurityTrustHtml(content);
+  }
+
+  getSanitizedTooltipContent(): string {
+    return this.postContent ? this.postContent.toString() : '';
   }
 
 }

@@ -258,7 +258,6 @@ mat-paginator {
 
 .user-avatar:hover {
   transform: scale(1.15);
-
 }
 
 .my-avatar {
@@ -521,6 +520,23 @@ mat-paginator {
 .message-metadetails {
   display: flex;
 }
+
+.post-pinned-label {
+  color:#4255c0;
+  font-weight:bold;
+  text-transform: uppercase;
+}
+
+a[title]:hover:after {
+  content: attr(title);
+  padding: 5px;
+  color: #fff;
+  background-color: #000;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 1;
+}
+
 
 .message-content-details {
   display: flex;

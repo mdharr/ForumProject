@@ -8,6 +8,8 @@ import { HomeService } from 'src/app/services/home.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ThemePalette } from '@angular/material/core';
 import { Renderer2, ElementRef } from '@angular/core';
+import { User } from 'src/app/models/user';
+import { Subscription, tap } from 'rxjs';
 
 
 @Component({
@@ -18,6 +20,8 @@ import { Renderer2, ElementRef } from '@angular/core';
 export class DrawerComponent implements OnInit {
   @ViewChild('sidenav') public sidenav: MatSidenav | undefined;
 
+  loggedInUser: User = new User();
+
   color: ThemePalette = 'primary';
   checked = false;
   disabled = false;
@@ -25,6 +29,8 @@ export class DrawerComponent implements OnInit {
   categories: Category[] = [];
 
   hideImages = false;
+
+  private loggedInUserSubscription: Subscription | undefined;
 
   defaultImageUrl = "https://www.resetera.com/styles/resetera/images/resetera-default-avatar-transparent.png";
 
@@ -40,7 +46,48 @@ export class DrawerComponent implements OnInit {
               ) {
   }
 
+  getHttpOptions() {
+    let options = {
+      headers: {
+        Authorization: 'Basic ' + this.authService.getCredentials(),
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    };
+    return options;
+  }
+
   ngOnInit() {
+
+    if (this.loggedInUserSubscription) {
+      this.loggedInUserSubscription.unsubscribe();
+    }
+
+    this.authService.getCurrentLoggedInUser().subscribe((user: User) => {
+      this.loggedInUser = user;
+      // Do something with the logged-in user object, e.g. update UI
+    });
+
+    this.authService.getLoggedInUser().subscribe({
+      next: (user) => {
+        this.loggedInUser = user;
+      },
+      error: (error) => {
+        console.log('Error getting loggedInUser');
+        console.log(error);
+      },
+    });
+
+    this.loggedInUserSubscription = this.authService.getLoggedInUser().pipe(
+      tap(user => {
+        this.loggedInUser = user;
+      })
+    ).subscribe({
+      error: (error) => {
+        console.log('Error getting loggedInUser Profile Component');
+        console.log(error);
+      },
+    });
+
     this.sideNavService.sideNavToggleSubject.subscribe(()=> {
       this.sidenav?.toggle();
     });
@@ -57,6 +104,10 @@ export class DrawerComponent implements OnInit {
         console.error(fail);
       }
     });
+  }
+
+  loggedIn(): boolean {
+    return this.authService.checkLogin();
   }
 
   toggleDarkTheme(): void {

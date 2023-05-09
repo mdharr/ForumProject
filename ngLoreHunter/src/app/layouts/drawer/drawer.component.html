@@ -22,6 +22,7 @@
       <div class="title">
         <a mat-list-item class="light-link" [routerLink]="['/games']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">videogame_asset</mat-icon></dt><dd class="sidenav-items">Games</dd></dl></a>
       </div>
+      <a mat-list-item *ngIf="loggedIn() && loggedInUser.role === 'ADMIN'"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">admin_panel_settings</mat-icon></dt><dd><span class="sidenav-items">Admin</span></dd></dl></a>
       <mat-accordion elevation={0}>
         <mat-expansion-panel hideToggle class="mat-elevation-z0" style="background: var(--bkg-color); padding: 0;">
           <mat-expansion-panel-header style="padding: 16px; background: var(--bkg-color);">
@@ -52,7 +53,7 @@
       [color]="color"
       [checked]="checked"
       [disabled]="disabled" (click)="toggleDarkTheme()">
-      <p class="sidenav-items" style="margin-left: 5px;">Light/Dark</p>
+      <p class="sidenav-items" style="margin-left: 5px; font-weight: 500;">Light/Dark</p>
       </mat-slide-toggle>
       </a>
     </mat-nav-list>

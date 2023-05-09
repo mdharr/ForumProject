@@ -608,6 +608,7 @@ mat-paginator {
   margin-left: 5px;
   margin-right: 5px;
   font-size: 1.3rem;
+  color: var(--text-color);
 }
 
 .no-trendingPosts-container {
