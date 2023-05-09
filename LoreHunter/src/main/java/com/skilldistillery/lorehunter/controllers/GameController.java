@@ -100,7 +100,7 @@ public class GameController {
     @GetMapping("games")
     public ResponseEntity<Object> getGames(
             @RequestParam(value = "page", defaultValue = "1") int page,
-            @RequestParam(value = "pageSize", defaultValue = "40") int pageSize) {
+            @RequestParam(value = "pageSize", defaultValue = "20") int pageSize) {
         // Fetch data from external API
         String apiUrl = API_BASE_URL + "?" + API_KEY_PARAM + "=" + API_KEY_VALUE
                 + "&page=" + page + "&page_size=" + pageSize;

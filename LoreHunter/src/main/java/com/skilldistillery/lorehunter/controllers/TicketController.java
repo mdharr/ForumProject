@@ -90,8 +90,12 @@ public class TicketController {
 
 	@PostMapping("tickets")
 	public ResponseEntity<Ticket> addTicket(@RequestBody Ticket ticket, Principal principal) {
-
-		ticket.setUser((User) principal);
+		
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String username = authentication.getName();
+	    User authenticatedUser = userService.showByUsername(username);
+	    
+		ticket.setUser(authenticatedUser);
 		
 		Ticket newTicket = ticketService.createTicket(ticket);
 		if (newTicket == null) {

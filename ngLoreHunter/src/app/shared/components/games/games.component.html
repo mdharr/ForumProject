@@ -34,15 +34,16 @@
 
     </div>
 
-    <div *ngIf="isLoading">
-      <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+    <div class="loading-container" *ngIf="isLoading">
+      <mat-progress-spinner style="margin-top: 100px;" color="primary" mode="indeterminate"></mat-progress-spinner>
     </div>
 
       <div *ngIf="searchResults && !isLoading" class="p-body">
         <div class="row item-grid2">
           <div class="card item-card" *ngFor="let game of searchResults" (click)="onCardClick($event)">
             <div class="item-card-image">
-              <img src="{{ game.background_image }}" alt="Item Image" loading="lazy">
+              <!-- <img class="game-image" src="{{ game.background_image }}" alt="Item Image" loading="lazy"> -->
+              <img class="game-image" [style.background-image]="'url(' + game.background_image + ')'" [style.background-position]="'center'" loading="lazy">
             </div>
             <div class="item-card-details">
               <h3 class="item-card-title">{{ game.name }}</h3>
@@ -62,7 +63,7 @@
       <div class="row item-grid2">
         <div class="card item-card" *ngFor="let game of games" (click)="onCardClick($event)">
           <div class="item-card-image">
-            <img src="{{ game.background_image }}" alt="Item Image">
+            <img class="game-image" [style.background-image]="'url(' + game.background_image + ')'" [style.background-position]="'center'" loading="lazy">
           </div>
           <div class="item-card-details">
             <h3 class="item-card-title">{{ game.name }}</h3>
@@ -82,7 +83,7 @@
 
 </div>
 
-<div class="breadcrumb-outer-bottom">
+<div class="breadcrumb-outer-bottom" *ngIf="!isLoading">
   <div class="breadcrumb-inner">
     <ol class="breadcrumbnav" style="padding:0;">
       <li class="breadcrumb-value" [routerLink]="['/home']">Discussion</li>
