@@ -3,7 +3,7 @@ import { SideNavService } from 'src/app/services/side-nav.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { CategoryService } from 'src/app/services/category.service';
@@ -37,6 +37,8 @@ export class HeaderComponent implements OnInit {
 
   isRotated1: boolean = false;
 
+  quickJumpText: string = 'Quick Jump';
+
   private categoriesSubscription: Subscription | undefined;
   private loggedInUserSubscription: Subscription | undefined;
 
@@ -53,7 +55,7 @@ export class HeaderComponent implements OnInit {
     private scrollService: ScrollService,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
-    private userNotificationService: UserNotificationService
+    private userNotificationService: UserNotificationService,
     ) {
 
   }
@@ -69,6 +71,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     if (this.categoriesSubscription) {
       this.categoriesSubscription.unsubscribe();
     }
