@@ -104,17 +104,47 @@ public class TicketController {
 			return new ResponseEntity<>(newTicket, HttpStatus.CREATED);
 		}
 	}
-
-	@PutMapping("tickets/{id}")
-	public ResponseEntity<Ticket> updateTicket(@PathVariable int id, @RequestBody Ticket ticket, Principal principal) {
-		Optional<Ticket> optTicket = ticketRepo.findById(id);
-		User adminUser = new User();
-		adminUser = (User) principal;
+	
+	@PutMapping("users/{uid}/tickets/{tid}")
+	public ResponseEntity<Ticket> updateUserTicket(@PathVariable("uid") int userId, @PathVariable("tid") int ticketId, @RequestBody Ticket ticket, Principal principal) {
+		Optional<Ticket> optTicket = ticketRepo.findById(ticketId);
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String username = authentication.getName();
+	    User authenticatedUser = userService.showByUsername(username);
 		if (optTicket.isPresent()) {
 			Ticket existingTicket = optTicket.get();
 			
 			// Example of how to check user information from principal
-			if (existingTicket.getUser().getUsername() != principal.getName() && !adminUser.getRole().equals("ADMIN")) {
+			if (!(authenticatedUser.getId() == existingTicket.getUser().getId())) {
+				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+			}
+			
+			existingTicket.setTitle(ticket.getTitle());
+			existingTicket.setDescription(ticket.getDescription());
+			
+			Ticket updatedTicket = ticketService.updateTicket(ticketId, existingTicket);
+			
+			if (updatedTicket == null) {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			} else {
+				return new ResponseEntity<>(updatedTicket, HttpStatus.OK);
+			}
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@PutMapping("tickets/{id}")
+	public ResponseEntity<Ticket> updateTicket(@PathVariable int id, @RequestBody Ticket ticket, Principal principal) {
+		Optional<Ticket> optTicket = ticketRepo.findById(id);
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String username = authentication.getName();
+	    User authenticatedUser = userService.showByUsername(username);
+		if (optTicket.isPresent()) {
+			Ticket existingTicket = optTicket.get();
+			
+			// Example of how to check user information from principal
+			if (!authenticatedUser.getRole().equals("ADMIN")) {
 				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 			}
 			
