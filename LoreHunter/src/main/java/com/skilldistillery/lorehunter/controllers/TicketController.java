@@ -72,16 +72,20 @@ public class TicketController {
 		}
 	}
 
-	@GetMapping("tickets/users/{userId}")
-	public List<Ticket> listTicketsByUserId(@PathVariable int userId, Principal principal) {
+	@GetMapping("users/{userId}/tickets")
+	public ResponseEntity<List<Ticket>> listTicketsByUserId(@PathVariable int userId, Principal principal) {
 		// Example of how to check user information from principal
-		User loggedInUser = new User();
-		loggedInUser = (User) principal;
-		if (userId != loggedInUser.getId() && !loggedInUser.getRole().equals("ADMIN")) {
-			return null;
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String username = authentication.getName();
+	    User authenticatedUser = userService.showByUsername(username);
+		if (userId != authenticatedUser.getId() && !authenticatedUser.getRole().equals("ADMIN")) {
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		} else if (userId == authenticatedUser.getId() || authenticatedUser.getRole().equals("ADMIN")) {
+			return new ResponseEntity<>(ticketService.getAllTicketsByUserId(userId), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		
-		return ticketService.getAllTicketsByUserId(userId);
 	}
 
 	@PostMapping("tickets")
