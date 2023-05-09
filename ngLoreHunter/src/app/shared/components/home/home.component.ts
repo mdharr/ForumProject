@@ -361,6 +361,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         },
         error: (error: any) => {
           // Handle error accordingly
+          console.error('Error retrieving backend user notifications');
+          console.error(error);
         }
       });
   }
