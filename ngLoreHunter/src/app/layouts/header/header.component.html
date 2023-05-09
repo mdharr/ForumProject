@@ -13,8 +13,15 @@
         <button *ngIf="i === 1" mat-menu-item [routerLink]="['/categories', category.id, 'posts']">{{category.name}}</button>
         <button *ngIf="i === 2" mat-menu-item [routerLink]="['/categories', category.id, 'posts']">{{category.name}}</button>
         <button *ngIf="i === 3" mat-menu-item [routerLink]="['/categories', category.id, 'posts']">{{category.name}}</button>
-        <button *ngIf="i === 4" mat-menu-item [routerLink]="['/categories', category.id, 'posts']">{{category.name}}</button>
-        <button *ngIf="i === 5" mat-menu-item [routerLink]="['/categories', category.id, 'posts']">{{category.name}}</button>
+      </div>
+      <div class="menu-categories">
+        <button mat-menu-item [routerLink]="['/trending']">Trending Posts</button>
+      </div>
+      <div class="menu-categories">
+        <button mat-menu-item [routerLink]="['/posts']">Latest Posts</button>
+      </div>
+      <div class="menu-categories">
+        <button *ngIf="loggedIn()" mat-menu-item>Watched</button>
       </div>
       </mat-menu>
      <span class="example-spacer"></span>
