@@ -59,9 +59,10 @@ public class TicketController {
 			Ticket ticket = optTicket.get();
 			
 			// Example of how to check user information from principal
-			User adminUser = new User();
-			adminUser = (User) principal;
-			if (!adminUser.getRole().equals("ADMIN")) {
+		    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		    String username = authentication.getName();
+		    User authenticatedUser = userService.showByUsername(username);
+			if (!authenticatedUser.getRole().equals("ADMIN")) {
 				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 			}
 			
