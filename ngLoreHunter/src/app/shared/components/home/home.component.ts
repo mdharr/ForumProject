@@ -65,6 +65,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private loggedInUsersSubscription: Subscription | undefined;
   private getLoggedInUserSubscription: Subscription | undefined;
   private userNotificationsSubscription: Subscription | undefined;
+  private refreshNotificationsSubscription: Subscription | undefined;
   private loggedInUserSubscription: Subscription | undefined;
 
 
@@ -180,6 +181,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.usersSubscription = this.userService.index().subscribe({
       next: (users) => {
         this.users = users;
+        this.pollUserNotifications();
       },
       error:(fail) => {
         console.error('Error getting comments:');
@@ -203,7 +205,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     });
 
-    this.pollUserNotifications();
+
 
   }
 
@@ -247,6 +249,10 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     if (this.userNotificationsSubscription) {
       this.userNotificationsSubscription.unsubscribe();
+    }
+
+    if (this.refreshNotificationsSubscription) {
+      this.refreshNotificationsSubscription.unsubscribe();
     }
 
   }
@@ -342,7 +348,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   pollUserNotifications(): void {
-    interval(5000) // Poll every 5 seconds (adjust the interval as needed)
+    this.refreshNotificationsSubscription = interval(5000) // Poll every 5 seconds (adjust the interval as needed)
       .pipe(
         switchMap(() => this.userNotificationService.getUnreadUserNotificationsByUserId(this.loggedInUser.id))
       )
