@@ -53,6 +53,7 @@ import { NotificationDialogComponent } from './components/notification-dialog/no
 import { UserPostsComponent } from './components/user-posts/user-posts.component';
 import { UserCommentsComponent } from './components/user-comments/user-comments.component';
 import { TruncateTextDirective } from '../directives/truncate-text.directive';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { TruncateTextDirective } from '../directives/truncate-text.directive';
     NotificationDialogComponent,
     UserPostsComponent,
     UserCommentsComponent,
-    TruncateTextDirective
+    TruncateTextDirective,
+    AdminDashboardComponent
   ],
   imports: [
     CommonModule,
