@@ -19,6 +19,7 @@ import { TrendingComponent } from './shared/components/trending/trending.compone
 import { UserPostsComponent } from './shared/components/user-posts/user-posts.component';
 import { UserCommentsComponent } from './shared/components/user-comments/user-comments.component';
 import { AdminDashboardComponent } from './shared/components/admin-dashboard/admin-dashboard.component';
+import { TicketListComponent } from './shared/components/ticket-list/ticket-list.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: 'header', component: HeaderComponent },
   { path: 'drawer', component: DrawerComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
+  { path: 'ticket-list', component: TicketListComponent },
   { path: '**', component: NotFoundComponent } //page not found route
 ];
 
