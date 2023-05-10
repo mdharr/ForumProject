@@ -41,6 +41,9 @@ const routes: Routes = [
   { path: 'header', component: HeaderComponent },
   { path: 'drawer', component: DrawerComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
+  { path: 'user-list', component: TicketListComponent },
+  { path: 'post-list', component: TicketListComponent },
+  { path: 'comment-list', component: TicketListComponent },
   { path: 'ticket-list', component: TicketListComponent },
   { path: '**', component: NotFoundComponent } //page not found route
 ];

@@ -116,6 +116,7 @@
 .card:hover {
   transform: scale(1.05); /* Add a zoom effect on hover */
   cursor: pointer;
+
 }
 
 /* .item-card-image img {
