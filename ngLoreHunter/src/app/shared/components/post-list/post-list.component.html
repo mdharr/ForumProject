@@ -1,1 +1,25 @@
-<p>post-list works!</p>
+<!-- <mat-table [dataSource]="tickets"> -->
+  <mat-table>
+    <ng-container matColumnDef="ticketNumber">
+      <mat-header-cell *matHeaderCellDef> Ticket Number </mat-header-cell>
+      <mat-cell *matCellDef="let ticket"> {{ticket.ticketNumber}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="subject">
+      <mat-header-cell *matHeaderCellDef> Subject </mat-header-cell>
+      <mat-cell *matCellDef="let ticket"> {{ticket.subject}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="priority">
+      <mat-header-cell *matHeaderCellDef> Priority </mat-header-cell>
+      <mat-cell *matCellDef="let ticket"> {{ticket.priority}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let ticket"> {{ticket.status}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="dateCreated">
+      <mat-header-cell *matHeaderCellDef> Date Created </mat-header-cell>
+      <mat-cell *matCellDef="let ticket"> {{ticket.dateCreated}} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="['ticketNumber', 'subject', 'priority', 'status', 'dateCreated']"></mat-header-row>
+    <mat-row *matRowDef="let ticket; columns: ['ticketNumber', 'subject', 'priority', 'status', 'dateCreated'];"></mat-row>
+  </mat-table>
