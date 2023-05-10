@@ -18,6 +18,7 @@ import { GamesComponent } from './shared/components/games/games.component';
 import { TrendingComponent } from './shared/components/trending/trending.component';
 import { UserPostsComponent } from './shared/components/user-posts/user-posts.component';
 import { UserCommentsComponent } from './shared/components/user-comments/user-comments.component';
+import { AdminDashboardComponent } from './shared/components/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'categories/:categoryId/posts/:postId/comments', component: CommentsComponent },
   { path: 'header', component: HeaderComponent },
   { path: 'drawer', component: DrawerComponent },
+  { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: '**', component: NotFoundComponent } //page not found route
 ];
 
