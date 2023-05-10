@@ -1,6 +1,7 @@
 <mat-sidenav-container class='app-drawer-container' fullscreen>
   <mat-sidenav #sidenav mode="side" class="mat-elevation-z0">
     <mat-nav-list style="margin-top: 50px;">
+      <a mat-list-item [routerLink]="['/admin-dashboard']" *ngIf="loggedIn() && loggedInUser.role === 'ADMIN'"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons" style="color:#7aa14c;">admin_panel_settings</mat-icon></dt><dd><span class="sidenav-items" style="color:#7aa14c;">Dashboard</span></dd></dl></a>
       <a mat-list-item [routerLink]="['/home']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons forum-icon">forum</mat-icon></dt><dd><span class="sidenav-forum">Forums</span></dd></dl></a>
       <ng-container *ngFor="let category of categories; let i = index">
         <div class="title" *ngIf="i === 0">
@@ -22,7 +23,7 @@
       <div class="title">
         <a mat-list-item class="light-link" [routerLink]="['/games']"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">videogame_asset</mat-icon></dt><dd class="sidenav-items">Games</dd></dl></a>
       </div>
-      <a mat-list-item [routerLink]="['/admin-dashboard']" *ngIf="loggedIn() && loggedInUser.role === 'ADMIN'"><dl class="pairs"><dt class="dt-icon"><mat-icon class="material-icons sidenav-icons">admin_panel_settings</mat-icon></dt><dd><span class="sidenav-items">Admin</span></dd></dl></a>
+
       <mat-accordion elevation={0}>
         <mat-expansion-panel hideToggle class="mat-elevation-z0" style="background: var(--bkg-color); padding: 0;">
           <mat-expansion-panel-header style="padding: 16px; background: var(--bkg-color);">

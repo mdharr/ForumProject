@@ -54,6 +54,7 @@ import { UserPostsComponent } from './components/user-posts/user-posts.component
 import { UserCommentsComponent } from './components/user-comments/user-comments.component';
 import { TruncateTextDirective } from '../directives/truncate-text.directive';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -109,7 +110,8 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
     MatSelectModule,
     MatTooltipModule,
     MatMenuModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule
   ],
   exports: [
     HomeComponent,
