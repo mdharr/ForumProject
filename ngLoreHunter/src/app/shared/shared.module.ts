@@ -58,6 +58,7 @@ import { MatCardModule } from '@angular/material/card';
 import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { PostListComponent } from './components/post-list/post-list.component';
+import { CommentListComponent } from './components/comment-list/comment-list.component';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { PostListComponent } from './components/post-list/post-list.component';
     AdminDashboardComponent,
     TicketListComponent,
     UserListComponent,
-    PostListComponent
+    PostListComponent,
+    CommentListComponent
   ],
   imports: [
     CommonModule,
