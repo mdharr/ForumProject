@@ -537,6 +537,11 @@ section {
   padding: 0;
 }
 
+.post-img {
+  width: 100%;
+  height: auto;
+}
+
 .message-avatar-wrapper {
   position: relative;
   display: inline-block;
@@ -785,6 +790,10 @@ li {
   padding-bottom: 12px;
   margin: 0;
   color: var(--text-color);
+}
+
+span {
+  color: var(--text-color) !important;
 }
 
 p > span {
