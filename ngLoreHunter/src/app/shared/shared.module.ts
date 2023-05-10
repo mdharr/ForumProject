@@ -57,6 +57,7 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { MatCardModule } from '@angular/material/card';
 import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { PostListComponent } from './components/post-list/post-list.component';
 
 
 @NgModule({
@@ -86,7 +87,8 @@ import { UserListComponent } from './components/user-list/user-list.component';
     TruncateTextDirective,
     AdminDashboardComponent,
     TicketListComponent,
-    UserListComponent
+    UserListComponent,
+    PostListComponent
   ],
   imports: [
     CommonModule,
