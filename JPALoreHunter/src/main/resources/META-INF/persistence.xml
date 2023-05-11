@@ -20,6 +20,7 @@
 		<class>com.skilldistillery.lorehunter.entities.UserNotificationId</class>
 		<class>com.skilldistillery.lorehunter.entities.Like</class>
 		<class>com.skilldistillery.lorehunter.entities.Ticket</class>
+		<class>com.skilldistillery.lorehunter.entities.TicketMessage</class>
 
 		<!-- end entities -->
 
