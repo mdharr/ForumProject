@@ -58,8 +58,20 @@ public class TicketMessageController {
     
     
     @GetMapping("users/{uid}/tickets/{tid}/messages")
-    public List<TicketMessage> getMessagesForTicketAndSender(@PathVariable("tid") int ticketId, @PathVariable("uid") int userId, Principal principal) {
-        return ticketMessageService.getMessagesForTicketAndUser(ticketId, userId);
+    public ResponseEntity<List<TicketMessage>> getMessagesForTicketAndSender(@PathVariable("tid") int ticketId, @PathVariable("uid") int userId, Principal principal) {
+    	Optional<Ticket> optTicket = ticketRepo.findById(ticketId);
+    	if (optTicket.isPresent()) {
+    		Ticket ticket = optTicket.get();
+    		List<TicketMessage> ticketMessages = ticket.getTicketMessages();
+    		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    		String username = authentication.getName();
+    		User authenticatedUser = userService.showByUsername(username);
+    		if (authenticatedUser.getId() != userId) {
+    			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    		}
+    		return new ResponseEntity<>(ticketMessages, HttpStatus.OK);
+    	}
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
     @PostMapping("tickets/{tid}/messages")
