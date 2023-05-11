@@ -35,25 +35,35 @@ class TicketMessageTest {
 		em = emf.createEntityManager();
 		ticket = em.find(Ticket.class, 1);
 		ticketMessage = em.find(TicketMessage.class, 1);
-		user = em.find(User.class, 5);
+		user = em.find(User.class, 3);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
 		ticket = null;
+		ticketMessage = null;
+		user = null;
 	}
 
 	@Test
-	void test_Ticket_entity_mapping() {
-		assertNotNull(ticket);
-		assertEquals("Idea for New Feature", ticket.getTitle());
+	void test_TicketMessage_entity_mapping() {
+		assertNotNull(ticketMessage);
+		assertEquals("Please provide additional information. Thank you.", ticketMessage.getContent());
 	}
 	
 	@Test
-	void test_Ticket_User_many_to_one_mapping() {
+	void test_TicketMessage_User_many_to_one_mapping() {
+		assertNotNull(ticketMessage);
+		assertEquals("Snake", ticketMessage.getUser().getUsername());
+		assertEquals(ticketMessage.getUser().getUsername(), user.getUsername());
+	}
+	
+	@Test
+	void test_TicketMessage_Ticket_many_to_one_mapping() {
+		assertNotNull(ticketMessage);
 		assertNotNull(ticket);
-		assertEquals("Drifter", ticket.getUser().getUsername());
+		assertEquals(ticket.getTitle(), ticketMessage.getTicket().getTitle());
 	}
 
 }
