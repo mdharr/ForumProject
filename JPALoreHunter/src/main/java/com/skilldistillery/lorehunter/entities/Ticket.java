@@ -21,6 +21,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.skilldistillery.lorehunter.enums.TicketPriority;
 import com.skilldistillery.lorehunter.enums.TicketStatus;
 
@@ -53,6 +54,7 @@ public class Ticket {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
 	private List<TicketMessage> ticketMessages = new ArrayList<>();
 

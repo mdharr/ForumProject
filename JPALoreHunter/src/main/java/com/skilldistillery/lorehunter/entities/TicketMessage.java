@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "ticket_message")
 public class TicketMessage {
@@ -28,10 +30,12 @@ public class TicketMessage {
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "ticket_id")
 	private Ticket ticket;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;

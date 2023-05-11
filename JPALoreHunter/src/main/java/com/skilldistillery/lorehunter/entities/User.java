@@ -113,6 +113,7 @@ public class User {
     @Column(name = "last_verification_code_sent_time")
 	private LocalDateTime lastVerificationCodeSentTime;
     
+    @JsonManagedReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<TicketMessage> ticketMessages = new ArrayList<>();
 
