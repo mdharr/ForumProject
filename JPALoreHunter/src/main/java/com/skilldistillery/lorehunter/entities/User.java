@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -111,6 +112,9 @@ public class User {
 	
     @Column(name = "last_verification_code_sent_time")
 	private LocalDateTime lastVerificationCodeSentTime;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<TicketMessage> ticketMessages = new ArrayList<>();
 
 	public User() {
 		super();
@@ -121,7 +125,7 @@ public class User {
 			LocalDateTime lastActivity, String status, Integer commentCount, String bannerMessage, String bannerImage,
 			List<Category> categories, List<Post> posts, List<Comment> comments, Integer postCount, Boolean isOnline,
 			List<UserGame> userGames, String verificationCode, VerifiedStatus verifiedStatus, boolean emailVerified,
-			LocalDateTime verificationExpiryTime, int resendCount, LocalDateTime lastVerificationCodeSentTime) {
+			LocalDateTime verificationExpiryTime, int resendCount, LocalDateTime lastVerificationCodeSentTime, List<TicketMessage> ticketMessages) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -151,6 +155,7 @@ public class User {
 		this.verificationExpiryTime = verificationExpiryTime;
 		this.resendCount = resendCount;
 		this.lastVerificationCodeSentTime = lastVerificationCodeSentTime;
+		this.ticketMessages = ticketMessages;
 	}
 
 	public int getId() {
@@ -375,6 +380,14 @@ public class User {
 
 	public void setLastVerificationCodeSentTime(LocalDateTime lastVerificationCodeSentTime) {
 		this.lastVerificationCodeSentTime = lastVerificationCodeSentTime;
+	}
+
+	public List<TicketMessage> getTicketMessages() {
+		return ticketMessages;
+	}
+
+	public void setTicketMessages(List<TicketMessage> ticketMessages) {
+		this.ticketMessages = ticketMessages;
 	}
 
 	@Override

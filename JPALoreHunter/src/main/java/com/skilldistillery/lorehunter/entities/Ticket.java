@@ -1,8 +1,11 @@
 package com.skilldistillery.lorehunter.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -48,6 +52,9 @@ public class Ticket {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	@OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
+	private List<TicketMessage> ticketMessages = new ArrayList<>();
 
 	public Ticket() {
 		super();
@@ -55,7 +62,7 @@ public class Ticket {
 	}
 
 	public Ticket(int id, String title, String description, TicketStatus status, TicketPriority priority,
-			LocalDateTime createdAt, LocalDateTime updatedAt, User user) {
+			LocalDateTime createdAt, LocalDateTime updatedAt, User user, List<TicketMessage> ticketMessages) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -65,6 +72,7 @@ public class Ticket {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.user = user;
+		this.ticketMessages = ticketMessages;
 	}
 
 	public int getId() {
@@ -129,6 +137,14 @@ public class Ticket {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<TicketMessage> getTicketMessages() {
+		return ticketMessages;
+	}
+
+	public void setTicketMessages(List<TicketMessage> ticketMessages) {
+		this.ticketMessages = ticketMessages;
 	}
 
 	@Override
