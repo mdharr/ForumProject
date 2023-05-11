@@ -63,8 +63,30 @@ public class TicketMessageController {
     }
     
     @PostMapping("tickets/{tid}/messages")
-    public TicketMessage createMessage(@RequestBody TicketMessage ticketMessage, @PathVariable("tid") int ticketId, Principal principal) {
-        return ticketMessageService.createMessage(ticketMessage);
+    public ResponseEntity<TicketMessage> createMessage(@RequestBody TicketMessage ticketMessage, @PathVariable("tid") int ticketId, Principal principal) {
+    	Optional<Ticket> optTicket = ticketRepo.findById(ticketId);
+    	if (optTicket.isPresent()) {
+    		Ticket ticket = optTicket.get();
+    		List<TicketMessage> ticketMessages = ticket.getTicketMessages();
+    		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    		String username = authentication.getName();
+    		User authenticatedUser = userService.showByUsername(username);
+    		if(!authenticatedUser.getRole().equals("ADMIN") && authenticatedUser.getId() != ticket.getUser().getId()) {
+    			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    		}
+    		ticketMessage.setUser(authenticatedUser);
+    		ticketMessage.setTicket(ticket);
+    		TicketMessage newTicketMessage = ticketMessageService.createMessage(ticketMessage);
+    		if (newTicketMessage == null) {
+    			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    		} else {
+    			ticketMessages.add(newTicketMessage);
+    			return new ResponseEntity<>(ticketMessage, HttpStatus.CREATED);
+    		}
+    	} else {
+    		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    	}
+
     }
 
 }
