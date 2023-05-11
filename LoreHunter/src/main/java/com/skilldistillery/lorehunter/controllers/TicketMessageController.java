@@ -58,7 +58,7 @@ public class TicketMessageController {
     
     
     @GetMapping("users/{uid}/tickets/{tid}/messages")
-    public ResponseEntity<List<TicketMessage>> getMessagesForTicketAndSender(@PathVariable("tid") int ticketId, @PathVariable("uid") int userId, Principal principal) {
+    public ResponseEntity<List<TicketMessage>> getMessagesForTicketAndUser(@PathVariable("tid") int ticketId, @PathVariable("uid") int userId, Principal principal) {
     	Optional<Ticket> optTicket = ticketRepo.findById(ticketId);
     	if (optTicket.isPresent()) {
     		Ticket ticket = optTicket.get();
