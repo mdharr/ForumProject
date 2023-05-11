@@ -282,6 +282,33 @@ CREATE TABLE IF NOT EXISTS `ticket` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `ticket_message`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ticket_message` ;
+
+CREATE TABLE IF NOT EXISTS `ticket_message` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `content` TEXT NULL,
+  `created_at` TIMESTAMP NULL,
+  `ticket_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_ticket_message_ticket1_idx` (`ticket_id` ASC),
+  INDEX `fk_ticket_message_user1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_ticket_message_ticket1`
+    FOREIGN KEY (`ticket_id`)
+    REFERENCES `ticket` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ticket_message_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS lorehunter@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -427,6 +454,16 @@ COMMIT;
 START TRANSACTION;
 USE `lorehunterdb`;
 INSERT INTO `ticket` (`id`, `title`, `description`, `status`, `priority`, `created_at`, `updated_at`, `user_id`) VALUES (1, 'Idea for New Feature', 'I think more customization is needed for profile pages.', 'OPEN', 'MEDIUM', '2023-03-03T12:35:22', '2023-03-03T12:35:22', 5);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `ticket_message`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `lorehunterdb`;
+INSERT INTO `ticket_message` (`id`, `content`, `created_at`, `ticket_id`, `user_id`) VALUES (1, 'Please provide additional information. Thank you.', '2023-03-03T12:35:22', 1, 3);
 
 COMMIT;
 
