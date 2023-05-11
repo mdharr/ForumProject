@@ -56,25 +56,6 @@ public class TicketMessageController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
-//	@GetMapping("tickets/{id}")
-//	public ResponseEntity<Ticket> getTicketById(@PathVariable int id, Principal principal) {
-//		Optional<Ticket> optTicket = ticketRepo.findById(id);
-//		if (optTicket.isPresent()) {
-//			Ticket ticket = optTicket.get();
-//			
-//			// Example of how to check user information from principal
-//		    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		    String username = authentication.getName();
-//		    User authenticatedUser = userService.showByUsername(username);
-//			if (!authenticatedUser.getRole().equals("ADMIN")) {
-//				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-//			}
-//			
-//			return new ResponseEntity<>(ticket, HttpStatus.OK);
-//		} else {
-//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//		}
-//	}
     
     @GetMapping("users/{uid}/tickets/{tid}/messages")
     public List<TicketMessage> getMessagesForTicketAndSender(@PathVariable("tid") int ticketId, @PathVariable("uid") int userId, Principal principal) {

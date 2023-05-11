@@ -35,7 +35,6 @@ public class TicketMessage {
 	@JoinColumn(name = "ticket_id")
 	private Ticket ticket;
 
-	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
