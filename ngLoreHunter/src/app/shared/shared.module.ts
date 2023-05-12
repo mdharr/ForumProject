@@ -60,6 +60,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { TicketMessagesComponent } from './components/ticket-messages/ticket-messages.component';
+import { TicketDetailsComponent } from './components/ticket-details/ticket-details.component';
 
 
 @NgModule({
@@ -92,7 +93,8 @@ import { TicketMessagesComponent } from './components/ticket-messages/ticket-mes
     UserListComponent,
     PostListComponent,
     CommentListComponent,
-    TicketMessagesComponent
+    TicketMessagesComponent,
+    TicketDetailsComponent
   ],
   imports: [
     CommonModule,
