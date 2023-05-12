@@ -1,7 +1,14 @@
-.mat-table {
+table {
   width: 100%;
 }
 
-.mat-header-cell, .mat-cell {
-  text-align: center;
+.full-width-table {
+  width: 100%;
+}
+
+.mat-cell {
+  word-wrap: break-word;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
