@@ -1,9 +1,40 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Ticket } from '../models/ticket';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketService {
+  private url = environment.baseUrl + 'api';
 
-  constructor() { }
+  constructor(private authService: AuthService, private http: HttpClient,) { }
+
+  getHttpOptions() {
+    let options = {
+      headers: {
+        Authorization: 'Basic ' + this.authService.getCredentials(),
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    };
+    return options;
+  }
+
+  getAllTickets(): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(this.url + '/tickets', this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+          new Error(
+            'TicketService.getAllTickets(): error retrieving all tickets ' + err
+          )
+        );
+      })
+    );
+  }
+
 }
