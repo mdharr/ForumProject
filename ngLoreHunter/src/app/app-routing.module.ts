@@ -20,6 +20,8 @@ import { UserPostsComponent } from './shared/components/user-posts/user-posts.co
 import { UserCommentsComponent } from './shared/components/user-comments/user-comments.component';
 import { AdminDashboardComponent } from './shared/components/admin-dashboard/admin-dashboard.component';
 import { TicketListComponent } from './shared/components/ticket-list/ticket-list.component';
+import { TicketDetailsComponent } from './shared/components/ticket-details/ticket-details.component';
+import { TicketMessagesComponent } from './shared/components/ticket-messages/ticket-messages.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -44,7 +46,9 @@ const routes: Routes = [
   { path: 'user-list', component: TicketListComponent },
   { path: 'post-list', component: TicketListComponent },
   { path: 'comment-list', component: TicketListComponent },
-  { path: 'ticket-list', component: TicketListComponent },
+  { path: 'tickets', component: TicketListComponent },
+  { path: 'tickets/:id', component: TicketDetailsComponent },
+  { path: 'tickets/:id/messages', component: TicketMessagesComponent },
   { path: '**', component: NotFoundComponent } //page not found route
 ];
 

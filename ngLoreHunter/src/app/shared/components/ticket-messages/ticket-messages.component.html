@@ -1,1 +1,5 @@
-<p>ticket-messages works!</p>
+<div class="message-container">
+  <div *ngFor="let message of messages" class="message" [ngClass]="{'right': !ticket.user, 'left': ticket.user}">
+    <p>{{ message.content }}</p>
+  </div>
+</div>
