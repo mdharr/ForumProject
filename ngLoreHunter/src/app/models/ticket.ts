@@ -20,7 +20,7 @@ export class Ticket {
     priority: TicketPriority = TicketPriority.MEDIUM,
     createdAt: string = '',
     updatedAt: string = '',
-    user: User = new User,
+    user: User = new User(),
     ticketMessages: TicketMessage[] = []
   ) {
     this.id = id;
