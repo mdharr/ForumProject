@@ -72,9 +72,20 @@ export class TicketService {
         return throwError(
           () =>
           new Error('TicketService.createTicket(): error creating ticket: ' + err)
-        )
+        );
       })
-    )
+    );
+  }
+
+  updateTicket(ticket: Ticket, ticketId: number): Observable<Ticket> {
+    return this.http.put<Ticket>(this.url + '/tickets/' + ticketId, ticket, this.getHttpOptions()).pipe(
+            catchError((err: any) => {
+              console.log(err);
+              return throwError(
+                () => new Error('TicketService.updateTicket(): error updating ticket: ' + err)
+              );
+            })
+    );
   }
 
 }
