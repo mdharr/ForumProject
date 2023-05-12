@@ -77,14 +77,25 @@ export class TicketService {
     );
   }
 
-  updateTicket(ticket: Ticket, ticketId: number): Observable<Ticket> {
+  updateTicketByTicketId(ticket: Ticket, ticketId: number): Observable<Ticket> {
     return this.http.put<Ticket>(this.url + '/tickets/' + ticketId, ticket, this.getHttpOptions()).pipe(
-            catchError((err: any) => {
-              console.log(err);
-              return throwError(
-                () => new Error('TicketService.updateTicket(): error updating ticket: ' + err)
-              );
-            })
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('TicketService.updateTicket(): error updating ticket: ' + err)
+        );
+      })
+    );
+  }
+
+  updateTicketByTicketIdAndUserId(ticket: Ticket, ticketId: number, userId: number): Observable<Ticket> {
+    return this.http.put<Ticket>(this.url + '/users/' + userId + '/tickets/' + ticketId, ticket, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('TicketService.updateTicketByTicketIdAndUserId(): error updating ticket: ' + err)
+        );
+      })
     );
   }
 
