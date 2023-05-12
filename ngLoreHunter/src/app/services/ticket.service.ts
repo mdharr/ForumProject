@@ -37,4 +37,18 @@ export class TicketService {
     );
   }
 
+  getTicketById(ticketId: number): Observable<Ticket> {
+    return this.http.get<Ticket>(this.url + '/tickets/' + ticketId, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+          new Error(
+            'TicketService.getTicketById(): error retrieving ticket: ' + err
+          )
+        );
+      })
+    );
+  }
+
 }
