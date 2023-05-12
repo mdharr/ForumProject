@@ -65,4 +65,16 @@ export class TicketService {
     );
   }
 
+  createTicket(ticket: Ticket): Observable<Ticket> {
+    return this.http.post<Ticket>(this.url + '/tickets', this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+          new Error('TicketService.createTicket(): error creating ticket: ' + err)
+        )
+      })
+    )
+  }
+
 }
