@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Ticket } from 'src/app/models/ticket';
 import { TicketService } from 'src/app/services/ticket.service';
 
@@ -8,10 +9,12 @@ import { TicketService } from 'src/app/services/ticket.service';
   templateUrl: './ticket-list.component.html',
   styleUrls: ['./ticket-list.component.css']
 })
-export class TicketListComponent {
+export class TicketListComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['title', 'status', 'priority', 'createdAt', 'updatedAt', 'user'];
   tickets: Ticket[] = [];
+
+  private ticketSubscription: Subscription | undefined;
 
   constructor(private ticketService: TicketService, private router: Router) { }
 
@@ -20,7 +23,7 @@ export class TicketListComponent {
   }
 
   getTickets(): void {
-    this.ticketService.getAllTickets().subscribe((tickets) => {
+    this.ticketSubscription = this.ticketService.getAllTickets().subscribe((tickets) => {
       this.tickets = tickets;
     });
   }
@@ -31,6 +34,12 @@ export class TicketListComponent {
 
   onRowClicked(ticket: Ticket) {
     this.router.navigate(['/tickets', ticket.id]);
+  }
+
+  ngOnDestroy(): void {
+    if(this.ticketSubscription) {
+      this.ticketSubscription.unsubscribe();
+    }
   }
 
 }
