@@ -51,4 +51,18 @@ export class TicketService {
     );
   }
 
+  getTicketsByUserId(userId: number): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(this.url + '/users/' + userId + '/tickets', this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+          new Error(
+            'TicketService.getTicketsByUserId(): error retrieving tickets: ' + err
+          )
+        );
+      })
+    );
+  }
+
 }
