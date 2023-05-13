@@ -1,5 +1,17 @@
-<div class="message-container">
+<!-- <div class="message-container">
   <div *ngFor="let message of messages" class="message" [ngClass]="{'right': !ticket.user, 'left': ticket.user}">
     <p>{{ message.content }}</p>
+  </div>
+</div> -->
+
+<div class="message-container">
+  <div *ngFor="let message of messages" class="message" [ngClass]="{'right': !ticket.user, 'left': ticket.user}">
+    <div class="message-content">
+      <p>{{ message.content }}</p>
+    </div>
+    <div class="message-user-info" *ngIf="ticket.user">
+      <img [src]="message.user.imageUrl" alt="User Profile Picture" class="message-user-image">
+      <span class="message-username">{{ message.user.username }}</span>
+    </div>
   </div>
 </div>
