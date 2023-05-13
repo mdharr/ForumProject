@@ -74,6 +74,7 @@ public class TicketMessageController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
+    // rest api endpoint test success
     @PostMapping("tickets/{tid}/messages")
     public ResponseEntity<TicketMessage> createMessage(@RequestBody TicketMessage ticketMessage, @PathVariable("tid") int ticketId, Principal principal) {
     	Optional<Ticket> optTicket = ticketRepo.findById(ticketId);
