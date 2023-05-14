@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Ticket } from 'src/app/models/ticket';
@@ -15,6 +15,7 @@ export class TicketMessagesComponent implements OnInit, OnDestroy {
   ticketId: number = 0;
   ticket: Ticket = new Ticket();
   messages: TicketMessage[] = [];
+  newMessage: TicketMessage = new TicketMessage();
 
   private ticketSubscription: Subscription | undefined;
 
@@ -26,13 +27,24 @@ export class TicketMessagesComponent implements OnInit, OnDestroy {
       this.ticket = ticket;
     });
     this.messageService.getMessagesByTicketId(this.ticketId).subscribe((messages) => {
-      this.messages = messages;
+      this.messages = messages.sort((a, b) => {
+        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+      });
     });
   }
 
   ngOnDestroy(): void {
     if(this.ticketSubscription) {
       this.ticketSubscription.unsubscribe();
+    }
+  }
+
+  onSubmit(): void {
+    if (this.ticket) {
+      this.messageService.createTicketMessageByTicketId(this.ticket.id, this.newMessage).subscribe((message) => {
+        this.messages.push(message);
+        this.newMessage.content = '';
+      });
     }
   }
 
