@@ -34,3 +34,11 @@ table {
 .mat-mdc-cell {
   color: var(--text-color);
 }
+
+.ticket-row {
+  cursor: pointer;
+}
+
+.ticket-row {
+  background-color: var(--bkg-color);
+}

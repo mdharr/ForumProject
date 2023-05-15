@@ -34,7 +34,7 @@
         </mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
+      <mat-row class="ticket-row" *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
     </mat-table>
   </div>
 </div>

@@ -39,3 +39,7 @@ td:first-child {
 ::ng-deep .mat-mdc-select-arrow {
   color: var(--text-color);
 }
+
+::ng-deep .cdk-overlay-pane:not(.mat-mdc-select-panel-above) .mdc-menu-surface.mat-mdc-select-panel {
+  background-color: var(--bkg-color);
+}
