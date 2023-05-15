@@ -358,6 +358,7 @@ mat-paginator {
   width: 90%;
   background-color: var(--container-bkg-color);
   box-shadow: var(--box-shadow-style);
+  border-radius: 6px;
 }
 
 #userThumbnail {

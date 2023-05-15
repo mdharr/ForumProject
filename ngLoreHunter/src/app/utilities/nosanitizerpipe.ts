@@ -54,6 +54,7 @@ export class NoSanitizePipe implements PipeTransform {
   images.forEach((image: any) => {
     this.renderer.setStyle(image, 'width', '100%');
     this.renderer.setStyle(image, 'height', 'auto');
+    this.renderer.setAttribute(image, 'loading', 'lazy');
   });
 
 
