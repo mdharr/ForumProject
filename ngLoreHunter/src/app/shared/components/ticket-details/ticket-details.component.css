@@ -13,4 +13,7 @@ td:first-child {
 
 .card-body {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 200px;
 }
