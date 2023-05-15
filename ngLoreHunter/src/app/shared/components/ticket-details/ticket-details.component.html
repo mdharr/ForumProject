@@ -10,26 +10,17 @@
           <tr>
             <td>Status:</td>
             <td>
-              <mat-form-field>
-                <mat-select [(value)]="ticket.status">
-                  <mat-option value="New">New</mat-option>
-                  <mat-option value="In Progress">In Progress</mat-option>
-                  <mat-option value="Resolved">Resolved</mat-option>
-                  <mat-option value="Closed">Closed</mat-option>
-                </mat-select>
-              </mat-form-field>
+              <mat-select [(ngModel)]="ticket.status" (selectionChange)="updateTicket()">
+                <mat-option *ngFor="let status of statuses" [value]="status">{{ status }}</mat-option>
+              </mat-select>
             </td>
           </tr>
           <tr>
             <td>Priority:</td>
             <td>
-              <mat-form-field>
-                <mat-select [(value)]="ticket.priority">
-                  <mat-option value="Low">Low</mat-option>
-                  <mat-option value="Medium">Medium</mat-option>
-                  <mat-option value="High">High</mat-option>
-                </mat-select>
-              </mat-form-field>
+              <mat-select [(ngModel)]="ticket.priority" (selectionChange)="updateTicket()">
+                <mat-option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</mat-option>
+              </mat-select>
             </td>
           </tr>
           <tr>
@@ -42,7 +33,7 @@
           </tr>
           <tr>
             <td>User:</td>
-            <td>{{ ticket.user.firstName }} {{ ticket.user.lastName }}</td>
+            <td>{{ ticket.user.username }}</td>
           </tr>
         </table>
       </mat-card-content>

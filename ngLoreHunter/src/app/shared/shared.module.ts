@@ -61,6 +61,7 @@ import { PostListComponent } from './components/post-list/post-list.component';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { TicketMessagesComponent } from './components/ticket-messages/ticket-messages.component';
 import { TicketDetailsComponent } from './components/ticket-details/ticket-details.component';
+import { MatOptionModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -123,7 +124,8 @@ import { TicketDetailsComponent } from './components/ticket-details/ticket-detai
     MatTooltipModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    MatCardModule
+    MatCardModule,
+    MatOptionModule
   ],
   exports: [
     HomeComponent,

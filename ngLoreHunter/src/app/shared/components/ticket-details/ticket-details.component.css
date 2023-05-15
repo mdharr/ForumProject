@@ -31,3 +31,11 @@ td:first-child {
   background-color: var(--container-bkg-color);
   color: var(--text-color);
 }
+
+::ng-deep .mat-mdc-select-value {
+  color: var(--text-color);
+}
+
+::ng-deep .mat-mdc-select-arrow {
+  color: var(--text-color);
+}
