@@ -9,11 +9,28 @@
         <table>
           <tr>
             <td>Status:</td>
-            <td>{{ ticket.status }}</td>
+            <td>
+              <mat-form-field>
+                <mat-select [(value)]="ticket.status">
+                  <mat-option value="New">New</mat-option>
+                  <mat-option value="In Progress">In Progress</mat-option>
+                  <mat-option value="Resolved">Resolved</mat-option>
+                  <mat-option value="Closed">Closed</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
           </tr>
           <tr>
             <td>Priority:</td>
-            <td>{{ ticket.priority }}</td>
+            <td>
+              <mat-form-field>
+                <mat-select [(value)]="ticket.priority">
+                  <mat-option value="Low">Low</mat-option>
+                  <mat-option value="Medium">Medium</mat-option>
+                  <mat-option value="High">High</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
           </tr>
           <tr>
             <td>Created At:</td>

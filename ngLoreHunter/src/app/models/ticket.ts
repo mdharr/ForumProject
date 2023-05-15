@@ -46,5 +46,6 @@ export enum TicketStatus {
 export enum TicketPriority {
   LOW = 'LOW',
   MEDIUM = 'MEDIUM',
-  HIGH = 'HIGH'
+  HIGH = 'HIGH',
+  URGENT = 'URGENT'
 }
