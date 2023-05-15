@@ -1,36 +1,40 @@
-<mat-table [dataSource]="tickets" class="mat-elevation-z8">
-  <ng-container matColumnDef="title">
-    <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
-    <mat-cell *matCellDef="let ticket">{{ ticket.title }}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="status">
-    <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-    <mat-cell *matCellDef="let ticket">{{ ticket.status }}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="priority">
-    <mat-header-cell *matHeaderCellDef>Priority</mat-header-cell>
-    <mat-cell *matCellDef="let ticket">{{ ticket.priority }}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="createdAt">
-    <mat-header-cell *matHeaderCellDef>Created At</mat-header-cell>
-    <mat-cell *matCellDef="let ticket">{{ ticket.createdAt | date: 'medium' }}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="updatedAt">
-    <mat-header-cell *matHeaderCellDef>Updated At</mat-header-cell>
-    <mat-cell *matCellDef="let ticket">{{ ticket.updatedAt | date: 'medium' }}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="user">
-    <mat-header-cell *matHeaderCellDef>User</mat-header-cell>
-    <mat-cell *matCellDef="let ticket">{{ ticket.user?.name }}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let ticket">
-      <button mat-icon-button (click)="viewTicketDetails(ticket.id)">
-        <mat-icon>visibility</mat-icon>
-      </button>
-    </mat-cell>
-  </ng-container>
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
-</mat-table>
+<div class="table-wrapper">
+  <div class="table-div">
+    <mat-table [dataSource]="tickets" class="mat-elevation-z8">
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+        <mat-cell *matCellDef="let ticket">{{ ticket.title }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef="let ticket">{{ ticket.status }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="priority">
+        <mat-header-cell *matHeaderCellDef>Priority</mat-header-cell>
+        <mat-cell *matCellDef="let ticket">{{ ticket.priority }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef>Created At</mat-header-cell>
+        <mat-cell *matCellDef="let ticket">{{ ticket.createdAt | date: 'medium' }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="updatedAt">
+        <mat-header-cell *matHeaderCellDef>Updated At</mat-header-cell>
+        <mat-cell *matCellDef="let ticket">{{ ticket.updatedAt | date: 'medium' }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="user">
+        <mat-header-cell *matHeaderCellDef>User</mat-header-cell>
+        <mat-cell *matCellDef="let ticket">{{ ticket.user?.username }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let ticket">
+          <button mat-icon-button (click)="viewTicketDetails(ticket.id)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
+    </mat-table>
+  </div>
+</div>

@@ -12,3 +12,13 @@ table {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.table-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.table-div {
+  display: flex;
+}
