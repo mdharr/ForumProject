@@ -6,3 +6,11 @@ td:first-child {
   width: 150px;
   font-weight: bold;
 }
+
+.card-wrapper {
+  display: flex;
+}
+
+.card-body {
+  display: flex;
+}

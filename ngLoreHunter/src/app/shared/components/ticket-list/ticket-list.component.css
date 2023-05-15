@@ -22,3 +22,15 @@ table {
 .table-div {
   display: flex;
 }
+
+.mat-mdc-table {
+  background-color: var(--container-bkg-color);
+}
+
+.mat-mdc-header-cell {
+  color: var(--text-color);
+}
+
+.mat-mdc-cell {
+  color: var(--text-color);
+}

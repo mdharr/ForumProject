@@ -1,33 +1,37 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>{{ ticket.title }}</mat-card-title>
-    <mat-card-subtitle>{{ ticket.description }}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <table>
-      <tr>
-        <td>Status:</td>
-        <td>{{ ticket.status }}</td>
-      </tr>
-      <tr>
-        <td>Priority:</td>
-        <td>{{ ticket.priority }}</td>
-      </tr>
-      <tr>
-        <td>Created At:</td>
-        <td>{{ ticket.createdAt }}</td>
-      </tr>
-      <tr>
-        <td>Updated At:</td>
-        <td>{{ ticket.updatedAt }}</td>
-      </tr>
-      <tr>
-        <td>User:</td>
-        <td>{{ ticket.user.firstName }} {{ ticket.user.lastName }}</td>
-      </tr>
-    </table>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" routerLink="/tickets/{{ ticket.id }}/messages">View Messages</button>
-  </mat-card-actions>
-</mat-card>
+<div class="card-wrapper">
+  <div class="card-body">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ ticket.title }}</mat-card-title>
+        <mat-card-subtitle>{{ ticket.description }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <table>
+          <tr>
+            <td>Status:</td>
+            <td>{{ ticket.status }}</td>
+          </tr>
+          <tr>
+            <td>Priority:</td>
+            <td>{{ ticket.priority }}</td>
+          </tr>
+          <tr>
+            <td>Created At:</td>
+            <td>{{ ticket.createdAt }}</td>
+          </tr>
+          <tr>
+            <td>Updated At:</td>
+            <td>{{ ticket.updatedAt }}</td>
+          </tr>
+          <tr>
+            <td>User:</td>
+            <td>{{ ticket.user.firstName }} {{ ticket.user.lastName }}</td>
+          </tr>
+        </table>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/tickets/{{ ticket.id }}/messages">View Messages</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
