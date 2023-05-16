@@ -1,1 +1,10 @@
-<p>create-ticket-dialog works!</p>
+<h2>Create Ticket</h2>
+
+<form (ngSubmit)="createTicket()">
+  <!-- Add form fields for ticket title, description, status, priority, etc. -->
+  <!-- Use Angular's [(ngModel)] directive to bind the form fields to the ticket object properties -->
+
+  <button type="submit" mat-raised-button color="primary">Create</button>
+  <button type="button" mat-button (click)="closeDialog()">Cancel</button>
+</form>
+
