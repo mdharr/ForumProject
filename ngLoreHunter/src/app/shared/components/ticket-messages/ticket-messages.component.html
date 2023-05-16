@@ -1,5 +1,8 @@
 <div class="chat-container">
   <div class="messages-container">
+    <div *ngIf="!messages.length">
+      <h3>Send message here to discuss ticket details with admin</h3>
+    </div>
     <div *ngFor="let message of messages" class="message" [ngClass]="{'right': !ticket.user, 'left': ticket.user}">
       <div class="user-avatar-container">
         <img [src]="message.user.imageUrl" alt="User Profile Picture" class="message-user-image">
