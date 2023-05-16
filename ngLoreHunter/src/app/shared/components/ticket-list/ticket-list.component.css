@@ -21,6 +21,7 @@ table {
 
 .table-div {
   display: flex;
+  width: 95%;
 }
 
 .mat-mdc-table {

@@ -453,7 +453,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `ticket` (`id`, `title`, `description`, `status`, `priority`, `created_at`, `updated_at`, `user_id`) VALUES (1, 'Idea for New Feature', 'I think more customization is needed for profile pages.', 'OPEN', 'MEDIUM', '2023-03-03T12:35:22', '2023-03-03T12:35:22', 5);
+INSERT INTO `ticket` (`id`, `title`, `description`, `status`, `priority`, `created_at`, `updated_at`, `user_id`) VALUES (1, 'Username Change Request', 'I would like to change my username to `Samus Aran` please. Thank you.', 'OPEN', 'MEDIUM', '2023-03-03T12:35:22', '2023-03-03T12:35:22', 4);
 
 COMMIT;
 
@@ -463,7 +463,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `ticket_message` (`id`, `content`, `created_at`, `ticket_id`, `user_id`) VALUES (1, 'Please provide additional information. Thank you.', '2023-03-03T12:35:22', 1, 3);
+INSERT INTO `ticket_message` (`id`, `content`, `created_at`, `ticket_id`, `user_id`) VALUES (1, 'Good morning Samus! We\'d love to take care of that for you. Let me first verify that your last username change was not within the past year.', '2023-03-03T12:35:22', 1, 3);
 
 COMMIT;
 

@@ -1,7 +1,7 @@
 <div class="chat-container">
   <div class="messages-container">
     <div *ngIf="!messages.length">
-      <h3>Send message here to discuss ticket details with admin</h3>
+      <h3>Send messages here to communicate ticket details with Admin</h3>
     </div>
     <div *ngFor="let message of messages" class="message" [ngClass]="{'right': !ticket.user, 'left': ticket.user}">
       <div class="user-avatar-container">
