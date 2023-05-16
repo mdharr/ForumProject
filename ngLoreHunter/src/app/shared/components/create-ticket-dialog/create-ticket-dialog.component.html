@@ -1,11 +1,11 @@
-<h2 mat-dialog-title>Create Ticket</h2>
+<h2 mat-dialog-title class="create-ticket-form-header">Create Ticket</h2>
 <mat-dialog-content>
   <form class="create-ticket-form">
     <mat-form-field>
-      <input matInput placeholder="Title" [(ngModel)]="ticket.title" name="title" required>
+      <input class="create-ticket-form-input" matInput placeholder="Title" [(ngModel)]="ticket.title" name="title" required>
     </mat-form-field>
     <mat-form-field>
-      <textarea matInput placeholder="Description" [(ngModel)]="ticket.description" name="description" required></textarea>
+      <textarea class="create-ticket-form-input" matInput placeholder="Description" [(ngModel)]="ticket.description" name="description" required></textarea>
     </mat-form-field>
   </form>
 </mat-dialog-content>

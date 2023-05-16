@@ -1,6 +1,7 @@
 :host {
   display: flex;
   flex-direction: column;
+  background-color: var(--bkg-color);
 }
 
 mat-dialog-content {
@@ -19,4 +20,20 @@ button {
 .create-ticket-form {
   display: flex;
   flex-direction: column;
+}
+
+.create-ticket-form-header {
+  color: var(--text-color);
+}
+
+.create-ticket-form-input {
+
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--container-bkg-color);
+}
+
+::ng-deep .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input, .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+  color: var(--text-color);
 }
