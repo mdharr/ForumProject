@@ -10,6 +10,7 @@ import { ThemePalette } from '@angular/material/core';
 import { Renderer2, ElementRef } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Subscription, tap } from 'rxjs';
+import { TicketService } from 'src/app/services/ticket.service';
 
 
 @Component({
@@ -43,6 +44,7 @@ export class DrawerComponent implements OnInit {
               public imageService: ImageService,
               private renderer: Renderer2,
               private el: ElementRef,
+              public ticketService: TicketService
               ) {
   }
 
