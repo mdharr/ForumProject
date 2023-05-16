@@ -1,10 +1,18 @@
 <h2>Create Ticket</h2>
 
 <form (ngSubmit)="createTicket()">
-  <!-- Add form fields for ticket title, description, status, priority, etc. -->
-  <!-- Use Angular's [(ngModel)] directive to bind the form fields to the ticket object properties -->
+  <mat-form-field>
+    <input matInput placeholder="Title" [(ngModel)]="ticket.title" name="title" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Description" [(ngModel)]="ticket.description" name="description" required></textarea>
+  </mat-form-field>
+
+  <!-- Add more form fields for other ticket properties (status, priority, etc.) if needed -->
 
   <button type="submit" mat-raised-button color="primary">Create</button>
   <button type="button" mat-button (click)="closeDialog()">Cancel</button>
 </form>
+
 
