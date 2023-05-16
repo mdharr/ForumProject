@@ -42,4 +42,9 @@ export class TicketListComponent implements OnInit, OnDestroy {
     }
   }
 
+  trimSubject(subject: string): string {
+    const maxLength = 15;
+    return subject.length > maxLength ? subject.slice(0, maxLength) + '...' : subject;
+  }
+
 }
