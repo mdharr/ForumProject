@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Ticket } from '../models/ticket';
+import { CreateTicketDialogComponent } from '../shared/components/create-ticket-dialog/create-ticket-dialog.component';
 import { AuthService } from './auth.service';
 
 @Injectable({
