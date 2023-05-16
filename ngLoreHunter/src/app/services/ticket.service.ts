@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Ticket } from '../models/ticket';
@@ -11,7 +12,7 @@ import { AuthService } from './auth.service';
 export class TicketService {
   private url = environment.baseUrl + 'api';
 
-  constructor(private authService: AuthService, private http: HttpClient,) { }
+  constructor(private authService: AuthService, private http: HttpClient, private dialog: MatDialog) { }
 
   getHttpOptions() {
     let options = {
@@ -97,6 +98,32 @@ export class TicketService {
         );
       })
     );
+  }
+
+  openCreateTicketDialog(): void {
+    const dialogRef = this.dialog.open(CreateTicketDialogComponent, {
+      width: '500px',
+      // Other dialog configuration options
+    });
+
+    // Subscribe to the dialog close event to handle the result
+    dialogRef.afterClosed().subscribe((newTicket: Ticket | undefined) => {
+      if (newTicket) {
+        // Call the createTicket() method to save the new ticket
+        this.createTicket(newTicket).subscribe(
+          (ticket: Ticket) => {
+            // Handle successful creation of the ticket
+            console.log('Ticket created:', ticket);
+            // Perform any additional actions, such as refreshing the ticket list
+          },
+          (err) => {
+            // Handle error during ticket creation
+            console.error('Error creating ticket:', err);
+            // Perform any error handling, such as displaying an error message
+          }
+        );
+      }
+    });
   }
 
 }
