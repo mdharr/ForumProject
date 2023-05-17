@@ -1,0 +1,45 @@
+table {
+  width: 100%;
+}
+
+td:first-child {
+  width: 150px;
+  font-weight: bold;
+}
+
+.card-wrapper {
+  display: flex;
+}
+
+.card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 200px;
+}
+
+.mat-mdc-card {
+  background-color: var(--container-bkg-color);
+  color: var(--text-color);
+}
+
+.mat-mdc-card:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+}
+
+.mat-mdc-card-subtitle {
+  background-color: var(--container-bkg-color);
+  color: var(--text-color);
+}
+
+::ng-deep .mat-mdc-select-value {
+  color: var(--text-color);
+}
+
+::ng-deep .mat-mdc-select-arrow {
+  color: var(--text-color);
+}
+
+::ng-deep .cdk-overlay-pane:not(.mat-mdc-select-panel-above) .mdc-menu-surface.mat-mdc-select-panel {
+  background-color: var(--bkg-color);
+}

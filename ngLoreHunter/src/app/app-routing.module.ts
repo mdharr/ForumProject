@@ -46,7 +46,7 @@ const routes: Routes = [
   { path: 'drawer', component: DrawerComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'user-list', component: UserListComponent },
-  { path: 'user-details', component: UserDetailsComponent },
+  { path: 'user-details/:id', component: UserDetailsComponent },
   { path: 'post-list', component: TicketListComponent },
   { path: 'comment-list', component: TicketListComponent },
   { path: 'tickets', component: TicketListComponent },
