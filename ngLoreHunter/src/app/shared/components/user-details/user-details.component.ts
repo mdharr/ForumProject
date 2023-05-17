@@ -15,6 +15,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   user: User = new User();
   id: number = 0;
   userForm!: FormGroup;
+  userId: number = 0;
 
   private userSubscription: Subscription | undefined;
 
@@ -23,8 +24,29 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.id = +this.route.snapshot.paramMap.get('id')!;
-    this.userSubscription = this.userService.show(this.id).subscribe(user => this.user = user);
+    console.log(this.id);
+    this.userId = this.id;
+    console.log(this.userId);
 
+    this.userSubscription = this.userService.show(this.userId).subscribe(user => this.user = user);
+
+    console.log(this.user);
+
+    this.userForm = this.formBuilder.group({
+      username: [this.user.username],
+      password: [this.user.password],
+      enabled: [this.user.enabled],
+      role: [this.user.role],
+      firstName: [this.user.firstName],
+      lastName: [this.user.lastName],
+      email: [this.user.email],
+      imageUrl: [this.user.imageUrl],
+      status: [this.user.status],
+      commentCount: [this.user.commentCount],
+      postCount: [this.user.postCount],
+      bannerMessage: [this.user.bannerMessage],
+      bannerImage: [this.user.bannerImage],
+    });
   }
 
   ngOnDestroy(): void {
@@ -34,8 +56,8 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   }
 
   updateUser() {
-    console.log('User:', this.user);
-    this.userService.update(this.user).subscribe(
+    console.log('User:', this.userForm.value);
+    this.userService.update(this.userForm.value).subscribe(
       (user: User) => {
         this.user = user;
       },
@@ -44,5 +66,6 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
       }
     );
   }
+
 
 }
