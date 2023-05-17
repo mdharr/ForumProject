@@ -33,7 +33,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   onRowClicked(user: User) {
-    this.router.navigate(['/users', user.id]);
+    this.router.navigate(['/user-details', user.id]);
   }
 
   ngOnDestroy(): void {

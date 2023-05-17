@@ -23,6 +23,7 @@ import { TicketListComponent } from './shared/components/ticket-list/ticket-list
 import { TicketDetailsComponent } from './shared/components/ticket-details/ticket-details.component';
 import { TicketMessagesComponent } from './shared/components/ticket-messages/ticket-messages.component';
 import { UserListComponent } from './shared/components/user-list/user-list.component';
+import { UserDetailsComponent } from './shared/components/user-details/user-details.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'drawer', component: DrawerComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'user-list', component: UserListComponent },
+  { path: 'user-details', component: UserDetailsComponent },
   { path: 'post-list', component: TicketListComponent },
   { path: 'comment-list', component: TicketListComponent },
   { path: 'tickets', component: TicketListComponent },
