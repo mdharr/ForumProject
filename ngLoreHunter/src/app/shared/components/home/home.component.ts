@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   categoryId: number = 0;
   posts: Post[] = [];
   comments: Comment[] = [];
+  user: User = new User();
   users: User[] = [];
   activeUsers: User[] = [];
   data: any;
@@ -379,6 +380,5 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     const maxLength = 45;
     return subject.length > maxLength ? subject.slice(0, maxLength) + '...' : subject;
   }
-
 
 }

@@ -690,9 +690,10 @@ dd {
   text-align: center;
 }
 
-
-
-
-
-
-
+.custom-tooltip {
+  display: inline-block;
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}

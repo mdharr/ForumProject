@@ -64,7 +64,6 @@ import { TicketDetailsComponent } from './components/ticket-details/ticket-detai
 import { MatOptionModule } from '@angular/material/core';
 import { CreateTicketDialogComponent } from './components/create-ticket-dialog/create-ticket-dialog.component';
 
-
 @NgModule({
   declarations: [
     HomeComponent,
@@ -97,7 +96,7 @@ import { CreateTicketDialogComponent } from './components/create-ticket-dialog/c
     CommentListComponent,
     TicketMessagesComponent,
     TicketDetailsComponent,
-    CreateTicketDialogComponent
+    CreateTicketDialogComponent,
   ],
   imports: [
     CommonModule,

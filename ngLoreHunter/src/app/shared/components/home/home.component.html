@@ -451,11 +451,16 @@
     </div>
 </div>
 
-<ng-template #tooltip let-username="username" let-bannerMessage="bannerMessage" let-imageUrl="imageUrl">
+<ng-template #tooltip let-username="username" let-role="role" let-lastActivity="lastActivity" let-createdAt="createdAt" let-postCount="postCount" let-commentCount="commentCount" let-imageUrl="imageUrl">
   <div class="tooltip-content">
-    <div class="tooltip-username">{{ username }}</div>
-    <div class="tooltip-banner">{{ bannerMessage }}</div>
     <img [src]="imageUrl" alt="User Image" class="tooltip-image" />
+    <div class="tooltip-username">{{ username }}</div>
+    <div class="tooltip-role">{{ role }}</div>
+    <div class="tooltip-last-activity">Last Activity: {{ lastActivity }}</div>
+    <div class="tooltip-joined-date">Joined: {{ createdAt }}</div>
+    <div class="tooltip-post-count">Posts: {{ postCount }}</div>
+    <div class="tooltip-comment-count">Comments: {{ commentCount }}</div>
   </div>
 </ng-template>
+
 
