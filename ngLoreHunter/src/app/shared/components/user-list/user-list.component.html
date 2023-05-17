@@ -1,25 +1,53 @@
 <!-- <mat-table [dataSource]="tickets"> -->
-  <mat-table>
-    <ng-container matColumnDef="ticketNumber">
-      <mat-header-cell *matHeaderCellDef> Ticket Number </mat-header-cell>
-      <mat-cell *matCellDef="let ticket"> {{ticket.ticketNumber}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="subject">
-      <mat-header-cell *matHeaderCellDef> Subject </mat-header-cell>
-      <mat-cell *matCellDef="let ticket"> {{ticket.subject}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="priority">
-      <mat-header-cell *matHeaderCellDef> Priority </mat-header-cell>
-      <mat-cell *matCellDef="let ticket"> {{ticket.priority}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-      <mat-cell *matCellDef="let ticket"> {{ticket.status}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="dateCreated">
-      <mat-header-cell *matHeaderCellDef> Date Created </mat-header-cell>
-      <mat-cell *matCellDef="let ticket"> {{ticket.dateCreated}} </mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="['ticketNumber', 'subject', 'priority', 'status', 'dateCreated']"></mat-header-row>
-    <mat-row *matRowDef="let ticket; columns: ['ticketNumber', 'subject', 'priority', 'status', 'dateCreated'];"></mat-row>
-  </mat-table>
+  <div class="table-wrapper">
+    <div class="table-div">
+      <mat-table [dataSource]="users" class="mat-elevation-z8">
+        <ng-container matColumnDef="username">
+          <mat-header-cell *matHeaderCellDef>Username</mat-header-cell>
+          <mat-cell *matCellDef="let user">{{ user.username }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+          <mat-cell *matCellDef="let user">{{ user.email }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="role">
+          <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
+          <mat-cell *matCellDef="let user">{{ user.role }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="firstName">
+          <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
+          <mat-cell *matCellDef="let user">{{ user.firstName }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="lastName">
+          <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+          <mat-cell *matCellDef="let user">{{ user.lastName }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="createdAt">
+          <mat-header-cell *matHeaderCellDef>Created At</mat-header-cell>
+          <mat-cell *matCellDef="let user">{{ user.createdAt | date: 'medium' }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="lastActivity">
+          <mat-header-cell *matHeaderCellDef>Updated At</mat-header-cell>
+          <mat-cell *matCellDef="let user">{{ user.lastActivity | date: 'medium' }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="postCount">
+          <mat-header-cell *matHeaderCellDef>Post Count</mat-header-cell>
+          <mat-cell *matCellDef="let user">{{ user.postCount }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="commentCount">
+          <mat-header-cell *matHeaderCellDef>Comment Count</mat-header-cell>
+          <mat-cell *matCellDef="let user">{{ user.commentCount }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let user">
+            <button mat-icon-button (click)="viewUserDetails(user.id)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row class="ticket-row" *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
+      </mat-table>
+    </div>
+  </div>

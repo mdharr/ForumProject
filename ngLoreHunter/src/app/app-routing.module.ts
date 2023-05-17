@@ -22,6 +22,7 @@ import { AdminDashboardComponent } from './shared/components/admin-dashboard/adm
 import { TicketListComponent } from './shared/components/ticket-list/ticket-list.component';
 import { TicketDetailsComponent } from './shared/components/ticket-details/ticket-details.component';
 import { TicketMessagesComponent } from './shared/components/ticket-messages/ticket-messages.component';
+import { UserListComponent } from './shared/components/user-list/user-list.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -43,7 +44,7 @@ const routes: Routes = [
   { path: 'header', component: HeaderComponent },
   { path: 'drawer', component: DrawerComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
-  { path: 'user-list', component: TicketListComponent },
+  { path: 'user-list', component: UserListComponent },
   { path: 'post-list', component: TicketListComponent },
   { path: 'comment-list', component: TicketListComponent },
   { path: 'tickets', component: TicketListComponent },

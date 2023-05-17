@@ -1,7 +1,46 @@
-.mat-table {
+table {
   width: 100%;
 }
 
-.mat-header-cell, .mat-cell {
-  text-align: center;
+.full-width-table {
+  width: 100%;
 }
+
+.mat-cell {
+  word-wrap: break-word;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.table-div {
+  display: flex;
+  width: 95%;
+}
+
+.mat-mdc-table {
+  background-color: var(--container-bkg-color);
+}
+
+.mat-mdc-header-cell {
+  color: var(--text-color);
+}
+
+.mat-mdc-cell {
+  color: var(--text-color);
+}
+
+.ticket-row {
+  cursor: pointer;
+}
+
+.ticket-row {
+  background-color: var(--bkg-color);
+}
+
