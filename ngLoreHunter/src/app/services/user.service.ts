@@ -67,6 +67,17 @@ export class UserService {
       );
   }
 
+  adminUpdate(user: User, userId: number): Observable<User> {
+    return this.http.put<User>(this.url + '/users/' + userId + '/update', user, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('UserService.adminUpdate(): error updating user: ' + err)
+        );
+      })
+    );
+  }
+
   destroy(id: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${id}`).pipe(
       catchError((err: any) => {
