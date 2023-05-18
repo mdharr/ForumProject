@@ -2,6 +2,7 @@ package com.skilldistillery.lorehunter.controllers;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.lorehunter.entities.Game;
+import com.skilldistillery.lorehunter.entities.Ticket;
 import com.skilldistillery.lorehunter.entities.User;
 import com.skilldistillery.lorehunter.repositories.GameRepository;
 import com.skilldistillery.lorehunter.repositories.UserRepository;
@@ -91,6 +95,61 @@ public class UserController {
 			user = null;
 		}
 		return user;
+	}
+	
+	@PutMapping("users/{uid}/update")
+	public ResponseEntity<User> updateUser(@PathVariable("uid") int id, @RequestBody User user, Principal principal) {
+		Optional<User> optUser = userRepo.findById(id);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		User authenticatedUser = userService.showByUsername(username);
+		if (optUser.isPresent()) {
+			User existingUser = optUser.get();
+			if (!authenticatedUser.getRole().equals("ADMIN")) {
+				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+			}
+			
+			if (user.getUsername() != null) {
+	            existingUser.setUsername(user.getUsername());
+	        }
+	        if (user.getEnabled() != null) {
+	            existingUser.setEnabled(user.getEnabled());
+	        }
+	        if (user.getRole() != null) {
+	            existingUser.setRole(user.getRole());
+	        }
+	        if (user.getFirstName() != null) {
+	            existingUser.setFirstName(user.getFirstName());
+	        }
+	        if (user.getLastName() != null) {
+	            existingUser.setLastName(user.getLastName());
+	        }
+	        if (user.getEmail() != null) {
+	            existingUser.setEmail(user.getEmail());
+	        }
+	        if (user.getImageUrl() != null) {
+	            existingUser.setImageUrl(user.getImageUrl());
+	        }
+	        if (user.getStatus() != null) {
+	            existingUser.setStatus(user.getStatus());
+	        }
+	        if (user.getBannerMessage() != null) {
+	            existingUser.setBannerMessage(user.getBannerMessage());
+	        }
+	        if (user.getBannerImage() != null) {
+	            existingUser.setBannerImage(user.getBannerImage());
+	        }
+			
+			User updatedUser = userService.updateAdmin(id, existingUser);
+			
+			if (updatedUser == null) {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			} else {
+				return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+			}
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 		
 	@PatchMapping("users/{id}")
