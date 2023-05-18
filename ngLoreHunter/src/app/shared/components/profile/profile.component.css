@@ -107,6 +107,11 @@
   justify-content: flex-end;
   background: #f3f4f5;
   border-radius: 3px 3px 0 0;
+  background-position: center 40%; /* Adjust the values as needed */
+  background-size: cover;
+  background-attachment: fixed; /* This keeps the background image fixed while scrolling */
+  height: 50vh; /* Set a height for the container to enable scrolling */
+  /* overflow-y: scroll; */
 }
 
 .member-main-content {
