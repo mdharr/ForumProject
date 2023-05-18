@@ -26,10 +26,8 @@ export class UserTicketMessagesComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private ticketService: TicketService, private messageService: TicketMessageService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.ticketId = +this.route.snapshot.paramMap.get('id')!;
-    this.ticketSubscription = this.ticketService.getTicketById(this.ticketId).subscribe((ticket) => {
-      this.ticket = ticket;
-    });
+    this.ticketId = +this.route.snapshot.paramMap.get('ticketId')!;
+    console.log(this.ticketId);
 
     this.loggedInUserSubscription = this.authService.getLoggedInUser().pipe(
       switchMap(user => {
@@ -61,7 +59,7 @@ export class UserTicketMessagesComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.ticket) {
-      this.messageService.createTicketMessageByTicketId(this.ticket.id, this.newMessage).subscribe((message) => {
+      this.messageService.createTicketMessageByTicketId(this.ticketId, this.newMessage).subscribe((message) => {
         this.messages.push(message);
         this.newMessage.content = '';
       });
