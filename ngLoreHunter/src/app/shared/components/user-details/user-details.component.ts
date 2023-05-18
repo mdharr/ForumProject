@@ -26,24 +26,35 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     this.id = +this.route.snapshot.paramMap.get('id')!;
     console.log(this.id);
 
-    this.userSubscription = this.userService.show(this.id).subscribe(user => this.user = user);
+    this.userSubscription = this.userService.show(this.id).subscribe(user => {
+      this.user = user;
+      console.log(this.user);
 
-    console.log(this.user);
+      this.userForm.patchValue({
+        username: this.user.username,
+        enabled: this.user.enabled,
+        role: this.user.role,
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        email: this.user.email,
+        imageUrl: this.user.imageUrl,
+        status: this.user.status,
+        bannerMessage: this.user.bannerMessage,
+        bannerImage: this.user.bannerImage,
+      });
+    });
 
     this.userForm = this.formBuilder.group({
-      username: [this.user.username],
-      password: [this.user.password],
-      enabled: [this.user.enabled],
-      role: [this.user.role],
-      firstName: [this.user.firstName],
-      lastName: [this.user.lastName],
-      email: [this.user.email],
-      imageUrl: [this.user.imageUrl],
-      status: [this.user.status],
-      commentCount: [this.user.commentCount],
-      postCount: [this.user.postCount],
-      bannerMessage: [this.user.bannerMessage],
-      bannerImage: [this.user.bannerImage],
+      username: [''],
+      enabled: [false],
+      role: [''],
+      firstName: [''],
+      lastName: [''],
+      email: [''],
+      imageUrl: [''],
+      status: [''],
+      bannerMessage: [''],
+      bannerImage: [''],
     });
   }
 
@@ -55,15 +66,17 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
   updateUser() {
     console.log('User:', this.userForm.value);
-    this.userService.update(this.userForm.value).subscribe(
-      (user: User) => {
+    this.userService.adminUpdate(this.userForm.value, this.id).subscribe({
+      next: (user: User) => {
         this.user = user;
       },
-      (err) => {
+      error: (err: any) => {
         console.error('Error updating user:', err);
       }
-    );
+    });
   }
+
+
 
 
 }

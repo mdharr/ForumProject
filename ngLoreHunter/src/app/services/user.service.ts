@@ -68,7 +68,7 @@ export class UserService {
   }
 
   adminUpdate(user: User, userId: number): Observable<User> {
-    return this.http.put<User>(this.url + '/users/' + userId + '/update', user, this.getHttpOptions()).pipe(
+    return this.http.put<User>(this.url + '/' + userId + '/update', user, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
