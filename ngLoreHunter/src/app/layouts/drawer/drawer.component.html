@@ -40,7 +40,7 @@
             </div>
             <br>
             <div class="container-fluid" style="padding: 0;">
-              <a mat-list-item style="padding: 0;"><span class="sidenav-items">Watched</span></a>
+              <a mat-list-item style="padding: 0;" [routerLink]="['/users', loggedInUser.id , 'tickets']"><span class="sidenav-items">Watched</span></a>
             </div>
           </div>
         </mat-expansion-panel>
