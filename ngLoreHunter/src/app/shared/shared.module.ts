@@ -65,6 +65,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { CreateTicketDialogComponent } from './components/create-ticket-dialog/create-ticket-dialog.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { UserTicketsComponent } from './components/user-tickets/user-tickets.component';
+import { UserTicketMessagesComponent } from './components/user-ticket-messages/user-ticket-messages.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { UserTicketsComponent } from './components/user-tickets/user-tickets.com
     CreateTicketDialogComponent,
     UserDetailsComponent,
     UserTicketsComponent,
+    UserTicketMessagesComponent,
   ],
   imports: [
     CommonModule,
