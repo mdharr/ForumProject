@@ -69,34 +69,6 @@ public class GameController {
         return ResponseEntity.ok("Game URL stored successfully");
     }
     
-//    @GetMapping("games")
-//    public List<Game> getAllGames() {
-//        return gameService.getAllGames();
-//    }
-    
-//    @GetMapping("games")
-//    public ResponseEntity<Object> getGames() {
-//        // Fetch data from external API
-//    	String apiUrl = API_BASE_URL + "?" + API_KEY_PARAM + "=" + API_KEY_VALUE;
-//        ResponseEntity<Object> response = restTemplate.getForEntity(apiUrl, Object.class);
-//
-//        // Return the API response as-is to the frontend
-//        return response;
-//    }
-    
-//    @GetMapping("games")
-//    public ResponseEntity<Object> getGames() {
-//        int page = 1;
-//        int pageSize = 40;
-//    	// Fetch data from external API
-//    	String apiUrl = API_BASE_URL + "?" + API_KEY_PARAM + "=" + API_KEY_VALUE
-//    			+ "&page=" + page + "&page_size=" + pageSize;
-//    	ResponseEntity<Object> response = restTemplate.getForEntity(apiUrl, Object.class);
-//    	
-//    	// Return the API response as-is to the frontend
-//    	return response;
-//    }
-    
     @GetMapping("games")
     public ResponseEntity<Object> getGames(
             @RequestParam(value = "page", defaultValue = "1") int page,
