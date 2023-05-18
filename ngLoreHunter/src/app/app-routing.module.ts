@@ -24,6 +24,7 @@ import { TicketDetailsComponent } from './shared/components/ticket-details/ticke
 import { TicketMessagesComponent } from './shared/components/ticket-messages/ticket-messages.component';
 import { UserListComponent } from './shared/components/user-list/user-list.component';
 import { UserDetailsComponent } from './shared/components/user-details/user-details.component';
+import { UserTicketsComponent } from './shared/components/user-tickets/user-tickets.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: 'users/:userId', component: ProfileComponent },
   { path: 'users/:userId/posts', component: UserPostsComponent },
   { path: 'users/:userId/comments', component: UserCommentsComponent },
+  { path: 'users/:userId/tickets', component: UserTicketsComponent },
   { path: 'comments', component: CommentsComponent },
   { path: 'categories/:categoryId/posts/:postId/comments', component: CommentsComponent },
   { path: 'header', component: HeaderComponent },
