@@ -66,7 +66,7 @@
       <div class="row item-grid2">
         <div class="card item-card" *ngFor="let game of games" (click)="onCardClick($event)">
           <div class="item-card-image">
-            <img class="game-image" [style.background-image]="'url(' + game.background_image + ')'" [style.background-position]="'center'" loading="lazy">
+            <img class="game-image" [style.background-image]="'url(' + game.background_image + ')'" [style.background-position]="'center top'" loading="lazy">
           </div>
           <div class="item-card-details">
             <div class="item-card-footer">
