@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.lorehunter.entities.Ticket;
 import com.skilldistillery.lorehunter.entities.User;
 import com.skilldistillery.lorehunter.repositories.UserRepository;
 
@@ -39,26 +40,29 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User updateAdmin(int id, User user) {
-		User userUpdate = show(id);
-		userUpdate.setUsername(user.getUsername());
-		userUpdate.setPassword(user.getPassword());
-		userUpdate.setEnabled(user.getEnabled());
-		userUpdate.setRole(user.getRole());
-		userUpdate.setFirstName(user.getFirstName());
-		userUpdate.setLastName(user.getLastName());
-		userUpdate.setEmail(user.getEmail());
-		userUpdate.setImageUrl(user.getImageUrl());
-		userUpdate.setStatus(user.getStatus());
-		userUpdate.setBannerMessage(user.getBannerMessage());
-		userUpdate.setState(user.getState());
-		return userRepo.save(userUpdate);
+		Optional<User> optUser = userRepo.findById(id);
+		if (optUser.isPresent()) {
+			User existingUser = optUser.get();
+			existingUser.setUsername(user.getUsername());
+			existingUser.setEnabled(user.getEnabled());
+			existingUser.setRole(user.getRole());
+			existingUser.setFirstName(user.getFirstName());
+			existingUser.setLastName(user.getLastName());
+			existingUser.setEmail(user.getEmail());
+			existingUser.setImageUrl(user.getImageUrl());
+			existingUser.setStatus(user.getStatus());
+			existingUser.setBannerMessage(user.getBannerMessage());
+			existingUser.setBannerImage(user.getBannerImage());
+			return userRepo.save(existingUser);
+		}
+		return null;
 	}
+	
 
 	@Override
 	public User updateOwn(String username, User user) {
 		User userUpdate = userRepo.findByUsername(username);
 		userUpdate.setUsername(user.getUsername());
-		userUpdate.setPassword(user.getPassword());
 		userUpdate.setFirstName(user.getFirstName());
 		userUpdate.setLastName(user.getLastName());
 		userUpdate.setEmail(user.getEmail());

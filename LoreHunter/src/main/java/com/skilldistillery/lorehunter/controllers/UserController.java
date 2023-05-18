@@ -92,7 +92,7 @@ public class UserController {
 		}
 		return user;
 	}
-	
+		
 	@PatchMapping("users/{id}")
 	public void archiveUser(Principal principal, @PathVariable int id, HttpServletResponse res) {
 		try {
