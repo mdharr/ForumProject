@@ -148,10 +148,21 @@ public class TicketController {
 				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 			}
 			
-			existingTicket.setTitle(ticket.getTitle());
-			existingTicket.setDescription(ticket.getDescription());
-			existingTicket.setPriority(ticket.getPriority());
-			existingTicket.setStatus(ticket.getStatus());
+			if (ticket.getTitle() != null) {
+				existingTicket.setTitle(ticket.getTitle());
+			}
+			
+			if (ticket.getDescription() != null) {
+				existingTicket.setDescription(ticket.getDescription());
+			}
+			
+			if (ticket.getPriority() != null) {
+				existingTicket.setPriority(ticket.getPriority());
+			}
+			
+			if (ticket.getStatus() != null) {
+				existingTicket.setStatus(ticket.getStatus());
+			}
 			
 			Ticket updatedTicket = ticketService.updateTicket(id, existingTicket);
 			
