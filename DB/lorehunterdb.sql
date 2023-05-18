@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `role` VARCHAR(45) NULL,
   `first_name` VARCHAR(100) NULL,
   `last_name` VARCHAR(100) NULL,
-  `email` VARCHAR(254) NULL,
+  `email` VARCHAR(254) NOT NULL,
   `created_at` TIMESTAMP NULL,
   `image_url` TEXT NULL,
   `last_activity` TIMESTAMP NULL,
