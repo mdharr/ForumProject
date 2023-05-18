@@ -31,8 +31,8 @@
                     <a [routerLink]="['/users', comment.user.id]">{{ comment.user.username }}</a>
                   </h4>
                   <h5 class="userTitle message-userTitle" style="margin-bottom: 5px;">{{ comment.user.bannerMessage }}</h5>
-                  <h5 class="userTitle message-userTitle member-status" *ngIf="comment.user.status === 'active'">Member</h5>
-                </div>
+                  <h5 class="userTitle message-userTitle member-status" *ngIf="comment.user.role === 'STANDARD'">Member</h5>
+                  <h5 class="userTitle message-userTitle member-status" *ngIf="comment.user.role === 'ADMIN'">Admin</h5>                </div>
                 <div class="userExtras">
                   <dl class="pairs pairs--justified">
                     <dt class="message-userTitle"></dt>

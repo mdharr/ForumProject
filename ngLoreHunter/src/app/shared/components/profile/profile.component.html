@@ -36,7 +36,8 @@
                         </h1>
                         <div class="member-header-blurbContainer">
                           <div class="member-header-blurb">
-                            <span class="user-account-status" *ngIf="profileUser.status === 'active'">Member</span>
+                            <span class="user-account-status" *ngIf="profileUser.role === 'STANDARD'">Member</span>
+                            <span class="user-account-status" *ngIf="profileUser.role === 'ADMIN'">Admin</span>
                           </div>
                           <div class="member-header-blurbMessage">
                             <span class="user-bannerMessage">{{ profileUser.bannerMessage }}</span>
