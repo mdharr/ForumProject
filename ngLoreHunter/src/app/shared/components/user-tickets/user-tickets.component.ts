@@ -42,12 +42,12 @@ export class UserTicketsComponent implements OnInit, OnDestroy {
     });
   }
 
-  viewTicketDetails(ticketId: number): void {
-    this.router.navigate(['/tickets', ticketId]);
+  viewTicketMessages(ticketId: number): void {
+    this.router.navigate(['/users', this.loggedInUser.id, 'tickets', ticketId, 'messages']);
   }
 
   onRowClicked(ticket: Ticket) {
-    this.router.navigate(['/tickets', ticket.id]);
+    this.router.navigate(['/users', this.loggedInUser.id, 'tickets', ticket.id, 'messages']);
   }
 
   ngOnDestroy(): void {

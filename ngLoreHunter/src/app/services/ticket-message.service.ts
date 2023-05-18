@@ -37,6 +37,20 @@ export class TicketMessageService {
     )
   }
 
+  getMessagesByUserIdAndTicketId(userId: number, ticketId: number): Observable<TicketMessage[]> {
+    return this.http.get<TicketMessage[]>(this.url + '/users/' + userId + '/tickets/' + ticketId + '/messages', this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+          new Error(
+            'TicketMessageService.getMessagesByUserIdAndTicketId(): error retrieving ticket messages: ' + err
+          )
+        );
+      })
+    )
+  }
+
   createTicketMessageByTicketId(ticketId: number, ticketMessage: TicketMessage): Observable<TicketMessage> {
     return this.http.post<TicketMessage>(this.url + '/tickets/' + ticketId + '/messages', ticketMessage, this.getHttpOptions()).pipe(
       catchError((err: any) => {
