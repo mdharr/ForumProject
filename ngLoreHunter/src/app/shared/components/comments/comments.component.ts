@@ -220,6 +220,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe(
       map(comments => comments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
       );
+    this.enableImageZoom();
   }
 
   ngOnDestroy() {
@@ -370,7 +371,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-
+    this.enableImageZoom();
   }
 
   createLike(commentId: number) {
@@ -524,5 +525,31 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   //     this.ckeditorInstance.editorInstance.setData(updatedData);
   //   }
   // }
+
+  enableImageZoom() {
+    const images = document.querySelectorAll("img");
+
+    images.forEach((image) => {
+      image.style.cursor = "pointer";
+
+      image.addEventListener("click", () => {
+        const overlay = document.createElement("div");
+        overlay.classList.add("image-overlay");
+
+        const overlayImage = document.createElement("img");
+        overlayImage.src = image.src;
+        overlayImage.classList.add("zoomed-image");
+
+        overlay.appendChild(overlayImage);
+        document.body.appendChild(overlay);
+
+        overlay.addEventListener("click", () => {
+          document.body.removeChild(overlay);
+        });
+      });
+    });
+  }
+
+
 
 }

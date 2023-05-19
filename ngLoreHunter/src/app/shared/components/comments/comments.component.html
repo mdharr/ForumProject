@@ -13,7 +13,7 @@
                 <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
               </li>
               <li>
-                <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
+                <span style="margin-left: 5px; margin-right: 5px; color: none;">&#183;</span>
                 <mat-icon class="top-icon">access_time_filled</mat-icon>
                 <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | date:'shortDate' }}</a>
               </li>
