@@ -163,7 +163,7 @@
           <div class="message-cell message-cell-main">
             <div class="message-main">
               <div class="message-content">
-                <span class="post-pinned-label">PINNED:</span><a class="post-link" [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']" [innerHtml]='post.subject'> {{ post.subject }}</a>
+                <span class="post-pinned-label">PINNED: </span><a class="post-link" [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']" [innerHtml]='post.subject'> {{ post.subject }}</a>
                 <!-- This is a placeholder for click event on post in above anchor tag:  (click)="incrementViewCount(this.categoryId, post.id)" -->
               </div>
               <div class="message-content-details">
