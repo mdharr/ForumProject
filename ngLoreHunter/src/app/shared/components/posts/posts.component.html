@@ -163,7 +163,7 @@
           <div class="message-cell message-cell-main">
             <div class="message-main">
               <div class="message-content">
-                <span class="post-pinned-label">PINNED: </span><a class="post-link" [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']" [innerHtml]='post.subject'> {{ post.subject }}</a>
+                <span class="post-pinned-label">PINNED:</span><a class="post-link" [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']" [innerHtml]='post.subject'> {{ post.subject }}</a>
                 <!-- This is a placeholder for click event on post in above anchor tag:  (click)="incrementViewCount(this.categoryId, post.id)" -->
               </div>
               <div class="message-content-details">
@@ -172,7 +172,7 @@
                     <a class="post-link" [routerLink]="['/users', post.user.id]"><p class="p-content">{{ post.user.username }}</p></a>
                   </div>
                   <div>
-                    <p class="p-content"><span style="margin-left: 5px; margin-right: 5px;">&#183;</span> {{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</p>
+                    <p class="p-content"><span style="margin-left: 5px; margin-right: 5px;">&#183;</span> {{ post.createdAt | timeAgo }}</p>
                   </div>
                 </div>
                 <div class="message-metadetails">
@@ -193,11 +193,11 @@
           <div class="latest-comment-details" *ngFor="let comment of post.comments; let i = index;">
             <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-date">{{ comment.createdAt | date:'shortDate' }} at {{ comment.createdAt | date:'shortTime' }}</div>
             <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-user" [routerLink]="['/users', comment.user.id]">{{ comment.user.username }}</div>
-            <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
+            <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.createdAt | timeAgo }}</div>
             <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.user.username }}</div>
           </div>
           <div class="latest-comment-details" *ngIf="post.comments.length < 1">
-            <div class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
+            <div class="latest-comment-date">{{ post.createdAt | timeAgo }}</div>
             <div class="latest-comment-date" [routerLink]="['/users', post.user.id]">{{ post.user.username }}</div>
           </div>
         </div>
@@ -236,7 +236,7 @@
                     <a class="post-link" [routerLink]="['/users', post.user.id]"><p class="p-content">{{ post.user.username }}</p></a>
                   </div>
                   <div>
-                    <p class="p-content"><span style="margin-left: 5px; margin-right: 5px;">&#183;</span> {{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</p>
+                    <p class="p-content"><span style="margin-left: 5px; margin-right: 5px;">&#183;</span>{{ post.createdAt | timeAgo }}</p>
                   </div>
                 </div>
                 <div class="message-metadetails">
@@ -254,13 +254,13 @@
             </div>
           </div>
           <div class="latest-comment-details" *ngFor="let comment of post.comments; let i = index;">
-            <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-date">{{ comment.createdAt | date:'shortDate' }} at {{ comment.createdAt | date:'shortTime' }}</div>
+            <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-date">{{ comment.createdAt ? (comment.createdAt | timeAgo) : 'No date available' }}</div>
             <div style="cursor: pointer;" *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-user" [routerLink]="['/users', post.user.id]">{{ comment.user.username }}</div>
-            <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
+            <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ comment.createdAt ? (comment.createdAt | timeAgo) : 'No date available' }}</div>
             <div *ngIf="post.comments.length < 1" class="latest-comment-date" [routerLink]="['/users', post.user.id]">{{ post.user.username }}</div>
           </div>
           <div class="latest-comment-details" *ngIf="post.comments.length < 1">
-            <div class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
+            <div class="latest-comment-date">{{ post.createdAt | timeAgo }}</div>
             <div class="latest-comment-date" [routerLink]="['/users', post.user.id]">{{ post.user.username }}</div>
           </div>
         </div>

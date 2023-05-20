@@ -65,7 +65,7 @@ import { TruncateTextDirective } from './directives/truncate-text.directive';
   providers: [
     DatePipe,
     AuthService,
-    ScrollService
+    ScrollService,
   ],
   bootstrap: [AppComponent]
 })

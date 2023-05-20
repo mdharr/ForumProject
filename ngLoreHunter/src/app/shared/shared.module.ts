@@ -1,3 +1,4 @@
+import { TimeAgoPipe } from './../pipes/time-ago.pipe';
 import { ScrollService } from 'src/app/services/scroll.service';
 import { FilterPipe } from './../pipes/filter.pipe';
 import { SortPipe } from './../pipes/sort.pipe';
@@ -103,6 +104,7 @@ import { UserTicketMessagesComponent } from './components/user-ticket-messages/u
     UserDetailsComponent,
     UserTicketsComponent,
     UserTicketMessagesComponent,
+    TimeAgoPipe
   ],
   imports: [
     CommonModule,
