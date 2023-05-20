@@ -132,7 +132,7 @@ import { UserTicketMessagesComponent } from './components/user-ticket-messages/u
     MatMenuModule,
     MatProgressSpinnerModule,
     MatCardModule,
-    MatOptionModule
+    MatOptionModule,
   ],
   exports: [
     HomeComponent,
