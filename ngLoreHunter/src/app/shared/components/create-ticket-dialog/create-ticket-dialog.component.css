@@ -37,3 +37,8 @@ button {
 ::ng-deep .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input, .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
   color: var(--text-color);
 }
+
+.mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input {
+  color: var(--text-color);
+}
+

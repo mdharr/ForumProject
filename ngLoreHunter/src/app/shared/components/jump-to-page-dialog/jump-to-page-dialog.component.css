@@ -25,12 +25,15 @@
   color: var(--text-color);
 }
 
-
 p {
   color: var(--text-color);
 }
 
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
   background-color: var(--bkg-color);
+  color: var(--text-color);
+}
+
+.mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input {
   color: var(--text-color);
 }
