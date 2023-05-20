@@ -45,13 +45,13 @@
                           <div class="member-header-blurb">
                             <dl class="activity-pairs">
                               <dt class="blurb-data">Joined: </dt>
-                              <dd class="blurb-data">{{ profileUser.createdAt | date:'short' }}</dd>
+                              <dd class="blurb-data">{{ profileUser.createdAt | timeAgo }}</dd>
                             </dl>
                           </div>
                           <div class="member-header-blurb">
                             <dl class="activity-pairs">
                               <dt class="blurb-data">Last activity: </dt>
-                              <dd class="blurb-data">{{profileUser.lastActivity | date:'short'}}</dd>
+                              <dd class="blurb-data">{{ profileUser.lastActivity | timeAgo }}</dd>
                             </dl>
                           </div>
                         </div>
