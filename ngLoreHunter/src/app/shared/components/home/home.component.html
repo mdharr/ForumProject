@@ -46,8 +46,17 @@
                     <div class="description" *ngFor="let category of categories; let i = index">
                       <p class="description-text card-text" *ngIf="i === 0">{{ category.description }}</p>
                     </div>
-                    <div class="meta-details card-text" *ngFor="let category of categories; let i = index">
-                        <p class="card-text" *ngIf="i === 0">{{category.createdAt | date:'short'}}</p>
+                    <div class="meta-details card-text">
+                      <ng-container  *ngFor="let category of categories; let i = index">
+                          <div *ngIf="i === 0" class="post-count">
+                            <mat-icon class="mat-icons">chat_bubble</mat-icon>
+                            <p class="p-content">{{ getTotalPosts(category) }}</p>
+                          </div>
+                          <div *ngIf="i === 0" class="comment-count">
+                            <mat-icon class="mat-icons" style="font-size: 15px; margin-left: 8px;">forum</mat-icon>
+                            <p class="p-content">{{ getTotalComments(category) }}</p>
+                          </div>
+                      </ng-container>
                     </div>
                   </div>
 
@@ -63,7 +72,7 @@
                           <div class="user-post">
                             <div class="post-title" >
                               <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-recent-post-text" style="margin-bottom: 0;"><strong><span>{{ trimSubject(post.subject) }}</span></strong></p></a>
-                              <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
+                              <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | timeAgo }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
                             </div>
                             <div class="post-time">
 
@@ -95,9 +104,18 @@
                     <div class="description" *ngFor="let category of categories; let i = index">
                       <p class="description-text card-text" *ngIf="i === 1">{{ category.description }}</p>
                     </div>
-                    <div class="meta-details" *ngFor="let category of categories; let i = index">
-                      <p class="card-text" *ngIf="i === 1">{{category.createdAt | date:'short'}}</p>
-                  </div>
+                    <div class="meta-details card-text">
+                      <ng-container  *ngFor="let category of categories; let i = index">
+                          <div *ngIf="i === 1" class="post-count">
+                            <mat-icon class="mat-icons">chat_bubble</mat-icon>
+                            <p class="p-content">{{ getTotalPosts(category) }}</p>
+                          </div>
+                          <div *ngIf="i === 1" class="comment-count">
+                            <mat-icon class="mat-icons" style="font-size: 15px; margin-left: 8px;">forum</mat-icon>
+                            <p class="p-content">{{ getTotalComments(category) }}</p>
+                          </div>
+                      </ng-container>
+                    </div>
                   </div>
 
                 </div>
@@ -112,7 +130,7 @@
                           <div class="user-post">
                             <div class="post-title" >
                               <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-recent-post-text" style="margin-bottom: 0;"><strong>{{ trimSubject(post.subject) }}</strong></p></a>
-                              <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
+                              <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | timeAgo }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
                             </div>
                             <div class="post-time">
 
@@ -144,9 +162,18 @@
                     <div class="description" *ngFor="let category of categories; let i = index">
                       <p class="description-text card-text" *ngIf="i === 2">{{ category.description }}</p>
                     </div>
-                    <div class="meta-details" *ngFor="let category of categories; let i = index">
-                      <p class="card-text" *ngIf="i === 2">{{category.createdAt | date:'short'}}</p>
-                  </div>
+                    <div class="meta-details card-text">
+                      <ng-container  *ngFor="let category of categories; let i = index">
+                          <div *ngIf="i === 2" class="post-count">
+                            <mat-icon class="mat-icons">chat_bubble</mat-icon>
+                            <p class="p-content">{{ getTotalPosts(category) }}</p>
+                          </div>
+                          <div *ngIf="i === 2" class="comment-count">
+                            <mat-icon class="mat-icons" style="font-size: 15px; margin-left: 8px;">forum</mat-icon>
+                            <p class="p-content">{{ getTotalComments(category) }}</p>
+                          </div>
+                      </ng-container>
+                    </div>
                   </div>
 
                 </div>
@@ -161,7 +188,7 @@
                           <div class="user-post">
                             <div class="post-title" >
                               <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-recent-post-text" style="margin-bottom: 0;"><strong>{{ trimSubject(post.subject) }}</strong></p></a>
-                              <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
+                              <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | timeAgo }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
                             </div>
                             <div class="post-time">
 
@@ -195,9 +222,18 @@
                       <div class="description" *ngFor="let category of categories; let i = index">
                         <p class="description-text card-text" *ngIf="i === 3">{{ category.description }}</p>
                       </div>
-                      <div class="meta-details" *ngFor="let category of categories; let i = index">
-                        <p class=" card-text" *ngIf="i === 3">{{category.createdAt | date:'short'}}</p>
-                    </div>
+                      <div class="meta-details card-text">
+                        <ng-container  *ngFor="let category of categories; let i = index">
+                            <div *ngIf="i === 3" class="post-count">
+                              <mat-icon class="mat-icons">chat_bubble</mat-icon>
+                              <p class="p-content">{{ getTotalPosts(category) }}</p>
+                            </div>
+                            <div *ngIf="i === 3" class="comment-count">
+                              <mat-icon class="mat-icons" style="font-size: 15px; margin-left: 8px;">forum</mat-icon>
+                              <p class="p-content">{{ getTotalComments(category) }}</p>
+                            </div>
+                        </ng-container>
+                      </div>
                     </div>
 
                   </div>
@@ -212,7 +248,7 @@
                             <div class="user-post">
                               <div class="post-title" >
                                 <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-recent-post-text" style="margin-bottom: 0;"><strong>{{ trimSubject(post.subject) }}</strong></p></a>
-                                <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
+                                <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | timeAgo }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
                               </div>
                               <div class="post-time">
 
@@ -259,9 +295,18 @@
                   <div class="description" *ngFor="let category of categories; let i = index">
                     <p class="description-text card-text" *ngIf="i === 4">{{ category.description }}</p>
                   </div>
-                  <div class="meta-details" *ngFor="let category of categories; let i = index">
-                    <p class=" card-text" *ngIf="i === 4">{{category.createdAt | date:'short'}}</p>
-                </div>
+                  <div class="meta-details card-text">
+                    <ng-container  *ngFor="let category of categories; let i = index">
+                        <div *ngIf="i === 4" class="post-count">
+                          <mat-icon class="mat-icons">chat_bubble</mat-icon>
+                          <p class="p-content">{{ getTotalPosts(category) }}</p>
+                        </div>
+                        <div *ngIf="i === 4" class="comment-count">
+                          <mat-icon class="mat-icons" style="font-size: 15px; margin-left: 8px;">forum</mat-icon>
+                          <p class="p-content">{{ getTotalComments(category) }}</p>
+                        </div>
+                    </ng-container>
+                  </div>
                 </div>
 
               </div>
@@ -276,7 +321,7 @@
                         <div class="user-post">
                           <div class="post-title" >
                             <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-recent-post-text" style="margin-bottom: 0;"><strong>{{ trimSubject(post.subject) }}</strong></p></a>
-                            <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
+                            <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | timeAgo }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
                           </div>
                           <div class="post-time">
 
@@ -308,9 +353,18 @@
                   <div class="description" *ngFor="let category of categories; let i = index">
                     <p class="description-text card-text" *ngIf="i === 5">{{ category.description }}</p>
                   </div>
-                  <div class="meta-details" *ngFor="let category of categories; let i = index">
-                    <p class=" card-text" *ngIf="i === 5">{{category.createdAt | date:'short'}}</p>
-                </div>
+                  <div class="meta-details card-text">
+                    <ng-container  *ngFor="let category of categories; let i = index">
+                        <div *ngIf="i === 5" class="post-count">
+                          <mat-icon class="mat-icons">chat_bubble</mat-icon>
+                          <p class="p-content">{{ getTotalPosts(category) }}</p>
+                        </div>
+                        <div *ngIf="i === 5" class="comment-count">
+                          <mat-icon class="mat-icons" style="font-size: 15px; margin-left: 8px;">forum</mat-icon>
+                          <p class="p-content">{{ getTotalComments(category) }}</p>
+                        </div>
+                    </ng-container>
+                  </div>
                 </div>
 
               </div>
@@ -325,7 +379,7 @@
                         <div class="user-post">
                           <div class="post-title" >
                             <a class="light-link" [routerLink]="['/categories', category.id, 'posts', post.id, 'comments']"><p class="card-recent-post-text" style="margin-bottom: 0;"><strong>{{ trimSubject(post.subject) }}</strong></p></a>
-                            <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | date:'short' }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
+                            <p class="card-text" style="margin-bottom: 0;"> {{ post.createdAt | timeAgo }} <a class="light-link" [routerLink]="['/users', post.user.id]"><span>{{ post.user.username }}</span></a></p>
                           </div>
                           <div class="post-time">
 
@@ -402,7 +456,7 @@
                 <div>
                   <ul class="list-inline side-list dark-mode-text">
                     <li class="started-by-link" [routerLink]="['/users', post.user.id]">Started by {{ post.user.username }}</li>
-                    <li>{{ post.createdAt | date:'short' }}</li>
+                    <li>{{ post.createdAt | timeAgo }}</li>
                     <li>Comments: {{ post.comments.length }}</li>
                   </ul>
                 </div>
@@ -444,7 +498,7 @@
       <dl>
         <dt class="dark-mode-text">Latest Member</dt>
         <div *ngFor="let user of users; index as i; last as isLast;">
-          <dd [routerLink]="['/users', user.id]" class="dark-mode-text latest-member-bio" *ngIf="isLast"><span>{{ user.username }}</span> at {{ user.createdAt | date:'shortTime' }}</dd>
+          <dd [routerLink]="['/users', user.id]" class="dark-mode-text latest-member-bio" *ngIf="isLast"><span>{{ user.username }}</span> at {{ user.createdAt | timeAgo }}</dd>
         </div>
       </dl>
     </div>

@@ -697,3 +697,24 @@ dd {
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
+
+.post-count,
+.comment-count {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.mat-icons {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 2px;
+  width: 17px;
+  height: auto;
+}
+
+.p-content {
+  margin: 0;
+  font-size: 13px;
+}

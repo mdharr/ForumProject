@@ -151,6 +151,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         for (let category of this.allCategories) {
           let latestPost = category.posts.sort((a, b) => new Date(b.lastEdited).getTime() - new Date(a.lastEdited).getTime())[0];
           this.latestPosts.push(latestPost);
+
+          let totalPosts = this.getTotalPosts(category);
+          let totalComments = this.getTotalComments(category);
+          console.log(`Category: ${category.name}`);
+          console.log(`Total Posts: ${totalPosts}`);
+          console.log(`Total Comments: ${totalComments}`);
         }
       },
       error:(fail) => {
@@ -380,5 +386,20 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     const maxLength = 45;
     return subject.length > maxLength ? subject.slice(0, maxLength) + '...' : subject;
   }
+
+  // Calculate the total posts of a category
+  getTotalPosts(category: Category) {
+    return category.posts.length;
+  }
+
+  // Calculate the total comments of a category
+  getTotalComments(category: Category) {
+    let totalComments = 0;
+    for (let post of category.posts) {
+      totalComments += post.comments.length;
+    }
+    return totalComments;
+  }
+
 
 }
