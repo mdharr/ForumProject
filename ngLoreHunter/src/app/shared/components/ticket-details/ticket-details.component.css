@@ -18,15 +18,6 @@ td:first-child {
   padding: 200px;
 }
 
-.mat-mdc-card {
-  background-color: var(--container-bkg-color);
-  color: var(--text-color);
-}
-
-.mat-mdc-card:hover {
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
-}
-
 .mat-mdc-card-subtitle {
   background-color: var(--container-bkg-color);
   color: var(--text-color);
@@ -42,4 +33,19 @@ td:first-child {
 
 ::ng-deep .cdk-overlay-pane:not(.mat-mdc-select-panel-above) .mdc-menu-surface.mat-mdc-select-panel {
   background-color: var(--bkg-color);
+}
+
+mat-card {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  background-color: var(--container-bkg-color);
+  color: var(--text-color);
+  transition:ease-in-out 0.1s;
+}
+
+mat-card:hover {
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  transform: translateY(-5px);
 }
