@@ -1,51 +1,33 @@
-header, main, footer {
-
-}
-
 main {
+  display: flex;
+  flex-wrap: wrap;
   padding: 30px;
 }
 
-body {
-  background: white;
+.mat-col-6 {
+  width: 50%;
+  padding: 10px;
 }
 
-@media only screen and (max-width: 992px) {
-  header, main, footer {
-    padding-left: 0;
+@media only screen and (max-width: 768px) {
+  .mat-col-6 {
+    width: 100%;
   }
 }
 
-#credits li, #credits li a {
-  color: white;
-}
-
-#credits li a {
-  font-weight: bold;
-}
-
-.footer-copyright .container, .footer-copyright .container a {
-  color: #BCC2E2;
-}
-
-.fab-tip {
-  position: fixed;
-  right: 85px;
-  padding: 0px 0.5rem;
-  text-align: right;
-  background-color: #323232;
-  border-radius: 2px;
-  color: #FFF;
-  width: auto;
-}
-
 mat-card {
+  width: 100%;
+  box-sizing: border-box;
   margin-bottom: 15px;
   background-color: var(--container-bkg-color);
   color: var(--text-color);
+  transition:ease-in-out 0.1s;
 }
 
 mat-card:hover {
-  cursor:pointer;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+  color: #3f51b5;
+  cursor: pointer;
+  box-shadow: #3f51b5;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  transform: translateY(-5px);
 }
