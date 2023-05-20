@@ -12,4 +12,36 @@
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__content {
   display: flex;
   flex-direction: column;
+  background-color: var(--bkg-color);
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: var(--bkg-color);
+  color: var(--text-color);
+}
+
+.mat-mdc-dialog-title {
+  color: var(--text-color);
+}
+
+.mat-mdc-button {
+  color: var(--text-color);
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--container-bkg-color);
+  color: var(--text-color);
+}
+
+::ng-deep .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input, .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+  color: var(--text-color);
+}
+
+::ng-deep .mat-dialog-content {
+  background-color: var(--bkg-color);
+  color: var(--text-color);
+}
+
+.mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input {
+  color: var(--text-color);
 }
