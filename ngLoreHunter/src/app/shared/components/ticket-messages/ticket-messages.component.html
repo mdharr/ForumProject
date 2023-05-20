@@ -5,11 +5,12 @@
     </div>
     <div *ngFor="let message of messages" class="message" [ngClass]="{'right': !ticket.user, 'left': ticket.user}">
       <div class="user-avatar-container">
-        <img [src]="message.user.imageUrl" alt="User Profile Picture" class="message-user-image">
+        <img [routerLink]="['/users', message.user.id]" [src]="message.user.imageUrl" alt="User Profile Picture" class="message-user-image">
       </div>
       <div class="message-format-container">
         <div class="message-user-info" *ngIf="ticket.user">
-          <span class="message-username">{{ message.user.username }} said:</span>
+          <span class="message-username" [routerLink]="['/users', message.user.id]">{{ message.user.username }} said:</span>
+          <span class="message-timestamp">{{ message.createdAt | timeAgo }}</span>
         </div>
         <div class="message-content">
           <p class="message-p-content">{{ message.content }}</p>
