@@ -1,161 +1,173 @@
 <div class="container-fluid card">
-  <div class="card-gaming" *ngIf="categoryId === 1">
-    <div class="node-container">
-      <div class="node-title-container">
-        <div class="card-title">
-          <div class="title" *ngFor="let post of posts; let i = index">
-            <a *ngIf="post.id === this.postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
-          </div>
-          <div class="description" *ngFor="let post of posts; let i = index">
-            <ul *ngIf="post.id === this.postId" class="cat-description listInline">
-              <li>
-                <mat-icon class="top-icon">person</mat-icon>
-                <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
-              </li>
-              <li>
-                <span style="margin-left: 5px; margin-right: 5px; color: none;">&#183;</span>
-                <mat-icon class="top-icon">access_time_filled</mat-icon>
-                <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | timeAgo }}</a>
-              </li>
-            </ul>
-          </div>
-          <div class="meta-details">
+  <div class="card-gaming-wrapper">
+    <div class="card-gaming" *ngIf="categoryId === 1">
+      <div class="node-container">
+        <div class="node-title-container">
+          <div class="card-title">
+            <div class="title" *ngFor="let post of posts; let i = index">
+              <a *ngIf="post.id === this.postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
+            </div>
+            <div class="description" *ngFor="let post of posts; let i = index">
+              <ul *ngIf="post.id === this.postId" class="cat-description listInline">
+                <li>
+                  <mat-icon class="top-icon">person</mat-icon>
+                  <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
+                </li>
+                <li>
+                  <span style="margin-left: 5px; margin-right: 5px; color: none;">&#183;</span>
+                  <mat-icon class="top-icon">access_time_filled</mat-icon>
+                  <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | timeAgo }}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="meta-details">
 
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card-gaming-hangouts" *ngIf="categoryId === 2">
-    <div class="node-container">
-      <div class="node-title-container">
-        <div class="card-title">
-          <div class="title" *ngFor="let post of posts; let i = index">
-            <a *ngIf="post.id === this.postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
-          </div>
-          <div class="description" *ngFor="let post of posts; let i = index">
-            <ul *ngIf="post.id === this.postId" class="cat-description listInline">
-              <li>
-                <mat-icon class="top-icon">person</mat-icon>
-                <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
-              </li>
-              <li>
-                <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
-                <mat-icon class="top-icon">access_time_filled</mat-icon>
-                <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | timeAgo }}</a>
-              </li>
-            </ul>
-          </div>
-          <div class="meta-details">
+  <div class="card-gaming-wrapper">
+    <div class="card-gaming-hangouts" *ngIf="categoryId === 2">
+      <div class="node-container">
+        <div class="node-title-container">
+          <div class="card-title">
+            <div class="title" *ngFor="let post of posts; let i = index">
+              <a *ngIf="post.id === this.postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
+            </div>
+            <div class="description" *ngFor="let post of posts; let i = index">
+              <ul *ngIf="post.id === this.postId" class="cat-description listInline">
+                <li>
+                  <mat-icon class="top-icon">person</mat-icon>
+                  <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
+                </li>
+                <li>
+                  <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
+                  <mat-icon class="top-icon">access_time_filled</mat-icon>
+                  <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | timeAgo }}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="meta-details">
 
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card-lore" *ngIf="categoryId === 3">
-    <div class="node-container">
-      <div class="node-title-container">
-        <div class="card-title">
-          <div class="title" *ngFor="let post of posts; let i = index">
-            <a *ngIf="post.id === this.postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
-          </div>
-          <div class="description" *ngFor="let post of posts; let i = index">
-            <ul *ngIf="post.id === this.postId" class="cat-description listInline">
-              <li>
-                <mat-icon class="top-icon">person</mat-icon>
-                <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
-              </li>
-              <li>
-                <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
-                <mat-icon class="top-icon">access_time_filled</mat-icon>
-                <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | timeAgo }}</a>
-              </li>
-            </ul>
-          </div>
-          <div class="meta-details">
+  <div class="card-lore-wrapper">
+    <div class="card-lore" *ngIf="categoryId === 3">
+      <div class="node-container">
+        <div class="node-title-container">
+          <div class="card-title">
+            <div class="title" *ngFor="let post of posts; let i = index">
+              <a *ngIf="post.id === this.postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
+            </div>
+            <div class="description" *ngFor="let post of posts; let i = index">
+              <ul *ngIf="post.id === this.postId" class="cat-description listInline">
+                <li>
+                  <mat-icon class="top-icon">person</mat-icon>
+                  <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
+                </li>
+                <li>
+                  <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
+                  <mat-icon class="top-icon">access_time_filled</mat-icon>
+                  <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | timeAgo }}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="meta-details">
 
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card-lore-hangouts" *ngIf="categoryId === 4">
-    <div class="node-container">
-      <div class="node-title-container">
-        <div class="card-title">
-          <div class="title" *ngFor="let post of posts; let i = index">
-            <a *ngIf="post.id === this.postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
-          </div>
-          <div class="description" *ngFor="let post of posts; let i = index">
-            <ul *ngIf="post.id === this.postId" class="cat-description listInline">
-              <li>
-                <mat-icon class="top-icon">person</mat-icon>
-                <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
-              </li>
-              <li>
-                <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
-                <mat-icon class="top-icon">access_time_filled</mat-icon>
-                <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | timeAgo }}</a>
-              </li>
-            </ul>
-          </div>
-          <div class="meta-details">
+  <div class="card-lore-wrapper">
+    <div class="card-lore-hangouts" *ngIf="categoryId === 4">
+      <div class="node-container">
+        <div class="node-title-container">
+          <div class="card-title">
+            <div class="title" *ngFor="let post of posts; let i = index">
+              <a *ngIf="post.id === this.postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
+            </div>
+            <div class="description" *ngFor="let post of posts; let i = index">
+              <ul *ngIf="post.id === this.postId" class="cat-description listInline">
+                <li>
+                  <mat-icon class="top-icon">person</mat-icon>
+                  <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
+                </li>
+                <li>
+                  <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
+                  <mat-icon class="top-icon">access_time_filled</mat-icon>
+                  <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | timeAgo }}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="meta-details">
 
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card-announcements" *ngIf="categoryId === 5">
-    <div class="node-container">
-      <div class="node-title-container">
-        <div class="card-title">
-          <div class="title" *ngFor="let post of posts; let i = index">
-            <a *ngIf="post.id === this.postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
-          </div>
-          <div class="description" *ngFor="let post of posts; let i = index">
-            <ul *ngIf="post.id === this.postId" class="cat-description listInline">
-              <li>
-                <mat-icon class="top-icon">person</mat-icon>
-                <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
-              </li>
-              <li>
-                <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
-                <mat-icon class="top-icon">access_time_filled</mat-icon>
-                <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | timeAgo }}</a>
-              </li>
-            </ul>
-          </div>
-          <div class="meta-details">
+  <div class="card-announcements-wrapper">
+    <div class="card-announcements" *ngIf="categoryId === 5">
+      <div class="node-container">
+        <div class="node-title-container">
+          <div class="card-title">
+            <div class="title" *ngFor="let post of posts; let i = index">
+              <a *ngIf="post.id === this.postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
+            </div>
+            <div class="description" *ngFor="let post of posts; let i = index">
+              <ul *ngIf="post.id === this.postId" class="cat-description listInline">
+                <li>
+                  <mat-icon class="top-icon">person</mat-icon>
+                  <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
+                </li>
+                <li>
+                  <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
+                  <mat-icon class="top-icon">access_time_filled</mat-icon>
+                  <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | timeAgo }}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="meta-details">
 
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card-vault" *ngIf="categoryId === 6">
-    <div class="node-container">
-      <div class="node-title-container">
-        <div class="card-title">
-          <div class="title" *ngFor="let post of posts; let i = index">
-            <a *ngIf="post.id === this.postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
-          </div>
-          <div class="description" *ngFor="let post of posts; let i = index">
-            <ul *ngIf="post.id === this.postId" class="cat-description listInline">
-              <li>
-                <mat-icon class="top-icon">person</mat-icon>
-                <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
-              </li>
-              <li>
-                <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
-                <mat-icon class="top-icon">access_time_filled</mat-icon>
-                <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | timeAgo }}</a>
-              </li>
-            </ul>
-          </div>
-          <div class="meta-details">
+  <div class="card-vault-wrapper">
+    <div class="card-vault" *ngIf="categoryId === 6">
+      <div class="node-container">
+        <div class="node-title-container">
+          <div class="card-title">
+            <div class="title" *ngFor="let post of posts; let i = index">
+              <a *ngIf="post.id === this.postId" class="light-link"><h3 class="subject">{{ post.subject }}</h3></a>
+            </div>
+            <div class="description" *ngFor="let post of posts; let i = index">
+              <ul *ngIf="post.id === this.postId" class="cat-description listInline">
+                <li>
+                  <mat-icon class="top-icon">person</mat-icon>
+                  <a [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
+                </li>
+                <li>
+                  <span style="margin-left: 5px; margin-right: 5px;">&#183;</span>
+                  <mat-icon class="top-icon">access_time_filled</mat-icon>
+                  <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">{{ post.createdAt | timeAgo }}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="meta-details">
 
+            </div>
           </div>
         </div>
       </div>

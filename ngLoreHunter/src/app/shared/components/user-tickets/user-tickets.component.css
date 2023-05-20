@@ -43,3 +43,7 @@ table {
 .ticket-row {
   background-color: var(--bkg-color);
 }
+
+.no-tickets-header {
+  color: var(--text-color);
+}
