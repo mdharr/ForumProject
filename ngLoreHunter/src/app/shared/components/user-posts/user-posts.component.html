@@ -63,7 +63,7 @@
                     <a class="post-link" [routerLink]="['/users', post.user.id]"><p class="p-content">{{ post.user.username }}</p></a>
                   </div>
                   <div>
-                    <p class="p-content"><span style="margin-left: 5px; margin-right: 5px;">&#183;</span> {{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</p>
+                    <p class="p-content"><span style="margin-left: 5px; margin-right: 5px;">&#183;</span> {{ post.createdAt | timeAgo }}</p>
                   </div>
                 </div>
                 <div class="message-metadetails">
@@ -81,13 +81,13 @@
             </div>
           </div>
           <div class="latest-comment-details" *ngFor="let comment of post.comments; let i = index;">
-            <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-date">{{ comment.createdAt | date:'shortDate' }} at {{ comment.createdAt | date:'shortTime' }}</div>
+            <div *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-date">{{ comment.createdAt | timeAgo }}</div>
             <div style="cursor: pointer;" *ngIf="i === post.comments.length - 1 && post.comments.length >= 1" class="latest-comment-user" [routerLink]="['/users', post.user.id]">{{ comment.user.username }}</div>
-            <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
+            <div *ngIf="post.comments.length < 1" class="latest-comment-date">{{ post.createdAt | timeAgo }}</div>
             <div *ngIf="post.comments.length < 1" class="latest-comment-date" [routerLink]="['/users', post.user.id]">{{ post.user.username }}</div>
           </div>
           <div class="latest-comment-details" *ngIf="post.comments.length < 1">
-            <div class="latest-comment-date">{{ post.createdAt | date:'shortDate' }} at {{ post.createdAt | date:'shortTime' }}</div>
+            <div class="latest-comment-date">{{ post.createdAt | timeAgo }}</div>
             <div class="latest-comment-date" [routerLink]="['/users', post.user.id]">{{ post.user.username }}</div>
           </div>
         </div>
