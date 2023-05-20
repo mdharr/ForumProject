@@ -305,52 +305,82 @@ mat-paginator {
   transform: translateY(-5px);
 }
 
+.card-title {
+
+}
+
+.node-title-container {
+
+}
+
+.card-gaming-wrapper {
+  background-color: #29aa9f;
+  border-radius:5px;
+}
+
+.card-lore-wrapper {
+  background-color: #863a81;
+  border-radius:5px;
+}
+
+.card-announcements-wrapper {
+  background-color: #ea7e3e;
+  border-radius:5px;
+}
+
+.card-vault-wrapper {
+  background-color: #5fba43;
+  border-radius:5px;
+}
+
 .card-gaming {
   padding: 16px;
-  background: rgb(6,142,167);
-  background: linear-gradient(90deg, rgba(6,142,167,1) 0%, rgba(36,161,159,1) 40%);
   min-height: 100px;
-  border-radius:5px;
-
+  background-image: url(https://www.resetera.com/styles/resetera/resetera/images/thread-title-bar.png);
+  background-size: cover;
+  background-position: center top;
 }
 
 .card-gaming-hangouts {
   padding: 16px;
-  background: rgb(6,142,167);
-  background: linear-gradient(90deg, rgba(6,142,167,1) 0%, rgba(36,161,159,1) 40%);
   min-height: 100px;
-  border-radius:5px;
+  background-image: url(https://www.resetera.com/styles/resetera/resetera/images/thread-title-bar.png);
+  background-size: cover;
+  background-position: center top;
 
 }
 
 .card-lore {
   padding: 16px;
-  background: rgb(152,57,124);
-  background: linear-gradient(90deg, rgba(152,57,124,1) 40%, rgba(131,56,122,1) 100%);
-  border-radius:5px;
+  min-height: 100px;
+  background-image: url(https://www.resetera.com/styles/resetera/resetera/images/thread-title-bar.png);
+  background-size: cover;
+  background-position: center top;
 }
 
 .card-lore-hangouts {
   padding: 16px;
-  background: rgb(152,57,124);
-  background: linear-gradient(90deg, rgba(152,57,124,1) 40%, rgba(131,56,122,1) 100%);
-  border-radius:5px;
+  min-height: 100px;
+  background-image: url(https://www.resetera.com/styles/resetera/resetera/images/thread-title-bar.png);
+  background-size: cover;
+  background-position: center top;
 }
-
 
 .card-announcements {
   padding: 16px;
-  background: rgb(234,157,44);
-  background: linear-gradient(90deg, rgba(234,157,44,1) 40%, rgba(227,127,58,1) 100%);
-  border-radius:5px;
+  min-height: 100px;
+  background-image: url(https://www.resetera.com/styles/resetera/resetera/images/thread-title-bar.png);
+  background-size: cover;
+  background-position: center top;
 }
 
 
 .card-vault {
   padding: 16px;
-  background: rgb(62,178,91);
-  background: linear-gradient(90deg, rgba(62,178,91,1) 0%, rgba(89,185,73,1) 45%);
-  border-radius:5px;
+  min-height: 100px;
+  background-image: url(https://www.resetera.com/styles/resetera/resetera/images/thread-title-bar.png);
+  background-size: cover;
+  background-position: center top;
 }
 
 .post-block {

@@ -1,101 +1,113 @@
 <div class="container-fluid card">
-  <div class="card-gaming" *ngIf="categoryId === 1">
-    <div class="node-container">
-      <div class="node-title-container">
-        <div class="card-title">
-          <div class="title" *ngFor="let category of categories; let i = index">
-            <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
-          </div>
-          <div class="description" *ngFor="let category of categories; let i = index">
-            <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
-          </div>
-          <div class="meta-details">
+  <div class="card-gaming-wrapper">
+    <div class="card-gaming" *ngIf="categoryId === 1">
+      <div class="node-container">
+        <div class="node-title-container">
+          <div class="card-title">
+            <div class="title" *ngFor="let category of categories; let i = index">
+              <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
+            </div>
+            <div class="description" *ngFor="let category of categories; let i = index">
+              <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
+            </div>
+            <div class="meta-details">
 
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card-gaming-hangouts" *ngIf="categoryId === 2">
-    <div class="node-container">
-      <div class="node-title-container">
-        <div class="card-title">
-          <div class="title" *ngFor="let category of categories; let i = index">
-            <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
-          </div>
-          <div class="description" *ngFor="let category of categories; let i = index">
-            <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
-          </div>
-          <div class="meta-details">
+  <div class="card-gaming-wrapper">
+    <div class="card-gaming-hangouts" *ngIf="categoryId === 2">
+      <div class="node-container">
+        <div class="node-title-container">
+          <div class="card-title">
+            <div class="title" *ngFor="let category of categories; let i = index">
+              <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
+            </div>
+            <div class="description" *ngFor="let category of categories; let i = index">
+              <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
+            </div>
+            <div class="meta-details">
 
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card-lore" *ngIf="categoryId === 3">
-    <div class="node-container">
-      <div class="node-title-container">
-        <div class="card-title">
-          <div class="title" *ngFor="let category of categories; let i = index">
-            <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
-          </div>
-          <div class="description" *ngFor="let category of categories; let i = index">
-            <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
-          </div>
-          <div class="meta-details">
+  <div class="card-lore-wrapper">
+    <div class="card-lore" *ngIf="categoryId === 3">
+      <div class="node-container">
+        <div class="node-title-container">
+          <div class="card-title">
+            <div class="title" *ngFor="let category of categories; let i = index">
+              <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
+            </div>
+            <div class="description" *ngFor="let category of categories; let i = index">
+              <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
+            </div>
+            <div class="meta-details">
 
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card-lore-hangouts" *ngIf="categoryId === 4">
-    <div class="node-container">
-      <div class="node-title-container">
-        <div class="card-title">
-          <div class="title" *ngFor="let category of categories; let i = index">
-            <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
-          </div>
-          <div class="description" *ngFor="let category of categories; let i = index">
-            <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
-          </div>
-          <div class="meta-details">
+  <div class="card-lore-wrapper">
+    <div class="card-lore-hangouts" *ngIf="categoryId === 4">
+      <div class="node-container">
+        <div class="node-title-container">
+          <div class="card-title">
+            <div class="title" *ngFor="let category of categories; let i = index">
+              <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
+            </div>
+            <div class="description" *ngFor="let category of categories; let i = index">
+              <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
+            </div>
+            <div class="meta-details">
 
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card-announcements" *ngIf="categoryId === 5">
-    <div class="node-container">
-      <div class="node-title-container">
-        <div class="card-title">
-          <div class="title" *ngFor="let category of categories; let i = index">
-            <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
-          </div>
-          <div class="description" *ngFor="let category of categories; let i = index">
-            <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
-          </div>
-          <div class="meta-details">
+  <div class="card-announcements-wrapper">
+    <div class="card-announcements" *ngIf="categoryId === 5">
+      <div class="node-container">
+        <div class="node-title-container">
+          <div class="card-title">
+            <div class="title" *ngFor="let category of categories; let i = index">
+              <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
+            </div>
+            <div class="description" *ngFor="let category of categories; let i = index">
+              <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
+            </div>
+            <div class="meta-details">
 
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="card-vault" *ngIf="categoryId === 6">
-    <div class="node-container">
-      <div class="node-title-container">
-        <div class="card-title">
-          <div class="title" *ngFor="let category of categories; let i = index">
-            <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
-          </div>
-          <div class="description" *ngFor="let category of categories; let i = index">
-            <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
-          </div>
-          <div class="meta-details">
+  <div class="card-vault-wrapper">
+    <div class="card-vault" *ngIf="categoryId === 6">
+      <div class="node-container">
+        <div class="node-title-container">
+          <div class="card-title">
+            <div class="title" *ngFor="let category of categories; let i = index">
+              <a *ngIf="i === categoryId - 1" class="light-link"><h3 class="subject">{{ category.name }}</h3></a>
+            </div>
+            <div class="description" *ngFor="let category of categories; let i = index">
+              <p *ngIf="i === categoryId - 1" class="cat-description">{{ category.description }}</p>
+            </div>
+            <div class="meta-details">
 
+            </div>
           </div>
         </div>
       </div>
