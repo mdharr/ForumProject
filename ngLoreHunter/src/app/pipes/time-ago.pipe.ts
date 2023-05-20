@@ -21,6 +21,8 @@ export class TimeAgoPipe implements PipeTransform {
 
     if (diff < minute) {
       return 'A moment ago';
+    } else if (diff < (minute * 2)) {
+      return '1 minute ago';
     } else if (diff < hour) {
       const minutes = Math.floor(diff / minute);
       return `${minutes} minutes ago`;
