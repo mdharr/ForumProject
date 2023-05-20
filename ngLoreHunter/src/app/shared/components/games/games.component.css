@@ -82,7 +82,7 @@
 }
 
 .item-card {
-  width: calc(20% - 20px); /* Adjust width as needed */
+  width: 266px; /* Adjust width as needed */
   margin-bottom: 20px; /* Adjust margin as needed */
   /* Additional styles for item-card */
   padding: 10px;
@@ -161,10 +161,11 @@
 }
 
 .item-card-title {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   margin-top: 0;
   margin-bottom: 5px;
+  text-align: center;
   /* Additional styles for item-card-title */
 }
 
@@ -368,5 +369,15 @@
 
 .metascore-container {
   float: right;
+}
+
+@media (max-width: 768px) {
+  .item-grid2 {
+    flex-direction: column;
+  }
+
+  .card {
+    width: 100%;
+  }
 }
 
