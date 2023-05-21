@@ -49,7 +49,7 @@ class TicketMessageTest {
 	@Test
 	void test_TicketMessage_entity_mapping() {
 		assertNotNull(ticketMessage);
-		assertEquals("Please provide additional information. Thank you.", ticketMessage.getContent());
+		assertEquals("Good morning Samus! We'd love to take care of that for you. Let me first verify that your last username change was not within the past year.", ticketMessage.getContent());
 	}
 	
 	@Test

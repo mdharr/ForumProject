@@ -43,13 +43,13 @@ class TicketTest {
 	@Test
 	void test_Ticket_entity_mapping() {
 		assertNotNull(ticket);
-		assertEquals("Idea for New Feature", ticket.getTitle());
+		assertEquals("Username Change Request", ticket.getTitle());
 	}
 	
 	@Test
 	void test_Ticket_User_many_to_one_mapping() {
 		assertNotNull(ticket);
-		assertEquals("Drifter", ticket.getUser().getUsername());
+		assertEquals("Samus", ticket.getUser().getUsername());
 	}
 
 }
