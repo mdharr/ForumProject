@@ -10,7 +10,7 @@ import { HomeService } from 'src/app/services/home.service';
 import { PostService } from 'src/app/services/post.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
-import { catchError, EMPTY, of, Subscription, switchMap, throwError } from 'rxjs';
+import { catchError, EMPTY, map, Observable, of, Subscription, switchMap, throwError } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   dataSource = new CommentDataSource(this.commentService);
 
+  public isComponentLoaded = false;
 
   posts: Post[] = [];
   categories: Category[] = [];
@@ -54,8 +55,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   value: any;
   postsCount: number = 0;
   commentsCount: number = 0;
+
   followersCount: number = 0;
   followingCount: number = 0;
+  followingCount$!: Observable<number>;
+  followersCount$!: Observable<number>;
+  isFollowing: boolean = false;
+  followButtonLabel: string = '';
 
   newPost: Post = new Post();
 
@@ -179,7 +185,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }
       });
 
-      // this.dataSource.loadComments(this.categoryId, this.postId);
+      this.checkFollowingStatus();
+
+      setTimeout(() => {
+        this.isComponentLoaded = true;
+      }, 500);
 
     }
 
@@ -265,11 +275,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.profileUserFollowingSubscription = this.userFollowerService.getFollowersByUserId(this.userId).subscribe({
         next: (followers) => {
           this.followers = followers;
-          let totalUserFollowers = 0;
-          for(let i = 0; i < followers.length; i++) {
-            totalUserFollowers++;
-          }
-          this.followersCount = totalUserFollowers;
+          this.followersCount$ = of(followers.length); // Convert the count to an observable
         },
         error: (fail) => {
           console.error('Error getting followers:');
@@ -280,11 +286,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.profileUserFollowedBySubscription = this.userFollowerService.getFollowingByUserId(this.userId).subscribe({
         next: (following) => {
           this.following = following;
-          let totalUserFollowing = 0;
-          for(let i = 0; i < following.length; i++) {
-            totalUserFollowing++;
-          }
-          this.followingCount = totalUserFollowing;
+          this.followingCount$ = of(following.length); // Convert the count to an observable
         },
         error: (fail) => {
           console.error('Error getting following:');
@@ -359,6 +361,67 @@ export class ProfileComponent implements OnInit, OnDestroy {
         console.log(result);
         // do something with the result
       });
+    }
+
+    checkFollowingStatus(): void {
+      // Check if the follow status is stored in local storage
+      const storedFollowStatus = localStorage.getItem('followStatus');
+      if (storedFollowStatus) {
+        this.isFollowing = JSON.parse(storedFollowStatus);
+        this.updateFollowButtonLabel();
+      } else {
+        // If not stored, make a request to the backend to check if the logged-in user is following the profile user
+        this.userFollowerService.getFollowersByUserId(this.loggedInUser.id)
+          .subscribe((followers: UserFollower[]) => {
+            this.isFollowing = followers.some(follower => follower.followed.id === this.profileUser.id);
+            // Store the follow status in local storage
+            localStorage.setItem('followStatus', JSON.stringify(this.isFollowing));
+            this.updateFollowButtonLabel();
+          });
+      }
+    }
+
+    toggleFollow(): void {
+      if (this.isFollowing) {
+        this.unfollowUser();
+      } else {
+        this.followUser();
+      }
+    }
+
+    followUser(): void {
+      this.userFollowerService.followUser(this.loggedInUser.id, this.profileUser.id).subscribe(
+        () => {
+          this.isFollowing = true;
+          localStorage.setItem('followStatus', JSON.stringify(this.isFollowing));
+          this.updateFollowButtonLabel();
+          this.updateFollowersCount(); // Update followers count
+        },
+        (error) => {
+          console.log('follow error:', error);
+          // Handle error if necessary
+        }
+      );
+    }
+
+    unfollowUser(): void {
+      this.userFollowerService.unfollowUser(this.loggedInUser.id, this.profileUser.id)
+        .subscribe((isUnfollowed: boolean) => {
+          this.isFollowing = false;
+          localStorage.setItem('followStatus', JSON.stringify(this.isFollowing));
+          this.updateFollowButtonLabel();
+          this.updateFollowersCount(); // Update followers count
+        });
+    }
+
+    updateFollowButtonLabel(): void {
+      this.followButtonLabel = this.isFollowing ? 'Unfollow' : 'Follow';
+    }
+
+    updateFollowersCount(): void {
+      this.followersCount$ = this.userFollowerService.getFollowersByUserId(this.userId).pipe(
+        map((followers) => followers.length)
+      );
     }
 
 }

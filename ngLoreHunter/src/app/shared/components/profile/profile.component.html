@@ -76,16 +76,24 @@
                         <dl class="stats-pairs">
                           <dt>Following</dt>
                           <dd>
-                            <a [routerLink]="['/users', profileUser.id, 'comments']">{{ followingCount }}</a>
+                            <a [routerLink]="['/users', profileUser.id, 'comments']">{{ followingCount$ | async }}</a>
                           </dd>
                         </dl>
                         <dl class="stats-pairs">
                           <dt>Followers</dt>
                           <dd>
-                            <a [routerLink]="['/users', profileUser.id, 'comments']">{{ followersCount }}</a>
+                            <a [routerLink]="['/users', profileUser.id, 'comments']">{{ followersCount$ | async }}</a>
                           </dd>
                         </dl>
-                        <dl class="stats-pairs"></dl>
+                        <dl class="stats-pairs">
+                          <div *ngIf="isComponentLoaded">
+                            <ng-container *ngIf="profileUser.id !== loggedInUser.id && loggedIn()">
+                              <button mat-button color="primary" (click)="toggleFollow()">
+                                {{ followButtonLabel }}
+                              </button>
+                            </ng-container>
+                          </div>
+                        </dl>
                       </div>
                     </div>
                   </div>

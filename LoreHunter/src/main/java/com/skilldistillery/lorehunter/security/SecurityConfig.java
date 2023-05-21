@@ -61,6 +61,8 @@ public class SecurityConfig {
         .antMatchers(HttpMethod.PUT, "/api/users/**/setOnline").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.PUT, "/api/users/**/setOffline").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.PUT, "/api/users/**/notifications/**/dismiss").permitAll() // will hit the OPTIONS on the route
+        .antMatchers(HttpMethod.POST, "/api/users/**/follow/**").permitAll() // will hit the OPTIONS on the route
+        .antMatchers(HttpMethod.DELETE, "/api/users/**/unfollow/**").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.POST, "/api/notifications/send").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/comments/**/likes/count").permitAll() // will hit the OPTIONS on the route
         .antMatchers(HttpMethod.GET, "/api/comments/**/post").permitAll() // will hit the OPTIONS on the route
