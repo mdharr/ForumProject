@@ -76,13 +76,13 @@
                         <dl class="stats-pairs">
                           <dt>Following</dt>
                           <dd>
-                            <a [routerLink]="['/users', profileUser.id, 'comments']">{{ followingCount$ | async }}</a>
+                            <a [routerLink]="['/users', profileUser.id, 'following']">{{ followingCount$ | async }}</a>
                           </dd>
                         </dl>
                         <dl class="stats-pairs">
                           <dt>Followers</dt>
                           <dd>
-                            <a [routerLink]="['/users', profileUser.id, 'comments']">{{ followersCount$ | async }}</a>
+                            <a [routerLink]="['/users', profileUser.id, 'followers']">{{ followersCount$ | async }}</a>
                           </dd>
                         </dl>
                         <dl class="stats-pairs">
