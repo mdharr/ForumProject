@@ -37,6 +37,7 @@ public class UserFollowerController {
         return userFollowerService.getFollowersByUserId(userId);
     }
 
+    // Postman test success
     @GetMapping("users/{userId}/followed")
     public List<UserFollower> getFollowedByUserId(@PathVariable int userId) {
         return userFollowerService.getFollowedByUserId(userId);
