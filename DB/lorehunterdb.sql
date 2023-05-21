@@ -309,6 +309,29 @@ CREATE TABLE IF NOT EXISTS `ticket_message` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `user_has_user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_has_user` ;
+
+CREATE TABLE IF NOT EXISTS `user_has_user` (
+  `follower_id` INT NOT NULL,
+  `followed_id` INT NOT NULL,
+  INDEX `fk_user_has_user_user2_idx` (`followed_id` ASC),
+  INDEX `fk_user_has_user_user1_idx` (`follower_id` ASC),
+  CONSTRAINT `fk_user_has_user_user1`
+    FOREIGN KEY (`follower_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_has_user_user2`
+    FOREIGN KEY (`followed_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS lorehunter@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -466,6 +489,16 @@ COMMIT;
 START TRANSACTION;
 USE `lorehunterdb`;
 INSERT INTO `ticket_message` (`id`, `content`, `created_at`, `ticket_id`, `user_id`) VALUES (1, 'Good morning Samus! We\'d love to take care of that for you. Let me first verify that your last username change was not within the past year.', '2023-03-03T12:35:22', 1, 3);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_has_user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `lorehunterdb`;
+INSERT INTO `user_has_user` (`follower_id`, `followed_id`) VALUES (1, 2);
 
 COMMIT;
 
