@@ -52,7 +52,7 @@
                 <ul class="message-attribution-main">
                   <li class="u-concealed">
                     <a (click)="navigateToCommentsByCommentId(comment.id)">
-                      <time class="u-dt">{{ comment.createdAt | date:'shortDate' }} at {{ comment.createdAt | date:'shortTime' }}</time>
+                      <time class="u-dt">{{ comment.createdAt | timeAgo }}</time>
                     </a>
                   </li>
                 </ul>
