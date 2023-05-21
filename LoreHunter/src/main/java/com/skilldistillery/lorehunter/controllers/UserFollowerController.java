@@ -35,6 +35,7 @@ public class UserFollowerController {
     @Autowired
     private UserService userService;
 
+    // Postman test success
     @PostMapping("users/{followerId}/follow/{followedId}")
     public ResponseEntity<UserFollower> followUser(Principal principal,
                                                     @PathVariable int followerId, @PathVariable int followedId) {
@@ -53,6 +54,7 @@ public class UserFollowerController {
         }
     }
 
+    // Postman test success
     @DeleteMapping("users/{followerId}/unfollow/{followedId}")
     public ResponseEntity<Boolean> unfollowUser(Principal principal,
                                                  @PathVariable int followerId, @PathVariable int followedId) {
