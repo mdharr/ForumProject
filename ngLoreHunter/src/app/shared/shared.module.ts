@@ -67,6 +67,7 @@ import { CreateTicketDialogComponent } from './components/create-ticket-dialog/c
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { UserTicketsComponent } from './components/user-tickets/user-tickets.component';
 import { UserTicketMessagesComponent } from './components/user-ticket-messages/user-ticket-messages.component';
+import { UserFollowersComponent } from './components/user-followers/user-followers.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { UserTicketMessagesComponent } from './components/user-ticket-messages/u
     UserDetailsComponent,
     UserTicketsComponent,
     UserTicketMessagesComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    UserFollowersComponent
   ],
   imports: [
     CommonModule,
