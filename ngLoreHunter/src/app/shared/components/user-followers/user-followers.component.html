@@ -1,1 +1,18 @@
-<p>user-followers works!</p>
+<div class="user-wrapper">
+  <ng-container *ngFor="let follower of followerUsers">
+    <div class="user-component" [routerLink]="['/users', follower.follower.id]">
+      <div class="avatar">
+        <img src="{{ follower.follower.imageUrl }}" alt="User Avatar">
+      </div>
+      <div class="user-info">
+        <div class="username">{{ follower.follower.firstName }}</div>
+        <div class="handle">@{{ follower.follower.username }}</div>
+        <div class="bannerMessage">{{ follower.follower.bannerMessage }}</div>
+        <div class="follow-status">Follows you</div>
+      </div>
+      <div class="follow-button">
+        <button>Followed By</button>
+      </div>
+    </div>
+  </ng-container>
+</div>

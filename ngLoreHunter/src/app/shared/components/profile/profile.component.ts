@@ -10,7 +10,7 @@ import { HomeService } from 'src/app/services/home.service';
 import { PostService } from 'src/app/services/post.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
-import { catchError, EMPTY, map, Observable, of, Subscription, switchMap, throwError } from 'rxjs';
+import { catchError, combineLatest, EMPTY, map, Observable, of, Subscription, switchMap, throwError } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
@@ -60,6 +60,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   followingCount: number = 0;
   followingCount$!: Observable<number>;
   followersCount$!: Observable<number>;
+  followingUsers: UserFollower[] = [];
   isFollowing: boolean = false;
   followButtonLabel: string = '';
 
@@ -87,6 +88,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   checkCkEditor: boolean = false;
 
   private paramsSubscription: Subscription | undefined;
+  private testParamsSubscription: Subscription | undefined;
   private loggedInUserSubscription: Subscription | undefined;
   private homeServIndexSubscription: Subscription | undefined;
   private postsByCategorySubscription: Subscription | undefined;
@@ -106,44 +108,83 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private homeService: HomeService,
     private http: HttpClient,
     public dialog: MatDialog,
-    public userFollowerService: UserFollowerService
+    public userFollowerService: UserFollowerService,
     ) {}
 
     ngOnInit() {
 
-      console.log(this.activatedRoute);
-
       this.paramsSubscription = this.activatedRoute.paramMap.pipe(
         switchMap((param) => {
-          console.log(this.userId);
 
           let idString = param.get('userId');
           if (idString) {
             this.userId = +idString;
             if (!isNaN(this.userId)) {
-              return this.userService.show(this.userId).pipe(
-                switchMap((user) => {
-                  console.log(user);
-                  console.log(this.loggedInUser);
+              return combineLatest([
+                this.userService.show(this.userId),
+                this.userFollowerService.getFollowersByUserId(this.userId),
+                this.userFollowerService.getFollowingByUserId(this.userId),
+                this.postService.show(this.categoryId, this.postId),
+              ]).pipe(
+                switchMap(([user, followers, following, post]) => {
                   this.profileUser = user;
 
-                  return this.postService.show(this.categoryId, this.postId).pipe(
-                    switchMap((post) => {
-                      // Do any other processing with user and post here
+                  this.followers = followers;
+                  this.followersCount$ = of(followers.length); // Convert the count to an observable
 
-                      // You can return an observable if you need to further chain operators or subscribe later
-                      return of({ user, post });
-                    }),
-                    catchError((fail) => {
-                      console.log(fail);
-                      // this.router.navigateByUrl('postNotFound');
-                      // Return an empty observable or throw an error if needed
-                      return EMPTY;
-                    })
-                  );
+                  this.following = following;
+                  this.followingCount$ = of(following.length); // Convert the count to an observable
+
+                  this.profileUserSubscription = this.userService.show(this.userId).subscribe({
+                    next: (user) => {
+                      this.profileUser = user;
+
+                      this.followingCount$ = this.userFollowerService.getFollowingByUserId(user.id).pipe(
+                        map((following) => following.length)
+                      );
+                      this.followersCount$ = this.userFollowerService.getFollowersByUserId(user.id).pipe(
+                        map((followers) => followers.length)
+                      );
+                    },
+                    error: (error) => {
+                      console.log('Error getting profileUser');
+                      console.log(error);
+                    }
+                  });
+
+                  this.postsByCategorySubscription = this.postService.getUserPosts(this.userId).subscribe({
+                    next: (posts) => {
+                      this.posts = posts;
+                      this.postsCount = this.posts.length;
+                      console.log(this.postsCount);
+
+                    },
+                    error: (err) => {
+                      console.error('Error loading posts');
+                      console.error(err);
+                    },
+                  });
+
+                  this.profileUserCommentsSubscription = this.commentService.getUserComments(this.userId).subscribe({
+                    next: (comments) => {
+                      this.comments = comments;
+                      this.commentsCount = this.comments.length;
+                      console.log(this.commentsCount);
+
+                    },
+                    error: (err) => {
+                      console.error('Error loading comments');
+                      console.error(err);
+                    }
+                  });
+
+                  // Do any other processing with user and post here
+                  // You can return an observable if you need to further chain operators or subscribe later
+                  return of({ user, post });
                 }),
                 catchError((fail) => {
                   console.log(fail);
+                  // this.router.navigateByUrl('postNotFound');
                   // Return an empty observable or throw an error if needed
                   return EMPTY;
                 })
@@ -160,13 +201,23 @@ export class ProfileComponent implements OnInit, OnDestroy {
         })
       ).subscribe();
 
-
       this.reload();
 
       this.loggedInUserSubscription = this.authService.getLoggedInUser().subscribe({
         next: (user) => {
           this.loggedInUser = user;
-          console.log(this.loggedInUser);
+
+          // Retrieve the list of users that the logged-in user is following
+          this.userFollowerService.getFollowingByUserId(this.loggedInUser.id).subscribe({
+            next: (followingUsers) => {
+              this.followingUsers = followingUsers;
+              this.checkFollowingStatus();
+            },
+            error: (error) => {
+              console.log('Error getting following users');
+              console.log(error);
+            },
+          });
         },
         error: (error) => {
           console.log('Error getting loggedInUser');
@@ -175,9 +226,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
       });
 
       this.profileUserSubscription = this.userService.show(this.userId).subscribe({
-        next:(user) => {
+        next: (user) => {
           this.profileUser = user;
-          console.log(this.profileUser);
+
+          // Update the variables here
+          this.postsCount = this.posts.length;
+          this.commentsCount = this.comments.length;
+          this.followingCount$ = this.userFollowerService.getFollowingByUserId(user.id).pipe(
+            map((following) => following.length)
+          );
+          this.followersCount$ = this.userFollowerService.getFollowersByUserId(user.id).pipe(
+            map((followers) => followers.length)
+          );
         },
         error: (error) => {
           console.log('Error getting profileUser');
@@ -190,7 +250,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.isComponentLoaded = true;
       }, 500);
-
     }
 
     ngOnDestroy() {
@@ -225,6 +284,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       if (this.profileUserFollowedBySubscription) {
         this.profileUserFollowedBySubscription.unsubscribe();
       }
+
+      if (this.testParamsSubscription) {
+        this.testParamsSubscription.unsubscribe();
+      }
     }
 
     loggedIn(): boolean {
@@ -235,11 +298,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.postsByCategorySubscription = this.postService.getUserPosts(this.userId).subscribe({
         next: (posts) => {
           this.posts = posts;
-          let totalUserPosts = 0;
-          for(let i = 0; i < posts.length; i++) {
-            totalUserPosts++;
-          }
-          this.postsCount = totalUserPosts;
+          this.postsCount = this.posts.length;
+          console.log(this.postsCount);
+
         },
         error: (err) => {
           console.error('Error loading posts');
@@ -250,11 +311,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.profileUserCommentsSubscription = this.commentService.getUserComments(this.userId).subscribe({
         next: (comments) => {
           this.comments = comments;
-          let totalUserComments = 0;
-          for(let i = 0; i < comments.length; i++) {
-            totalUserComments++;
-          }
-          this.commentsCount = totalUserComments;
+          this.commentsCount = this.comments.length;
+          console.log(this.commentsCount);
+
         },
         error: (err) => {
           console.error('Error loading comments');
@@ -336,7 +395,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     editInformation(user: User): void {
-      console.log('in editInformation');
       this.userService.update(user).subscribe({
         next: (user) => {
           user = this.loggedInUser;
