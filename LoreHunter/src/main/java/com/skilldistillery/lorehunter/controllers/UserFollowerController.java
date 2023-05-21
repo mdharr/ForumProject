@@ -80,8 +80,8 @@ public class UserFollowerController {
     }
 
     // Postman test success
-    @GetMapping("users/{userId}/followed")
-    public List<UserFollower> getFollowedByUserId(@PathVariable int userId) {
+    @GetMapping("users/{userId}/following")
+    public List<UserFollower> getFollowingByUserId(@PathVariable int userId) {
         return userFollowerService.getFollowedByUserId(userId);
     }
 

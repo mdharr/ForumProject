@@ -73,6 +73,18 @@
                             <a [routerLink]="['/users', profileUser.id, 'comments']">{{ commentsCount }}</a>
                           </dd>
                         </dl>
+                        <dl class="stats-pairs">
+                          <dt>Following</dt>
+                          <dd>
+                            <a [routerLink]="['/users', profileUser.id, 'comments']">{{ followingCount }}</a>
+                          </dd>
+                        </dl>
+                        <dl class="stats-pairs">
+                          <dt>Followers</dt>
+                          <dd>
+                            <a [routerLink]="['/users', profileUser.id, 'comments']">{{ followersCount }}</a>
+                          </dd>
+                        </dl>
                         <dl class="stats-pairs"></dl>
                       </div>
                     </div>

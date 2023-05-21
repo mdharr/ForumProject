@@ -8,27 +8,27 @@ import { UserFollower } from '../models/user-follower';
   providedIn: 'root'
 })
 export class UserFollowerService {
-  private url = environment.baseUrl + 'api';
+  private baseUrl = environment.baseUrl + 'api';
 
   constructor(private http: HttpClient) {}
 
   followUser(followerId: number, followedId: number): Observable<UserFollower> {
-    const url = `${this.url}users/${followerId}/follow/${followedId}`;
+    const url = `${this.baseUrl}/users/${followerId}/follow/${followedId}`;
     return this.http.post<UserFollower>(url, {});
   }
 
   unfollowUser(followerId: number, followedId: number): Observable<boolean> {
-    const url = `${this.url}users/${followerId}/unfollow/${followedId}`;
+    const url = `${this.baseUrl}/users/${followerId}/unfollow/${followedId}`;
     return this.http.delete<boolean>(url);
   }
 
   getFollowersByUserId(userId: number): Observable<UserFollower[]> {
-    const url = `${this.url}users/${userId}/followers`;
+    const url = `${this.baseUrl}/users/${userId}/followers`;
     return this.http.get<UserFollower[]>(url);
   }
 
-  getFollowedByUserId(userId: number): Observable<UserFollower[]> {
-    const url = `${this.url}users/${userId}/followed`;
+  getFollowingByUserId(userId: number): Observable<UserFollower[]> {
+    const url = `${this.baseUrl}/users/${userId}/following`;
     return this.http.get<UserFollower[]>(url);
   }
 

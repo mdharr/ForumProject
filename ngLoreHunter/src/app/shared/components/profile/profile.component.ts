@@ -20,6 +20,8 @@ import { CommentDataSource } from 'src/app/services/comment.dataSource';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UserBannerImageDialogComponent } from '../user-banner-image-dialog/user-banner-image-dialog.component';
+import { UserFollowerService } from 'src/app/services/user-follower.service';
+import { UserFollower } from 'src/app/models/user-follower';
 
 @Component({
   selector: 'app-profile',
@@ -52,6 +54,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   value: any;
   postsCount: number = 0;
   commentsCount: number = 0;
+  followersCount: number = 0;
+  followingCount: number = 0;
 
   newPost: Post = new Post();
 
@@ -63,6 +67,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   newComment: Comment = new Comment();
   loggedInUser: User = new User();
   profileUser: User = new User();
+
+  followers: UserFollower[] = [];
+  following: UserFollower[] = [];
 
   postCreated = false;
   showForm: boolean = false;
@@ -79,6 +86,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private postsByCategorySubscription: Subscription | undefined;
   private profileUserSubscription: Subscription | undefined;
   private profileUserCommentsSubscription: Subscription | undefined;
+  private profileUserFollowingSubscription: Subscription | undefined;
+  private profileUserFollowedBySubscription: Subscription | undefined;
 
   constructor(
     private postService: PostService,
@@ -90,7 +99,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private homeService: HomeService,
     private http: HttpClient,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public userFollowerService: UserFollowerService
     ) {}
 
     ngOnInit() {
@@ -197,6 +207,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
       if (this.profileUserCommentsSubscription) {
         this.profileUserCommentsSubscription.unsubscribe();
       }
+
+      if (this.profileUserFollowingSubscription) {
+        this.profileUserFollowingSubscription.unsubscribe();
+      }
+
+      if (this.profileUserFollowedBySubscription) {
+        this.profileUserFollowedBySubscription.unsubscribe();
+      }
     }
 
     loggedIn(): boolean {
@@ -243,6 +261,37 @@ export class ProfileComponent implements OnInit, OnDestroy {
           console.error(fail);
         }
       });
+
+      this.profileUserFollowingSubscription = this.userFollowerService.getFollowersByUserId(this.userId).subscribe({
+        next: (followers) => {
+          this.followers = followers;
+          let totalUserFollowers = 0;
+          for(let i = 0; i < followers.length; i++) {
+            totalUserFollowers++;
+          }
+          this.followersCount = totalUserFollowers;
+        },
+        error: (fail) => {
+          console.error('Error getting followers:');
+          console.error(fail);
+        }
+      });
+
+      this.profileUserFollowedBySubscription = this.userFollowerService.getFollowingByUserId(this.userId).subscribe({
+        next: (following) => {
+          this.following = following;
+          let totalUserFollowing = 0;
+          for(let i = 0; i < following.length; i++) {
+            totalUserFollowing++;
+          }
+          this.followingCount = totalUserFollowing;
+        },
+        error: (fail) => {
+          console.error('Error getting following:');
+          console.error(fail);
+        }
+      });
+
     }
 
 
