@@ -311,11 +311,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `user_has_user`
+-- Table `user_has_follower`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `user_has_user` ;
+DROP TABLE IF EXISTS `user_has_follower` ;
 
-CREATE TABLE IF NOT EXISTS `user_has_user` (
+CREATE TABLE IF NOT EXISTS `user_has_follower` (
   `follower_id` INT NOT NULL,
   `followed_id` INT NOT NULL,
   INDEX `fk_user_has_user_user2_idx` (`followed_id` ASC),
@@ -494,11 +494,11 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `user_has_user`
+-- Data for table `user_has_follower`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `user_has_user` (`follower_id`, `followed_id`) VALUES (1, 2);
+INSERT INTO `user_has_follower` (`follower_id`, `followed_id`) VALUES (1, 2);
 
 COMMIT;
 
