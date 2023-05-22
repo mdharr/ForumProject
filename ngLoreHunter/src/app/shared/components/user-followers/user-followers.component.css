@@ -63,3 +63,12 @@
   padding: 6px 12px;
   border-radius: 20px;
 }
+
+.followers-list-title {
+  color: var(--text-color);
+  margin: 50px;
+}
+
+.loading-container {
+  margin-top: 50px;
+}

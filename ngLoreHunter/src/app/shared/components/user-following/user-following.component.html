@@ -1,17 +1,53 @@
-<div class="user-wrapper">
-  <ng-container *ngFor="let following of followingUsers">
-    <div class="user-component" [routerLink]="['/users', following.followed.id]">
-      <div class="avatar">
-        <img src="{{ following.followed.imageUrl }}" alt="User Avatar">
-      </div>
-      <div class="user-info">
-        <div class="username">{{ following.followed.firstName }}</div>
-        <div class="handle">@{{ following.followed.username }}</div>
-        <div class="bannerMessage">{{ following.followed.bannerMessage }}</div>
-      </div>
-      <div class="follow-button">
-        <button>Following</button>
-      </div>
-    </div>
-  </ng-container>
+<div class="loading-container" *ngIf="isLoading">
+  <mat-progress-spinner style="margin-top: 100px;" color="primary" mode="indeterminate"></mat-progress-spinner>
 </div>
+
+<div *ngIf="!isLoading">
+  <div *ngIf="isLoggedInUser">
+    <h1 class="followers-list-title">You are following</h1>
+    <div class="user-wrapper">
+      <ng-container *ngFor="let following of followingUsers">
+        <div class="user-component" [routerLink]="['/users', following.followed.id]">
+          <div class="avatar">
+            <img src="{{ following.followed.imageUrl }}" alt="User Avatar">
+          </div>
+          <div class="user-info">
+            <div class="username">{{ following.followed.firstName }}</div>
+            <div class="handle">@{{ following.followed.username }}</div>
+            <div class="bannerMessage">{{ following.followed.bannerMessage }}</div>
+            <div class="follow-status">You have followed since {{ following.createdAt | timeAgo }}</div>
+          </div>
+          <div class="follow-button">
+            <button>Following</button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isLoading">
+  <div *ngIf="!isLoggedInUser">
+    <h1 class="followers-list-title">{{ profileUser.username }} is following</h1>
+    <div class="user-wrapper">
+      <ng-container *ngFor="let following of followingUsers">
+        <div class="user-component" [routerLink]="['/users', following.followed.id]">
+          <div class="avatar">
+            <img src="{{ following.followed.imageUrl }}" alt="User Avatar">
+          </div>
+          <div class="user-info">
+            <div class="username">{{ following.followed.firstName }}</div>
+            <div class="handle">@{{ following.followed.username }}</div>
+            <div class="bannerMessage">{{ following.followed.bannerMessage }}</div>
+            <div class="follow-status">Follower since {{ following.createdAt | timeAgo }}</div>
+          </div>
+          <div class="follow-button">
+            <button>Following</button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+

@@ -10,7 +10,7 @@ import { HomeService } from 'src/app/services/home.service';
 import { PostService } from 'src/app/services/post.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
-import { catchError, combineLatest, EMPTY, map, Observable, of, Subscription, switchMap, throwError } from 'rxjs';
+import { catchError, combineLatest, EMPTY, map, Observable, of, Subscription, switchMap, tap, throwError } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
@@ -96,6 +96,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private profileUserCommentsSubscription: Subscription | undefined;
   private profileUserFollowingSubscription: Subscription | undefined;
   private profileUserFollowedBySubscription: Subscription | undefined;
+  private userFollowerSubscription: Subscription | undefined;
 
   constructor(
     private postService: PostService,
@@ -112,10 +113,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-
       this.paramsSubscription = this.activatedRoute.paramMap.pipe(
         switchMap((param) => {
-
           let idString = param.get('userId');
           if (idString) {
             this.userId = +idString;
@@ -126,60 +125,31 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.userFollowerService.getFollowingByUserId(this.userId),
                 this.postService.show(this.categoryId, this.postId),
               ]).pipe(
-                switchMap(([user, followers, following, post]) => {
+                tap(([user, followers, following, post]) => {
                   this.profileUser = user;
+                  this.postsCount = this.posts.length;
+                  this.commentsCount = this.comments.length;
+                }),
+                switchMap(([user, followers, following, post]) => {
+                  this.followingCount$ = this.userFollowerService.getFollowingByUserId(user.id).pipe(
+                    map((following) => following.length)
+                  );
+                  this.followersCount$ = this.userFollowerService.getFollowersByUserId(user.id).pipe(
+                    map((followers) => followers.length)
+                  );
 
-                  this.followers = followers;
-                  this.followersCount$ = of(followers.length); // Convert the count to an observable
-
-                  this.following = following;
-                  this.followingCount$ = of(following.length); // Convert the count to an observable
-
-                  this.profileUserSubscription = this.userService.show(this.userId).subscribe({
-                    next: (user) => {
-                      this.profileUser = user;
-
-                      this.followingCount$ = this.userFollowerService.getFollowingByUserId(user.id).pipe(
-                        map((following) => following.length)
-                      );
-                      this.followersCount$ = this.userFollowerService.getFollowersByUserId(user.id).pipe(
-                        map((followers) => followers.length)
-                      );
-                    },
-                    error: (error) => {
-                      console.log('Error getting profileUser');
-                      console.log(error);
-                    }
+                  this.postsByCategorySubscription = this.postService.getUserPosts(this.userId).subscribe((posts) => {
+                    this.posts = posts;
+                    this.postsCount = this.posts.length;
+                    this.commentsCount = this.comments.length;
                   });
 
-                  this.postsByCategorySubscription = this.postService.getUserPosts(this.userId).subscribe({
-                    next: (posts) => {
-                      this.posts = posts;
-                      this.postsCount = this.posts.length;
-                      console.log(this.postsCount);
-
-                    },
-                    error: (err) => {
-                      console.error('Error loading posts');
-                      console.error(err);
-                    },
+                  this.profileUserCommentsSubscription = this.commentService.getUserComments(this.userId).subscribe((comments) => {
+                    this.comments = comments;
+                    this.commentsCount = this.comments.length;
+                    this.postsCount = this.posts.length;
                   });
 
-                  this.profileUserCommentsSubscription = this.commentService.getUserComments(this.userId).subscribe({
-                    next: (comments) => {
-                      this.comments = comments;
-                      this.commentsCount = this.comments.length;
-                      console.log(this.commentsCount);
-
-                    },
-                    error: (err) => {
-                      console.error('Error loading comments');
-                      console.error(err);
-                    }
-                  });
-
-                  // Do any other processing with user and post here
-                  // You can return an observable if you need to further chain operators or subscribe later
                   return of({ user, post });
                 }),
                 catchError((fail) => {
@@ -206,12 +176,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.loggedInUserSubscription = this.authService.getLoggedInUser().subscribe({
         next: (user) => {
           this.loggedInUser = user;
-
-          // Retrieve the list of users that the logged-in user is following
-          this.userFollowerService.getFollowingByUserId(this.loggedInUser.id).subscribe({
+          this.userFollowerService.getFollowingByUserId(user.id).subscribe({
             next: (followingUsers) => {
               this.followingUsers = followingUsers;
-              this.checkFollowingStatus();
+              this.checkFollowingStatus(); // Initialize the isFollowing variable
             },
             error: (error) => {
               console.log('Error getting following users');
@@ -225,27 +193,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
         },
       });
 
-      this.profileUserSubscription = this.userService.show(this.userId).subscribe({
-        next: (user) => {
-          this.profileUser = user;
-
-          // Update the variables here
-          this.postsCount = this.posts.length;
-          this.commentsCount = this.comments.length;
-          this.followingCount$ = this.userFollowerService.getFollowingByUserId(user.id).pipe(
-            map((following) => following.length)
-          );
-          this.followersCount$ = this.userFollowerService.getFollowersByUserId(user.id).pipe(
-            map((followers) => followers.length)
-          );
-        },
-        error: (error) => {
-          console.log('Error getting profileUser');
-          console.log(error);
-        }
-      });
-
-      this.checkFollowingStatus();
+      if (this.profileUserSubscription) {
+        this.profileUserSubscription.unsubscribe();
+      }
 
       setTimeout(() => {
         this.isComponentLoaded = true;
@@ -287,6 +237,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
       if (this.testParamsSubscription) {
         this.testParamsSubscription.unsubscribe();
+      }
+
+      if (this.userFollowerSubscription) {
+        this.userFollowerSubscription.unsubscribe();
       }
     }
 
@@ -417,17 +371,23 @@ export class ProfileComponent implements OnInit, OnDestroy {
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
         console.log(result);
-        // do something with the result
       });
     }
 
     checkFollowingStatus(): void {
-      // If not stored, make a request to the backend to check if the logged-in user is following the profile user
-      this.userFollowerService.getFollowersByUserId(this.loggedInUser.id)
-        .subscribe((followers: UserFollower[]) => {
-          this.isFollowing = followers.some(follower => follower.followed.id === this.profileUser.id);
-          // Store the follow status in local storage
-          localStorage.setItem('followStatus', JSON.stringify(this.isFollowing));
+      console.log('checking following status');
+
+      if (this.userFollowerSubscription) {
+        this.userFollowerSubscription.unsubscribe();
+      }
+
+      this.userFollowerSubscription = this.userFollowerService.getFollowingByUserId(this.loggedInUser.id)
+        .subscribe((followingUsers: UserFollower[]) => {
+          this.followingUsers = followingUsers;
+          this.isFollowing = this.followingUsers.some(user => user.followed.id === this.profileUser.id);
+          console.log('following users: ', this.followingUsers);
+          console.log('following status is: ', this.isFollowing);
+
           this.updateFollowButtonLabel();
         });
     }
@@ -441,36 +401,38 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     followUser(): void {
-      this.userFollowerService.followUser(this.loggedInUser.id, this.profileUser.id).subscribe(
-        () => {
-          this.isFollowing = true;
-          localStorage.setItem('followStatus', JSON.stringify(this.isFollowing));
-          this.updateFollowButtonLabel();
-          this.updateFollowersCount(); // Update followers count
-        },
-        (error) => {
-          console.log('follow error:', error);
-          // Handle error if necessary
-        }
-      );
+      this.userFollowerService.followUser(this.loggedInUser.id, this.profileUser.id)
+        .subscribe(
+          () => {
+            this.isFollowing = true;
+            this.updateFollowButtonLabel();
+            this.updateFollowersCount();
+          },
+          (error) => {
+            console.log('follow error:', error);
+          }
+        );
     }
+
 
     unfollowUser(): void {
       this.userFollowerService.unfollowUser(this.loggedInUser.id, this.profileUser.id)
-        .subscribe((isUnfollowed: boolean) => {
-          this.isFollowing = false;
-          localStorage.setItem('followStatus', JSON.stringify(this.isFollowing));
-          this.updateFollowButtonLabel();
-          this.updateFollowersCount(); // Update followers count
-        });
+        .subscribe(
+          () => {
+            this.isFollowing = false;
+            this.updateFollowButtonLabel();
+            this.updateFollowersCount();
+          }
+        );
     }
+
 
     updateFollowButtonLabel(): void {
       this.followButtonLabel = this.isFollowing ? 'Unfollow' : 'Follow';
     }
 
     updateFollowersCount(): void {
-      this.followersCount$ = this.userFollowerService.getFollowersByUserId(this.userId).pipe(
+      this.followersCount$ = this.userFollowerService.getFollowersByUserId(this.profileUser.id).pipe(
         map((followers) => followers.length)
       );
     }
