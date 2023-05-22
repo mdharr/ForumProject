@@ -318,6 +318,7 @@ DROP TABLE IF EXISTS `user_has_follower` ;
 CREATE TABLE IF NOT EXISTS `user_has_follower` (
   `follower_id` INT NOT NULL,
   `followed_id` INT NOT NULL,
+  `created_at` TIMESTAMP NULL,
   INDEX `fk_user_has_user_user2_idx` (`followed_id` ASC),
   INDEX `fk_user_has_user_user1_idx` (`follower_id` ASC),
   CONSTRAINT `fk_user_has_user_user1`
@@ -498,7 +499,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `user_has_follower` (`follower_id`, `followed_id`) VALUES (1, 2);
+INSERT INTO `user_has_follower` (`follower_id`, `followed_id`, `created_at`) VALUES (1, 2, '2023-05-19T11:35:22');
 
 COMMIT;
 

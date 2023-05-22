@@ -1,13 +1,17 @@
 package com.skilldistillery.lorehunter.entities;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "user_has_follower")
@@ -23,16 +27,21 @@ public class UserFollower {
     @ManyToOne
     @JoinColumn(name = "followed_id")
     private User followed;
+    
+	@CreationTimestamp
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
 
 	public UserFollower() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserFollower(User follower, User followed) {
+	public UserFollower(User follower, User followed, LocalDateTime createdAt) {
 		super();
 		this.follower = follower;
 		this.followed = followed;
+		this.createdAt = createdAt;
 	}
 
 	public User getFollower() {
@@ -49,6 +58,14 @@ public class UserFollower {
 
 	public void setFollowed(User followed) {
 		this.followed = followed;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	@Override
@@ -75,6 +92,8 @@ public class UserFollower {
 		builder.append(follower);
 		builder.append(", followed=");
 		builder.append(followed);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
 		builder.append("]");
 		return builder.toString();
 	}
