@@ -59,30 +59,41 @@
                     </div>
                   </div>
                   <div class="member-header-content">
+                    <!-- <div title="Metascore" class="user-stats-label">
+                      {{ game.metacritic }}
+                    </div> -->
                     <div class="member-header-stats">
                       <div class="pairs-justified">
                         <dl class="stats-pairs">
-                          <dt>Posts</dt>
+                          <dt class="stats-title">Posts</dt>
                           <dd>
-                            <a [routerLink]="['/users', profileUser.id, 'posts']">{{ postsCount }}</a>
+                            <div class="user-stats-label">
+                              <a [routerLink]="['/users', profileUser.id, 'posts']">{{ postsCount }}</a>
+                            </div>
                           </dd>
                         </dl>
                         <dl class="stats-pairs">
-                          <dt>Comments</dt>
+                          <dt class="stats-title">Comments</dt>
                           <dd>
-                            <a [routerLink]="['/users', profileUser.id, 'comments']">{{ commentsCount }}</a>
+                            <div class="user-stats-label">
+                              <a [routerLink]="['/users', profileUser.id, 'comments']">{{ commentsCount }}</a>
+                            </div>
                           </dd>
                         </dl>
                         <dl class="stats-pairs">
-                          <dt>Following</dt>
+                          <dt class="stats-title">Following</dt>
                           <dd>
-                            <a [routerLink]="['/users', profileUser.id, 'following']">{{ followingCount$ | async }}</a>
+                            <div class="user-stats-label">
+                              <a [routerLink]="['/users', profileUser.id, 'following']">{{ followingCount$ | async }}</a>
+                            </div>
                           </dd>
                         </dl>
                         <dl class="stats-pairs">
-                          <dt>Followers</dt>
+                          <dt class="stats-title">Followers</dt>
                           <dd>
-                            <a [routerLink]="['/users', profileUser.id, 'followers']">{{ followersCount$ | async }}</a>
+                            <div class="user-stats-label">
+                              <a [routerLink]="['/users', profileUser.id, 'followers']">{{ followersCount$ | async }}</a>
+                            </div>
                           </dd>
                         </dl>
                         <dl class="stats-pairs">
