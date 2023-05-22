@@ -5,6 +5,9 @@
 <div *ngIf="!isLoading">
   <div *ngIf="isLoggedInUser">
     <h1 class="followers-list-title">You are following</h1>
+    <div *ngIf="!followingUsers.length">
+      <h3 class="followers-list-subtitle">You are currently not following anyone.</h3>
+    </div>
     <div class="user-wrapper">
       <ng-container *ngFor="let following of followingUsers">
         <div class="user-component" [routerLink]="['/users', following.followed.id]">
@@ -29,6 +32,9 @@
 <div *ngIf="!isLoading">
   <div *ngIf="!isLoggedInUser">
     <h1 class="followers-list-title">{{ profileUser.username }} is following</h1>
+    <div *ngIf="!followingUsers.length">
+      <h3 class="followers-list-subtitle">This user is currently not following anyone.</h3>
+    </div>
     <div class="user-wrapper">
       <ng-container *ngFor="let following of followingUsers">
         <div class="user-component" [routerLink]="['/users', following.followed.id]">
