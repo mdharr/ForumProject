@@ -422,21 +422,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     checkFollowingStatus(): void {
-      // Check if the follow status is stored in local storage
-      const storedFollowStatus = localStorage.getItem('followStatus');
-      if (storedFollowStatus) {
-        this.isFollowing = JSON.parse(storedFollowStatus);
-        this.updateFollowButtonLabel();
-      } else {
-        // If not stored, make a request to the backend to check if the logged-in user is following the profile user
-        this.userFollowerService.getFollowersByUserId(this.loggedInUser.id)
-          .subscribe((followers: UserFollower[]) => {
-            this.isFollowing = followers.some(follower => follower.followed.id === this.profileUser.id);
-            // Store the follow status in local storage
-            localStorage.setItem('followStatus', JSON.stringify(this.isFollowing));
-            this.updateFollowButtonLabel();
-          });
-      }
+      // If not stored, make a request to the backend to check if the logged-in user is following the profile user
+      this.userFollowerService.getFollowersByUserId(this.loggedInUser.id)
+        .subscribe((followers: UserFollower[]) => {
+          this.isFollowing = followers.some(follower => follower.followed.id === this.profileUser.id);
+          // Store the follow status in local storage
+          localStorage.setItem('followStatus', JSON.stringify(this.isFollowing));
+          this.updateFollowButtonLabel();
+        });
     }
 
     toggleFollow(): void {

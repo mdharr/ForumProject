@@ -38,7 +38,7 @@ dl.pairs {
 }
 
 ::ng-deep .mdc-list-item:hover {
-  background: #f44336;
+  background: var(--container-bkg-color);
   color: #fff !important;
 }
 
