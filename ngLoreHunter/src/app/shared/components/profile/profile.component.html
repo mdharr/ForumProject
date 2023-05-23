@@ -99,7 +99,7 @@
                         <dl class="stats-pairs">
                           <div *ngIf="isComponentLoaded">
                             <ng-container *ngIf="profileUser.id !== loggedInUser.id && loggedIn()">
-                              <button mat-button color="primary" (click)="toggleFollow()">
+                              <button mat-button color="primary" (click)="toggleFollow()" class="followBtn">
                                 {{ followButtonLabel }}
                               </button>
                             </ng-container>

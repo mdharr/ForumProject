@@ -194,7 +194,7 @@
                     <mat-icon class="mat-icons">visibility</mat-icon>
                     <p class="p-content">{{ post.viewCount }}</p>
                   </div>
-                  <div class="comment-count">
+                  <div class="comment-count" [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">
                     <mat-icon class="mat-icons" style="margin-left: 8px;">chat_bubble</mat-icon>
                     <p class="p-content">{{ post.comments.length + 1}}</p>
                   </div>
