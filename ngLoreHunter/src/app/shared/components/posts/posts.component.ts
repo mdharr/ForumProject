@@ -13,13 +13,12 @@ import { Category } from 'src/app/models/category';
 import { catchError, debounceTime, EMPTY, map, merge, Observable, Subscription, take, tap } from 'rxjs';
 import { HomeService } from 'src/app/services/home.service';
 import { HttpClient } from '@angular/common/http';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
 // import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as ClassicEditor from 'src/assets/ckeditor/ckeditor5-37.1.0-hicq7jejpz5/build/ckeditor';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { JumpToPageDialogComponent } from '../jump-to-page-dialog/jump-to-page-dialog.component';
 
 @Component({
   selector: 'app-posts',
@@ -43,14 +42,16 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('ckeditorInstance') ckeditorInstance: any; // Add this line to access the CKEditor instance
   @ViewChild('filterDialog') filterDialog!: TemplateRef<any>;
-  @Input() currentPage: number = 1;
+  // @Input() currentPage: number = 1;
   @Input() pageCount: number = 0;
 
   postContent: SafeHtml | undefined;
 
   isLoading: boolean = false;
 
-  pageSize: number = 10;
+  currentPage: number = 1;
+  pageSize: number = 2;
+  pages: number[] = [];
   totalPosts: number = 0;
   totalPages: number = 0;
 
@@ -110,6 +111,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
     private sanitizer: DomSanitizer,
 
     ) {
+      // necessary
       this.posts$ = postService.getPosts(this.categoryId);
       this.pinnedPosts$ = this.posts$.pipe(
         map(posts => posts.filter(post => post.isPinned))
@@ -128,38 +130,11 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.totalPostsByCategorySubscription.unsubscribe();
     }
 
-    this.pinnedPosts$ = this.posts$.pipe(
-      map(posts => posts.filter(post => post.isPinned))
-    );
-
     this.reload();
 
     this.post = new Post();
     this.postContent = this.sanitizer.bypassSecurityTrustHtml(this.post.content);
 
-  }
-
-  ngOnDestroy() {
-    if (this.paramsSub) {
-      this.paramsSub.unsubscribe();
-    }
-
-    if (this.totalPostsByCategorySubscription) {
-      this.totalPostsByCategorySubscription.unsubscribe();
-    }
-  }
-
-  ngAfterViewInit() {
-    const toolbarElement = document.querySelector('.ck-toolbar');
-
-    if (toolbarElement) {
-      (toolbarElement as HTMLElement).style.backgroundColor = 'red !important'; // Replace with your desired background color
-    }
-
-  }
-
-  loggedIn(): boolean {
-    return this.authService.checkLogin();
   }
 
   reload() {
@@ -174,6 +149,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
             next: (category) => {
               console.log(category);
               console.log(this.categoryId);
+
 
             },
             error: (fail) => {
@@ -200,6 +176,8 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
           map(posts => posts.filter(post => post.isPinned))
         );
 
+        this.loadPostsForPage(this.currentPage);
+
         this.totalPostsByCategorySubscription = this.postService.getTotalPostsByCategory(this.categoryId).subscribe(totalPosts => {
           this.totalPosts = totalPosts;
         });
@@ -216,15 +194,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log(error);
       },
     });
-    this.postService.postsByCategory(this.categoryId).subscribe({
-      next: (posts) => {
-        this.posts = posts;
-      },
-      error: (err) => {
-        console.error('Error loading posts');
-        console.error(err);
-      },
-    });
+
     this.homeServ.index().subscribe({
       next: (categories) => {
         this.categories = categories;
@@ -235,6 +205,29 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
+  }
+
+  ngOnDestroy() {
+    if (this.paramsSub) {
+      this.paramsSub.unsubscribe();
+    }
+
+    if (this.totalPostsByCategorySubscription) {
+      this.totalPostsByCategorySubscription.unsubscribe();
+    }
+  }
+
+  ngAfterViewInit() {
+    const toolbarElement = document.querySelector('.ck-toolbar');
+
+    if (toolbarElement) {
+      (toolbarElement as HTMLElement).style.backgroundColor = 'red !important'; // Replace with your desired background color
+    }
+
+  }
+
+  loggedIn(): boolean {
+    return this.authService.checkLogin();
   }
 
   resetForm() {
@@ -275,19 +268,8 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.postCreated = true;
         this.post = data;
         // this.posts$ = this.postService.postsByCategory(this.categoryId);
-        this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
-          map(posts => posts.sort((a, b) => {
-            let lastEditedComparison = new Date(b.lastComment).getTime() - new Date(a.lastComment).getTime();
-            if (lastEditedComparison === 0) {
-                return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-            } else {
-                return lastEditedComparison;
-            }
-          }))
-        );
-        this.pinnedPosts$ = this.posts$.pipe(
-          map(posts => posts.filter(post => post.isPinned))
-        );
+        this.loadPostsForPage(this.currentPage);
+        this.goToPage(1);
       },
       error: (nojoy) => {
         console.error(
@@ -355,27 +337,27 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
-  goToPreviousPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-    }
-  }
+//   goToPreviousPage(): void {
+//     if (this.currentPage > 1) {
+//       this.currentPage--;
+//     }
+//   }
 
-  goToNextPage(): void {
-    if (this.posts$ !== undefined) {
-      this.posts$.pipe(
-        take(1),
-        catchError(error => {
-          console.error(error);
-          return EMPTY;
-        })
-      ).subscribe(posts => {
-        if (Array.isArray(posts) && (this.currentPage * 5) < (posts.length)) {
-          this.currentPage++;
-        }
-      });
-    }
-}
+//   goToNextPage(): void {
+//     if (this.posts$ !== undefined) {
+//       this.posts$.pipe(
+//         take(1),
+//         catchError(error => {
+//           console.error(error);
+//           return EMPTY;
+//         })
+//       ).subscribe(posts => {
+//         if (Array.isArray(posts) && (this.currentPage * 5) < (posts.length)) {
+//           this.currentPage++;
+//         }
+//       });
+//     }
+// }
 
   openFilterDialog() {
     this.dialog.open(this.filterDialog, {
@@ -416,6 +398,171 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getSanitizedTooltipContent(): string {
     return this.postContent ? this.postContent.toString() : '';
+  }
+
+  generatePageArray() {
+    this.isLoading = true;
+    const maxVisiblePages = 5; // Maximum number of visible pages in the navigation
+
+    if (this.totalPages <= maxVisiblePages) {
+      // If total pages is less than or equal to maxVisiblePages, display all pages
+      this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    } else {
+      const firstPage = 1;
+      const lastPage = this.totalPages;
+      const currentPage = this.currentPage;
+
+      // Add first page
+      const pageNumbers: number[] = [firstPage];
+
+      // Add ellipsis if current page is not within the first 3 pages
+      if (currentPage > 3) {
+        pageNumbers.push(-1);
+      }
+
+      // Add visible page numbers
+      const startPage = Math.max(2, currentPage - 2);
+      const endPage = Math.min(lastPage - 1, currentPage + 2);
+      for (let i = startPage; i <= endPage; i++) {
+        pageNumbers.push(i);
+      }
+
+      // Add ellipsis if current page is not within the last 3 pages
+      if (currentPage < lastPage - 2) {
+        pageNumbers.push(-1);
+      }
+
+      // Add last page
+      pageNumbers.push(lastPage);
+
+      this.pages = pageNumbers;
+    }
+    this.isLoading = false;
+  }
+
+
+  // Modify the goToPage method
+  goToPage(page: number): void {
+    this.isLoading = true;
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.generatePageArray();
+      // Call a method to retrieve the posts for the current page
+      this.loadPostsForPage(page);
+    }
+    this.isLoading = false;
+  }
+
+  loadPostsForPage(page: number): void {
+    this.isLoading = true;
+    const startIndex = (page - 1) * this.pageSize;
+    let endIndex = startIndex + this.pageSize;
+
+    this.posts$ = this.postService.postsByCategory(this.categoryId).pipe(
+      map(posts => {
+        const sortedPosts = posts
+          .filter(post => !post.isPinned) // Exclude pinned posts
+          .sort((a, b) => {
+            let lastEditedComparison = new Date(b.lastComment).getTime() - new Date(a.lastComment).getTime();
+            if (lastEditedComparison === 0) {
+              return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+            } else {
+              return lastEditedComparison;
+            }
+          });
+
+        const totalPosts = sortedPosts.length;
+        const totalPages = this.getTotalPages();
+        const remainingPosts = totalPosts - startIndex;
+
+        if (remainingPosts < this.pageSize) {
+          endIndex = startIndex + remainingPosts;
+        }
+
+        const slicedPosts = sortedPosts.slice(startIndex, endIndex);
+
+        this.totalPosts = totalPosts;
+        this.totalPages = totalPages;
+        this.generatePageArray();
+
+        return slicedPosts;
+      })
+    );
+
+    this.posts$.subscribe(slicedPosts => {
+      this.posts = slicedPosts;
+      this.isLoading = false;
+    });
+  }
+
+  goToPreviousPage(): void {
+    if (this.currentPage > 1) {
+      this.goToPage(this.currentPage - 1);
+    }
+  }
+
+  goToNextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.goToPage(this.currentPage + 1);
+    }
+  }
+
+  onJumpToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.goToPage(page);
+    }
+  }
+
+  onJumpToPageDialog() {
+    console.log('onJumpToPageDialog called');
+
+    const dialogRef = this.dialog.open(JumpToPageDialogComponent, {
+      width: '250px',
+      data: { currentPage: this.currentPage, totalPages: this.totalPages } // Pass current page and total pages as data to the dialog
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.page) {
+        const page = result.page;
+        this.onJumpToPage(page); // Call the onJumpToPage method with the selected page number
+      }
+    });
+  }
+
+  updatePaginationNumber() {
+    // Clear the pages array
+    this.pages = [];
+
+    // Calculate the start and end page numbers based on the current page
+    let startPage: number;
+    let endPage: number;
+    const totalVisiblePages = 5; // Number of visible pages in the pagination
+
+    if (this.currentPage <= Math.floor(totalVisiblePages / 2) + 1) {
+      startPage = 1;
+      endPage = Math.min(totalVisiblePages, this.totalPages);
+    } else if (this.currentPage >= this.totalPages - Math.floor(totalVisiblePages / 2)) {
+      startPage = Math.max(1, this.totalPages - totalVisiblePages + 1);
+      endPage = this.totalPages;
+    } else {
+      startPage = this.currentPage - Math.floor(totalVisiblePages / 2);
+      endPage = this.currentPage + Math.floor(totalVisiblePages / 2);
+    }
+
+    // Add ellipsis if necessary
+    if (startPage > 1) {
+      this.pages.push(-1);
+    }
+
+    // Add page numbers to the pages array
+    for (let i = startPage; i <= endPage; i++) {
+      this.pages.push(i);
+    }
+
+    // Add ellipsis if necessary
+    if (endPage < this.totalPages) {
+      this.pages.push(-1);
+    }
   }
 
 }

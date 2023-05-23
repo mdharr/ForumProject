@@ -131,7 +131,7 @@
 
 <div class="wrapper">
 
-<div class="mat-paginator-container" fxLayout="row" fxLayoutAlign="center center">
+<!-- <div class="mat-paginator-container" fxLayout="row" fxLayoutAlign="center center">
   <button mat-icon-button [disabled]="currentPage === 1" (click)="goToPreviousPage()">
     <mat-icon>keyboard_arrow_left</mat-icon>
   </button>
@@ -141,10 +141,10 @@
   <button mat-icon-button [disabled]="currentPage === getTotalPages()" (click)="goToNextPage()">
     <mat-icon>keyboard_arrow_right</mat-icon>
   </button>
-</div>
+</div> -->
 
 <!-- PAGINATION EXPERIMENT START -->
-<!-- <div class="page-navigation">
+<div class="page-navigation">
   <a class="pageNav-prev pageNav" *ngIf="currentPage > 1" (click)="goToPreviousPage()">Prev</a>
   <a
     class="pageNav-pages pageNav"
@@ -159,7 +159,7 @@
     <ng-container *ngIf="page !== -1">{{ page }}</ng-container>
   </a>
   <a class="pageNav-next pageNav" *ngIf="currentPage < totalPages" (click)="goToNextPage()">Next</a>
-</div> -->
+</div>
 <!-- PAGINATION EXPERIMENT END -->
 
 <div class="block-filter-bar" *ngIf="!isLoading">
@@ -239,10 +239,10 @@
   </div>
 </div>
 </ng-container>
-    <div class="article-container" *ngFor="let post of (posts$ | async)?.slice((currentPage - 1) * 10, currentPage * 10); let i = index">
-      <article class="message-outer" *ngIf="!post.isPinned">
-    <!-- <div class="article-container" *ngFor="let post of posts$ | async; let i = index">
-      <article class="message-outer" *ngIf="!post.isPinned && !isLoading"> -->
+    <!-- <div class="article-container" *ngFor="let post of (posts$ | async)?.slice((currentPage - 1) * 10, currentPage * 10); let i = index">
+      <article class="message-outer" *ngIf="!post.isPinned"> -->
+    <div class="article-container" *ngFor="let post of posts$ | async; let i = index">
+      <article class="message-outer" *ngIf="!post.isPinned && !isLoading">
         <span class="anchorTarget"></span>
         <div class="message-inner">
           <div class="message-cell message-cell-user">
