@@ -143,13 +143,35 @@
   </button>
 </div>
 
-<div class="block-filter-bar">
+<!-- PAGINATION EXPERIMENT START -->
+<!-- <div class="page-navigation">
+  <a class="pageNav-prev pageNav" *ngIf="currentPage > 1" (click)="goToPreviousPage()">Prev</a>
+  <a
+    class="pageNav-pages pageNav"
+    [ngClass]="{
+      'isCurrentPage': page === currentPage,
+      'notCurrentPage': page !== currentPage
+    }"
+    *ngFor="let page of pages"
+    (click)="page === -1 ? onJumpToPageDialog() : goToPage(page)"
+  >
+    <ng-container *ngIf="page === -1">...</ng-container>
+    <ng-container *ngIf="page !== -1">{{ page }}</ng-container>
+  </a>
+  <a class="pageNav-next pageNav" *ngIf="currentPage < totalPages" (click)="goToNextPage()">Next</a>
+</div> -->
+<!-- PAGINATION EXPERIMENT END -->
+
+<div class="block-filter-bar" *ngIf="!isLoading">
   <div class="filter-bar" style="height: 25px;">
     <button class="filter-bar-menu-trigger" mat-button [matMenuTriggerFor]="menu" style="display: flex; align-items: center;">
       <span style="flex-grow: 1;">Filters</span>
       <span class="filter-bar-icon" style="margin-left: 5px;"><mat-icon style="vertical-align: top; margin-left:-10px;">arrow_drop_down</mat-icon></span>
     </button>
   </div>
+</div>
+<div class="loading-container" *ngIf="isLoading">
+  <mat-progress-spinner style="margin-top: 100px;" color="primary" mode="indeterminate"></mat-progress-spinner>
 </div>
 <ng-container *ngIf="(pinnedPosts$ | async)?.length && this.currentPage === 1">
 <div class="pinned-main-container">
@@ -219,6 +241,8 @@
 </ng-container>
     <div class="article-container" *ngFor="let post of (posts$ | async)?.slice((currentPage - 1) * 10, currentPage * 10); let i = index">
       <article class="message-outer" *ngIf="!post.isPinned">
+    <!-- <div class="article-container" *ngFor="let post of posts$ | async; let i = index">
+      <article class="message-outer" *ngIf="!post.isPinned && !isLoading"> -->
         <span class="anchorTarget"></span>
         <div class="message-inner">
           <div class="message-cell message-cell-user">
@@ -347,6 +371,3 @@
       </mat-form-field>
   </ng-container>
 </mat-menu>
-
-
-

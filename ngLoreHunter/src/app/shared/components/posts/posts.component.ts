@@ -48,6 +48,8 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   postContent: SafeHtml | undefined;
 
+  isLoading: boolean = false;
+
   pageSize: number = 10;
   totalPosts: number = 0;
   totalPages: number = 0;
