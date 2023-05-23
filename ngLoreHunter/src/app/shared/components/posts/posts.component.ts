@@ -50,7 +50,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   isLoading: boolean = false;
 
   currentPage: number = 1;
-  pageSize: number = 2;
+  pageSize: number = 3;
   pages: number[] = [];
   totalPosts: number = 0;
   totalPages: number = 0;
@@ -401,7 +401,6 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   generatePageArray() {
-    this.isLoading = true;
     const maxVisiblePages = 5; // Maximum number of visible pages in the navigation
 
     if (this.totalPages <= maxVisiblePages) {
