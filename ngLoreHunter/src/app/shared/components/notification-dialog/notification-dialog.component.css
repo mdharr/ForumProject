@@ -1,0 +1,20 @@
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: var(--bkg-color);
+  color: var(--text-color);
+}
+
+.mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input {
+  color: var(--text-color);
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--container-bkg-color);
+}
+
+.mat-mdc-dialog-title {
+  color: var(--text-color);
+}
+
+.mat-mdc-button {
+  color: var(--text-color);
+}
