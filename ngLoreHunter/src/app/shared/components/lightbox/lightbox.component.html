@@ -1,6 +1,6 @@
 <div class="lightbox-container" *ngIf="showLightbox">
   <div class="lightbox-content">
     <img [src]="imageSource" alt="Image">
-    <button class="close-button" (click)="closeLightbox()">Close</button>
+    <button class="close-button" (click)="closeLightbox.emit()">Close</button>
   </div>
 </div>

@@ -112,7 +112,6 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private elementRef: ElementRef,
     private sanitizer: DomSanitizer,
-
     ) {
       // necessary
       this.posts$ = postService.getPosts(this.categoryId);

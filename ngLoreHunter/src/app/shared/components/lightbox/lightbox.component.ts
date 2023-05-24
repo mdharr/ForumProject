@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-lightbox',
@@ -8,14 +8,7 @@ import { Component, Input } from '@angular/core';
 export class LightboxComponent {
 
   @Input() imageSource: string = '';
-  showLightbox: boolean = false;
-
-  openLightbox() {
-    this.showLightbox = true;
-  }
-
-  closeLightbox() {
-    this.showLightbox = false;
-  }
+  @Input() showLightbox: boolean = false;
+  @Output() closeLightbox = new EventEmitter<void>();
 
 }
