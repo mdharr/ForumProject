@@ -815,3 +815,11 @@ input:focus {
 .loading-container {
   margin-top: 50px;
 }
+
+.article-wrapper {
+  min-height: 750px;
+}
+
+.ghost-container {
+  flex: 1;
+}

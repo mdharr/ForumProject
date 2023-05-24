@@ -38,6 +38,9 @@ import { JumpToPageDialogComponent } from '../jump-to-page-dialog/jump-to-page-d
 export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   title = 'ngLoreHunter';
 
+  @ViewChild('postContainer', { read: ElementRef })
+  postContainer!: ElementRef;
+
   public Editor = ClassicEditor;
 
   @ViewChild('ckeditorInstance') ckeditorInstance: any; // Add this line to access the CKEditor instance
@@ -50,7 +53,7 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
   isLoading: boolean = false;
 
   currentPage: number = 1;
-  pageSize: number = 3;
+  pageSize: number = 10;
   pages: number[] = [];
   totalPosts: number = 0;
   totalPages: number = 0;
@@ -224,6 +227,27 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
       (toolbarElement as HTMLElement).style.backgroundColor = 'red !important'; // Replace with your desired background color
     }
 
+    const options = {
+      root: null, // Use the viewport as the root
+      rootMargin: '0px',
+      threshold: 0.5, // Adjust as needed
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Trigger the method to load posts for the current page asynchronously
+          this.loadPostsForPage(this.currentPage);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, options);
+
+    const paginationElement = document.querySelector('.page-navigation');
+    if (paginationElement) {
+      observer.observe(paginationElement);
+    }
+
   }
 
   loggedIn(): boolean {
@@ -269,7 +293,10 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.post = data;
         // this.posts$ = this.postService.postsByCategory(this.categoryId);
         this.loadPostsForPage(this.currentPage);
-        this.goToPage(1);
+        // this.goToPage(1);
+        console.log(this.categoryId);
+        console.log(this.post.id);
+        this.router.navigateByUrl(`/categories/${this.categoryId}/posts/${this.post.id}/comments`);
       },
       error: (nojoy) => {
         console.error(
@@ -441,15 +468,15 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   // Modify the goToPage method
-  goToPage(page: number): void {
-    this.isLoading = true;
+  async goToPage(page: number): Promise<void> {
     if (page >= 1 && page <= this.totalPages) {
+      this.isLoading = true;
       this.currentPage = page;
       this.generatePageArray();
       // Call a method to retrieve the posts for the current page
-      this.loadPostsForPage(page);
+      await this.loadPostsForPage(page);
+      this.isLoading = false;
     }
-    this.isLoading = false;
   }
 
   loadPostsForPage(page: number): void {
@@ -526,42 +553,6 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.onJumpToPage(page); // Call the onJumpToPage method with the selected page number
       }
     });
-  }
-
-  updatePaginationNumber() {
-    // Clear the pages array
-    this.pages = [];
-
-    // Calculate the start and end page numbers based on the current page
-    let startPage: number;
-    let endPage: number;
-    const totalVisiblePages = 5; // Number of visible pages in the pagination
-
-    if (this.currentPage <= Math.floor(totalVisiblePages / 2) + 1) {
-      startPage = 1;
-      endPage = Math.min(totalVisiblePages, this.totalPages);
-    } else if (this.currentPage >= this.totalPages - Math.floor(totalVisiblePages / 2)) {
-      startPage = Math.max(1, this.totalPages - totalVisiblePages + 1);
-      endPage = this.totalPages;
-    } else {
-      startPage = this.currentPage - Math.floor(totalVisiblePages / 2);
-      endPage = this.currentPage + Math.floor(totalVisiblePages / 2);
-    }
-
-    // Add ellipsis if necessary
-    if (startPage > 1) {
-      this.pages.push(-1);
-    }
-
-    // Add page numbers to the pages array
-    for (let i = startPage; i <= endPage; i++) {
-      this.pages.push(i);
-    }
-
-    // Add ellipsis if necessary
-    if (endPage < this.totalPages) {
-      this.pages.push(-1);
-    }
   }
 
 }
