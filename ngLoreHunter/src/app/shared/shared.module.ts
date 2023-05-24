@@ -69,6 +69,7 @@ import { UserTicketsComponent } from './components/user-tickets/user-tickets.com
 import { UserTicketMessagesComponent } from './components/user-ticket-messages/user-ticket-messages.component';
 import { UserFollowersComponent } from './components/user-followers/user-followers.component';
 import { UserFollowingComponent } from './components/user-following/user-following.component';
+import { LightboxComponent } from './components/lightbox/lightbox.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { UserFollowingComponent } from './components/user-following/user-followi
     UserTicketMessagesComponent,
     TimeAgoPipe,
     UserFollowersComponent,
-    UserFollowingComponent
+    UserFollowingComponent,
+    LightboxComponent
   ],
   imports: [
     CommonModule,
