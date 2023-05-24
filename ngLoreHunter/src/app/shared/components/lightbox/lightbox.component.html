@@ -1,1 +1,6 @@
-<p>lightbox works!</p>
+<div class="lightbox-container" *ngIf="showLightbox">
+  <div class="lightbox-content">
+    <img [src]="imageSource" alt="Image">
+    <button class="close-button" (click)="closeLightbox()">Close</button>
+  </div>
+</div>

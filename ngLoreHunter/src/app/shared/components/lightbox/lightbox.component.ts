@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-lightbox',
@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./lightbox.component.css']
 })
 export class LightboxComponent {
+
+  @Input() imageSource: string = '';
+  showLightbox: boolean = false;
+
+  openLightbox() {
+    this.showLightbox = true;
+  }
+
+  closeLightbox() {
+    this.showLightbox = false;
+  }
 
 }
