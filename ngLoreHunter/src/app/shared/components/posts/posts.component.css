@@ -817,7 +817,8 @@ input:focus {
 }
 
 .article-wrapper {
-  min-height: 750px;
+  /* min-height: 750px; */
+  flex: 1;
 }
 
 .ghost-container {

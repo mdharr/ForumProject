@@ -465,7 +465,6 @@ export class PostsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isLoading = false;
   }
 
-
   // Modify the goToPage method
   async goToPage(page: number): Promise<void> {
     if (page >= 1 && page <= this.totalPages) {
