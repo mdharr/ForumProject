@@ -21,25 +21,25 @@ import com.skilldistillery.lorehunter.enums.TicketPriority;
 @Table(name = "user_has_game")
 public class UserGame {
 	
-	@EmbeddedId
-	private UserGameId id;
-	
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	@MapsId(value = "userId")
-	private User user;
-	
-	@ManyToOne
-	@JoinColumn(name = "game_id")
-	@MapsId(value = "gameId")
-	private Game game;
-	
-	@Enumerated(EnumType.STRING)
-	private GameCategory category = GameCategory.PLAYING;
-	
-	@Enumerated(EnumType.STRING)
-	private GameRating rating = GameRating.ONE;
+    @EmbeddedId
+    private UserGameId id;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @MapsId("userId")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "game_id", referencedColumnName = "id")
+    @MapsId("gameId")
+    private Game game;
+
+    @Enumerated(EnumType.STRING)
+    private GameCategory category = GameCategory.PLAYING;
+
+    @Enumerated(EnumType.STRING)
+    private GameRating rating = GameRating.ZERO;
 	
 	public UserGame() {
 		super();
