@@ -127,28 +127,36 @@ public class GameController {
       return ResponseEntity.ok().body(savedGame);
     }
     
-//    @PostMapping("users/{userId}/games/{gameId}")
-//    public ResponseEntity<?> saveUserGame(@PathVariable int userId, @PathVariable int gameId) {
-//        User user = userService.getUser(userId);
-//        if (user == null) {
-//            return ResponseEntity.notFound().build();
-//        }
+//    @PostMapping("games")
+//    public ResponseEntity<Game> createGame(@RequestParam String apiKey, @RequestParam String url, @RequestParam String slug,
+//            @RequestParam String name, @RequestParam String description, @RequestParam String released,
+//            @RequestParam String backgroundImage) {
+//        // Create a new Game object
+//        Game game = new Game();
+//        game.setApiKey(apiKey);
+//        game.setUrl(url);
+//        game.setSlug(slug);
+//        game.setName(name);
+//        game.setDescription(description);
+//        game.setReleased(released);
+//        game.setBackgroundImage(backgroundImage);
 //
-//        Game game = gameService.getGame(gameId);
-//        if (game == null) {
-//            return ResponseEntity.notFound().build();
-//        }
+//        // Save the game object using your repository or service
+//        game = gameService.createGame(game);
 //
-//        UserGameId userGameId = new UserGameId(user.getId(), game.getId());
-//        Optional<UserGame> optionalUserGame = userGameRepo.findByUserGameId(userGameId);
-//        if (optionalUserGame.isPresent()) {
-//            return ResponseEntity.badRequest().body("Game already added to collection.");
-//        }
-//
-//        UserGame userGame = new UserGame(user, game);
-//        userGameRepo.save(userGame);
-//
-//        return ResponseEntity.ok().build();
+//        return ResponseEntity.ok().body(game);
 //    }
+    
+    @GetMapping("games/{id}")
+    public ResponseEntity<Object> getGameDetails(@PathVariable("id") String gameId) {
+        // Construct the URL for retrieving game details
+        String apiUrl = API_BASE_URL + "/" + gameId + "?" + API_KEY_PARAM + "=" + API_KEY_VALUE;
+
+        // Send a GET request to the API to retrieve game details
+        ResponseEntity<Object> response = restTemplate.getForEntity(apiUrl, Object.class);
+
+        // Return the API response as-is to the frontend
+        return response;
+    }
 
 }
