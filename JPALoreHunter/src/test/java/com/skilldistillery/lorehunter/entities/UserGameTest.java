@@ -12,6 +12,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.skilldistillery.lorehunter.enums.GameCategory;
+import com.skilldistillery.lorehunter.enums.GameRating;
+
 class UserGameTest {
 	
 	private static EntityManagerFactory emf;
@@ -32,6 +35,7 @@ class UserGameTest {
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
 		userGame = em.find(UserGame.class, new UserGameId(1,1));
+		System.out.println(userGame);
 	}
 
 	@AfterEach
@@ -50,6 +54,18 @@ class UserGameTest {
 	void test_Game_User_many_to_many_mapping() {
 		assertNotNull(userGame);
 		assertEquals(1, userGame.getGame().getId());
+	}
+	
+	@Test
+	void test_UserGame_rating() {
+		assertNotNull(userGame);
+		assertEquals(GameRating.FIVE, userGame.getRating());
+	}
+	
+	@Test
+	void test_UserGame_category() {
+		assertNotNull(userGame);
+		assertEquals(GameCategory.PLAYED, userGame.getCategory());
 	}
 	
 	@Test

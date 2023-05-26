@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.skilldistillery.lorehunter.enums.TicketStatus;
+
 class TicketTest {
 
 	private static EntityManagerFactory emf;
@@ -50,6 +52,12 @@ class TicketTest {
 	void test_Ticket_User_many_to_one_mapping() {
 		assertNotNull(ticket);
 		assertEquals("Samus", ticket.getUser().getUsername());
+	}
+	
+	@Test
+	void test_Ticket_User_status() {
+		assertNotNull(ticket);
+		assertEquals(TicketStatus.OPEN, ticket.getStatus());
 	}
 
 }

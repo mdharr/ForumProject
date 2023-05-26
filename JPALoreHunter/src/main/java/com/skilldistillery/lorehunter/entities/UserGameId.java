@@ -8,7 +8,6 @@ import javax.persistence.Embeddable;
 import javax.persistence.Table;
 
 @Embeddable
-@Table(name = "user_has_game")
 public class UserGameId implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

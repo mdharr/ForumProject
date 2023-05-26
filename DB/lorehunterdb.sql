@@ -176,8 +176,8 @@ DROP TABLE IF EXISTS `user_has_game` ;
 CREATE TABLE IF NOT EXISTS `user_has_game` (
   `user_id` INT NOT NULL,
   `game_id` INT NOT NULL,
-  `category` ENUM('PLAYED', 'PLAYING') NULL,
-  `rating` ENUM('0', '0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5') NULL,
+  `category` ENUM('PLAYED', 'PLAYING') NULL DEFAULT 'PLAYING',
+  `rating` ENUM('0', '0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5') NULL DEFAULT '5',
   PRIMARY KEY (`user_id`, `game_id`),
   INDEX `fk_user_has_game_game1_idx` (`game_id` ASC),
   INDEX `fk_user_has_game_user1_idx` (`user_id` ASC),
