@@ -5,7 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.skilldistillery.lorehunter.entities.Game;
 
 public interface GameRepository extends JpaRepository<Game, Integer> {
-	
-	Game findByGameId(int id);
-	
+		
 }

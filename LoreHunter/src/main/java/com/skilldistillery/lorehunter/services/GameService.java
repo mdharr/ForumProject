@@ -21,4 +21,6 @@ public interface GameService {
     
     void deleteGame(int gameId);
 
+	List<Game> index();
+
 }

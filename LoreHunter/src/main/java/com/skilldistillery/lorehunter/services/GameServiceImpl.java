@@ -84,6 +84,11 @@ public class GameServiceImpl implements GameService {
 
         return gameList;
     }
+    
+    @Override
+    public List<Game> index() {
+    	return gameRepo.findAll();
+    }
 
     @Override
     public Game createGame(Game game) {

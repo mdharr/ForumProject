@@ -15,8 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +32,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.skilldistillery.lorehunter.entities.Game;
+import com.skilldistillery.lorehunter.entities.Ticket;
 import com.skilldistillery.lorehunter.entities.User;
 import com.skilldistillery.lorehunter.entities.UserGame;
 import com.skilldistillery.lorehunter.entities.UserGameId;
@@ -66,16 +70,16 @@ public class GameController {
 	private UserGameRepository userGameRepo;
 	
     // store url for user in game table of database
-    @PostMapping("users/{userId}/games/{gameId}/url")
-    public ResponseEntity<String> storeGameUrlForUser(
-            @PathVariable("userId") int userId,
-            @PathVariable("gameId") int gameId,
-            @RequestBody String gameUrl) {
-
-        gameService.storeGameUrl(userId, gameId, gameUrl);
-
-        return ResponseEntity.ok("Game URL stored successfully");
-    }
+//    @PostMapping("users/{userId}/games/{gameId}/url")
+//    public ResponseEntity<String> storeGameUrlForUser(
+//            @PathVariable("userId") int userId,
+//            @PathVariable("gameId") int gameId,
+//            @RequestBody String gameUrl) {
+//
+//        gameService.storeGameUrl(userId, gameId, gameUrl);
+//
+//        return ResponseEntity.ok("Game URL stored successfully");
+//    }
     
     @GetMapping("games")
     public ResponseEntity<Object> getGames(
@@ -185,4 +189,9 @@ public class GameController {
     	Game savedGame = gameRepo.save(game);
     	return ResponseEntity.ok().body(savedGame);
     }
+    
+	@GetMapping("games/library")
+	public ResponseEntity<List<Game>> listAllGames() {
+		return new ResponseEntity<>(gameService.index(), HttpStatus.OK);
+	}
 }
