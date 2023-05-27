@@ -11,14 +11,14 @@ public interface GameService {
 	
 	List<Game> getGamesBySearchTerm(String searchTerm);
 
-	void storeGameUrl(int userId, int gameId, String gameUrl);
-
 	List<Game> getGamesFromExternalApi();
 
-	void saveGame(JsonNode jsonNode);
-
-	Game getGame(int gameId);
-
-//	Game createGameFromApi(Game game);
+    Game createGame(Game game);
+    
+    Game getGameById(int gameId);
+    
+    Game updateGame(int gameId, Game updatedGame);
+    
+    void deleteGame(int gameId);
 
 }

@@ -6,6 +6,6 @@ import com.skilldistillery.lorehunter.entities.Game;
 
 public interface GameRepository extends JpaRepository<Game, Integer> {
 	
-	Game findByUrl(String gameUrl);
-
+	Game findByGameId(int id);
+	
 }

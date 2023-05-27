@@ -1,5 +1,6 @@
 package com.skilldistillery.lorehunter.services;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,15 +8,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.persistence.Column;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.skilldistillery.lorehunter.entities.Category;
 import com.skilldistillery.lorehunter.entities.Game;
+import com.skilldistillery.lorehunter.entities.Post;
+import com.skilldistillery.lorehunter.entities.Ticket;
 import com.skilldistillery.lorehunter.entities.User;
 import com.skilldistillery.lorehunter.entities.UserGame;
 import com.skilldistillery.lorehunter.entities.UserGameId;
@@ -58,33 +71,6 @@ public class GameServiceImpl implements GameService {
 	    return Collections.emptyList(); // Placeholder implementation
 	}
 	
-	@Override
-	public void storeGameUrl(int userId, int gameId, String gameUrl) {
-	    // Check if the game URL already exists in the database
-	    Game existingGame = gameRepo.findByUrl(gameUrl);
-
-	    if (existingGame != null) {
-	        // If the game URL already exists, update the game ID to the existing game's ID
-	        gameId = existingGame.getId();
-	    } else {
-	        // If the game URL does not exist, create a new Game entity with the provided game URL
-	        Game game = new Game();
-	        game.setUrl(gameUrl);
-
-	        // Persist the Game entity to the database to generate an ID
-	        game = gameRepo.save(game);
-
-	        // Update the game ID to the generated ID
-	        gameId = game.getId();
-	    }
-
-	    // Create and persist the UserGame entity with the updated game ID
-	    UserGame userGame = new UserGame();
-	    userGame.setUser(userRepo.findById(userId).orElse(null));
-	    userGame.setGame(gameRepo.findById(gameId).orElse(null));
-	    userGameRepo.save(userGame);
-	}
-	
     @Override
     public List<Game> getGamesFromExternalApi() {
     	String url = API_BASE_URL + "?" + API_KEY_PARAM + "=" + API_KEY_VALUE;
@@ -98,26 +84,37 @@ public class GameServiceImpl implements GameService {
 
         return gameList;
     }
-    
+
     @Override
-	public void saveGame(JsonNode jsonNode) {
-		Game game = new Game();
-		game.setSlug(jsonNode.get("slug").asText());
-		game.setName(jsonNode.get("name").asText());
-		game.setDescription(jsonNode.get("description").asText());
-		game.setReleased(jsonNode.get("released").asText());
-		game.setBackgroundImage(jsonNode.get("background_image").asText());
-		gameRepo.save(game);
-	}
-    
-	@Override
-	public Game getGame(int gameId) {
-		Game game = null;
-		Optional<Game> gameOpt = gameRepo.findById(gameId);
-		if (gameOpt.isPresent()) {
-			game = gameOpt.get();
-		}
-		return game;
-	}
+    public Game createGame(Game game) {
+        return gameRepo.save(game);
+    }
+
+    @Override
+    public Game getGameById(int gameId) {
+        return gameRepo.findById(gameId)
+                .orElseThrow(() -> new IllegalArgumentException("Game not found"));
+    }
+
+    @Override
+    public Game updateGame(int gameId, Game updatedGame) {
+        Optional<Game> optionalGame = gameRepo.findById(gameId);
+        if (optionalGame.isPresent()) {
+            Game existingGame = optionalGame.get();
+            existingGame.setTitle(updatedGame.getTitle());
+            existingGame.setDescription(updatedGame.getDescription());
+            existingGame.setReleased(updatedGame.getReleased());
+            existingGame.setBackgroundImage(updatedGame.getBackgroundImage());
+            existingGame.setMetacriticScore(updatedGame.getMetacriticScore());
+            return gameRepo.save(existingGame);
+        }
+        throw new IllegalArgumentException("Game not found");
+    }
+
+    @Override
+    public void deleteGame(int gameId) {
+        gameRepo.deleteById(gameId);
+    }
+
 
 }
