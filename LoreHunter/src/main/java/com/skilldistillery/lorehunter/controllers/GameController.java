@@ -12,6 +12,10 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.skilldistillery.lorehunter.entities.Game;
 import com.skilldistillery.lorehunter.entities.User;
@@ -39,8 +44,11 @@ public class GameController {
 	
 	private static final String API_BASE_URL = "https://api.rawg.io/api/games";
 	private static final String API_BASE_SEARCH_URL = "https://api.rawg.io/api/games?search=";
+	private static final String API_BASE_SEARCH_BY_ID_URL = "https://api.rawg.io/api/games/";
 	private static final String API_KEY_PARAM = "key";
 	private static final String API_KEY_VALUE = "a569b5c91c944880a78145c9280ce92c";
+	private static final String API_BASE_URL_MOBY = "https://api.mobygames.com/v1/games";
+	private static final String API_KEY_VALUE_MOBY = "moby_AoFLZFRks2PS5CM2xbvzfrADzJh";
 	
 	@Autowired
 	private GameService gameService;
@@ -100,10 +108,36 @@ public class GameController {
         return response;
     }
     
+//    @GetMapping("games")
+//    public ResponseEntity<Object> getGamesMoby() {
+//    	// Fetch data from external API
+//    	String apiUrl = API_BASE_URL_MOBY + "?api_key=moby_AoFLZFRks2PS5CM2xbvzfrADzJh";
+//    	ResponseEntity<Object> response = restTemplate.getForEntity(apiUrl, Object.class);
+//    	
+//    	// Extract the results array from the API response
+//    	Object responseBody = response.getBody();
+//    	if (responseBody instanceof Map) {
+//    		Map<String, Object> responseMap = (Map<String, Object>) responseBody;
+//    		if (responseMap.containsKey("results")) {
+//    			List<Object> results = (List<Object>) responseMap.get("results");
+//    			
+//    			// Create a custom response object that includes the count field
+//    			Map<String, Object> customResponse = new HashMap<>();
+//    			customResponse.put("results", results);
+//    			
+//    			// Return the custom response object to the frontend
+//    			return ResponseEntity.ok().body(customResponse);
+//    		}
+//    	}
+//    	
+//    	// Return the API response as-is to the frontend
+//    	return response;
+//    }
+    
     @GetMapping("games/search")
     public ResponseEntity<Object> searchGames(@RequestParam("search") String searchQuery) {
       // Fetch data from external API based on search query
-      String apiUrl = API_BASE_URL + "?" + API_KEY_PARAM + "=" + API_KEY_VALUE
+      String apiUrl = API_BASE_URL + "?key=" + API_KEY_VALUE
           + "&search=" + searchQuery;
       ResponseEntity<Object> response = restTemplate.getForEntity(apiUrl, Object.class);
 
@@ -121,42 +155,34 @@ public class GameController {
       return ResponseEntity.ok().body(Collections.emptyList());
     }
     
-    @PostMapping("games")
-    public ResponseEntity<Game> addGame(@RequestBody Game game) {
-      Game savedGame = gameRepo.save(game);
-      return ResponseEntity.ok().body(savedGame);
-    }
-    
-//    @PostMapping("games")
-//    public ResponseEntity<Game> createGame(@RequestParam String apiKey, @RequestParam String url, @RequestParam String slug,
-//            @RequestParam String name, @RequestParam String description, @RequestParam String released,
-//            @RequestParam String backgroundImage) {
-//        // Create a new Game object
-//        Game game = new Game();
-//        game.setApiKey(apiKey);
-//        game.setUrl(url);
-//        game.setSlug(slug);
-//        game.setName(name);
-//        game.setDescription(description);
-//        game.setReleased(released);
-//        game.setBackgroundImage(backgroundImage);
+//    @GetMapping("games/{id}")
+//    public ResponseEntity<Object> getGameDetails(@PathVariable("id") String gameId) {
+//        String apiUrl = API_BASE_URL + "/" + gameId;
+//        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString(apiUrl)
+//                .queryParam("key", API_KEY_VALUE);
+//        
+//        ResponseEntity<Object> response = restTemplate.getForEntity(uriBuilder.toUriString(), Object.class);
+//        Object responseBody = response.getBody();
 //
-//        // Save the game object using your repository or service
-//        game = gameService.createGame(game);
+//        // Print or log the response body to inspect its structure
+//        System.out.println(responseBody);
 //
-//        return ResponseEntity.ok().body(game);
+//        return ResponseEntity.ok().body(responseBody);
 //    }
     
     @GetMapping("games/{id}")
     public ResponseEntity<Object> getGameDetails(@PathVariable("id") String gameId) {
-        // Construct the URL for retrieving game details
-        String apiUrl = API_BASE_URL + "/" + gameId + "?" + API_KEY_PARAM + "=" + API_KEY_VALUE;
+        String apiUrl = "https://api.rawg.io/api/games/" + gameId + "?key=a569b5c91c944880a78145c9280ce92c";
 
-        // Send a GET request to the API to retrieve game details
         ResponseEntity<Object> response = restTemplate.getForEntity(apiUrl, Object.class);
+        Object responseBody = response.getBody();
 
-        // Return the API response as-is to the frontend
-        return response;
+        return ResponseEntity.ok().body(responseBody);
     }
 
+    @PostMapping("games")
+    public ResponseEntity<Game> addGame(@RequestBody Game game) {
+    	Game savedGame = gameRepo.save(game);
+    	return ResponseEntity.ok().body(savedGame);
+    }
 }
