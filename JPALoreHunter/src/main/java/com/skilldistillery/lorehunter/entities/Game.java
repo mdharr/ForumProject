@@ -43,14 +43,14 @@ public class Game {
 	private String backgroundImage;
 	
 	@Column(name = "metacritic_score")
-	private int metacriticScore;
+	private Integer metacriticScore;
 
 	public Game() {
 		super();
 	}
 
 	public Game(int id, LocalDateTime createdAt, List<User> users, String title,
-			String description, String released, String backgroundImage, int metacriticScore) {
+			String description, String released, String backgroundImage, Integer metacriticScore) {
 		super();
 		this.id = id;
 		this.createdAt = createdAt;
@@ -118,11 +118,11 @@ public class Game {
 		this.backgroundImage = backgroundImage;
 	}
 	
-	public int getMetacriticScore() {
+	public Integer getMetacriticScore() {
 		return metacriticScore;
 	}
 	
-	public void setMetacriticScore(int metacriticScore) {
+	public void setMetacriticScore(Integer metacriticScore) {
 		this.metacriticScore = metacriticScore;
 	}
 

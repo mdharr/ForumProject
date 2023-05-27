@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -193,8 +194,8 @@ public class GameController {
 //    }
     
 	@GetMapping("games/library")
-	public ResponseEntity<List<Game>> listAllGames() {
-		return new ResponseEntity<>(gameService.index(), HttpStatus.OK);
+	public List<Game> listAllGames() {
+		return gameService.index();
 	}
 	
 	@PostMapping("games/library")
@@ -213,6 +214,52 @@ public class GameController {
 		}
 		
 		return game;
+	}
+	
+	@PutMapping("games/library/{id}")
+	public ResponseEntity<Game> updateGame(@PathVariable int id, @RequestBody Game game, Principal principal) {
+		Optional<Game> optGame = gameRepo.findById(id);
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String username = authentication.getName();
+	    User authenticatedUser = userService.showByUsername(username);
+		if (optGame.isPresent()) {
+			Game existingGame = optGame.get();
+			
+			// Example of how to check user information from principal
+			if (authenticatedUser == null) {
+				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+			}
+			
+			if (game.getTitle() != null) {
+				existingGame.setTitle(game.getTitle());
+			}
+			
+			if (game.getDescription() != null) {
+				existingGame.setDescription(game.getDescription());
+			}
+			
+			if (game.getReleased() != null) {
+				existingGame.setReleased(game.getReleased());
+			}
+			
+			if (game.getBackgroundImage() != null) {
+				existingGame.setBackgroundImage(game.getBackgroundImage());
+			}
+			
+			if (game.getMetacriticScore() != null) {
+				existingGame.setMetacriticScore(game.getMetacriticScore());
+			}
+			
+			Game updatedGame = gameService.updateGame(id, existingGame);
+			
+			if (updatedGame == null) {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			} else {
+				return new ResponseEntity<>(updatedGame, HttpStatus.OK);
+			}
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 }
