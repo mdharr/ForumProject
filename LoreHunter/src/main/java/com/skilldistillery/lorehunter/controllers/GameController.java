@@ -22,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -261,5 +262,19 @@ public class GameController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	// TODO: Allow only Admin Users to delete a games from the library
+	@DeleteMapping("games/library/{id}")
+	public ResponseEntity<Void> deleteGame(@PathVariable("id") int gameId) {
+	    Optional<Game> optionalGame = gameRepo.findById(gameId);
+	    
+	    if (optionalGame.isPresent()) {
+	        gameService.deleteGame(gameId);
+	        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	    } else {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+	}
+
 	
 }
