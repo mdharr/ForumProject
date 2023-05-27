@@ -170,15 +170,15 @@ public class GameController {
 //        return ResponseEntity.ok().body(responseBody);
 //    }
     
-    @GetMapping("games/{id}")
-    public ResponseEntity<Object> getGameDetails(@PathVariable("id") String gameId) {
-        String apiUrl = "https://api.rawg.io/api/games/" + gameId + "?key=a569b5c91c944880a78145c9280ce92c";
-
-        ResponseEntity<Object> response = restTemplate.getForEntity(apiUrl, Object.class);
-        Object responseBody = response.getBody();
-
-        return ResponseEntity.ok().body(responseBody);
-    }
+//    @GetMapping("games/{id}")
+//    public ResponseEntity<Object> getGameDetails(@PathVariable("id") String gameId) {
+//        String apiUrl = "https://api.rawg.io/api/games/" + gameId + "?key=a569b5c91c944880a78145c9280ce92c";
+//
+//        ResponseEntity<Object> response = restTemplate.getForEntity(apiUrl, Object.class);
+//        Object responseBody = response.getBody();
+//
+//        return ResponseEntity.ok().body(responseBody);
+//    }
 
     @PostMapping("games")
     public ResponseEntity<Game> addGame(@RequestBody Game game) {

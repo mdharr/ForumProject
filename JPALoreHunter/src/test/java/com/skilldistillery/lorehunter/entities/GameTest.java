@@ -43,7 +43,7 @@ class GameTest {
 	@Test
 	void test_Game_entity_mapping() {
 		assertNotNull(game);
-		assertEquals("https://api.rawg.io/api/games/resident-evil-2002?key=a569b5c91c944880a78145c9280ce92c", game.getUrl());
+		assertEquals("Resident Evil (2002)", game.getTitle());
 	}
 
 }

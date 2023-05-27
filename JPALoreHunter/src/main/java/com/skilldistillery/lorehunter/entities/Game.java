@@ -23,12 +23,7 @@ public class Game {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name = "api_key")
-	private String apiKey;
-	
-	private String url;
-	
+
 	@CreationTimestamp
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
@@ -39,31 +34,32 @@ public class Game {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "game_id"))
     private List<User> users;
-	
-	private String slug;
-	private String name;
+
+	private String title;
 	private String description;
 	private String released;
+	
 	@Column(name = "background_image")
 	private String backgroundImage;
+	
+	@Column(name = "metacritic_score")
+	private int metacriticScore;
 
 	public Game() {
 		super();
 	}
 
-	public Game(int id, String apiKey, String url, LocalDateTime createdAt, List<User> users, String slug, String name,
-			String description, String released, String backgroundImage) {
+	public Game(int id, LocalDateTime createdAt, List<User> users, String title,
+			String description, String released, String backgroundImage, int metacriticScore) {
 		super();
 		this.id = id;
-		this.apiKey = apiKey;
-		this.url = url;
 		this.createdAt = createdAt;
 		this.users = users;
-		this.slug = slug;
-		this.name = name;
+		this.title = title;
 		this.description = description;
 		this.released = released;
 		this.backgroundImage = backgroundImage;
+		this.metacriticScore = metacriticScore;
 	}
 
 	public int getId() {
@@ -72,22 +68,6 @@ public class Game {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getApiKey() {
-		return apiKey;
-	}
-
-	public void setApiKey(String apiKey) {
-		this.apiKey = apiKey;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -106,20 +86,12 @@ public class Game {
 		this.users = users;
 	}
 
-	public String getSlug() {
-		return slug;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setSlug(String slug) {
-		this.slug = slug;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getDescription() {
@@ -145,10 +117,18 @@ public class Game {
 	public void setBackgroundImage(String backgroundImage) {
 		this.backgroundImage = backgroundImage;
 	}
+	
+	public int getMetacriticScore() {
+		return metacriticScore;
+	}
+	
+	public void setMetacriticScore(int metacriticScore) {
+		this.metacriticScore = metacriticScore;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(apiKey, createdAt, id, url);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -160,15 +140,30 @@ public class Game {
 		if (getClass() != obj.getClass())
 			return false;
 		Game other = (Game) obj;
-		return Objects.equals(apiKey, other.apiKey) && Objects.equals(createdAt, other.createdAt) && id == other.id
-				&& Objects.equals(url, other.url);
+		return id == other.id;
 	}
 
 	@Override
 	public String toString() {
-		return "Game [id=" + id + ", apiKey=" + apiKey + ", url=" + url + ", createdAt=" + createdAt + ", users="
-				+ users + ", slug=" + slug + ", name=" + name + ", description=" + description + ", released="
-				+ released + ", backgroundImage=" + backgroundImage + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Game [id=");
+		builder.append(id);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", users=");
+		builder.append(users);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append(", released=");
+		builder.append(released);
+		builder.append(", backgroundImage=");
+		builder.append(backgroundImage);
+		builder.append(", metacriticScore=");
+		builder.append(metacriticScore);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

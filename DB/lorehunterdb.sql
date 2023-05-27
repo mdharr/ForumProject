@@ -162,7 +162,8 @@ CREATE TABLE IF NOT EXISTS `game` (
   `released` VARCHAR(45) NULL,
   `background_image` VARCHAR(1000) NULL,
   `metacritic_score` INT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `title_UNIQUE` (`title` ASC))
 ENGINE = InnoDB;
 
 
