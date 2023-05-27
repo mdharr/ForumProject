@@ -1,5 +1,6 @@
 package com.skilldistillery.lorehunter.services;
 
+import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,19 @@ import com.skilldistillery.lorehunter.entities.User;
 import com.skilldistillery.lorehunter.entities.UserGame;
 import com.skilldistillery.lorehunter.entities.UserGameId;
 import com.skilldistillery.lorehunter.repositories.UserGameRepository;
+import com.skilldistillery.lorehunter.repositories.UserRepository;
 
 @Service
 public class UserGameServiceImpl implements UserGameService {
 	
 	@Autowired
 	private UserGameRepository userGameRepo;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override
 	public void addUserGame(User user, Game game) {
@@ -36,10 +44,25 @@ public class UserGameServiceImpl implements UserGameService {
 		
 	}
 
-    @Override
-    public UserGame createUserGame(UserGame userGame) {
-        return userGameRepo.save(userGame);
-    }
+	@Override
+	public UserGame createUserGame(UserGame userGame, Principal principal) {
+	    // Get the authenticated user's username (which can be used as the userId)
+	    String username = principal.getName();
+	    User user = userRepo.findByUsername(username);
+	    if (user != null) {
+	    	int userId = user.getId();
+	    	// Set the userId in the UserGameId object
+	    	UserGameId userGameId = new UserGameId();
+	    	userGameId.setUserId(userId);
+	    	userGame.setId(userGameId);
+	    	
+	    	return userGameRepo.save(userGame);
+	    }
+	    
+	    return null;
+	  
+	}
+
 
     @Override
     public UserGame getUserGameById(int userId, int gameId) {

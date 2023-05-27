@@ -35,7 +35,7 @@ public class UserGameController {
 	@Autowired
 	private UserService userService;
 	
-    @PostMapping("user/{uid}/usergames")
+    @PostMapping("users/{uid}/usergames")
     public ResponseEntity<UserGame> createUserGame(@RequestBody UserGame userGame) {
         UserGame newUserGame = userGameService.createUserGame(userGame);
         if (newUserGame != null) {
@@ -44,8 +44,8 @@ public class UserGameController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping("user/{uid}/usergames/{gid}")
-    public ResponseEntity<UserGame> getUserGameById(@PathVariable int userId, @PathVariable int gameId) {
+    @GetMapping("users/{uid}/usergames/{gid}")
+    public ResponseEntity<UserGame> getUserGameById(@PathVariable("uid") int userId, @PathVariable("gid") int gameId) {
         UserGame userGame = userGameService.getUserGameById(userId, gameId);
         if (userGame != null) {
             return new ResponseEntity<>(userGame, HttpStatus.OK);
@@ -53,8 +53,8 @@ public class UserGameController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
-    @GetMapping("user/{uid}/usergames")
-    public ResponseEntity<List<UserGame>> indexUserGames(@PathVariable int userId) {
+    @GetMapping("users/{uid}/usergames")
+    public ResponseEntity<List<UserGame>> indexUserGames(@PathVariable("uid") int userId) {
     	User user = userService.show(userId);
     	if (user != null) {
     		return new ResponseEntity<>(userGameRepo.findByUserId(userId), HttpStatus.OK);
@@ -63,8 +63,8 @@ public class UserGameController {
     	}
     }
 
-    @PutMapping("user/{uid}/usergames/{gid}")
-    public ResponseEntity<UserGame> updateUserGame(@PathVariable int userId, @PathVariable int gameId, @RequestBody UserGame userGame) {
+    @PutMapping("users/{uid}/usergames/{gid}")
+    public ResponseEntity<UserGame> updateUserGame(@PathVariable("uid") int userId, @PathVariable("gid") int gameId, @RequestBody UserGame userGame) {
         UserGame updatedUserGame = userGameService.updateUserGame(userId, gameId, userGame);
         if (updatedUserGame != null) {
             return new ResponseEntity<>(updatedUserGame, HttpStatus.OK);
@@ -72,8 +72,8 @@ public class UserGameController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("user/{uid}/usergames/{gid}")
-    public ResponseEntity<Void> deleteUserGame(@PathVariable int userId, @PathVariable int gameId) {
+    @DeleteMapping("users/{uid}/usergames/{gid}")
+    public ResponseEntity<Void> deleteUserGame(@PathVariable("uid") int userId, @PathVariable("gid") int gameId) {
         userGameService.deleteUserGame(userId, gameId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
