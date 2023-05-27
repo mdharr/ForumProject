@@ -26,6 +26,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.skilldistillery.lorehunter.entities.Category;
+import com.skilldistillery.lorehunter.entities.Comment;
 import com.skilldistillery.lorehunter.entities.Game;
 import com.skilldistillery.lorehunter.entities.Post;
 import com.skilldistillery.lorehunter.entities.Ticket;
@@ -91,8 +92,12 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public Game createGame(Game game) {
-        return gameRepo.save(game);
+    public Game createGame(String username, Game game) {
+    	User user = userRepo.findByUsername(username);
+    	if (user != null) {
+    		return gameRepo.saveAndFlush(game);
+    	}
+        return null;
     }
 
     @Override

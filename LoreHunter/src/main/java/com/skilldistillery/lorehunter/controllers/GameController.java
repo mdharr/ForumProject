@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.skilldistillery.lorehunter.entities.Comment;
 import com.skilldistillery.lorehunter.entities.Game;
 import com.skilldistillery.lorehunter.entities.Ticket;
 import com.skilldistillery.lorehunter.entities.User;
@@ -184,14 +186,33 @@ public class GameController {
 //        return ResponseEntity.ok().body(responseBody);
 //    }
 
-    @PostMapping("games")
-    public ResponseEntity<Game> addGame(@RequestBody Game game) {
-    	Game savedGame = gameRepo.save(game);
-    	return ResponseEntity.ok().body(savedGame);
-    }
+//    @PostMapping("games")
+//    public ResponseEntity<Game> addGame(@RequestBody Game game) {
+//    	Game savedGame = gameRepo.save(game);
+//    	return ResponseEntity.ok().body(savedGame);
+//    }
     
 	@GetMapping("games/library")
 	public ResponseEntity<List<Game>> listAllGames() {
 		return new ResponseEntity<>(gameService.index(), HttpStatus.OK);
 	}
+	
+	@PostMapping("games/library")
+	public Game addGame(Principal principal, HttpServletRequest req, HttpServletResponse res, @RequestBody Game game) {
+		
+		try {
+			gameService.createGame(principal.getName(), game);
+			res.setStatus(201);
+			StringBuffer url = req.getRequestURL();
+			url.append("/").append(game.getId());
+			res.setHeader("Location", url.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			game = null;
+		}
+		
+		return game;
+	}
+	
 }
