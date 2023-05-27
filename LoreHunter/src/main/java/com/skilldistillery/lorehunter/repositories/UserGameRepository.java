@@ -1,5 +1,6 @@
 package com.skilldistillery.lorehunter.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,6 +22,9 @@ public interface UserGameRepository extends JpaRepository<UserGame, Integer> {
 	
     @Query("SELECT ug FROM UserGame ug WHERE ug.id.userId = :userId AND ug.id.gameId = :gameId")
     UserGame findByUserIdAndGameId(@Param("userId") int userId, @Param("gameId") int gameId);
+    
+    @Query("SELECT ug FROM UserGame ug WHERE ug.id.userId = :userId")
+    List<UserGame> findByUserId(@Param("userId") int userId);
     
     @Modifying
     @Query("DELETE FROM UserGame ug WHERE ug.id.userId = :userId AND ug.id.gameId = :gameId")
