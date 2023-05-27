@@ -46,22 +46,23 @@ public class UserGameServiceImpl implements UserGameService {
 
 	@Override
 	public UserGame createUserGame(UserGame userGame, Principal principal) {
-	    // Get the authenticated user's username (which can be used as the userId)
 	    String username = principal.getName();
 	    User user = userRepo.findByUsername(username);
 	    if (user != null) {
-	    	int userId = user.getId();
-	    	// Set the userId in the UserGameId object
-	    	UserGameId userGameId = new UserGameId();
-	    	userGameId.setUserId(userId);
-	    	userGame.setId(userGameId);
-	    	
-	    	return userGameRepo.save(userGame);
+	        int userId = user.getId();
+	        UserGameId userGameId = new UserGameId();
+	        userGameId.setUserId(userId);
+	        userGame.setId(userGameId);
+	        
+	        // Set the user object in the userGame
+	        userGame.setUser(user);
+	        
+	        return userGameRepo.save(userGame);
 	    }
 	    
 	    return null;
-	  
 	}
+
 
 
     @Override

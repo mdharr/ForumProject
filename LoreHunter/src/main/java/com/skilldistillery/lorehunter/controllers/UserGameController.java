@@ -1,5 +1,6 @@
 package com.skilldistillery.lorehunter.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +36,15 @@ public class UserGameController {
 	@Autowired
 	private UserService userService;
 	
-    @PostMapping("users/{uid}/usergames")
-    public ResponseEntity<UserGame> createUserGame(@RequestBody UserGame userGame) {
-        UserGame newUserGame = userGameService.createUserGame(userGame);
-        if (newUserGame != null) {
-            return new ResponseEntity<>(newUserGame, HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
+	@PostMapping("users/{uid}/usergames")
+	public ResponseEntity<UserGame> createUserGame(@RequestBody UserGame userGame, Principal principal) {
+	    UserGame newUserGame = userGameService.createUserGame(userGame, principal);
+	    if (newUserGame != null) {
+	        return new ResponseEntity<>(newUserGame, HttpStatus.CREATED);
+	    }
+	    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+
 
     @GetMapping("users/{uid}/usergames/{gid}")
     public ResponseEntity<UserGame> getUserGameById(@PathVariable("uid") int userId, @PathVariable("gid") int gameId) {
