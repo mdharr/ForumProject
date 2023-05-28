@@ -70,6 +70,7 @@ import { UserTicketMessagesComponent } from './components/user-ticket-messages/u
 import { UserFollowersComponent } from './components/user-followers/user-followers.component';
 import { UserFollowingComponent } from './components/user-following/user-following.component';
 import { GamesLibraryComponent } from './components/games-library/games-library.component';
+import { UserGamesComponent } from './components/user-games/user-games.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { GamesLibraryComponent } from './components/games-library/games-library.
     TimeAgoPipe,
     UserFollowersComponent,
     UserFollowingComponent,
-    GamesLibraryComponent
+    GamesLibraryComponent,
+    UserGamesComponent
   ],
   imports: [
     CommonModule,
