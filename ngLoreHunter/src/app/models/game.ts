@@ -14,7 +14,7 @@ export class Game {
     description: string = "",
     released: string = "",
     backgroundImage: string = "",
-    metacriticScore: number
+    metacriticScore: number = 0
   ) {
     this.id = id;
     this.createdAt = createdAt;

@@ -1,1 +1,6 @@
-<p>games-library works!</p>
+<div *ngIf="(games$ | async) as games">
+  <!-- Display the games here -->
+  <div *ngFor="let game of games">
+    {{ game.title }}
+  </div>
+</div>

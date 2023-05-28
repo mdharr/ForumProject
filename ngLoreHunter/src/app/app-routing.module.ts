@@ -28,6 +28,7 @@ import { UserTicketsComponent } from './shared/components/user-tickets/user-tick
 import { UserTicketMessagesComponent } from './shared/components/user-ticket-messages/user-ticket-messages.component';
 import { UserFollowersComponent } from './shared/components/user-followers/user-followers.component';
 import { UserFollowingComponent } from './shared/components/user-following/user-following.component';
+import { GamesLibraryComponent } from './shared/components/games-library/games-library.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'games', component: GamesComponent },
+  { path: 'games/library', component: GamesLibraryComponent },
   { path: 'user', component: UserComponent },
   { path: 'users/:userId', component: ProfileComponent },
   { path: 'users/:userId/posts', component: UserPostsComponent },
