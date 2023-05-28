@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { finalize, map, Observable } from 'rxjs';
+import { catchError, finalize, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Game } from '../models/game';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,19 @@ export class GameService {
       .pipe(
         finalize(() => console.log('API call completed')) // Optional: Perform any finalization logic here
       );
+  }
+
+  fetchGames(): Observable<Game[]> {
+    return this.http.get<Game[]>(this.url + '/games/library').pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(
+              'GameService.fetchGames(): error retrieving list of all games from app library: ' + err
+            )
+        );
+      })
+    );
   }
 }
