@@ -13,20 +13,45 @@
   flex-direction: column;
 }
 
-.star-rating {
-  font-size: 20px;
-  color: #ffd700; /* Default star color */
+.rating {
+  border: none;
+  float: left;
 }
 
-.star-rating .star {
+.rating > input {
+  display: none;
+}
+
+.rating > label:before {
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  background-position: 0 -20px; /* Default star icon (empty star) */
-  transition: background-position 0.2s;
+  content: "\f005";
 }
 
-.star-rating .star.full {
-  background-position: 0 0; /* Filled star icon */
+.rating > .half:before {
+  content: "\f089";
+  position: absolute;
 }
+
+.rating > label {
+  color: #ddd;
+  float: right;
+}
+
+.rating > input:checked ~ label,
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #FFD700;
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label,
+.rating > input:checked ~ label:hover ~ label {
+  color: #FFED85;
+}
+
+
 

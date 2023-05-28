@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
-import { GameRating, UserGame } from 'src/app/models/user-game';
+import { GameCategory, GameRating, UserGame } from 'src/app/models/user-game';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserGameService } from 'src/app/services/user-game.service';
 
@@ -20,6 +20,8 @@ export class UserGamesComponent implements OnInit {
   loggedInUser: User = new User();
   userGamesPlayed$!: Observable<UserGame[]>;
   userGamesPlaying$!: Observable<UserGame[]>;
+  categories: GameCategory[] = [];
+  ratings: GameRating[] = [];
 
   constructor(
     private userGameService: UserGameService,
@@ -31,6 +33,8 @@ export class UserGamesComponent implements OnInit {
     console.log("user id in user games component" + this.userId);
 
     this.fetchUserGames(this.userId);
+    this.categories = Object.values(GameCategory);
+    this.ratings = Object.values(GameRating);
 
     this.authService.getCurrentLoggedInUser().subscribe((user: User) => {
       this.loggedInUser = user;
@@ -71,24 +75,5 @@ export class UserGamesComponent implements OnInit {
       map((userGames: UserGame[]) => userGames.filter((userGame: UserGame) => userGame.category === category))
     );
   }
-
-  generateStarArray(rating: GameRating): number[] {
-    const ratingValue = Number(rating); // Convert string rating to number
-    const fullStars = Math.floor(ratingValue);
-    const hasHalfStar = ratingValue % 1 !== 0;
-
-    const starArray: number[] = [];
-
-    for (let i = 0; i < fullStars; i++) {
-      starArray.push(1); // Full star
-    }
-
-    if (hasHalfStar) {
-      starArray.push(0.5); // Half star
-    }
-
-    return starArray;
-  }
-
 
 }
