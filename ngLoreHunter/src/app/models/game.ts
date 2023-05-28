@@ -1,21 +1,27 @@
 export class Game {
-  slug: string;
-  name: string;
+  id: number;
+  createdAt: string;
+  title: string;
   description: string;
   released: string;
   backgroundImage: string;
+  metacriticScore: number;
 
   constructor(
-    slug: string = "",
-    name: string = "",
+    id: number = 0,
+    createdAt: string = "",
+    title: string = "",
     description: string = "",
     released: string = "",
-    backgroundImage: string = ""
+    backgroundImage: string = "",
+    metacriticScore: number
   ) {
-    this.slug = slug;
-    this.name = name;
+    this.id = id;
+    this.createdAt = createdAt;
+    this.title = title;
     this.description = description;
     this.released = released;
     this.backgroundImage = backgroundImage;
+    this.metacriticScore = metacriticScore;
   }
 }

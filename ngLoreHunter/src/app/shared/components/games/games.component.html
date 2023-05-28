@@ -50,9 +50,8 @@
               <h3 class="item-card-title">{{ game.name }}</h3>
               <p class="item-card-description">Released: {{ game.released }}</p>
               <div title="Metascore" class="metascore-label metascore-label_green">
-                {{ game.metacritic }}
+                {{ game.metacritic !== null ? game.metacritic : "tbd" }}
               </div>
-              <!-- <p class="item-card-description">Metacritic: {{ game.metacritic }}</p> -->
               <p class="item-card-description">Playtime: {{ game.playtime }} hours</p>
               <div class="item-card-footer">
 
@@ -93,14 +92,13 @@
                   </div>
                 </ng-container>
               </div>
-              <div title="Metascore" class="metascore-label metascore-label_green metascore-container">
-                {{ game.metacritic }}
+              <div title="Metascore" class="metascore-label metascore-label_green">
+                {{ game.metacritic !== null ? game.metacritic : "tbd" }}
               </div>
             </div>
             <h3 class="item-card-title">{{ game.name }}</h3>
             <p class="item-card-description">Released: {{ game.released }}</p>
 
-            <!-- <p class="item-card-description">Metacritic: {{ game.metacritic }}</p> -->
             <p class="item-card-description">Playtime: {{ game.playtime }} hours</p>
 
           </div>
