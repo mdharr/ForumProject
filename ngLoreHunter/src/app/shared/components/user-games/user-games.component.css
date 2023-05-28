@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.played-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.playing-body {
+  display: flex;
+  flex-direction: column;
+}

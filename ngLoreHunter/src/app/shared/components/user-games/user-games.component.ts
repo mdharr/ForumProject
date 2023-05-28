@@ -1,3 +1,4 @@
+import { LoginComponent } from './../login/login.component';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, Observable, of } from 'rxjs';
@@ -57,7 +58,11 @@ export class UserGamesComponent implements OnInit {
   fetchUserGames(userId: number) {
     this.userGameService.fetchUserGames(userId).subscribe((userGames: UserGame[]) => {
       this.userGamesPlayed$ = this.filterByCategory(userGames, 'PLAYED');
+      console.log(this.userGamesPlayed$);
+
       this.userGamesPlaying$ = this.filterByCategory(userGames, 'PLAYING');
+      console.log(this.userGamesPlaying$);
+
     });
   }
 

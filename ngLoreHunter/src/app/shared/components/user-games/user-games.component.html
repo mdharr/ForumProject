@@ -1,13 +1,24 @@
-<div *ngIf="(userGamesPlayed$ | async) as userGames">
-  <!-- Display the games here -->
-  <div *ngFor="let userGame of userGames">
-    {{ userGame.game.title }}
+<div class="wrapper">
+  <div class="played-body">
+    <div>
+      <h1>Played:</h1>
+    </div>
+    <ng-container *ngFor="let userGame of userGamesPlayed$ | async">
+      <div>
+        {{ userGame.game.title }}
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="playing-body">
+    <div>
+      <h1>Playing:</h1>
+    </div>
+    <ng-container *ngFor="let userGame of userGamesPlaying$ | async">
+      <div>
+        {{ userGame.game.title }}
+      </div>
+    </ng-container>
   </div>
 </div>
 
-<div *ngIf="(userGamesPlaying$ | async) as userGames">
-  <!-- Display the games here -->
-  <div *ngFor="let userGame of userGames">
-    {{ userGame.game.title }}
-  </div>
-</div>
