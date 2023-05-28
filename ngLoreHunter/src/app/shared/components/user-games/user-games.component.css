@@ -25,13 +25,12 @@
 .rating > label:before {
   margin: 5px;
   font-size: 1.25em;
-  font-family: FontAwesome;
   display: inline-block;
-  content: "\f005";
+  content: "\2605"; /* Unicode character for a star */
 }
 
 .rating > .half:before {
-  content: "\f089";
+  content: "\2605";
   position: absolute;
 }
 
@@ -52,6 +51,3 @@
 .rating > input:checked ~ label:hover ~ label {
   color: #FFED85;
 }
-
-
-
