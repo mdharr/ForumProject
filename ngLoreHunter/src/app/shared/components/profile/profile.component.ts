@@ -74,6 +74,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   newComment: Comment = new Comment();
   loggedInUser: User = new User();
   profileUser: User = new User();
+  profileUserId: number = 0;
 
   followers: UserFollower[] = [];
   following: UserFollower[] = [];
@@ -193,9 +194,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
         },
       });
 
-      if (this.profileUserSubscription) {
-        this.profileUserSubscription.unsubscribe();
-      }
+      // if (this.profileUserSubscription) {
+      //   this.profileUserSubscription.unsubscribe();
+      // }
 
       setTimeout(() => {
         this.isComponentLoaded = true;

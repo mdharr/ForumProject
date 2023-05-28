@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { filter, map, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { UserGame } from 'src/app/models/user-game';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,10 +13,12 @@ import { UserGameService } from 'src/app/services/user-game.service';
 })
 export class UserGamesComponent implements OnInit {
 
-  userId: number = 0;
+  @Input() userId: number = 0;
+
   profileUser: User = new User();
   loggedInUser: User = new User();
-  userGames$!: Observable<UserGame[]>;
+  userGamesPlayed$!: Observable<UserGame[]>;
+  userGamesPlaying$!: Observable<UserGame[]>;
 
   constructor(
     private userGameService: UserGameService,
@@ -25,12 +27,9 @@ export class UserGamesComponent implements OnInit {
     private activatedRoute: ActivatedRoute,) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      this.userId = params['userId'];
-      console.log(this.userId);
+    console.log("user id in user games component" + this.userId);
 
-      this.reload();
-    });
+    this.fetchUserGames(this.userId);
 
     this.authService.getCurrentLoggedInUser().subscribe((user: User) => {
       this.loggedInUser = user;
@@ -49,11 +48,23 @@ export class UserGamesComponent implements OnInit {
         console.log(error);
       },
     });
-    this.userGames$ = this.userGameService.fetchUserGames(this.userId);
   }
 
   reload() {
 
+  }
+
+  fetchUserGames(userId: number) {
+    this.userGameService.fetchUserGames(userId).subscribe((userGames: UserGame[]) => {
+      this.userGamesPlayed$ = this.filterByCategory(userGames, 'PLAYED');
+      this.userGamesPlaying$ = this.filterByCategory(userGames, 'PLAYING');
+    });
+  }
+
+  filterByCategory(userGames: UserGame[], category: string): Observable<UserGame[]> {
+    return of(userGames).pipe(
+      map((userGames: UserGame[]) => userGames.filter((userGame: UserGame) => userGame.category === category))
+    );
   }
 
 }
