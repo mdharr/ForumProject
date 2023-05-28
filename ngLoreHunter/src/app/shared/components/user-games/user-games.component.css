@@ -12,3 +12,21 @@
   display: flex;
   flex-direction: column;
 }
+
+.star-rating {
+  font-size: 20px;
+  color: #ffd700; /* Default star color */
+}
+
+.star-rating .star {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-position: 0 -20px; /* Default star icon (empty star) */
+  transition: background-position 0.2s;
+}
+
+.star-rating .star.full {
+  background-position: 0 0; /* Filled star icon */
+}
+
