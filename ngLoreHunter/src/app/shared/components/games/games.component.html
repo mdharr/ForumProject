@@ -47,16 +47,40 @@
               <img class="game-image" [style.background-image]="'url(' + game.background_image + ')'" [style.background-position]="'center'" loading="lazy">
             </div>
             <div class="item-card-details">
+              <div class="item-card-footer">
+                <div class="platform-wrapper">
+                  <ng-container *ngFor="let platform of game.parent_platforms" class="platform-body">
+                    <div title="Playstation" *ngIf="platform.platform.slug === 'playstation'">
+                      <img  class="platform-icon" src="https://cdn.iconscout.com/icon/free/png-512/free-playstation-3521641-2945085.png" alt="">
+                    </div>
+                    <div title="Xbox" *ngIf="platform.platform.slug === 'xbox'">
+                      <img  class="platform-icon" src="https://cdn.iconscout.com/icon/free/png-512/free-xbox-49-722654.png" alt="">
+                    </div>
+                    <div title="Nintendo" *ngIf="platform.platform.slug === 'nintendo'">
+                      <img  class="platform-icon" src="https://cdn.iconscout.com/icon/free/png-512/free-nintendo-3521606-2945050.png" alt="">
+                    </div>
+                    <div title="Sega" *ngIf="platform.platform.slug === 'sega'">
+                      <img  class="platform-icon" src="https://cdn.iconscout.com/icon/free/png-512/free-sega-3521696-2945140.png" alt="">
+                    </div>
+                    <div title="Apple" *ngIf="platform.platform.slug === 'apple'">
+                      <img  class="platform-icon" src="https://cdn.iconscout.com/icon/free/png-512/free-logo-1889536-1597596.png" alt="">
+                    </div>
+                    <div title="Android" *ngIf="platform.platform.slug === 'android'">
+                      <img  class="platform-icon" src="https://cdn.iconscout.com/icon/free/png-512/free-android-247-1175275.png" alt="">
+                    </div>
+                  </ng-container>
+                </div>
+                <div title="Metascore" class="metascore-label metascore-label_green">
+                  {{ game.metacritic !== null ? game.metacritic : "tbd" }}
+                </div>
+              </div>
               <h3 class="item-card-title">{{ game.name }}</h3>
               <p class="item-card-description">Released: {{ game.released }}</p>
-              <div title="Metascore" class="metascore-label metascore-label_green">
-                {{ game.metacritic !== null ? game.metacritic : "tbd" }}
-              </div>
-              <p class="item-card-description">Playtime: {{ game.playtime }} hours</p>
-              <div class="item-card-footer">
 
-              </div>
+              <p class="item-card-description">Playtime: {{ game.playtime }} hours</p>
+
             </div>
+
           </div>
 
         </div>
