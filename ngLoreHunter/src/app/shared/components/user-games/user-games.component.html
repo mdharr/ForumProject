@@ -27,3 +27,33 @@
     </ng-container>
   </div>
 </div>
+
+<div class="p-body">
+  <div>
+    <h1>Played:</h1>
+  </div>
+  <div class="row item-grid2">
+    <div class="card item-card" *ngFor="let userGame of userGamesPlayed$ | async">
+      <div class="item-card-image">
+        <img class="game-image" [style.background-image]="'url(' + userGame.game.backgroundImage + ')'" [style.background-position]="'center top'" loading="lazy">
+      </div>
+      <div class="item-card-details">
+        <div class="item-card-footer">
+          <div title="Metascore" class="metascore-label metascore-label_green">
+              <div>
+                <div class="star-rating">
+                  <span *ngFor="let star of generateStarArray(userGame.rating)" class="star" [class.full]="star === 'full'" [class.half]="star === 'half'" [innerHTML]="getStarSymbol(star)"></span>
+                </div>
+              </div>
+          </div>
+        </div>
+        <h3 class="item-card-title">{{ userGame.game.title }}</h3>
+        <p class="item-card-description">Released: {{ userGame.game.description }}</p>
+
+        <!-- <p class="item-card-description">Playtime: {{ userGame.playtime }} hours</p> -->
+
+      </div>
+    </div>
+
+  </div>
+</div>
