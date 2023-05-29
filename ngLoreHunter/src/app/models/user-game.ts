@@ -28,16 +28,16 @@ export enum GameCategory {
 }
 
 export enum GameRating {
-  ZERO = '0',
-  HALF = '0.5',
-  ONE = '1',
-  ONE_AND_A_HALF = '1.5',
-  TWO = '2',
-  TWO_AND_A_HALF = '2.5',
-  THREE = '3',
-  THREE_AND_A_HALF = '3.5',
-  FOUR = '4',
-  FOUR_AND_A_HALF = '4.5',
-  FIVE = '5'
+  ZERO = 'ZERO',
+  HALF = 'HALF',
+  ONE = 'ONE',
+  ONE_AND_A_HALF = 'ONE_AND_A_HALF',
+  TWO = 'TWO',
+  TWO_AND_A_HALF = 'TWO_AND_A_HALF',
+  THREE = 'THREE',
+  THREE_AND_A_HALF = 'THREE_AND_A_HALF',
+  FOUR = 'FOUR',
+  FOUR_AND_A_HALF = 'FOUR_AND_A_HALF',
+  FIVE = 'FIVE'
 }
 

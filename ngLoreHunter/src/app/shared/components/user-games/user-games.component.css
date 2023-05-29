@@ -1,6 +1,7 @@
 .wrapper {
   display: flex;
   justify-content: space-between;
+  color: var(--text-color);
 }
 
 .played-body {
@@ -13,41 +14,36 @@
   flex-direction: column;
 }
 
-.rating {
-  border: none;
-  float: left;
+.star-rating .star.full {
+  font-size: 20px;
+  color: #ffd700; /* Default star color */
 }
 
-.rating > input {
-  display: none;
+.star-rating .star.half {
+  font-size: 20px;
+  color: #ffd700; /* Default star color */
 }
 
-.rating > label:before {
-  margin: 5px;
-  font-size: 1.25em;
+.star-rating .star {
   display: inline-block;
-  content: "\2605"; /* Unicode character for a star */
 }
 
-.rating > .half:before {
-  content: "\2605";
-  position: absolute;
+.star-rating .star.full {
+  background-position: 0 0; /* Filled star icon */
 }
 
-.rating > label {
-  color: #ddd;
-  float: right;
+.star-rating .star.half {
+  background-position: 0 -20px; /* Half-filled star icon */
 }
 
-.rating > input:checked ~ label,
-.rating:not(:checked) > label:hover,
-.rating:not(:checked) > label:hover ~ label {
-  color: #FFD700;
+.star-rating .star.grey_full {
+  color: grey; /* Grey star color */
 }
 
-.rating > input:checked + label:hover,
-.rating > input:checked ~ label:hover,
-.rating > label:hover ~ input:checked ~ label,
-.rating > input:checked ~ label:hover ~ label {
-  color: #FFED85;
+.star-rating .star.grey_half {
+  color: grey; /* Grey star color */
 }
+
+
+
+

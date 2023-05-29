@@ -76,4 +76,48 @@ export class UserGamesComponent implements OnInit {
     );
   }
 
+  generateStarArray(rating: GameRating): string[] {
+    const starArray: string[] = [];
+
+    if (rating === GameRating.ZERO) {
+      starArray.push('grey_full', 'grey_full', 'grey_full', 'grey_full', 'grey_full');
+    } else if (rating === GameRating.HALF) {
+      starArray.push('half', 'grey_full', 'grey_full', 'grey_full', 'grey_full');
+    } else if (rating === GameRating.ONE) {
+      starArray.push('full', 'grey_full', 'grey_full', 'grey_full', 'grey_full');
+    } else if (rating === GameRating.ONE_AND_A_HALF) {
+      starArray.push('full', 'half', 'grey_full', 'grey_full', 'grey_full');
+    } else if (rating === GameRating.TWO) {
+      starArray.push('full', 'full', 'grey_full', 'grey_full', 'grey_full');
+    } else if (rating === GameRating.TWO_AND_A_HALF) {
+      starArray.push('full', 'full', 'half', 'grey_full', 'grey_full');
+    } else if (rating === GameRating.THREE) {
+      starArray.push('full', 'full', 'full', 'grey_full', 'grey_full');
+    } else if (rating === GameRating.THREE_AND_A_HALF) {
+      starArray.push('full', 'full', 'full', 'half', 'grey_full');
+    } else if (rating === GameRating.FOUR) {
+      starArray.push('full', 'full', 'full', 'full', 'grey_full');
+    } else if (rating === GameRating.FOUR_AND_A_HALF) {
+      starArray.push('full', 'full', 'full', 'full', 'half');
+    } else if (rating === GameRating.FIVE) {
+      starArray.push('full', 'full', 'full', 'full', 'full');
+    }
+
+    return starArray;
+  }
+
+  getStarSymbol(star: string): string {
+    if (star === 'full') {
+      return '&#9733;'; // Full star Unicode character
+    } else if (star === 'half') {
+      return '&#189;'; // Half star Unicode character
+    } else if (star === 'grey_full') {
+      return '&#9733;'
+    } else if (star === 'grey_half') {
+      return '&#189;'
+    } else {
+      return ''; // Empty string for any other value (no star)
+    }
+  }
+
 }
