@@ -141,12 +141,32 @@ p {
   -moz-transition: all .0.1s linear;
   -webkit-transition: all .0.1s linear;
   transition: all 0.1s linear;
+  color: lightgray;
 }
 
 .down {
   -moz-transform:rotate(-180deg);
   -webkit-transform:rotate(-180deg);
   transform:rotate(-180deg);
+  color: #fff;
+}
+
+.highlight {
+  color: #fff;
+}
+
+.rotate-hamburger {
+  -moz-transition: all .0.4s linear;
+  -webkit-transition: all .0.4s linear;
+  transition: all 0.4s ease-in-out;
+  color: lightgray;
+}
+
+.right {
+  -moz-transform:rotate(360deg);
+  -webkit-transform:rotate(360deg);
+  transform:rotate(360deg);
+  color: #fff;
 }
 
 /* mat-toolbar .animated-ui:before {

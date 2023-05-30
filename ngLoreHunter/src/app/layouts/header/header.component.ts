@@ -37,6 +37,8 @@ export class HeaderComponent implements OnInit {
 
   isRotated1: boolean = false;
 
+  isRotated2: boolean = false;
+
   quickJumpText: string = 'Quick Jump';
 
   private categoriesSubscription: Subscription | undefined;
@@ -134,7 +136,11 @@ export class HeaderComponent implements OnInit {
     setTimeout(() => {
       this.displayProgressBar = false;
     }, 1130);
-
+    if (!this.isRotated2) {
+      this.rotateHamburgerRight();
+    } else {
+      this.resetHamburgerRotationState();
+    }
   }
 
   public isCollapsed = false;
@@ -197,6 +203,17 @@ export class HeaderComponent implements OnInit {
     console.log('reset rotation state function called');
 
     this.isRotated1 = false;
+  }
+
+  rotateHamburgerRight() {
+    this.isRotated2 = !this.isRotated2;
+
+  }
+
+  resetHamburgerRotationState() {
+    console.log('reset hamburger rotation state function called');
+
+    this.isRotated2 = false;
   }
 
   menuOpen(){

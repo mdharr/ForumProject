@@ -1,12 +1,12 @@
 <mat-toolbar color="primary" role="heading" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
      <button mat-icon-button (click)="clickMenu()">
-      <mat-icon>menu</mat-icon>
+      <mat-icon class="rotate-hamburger" [ngClass]="{right: isRotated2}">menu</mat-icon>
      </button>
      <button mat-button [routerLink]="['/home']">
        <span class="logo animated-ui">Lore Hunters</span>
        <!-- <img class="logo animated-ui" src="https://media.discordapp.net/attachments/1080302897599877181/1101412533266563097/mmexport1682667423735.png?width=2160&height=624" alt=""> -->
      </button>
-     <button mat-button [matMenuTriggerFor]="afterMenu" id="quick-jump-btn" (menuOpened)="menuOpen()" (click)="rotateChevronTop()"><span class="quickJump-text" style="vertical-align: middle;">{{ quickJumpText }}</span><span><mat-icon class="rotate" style="vertical-align: middle;" [ngClass]="{down: isRotated1}">arrow_drop_down</mat-icon></span></button>
+     <button mat-button [matMenuTriggerFor]="afterMenu" id="quick-jump-btn" (menuOpened)="menuOpen()" (click)="rotateChevronTop()"><span class="rotate" style="vertical-align: middle;" [ngClass]="{highlight: isRotated1}">{{ quickJumpText }}</span><span><mat-icon class="rotate" style="vertical-align: middle;" [ngClass]="{down: isRotated1}">arrow_drop_down</mat-icon></span></button>
      <mat-menu #afterMenu="matMenu" xPosition="after" class="toolbar-menu" (closed)="resetRotationState()">
       <div class="menu-categories" *ngFor="let category of categories; let i = index">
         <button *ngIf="i === 0" mat-menu-item [routerLink]="['/categories', category.id, 'posts']">{{category.name}}</button>
