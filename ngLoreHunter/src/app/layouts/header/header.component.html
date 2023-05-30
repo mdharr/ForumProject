@@ -6,7 +6,7 @@
        <span class="logo animated-ui">Lore Hunters</span>
        <!-- <img class="logo animated-ui" src="https://media.discordapp.net/attachments/1080302897599877181/1101412533266563097/mmexport1682667423735.png?width=2160&height=624" alt=""> -->
      </button>
-     <button mat-button [matMenuTriggerFor]="afterMenu" id="quick-jump-btn" (menuOpened)="menuOpen()" (click)="rotateChevronTop()"><span style="vertical-align: middle;">{{ quickJumpText }}</span><span><mat-icon class="rotate" style="vertical-align: middle;" [ngClass]="{down: isRotated1}">arrow_drop_down</mat-icon></span></button>
+     <button mat-button [matMenuTriggerFor]="afterMenu" id="quick-jump-btn" (menuOpened)="menuOpen()" (click)="rotateChevronTop()"><span class="quickJump-text" style="vertical-align: middle;">{{ quickJumpText }}</span><span><mat-icon class="rotate" style="vertical-align: middle;" [ngClass]="{down: isRotated1}">arrow_drop_down</mat-icon></span></button>
      <mat-menu #afterMenu="matMenu" xPosition="after" class="toolbar-menu" (closed)="resetRotationState()">
       <div class="menu-categories" *ngFor="let category of categories; let i = index">
         <button *ngIf="i === 0" mat-menu-item [routerLink]="['/categories', category.id, 'posts']">{{category.name}}</button>
@@ -27,14 +27,14 @@
      <span class="example-spacer"></span>
 
      <button class="animated-ui" mat-button *ngIf="!loggedIn()" (click)="open(loginmodal)">
-       <span>Login</span>
+       <span class="login-text">Login</span>
      </button>
      <button mat-button class="animated-ui" *ngIf="!loggedIn()" (click)="open(registermodal)">
-      <span>Register</span>
+      <span class="register-text">Register</span>
     </button>
       <a *ngIf="loggedIn()" style="cursor: pointer;" [routerLink]="['/users', loggedInUser.id]"><div class="avatar" id="userThumbnail" [style.background-image]="'url(' + loggedInUser.imageUrl + ')'" [style.background-position]="'center'"></div></a>
-      <button mat-button class="animated-ui" *ngIf="loggedIn()" [routerLink]="['/users', loggedInUser.id]">{{ loggedInUser.username }}</button>
-      <button class="animated-ui" mat-button *ngIf="loggedIn()">
+      <button mat-button class="animated-ui" *ngIf="loggedIn()" [routerLink]="['/users', loggedInUser.id]"><span class="profile-text">{{ loggedInUser.username }}</span></button>
+      <button class="logout-text animated-ui" mat-button *ngIf="loggedIn()">
         <app-logout></app-logout>
       </button>
       <div class="u-scrollButtons js-scrollButtons is-active" data-trigger-type="">

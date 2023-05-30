@@ -1,0 +1,7 @@
+.logout-text {
+  color: lightgray;
+}
+
+.logout-text:hover {
+  color: #fff;
+}

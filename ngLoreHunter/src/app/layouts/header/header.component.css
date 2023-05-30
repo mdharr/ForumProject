@@ -50,6 +50,57 @@ p {
   padding: 5px;
   width: 200px;
   height: auto;
+  color: lightgray;
+}
+
+.logo:hover {
+  font-family: "Palanquin Dark",serif;
+  font-size:1.6em;
+  transition: all cubic-bezier(.4,0,.2,1) .15s;
+  padding: 5px;
+  width: 200px;
+  height: auto;
+  color: #fff;
+}
+
+.profile-text {
+  color: lightgray;
+}
+
+.profile-text:hover {
+  color: #fff;
+}
+
+.login-text {
+  color: lightgray;
+}
+
+.login-text:hover {
+  color: #fff;
+}
+
+.logout-text {
+  color: lightgray;
+}
+
+.logout-text:hover {
+  color: #fff;
+}
+
+.register-text {
+  color: lightgray;
+}
+
+.register-text:hover {
+  color: #fff;
+}
+
+.quickJump-text {
+  color: lightgray;
+}
+
+.quickJump-text:hover {
+  color: #fff;
 }
 
 /* .logo:hover {
