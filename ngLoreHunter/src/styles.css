@@ -13,6 +13,7 @@ html, body {
 
 body {
   --text-color: #222;
+  --pagination-text-color: lightgray;
   --bkg-color: #f9f9f9;
   --container-bkg-color: #ffffff;
   --btn-txt-color: white;
@@ -26,9 +27,12 @@ body {
   --reply-user-bkg-color: #ffffff;
   --reply-content-bkg-color: #f1f0f1;
   --reply-border-color: rgb(158 159 162 / 12%);
+  --game-card-bkg-color: #ffffff;
+  --game-card-bkg: #f1f1f1;
 }
 body.dark-theme {
   --text-color: #eee;
+  --pagination-bkg-color: rgba(71, 75, 86, 0.5);
   --bkg-color: #1c1b1b;
   --container-bkg-color: #2a2a2c;
   --btn-txt-color: rgb(46, 43, 43);
@@ -42,6 +46,8 @@ body.dark-theme {
   --reply-user-bkg-color: #2a2a2c;
   --reply-content-bkg-color: #343436;
   --reply-border-color: rgb(158 159 162 / 12%);
+  --game-card-bkg-color: rgb(50 51 56);
+  --game-card-bkg: #2a2a2c;
 }
 
 body {

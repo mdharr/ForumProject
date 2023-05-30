@@ -740,6 +740,7 @@ input:focus {
 .pageNav:hover {
   color:#3f51b5;
   border-bottom: 2px solid #3f51b5;
+  background: var(--pagination-bkg-color);
 }
 
 .isCurrentPage {
