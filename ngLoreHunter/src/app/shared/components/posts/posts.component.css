@@ -141,8 +141,9 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: 90%;
+	width: 93%;
 	margin: 50px auto;
+  margin-top: 0px;
 }
 
 table {
