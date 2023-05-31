@@ -25,8 +25,10 @@ export class PostsListComponent implements OnInit, OnDestroy {
   @ViewChild('filterDialog') filterDialog!: TemplateRef<any>;
 
   currentPage: number = 1;
-
   pageSize: number = 10;
+  pages: number[] = [];
+  totalPosts: number = 0;
+  totalPages: number = 0;
 
   displayedColumns: string[] = ['user', 'subject', 'content'];
 
@@ -51,6 +53,9 @@ export class PostsListComponent implements OnInit, OnDestroy {
 
   loggedInUser: User = new User();
 
+  comments: Comment[] = [];
+  comment: Comment = new Comment();
+  newComment: Comment = new Comment();
   postCreated = false;
 
   selectedSearch: string = 'all';

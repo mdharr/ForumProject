@@ -186,6 +186,12 @@ export class PostService {
       );
     }
 
+    getTotalPostsCount(): Observable<number> {
+      return this.http.get<Post[]>(this.url + '/posts').pipe(
+        map(posts => posts.length)
+      );
+    }
+
     getTotalPostsByCategory(categoryId: number): Observable<number> {
       return this.http.get<Post[]>(`${this.url}/categories/${categoryId}/posts`).pipe(
         map(posts => posts.length)
