@@ -12,6 +12,7 @@ export class UserGameService {
 
   constructor(private http: HttpClient) { }
 
+  // rest api endpoint test success
   fetchUserGames(userId: number): Observable<UserGame[]> {
     return this.http.get<UserGame[]>(this.url + '/users/' + userId + '/usergames').pipe(
       catchError((err: any) => {
