@@ -37,7 +37,7 @@ export class UserNotificationService {
     );
   }
 
-
+  // rest api endpoint test success
   getUnreadUserNotificationsByUserId(userId: number): Observable<UserNotification[]> {
     return this.http.get<UserNotification[]>(this.url + '/users/' + userId + '/notifications/unread').pipe(
       catchError((err: any) => {
