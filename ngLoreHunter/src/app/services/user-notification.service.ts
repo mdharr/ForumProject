@@ -52,6 +52,7 @@ export class UserNotificationService {
     );
   }
 
+  // rest api endpoint test success for dismissing user notifications
   dismissUserNotification(userId: number, notificationId: number): Observable<void> {
     const url = `${this.url}/users/${userId}/notifications/${notificationId}/dismiss`;
     return this.http.put<void>(url, null).pipe(
