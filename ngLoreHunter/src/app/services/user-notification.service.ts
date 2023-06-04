@@ -24,6 +24,7 @@ export class UserNotificationService {
     return options;
   }
 
+    // rest api endpoint test success for sending user notifications
   sendNotification(message: string) {
     const notification = { message: message };
     return this.http.post(this.url + '/notifications/send', notification, this.getHttpOptions()).pipe(
