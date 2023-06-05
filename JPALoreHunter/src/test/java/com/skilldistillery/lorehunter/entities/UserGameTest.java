@@ -73,5 +73,23 @@ class UserGameTest {
 		assertNotNull(userGame);
 		assertEquals("Jill", userGame.getGame().getUsers().get(0).getUsername());
 	}
+	
+	@Test
+	void test_UserGame_review() {
+		assertNotNull(userGame);
+		assertTrue(userGame.getReview().contains("I love coming back to Resident Evil"));
+	}
+	
+	@Test
+	void test_UserGame_recommended() {
+		assertNotNull(userGame);
+		assertTrue(userGame.getIsRecommended());
+	}
+	
+	@Test
+	void test_UserGame_playtime() {
+		assertNotNull(userGame);
+		assertEquals(12, userGame.getPlaytime());
+	}
 
 }
