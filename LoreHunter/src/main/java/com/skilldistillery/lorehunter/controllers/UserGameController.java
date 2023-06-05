@@ -55,6 +55,7 @@ public class UserGameController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
+    // test rest api in postman success
     @GetMapping("users/{uid}/usergames")
     public ResponseEntity<List<UserGame>> indexUserGames(@PathVariable("uid") int userId) {
     	User user = userService.show(userId);
