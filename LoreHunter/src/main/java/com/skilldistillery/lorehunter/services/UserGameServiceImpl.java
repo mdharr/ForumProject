@@ -76,6 +76,9 @@ public class UserGameServiceImpl implements UserGameService {
         if (existingUserGame != null) {
             existingUserGame.setCategory(userGame.getCategory());
             existingUserGame.setRating(userGame.getRating());
+            existingUserGame.setReview(userGame.getReview());
+            existingUserGame.setIsRecommended(userGame.getIsRecommended());
+            existingUserGame.setPlaytime(userGame.getPlaytime());
             return userGameRepo.save(existingUserGame);
         }
         return null;

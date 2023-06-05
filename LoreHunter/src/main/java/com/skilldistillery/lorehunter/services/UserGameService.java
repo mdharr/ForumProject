@@ -14,7 +14,9 @@ public interface UserGameService {
 	public void removeUserGame(User user, Game game);
 	
     UserGame getUserGameById(int userId, int gameId);
+    
     UserGame updateUserGame(int userId, int gameId, UserGame userGame);
+    
     void deleteUserGame(int userId, int gameId);
 
 	UserGame createUserGame(UserGame userGame, Principal principal);
