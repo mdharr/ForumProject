@@ -1,38 +1,17 @@
 package com.skilldistillery.lorehunter.services;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
-import javax.persistence.Column;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.skilldistillery.lorehunter.entities.Category;
-import com.skilldistillery.lorehunter.entities.Comment;
 import com.skilldistillery.lorehunter.entities.Game;
-import com.skilldistillery.lorehunter.entities.Post;
-import com.skilldistillery.lorehunter.entities.Ticket;
 import com.skilldistillery.lorehunter.entities.User;
-import com.skilldistillery.lorehunter.entities.UserGame;
-import com.skilldistillery.lorehunter.entities.UserGameId;
 import com.skilldistillery.lorehunter.repositories.GameRepository;
 import com.skilldistillery.lorehunter.repositories.UserGameRepository;
 import com.skilldistillery.lorehunter.repositories.UserRepository;
