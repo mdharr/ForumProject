@@ -40,18 +40,28 @@ public class UserGame {
 
     @Enumerated(EnumType.STRING)
     private GameRating rating = GameRating.ZERO;
+    
+    private String review;
+    
+    @Column(name = "is_recommended")
+    private Boolean isRecommended;
+    
+    private Integer playtime;
 	
 	public UserGame() {
 		super();
 	}
 	
-	public UserGame(UserGameId id, User user, Game game, GameCategory category, GameRating rating) {
+	public UserGame(UserGameId id, User user, Game game, GameCategory category, GameRating rating, String review, Boolean isRecommended, Integer playtime) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.game = game;
 		this.category = category;
 		this.rating = rating;
+		this.review = review;
+		this.isRecommended = isRecommended;
+		this.playtime = playtime;
 	}
 
 	public UserGameId getId() {
@@ -94,6 +104,30 @@ public class UserGame {
 		this.rating = rating;
 	}
 
+	public String getReview() {
+		return review;
+	}
+
+	public void setReview(String review) {
+		this.review = review;
+	}
+
+	public Boolean getIsRecommended() {
+		return isRecommended;
+	}
+
+	public void setIsRecommended(Boolean isRecommended) {
+		this.isRecommended = isRecommended;
+	}
+
+	public Integer getPlaytime() {
+		return playtime;
+	}
+
+	public void setPlaytime(Integer playtime) {
+		this.playtime = playtime;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(game, id, user);
@@ -124,6 +158,12 @@ public class UserGame {
 		builder.append(category);
 		builder.append(", rating=");
 		builder.append(rating);
+		builder.append(", review=");
+		builder.append(review);
+		builder.append(", isRecommended=");
+		builder.append(isRecommended);
+		builder.append(", playtime=");
+		builder.append(playtime);
 		builder.append("]");
 		return builder.toString();
 	}
