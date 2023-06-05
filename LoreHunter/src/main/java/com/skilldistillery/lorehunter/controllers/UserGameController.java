@@ -36,6 +36,7 @@ public class UserGameController {
 	@Autowired
 	private UserService userService;
 	
+	// test rest api in postman success
 	@PostMapping("users/{uid}/usergames")
 	public ResponseEntity<UserGame> createUserGame(@RequestBody UserGame userGame, Principal principal) {
 	    UserGame newUserGame = userGameService.createUserGame(userGame, principal);
