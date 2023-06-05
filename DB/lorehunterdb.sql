@@ -177,6 +177,9 @@ CREATE TABLE IF NOT EXISTS `user_has_game` (
   `game_id` INT NOT NULL,
   `category` ENUM('PLAYED', 'PLAYING') NULL DEFAULT 'PLAYING',
   `rating` ENUM('ZERO', 'HALF', 'ONE', 'ONE_AND_A_HALF', 'TWO', 'TWO_AND_A_HALF', 'THREE', 'THREE_AND_A_HALF', 'FOUR', 'FOUR_AND_A_HALF', 'FIVE') NULL DEFAULT 'ZERO',
+  `review` TEXT NULL,
+  `is_recommended` TINYINT NULL,
+  `playtime` INT NULL,
   PRIMARY KEY (`user_id`, `game_id`),
   INDEX `fk_user_has_game_game1_idx` (`game_id` ASC),
   INDEX `fk_user_has_game_user1_idx` (`user_id` ASC),
@@ -436,9 +439,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `user_has_game` (`user_id`, `game_id`, `category`, `rating`) VALUES (1, 1, 'PLAYED', 'FIVE');
-INSERT INTO `user_has_game` (`user_id`, `game_id`, `category`, `rating`) VALUES (2, 2, 'PLAYED', 'FIVE');
-INSERT INTO `user_has_game` (`user_id`, `game_id`, `category`, `rating`) VALUES (3, 3, 'PLAYED', 'FIVE');
+INSERT INTO `user_has_game` (`user_id`, `game_id`, `category`, `rating`, `review`, `is_recommended`, `playtime`) VALUES (1, 1, 'PLAYED', 'FIVE', NULL, NULL, NULL);
+INSERT INTO `user_has_game` (`user_id`, `game_id`, `category`, `rating`, `review`, `is_recommended`, `playtime`) VALUES (2, 2, 'PLAYED', 'FIVE', NULL, NULL, NULL);
+INSERT INTO `user_has_game` (`user_id`, `game_id`, `category`, `rating`, `review`, `is_recommended`, `playtime`) VALUES (3, 3, 'PLAYED', 'FIVE', NULL, NULL, NULL);
 
 COMMIT;
 
