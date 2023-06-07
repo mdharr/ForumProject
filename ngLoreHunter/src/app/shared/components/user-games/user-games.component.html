@@ -49,6 +49,9 @@
         </div>
         <h3 class="item-card-title">{{ userGame.game.title }}</h3>
         <p class="item-card-description">Released: {{ userGame.game.description }}</p>
+        <p class="item-card-description">Review: {{ userGame.review }}</p>
+        <p class="item-card-description">Recommended? {{ userGame.isRecommended ? "yes" : "no" }}</p>
+        <p class="item-card-description">Playtime: {{ userGame.playtime }} hours</p>
 
         <!-- <p class="item-card-description">Playtime: {{ userGame.playtime }} hours</p> -->
 
