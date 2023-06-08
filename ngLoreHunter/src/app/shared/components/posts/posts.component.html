@@ -353,7 +353,8 @@
     <div class="editor-outer" style="padding: 10px;">
       <div class="editor-inner" style="padding: 10px;">
           <mat-label style="font-weight: bolder; margin-right: 10px; color: var(--text-color);">Title:</mat-label>
-          <input mat-input [formControl]="subject" [(ngModel)]="newPost.subject" required>
+          <input mat-input [formControl]="subject" [(ngModel)]="newPost.subject" style="background-color: var(--bkg-color);
+          color: var(--text-color);" required>
           <mat-error *ngIf="subject.invalid && checkCkEditor">{{ getErrorMessageSubject() }}</mat-error>
       </div>
       <div class="editor-inner" style="padding: 10px;">
