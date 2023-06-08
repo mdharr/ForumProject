@@ -49,6 +49,9 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   // post: null | Post = null;
   post: Post | null = null;
 
+  imageSrc: string = 'imageName.jpg';
+  isLoaded: boolean = false;
+
   users: User[] = [];
   selected: Post = new Post();
   categoryId: number = 0;
@@ -548,6 +551,10 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       });
     });
+  }
+
+  onImageLoad() {
+    this.isLoaded = true;
   }
 
 }

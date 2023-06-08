@@ -52,10 +52,15 @@ export class NoSanitizePipe implements PipeTransform {
 
   // Add the "post-img" class to each <img> element
   images.forEach((image: any) => {
+    const divWrapper = this.renderer.createElement('div');
+    this.renderer.addClass(divWrapper, 'blurred-img');
+
     this.renderer.setStyle(image, 'width', '100%');
     this.renderer.setStyle(image, 'height', 'auto');
     this.renderer.setAttribute(image, 'loading', 'lazy');
-    this.renderer.setAttribute(image, 'class', 'blurred-img');
+
+    this.renderer.appendChild(divWrapper, image.parentNode.removeChild(image));
+    this.renderer.appendChild(tempDiv, divWrapper);
   });
 
 
