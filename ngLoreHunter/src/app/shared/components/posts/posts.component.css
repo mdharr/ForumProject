@@ -144,6 +144,8 @@ body {
 	width: 93%;
 	margin: 50px auto;
   margin-top: 0px;
+  flex: 1;
+  min-height:1px;
 }
 
 table {
@@ -820,9 +822,14 @@ input:focus {
 
 .article-wrapper {
   /* min-height: 750px; */
-  flex: 1;
+
 }
 
 .ghost-container {
-  flex: 1;
+  /* flex: 1; */
+}
+
+.child-wrapper {
+  /* min-height: auto;
+  height: 1105px; */
 }
