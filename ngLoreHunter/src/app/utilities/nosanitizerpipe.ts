@@ -55,6 +55,7 @@ export class NoSanitizePipe implements PipeTransform {
     this.renderer.setStyle(image, 'width', '100%');
     this.renderer.setStyle(image, 'height', 'auto');
     this.renderer.setAttribute(image, 'loading', 'lazy');
+    this.renderer.setAttribute(image, 'class', 'blurred-img');
   });
 
 
