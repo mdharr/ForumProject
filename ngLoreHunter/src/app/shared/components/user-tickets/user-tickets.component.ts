@@ -42,7 +42,7 @@ export class UserTicketsComponent implements OnInit, OnDestroy {
       this.tickets = tickets;
       console.log(this.hasTicketHistory);
 
-      if(this.tickets) {
+      if(this.tickets.length > 0) {
         this.hasTicketHistory = true;
       } else {
         this.hasTicketHistory = false;
