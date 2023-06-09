@@ -32,7 +32,7 @@
     <div>
       <h1>Played:</h1>
     </div>
-    <div class="row item-grid2">
+    <div class="row item-grid2" *ngIf="(userGamesPlayed$ | async)?.length">
       <div class="card item-card" *ngFor="let userGame of userGamesPlayed$ | async">
         <div class="item-card-image">
           <img class="game-image" [style.background-image]="'url(' + userGame.game.backgroundImage + ')'" [style.background-position]="'center top'" loading="lazy">
@@ -58,6 +58,9 @@
         </div>
       </div>
 
+    </div>
+    <div *ngIf="!(userGamesPlayed$ | async)?.length">
+      <h3>No previously games listed</h3>
     </div>
   </div>
   <div class="p-body playing-body">
