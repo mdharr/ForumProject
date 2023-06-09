@@ -16,6 +16,7 @@ export class UserTicketsComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['title', 'status', 'priority', 'createdAt', 'updatedAt', 'user'];
   tickets: Ticket[] = [];
   loggedInUser: User = new User();
+  hasTicketHistory: boolean = false;
 
   private ticketSubscription: Subscription | undefined;
   private loggedInUserSubscription: Subscription | undefined;
@@ -39,6 +40,13 @@ export class UserTicketsComponent implements OnInit, OnDestroy {
   getTickets(userId: number): void {
     this.ticketSubscription = this.ticketService.getTicketsByUserId(userId).subscribe((tickets) => {
       this.tickets = tickets;
+      console.log(this.hasTicketHistory);
+
+      if(this.tickets) {
+        this.hasTicketHistory = true;
+      } else {
+        this.hasTicketHistory = false;
+      }
     });
   }
 

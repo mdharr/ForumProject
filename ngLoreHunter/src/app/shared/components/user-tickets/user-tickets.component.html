@@ -37,7 +37,7 @@
       <mat-row class="ticket-row" *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
     </mat-table>
   </div>
-  <div *ngIf="!tickets.length">
+  <div *ngIf="hasTicketHistory">
     <h1 class="no-tickets-header">No ticket history</h1>
   </div>
 </div>
