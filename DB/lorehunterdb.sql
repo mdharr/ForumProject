@@ -335,6 +335,53 @@ CREATE TABLE IF NOT EXISTS `user_has_follower` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `user_conversation`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_conversation` ;
+
+CREATE TABLE IF NOT EXISTS `user_conversation` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `created_at` TIMESTAMP NULL,
+  `updated_at` TIMESTAMP NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_user_conversation_user1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_user_conversation_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `private_message`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `private_message` ;
+
+CREATE TABLE IF NOT EXISTS `private_message` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_conversation_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `content` TEXT NULL,
+  `created_at` TIMESTAMP NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_private_message_user_conversation1_idx` (`user_conversation_id` ASC),
+  INDEX `fk_private_message_user1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_private_message_user_conversation1`
+    FOREIGN KEY (`user_conversation_id`)
+    REFERENCES `user_conversation` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_private_message_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS lorehunter@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -502,6 +549,26 @@ COMMIT;
 START TRANSACTION;
 USE `lorehunterdb`;
 INSERT INTO `user_has_follower` (`follower_id`, `followed_id`, `created_at`) VALUES (1, 2, '2023-05-19T11:35:22');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_conversation`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `lorehunterdb`;
+INSERT INTO `user_conversation` (`id`, `user_id`, `created_at`, `updated_at`) VALUES (1, 1, '2023-05-19T11:35:22', '2023-05-19T11:35:22');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `private_message`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `lorehunterdb`;
+INSERT INTO `private_message` (`id`, `user_conversation_id`, `user_id`, `content`, `created_at`) VALUES (1, 1, 1, 'Hey, what\'s up?', '2023-05-19T11:35:22');
 
 COMMIT;
 
