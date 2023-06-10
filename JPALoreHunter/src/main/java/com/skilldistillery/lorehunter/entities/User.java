@@ -116,6 +116,10 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<TicketMessage> ticketMessages = new ArrayList<>();
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<PrivateMessage> privateMessages = new ArrayList<>();
 
 	public User() {
 		super();
@@ -126,7 +130,8 @@ public class User {
 			LocalDateTime lastActivity, String status, Integer commentCount, String bannerMessage, String bannerImage,
 			List<Category> categories, List<Post> posts, List<Comment> comments, Integer postCount, Boolean isOnline,
 			List<UserGame> userGames, String verificationCode, VerifiedStatus verifiedStatus, boolean emailVerified,
-			LocalDateTime verificationExpiryTime, int resendCount, LocalDateTime lastVerificationCodeSentTime, List<TicketMessage> ticketMessages) {
+			LocalDateTime verificationExpiryTime, int resendCount, LocalDateTime lastVerificationCodeSentTime, List<TicketMessage> ticketMessages,
+			List<PrivateMessage> privateMessages) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -157,6 +162,7 @@ public class User {
 		this.resendCount = resendCount;
 		this.lastVerificationCodeSentTime = lastVerificationCodeSentTime;
 		this.ticketMessages = ticketMessages;
+		this.privateMessages = privateMessages;
 	}
 
 	public int getId() {
@@ -390,6 +396,14 @@ public class User {
 	public void setTicketMessages(List<TicketMessage> ticketMessages) {
 		this.ticketMessages = ticketMessages;
 	}
+	
+	public List<PrivateMessage> getPrivateMessages() {
+		return privateMessages;
+	}
+	
+	public void setPrivateMessages(List<PrivateMessage> privateMessages) {
+		this.privateMessages = privateMessages;
+	}
 
 	@Override
 	public int hashCode() {
@@ -443,10 +457,18 @@ public class User {
 		builder.append(bannerMessage);
 		builder.append(", bannerImage=");
 		builder.append(bannerImage);
+		builder.append(", categories=");
+		builder.append(categories);
+		builder.append(", posts=");
+		builder.append(posts);
+		builder.append(", comments=");
+		builder.append(comments);
 		builder.append(", postCount=");
 		builder.append(postCount);
 		builder.append(", isOnline=");
 		builder.append(isOnline);
+		builder.append(", userGames=");
+		builder.append(userGames);
 		builder.append(", verificationCode=");
 		builder.append(verificationCode);
 		builder.append(", verifiedStatus=");
@@ -459,6 +481,10 @@ public class User {
 		builder.append(resendCount);
 		builder.append(", lastVerificationCodeSentTime=");
 		builder.append(lastVerificationCodeSentTime);
+		builder.append(", ticketMessages=");
+		builder.append(ticketMessages);
+		builder.append(", privateMessages=");
+		builder.append(privateMessages);
 		builder.append("]");
 		return builder.toString();
 	}
