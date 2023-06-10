@@ -569,6 +569,7 @@ COMMIT;
 START TRANSACTION;
 USE `lorehunterdb`;
 INSERT INTO `private_message` (`id`, `user_conversation_id`, `user_id`, `content`, `created_at`) VALUES (1, 1, 1, 'Hey, what\'s up?', '2023-05-19T11:35:22');
+INSERT INTO `private_message` (`id`, `user_conversation_id`, `user_id`, `content`, `created_at`) VALUES (2, 1, 2, 'Not much. How about you?', '2023-05-19T11:37:22');
 
 COMMIT;
 
