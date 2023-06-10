@@ -15,7 +15,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.skilldistillery.lorehunter.enums.GameCategory;
 import com.skilldistillery.lorehunter.enums.GameRating;
-import com.skilldistillery.lorehunter.enums.TicketPriority;
 
 @Entity
 @Table(name = "user_has_game")
@@ -30,13 +29,15 @@ public class UserGame {
     @MapsId("userId")
     private User user;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "game_id", referencedColumnName = "id")
     @MapsId("gameId")
     private Game game;
 
+    @Column(name = "game_category")
     @Enumerated(EnumType.STRING)
-    private GameCategory category = GameCategory.PLAYING;
+    private GameCategory gameCategory = GameCategory.PLAYING;
 
     @Enumerated(EnumType.STRING)
     private GameRating rating = GameRating.ZERO;
@@ -52,12 +53,12 @@ public class UserGame {
 		super();
 	}
 	
-	public UserGame(UserGameId id, User user, Game game, GameCategory category, GameRating rating, String review, Boolean isRecommended, Integer playtime) {
+	public UserGame(UserGameId id, User user, Game game, GameCategory gameCategory, GameRating rating, String review, Boolean isRecommended, Integer playtime) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.game = game;
-		this.category = category;
+		this.gameCategory = gameCategory;
 		this.rating = rating;
 		this.review = review;
 		this.isRecommended = isRecommended;
@@ -88,12 +89,12 @@ public class UserGame {
 		this.game = game;
 	}
 
-	public GameCategory getCategory() {
-		return category;
+	public GameCategory getGameCategory() {
+		return gameCategory;
 	}
 
-	public void setCategory(GameCategory category) {
-		this.category = category;
+	public void setGameCategory(GameCategory gameCategory) {
+		this.gameCategory = gameCategory;
 	}
 
 	public GameRating getRating() {
@@ -150,12 +151,12 @@ public class UserGame {
 		StringBuilder builder = new StringBuilder();
 		builder.append("UserGame [id=");
 		builder.append(id);
-		builder.append(", user=");
-		builder.append(user);
-		builder.append(", game=");
-		builder.append(game);
-		builder.append(", category=");
-		builder.append(category);
+//		builder.append(", user=");
+//		builder.append(user);
+//		builder.append(", game=");
+//		builder.append(game);
+		builder.append(", gameCategory=");
+		builder.append(gameCategory);
 		builder.append(", rating=");
 		builder.append(rating);
 		builder.append(", review=");

@@ -74,7 +74,7 @@ public class UserGameServiceImpl implements UserGameService {
     public UserGame updateUserGame(int userId, int gameId, UserGame userGame) {
         UserGame existingUserGame = userGameRepo.findByUserIdAndGameId(userId, gameId);
         if (existingUserGame != null) {
-            existingUserGame.setCategory(userGame.getCategory());
+            existingUserGame.setGameCategory(userGame.getGameCategory());
             existingUserGame.setRating(userGame.getRating());
             existingUserGame.setReview(userGame.getReview());
             existingUserGame.setIsRecommended(userGame.getIsRecommended());

@@ -65,7 +65,7 @@ class UserGameTest {
 	@Test
 	void test_UserGame_category() {
 		assertNotNull(userGame);
-		assertEquals(GameCategory.PLAYED, userGame.getCategory());
+		assertEquals(GameCategory.PLAYED, userGame.getGameCategory());
 	}
 	
 	@Test
