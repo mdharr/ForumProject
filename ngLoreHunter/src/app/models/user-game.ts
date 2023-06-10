@@ -6,7 +6,7 @@ export class UserGame {
     gameId: number;
   }
   game: Game;
-  category: GameCategory;
+  gameCategory: GameCategory;
   rating: GameRating;
   review: string;
   isRecommended: boolean;
@@ -15,7 +15,7 @@ export class UserGame {
   constructor(
     id: { userId: number, gameId: number },
     game: Game = new Game(0, undefined, undefined, undefined, undefined, undefined, 0),
-    category: GameCategory = GameCategory.PLAYING,
+    gameCategory: GameCategory = GameCategory.PLAYING,
     rating: GameRating = GameRating.ZERO,
     review: string = '',
     isRecommended: boolean = false,
@@ -23,7 +23,7 @@ export class UserGame {
   ) {
     this.id = id;
     this.game = game;
-    this.category = category;
+    this.gameCategory = gameCategory;
     this.rating = rating;
     this.review = review;
     this.isRecommended = isRecommended;

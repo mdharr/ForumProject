@@ -20,7 +20,7 @@ export class UserGamesComponent implements OnInit {
   loggedInUser: User = new User();
   userGamesPlayed$!: Observable<UserGame[]>;
   userGamesPlaying$!: Observable<UserGame[]>;
-  categories: GameCategory[] = [];
+  gameCategories: GameCategory[] = [];
   ratings: GameRating[] = [];
 
   constructor(
@@ -33,7 +33,7 @@ export class UserGamesComponent implements OnInit {
     console.log("user id in user games component" + this.userId);
 
     this.fetchUserGames(this.userId);
-    this.categories = Object.values(GameCategory);
+    this.gameCategories = Object.values(GameCategory);
     this.ratings = Object.values(GameRating);
 
     this.authService.getCurrentLoggedInUser().subscribe((user: User) => {
@@ -70,9 +70,9 @@ export class UserGamesComponent implements OnInit {
     });
   }
 
-  filterByCategory(userGames: UserGame[], category: string): Observable<UserGame[]> {
+  filterByCategory(userGames: UserGame[], gameCategory: string): Observable<UserGame[]> {
     return of(userGames).pipe(
-      map((userGames: UserGame[]) => userGames.filter((userGame: UserGame) => userGame.category === category))
+      map((userGames: UserGame[]) => userGames.filter((userGame: UserGame) => userGame.gameCategory === gameCategory))
     );
   }
 
