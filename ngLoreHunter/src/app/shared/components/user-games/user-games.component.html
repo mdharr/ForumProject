@@ -48,9 +48,9 @@
             </div>
           </div>
           <h3 class="item-card-title">{{ userGame.game.title }}</h3>
-          <p class="item-card-description">Released: {{ userGame.game.description }}</p>
+          <p class="item-card-description">Description: {{ userGame.game.description }}</p>
           <p class="item-card-description">Review: {{ userGame.review }}</p>
-          <p class="item-card-description">Recommended? {{ userGame.isRecommended ? "yes" : "no" }}</p>
+          <p class="item-card-description" style="display: flex; align-items: self-end;">Recommended? <span style="margin-left: 10px;"><img class="recommended-thumb" src="{{ userGame.isRecommended ? 'https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsUp_v6.png' : 'https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsDown_v6.png' }}" alt=""></span></p>
           <p class="item-card-description">Playtime: {{ userGame.playtime }} hours</p>
 
           <!-- <p class="item-card-description">Playtime: {{ userGame.playtime }} hours</p> -->

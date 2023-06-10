@@ -182,6 +182,11 @@
   background-color: var(--bkg-color);
 }
 
+.recommended-thumb {
+  width: 30px;
+  border-radius: 3px;
+}
+
 
 
 
