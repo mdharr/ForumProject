@@ -22,6 +22,8 @@
 		<class>com.skilldistillery.lorehunter.entities.Ticket</class>
 		<class>com.skilldistillery.lorehunter.entities.TicketMessage</class>
 		<class>com.skilldistillery.lorehunter.entities.UserFollower</class>
+		<class>com.skilldistillery.lorehunter.entities.PrivateMessage</class>
+		<class>com.skilldistillery.lorehunter.entities.UserConversation</class>
 
 		<!-- end entities -->
 
