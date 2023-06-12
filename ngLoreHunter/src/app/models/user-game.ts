@@ -11,6 +11,7 @@ export class UserGame {
   review: string;
   isRecommended: boolean;
   playtime: number;
+  createdAt: string;
 
   constructor(
     id: { userId: number, gameId: number },
@@ -19,7 +20,8 @@ export class UserGame {
     rating: GameRating = GameRating.ZERO,
     review: string = '',
     isRecommended: boolean = false,
-    playtime: number = 0
+    playtime: number = 0,
+    createdAt: string = ''
   ) {
     this.id = id;
     this.game = game;
@@ -28,6 +30,7 @@ export class UserGame {
     this.review = review;
     this.isRecommended = isRecommended;
     this.playtime = playtime;
+    this.createdAt = createdAt;
   }
 }
 

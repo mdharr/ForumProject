@@ -78,8 +78,8 @@
     <div>
       <h1>Played:</h1>
     </div>
-    <div class="review-box" *ngIf="(userGamesPlaying$ | async)?.length">
-      <div class="review-body" *ngFor="let userGame of userGamesPlaying$ | async">
+    <div class="review-box" *ngIf="(userGamesPlayed$ | async)?.length">
+      <div class="review-body" *ngFor="let userGame of userGamesPlayed$ | async">
         <div class="left-col">
           <div class="game-thumbnail"><img class="game-image" [style.background-image]="'url(' + userGame.game.backgroundImage + ')'" [style.background-position]="'center top'" loading="lazy"></div>
           <div class="game-title"><h3>{{ userGame.game.title }}</h3></div>

@@ -32,7 +32,6 @@ public class UserGame {
     @MapsId("userId")
     private User user;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "game_id", referencedColumnName = "id")
     @MapsId("gameId")
