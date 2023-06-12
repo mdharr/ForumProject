@@ -72,3 +72,31 @@
     </div>
   </div>
 </div>
+
+<div class="wrapper">
+  <div class="p-body played-body">
+    <div>
+      <h1>Played:</h1>
+    </div>
+    <div class="review-box" *ngIf="(userGamesPlaying$ | async)?.length">
+      <div class="review-body" *ngFor="let userGame of userGamesPlaying$ | async">
+        <div class="left-col">
+          <div class="game-thumbnail"><img class="game-image" [style.background-image]="'url(' + userGame.game.backgroundImage + ')'" [style.background-position]="'center top'" loading="lazy"></div>
+          <div class="game-title"><h3>{{ userGame.game.title }}</h3></div>
+          <div class="game-description"><p>{{ userGame.game.description }}</p></div>
+        </div>
+        <div class="right-col">
+          <div class="recommendation-box">
+            <div class="recommendation-image"><img class="recommended-thumb" src="{{ userGame.isRecommended ? 'https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsUp_v6.png' : 'https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsDown_v6.png' }}" alt=""></div>
+            <div class="recommendation-text"><h3>{{ userGame.isRecommended ? "Recommended" : "Not Recommended" }}</h3></div>
+            <div class="playtime-text">{{ userGame.playtime }}</div>
+          </div>
+          <div class="review-text-box">
+            <div class="date-box">{{ userGame.createdAt | date: 'short' }}</div>
+            <div class="review-text-body"><p>{{ userGame.review }}</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

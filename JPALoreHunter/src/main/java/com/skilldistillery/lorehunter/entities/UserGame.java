@@ -1,5 +1,6 @@
 package com.skilldistillery.lorehunter.entities;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.skilldistillery.lorehunter.enums.GameCategory;
@@ -48,6 +51,10 @@ public class UserGame {
     private Boolean isRecommended;
     
     private Integer playtime;
+    
+	@CreationTimestamp
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
 	
 	public UserGame() {
 		super();
