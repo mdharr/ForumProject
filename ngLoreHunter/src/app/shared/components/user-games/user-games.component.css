@@ -183,8 +183,70 @@
 }
 
 .recommended-thumb {
-  width: 30px;
-  border-radius: 3px;
+  width: 40px;
+}
+
+.review-box {
+  background-color: rgba( 0, 0, 0, 0.2 );
+  margin-bottom: 26px;
+  background-image: url(https://store.akamai.steamstatic.com/public/images/v6/maincol_gradient_rule.pngrepeat);
+  background-position: top left;
+}
+
+.left-col {
+  width: 184px;
+  float: left;
+  padding: 8px;
+  opacity: 0.6;
+}
+
+.right-col {
+  float: left;
+  width: 400px;
+  position: relative;
+}
+
+.recommendation-box {
+  margin: 11px 0 13px;
+  display: block;
+  background: rgba( 0, 0, 0, 0.2 );
+  /* height: 40px; */
+}
+
+.recommended-thumb {
+  margin-right: 10px;
+  height: 100%;
+}
+
+.recommendation-text {
+  font-size: 16px;
+  color: #d6d7d8;
+  font-weight: normal;
+  padding: 3px 0px 0px 0px;
+  line-height: 19px;
+}
+
+.playtime-text {
+  font-weight: 300;
+  font-size: 11px;
+  line-height: 15px;
+  color: #8091a2;
+  opacity: 0.6;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recommendation-playtime-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.recommendation-body {
+  display: flex;
 }
 
 
