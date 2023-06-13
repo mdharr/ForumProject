@@ -189,246 +189,265 @@
   </div>
 </div>
 
-  <!-- PAGINATION EXPERIMENT START -->
-  <div class="page-navigation">
-    <a class="pageNav-prev pageNav" *ngIf="currentPage > 1" (click)="goToPreviousPage()">Prev</a>
-    <a
-      class="pageNav-pages pageNav"
-      [ngClass]="{
-        'isCurrentPage': page === currentPage,
-        'notCurrentPage': page !== currentPage
-      }"
-      *ngFor="let page of pages"
-      (click)="page === -1 ? onJumpToPageDialog() : goToPage(page)"
-    >
-      <ng-container *ngIf="page === -1">...</ng-container>
-      <ng-container *ngIf="page !== -1">{{ page }}</ng-container>
-    </a>
-    <a class="pageNav-next pageNav" *ngIf="currentPage < totalPages" (click)="goToNextPage()">Next</a>
-  </div>
-  <!-- PAGINATION EXPERIMENT END -->
 
 <div class="wrapper">
-    <ng-container *ngFor="let post of posts; let i = index">
-      <article *ngIf="post.id === this.postId" class="message-outer">
-        <span class="anchorTarget"></span>
-        <div class="message-inner">
-          <div class="message-cell message-cell-user">
-            <section class="message-user">
-              <div class="message-avatar">
-                <div class="message-avatar-wrapper">
-                  <a [routerLink]="['/users', post.user.id]" class="avatar avatar--l">
-                    <div class="user-avatar" [style.background-image]="'url(' + post.user.imageUrl + ')'" [style.background-position]="'center'"></div>
-                  </a>
+  <div class="child-wrapper">
+    <!-- PAGINATION EXPERIMENT START -->
+    <div class="page-navigation">
+      <a class="pageNav-prev pageNav" *ngIf="currentPage > 1" (click)="goToPreviousPage()">Prev</a>
+      <a
+        class="pageNav-pages pageNav"
+        [ngClass]="{
+          'isCurrentPage': page === currentPage,
+          'notCurrentPage': page !== currentPage
+        }"
+        *ngFor="let page of pages"
+        (click)="page === -1 ? onJumpToPageDialog() : goToPage(page)"
+      >
+        <ng-container *ngIf="page === -1">...</ng-container>
+        <ng-container *ngIf="page !== -1">{{ page }}</ng-container>
+      </a>
+      <a class="pageNav-next pageNav" *ngIf="currentPage < totalPages" (click)="goToNextPage()">Next</a>
+    </div>
+    <!-- PAGINATION EXPERIMENT END -->
+      <ng-container *ngFor="let post of posts; let i = index">
+        <article *ngIf="post.id === this.postId && this.currentPage === 1" class="message-outer">
+          <span class="anchorTarget"></span>
+          <div class="message-inner">
+            <div class="message-cell message-cell-user">
+              <section class="message-user">
+                <div class="message-avatar">
+                  <div class="message-avatar-wrapper">
+                    <a [routerLink]="['/users', post.user.id]" class="avatar avatar--l">
+                      <div class="user-avatar" [style.background-image]="'url(' + post.user.imageUrl + ')'" [style.background-position]="'center'"></div>
+                    </a>
+                  </div>
                 </div>
+                <div class="user-details-wrapper">
+                  <div class="userDetails">
+                    <h4 class="message-name">
+                      <a href="username" [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
+                    </h4>
+                    <h5 class="userTitle message-userTitle" style="margin-bottom: 5px;">{{ post.user.bannerMessage }}</h5>
+                    <h5 class="userTitle message-userTitle member-status" *ngIf="post.user.status === 'active'">Member</h5>
+                  </div>
+                  <div class="userExtras">
+                    <dl class="pairs pairs--justified">
+                      <dt></dt>
+                      <dd>
+                        <ol class="listInline listInline--customField">
+                          <li></li>
+                        </ol>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="message-cell message-cell-main">
+              <div class="message-main">
+                <header class="message-attribution">
+                  <ul class="message-attribution-main">
+                    <li class="u-concealed">
+                      <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">
+                        <time class="u-dt">{{ post.createdAt | timeAgo }}</time>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="message-attribution-opposite">
+                    <li>
+                      <a href="" class="message-attribution-gadget">
+                        <mat-icon id="post-share-icon" class="mat-18">share</mat-icon>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="" class="message-attribution-gadget">
+                        <mat-icon id="post-bookmark-icon" class="mat-18">bookmark_border</mat-icon>
+                      </a>
+                    </li>
+                    <li class="count-tracker">
+                      <a href="" class="message-attribution-gadget">
+                        <i>#{{i -i + 1}}</i>
+                      </a>
+                    </li>
+                  </ul>
+                </header>
+                <div class="message-content">
+                  <div class="message-userContent">
+                    <article class="message-body" [innerHtml]='post.content | noSanitize'></article>
+                  </div>
+                </div>
+                <!-- REPLY TO ORIGINAL POST -->
+                <!-- <div class="reply-main">
+                  <div *ngIf="!post.content.includes('blockquote')" class="post-reply-container">
+                    <a class="reply-button" (click)="addReply(post.content, post.user.username)"><span class="reply-element"><mat-icon class="material-icons reply-icon">keyboard_return</mat-icon><span>Reply</span></span></a>
+                  </div>
+                </div> -->
               </div>
-              <div class="user-details-wrapper">
-                <div class="userDetails">
-                  <h4 class="message-name">
-                    <a href="username" [routerLink]="['/users', post.user.id]">{{ post.user.username }}</a>
-                  </h4>
-                  <h5 class="userTitle message-userTitle" style="margin-bottom: 5px;">{{ post.user.bannerMessage }}</h5>
-                  <h5 class="userTitle message-userTitle member-status" *ngIf="post.user.status === 'active'">Member</h5>
-                </div>
-                <div class="userExtras">
-                  <dl class="pairs pairs--justified">
-                    <dt></dt>
-                    <dd>
-                      <ol class="listInline listInline--customField">
-                        <li></li>
-                      </ol>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-            </section>
-          </div>
-          <div class="message-cell message-cell-main">
-            <div class="message-main">
-              <header class="message-attribution">
-                <ul class="message-attribution-main">
-                  <li class="u-concealed">
-                    <a [routerLink]="['/categories', categoryId, 'posts', post.id, 'comments']">
-                      <time class="u-dt">{{ post.createdAt | timeAgo }}</time>
-                    </a>
-                  </li>
-                </ul>
-                <ul class="message-attribution-opposite">
-                  <li>
-                    <a href="" class="message-attribution-gadget">
-                      <mat-icon id="post-share-icon" class="mat-18">share</mat-icon>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="" class="message-attribution-gadget">
-                      <mat-icon id="post-bookmark-icon" class="mat-18">bookmark_border</mat-icon>
-                    </a>
-                  </li>
-                  <li class="count-tracker">
-                    <a href="" class="message-attribution-gadget">
-                      <i>#{{i -i + 1}}</i>
-                    </a>
-                  </li>
-                </ul>
-              </header>
-              <div class="message-content">
-                <div class="message-userContent">
-                  <article class="message-body" [innerHtml]='post.content | noSanitize'></article>
-                </div>
-              </div>
-              <!-- REPLY TO ORIGINAL POST -->
-              <!-- <div class="reply-main">
-                <div *ngIf="!post.content.includes('blockquote')" class="post-reply-container">
-                  <a class="reply-button" (click)="addReply(post.content, post.user.username)"><span class="reply-element"><mat-icon class="material-icons reply-icon">keyboard_return</mat-icon><span>Reply</span></span></a>
-                </div>
-              </div> -->
             </div>
           </div>
-        </div>
-      </article>
-    </ng-container>
+        </article>
+      </ng-container>
 
-    <div *ngFor="let comment of comments$ | async; let i = index;">
-      <article class="message-outer">
-        <span class="anchorTarget"></span>
-        <div class="message-inner">
-          <div class="message-cell message-cell-user">
-            <section class="message-user">
-              <div class="message-avatar">
-                <div class="message-avatar-wrapper">
-                  <a [routerLink]="['/users', comment.user.id]" class="avatar avatar--l">
-                    <img class="user-avatar" [style.background-image]="'url(' + comment.user.imageUrl + ')'" [style.background-position]="'center'">
-                  </a>
-                </div>
-              </div>
-              <div class="user-details-wrapper">
-                <div class="userDetails">
-                  <h4 class="message-name">
-                    <a [routerLink]="['/users', comment.user.id]">{{ comment.user.username }}</a>
-                  </h4>
-                  <h5 class="userTitle message-userTitle" style="margin-bottom: 5px;">{{ comment.user.bannerMessage }}</h5>
-                  <h5 class="userTitle message-userTitle member-status" *ngIf="comment.user.role === 'STANDARD'">Member</h5>
-                  <h5 class="userTitle message-userTitle member-status" *ngIf="comment.user.role === 'ADMIN'">Admin</h5>
-                </div>
-                <div class="userExtras">
-                  <dl class="pairs pairs--justified">
-                    <dt class="message-userTitle"></dt>
-                    <dd>
-                      <ol class="listInline listInline--customField">
-                        <li></li>
-                      </ol>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-            </section>
-          </div>
-          <div class="message-cell message-cell-main">
-            <div class="message-main">
-              <header class="message-attribution message-attribution--split">
-                <ul class="message-attribution-main">
-                  <li class="u-concealed">
-                    <a href="">
-                      <time class="u-dt">{{ comment.createdAt | timeAgo }}</time>
+      <div *ngFor="let comment of comments$ | async; let i = index;">
+        <article class="message-outer">
+          <span class="anchorTarget"></span>
+          <div class="message-inner">
+            <div class="message-cell message-cell-user">
+              <section class="message-user">
+                <div class="message-avatar">
+                  <div class="message-avatar-wrapper">
+                    <a [routerLink]="['/users', comment.user.id]" class="avatar avatar--l">
+                      <img class="user-avatar" [style.background-image]="'url(' + comment.user.imageUrl + ')'" [style.background-position]="'center'">
                     </a>
-                  </li>
-                </ul>
-                <ul class="message-attribution-opposite">
-                  <li>
-                    <a href="" class="message-attribution-gadget">
-                      <mat-icon id="comment-share-icon" class="mat-18">share</mat-icon>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="" class="message-attribution-gadget">
-                      <mat-icon id="comment-bookmark-icon" class="mat-18">bookmark_border</mat-icon>
-                    </a>
-                  </li>
-                  <li class="count-tracker">
-                    <a href="" class="message-attribution-gadget">
-                      <i>#{{i + 2}}</i>
-                    </a>
-                  </li>
-                </ul>
-              </header>
-              <div class="message-content">
-                <div class="message-userContent">
-                  <article class="message-body" [innerHtml]="comment.content | noSanitize">
-
-                  </article>
+                  </div>
                 </div>
-              </div>
-              <div class="reply-main">
-              <!-- Add the like button here -->
-              <div class="like-reply-container">
+                <div class="user-details-wrapper">
+                  <div class="userDetails">
+                    <h4 class="message-name">
+                      <a [routerLink]="['/users', comment.user.id]">{{ comment.user.username }}</a>
+                    </h4>
+                    <h5 class="userTitle message-userTitle" style="margin-bottom: 5px;">{{ comment.user.bannerMessage }}</h5>
+                    <h5 class="userTitle message-userTitle member-status" *ngIf="comment.user.role === 'STANDARD'">Member</h5>
+                    <h5 class="userTitle message-userTitle member-status" *ngIf="comment.user.role === 'ADMIN'">Admin</h5>
+                  </div>
+                  <div class="userExtras">
+                    <dl class="pairs pairs--justified">
+                      <dt class="message-userTitle"></dt>
+                      <dd>
+                        <ol class="listInline listInline--customField">
+                          <li></li>
+                        </ol>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="message-cell message-cell-main">
+              <div class="message-main">
+                <header class="message-attribution message-attribution--split">
+                  <ul class="message-attribution-main">
+                    <li class="u-concealed">
+                      <a href="">
+                        <time class="u-dt">{{ comment.createdAt | timeAgo }}</time>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="message-attribution-opposite">
+                    <li>
+                      <a href="" class="message-attribution-gadget">
+                        <mat-icon id="comment-share-icon" class="mat-18">share</mat-icon>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="" class="message-attribution-gadget">
+                        <mat-icon id="comment-bookmark-icon" class="mat-18">bookmark_border</mat-icon>
+                      </a>
+                    </li>
+                    <li class="count-tracker">
+                      <a href="" class="message-attribution-gadget">
+                        <i>#{{i + 2}}</i>
+                      </a>
+                    </li>
+                  </ul>
+                </header>
+                <div class="message-content">
+                  <div class="message-userContent">
+                    <article class="message-body" [innerHtml]="comment.content | noSanitize">
 
-                <div class="like-button-container">
-                  <!-- <button (click)="createLike(comment.id)" class="like-button">
-                    <mat-icon class="like-icon">thumb_up</mat-icon>
-                    Like
-                  </button> -->
-                  <!-- <div id="main-content">
-                    <div>
-                      <input type="checkbox" id="checkbox" (click)="createLike(comment.id)"/>
-                      <label for="checkbox">
-                        <svg id="game-svg" viewBox="467 392 58 57" xmlns="http://www.w3.org/2000/svg">
-                          <g id="Group" fill="none" fill-rule="evenodd" transform="translate(467 392)">
-                            <path d="M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z" id="heart" fill="#AAB8C2"/>
-                            <circle id="main-circ" fill="#E2264D" opacity="0" cx="29.5" cy="29.5" r="1.5"/>
+                    </article>
+                  </div>
+                </div>
+                <div class="reply-main">
+                <!-- Add the like button here -->
+                <div class="like-reply-container">
 
-                            <g id="grp7" opacity="0" transform="translate(7 6)">
-                              <circle id="oval1" fill="#9CD8C3" cx="2" cy="6" r="2"/>
-                              <circle id="oval2" fill="#8CE8C3" cx="5" cy="2" r="2"/>
+                  <div class="like-button-container">
+                    <!-- <button (click)="createLike(comment.id)" class="like-button">
+                      <mat-icon class="like-icon">thumb_up</mat-icon>
+                      Like
+                    </button> -->
+                    <!-- <div id="main-content">
+                      <div>
+                        <input type="checkbox" id="checkbox" (click)="createLike(comment.id)"/>
+                        <label for="checkbox">
+                          <svg id="game-svg" viewBox="467 392 58 57" xmlns="http://www.w3.org/2000/svg">
+                            <g id="Group" fill="none" fill-rule="evenodd" transform="translate(467 392)">
+                              <path d="M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z" id="heart" fill="#AAB8C2"/>
+                              <circle id="main-circ" fill="#E2264D" opacity="0" cx="29.5" cy="29.5" r="1.5"/>
+
+                              <g id="grp7" opacity="0" transform="translate(7 6)">
+                                <circle id="oval1" fill="#9CD8C3" cx="2" cy="6" r="2"/>
+                                <circle id="oval2" fill="#8CE8C3" cx="5" cy="2" r="2"/>
+                              </g>
+
+                              <g id="grp6" opacity="0" transform="translate(0 28)">
+                                <circle id="oval1" fill="#CC8EF5" cx="2" cy="7" r="2"/>
+                                <circle id="oval2" fill="#91D2FA" cx="3" cy="2" r="2"/>
+                              </g>
+
+                              <g id="grp3" opacity="0" transform="translate(52 28)">
+                                <circle id="oval2" fill="#9CD8C3" cx="2" cy="7" r="2"/>
+                                <circle id="oval1" fill="#8CE8C3" cx="4" cy="2" r="2"/>
+                              </g>
+
+                              <g id="grp2" opacity="0" transform="translate(44 6)">
+                                <circle id="oval2" fill="#CC8EF5" cx="5" cy="6" r="2"/>
+                                <circle id="oval1" fill="#CC8EF5" cx="2" cy="2" r="2"/>
+                              </g>
+
+                              <g id="grp5" opacity="0" transform="translate(14 50)">
+                                <circle id="oval1" fill="#91D2FA" cx="6" cy="5" r="2"/>
+                                <circle id="oval2" fill="#91D2FA" cx="2" cy="2" r="2"/>
+                              </g>
+
+                              <g id="grp4" opacity="0" transform="translate(35 50)">
+                                <circle id="oval1" fill="#F48EA7" cx="6" cy="5" r="2"/>
+                                <circle id="oval2" fill="#F48EA7" cx="2" cy="2" r="2"/>
+                              </g>
+
+                              <g id="grp1" opacity="0" transform="translate(24)">
+                                <circle id="oval1" fill="#9FC7FA" cx="2.5" cy="3" r="2"/>
+                                <circle id="oval2" fill="#9FC7FA" cx="7.5" cy="2" r="2"/>
+                              </g>
                             </g>
+                          </svg>
+                        </label>
+                      </div>
+                    </div> -->
+                  </div>
 
-                            <g id="grp6" opacity="0" transform="translate(0 28)">
-                              <circle id="oval1" fill="#CC8EF5" cx="2" cy="7" r="2"/>
-                              <circle id="oval2" fill="#91D2FA" cx="3" cy="2" r="2"/>
-                            </g>
-
-                            <g id="grp3" opacity="0" transform="translate(52 28)">
-                              <circle id="oval2" fill="#9CD8C3" cx="2" cy="7" r="2"/>
-                              <circle id="oval1" fill="#8CE8C3" cx="4" cy="2" r="2"/>
-                            </g>
-
-                            <g id="grp2" opacity="0" transform="translate(44 6)">
-                              <circle id="oval2" fill="#CC8EF5" cx="5" cy="6" r="2"/>
-                              <circle id="oval1" fill="#CC8EF5" cx="2" cy="2" r="2"/>
-                            </g>
-
-                            <g id="grp5" opacity="0" transform="translate(14 50)">
-                              <circle id="oval1" fill="#91D2FA" cx="6" cy="5" r="2"/>
-                              <circle id="oval2" fill="#91D2FA" cx="2" cy="2" r="2"/>
-                            </g>
-
-                            <g id="grp4" opacity="0" transform="translate(35 50)">
-                              <circle id="oval1" fill="#F48EA7" cx="6" cy="5" r="2"/>
-                              <circle id="oval2" fill="#F48EA7" cx="2" cy="2" r="2"/>
-                            </g>
-
-                            <g id="grp1" opacity="0" transform="translate(24)">
-                              <circle id="oval1" fill="#9FC7FA" cx="2.5" cy="3" r="2"/>
-                              <circle id="oval2" fill="#9FC7FA" cx="7.5" cy="2" r="2"/>
-                            </g>
-                          </g>
-                        </svg>
-                      </label>
+                    <div *ngIf="!comment.content.includes('blockquote')" class="reply-container">
+                      <a class="reply-button" (click)="addReply(comment.content, comment.user.username)"><span class="reply-element"><mat-icon class="material-icons reply-icon">keyboard_return</mat-icon><span>Reply</span></span></a>
                     </div>
-                  </div> -->
-                </div>
-
-                  <div *ngIf="!comment.content.includes('blockquote')" class="reply-container">
-                    <a class="reply-button" (click)="addReply(comment.content, comment.user.username)"><span class="reply-element"><mat-icon class="material-icons reply-icon">keyboard_return</mat-icon><span>Reply</span></span></a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </article>
-    </div>
+        </article>
+      </div>
+  </div>
 
-
+      <!-- PAGINATION EXPERIMENT START -->
+      <div class="page-navigation">
+        <a class="pageNav-prev pageNav" *ngIf="currentPage > 1" (click)="goToPreviousPage()">Prev</a>
+        <a
+          class="pageNav-pages pageNav"
+          [ngClass]="{
+            'isCurrentPage': page === currentPage,
+            'notCurrentPage': page !== currentPage
+          }"
+          *ngFor="let page of pages"
+          (click)="page === -1 ? onJumpToPageDialog() : goToPage(page)"
+        >
+          <ng-container *ngIf="page === -1">...</ng-container>
+          <ng-container *ngIf="page !== -1">{{ page }}</ng-container>
+        </a>
+        <a class="pageNav-next pageNav" *ngIf="currentPage < totalPages" (click)="goToNextPage()">Next</a>
+      </div>
+      <!-- PAGINATION EXPERIMENT END -->
 
 </div>
 

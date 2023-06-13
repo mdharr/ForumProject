@@ -108,7 +108,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private likeService: LikeService,
     ) {
-
+      this.comments$ = commentService.fetchComments(this.categoryId, this.postId);
     }
 
   ngOnInit() {
@@ -139,8 +139,9 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
                       // Perform actions with category data
                       // this.navigateToComments(this.categoryId, this.postId);
                       this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe(
-                        map(comments => comments.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
+                        map(comments => comments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
                       );
+                      this.loadCommentsForPage(this.currentPage);
                       return this.postService.show(this.categoryId, this.postId);
                     }),
                     switchMap((post) => {
@@ -185,8 +186,8 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
                   this.updateViewCount(this.postId);
                   // Perform actions with category data
                   this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe(
-                    map(comments => comments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
-                  );
+                    map(comments => comments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())));
+                  this.loadCommentsForPage(this.currentPage);
                   return this.postService.show(this.categoryId, this.postId);
                 }),
                 switchMap((post) => {
@@ -234,8 +235,8 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // this.comments$ = this.dataSource.loadComments(this.categoryId, this.postId);
     this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe(
-      map(comments => comments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
-      );
+      map(comments => comments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())));
+      this.loadCommentsForPage(this.currentPage);
     this.enableImageZoom();
   }
 
@@ -318,6 +319,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.comments$ = this.commentService.fetchComments(this.categoryId, this.postId).pipe(
           map(comments => comments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
         );
+        this.loadCommentsForPage(this.currentPage);
       },
       error: (nojoy) => {
         console.error('CommentComponent.createComment: Error creating comment.');
@@ -620,12 +622,12 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.currentPage = page;
       this.generatePageArray();
       // Call a method to retrieve the posts for the current page
-      await this.loadPostsForPage(page);
+      await this.loadCommentsForPage(page);
       this.isLoading = false;
     }
   }
 
-  loadPostsForPage(page: number): void {
+  loadCommentsForPage(page: number): void {
     this.isLoading = true;
     const startIndex = (page - 1) * this.pageSize;
     let endIndex = startIndex + this.pageSize;
@@ -634,14 +636,7 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
       map(comments => {
         const sortedComments = comments
           // .filter(comment => !post.isPinned)
-          .sort((a, b) => {
-            let lastEditedComparison = new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-            if (lastEditedComparison === 0) {
-              return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-            } else {
-              return lastEditedComparison;
-            }
-          });
+          .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
 
         const totalComments = sortedComments.length;
         const totalPages = this.getTotalPages();
