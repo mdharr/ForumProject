@@ -189,6 +189,25 @@
   </div>
 </div>
 
+  <!-- PAGINATION EXPERIMENT START -->
+  <div class="page-navigation">
+    <a class="pageNav-prev pageNav" *ngIf="currentPage > 1" (click)="goToPreviousPage()">Prev</a>
+    <a
+      class="pageNav-pages pageNav"
+      [ngClass]="{
+        'isCurrentPage': page === currentPage,
+        'notCurrentPage': page !== currentPage
+      }"
+      *ngFor="let page of pages"
+      (click)="page === -1 ? onJumpToPageDialog() : goToPage(page)"
+    >
+      <ng-container *ngIf="page === -1">...</ng-container>
+      <ng-container *ngIf="page !== -1">{{ page }}</ng-container>
+    </a>
+    <a class="pageNav-next pageNav" *ngIf="currentPage < totalPages" (click)="goToNextPage()">Next</a>
+  </div>
+  <!-- PAGINATION EXPERIMENT END -->
+
 <div class="wrapper">
     <ng-container *ngFor="let post of posts; let i = index">
       <article *ngIf="post.id === this.postId" class="message-outer">

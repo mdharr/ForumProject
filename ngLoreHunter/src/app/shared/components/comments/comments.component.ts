@@ -22,6 +22,7 @@ import { DomSanitizer, SafeHtml, SafeResourceUrl } from '@angular/platform-brows
 import { MatDialog } from '@angular/material/dialog';
 import { LikeService } from 'src/app/services/like.service';
 import { Like } from 'src/app/models/like';
+import { JumpToPageDialogComponent } from '../jump-to-page-dialog/jump-to-page-dialog.component';
 
 
 @Component({
@@ -35,6 +36,18 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
   public Editor = ClassicEditor;
   @ViewChild('ckeditorInstance', { static: false }) ckeditorInstance: any; // Add this line to access the CKEditor instance
   contentEditor: any;
+
+  @Input() pageCount: number = 0;
+
+  postContent: SafeHtml | undefined;
+
+  isLoading: boolean = false;
+
+  currentPage: number = 1;
+  pageSize: number = 10;
+  pages: number[] = [];
+  totalComments: number = 0;
+  totalPages: number = 0;
 
   displayedColumns: string[] = ['user', 'content'];
 
@@ -555,6 +568,137 @@ export class CommentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onImageLoad() {
     this.isLoaded = true;
+  }
+
+  getTotalPages(): number {
+    return Math.ceil(this.totalComments / this.pageSize);
+  }
+
+  generatePageArray() {
+    const maxVisiblePages = 5; // Maximum number of visible pages in the navigation
+
+    if (this.totalPages <= maxVisiblePages) {
+      // If total pages is less than or equal to maxVisiblePages, display all pages
+      this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    } else {
+      const firstPage = 1;
+      const lastPage = this.totalPages;
+      const currentPage = this.currentPage;
+
+      // Add first page
+      const pageNumbers: number[] = [firstPage];
+
+      // Add ellipsis if current page is not within the first 3 pages
+      if (currentPage > 3) {
+        pageNumbers.push(-1);
+      }
+
+      // Add visible page numbers
+      const startPage = Math.max(2, currentPage - 2);
+      const endPage = Math.min(lastPage - 1, currentPage + 2);
+      for (let i = startPage; i <= endPage; i++) {
+        pageNumbers.push(i);
+      }
+
+      // Add ellipsis if current page is not within the last 3 pages
+      if (currentPage < lastPage - 2) {
+        pageNumbers.push(-1);
+      }
+
+      // Add last page
+      pageNumbers.push(lastPage);
+
+      this.pages = pageNumbers;
+    }
+    this.isLoading = false;
+  }
+
+  // Modify the goToPage method
+  async goToPage(page: number): Promise<void> {
+    if (page >= 1 && page <= this.totalPages) {
+      this.isLoading = true;
+      this.currentPage = page;
+      this.generatePageArray();
+      // Call a method to retrieve the posts for the current page
+      await this.loadPostsForPage(page);
+      this.isLoading = false;
+    }
+  }
+
+  loadPostsForPage(page: number): void {
+    this.isLoading = true;
+    const startIndex = (page - 1) * this.pageSize;
+    let endIndex = startIndex + this.pageSize;
+
+    this.comments$ = this.commentService.commentsByPost(this.categoryId, this.postId).pipe(
+      map(comments => {
+        const sortedComments = comments
+          // .filter(comment => !post.isPinned)
+          .sort((a, b) => {
+            let lastEditedComparison = new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+            if (lastEditedComparison === 0) {
+              return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+            } else {
+              return lastEditedComparison;
+            }
+          });
+
+        const totalComments = sortedComments.length;
+        const totalPages = this.getTotalPages();
+        const remainingComments = totalComments - startIndex;
+
+        if (remainingComments < this.pageSize) {
+          endIndex = startIndex + remainingComments;
+        }
+
+        const slicedComments = sortedComments.slice(startIndex, endIndex);
+
+        this.totalComments = totalComments;
+        this.totalPages = totalPages;
+        this.generatePageArray();
+
+        return slicedComments;
+      })
+    );
+
+    this.comments$.subscribe(slicedComments => {
+      this.comments = slicedComments;
+      this.isLoading = false;
+    });
+  }
+
+  goToPreviousPage(): void {
+    if (this.currentPage > 1) {
+      this.goToPage(this.currentPage - 1);
+    }
+  }
+
+  goToNextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.goToPage(this.currentPage + 1);
+    }
+  }
+
+  onJumpToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.goToPage(page);
+    }
+  }
+
+  onJumpToPageDialog() {
+    console.log('onJumpToPageDialog called');
+
+    const dialogRef = this.dialog.open(JumpToPageDialogComponent, {
+      width: '250px',
+      data: { currentPage: this.currentPage, totalPages: this.totalPages } // Pass current page and total pages as data to the dialog
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.page) {
+        const page = result.page;
+        this.onJumpToPage(page); // Call the onJumpToPage method with the selected page number
+      }
+    });
   }
 
 }
