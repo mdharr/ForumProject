@@ -1,17 +1,19 @@
 .wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   color: var(--text-color);
 }
 
 .played-body {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .playing-body {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .star-rating .star.full {
@@ -120,7 +122,7 @@
 }
 
 .game-image:hover {
-  transform: scale(1.15);
+  /* transform: scale(1.15); */
 }
 
 .loading-container {
@@ -182,28 +184,35 @@
   background-color: var(--bkg-color);
 }
 
-.recommended-thumb {
-  width: 40px;
-}
-
 .review-box {
-  background-color: rgba( 0, 0, 0, 0.2 );
+  /* background-color: rgba( 0, 0, 0, 0.2 ); */
+  background-color: var(--container-bkg-color);
   margin-bottom: 26px;
   background-image: url(https://store.akamai.steamstatic.com/public/images/v6/maincol_gradient_rule.pngrepeat);
   background-position: top left;
+  border-top: 2px solid #3f51b5;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.review-box:hover {
+  box-shadow: 0 6px 10px 0px rgb(0 0 0 / 14%), 0 1px 18px 0px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%) !important;
+  transform: translateY(-5px);
+  border-radius: 3px;
 }
 
 .left-col {
-  width: 184px;
-  float: left;
-  padding: 8px;
-  opacity: 0.6;
+  /* width: 184px; */
+  /* width: 598px;
+  float: left; */
+  padding: 11px;
+  /* opacity: 0.6; */
 }
 
 .right-col {
-  float: left;
+  /* float: left;
   width: 400px;
-  position: relative;
+  position: relative; */
 }
 
 .recommendation-box {
@@ -246,6 +255,32 @@
 }
 
 .recommendation-body {
+  display: flex;
+  height: 40px;
+}
+
+.recommendation-image {
+  display: flex;
+}
+
+.recommendation-text-header {
+  line-height: 1;
+  margin: 0;
+  color: var(--text-color);
+}
+
+.category-type {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+
+.no-games-body {
+  display: flex;
+  justify-content: center;
+}
+
+.review-body {
   display: flex;
 }
 

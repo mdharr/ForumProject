@@ -1,6 +1,6 @@
 <!-- Recently completed and recently playing. TODO: backlog -->
 <!-- Model completed and playing like steam reviews -->
-<div class="wrapper">
+<!-- <div class="wrapper">
   <div class="p-body played-body">
     <div>
       <h1>Played:</h1>
@@ -25,8 +25,6 @@
           <p class="item-card-description">Review: {{ userGame.review }}</p>
           <p class="item-card-description" style="display: flex; align-items: self-end;">Recommended? <span style="margin-left: 10px;"><img class="recommended-thumb" src="{{ userGame.isRecommended ? 'https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsUp_v6.png' : 'https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsDown_v6.png' }}" alt=""></span></p>
           <p class="item-card-description">Playtime: {{ userGame.playtime }} hours</p>
-
-          <!-- <p class="item-card-description">Playtime: {{ userGame.playtime }} hours</p> -->
 
         </div>
       </div>
@@ -61,8 +59,6 @@
           <p class="item-card-description">Recommended? {{ userGame.isRecommended ? "yes" : "no" }}</p>
           <p class="item-card-description">Playtime: {{ userGame.playtime }} hours</p>
 
-          <!-- <p class="item-card-description">Playtime: {{ userGame.playtime }} hours</p> -->
-
         </div>
       </div>
 
@@ -71,27 +67,29 @@
       <h3>Not currently playing any games</h3>
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="wrapper">
   <div class="p-body played-body">
-    <div>
-      <h1>Played:</h1>
+    <div class="category-type">
+      <h1 style="margin: 0;">Games Played</h1>
     </div>
     <div class="review-box" *ngIf="(userGamesPlayed$ | async)?.length">
       <div class="review-body" *ngFor="let userGame of userGamesPlayed$ | async">
         <div class="left-col">
-          <div class="game-thumbnail"><img class="game-image" [style.background-image]="'url(' + userGame.game.backgroundImage + ')'" [style.background-position]="'center top'" loading="lazy"></div>
+          <div class="game-thumbnail"><img class="game-image" src="{{ userGame.game.backgroundImage }}" alt="" loading="lazy"></div>
           <div class="game-title"><h2>{{ userGame.game.title }}</h2></div>
-          <div class="game-description"><p>{{ userGame.game.description }}</p></div>
+          <div class="game-description"><p [innerHtml]="userGame.game.description | noSanitize"></p></div>
         </div>
         <div class="right-col">
           <div class="recommendation-box">
             <div class="recommendation-body">
-              <div class="recommendation-image"><img class="recommended-thumb" src="{{ userGame.isRecommended ? 'https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsUp_v6.png' : 'https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsDown_v6.png' }}" alt=""></div>
-              <div class="recommendation-playtime-container">
-                <div class="recommendation-text ellipsis"><h2>{{ userGame.isRecommended ? "Recommended" : "Not Recommended" }}</h2></div>
-                <div class="playtime-text ellipsis">{{ userGame.playtime }}</div>
+              <div class="recommendation-image">
+                <img class="recommended-thumb" src="{{ userGame.isRecommended ? 'https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsUp_v6.png' : 'https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsDown_v6.png' }}" alt="">
+                <div class="recommendation-playtime-container">
+                  <div class="recommendation-text ellipsis"><h2 class="recommendation-text-header">{{ userGame.isRecommended ? "Recommended" : "Not Recommended" }}</h2></div>
+                  <div class="playtime-text ellipsis"><p style="margin: 0; color: var(--text-color);">{{ userGame.playtime }} hrs on record</p></div>
+                </div>
               </div>
             </div>
           </div>
@@ -101,6 +99,46 @@
           </div>
         </div>
       </div>
+    </div>
+    <div *ngIf="!(userGamesPlayed$ | async)?.length" class="no-games-body">
+      <h3>No games listed</h3>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper">
+  <div class="p-body played-body">
+    <div class="category-type">
+      <h1 style="margin: 0;">Games Playing</h1>
+    </div>
+    <div class="review-box" *ngIf="(userGamesPlaying$ | async)?.length">
+      <div class="review-body" *ngFor="let userGame of userGamesPlaying$ | async">
+        <div class="left-col">
+          <div class="game-thumbnail"><img class="game-image" [style.background-image]="'url(' + userGame.game.backgroundImage + ')'" [style.background-position]="'center top'" loading="lazy"></div>
+          <div class="game-title"><h2>{{ userGame.game.title }}</h2></div>
+          <div class="game-description"><p>{{ userGame.game.description }}</p></div>
+        </div>
+        <div class="right-col">
+          <div class="recommendation-box">
+            <div class="recommendation-body">
+              <div class="recommendation-image">
+                <img class="recommended-thumb" src="{{ userGame.isRecommended ? 'https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsUp_v6.png' : 'https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsDown_v6.png' }}" alt="">
+                <div class="recommendation-playtime-container">
+                  <div class="recommendation-text ellipsis"><h2 class="recommendation-text-header">{{ userGame.isRecommended ? "Recommended" : "Not Recommended" }}</h2></div>
+                  <div class="playtime-text ellipsis"><p style="margin: 0; color: var(--text-color);">{{ userGame.playtime }} hrs on record</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="review-text-box">
+            <div class="date-box">{{ userGame.createdAt | date: 'short' }}</div>
+            <div class="review-text-body"><p>{{ userGame.review }}</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!(userGamesPlaying$ | async)?.length" class="no-games-body">
+      <h3>No games listed</h3>
     </div>
   </div>
 </div>
