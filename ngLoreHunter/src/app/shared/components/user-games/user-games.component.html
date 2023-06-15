@@ -72,14 +72,14 @@
 <div class="wrapper">
   <div class="p-body played-body">
     <div class="category-type">
-      <h1 style="margin: 0;">Games Played</h1>
+      <h1 style="margin: 0;">Recently Played</h1>
     </div>
     <div class="review-box" *ngIf="(userGamesPlayed$ | async)?.length">
-      <div class="review-body" *ngFor="let userGame of userGamesPlayed$ | async">
+      <div class="review-body" *ngFor="let userGame of userGamesPlayed$ | async" [style.background-image]="'url(' + userGame.game.backgroundImage + ')'" [style.background-position]="'center'">
         <div class="left-col">
           <div class="game-thumbnail"><img class="game-image" src="{{ userGame.game.backgroundImage }}" alt="" loading="lazy"></div>
-          <div class="game-title"><h2>{{ userGame.game.title }}</h2></div>
-          <div class="game-description"><p [innerHtml]="userGame.game.description | noSanitize"></p></div>
+          <div class="game-title"><h2 class="game-title-text">{{ userGame.game.title }}</h2></div>
+          <div class="game-description"><p class="user-game-description-text" [innerHtml]="userGame.game.description | noSanitize"></p></div>
         </div>
         <div class="right-col">
           <div class="recommendation-box">
@@ -88,20 +88,28 @@
                 <img class="recommended-thumb" src="{{ userGame.isRecommended ? 'https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsUp_v6.png' : 'https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsDown_v6.png' }}" alt="">
                 <div class="recommendation-playtime-container">
                   <div class="recommendation-text ellipsis"><h2 class="recommendation-text-header">{{ userGame.isRecommended ? "Recommended" : "Not Recommended" }}</h2></div>
-                  <div class="playtime-text ellipsis"><p style="margin: 0; color: var(--text-color);">{{ userGame.playtime }} hrs on record</p></div>
+                  <div class="playtime-text ellipsis"><p style="margin: 0; color: #fff;">{{ userGame.playtime }} hrs on record</p></div>
                 </div>
               </div>
             </div>
           </div>
           <div class="review-text-box">
-            <div class="date-box">{{ userGame.createdAt | date: 'short' }}</div>
-            <div class="review-text-body"><p>{{ userGame.review }}</p></div>
+            <div class="date-box">{{ userGame.createdAt }}</div>
+            <div class="review-text-body">
+              <p class="user-review-text">{{ userGame.review }}
+                <span>
+                  <div class="star-rating">
+                    <span *ngFor="let star of generateStarArray(userGame.rating)" class="star" [class.full]="star === 'full'" [class.half]="star === 'half'" [innerHTML]="getStarSymbol(star)"></span>
+                  </div>
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div *ngIf="!(userGamesPlayed$ | async)?.length" class="no-games-body">
-      <h3>No games listed</h3>
+      <h3>This user has no played games</h3>
     </div>
   </div>
 </div>
@@ -109,7 +117,7 @@
 <div class="wrapper">
   <div class="p-body played-body">
     <div class="category-type">
-      <h1 style="margin: 0;">Games Playing</h1>
+      <h1 style="margin: 0;">Currently Playing</h1>
     </div>
     <div class="review-box" *ngIf="(userGamesPlaying$ | async)?.length">
       <div class="review-body" *ngFor="let userGame of userGamesPlaying$ | async">
@@ -138,7 +146,7 @@
       </div>
     </div>
     <div *ngIf="!(userGamesPlaying$ | async)?.length" class="no-games-body">
-      <h3>No games listed</h3>
+      <h3>This user is not playing any games at the moment. Check back at a later date!</h3>
     </div>
   </div>
 </div>

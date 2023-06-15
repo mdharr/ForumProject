@@ -119,6 +119,7 @@
   height: 100%;
   background-size: cover;
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  display: none;
 }
 
 .game-image:hover {
@@ -190,15 +191,15 @@
   margin-bottom: 26px;
   background-image: url(https://store.akamai.steamstatic.com/public/images/v6/maincol_gradient_rule.pngrepeat);
   background-position: top left;
-  border-top: 2px solid #3f51b5;
+  border-top: 5px solid #3f51b5;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
 .review-box:hover {
-  box-shadow: 0 6px 10px 0px rgb(0 0 0 / 14%), 0 1px 18px 0px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%) !important;
+  /* box-shadow: 0 6px 10px 0px rgb(0 0 0 / 14%), 0 1px 18px 0px rgb(0 0 0 / 12%), 0 3px 5px 0 rgb(0 0 0 / 20%) !important; */
+  box-shadow: 0 20px 20px 0 rgba(0,0,0,.3);
   transform: translateY(-5px);
-  border-radius: 3px;
 }
 
 .left-col {
@@ -207,19 +208,25 @@
   float: left; */
   padding: 11px;
   /* opacity: 0.6; */
+  background-color: rgba( 0, 0, 0, 0.5 );
 }
 
 .right-col {
   /* float: left;
   width: 400px;
   position: relative; */
+  background-color: rgba( 0, 0, 0, 0.5 );
 }
 
 .recommendation-box {
   margin: 11px 0 13px;
   display: block;
-  background: rgba( 0, 0, 0, 0.2 );
+  background: rgba( 0, 0, 0, 0.5 );
   /* height: 40px; */
+  margin-left: 15px;
+  border-left: 1px solid #fff;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
 }
 
 .recommended-thumb {
@@ -266,7 +273,6 @@
 .recommendation-text-header {
   line-height: 1;
   margin: 0;
-  color: var(--text-color);
 }
 
 .category-type {
@@ -282,12 +288,46 @@
 
 .review-body {
   display: flex;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-color: rgba( 0, 0, 0, 0.2 );
+}
+
+.review-body::before {
+  content: "";
+  position: absolute;
+  opacity: 0.6;
 }
 
 .game-title {
   display: flex;
   justify-content: center;
+  margin: 0;
   margin-top: 15px;
+  color: #fff;
+}
+
+.game-title-text {
+  margin: 0;
+}
+
+.star-rating {
+  display: contents;
+}
+
+.user-review-text {
+  padding: 0 15px 0 15px;
+  text-align: justify;
+  color: #fff;
+}
+
+.user-game-description-text {
+  text-align: justify;
+}
+
+.game-description {
+  color: white;
 }
 
 
