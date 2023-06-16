@@ -194,7 +194,7 @@
   border-top: 5px solid #3f51b5;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid var(--text-color);
 }
 
 .review-box:hover {
@@ -209,14 +209,14 @@
   float: left; */
   padding: 11px;
   /* opacity: 0.6; */
-  background-color: rgba( 0, 0, 0, 0.5 );
+  background-color: var(--usergame-bkg-color);
 }
 
 .right-col {
   /* float: left;
   width: 400px;
   position: relative; */
-  background-color: rgba( 0, 0, 0, 0.5 );
+  background-color: var(--usergame-bkg-color);
 }
 
 .recommendation-box {
@@ -225,9 +225,9 @@
   background: rgba( 0, 0, 0, 0.5 );
   /* height: 40px; */
   margin-left: 15px;
-  border-left: 1px solid #fff;
-    border-top: 1px solid #fff;
-    border-bottom: 1px solid #fff;
+  border-left: 1px solid var(--text-color);
+    border-top: 1px solid var(--text-color);
+    border-bottom: 1px solid var(--text-color);
 }
 
 .recommended-thumb {
@@ -305,8 +305,9 @@
   display: flex;
   justify-content: center;
   margin: 0;
-  margin-top: 15px;
-  color: #fff;
+  color: var(--text-color);
+  margin-bottom: 11px;
+  margin-top: 13px;
 }
 
 .game-title-text {
@@ -320,7 +321,7 @@
 .user-review-text {
   padding: 0 15px 0 15px;
   text-align: justify;
-  color: #fff;
+  color: var(--text-color);
 }
 
 .user-game-description-text {
@@ -328,7 +329,7 @@
 }
 
 .game-description {
-  color: white;
+  color: var(--text-color);
 }
 
 
