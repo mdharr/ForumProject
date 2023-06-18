@@ -18,3 +18,8 @@
 .mat-mdc-button {
   color: var(--text-color);
 }
+
+.mdc-dialog__content>:last-child {
+  margin-bottom: 0;
+  width: 100%;
+}
