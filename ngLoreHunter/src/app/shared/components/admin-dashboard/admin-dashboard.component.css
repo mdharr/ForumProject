@@ -2,6 +2,10 @@ main {
   display: flex;
   flex-wrap: wrap;
   padding: 30px;
+  justify-content: center;
+    height: 100%;
+    align-items: center;
+    flex-direction: column;
 }
 
 .mat-col-6 {
@@ -30,4 +34,11 @@ mat-card:hover {
   box-shadow: #3f51b5;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   transform: translateY(-5px);
+}
+
+.main-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
