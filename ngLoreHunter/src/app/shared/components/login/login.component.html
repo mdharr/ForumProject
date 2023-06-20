@@ -1,5 +1,8 @@
+<div class="title-box">
+  <h1 class="login-modal-title">Login</h1>
+  <a class="overlay-titleCloser js-overlayClose" role="button" (click)="dismissModal()">X</a>
+</div>
 <form style="align-items: center;">
-  <h1 class="a11y-hidden">Login Form</h1>
   <div>
     <label class="label-email">
       <input type="text" class="text" name="username" [(ngModel)]="loginUser.username" placeholder="Username" tabindex="1" required />
@@ -19,3 +22,104 @@
   <input id="loginFormBtn" type="submit" value="Log In" (click)="login(loginUser)"/>
 </form>
 
+
+<!-- new login form experiment -->
+<!-- <div class="overlay-container is-active" id="js-XFUniqueId300"><div class="overlay" tabindex="-1" data-url="null" role="alertdialog" aria-hidden="false"><div class="overlay-title"><a class="overlay-titleCloser js-overlayClose" role="button" tabindex="0" aria-label="Close"></a>Log in</div><div class="overlay-content"><div class="blockMessage blockMessage--error blockMessage--iconic">
+  You must be logged-in to do that.
+</div>
+
+
+<div class="blocks">
+
+    <form action="/login/login" method="post" class="block">
+      <input type="hidden" name="_xfToken" value="1687228865,0de90334c420ec5f399b8a460be3b7d6"><input type="hidden" name="_xfwebp" value="0">
+
+  <div class="block-container">
+    <div class="block-body">
+
+
+    <dl class="formRow formRow--input">
+      <dt>
+        <div class="formRow-labelWrapper">
+        <label class="formRow-label" for="_xfUid-1-1687228865">Your name or email address</label></div>
+      </dt>
+      <dd>
+        <input type="text" class="input" name="login" autofocus="autofocus" autocomplete="username" id="_xfUid-1-1687228865">
+      </dd>
+    </dl>
+
+
+
+
+    <dl class="formRow formRow--input">
+      <dt>
+        <div class="formRow-labelWrapper">
+        <label class="formRow-label" for="_xfUid-2-1687228865">Password</label></div>
+      </dt>
+      <dd>
+
+
+
+
+
+
+<div data-xf-init=" " data-show-text="Show" data-hide-text="Hide">
+
+
+<input type="password" name="password" value="" class="input js-password " autocomplete="current-password" id="_xfUid-2-1687228865">
+
+
+
+
+</div>
+        <a class="uix_forgotPassWord__link" href="/lost-password/" data-xf-click="overlay">Forgot your password?</a>
+      </dd>
+    </dl>
+
+
+
+
+
+    <dl class="formRow">
+      <dt>
+        <div class="formRow-labelWrapper"></div>
+      </dt>
+      <dd>
+
+    <ul class="inputChoices">
+      <li class="inputChoices-choice"><label class="iconic"><input type="checkbox" name="remember" value="1" checked="checked"><i aria-hidden="true"></i><span class="iconic-label">Stay logged in</span></label></li>
+
+    </ul>
+
+      </dd>
+    </dl>
+
+
+      <input type="hidden" name="_xfRedirect" value="">
+    </div>
+
+    <dl class="formRow formSubmitRow">
+      <dt></dt>
+      <dd>
+        <div class="formSubmitRow-main">
+          <div class="formSubmitRow-bar"></div>
+          <div class="formSubmitRow-controls"><button type="submit" class="button--primary button button--icon button--icon--login"><span class="button-text">Log in</span></button></div>
+        </div>
+      </dd>
+    </dl>
+
+  </div>
+
+    <div class="block-outer block-outer--after uix_login__registerLink">
+      <div class="block-outer-middle">
+        Don't have an account? <a href="/login/register">Register now</a>
+      </div>
+    </div>
+
+
+
+    </form>
+
+
+
+</div></div></div></div> -->

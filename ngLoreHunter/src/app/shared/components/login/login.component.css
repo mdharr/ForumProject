@@ -27,7 +27,7 @@ form {
   --shadeNormal: 0.5;
   --borderRadius: 0.125rem;
   --highlight: #306090;
-  background: white;
+  background: var(--form-bkg-color);
   border: 1px solid var(--border);
   border-radius: var(--borderRadius);
   box-shadow: 0 1rem 1rem -0.75rem var(--border);
@@ -74,7 +74,7 @@ label {
 }
 
 label > span {
-  color: var(--borderDarker);
+  color: var(--text-color);
   display: block;
   font-size: 0.825rem;
   margin-top: 0.625rem;
@@ -91,10 +91,14 @@ label > span.required::after {
 label input {
   order: 2;
   outline: none;
+  background: var(--container-bkg-color);
+  color: var(--text-color);
+  border-radius: 6px;
 }
 
 label input::placeholder {
-  color: var(--borderDark);
+  color: lightgrey;
+  font-weight:100;
 }
 
 label input[name="password"] {
@@ -137,6 +141,7 @@ input {
   padding: 0.25rem 0.5rem;
   width: 15rem;
   transition: all 0.25s;
+  color: var(--text-color);
 }
 
 input[type="submit"] {
@@ -190,11 +195,12 @@ input[type="checkbox"] + label span::before {
   left: 0;
   width: 0.75rem;
   height: 0.75rem;
-  border: 1px solid var(--borderDark);
+  border: 1px solid lightgray;
   border-radius: var(--borderRadius);
   transition: all 0.25s;
   outline:1px dashed transparent;
   outline-offset: 2px;
+  margin-top: 4px;
 }
 
 input[type="checkbox"]:checked + label span::after {
@@ -253,9 +259,42 @@ input[type="checkbox"]:checked + label span::after {
 	transform: scale(1.15);
 }
 
+.overlay-titleCloser {
+  float: right;
+  cursor: pointer;
+  margin-left: 5px;
+  text-decoration: none;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+.overlay-titleCloser:after {
+  font: normal normal normal 18px/1 "Material Design Icons";
+  font-size: 110%;
+  font-weight: 400;
+  line-height: inherit;
+  width: auto;
+  content: "";
+  display: inline-block;
+  text-align: center;
+}
+
+.title-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-modal-title {
+  color: var(--text-color);
+}
+
+::ng-deep .modal.show .modal-dialog {
+  transform: translate3d(0px, 50%, 0px);
+}
+
 /* New Login Form Start */
 
-.overlay-container {
+/* .overlay-container {
   display: none;
   position: fixed;
   top: 0;
@@ -277,4 +316,4 @@ input[type="checkbox"]:checked + label span::after {
 
 body.is-modalOpen .overlay-container, body.is-modalOpen .offCanvasMenu {
   overflow-y: scroll!important;
-}
+} */

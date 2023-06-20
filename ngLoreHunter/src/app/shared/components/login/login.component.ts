@@ -57,4 +57,8 @@ export class LoginComponent {
 
   }
 
+  dismissModal() {
+    this.modalService.dismissAll();
+  }
+
 }

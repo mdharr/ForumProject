@@ -30,6 +30,7 @@ body {
   --game-card-bkg-color: #ffffff;
   --game-card-bkg: #f1f1f1;
   --usergame-bkg-color: rgba( 255, 255, 255, 0.6 );
+  --form-bkg-color: #f9f9f9;
 }
 body.dark-theme {
   --text-color: #eee;
@@ -50,6 +51,7 @@ body.dark-theme {
   --game-card-bkg-color: rgb(50 51 56);
   --game-card-bkg: #2a2a2c;
   --usergame-bkg-color: rgba( 0, 0, 0, 0.2 );
+  --form-bkg-color: #232323;
 }
 
 body {

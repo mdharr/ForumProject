@@ -239,6 +239,10 @@ mat-toolbar .animated-ui:hover:after {
 
 }
 
+.modal.show .modal-dialog {
+  transform: translate3d(20px, 50%, 10px);
+}
+
 
 
 
