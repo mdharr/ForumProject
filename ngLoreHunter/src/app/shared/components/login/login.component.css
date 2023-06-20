@@ -252,3 +252,29 @@ input[type="checkbox"]:checked + label span::after {
 .zoom:hover {
 	transform: scale(1.15);
 }
+
+/* New Login Form Start */
+
+.overlay-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  background: rgba(0,0,0,.35);
+  -webkit-overflow-scrolling: touch;
+  opacity: 0;
+  -webkit-transition: opacity .2s ease;
+  transition: opacity .2s ease;
+}
+
+.overlay-container.is-active {
+  display: block;
+  opacity: 1;
+}
+
+body.is-modalOpen .overlay-container, body.is-modalOpen .offCanvasMenu {
+  overflow-y: scroll!important;
+}
