@@ -1,5 +1,9 @@
 package com.skilldistillery.lorehunter.repositories;
 
-public interface PrivateMessageRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.skilldistillery.lorehunter.entities.PrivateMessage;
+
+public interface PrivateMessageRepository extends JpaRepository<PrivateMessage, Integer> {
 
 }
