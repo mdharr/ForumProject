@@ -65,6 +65,7 @@ class PrivateMessageTest {
 		assertNotNull(privateMessage);
 		assertNotNull(userConversation);
 		assertEquals(userConversation.getUser().getUsername(), user.getUsername());
+		assertEquals("Hey, what's up?", userConversation.getPrivateMessages().get(0).getContent());
 	}
 
 }
