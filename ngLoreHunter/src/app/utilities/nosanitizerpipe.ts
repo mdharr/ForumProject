@@ -50,14 +50,32 @@ export class NoSanitizePipe implements PipeTransform {
 
   const images = tempDiv.querySelectorAll('img');
 
+  const figures = tempDiv.querySelectorAll('figure');
+  const figuresArray = Array.from(figures) as HTMLElement[];
+
   // Add the "post-img" class to each <img> element
   images.forEach((image: any) => {
     const divWrapper = this.renderer.createElement('div');
-    this.renderer.addClass(divWrapper, 'blurred-img');
     this.renderer.setStyle(image, 'width', '100%');
     this.renderer.setStyle(image, 'height', 'auto');
     this.renderer.setAttribute(image, 'loading', 'lazy');
-    this.renderer.setAttribute(image, 'class', 'blurred-img');
+    this.renderer.setStyle(image, 'text-align', 'center');
+
+    const figures = figuresArray.find((figure: HTMLElement) => {
+      this.renderer.setStyle(figure, 'display', 'flex');
+      this.renderer.setStyle(figure, 'justify-content', 'center');
+      return figure.contains(image);
+    });
+
+    // if (figure) {
+    //   const margin = figure.style.margin;
+    //   if (margin) {
+    //     this.renderer.setStyle(image, 'margin', margin);
+    //   }
+    //   this.renderer.setStyle(figure, )
+    // }
+
+    this.renderer.appendChild(tempDiv, divWrapper);
   });
 
 
