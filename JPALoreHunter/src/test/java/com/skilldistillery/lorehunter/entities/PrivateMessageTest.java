@@ -55,8 +55,9 @@ class PrivateMessageTest {
 	@Test
 	void test_PrivateMessage_User_many_to_one_mapping() {
 		assertNotNull(privateMessage);
-		assertEquals("Jill", privateMessage.getUser().getUsername());
-		assertEquals(privateMessage.getUser().getUsername(), user.getUsername());
+		assertEquals("Jill", privateMessage.getSender().getUsername());
+		assertEquals(privateMessage.getSender().getUsername(), user.getUsername());
+		assertEquals("Wander", privateMessage.getRecipient().getUsername());
 	}
 	
 	@Test

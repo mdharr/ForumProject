@@ -25,4 +25,28 @@ public class UserConversationServiceImpl implements UserConversationService {
         return userConversationRepo.findByUser(user);
 	}
 
+	@Override
+	public List<UserConversation> getAllUserConversations() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserConversation> getAllUserConversationsByUserId(int userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserConversation createUserConversation(UserConversation userConversation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserConversation updateUserConversation(int id, UserConversation userConversation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -365,19 +365,26 @@ DROP TABLE IF EXISTS `private_message` ;
 CREATE TABLE IF NOT EXISTS `private_message` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_conversation_id` INT NOT NULL,
-  `user_id` INT NOT NULL,
   `content` TEXT NULL,
   `created_at` TIMESTAMP NULL,
+  `sender_id` INT NOT NULL,
+  `recipient_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_private_message_user_conversation1_idx` (`user_conversation_id` ASC),
-  INDEX `fk_private_message_user1_idx` (`user_id` ASC),
+  INDEX `fk_private_message_user1_idx` (`sender_id` ASC),
+  INDEX `fk_private_message_user2_idx` (`recipient_id` ASC),
   CONSTRAINT `fk_private_message_user_conversation1`
     FOREIGN KEY (`user_conversation_id`)
     REFERENCES `user_conversation` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_private_message_user1`
-    FOREIGN KEY (`user_id`)
+    FOREIGN KEY (`sender_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_private_message_user2`
+    FOREIGN KEY (`recipient_id`)
     REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -569,8 +576,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `lorehunterdb`;
-INSERT INTO `private_message` (`id`, `user_conversation_id`, `user_id`, `content`, `created_at`) VALUES (1, 1, 1, 'Hey, what\'s up?', '2023-05-19T11:35:22');
-INSERT INTO `private_message` (`id`, `user_conversation_id`, `user_id`, `content`, `created_at`) VALUES (2, 1, 2, 'Not much. How about you?', '2023-05-19T11:37:22');
+INSERT INTO `private_message` (`id`, `user_conversation_id`, `content`, `created_at`, `sender_id`, `recipient_id`) VALUES (1, 1, 'Hey, what\'s up?', '2023-05-19T11:35:22', 1, 2);
+INSERT INTO `private_message` (`id`, `user_conversation_id`, `content`, `created_at`, `sender_id`, `recipient_id`) VALUES (2, 1, 'Not much. How about you?', '2023-05-19T11:37:22', 2, 1);
 
 COMMIT;
 

@@ -10,5 +10,13 @@ public interface UserConversationService {
     UserConversation saveUserConversation(UserConversation userConversation);
     
     List<UserConversation> getUserConversationsByUser(User user);
+    
+	List<UserConversation> getAllUserConversations();
+
+	List<UserConversation> getAllUserConversationsByUserId(int userId);
+
+	UserConversation createUserConversation(UserConversation userConversation);
+	
+    UserConversation updateUserConversation(int id, UserConversation userConversation);
 
 }

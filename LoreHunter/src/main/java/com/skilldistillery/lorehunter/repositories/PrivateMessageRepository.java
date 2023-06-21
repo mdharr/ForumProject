@@ -11,9 +11,9 @@ public interface PrivateMessageRepository extends JpaRepository<PrivateMessage, 
 	
 	List<PrivateMessage> findByUserConversationIdOrderByCreatedAtAsc(int ticketId);
     
-    List<PrivateMessage> findByUserIdOrderByCreatedAtAsc(int userId);
+    List<PrivateMessage> findBySenderIdOrderByCreatedAtAsc(int userId);
     
-    List<PrivateMessage> findByUserConversationIdAndUserIdOrderByCreatedAtAsc(int ticketId, int userId);
+    List<PrivateMessage> findByUserConversationIdAndSenderIdOrderByCreatedAtAsc(int userConversationId, int userId);
     
     List<PrivateMessage> findByUserConversation(UserConversation userConversation);
 

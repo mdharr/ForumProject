@@ -118,8 +118,12 @@ public class User {
     private List<TicketMessage> ticketMessages = new ArrayList<>();
     
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<PrivateMessage> privateMessages = new ArrayList<>();
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    private List<PrivateMessage> sentMessages = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL)
+    private List<PrivateMessage> receivedMessages = new ArrayList<>();
 
 	public User() {
 		super();
@@ -131,7 +135,7 @@ public class User {
 			List<Category> categories, List<Post> posts, List<Comment> comments, Integer postCount, Boolean isOnline,
 			List<UserGame> userGames, String verificationCode, VerifiedStatus verifiedStatus, boolean emailVerified,
 			LocalDateTime verificationExpiryTime, int resendCount, LocalDateTime lastVerificationCodeSentTime, List<TicketMessage> ticketMessages,
-			List<PrivateMessage> privateMessages) {
+			List<PrivateMessage> sentMessages, List<PrivateMessage> receivedMessages) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -162,7 +166,8 @@ public class User {
 		this.resendCount = resendCount;
 		this.lastVerificationCodeSentTime = lastVerificationCodeSentTime;
 		this.ticketMessages = ticketMessages;
-		this.privateMessages = privateMessages;
+		this.sentMessages = sentMessages;
+		this.receivedMessages = receivedMessages;
 	}
 
 	public int getId() {
@@ -397,12 +402,20 @@ public class User {
 		this.ticketMessages = ticketMessages;
 	}
 	
-	public List<PrivateMessage> getPrivateMessages() {
-		return privateMessages;
+	public List<PrivateMessage> getSentMessages() {
+		return sentMessages;
 	}
 	
-	public void setPrivateMessages(List<PrivateMessage> privateMessages) {
-		this.privateMessages = privateMessages;
+	public void setSentMessages(List<PrivateMessage> sentMessages) {
+		this.sentMessages = sentMessages;
+	}
+	
+	public List<PrivateMessage> getReceivedMessages() {
+		return receivedMessages;
+	}
+	
+	public void setReceivedMessages(List<PrivateMessage> receivedMessages) {
+		this.receivedMessages = receivedMessages;
 	}
 
 	@Override
@@ -483,8 +496,10 @@ public class User {
 		builder.append(lastVerificationCodeSentTime);
 		builder.append(", ticketMessages=");
 		builder.append(ticketMessages);
-		builder.append(", privateMessages=");
-		builder.append(privateMessages);
+		builder.append(", sentMessages=");
+		builder.append(sentMessages);
+		builder.append(", receivedMessages=");
+		builder.append(receivedMessages);
 		builder.append("]");
 		return builder.toString();
 	}

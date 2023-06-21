@@ -36,8 +36,12 @@ public class PrivateMessage {
 	private UserConversation userConversation;
 
 	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	@JoinColumn(name = "sender_id")
+	private User sender;
+	
+	@ManyToOne
+	@JoinColumn(name = "recipient_id")
+	private User recipient;
 
 	public PrivateMessage() {
 		super();
@@ -45,13 +49,14 @@ public class PrivateMessage {
 	}
 
 	public PrivateMessage(int id, String content, LocalDateTime createdAt, UserConversation userConversation,
-			User user) {
+			User sender, User recipient) {
 		super();
 		this.id = id;
 		this.content = content;
 		this.createdAt = createdAt;
 		this.userConversation = userConversation;
-		this.user = user;
+		this.sender = sender;
+		this.recipient = recipient;
 	}
 
 	public int getId() {
@@ -86,12 +91,20 @@ public class PrivateMessage {
 		this.userConversation = userConversation;
 	}
 
-	public User getUser() {
-		return user;
+	public User getSender() {
+		return sender;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setSender(User sender) {
+		this.sender = sender;
+	}
+	
+	public User getRecipient() {
+		return recipient;
+	}
+	
+	public void setRecipient(User recipient) {
+		this.recipient = recipient;
 	}
 
 	@Override
@@ -122,8 +135,10 @@ public class PrivateMessage {
 		builder.append(createdAt);
 		builder.append(", userConversation=");
 		builder.append(userConversation);
-		builder.append(", user=");
-		builder.append(user);
+		builder.append(", sender=");
+		builder.append(sender);
+		builder.append(", recipient=");
+		builder.append(recipient);
 		builder.append("]");
 		return builder.toString();
 	}
