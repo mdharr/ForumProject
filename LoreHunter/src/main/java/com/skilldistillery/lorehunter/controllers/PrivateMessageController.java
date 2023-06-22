@@ -42,6 +42,7 @@ public class PrivateMessageController {
 	@Autowired
 	private UserService userService;
 	
+	//api endpoint postman test success
     @GetMapping("conversations/{cid}/messages")
     public ResponseEntity<List<PrivateMessage>> getMessagesForConversation(@PathVariable("cid") int conversationId, Principal principal) {
     	Optional<UserConversation> conversationOpt = userConversationRepo.findById(conversationId);
@@ -80,6 +81,7 @@ public class PrivateMessageController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
+    // api endpoint postman test success
     @PostMapping("conversations/{cid}/messages")
     public ResponseEntity<PrivateMessage> createMessage(@RequestBody PrivateMessage privateMessage, @PathVariable("cid") int conversationId, Principal principal) {
         Optional<UserConversation> conversationOpt = userConversationRepo.findById(conversationId);
