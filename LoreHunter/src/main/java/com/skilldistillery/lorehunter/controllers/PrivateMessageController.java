@@ -61,7 +61,7 @@ public class PrivateMessageController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
-    
+    // api endpoint test successfully with postman
     @GetMapping("users/{uid}/conversations/{cid}/messages")
     public ResponseEntity<List<PrivateMessage>> getMessagesForConversationAndUser(@PathVariable("cid") int conversationId, @PathVariable("uid") int userId, Principal principal) {
     	Optional<UserConversation> conversationOpt = userConversationRepo.findById(conversationId);
