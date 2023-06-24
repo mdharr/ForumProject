@@ -107,5 +107,7 @@ public class PrivateMessageController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    
+    // TODO: create rest api endpoint to delete private messages and user conversations
 
 }
