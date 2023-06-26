@@ -110,5 +110,8 @@ public class PrivateMessageController {
     
     // TODO: create rest api endpoint to delete private messages and user conversations
     // TODO: when a conversation is deleted, it is only hidden from the user who deletes it
+    
+    
+    // TODO: implement notifications into private messages so user is notified upon receiving new private messages
 
 }
