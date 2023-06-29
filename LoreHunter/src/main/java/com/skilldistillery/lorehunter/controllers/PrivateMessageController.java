@@ -115,5 +115,6 @@ public class PrivateMessageController {
     // TODO: implement notifications into private messages so user is notified upon receiving new private messages
     // TODO: create separate notifications for private messages
     // TODO: create separate endpoint for dismissing notifications
+    // TODO: create endpoint for accepting private messages
 
 }
