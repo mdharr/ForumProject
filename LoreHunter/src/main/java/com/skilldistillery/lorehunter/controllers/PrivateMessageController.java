@@ -119,5 +119,6 @@ public class PrivateMessageController {
     // TODO: create endpoint for marking private messages as read
     // TODO: create endpoint for pinning user conversation
     // TODO: create endpoint for ignoring user conversations and private messages from a user
+    // TODO: create endpoint for filtering user conversations
 
 }
