@@ -48,7 +48,7 @@ public class UserNotification {
 	
 	public UserNotification(User user, Notification notification) {
 		super();
-		this.id = new UserNotificationId(user.getId(), notification.getId());;
+		this.id = new UserNotificationId(user.getId(), notification.getId());
 		this.user = user;
 		this.notification = notification;
 	}
