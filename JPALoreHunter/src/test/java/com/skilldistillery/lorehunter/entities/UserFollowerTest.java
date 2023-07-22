@@ -39,6 +39,7 @@ class UserFollowerTest {
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
+		userFollowerId = null;
 		userFollower = null;
 	}
 
